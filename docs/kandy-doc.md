@@ -742,6 +742,88 @@ The Basic Error object. Provides information about an error that occurred in the
 -   `code` **[string][2]** The code of the error. If no code is known, this will be 'NO_CODE'.
 -   `message` **[string][2]** A human-readable message to describe the error. If no message is known, this will be 'An error occured'.
 
+## CallObject
+
+Information about a Call.
+
+Can be retrieved using the [call.getAll][30] or
+   [call.getById][31] APIs.
+
+**Properties**
+
+-   `id` **[string][2]** The ID of the call.
+-   `direction` **[string][2]** The direction in which the call was created. Can be 'outgoing' or 'incoming'.
+-   `state` **[string][2]** The current state of the call. See [call.states][32] for possible states.
+-   `localHold` **[boolean][6]** Indicates whether this call is currently being held locally.
+-   `remoteHold` **[boolean][6]** Indicates whether this call is currently being held remotely.
+-   `localTracks` **[Array][10]&lt;[string][2]>** A list of Track IDs that the call is sending to the remote participant.
+-   `remoteTracks` **[Array][10]&lt;[string][2]>** A list of Track IDs that the call is receiving from the remote participant.
+-   `remoteParticipant` **[Object][5]** Information about the other call participant.
+    -   `remoteParticipant.displayNumber` **[string][2]?** The User ID of the remote participant in the form "username@domain".
+    -   `remoteParticipant.displayName` **[string][2]?** The display name of the remote participant.
+-   `bandwidth` **[BandwidthControls][13]** The bandwidth limitations set for the call.
+-   `startTime` **[number][14]** The start time of the call in milliseconds since the epoch.
+-   `endTime` **[number][14]?** The end time of the call in milliseconds since the epoch.
+
+## MediaConstraint
+
+The MediaConstraint type defines the format for configuring media options.
+Either the `exact` or `ideal` property should be provided. If both are present, the
+   `exact` value will be used.
+
+When the `exact` value is provided, it will be the only value considered for the option.
+   If it cannot be used, the constraint will be considered an error.
+
+When the `ideal` value is provided, it will be considered as the optimal value for the option.
+   If it cannot be used, the closest acceptable value will be used instead.
+
+Type: [Object][5]
+
+**Properties**
+
+-   `exact` **[string][2]?** The required value for the constraint. Other values will not be accepted.
+-   `ideal` **[string][2]?** The ideal value for the constraint. Other values will be considered if necessary.
+
+**Examples**
+
+```javascript
+// Specify video resolution when making a call.
+client.call.make(destination, {
+   audio: true,
+   video: true,
+   videoOptions: {
+     // Set height and width constraints to ideally be 1280x720.
+     height: { ideal: 720 },
+     width: { ideal: 1280 }
+   }
+})
+```
+
+## BandwidthControls
+
+The BandwidthControls type defines the format for configuring media and/or track bandwidth options.
+BandwidthControls only affect received remote tracks of the specified type.
+
+Type: [Object][5]
+
+**Properties**
+
+-   `audio` **[number][14]?** The desired bandwidth bitrate in kilobits per second for received remote audio.
+-   `video` **[number][14]?** The desired bandwidth bitrate in kilobits per second for received remote video.
+
+**Examples**
+
+```javascript
+// Specify received remote video bandwidth limits when making a call.
+client.call.make(destination, mediaConstraints,
+ {
+   bandwidth: {
+     video: 5
+   }
+ }
+)
+```
+
 ## IceServer
 
 Type: [Object][5]
@@ -750,6 +832,26 @@ Type: [Object][5]
 
 -   `url` **[string][2]** The URL of the ICE server.
 -   `credential` **[string][2]?** The credential needed by the ICE server.
+
+## SdpHandlerInfo
+
+Type: [Object][5]
+
+**Properties**
+
+-   `type` **RTCSdpType** The session description's type.
+-   `endpoint` **[string][2]** Which end of the connection created the SDP.
+
+## DeviceInfo
+
+Contains information about a device.
+
+**Properties**
+
+-   `deviceId` **[string][2]** The ID of the device.
+-   `groupId` **[string][2]** The group ID of the device. Devices that share a `groupId` belong to the same physical device.
+-   `kind` **[string][2]** The type of the device (audioinput, audiooutput, videoinput).
+-   `label` **[string][2]** The name of the device.
 
 ## SdpHandlerFunction
 
@@ -760,7 +862,7 @@ Type: [Function][3]
 **Parameters**
 
 -   `newSdp` **[Object][5]** The SDP so far (could have been modified by previous handlers).
--   `info` **[SdpHandlerInfo][30]** Additional information that might be useful when making SDP modifications.
+-   `info` **[SdpHandlerInfo][33]** Additional information that might be useful when making SDP modifications.
 -   `originalSdp` **[Object][5]** The SDP in its initial state.
 
 Returns **[Object][5]** The resulting modified SDP based on the changes made by this function.
@@ -800,111 +902,9 @@ A collection of media devices and their information.
 
 **Properties**
 
--   `camera` **[Array][10]&lt;[DeviceInfo][31]>** A list of camera device information.
--   `microphone` **[Array][10]&lt;[DeviceInfo][31]>** A list of microphone device information.
--   `speaker` **[Array][10]&lt;[DeviceInfo][31]>** A list of speaker device information.
-
-## DeviceInfo
-
-Contains information about a device.
-
-**Properties**
-
--   `deviceId` **[string][2]** The ID of the device.
--   `groupId` **[string][2]** The group ID of the device. Devices that share a `groupId` belong to the same physical device.
--   `kind` **[string][2]** The type of the device (audioinput, audiooutput, videoinput).
--   `label` **[string][2]** The name of the device.
-
-## BandwidthControls
-
-The BandwidthControls type defines the format for configuring media and/or track bandwidth options.
-BandwidthControls only affect received remote tracks of the specified type.
-
-Type: [Object][5]
-
-**Properties**
-
--   `audio` **[number][14]?** The desired bandwidth bitrate in kilobits per second for received remote audio.
--   `video` **[number][14]?** The desired bandwidth bitrate in kilobits per second for received remote video.
-
-**Examples**
-
-```javascript
-// Specify received remote video bandwidth limits when making a call.
-client.call.make(destination, mediaConstraints,
- {
-   bandwidth: {
-     video: 5
-   }
- }
-)
-```
-
-## MediaConstraint
-
-The MediaConstraint type defines the format for configuring media options.
-Either the `exact` or `ideal` property should be provided. If both are present, the
-   `exact` value will be used.
-
-When the `exact` value is provided, it will be the only value considered for the option.
-   If it cannot be used, the constraint will be considered an error.
-
-When the `ideal` value is provided, it will be considered as the optimal value for the option.
-   If it cannot be used, the closest acceptable value will be used instead.
-
-Type: [Object][5]
-
-**Properties**
-
--   `exact` **[string][2]?** The required value for the constraint. Other values will not be accepted.
--   `ideal` **[string][2]?** The ideal value for the constraint. Other values will be considered if necessary.
-
-**Examples**
-
-```javascript
-// Specify video resolution when making a call.
-client.call.make(destination, {
-   audio: true,
-   video: true,
-   videoOptions: {
-     // Set height and width constraints to ideally be 1280x720.
-     height: { ideal: 720 },
-     width: { ideal: 1280 }
-   }
-})
-```
-
-## SdpHandlerInfo
-
-Type: [Object][5]
-
-**Properties**
-
--   `type` **RTCSdpType** The session description's type.
--   `endpoint` **[string][2]** Which end of the connection created the SDP.
-
-## CallObject
-
-Information about a Call.
-
-Can be retrieved using the [call.getAll][32] or
-   [call.getById][33] APIs.
-
-**Properties**
-
--   `id` **[string][2]** The ID of the call.
--   `direction` **[string][2]** The direction in which the call was created. Can be 'outgoing' or 'incoming'.
--   `state` **[string][2]** The current state of the call. See [call.states][34] for possible states.
--   `localHold` **[boolean][6]** Indicates whether this call is currently being held locally.
--   `remoteHold` **[boolean][6]** Indicates whether this call is currently being held remotely.
--   `localTracks` **[Array][10]&lt;[string][2]>** A list of Track IDs that the call is sending to the remote participant.
--   `remoteTracks` **[Array][10]&lt;[string][2]>** A list of Track IDs that the call is receiving from the remote participant.
--   `remoteParticipant` **[Object][5]** Information about the other call participant.
-    -   `remoteParticipant.displayNumber` **[string][2]?** The User ID of the remote participant in the form "username@domain".
-    -   `remoteParticipant.displayName` **[string][2]?** The display name of the remote participant.
--   `bandwidth` **[BandwidthControls][13]** The bandwidth limitations set for the call.
--   `startTime` **[number][14]** The start time of the call in milliseconds since the epoch.
--   `endTime` **[number][14]?** The end time of the call in milliseconds since the epoch.
+-   `camera` **[Array][10]&lt;[DeviceInfo][34]>** A list of camera device information.
+-   `microphone` **[Array][10]&lt;[DeviceInfo][34]>** A list of microphone device information.
+-   `speaker` **[Array][10]&lt;[DeviceInfo][34]>** A list of speaker device information.
 
 [1]: #config
 
@@ -964,12 +964,12 @@ Can be retrieved using the [call.getAll][32] or
 
 [29]: #config
 
-[30]: #sdphandlerinfo
+[30]: #callsgetall
 
-[31]: #deviceinfo
+[31]: #callsgetbyid
 
-[32]: #callsgetall
+[32]: Calls.states
 
-[33]: #callsgetbyid
+[33]: #sdphandlerinfo
 
-[34]: Calls.states
+[34]: #deviceinfo
