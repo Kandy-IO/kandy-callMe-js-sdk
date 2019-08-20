@@ -1,7 +1,7 @@
 /**
  * Kandy.js
  * kandy.newCallMe.js
- * Version: 4.7.0-beta.111
+ * Version: 4.7.0-beta.120
  */
 (function webpackUniversalModuleDefinition(root, factory) {
 	if(typeof exports === 'object' && typeof module === 'object')
@@ -30416,6 +30416,21 @@ Object.defineProperty(exports, "__esModule", {
 const CALL_STARTED = exports.CALL_STARTED = 'call:start';
 
 /**
+ * A new joined call has been started.
+ *
+ * Information about the Call can be retrieved using the
+ *    {@link Calls.getById call.getById} API.
+ *
+ * @public
+ * @memberof Calls
+ * @event call:join
+ * @param {Object} params
+ * @param {string} params.callId The ID of the call.
+ * @param {BasicError} [params.error] An error object, if the operation was not successful.
+ */
+const CALL_JOIN = exports.CALL_JOIN = 'call:join';
+
+/**
  * A new incoming call has been received.
  *
  * Information about the Call can be retrieved using the
@@ -30670,6 +30685,10 @@ callEvents[actionTypes.PENDING_MAKE_CALL] = action => {
   return callEventHandler(eventTypes.CALL_STARTED, action, {
     error: action.payload.error
   });
+};
+
+callEvents[actionTypes.PENDING_JOIN] = action => {
+  return callEventHandler(eventTypes.CALL_JOIN, action);
 };
 
 callEvents[actionTypes.CALL_INCOMING] = action => {
@@ -32990,7 +33009,7 @@ function* unholdCall(deps) {
  * @param {Array}  deps.sdpHandlers SDP handlers.
  */
 function* callAudit(deps) {
-  const actionTypesToDoAuditOn = [actionTypes.ANSWER_CALL, actionTypes.CALL_ACCEPTED];
+  const actionTypesToDoAuditOn = [actionTypes.ANSWER_CALL, actionTypes.CALL_ACCEPTED, actionTypes.MAKE_CALL_FINISH];
 
   function callStartAuditPattern(action) {
     return actionTypesToDoAuditOn.indexOf(action.type) !== -1 && !action.error;
@@ -40563,7 +40582,7 @@ const factoryDefaults = {
    */
 };function factory(plugins, options = factoryDefaults) {
   // Log the SDK's version (templated by webpack) on initialization.
-  let version = '4.7.0-beta.111';
+  let version = '4.7.0-beta.120';
   log.info(`SDK version: ${version}`);
 
   var sagas = [];

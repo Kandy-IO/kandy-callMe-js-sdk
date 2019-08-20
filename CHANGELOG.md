@@ -7,6 +7,10 @@ Kandy.js change log.
 
 ## 4.7.0 - beta
 
+## Fixed
+
+- Fixed an issue where call audits weren't being sent.`KAA-1944`
+
 ## 4.6.0 - 2018-08-01
 
 ### Added
