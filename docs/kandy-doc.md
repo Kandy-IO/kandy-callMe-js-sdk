@@ -540,9 +540,97 @@ Enables, or disables, the processing of websocket notifications.
 
 -   `enable` **[boolean][6]** Whether the websocket channel should be enabled.
 
+## config
+
+The configuration object. This object defines what different configuration
+values you can use when instantiating the SDK.
+
+### config.logs
+
+Configuration options for the Logs feature.
+
+**Parameters**
+
+-   `logs` **[Object][5]** Logs configs.
+    -   `logs.logLevel` **[string][2]** Log level to be set. See [levels][24]. (optional, default `'debug'`)
+    -   `logs.flatten` **[boolean][6]** Whether all logs should be output in a string-only format. (optional, default `false`)
+    -   `logs.logActions` **[Object][5]?** Options specifically for action logs when logLevel is at DEBUG+ levels. Set this to false to not output action logs.
+        -   `logs.logActions.actionOnly` **[boolean][6]** Only output information about the action itself. Omits the SDK context for when it occurred. (optional, default `true`)
+        -   `logs.logActions.collapsed` **[boolean][6]** Whether logs should be minimized when initially output. The full log is still output and can be inspected on the console. (optional, default `false`)
+        -   `logs.logActions.diff` **[boolean][6]** Include a diff of what SDK context was changed by the action. (optional, default `false`)
+        -   `logs.logActions.exposePayloads` **[boolean][6]** Allow action payloads to be exposed in the logs, potentially displaying sensitive information (optional, default `false`)
+    -   `logs.enableFcsLogs` **[boolean][6]** Enable the detailed call logger. (optional, default `true`)
+    -   `logs.enableGrouping` **[boolean][6]** Whether to group information about an action log together in the console. (optional, default `true`)
+
+### config.authentication
+
+Configuration options for the CallMe Authentication feature.
+
+**Parameters**
+
+-   `authentication` **[Object][5]** Authentication configs.
+    -   `authentication.subscription` **[Object][5]** 
+        -   `authentication.subscription.protocol` **[string][2]** Protocol to be used for subscription requests. (optional, default `https`)
+        -   `authentication.subscription.server` **[string][2]** Server to be used for subscription requests.
+        -   `authentication.subscription.port` **[Number][14]** Port to be used for subscription requests. (optional, default `443`)
+        -   `authentication.subscription.version` **[string][2]** Version of the REST API to be used. (optional, default `1`)
+        -   `authentication.subscription.service` **[Array][10]?** Services to subscribe to for notifications.
+    -   `authentication.websocket` **[Object][5]** 
+        -   `authentication.websocket.protocol` **[string][2]** Protocol to be used for websocket notifications. (optional, default `wss`)
+        -   `authentication.websocket.server` **[string][2]** Server to be used for websocket notifications.
+        -   `authentication.websocket.port` **[Number][14]** Port to be used for websocket notifications. (optional, default `443`)
+
+### config.call
+
+Configuration options for the call feature.
+
+**Parameters**
+
+-   `call` **[Object][5]** The call configuration object.
+    -   `call.sdpSemantics` **[string][2]** The sdpSemantics to use (`'unified-plan'` or `'plan-b'`). (optional, default `'unified-plan'`)
+    -   `call.iceServers` **[Array][10]&lt;[IceServer][25]>?** The list of ICE servers to be used for calls.
+    -   `call.serverTurnCredentials` **[boolean][6]** Whether server-provided TURN credentials should be used. (optional, default `true`)
+    -   `call.sdpHandlers` **[Array][10]&lt;[SdpHandlerFunction][26]>?** List of SDP handler functions to modify SDP. Advanced usage.
+    -   `call.removeH264Codecs` **[boolean][6]** Whether to remove "H264" codec lines from incoming and outgoing SDP messages. (optional, default `true`)
+
+### config.connectivity
+
+Configuration options for the Connectivity feature.
+
+**Parameters**
+
+-   `connectivity` **[Object][5]** Connectivity configs.
+    -   `connectivity.method` **[Object][5]** Configuration for how connectivity checks should be made.
+        -   `connectivity.method.type` **[String][2]** The method of connectivity checking to use: `keepAlive` or `pingPong`. (optional, default `'keepAlive'`)
+        -   `connectivity.method.responsibleParty` **[String][2]** Configures who is responsible for initiating the connectivity check: `client` or `server`. (optional, default `'client'`)
+    -   `connectivity.pingInterval` **[Number][14]** Time in between websocket ping attempts (milliseconds). Only used for when the client is responsible for ping/connCheck. (optional, default `30000`)
+    -   `connectivity.reconnectLimit` **[Number][14]** Number of failed reconnect attempts before reporting an error. Can be set to 0 to not limit reconnection attempts. (optional, default `5`)
+    -   `connectivity.reconnectDelay` **[Number][14]** Base time between websocket reconnect attempts (milliseconds). (optional, default `5000`)
+    -   `connectivity.reconnectTimeMultiplier` **[Number][14]** Reconnect delay multiplier for subsequent attempts. The reconnect delay time will be multiplied by this factor after each failed reconnect attempt to increase the delay between attempts. (optional, default `1`)
+    -   `connectivity.reconnectTimeLimit` **[Number][14]** Maximum time delay between reconnect attempts (milliseconds). Used in conjunction with `reconnectTimeMultiplier` to prevent overly long delays between reconnection attempts. (optional, default `640000`)
+    -   `connectivity.autoReconnect` **[Boolean][6]** Flag to determine whether reconnection will be attempted automatically after connectivity disruptions. (optional, default `true`)
+    -   `connectivity.maxMissedPings` **[Number][14]** Maximum pings sent (without receiving a response) before reporting an error. (optional, default `3`)
+    -   `connectivity.checkConnectivity` **[Boolean][6]** Flag to determine whether to enable connectivity checking or not. (optional, default `false`)
+
+### config.notifications
+
+Configuration options for the notification feature.
+
+**Parameters**
+
+-   `notifications` **[Object][5]** The notifications configuration object.
+    -   `notifications.idCacheLength` **[number][14]** Default amount of event ids to remember for de-duplication purposes. (optional, default `100`)
+    -   `notifications.pushRegistration` **[Object][5]?** Object describing the server to use for push services.
+        -   `notifications.pushRegistration.server` **[string][2]?** Hostname for the push registration server.
+        -   `notifications.pushRegistration.port` **[string][2]?** Port for the push registration server.
+        -   `notifications.pushRegistration.protocol` **[string][2]?** Protocol for the push registration server.
+        -   `notifications.pushRegistration.version` **[string][2]?** Version for the push registration server.
+    -   `notifications.realm` **[string][2]?** The realm used for push notifications
+    -   `notifications.bundleId` **[string][2]?** The bundle id used for push notifications
+
 ## sdpHandlers
 
-A set of [SdpHandlerFunction][24]s for manipulating SDP information.
+A set of [SdpHandlerFunction][27]s for manipulating SDP information.
 These handlers are used to customize low-level call behaviour for very specific
 environments and/or scenarios. They can be provided during SDK instantiation
 to be used for all calls.
@@ -584,95 +672,7 @@ const client = create({
 })
 ```
 
-Returns **[SdpHandlerFunction][25]** The resulting SDP handler that will remove the codec.
-
-## config
-
-The configuration object. This object defines what different configuration
-values you can use when instantiating the SDK.
-
-### config.logs
-
-Configuration options for the Logs feature.
-
-**Parameters**
-
--   `logs` **[Object][5]** Logs configs.
-    -   `logs.logLevel` **[string][2]** Log level to be set. See [levels][26]. (optional, default `'debug'`)
-    -   `logs.flatten` **[boolean][6]** Whether all logs should be output in a string-only format. (optional, default `false`)
-    -   `logs.logActions` **[Object][5]?** Options specifically for action logs when logLevel is at DEBUG+ levels. Set this to false to not output action logs.
-        -   `logs.logActions.actionOnly` **[boolean][6]** Only output information about the action itself. Omits the SDK context for when it occurred. (optional, default `true`)
-        -   `logs.logActions.collapsed` **[boolean][6]** Whether logs should be minimized when initially output. The full log is still output and can be inspected on the console. (optional, default `false`)
-        -   `logs.logActions.diff` **[boolean][6]** Include a diff of what SDK context was changed by the action. (optional, default `false`)
-        -   `logs.logActions.exposePayloads` **[boolean][6]** Allow action payloads to be exposed in the logs, potentially displaying sensitive information (optional, default `false`)
-    -   `logs.enableFcsLogs` **[boolean][6]** Enable the detailed call logger. (optional, default `true`)
-    -   `logs.enableGrouping` **[boolean][6]** Whether to group information about an action log together in the console. (optional, default `true`)
-
-### config.authentication
-
-Configuration options for the CallMe Authentication feature.
-
-**Parameters**
-
--   `authentication` **[Object][5]** Authentication configs.
-    -   `authentication.subscription` **[Object][5]** 
-        -   `authentication.subscription.protocol` **[string][2]** Protocol to be used for subscription requests. (optional, default `https`)
-        -   `authentication.subscription.server` **[string][2]** Server to be used for subscription requests.
-        -   `authentication.subscription.port` **[Number][14]** Port to be used for subscription requests. (optional, default `443`)
-        -   `authentication.subscription.version` **[string][2]** Version of the REST API to be used. (optional, default `1`)
-        -   `authentication.subscription.service` **[Array][10]?** Services to subscribe to for notifications.
-    -   `authentication.websocket` **[Object][5]** 
-        -   `authentication.websocket.protocol` **[string][2]** Protocol to be used for websocket notifications. (optional, default `wss`)
-        -   `authentication.websocket.server` **[string][2]** Server to be used for websocket notifications.
-        -   `authentication.websocket.port` **[Number][14]** Port to be used for websocket notifications. (optional, default `443`)
-
-### config.call
-
-Configuration options for the call feature.
-
-**Parameters**
-
--   `call` **[Object][5]** The call configuration object.
-    -   `call.sdpSemantics` **[string][2]** The sdpSemantics to use (`'unified-plan'` or `'plan-b'`). (optional, default `'unified-plan'`)
-    -   `call.iceServers` **[Array][10]&lt;[IceServer][27]>?** The list of ICE servers to be used for calls.
-    -   `call.serverTurnCredentials` **[boolean][6]** Whether server-provided TURN credentials should be used. (optional, default `true`)
-    -   `call.sdpHandlers` **[Array][10]&lt;[SdpHandlerFunction][25]>?** List of SDP handler functions to modify SDP. Advanced usage.
-    -   `call.removeH264Codecs` **[boolean][6]** Whether to remove "H264" codec lines from incoming and outgoing SDP messages. (optional, default `true`)
-
-### config.connectivity
-
-Configuration options for the Connectivity feature.
-
-**Parameters**
-
--   `connectivity` **[Object][5]** Connectivity configs.
-    -   `connectivity.method` **[Object][5]** Configuration for how connectivity checks should be made.
-        -   `connectivity.method.type` **[String][2]** The method of connectivity checking to use: `keepAlive` or `pingPong`. (optional, default `'keepAlive'`)
-        -   `connectivity.method.responsibleParty` **[String][2]** Configures who is responsible for initiating the connectivity check: `client` or `server`. (optional, default `'client'`)
-    -   `connectivity.pingInterval` **[Number][14]** Time in between websocket ping attempts (milliseconds). Only used for when the client is responsible for ping/connCheck. (optional, default `30000`)
-    -   `connectivity.reconnectLimit` **[Number][14]** Number of failed reconnect attempts before reporting an error. Can be set to 0 to not limit reconnection attempts. (optional, default `5`)
-    -   `connectivity.reconnectDelay` **[Number][14]** Base time between websocket reconnect attempts (milliseconds). (optional, default `5000`)
-    -   `connectivity.reconnectTimeMultiplier` **[Number][14]** Reconnect delay multiplier for subsequent attempts. The reconnect delay time will be multiplied by this factor after each failed reconnect attempt to increase the delay between attempts. (optional, default `1`)
-    -   `connectivity.reconnectTimeLimit` **[Number][14]** Maximum time delay between reconnect attempts (milliseconds). Used in conjunction with `reconnectTimeMultiplier` to prevent overly long delays between reconnection attempts. (optional, default `640000`)
-    -   `connectivity.autoReconnect` **[Boolean][6]** Flag to determine whether reconnection will be attempted automatically after connectivity disruptions. (optional, default `true`)
-    -   `connectivity.maxMissedPings` **[Number][14]** Maximum pings sent (without receiving a response) before reporting an error. (optional, default `3`)
-    -   `connectivity.checkConnectivity` **[Boolean][6]** Flag to determine whether to enable connectivity checking or not. (optional, default `false`)
-
-### config.notifications
-
-Configuration options for the notification feature.
-
-**Parameters**
-
--   `notifications` **[Object][5]** The notifications configuration object.
-    -   `notifications.idCacheLength` **[number][14]** Default amount of event ids to remember for de-duplication purposes. (optional, default `100`)
-    -   `notifications.pushRegistration` **[Object][5]?** Object describing the server to use for push services.
-        -   `notifications.pushRegistration.server` **[string][2]?** Hostname for the push registration server.
-        -   `notifications.pushRegistration.port` **[string][2]?** Port for the push registration server.
-        -   `notifications.pushRegistration.protocol` **[string][2]?** Protocol for the push registration server.
-        -   `notifications.pushRegistration.version` **[string][2]?** Version for the push registration server.
-    -   `notifications.realm` **[string][2]?** The realm used for push notifications
-    -   `notifications.bundleId` **[string][2]?** The bundle id used for push notifications
+Returns **[SdpHandlerFunction][26]** The resulting SDP handler that will remove the codec.
 
 ## Logger
 
@@ -952,13 +952,13 @@ Can be retrieved using the [call.getAll][32] or
 
 [23]: #mediaeventmediaunmuted
 
-[24]: #sdphandlerfunction
+[24]: #loggerlevels
 
-[25]: #sdphandlerfunction
+[25]: #iceserver
 
-[26]: #loggerlevels
+[26]: #sdphandlerfunction
 
-[27]: #iceserver
+[27]: #sdphandlerfunction
 
 [28]: #configconfiglogs
 

@@ -1,7 +1,7 @@
 /**
  * Kandy.js
  * kandy.newCallMe.js
- * Version: 4.7.0-beta.123
+ * Version: 4.7.0-beta.124
  */
 (function webpackUniversalModuleDefinition(root, factory) {
 	if(typeof exports === 'object' && typeof module === 'object')
@@ -40608,7 +40608,7 @@ const factoryDefaults = {
    */
 };function factory(plugins, options = factoryDefaults) {
   // Log the SDK's version (templated by webpack) on initialization.
-  let version = '4.7.0-beta.123';
+  let version = '4.7.0-beta.124';
   log.info(`SDK version: ${version}`);
 
   var sagas = [];
@@ -42917,6 +42917,10 @@ const responseTypes = (0, _freeze2.default)({
   text: 'text'
 });
 
+const contentTypes = (0, _freeze2.default)({
+  jsonType: 'application/json'
+});
+
 /*
  * HTTP request plugin.
  */
@@ -42980,6 +42984,7 @@ async function makeRequest(options, requestId) {
     };
   }
   let response;
+  let contentType;
   try {
     response = await fetch(url + (0, _utils.toQueryString)(queryParams), fetchOptions);
   } catch (err) {
@@ -42995,6 +43000,12 @@ async function makeRequest(options, requestId) {
     };
   }
   try {
+    contentType = response.headers.get('content-type');
+  } catch (err) {
+    log.debug(`Failed to get content-type:${err.message}.`);
+  }
+
+  try {
     let result = {
       ok: response.ok,
       code: response.status,
@@ -43004,14 +43015,14 @@ async function makeRequest(options, requestId) {
     let error = !response.ok;
 
     if (error) {
+      log.debug(`Response indicates that request ${requestId} failed`);
       /*
        * Handle a special-case error where the response body is a HTML page...
-       * Throw away the body and to its simply reported as 'Forbidden'.
+       * Throw away the body and so it is simply reported as 'Forbidden'.
        * TODO: Handle responses based on their type rather than checking for
        *    individual special cases...
        */
-      const cType = response.headers.map['content-type'];
-      if (response.status === 403 && cType.includes('html')) {
+      if (response.status === 403 && contentType.includes('html')) {
         return {
           body: false,
           error: 'REQUEST',
@@ -43019,9 +43030,11 @@ async function makeRequest(options, requestId) {
         };
       }
 
-      // If the response indicates an error, resolve the body as JSON and return a `REQUEST` error
-      log.debug(`Response indicates that request ${requestId} failed`);
-      responseBody = await response.json();
+      /*
+       * If the response indicates an error and has a body, resolve the body as JSON
+       * but no body return an empty object then return a `REQUEST` error
+       */
+      responseBody = contentTypes.jsonType === contentType ? await response.json() : {};
       return {
         body: responseBody,
         error: 'REQUEST',
@@ -43039,13 +43052,15 @@ async function makeRequest(options, requestId) {
         result
       };
     } else {
-      if (responseType === responseTypes.json) {
+      responseBody = {};
+      if (contentTypes.jsonType === contentType && responseType === responseTypes.json) {
         responseBody = await response.json();
       } else if (responseType === responseTypes.blob) {
         responseBody = await response.blob();
       } else if (responseType === responseTypes.text) {
         responseBody = await response.text();
       }
+
       return {
         body: responseBody,
         error: false,
