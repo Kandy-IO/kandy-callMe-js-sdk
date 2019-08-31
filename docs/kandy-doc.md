@@ -742,26 +742,18 @@ The Basic Error object. Provides information about an error that occurred in the
 -   `code` **[string][2]** The code of the error. If no code is known, this will be 'NO_CODE'.
 -   `message` **[string][2]** A human-readable message to describe the error. If no message is known, this will be 'An error occured'.
 
-## DevicesObject
+## MediaObject
 
-A collection of media devices and their information.
+The state representation of a Media object.
+Media is a collection of Track objects.
 
-**Properties**
-
--   `camera` **[Array][10]&lt;[DeviceInfo][30]>** A list of camera device information.
--   `microphone` **[Array][10]&lt;[DeviceInfo][30]>** A list of microphone device information.
--   `speaker` **[Array][10]&lt;[DeviceInfo][30]>** A list of speaker device information.
-
-## DeviceInfo
-
-Contains information about a device.
+Type: [Object][5]
 
 **Properties**
 
--   `deviceId` **[string][2]** The ID of the device.
--   `groupId` **[string][2]** The group ID of the device. Devices that share a `groupId` belong to the same physical device.
--   `kind` **[string][2]** The type of the device (audioinput, audiooutput, videoinput).
--   `label` **[string][2]** The name of the device.
+-   `id` **[string][2]** The ID of the Media object.
+-   `local` **[boolean][6]** Indicator on whether this media is local or remote.
+-   `tracks` **[Array][10]&lt;[TrackObject][21]>** A list of Track objects that are contained in this Media object.
 
 ## TrackObject
 
@@ -778,29 +770,6 @@ Tracks can be retrieved using the Media module's `getTrackById` API and manipula
 -   `muted` **[boolean][6]** Indicator on whether this Track is muted or not.
 -   `state` **[string][2]** The state of this Track. Can be 'live' or 'ended'.
 -   `streamId` **[string][2]** The ID of the Media Stream that includes this Track.
-
-## CallObject
-
-Information about a Call.
-
-Can be retrieved using the [call.getAll][31] or
-   [call.getById][32] APIs.
-
-**Properties**
-
--   `id` **[string][2]** The ID of the call.
--   `direction` **[string][2]** The direction in which the call was created. Can be 'outgoing' or 'incoming'.
--   `state` **[string][2]** The current state of the call. See [call.states][33] for possible states.
--   `localHold` **[boolean][6]** Indicates whether this call is currently being held locally.
--   `remoteHold` **[boolean][6]** Indicates whether this call is currently being held remotely.
--   `localTracks` **[Array][10]&lt;[string][2]>** A list of Track IDs that the call is sending to the remote participant.
--   `remoteTracks` **[Array][10]&lt;[string][2]>** A list of Track IDs that the call is receiving from the remote participant.
--   `remoteParticipant` **[Object][5]** Information about the other call participant.
-    -   `remoteParticipant.displayNumber` **[string][2]?** The User ID of the remote participant in the form "username@domain".
-    -   `remoteParticipant.displayName` **[string][2]?** The display name of the remote participant.
--   `bandwidth` **[BandwidthControls][13]** The bandwidth limitations set for the call.
--   `startTime` **[number][14]** The start time of the call in milliseconds since the epoch.
--   `endTime` **[number][14]?** The end time of the call in milliseconds since the epoch.
 
 ## MediaConstraint
 
@@ -836,6 +805,43 @@ client.call.make(destination, {
 })
 ```
 
+## SdpHandlerFunction
+
+The form of an SDP handler function and the expected arguments that it receives.
+
+Type: [Function][3]
+
+**Parameters**
+
+-   `newSdp` **[Object][5]** The SDP so far (could have been modified by previous handlers).
+-   `info` **[SdpHandlerInfo][30]** Additional information that might be useful when making SDP modifications.
+-   `originalSdp` **[Object][5]** The SDP in its initial state.
+
+Returns **[Object][5]** The resulting modified SDP based on the changes made by this function.
+
+## CallObject
+
+Information about a Call.
+
+Can be retrieved using the [call.getAll][31] or
+   [call.getById][32] APIs.
+
+**Properties**
+
+-   `id` **[string][2]** The ID of the call.
+-   `direction` **[string][2]** The direction in which the call was created. Can be 'outgoing' or 'incoming'.
+-   `state` **[string][2]** The current state of the call. See [call.states][33] for possible states.
+-   `localHold` **[boolean][6]** Indicates whether this call is currently being held locally.
+-   `remoteHold` **[boolean][6]** Indicates whether this call is currently being held remotely.
+-   `localTracks` **[Array][10]&lt;[string][2]>** A list of Track IDs that the call is sending to the remote participant.
+-   `remoteTracks` **[Array][10]&lt;[string][2]>** A list of Track IDs that the call is receiving from the remote participant.
+-   `remoteParticipant` **[Object][5]** Information about the other call participant.
+    -   `remoteParticipant.displayNumber` **[string][2]?** The User ID of the remote participant in the form "username@domain".
+    -   `remoteParticipant.displayName` **[string][2]?** The display name of the remote participant.
+-   `bandwidth` **[BandwidthControls][13]** The bandwidth limitations set for the call.
+-   `startTime` **[number][14]** The start time of the call in milliseconds since the epoch.
+-   `endTime` **[number][14]?** The end time of the call in milliseconds since the epoch.
+
 ## BandwidthControls
 
 The BandwidthControls type defines the format for configuring media and/or track bandwidth options.
@@ -867,8 +873,19 @@ Type: [Object][5]
 
 **Properties**
 
--   `url` **[string][2]** The URL of the ICE server.
+-   `urls` **([Array][10]&lt;[string][2]> | [string][2])** Either an array of URLs for reaching out several ICE servers or a single URL for reaching one ICE server.
 -   `credential` **[string][2]?** The credential needed by the ICE server.
+
+## DeviceInfo
+
+Contains information about a device.
+
+**Properties**
+
+-   `deviceId` **[string][2]** The ID of the device.
+-   `groupId` **[string][2]** The group ID of the device. Devices that share a `groupId` belong to the same physical device.
+-   `kind` **[string][2]** The type of the device (audioinput, audiooutput, videoinput).
+-   `label` **[string][2]** The name of the device.
 
 ## SdpHandlerInfo
 
@@ -879,32 +896,15 @@ Type: [Object][5]
 -   `type` **RTCSdpType** The session description's type.
 -   `endpoint` **[string][2]** Which end of the connection created the SDP.
 
-## MediaObject
+## DevicesObject
 
-The state representation of a Media object.
-Media is a collection of Track objects.
-
-Type: [Object][5]
+A collection of media devices and their information.
 
 **Properties**
 
--   `id` **[string][2]** The ID of the Media object.
--   `local` **[boolean][6]** Indicator on whether this media is local or remote.
--   `tracks` **[Array][10]&lt;[TrackObject][21]>** A list of Track objects that are contained in this Media object.
-
-## SdpHandlerFunction
-
-The form of an SDP handler function and the expected arguments that it receives.
-
-Type: [Function][3]
-
-**Parameters**
-
--   `newSdp` **[Object][5]** The SDP so far (could have been modified by previous handlers).
--   `info` **[SdpHandlerInfo][34]** Additional information that might be useful when making SDP modifications.
--   `originalSdp` **[Object][5]** The SDP in its initial state.
-
-Returns **[Object][5]** The resulting modified SDP based on the changes made by this function.
+-   `camera` **[Array][10]&lt;[DeviceInfo][34]>** A list of camera device information.
+-   `microphone` **[Array][10]&lt;[DeviceInfo][34]>** A list of microphone device information.
+-   `speaker` **[Array][10]&lt;[DeviceInfo][34]>** A list of speaker device information.
 
 [1]: #config
 
@@ -964,7 +964,7 @@ Returns **[Object][5]** The resulting modified SDP based on the changes made by 
 
 [29]: #config
 
-[30]: #deviceinfo
+[30]: #sdphandlerinfo
 
 [31]: #callsgetall
 
@@ -972,4 +972,4 @@ Returns **[Object][5]** The resulting modified SDP based on the changes made by 
 
 [33]: Calls.states
 
-[34]: #sdphandlerinfo
+[34]: #deviceinfo
