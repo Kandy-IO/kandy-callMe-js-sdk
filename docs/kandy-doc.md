@@ -742,6 +742,29 @@ The Basic Error object. Provides information about an error that occurred in the
 -   `code` **[string][2]** The code of the error. If no code is known, this will be 'NO_CODE'.
 -   `message` **[string][2]** A human-readable message to describe the error. If no message is known, this will be 'An error occured'.
 
+## CallObject
+
+Information about a Call.
+
+Can be retrieved using the [call.getAll][30] or
+   [call.getById][31] APIs.
+
+**Properties**
+
+-   `id` **[string][2]** The ID of the call.
+-   `direction` **[string][2]** The direction in which the call was created. Can be 'outgoing' or 'incoming'.
+-   `state` **[string][2]** The current state of the call. See [call.states][32] for possible states.
+-   `localHold` **[boolean][6]** Indicates whether this call is currently being held locally.
+-   `remoteHold` **[boolean][6]** Indicates whether this call is currently being held remotely.
+-   `localTracks` **[Array][10]&lt;[string][2]>** A list of Track IDs that the call is sending to the remote participant.
+-   `remoteTracks` **[Array][10]&lt;[string][2]>** A list of Track IDs that the call is receiving from the remote participant.
+-   `remoteParticipant` **[Object][5]** Information about the other call participant.
+    -   `remoteParticipant.displayNumber` **[string][2]?** The User ID of the remote participant in the form "username@domain".
+    -   `remoteParticipant.displayName` **[string][2]?** The display name of the remote participant.
+-   `bandwidth` **[BandwidthControls][13]** The bandwidth limitations set for the call.
+-   `startTime` **[number][14]** The start time of the call in milliseconds since the epoch.
+-   `endTime` **[number][14]?** The end time of the call in milliseconds since the epoch.
+
 ## SdpHandlerInfo
 
 Type: [Object][5]
@@ -750,20 +773,6 @@ Type: [Object][5]
 
 -   `type` **RTCSdpType** The session description's type.
 -   `endpoint` **[string][2]** Which end of the connection created the SDP.
-
-## SdpHandlerFunction
-
-The form of an SDP handler function and the expected arguments that it receives.
-
-Type: [Function][3]
-
-**Parameters**
-
--   `newSdp` **[Object][5]** The SDP so far (could have been modified by previous handlers).
--   `info` **[SdpHandlerInfo][30]** Additional information that might be useful when making SDP modifications.
--   `originalSdp` **[Object][5]** The SDP in its initial state.
-
-Returns **[Object][5]** The resulting modified SDP based on the changes made by this function.
 
 ## MediaObject
 
@@ -800,9 +809,9 @@ A collection of media devices and their information.
 
 **Properties**
 
--   `camera` **[Array][10]&lt;[DeviceInfo][31]>** A list of camera device information.
--   `microphone` **[Array][10]&lt;[DeviceInfo][31]>** A list of microphone device information.
--   `speaker` **[Array][10]&lt;[DeviceInfo][31]>** A list of speaker device information.
+-   `camera` **[Array][10]&lt;[DeviceInfo][33]>** A list of camera device information.
+-   `microphone` **[Array][10]&lt;[DeviceInfo][33]>** A list of microphone device information.
+-   `speaker` **[Array][10]&lt;[DeviceInfo][33]>** A list of speaker device information.
 
 ## DeviceInfo
 
@@ -815,28 +824,14 @@ Contains information about a device.
 -   `kind` **[string][2]** The type of the device (audioinput, audiooutput, videoinput).
 -   `label` **[string][2]** The name of the device.
 
-## CallObject
+## IceServer
 
-Information about a Call.
-
-Can be retrieved using the [call.getAll][32] or
-   [call.getById][33] APIs.
+Type: [Object][5]
 
 **Properties**
 
--   `id` **[string][2]** The ID of the call.
--   `direction` **[string][2]** The direction in which the call was created. Can be 'outgoing' or 'incoming'.
--   `state` **[string][2]** The current state of the call. See [call.states][34] for possible states.
--   `localHold` **[boolean][6]** Indicates whether this call is currently being held locally.
--   `remoteHold` **[boolean][6]** Indicates whether this call is currently being held remotely.
--   `localTracks` **[Array][10]&lt;[string][2]>** A list of Track IDs that the call is sending to the remote participant.
--   `remoteTracks` **[Array][10]&lt;[string][2]>** A list of Track IDs that the call is receiving from the remote participant.
--   `remoteParticipant` **[Object][5]** Information about the other call participant.
-    -   `remoteParticipant.displayNumber` **[string][2]?** The User ID of the remote participant in the form "username@domain".
-    -   `remoteParticipant.displayName` **[string][2]?** The display name of the remote participant.
--   `bandwidth` **[BandwidthControls][13]** The bandwidth limitations set for the call.
--   `startTime` **[number][14]** The start time of the call in milliseconds since the epoch.
--   `endTime` **[number][14]?** The end time of the call in milliseconds since the epoch.
+-   `urls` **([Array][10]&lt;[string][2]> | [string][2])** Either an array of URLs for reaching out several ICE servers or a single URL for reaching one ICE server.
+-   `credential` **[string][2]?** The credential needed by the ICE server.
 
 ## MediaConstraint
 
@@ -872,6 +867,20 @@ client.call.make(destination, {
 })
 ```
 
+## SdpHandlerFunction
+
+The form of an SDP handler function and the expected arguments that it receives.
+
+Type: [Function][3]
+
+**Parameters**
+
+-   `newSdp` **[Object][5]** The SDP so far (could have been modified by previous handlers).
+-   `info` **[SdpHandlerInfo][34]** Additional information that might be useful when making SDP modifications.
+-   `originalSdp` **[Object][5]** The SDP in its initial state.
+
+Returns **[Object][5]** The resulting modified SDP based on the changes made by this function.
+
 ## BandwidthControls
 
 The BandwidthControls type defines the format for configuring media and/or track bandwidth options.
@@ -896,15 +905,6 @@ client.call.make(destination, mediaConstraints,
  }
 )
 ```
-
-## IceServer
-
-Type: [Object][5]
-
-**Properties**
-
--   `urls` **([Array][10]&lt;[string][2]> | [string][2])** Either an array of URLs for reaching out several ICE servers or a single URL for reaching one ICE server.
--   `credential` **[string][2]?** The credential needed by the ICE server.
 
 [1]: #config
 
@@ -964,12 +964,12 @@ Type: [Object][5]
 
 [29]: #config
 
-[30]: #sdphandlerinfo
+[30]: #callsgetall
 
-[31]: #deviceinfo
+[31]: #callsgetbyid
 
-[32]: #callsgetall
+[32]: Calls.states
 
-[33]: #callsgetbyid
+[33]: #deviceinfo
 
-[34]: Calls.states
+[34]: #sdphandlerinfo
