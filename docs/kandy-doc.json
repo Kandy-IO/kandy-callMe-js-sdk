@@ -26892,1275 +26892,6 @@
     "namespace": "BasicError"
   },
   {
-    "description": {
-      "type": "root",
-      "children": [
-        {
-          "type": "paragraph",
-          "children": [
-            {
-              "type": "text",
-              "value": "Information about a Call.",
-              "position": {
-                "start": {
-                  "line": 1,
-                  "column": 1,
-                  "offset": 0
-                },
-                "end": {
-                  "line": 1,
-                  "column": 26,
-                  "offset": 25
-                },
-                "indent": []
-              }
-            }
-          ],
-          "position": {
-            "start": {
-              "line": 1,
-              "column": 1,
-              "offset": 0
-            },
-            "end": {
-              "line": 1,
-              "column": 26,
-              "offset": 25
-            },
-            "indent": []
-          }
-        },
-        {
-          "type": "paragraph",
-          "children": [
-            {
-              "type": "text",
-              "value": "Can be retrieved using the ",
-              "position": {
-                "start": {
-                  "line": 3,
-                  "column": 1,
-                  "offset": 27
-                },
-                "end": {
-                  "line": 3,
-                  "column": 28,
-                  "offset": 54
-                },
-                "indent": []
-              }
-            },
-            {
-              "type": "link",
-              "url": "#callsgetall",
-              "title": null,
-              "jsdoc": true,
-              "children": [
-                {
-                  "type": "text",
-                  "value": "call.getAll"
-                }
-              ],
-              "position": {
-                "start": {
-                  "line": 3,
-                  "column": 28,
-                  "offset": 54
-                },
-                "end": {
-                  "line": 3,
-                  "column": 60,
-                  "offset": 86
-                },
-                "indent": []
-              }
-            },
-            {
-              "type": "text",
-              "value": " or\n   ",
-              "position": {
-                "start": {
-                  "line": 3,
-                  "column": 60,
-                  "offset": 86
-                },
-                "end": {
-                  "line": 4,
-                  "column": 4,
-                  "offset": 93
-                },
-                "indent": [
-                  1
-                ]
-              }
-            },
-            {
-              "type": "link",
-              "url": "#callsgetbyid",
-              "title": null,
-              "jsdoc": true,
-              "children": [
-                {
-                  "type": "text",
-                  "value": "call.getById"
-                }
-              ],
-              "position": {
-                "start": {
-                  "line": 4,
-                  "column": 4,
-                  "offset": 93
-                },
-                "end": {
-                  "line": 4,
-                  "column": 38,
-                  "offset": 127
-                },
-                "indent": []
-              }
-            },
-            {
-              "type": "text",
-              "value": " APIs.",
-              "position": {
-                "start": {
-                  "line": 4,
-                  "column": 38,
-                  "offset": 127
-                },
-                "end": {
-                  "line": 4,
-                  "column": 44,
-                  "offset": 133
-                },
-                "indent": []
-              }
-            }
-          ],
-          "position": {
-            "start": {
-              "line": 3,
-              "column": 1,
-              "offset": 27
-            },
-            "end": {
-              "line": 4,
-              "column": 44,
-              "offset": 133
-            },
-            "indent": [
-              1
-            ]
-          }
-        }
-      ],
-      "position": {
-        "start": {
-          "line": 1,
-          "column": 1,
-          "offset": 0
-        },
-        "end": {
-          "line": 4,
-          "column": 44,
-          "offset": 133
-        }
-      }
-    },
-    "tags": [
-      {
-        "title": "public",
-        "description": null,
-        "lineNumber": 6,
-        "type": null
-      },
-      {
-        "title": "static",
-        "description": null,
-        "lineNumber": 7
-      },
-      {
-        "title": "module",
-        "description": null,
-        "lineNumber": 8,
-        "type": null,
-        "name": "CallObject"
-      },
-      {
-        "title": "property",
-        "description": "The ID of the call.",
-        "lineNumber": 9,
-        "type": {
-          "type": "NameExpression",
-          "name": "string"
-        },
-        "name": "id"
-      },
-      {
-        "title": "property",
-        "description": "The direction in which the call was created. Can be 'outgoing' or 'incoming'.",
-        "lineNumber": 10,
-        "type": {
-          "type": "NameExpression",
-          "name": "string"
-        },
-        "name": "direction"
-      },
-      {
-        "title": "property",
-        "description": "The current state of the call. See {@link Calls.states call.states} for possible states.",
-        "lineNumber": 11,
-        "type": {
-          "type": "NameExpression",
-          "name": "string"
-        },
-        "name": "state"
-      },
-      {
-        "title": "property",
-        "description": "Indicates whether this call is currently being held locally.",
-        "lineNumber": 12,
-        "type": {
-          "type": "NameExpression",
-          "name": "boolean"
-        },
-        "name": "localHold"
-      },
-      {
-        "title": "property",
-        "description": "Indicates whether this call is currently being held remotely.",
-        "lineNumber": 13,
-        "type": {
-          "type": "NameExpression",
-          "name": "boolean"
-        },
-        "name": "remoteHold"
-      },
-      {
-        "title": "property",
-        "description": "A list of Track IDs that the call is sending to the remote participant.",
-        "lineNumber": 14,
-        "type": {
-          "type": "TypeApplication",
-          "expression": {
-            "type": "NameExpression",
-            "name": "Array"
-          },
-          "applications": [
-            {
-              "type": "NameExpression",
-              "name": "string"
-            }
-          ]
-        },
-        "name": "localTracks"
-      },
-      {
-        "title": "property",
-        "description": "A list of Track IDs that the call is receiving from the remote participant.",
-        "lineNumber": 15,
-        "type": {
-          "type": "TypeApplication",
-          "expression": {
-            "type": "NameExpression",
-            "name": "Array"
-          },
-          "applications": [
-            {
-              "type": "NameExpression",
-              "name": "string"
-            }
-          ]
-        },
-        "name": "remoteTracks"
-      },
-      {
-        "title": "property",
-        "description": "Information about the other call participant.",
-        "lineNumber": 16,
-        "type": {
-          "type": "NameExpression",
-          "name": "Object"
-        },
-        "name": "remoteParticipant"
-      },
-      {
-        "title": "property",
-        "description": "The User ID of the remote participant in the form \"username@domain\".",
-        "lineNumber": 17,
-        "type": {
-          "type": "OptionalType",
-          "expression": {
-            "type": "NameExpression",
-            "name": "string"
-          }
-        },
-        "name": "remoteParticipant.displayNumber"
-      },
-      {
-        "title": "property",
-        "description": "The display name of the remote participant.",
-        "lineNumber": 18,
-        "type": {
-          "type": "OptionalType",
-          "expression": {
-            "type": "NameExpression",
-            "name": "string"
-          }
-        },
-        "name": "remoteParticipant.displayName"
-      },
-      {
-        "title": "property",
-        "description": "The bandwidth limitations set for the call.",
-        "lineNumber": 19,
-        "type": {
-          "type": "NameExpression",
-          "name": "BandwidthControls"
-        },
-        "name": "bandwidth"
-      },
-      {
-        "title": "property",
-        "description": "The start time of the call in milliseconds since the epoch.",
-        "lineNumber": 20,
-        "type": {
-          "type": "NameExpression",
-          "name": "number"
-        },
-        "name": "startTime"
-      },
-      {
-        "title": "property",
-        "description": "The end time of the call in milliseconds since the epoch.",
-        "lineNumber": 21,
-        "type": {
-          "type": "OptionalType",
-          "expression": {
-            "type": "NameExpression",
-            "name": "number"
-          }
-        },
-        "name": "endTime"
-      }
-    ],
-    "loc": {
-      "start": {
-        "line": 13,
-        "column": 0
-      },
-      "end": {
-        "line": 35,
-        "column": 3
-      }
-    },
-    "context": {
-      "loc": {
-        "start": {
-          "line": 192,
-          "column": 0
-        },
-        "end": {
-          "line": 196,
-          "column": 1
-        }
-      },
-      "file": "/var/jenkins_home/workspace/Kandy.js_beta/packages/kandy/src/call/interfaceNew/api/index.js"
-    },
-    "augments": [],
-    "examples": [],
-    "params": [],
-    "properties": [
-      {
-        "title": "property",
-        "name": "id",
-        "lineNumber": 9,
-        "description": {
-          "type": "root",
-          "children": [
-            {
-              "type": "paragraph",
-              "children": [
-                {
-                  "type": "text",
-                  "value": "The ID of the call.",
-                  "position": {
-                    "start": {
-                      "line": 1,
-                      "column": 1,
-                      "offset": 0
-                    },
-                    "end": {
-                      "line": 1,
-                      "column": 20,
-                      "offset": 19
-                    },
-                    "indent": []
-                  }
-                }
-              ],
-              "position": {
-                "start": {
-                  "line": 1,
-                  "column": 1,
-                  "offset": 0
-                },
-                "end": {
-                  "line": 1,
-                  "column": 20,
-                  "offset": 19
-                },
-                "indent": []
-              }
-            }
-          ],
-          "position": {
-            "start": {
-              "line": 1,
-              "column": 1,
-              "offset": 0
-            },
-            "end": {
-              "line": 1,
-              "column": 20,
-              "offset": 19
-            }
-          }
-        },
-        "type": {
-          "type": "NameExpression",
-          "name": "string"
-        }
-      },
-      {
-        "title": "property",
-        "name": "direction",
-        "lineNumber": 10,
-        "description": {
-          "type": "root",
-          "children": [
-            {
-              "type": "paragraph",
-              "children": [
-                {
-                  "type": "text",
-                  "value": "The direction in which the call was created. Can be 'outgoing' or 'incoming'.",
-                  "position": {
-                    "start": {
-                      "line": 1,
-                      "column": 1,
-                      "offset": 0
-                    },
-                    "end": {
-                      "line": 1,
-                      "column": 78,
-                      "offset": 77
-                    },
-                    "indent": []
-                  }
-                }
-              ],
-              "position": {
-                "start": {
-                  "line": 1,
-                  "column": 1,
-                  "offset": 0
-                },
-                "end": {
-                  "line": 1,
-                  "column": 78,
-                  "offset": 77
-                },
-                "indent": []
-              }
-            }
-          ],
-          "position": {
-            "start": {
-              "line": 1,
-              "column": 1,
-              "offset": 0
-            },
-            "end": {
-              "line": 1,
-              "column": 78,
-              "offset": 77
-            }
-          }
-        },
-        "type": {
-          "type": "NameExpression",
-          "name": "string"
-        }
-      },
-      {
-        "title": "property",
-        "name": "state",
-        "lineNumber": 11,
-        "description": {
-          "type": "root",
-          "children": [
-            {
-              "type": "paragraph",
-              "children": [
-                {
-                  "type": "text",
-                  "value": "The current state of the call. See ",
-                  "position": {
-                    "start": {
-                      "line": 1,
-                      "column": 1,
-                      "offset": 0
-                    },
-                    "end": {
-                      "line": 1,
-                      "column": 36,
-                      "offset": 35
-                    },
-                    "indent": []
-                  }
-                },
-                {
-                  "type": "link",
-                  "url": "Calls.states",
-                  "title": null,
-                  "jsdoc": true,
-                  "children": [
-                    {
-                      "type": "text",
-                      "value": "call.states"
-                    }
-                  ],
-                  "position": {
-                    "start": {
-                      "line": 1,
-                      "column": 36,
-                      "offset": 35
-                    },
-                    "end": {
-                      "line": 1,
-                      "column": 68,
-                      "offset": 67
-                    },
-                    "indent": []
-                  }
-                },
-                {
-                  "type": "text",
-                  "value": " for possible states.",
-                  "position": {
-                    "start": {
-                      "line": 1,
-                      "column": 68,
-                      "offset": 67
-                    },
-                    "end": {
-                      "line": 1,
-                      "column": 89,
-                      "offset": 88
-                    },
-                    "indent": []
-                  }
-                }
-              ],
-              "position": {
-                "start": {
-                  "line": 1,
-                  "column": 1,
-                  "offset": 0
-                },
-                "end": {
-                  "line": 1,
-                  "column": 89,
-                  "offset": 88
-                },
-                "indent": []
-              }
-            }
-          ],
-          "position": {
-            "start": {
-              "line": 1,
-              "column": 1,
-              "offset": 0
-            },
-            "end": {
-              "line": 1,
-              "column": 89,
-              "offset": 88
-            }
-          }
-        },
-        "type": {
-          "type": "NameExpression",
-          "name": "string"
-        }
-      },
-      {
-        "title": "property",
-        "name": "localHold",
-        "lineNumber": 12,
-        "description": {
-          "type": "root",
-          "children": [
-            {
-              "type": "paragraph",
-              "children": [
-                {
-                  "type": "text",
-                  "value": "Indicates whether this call is currently being held locally.",
-                  "position": {
-                    "start": {
-                      "line": 1,
-                      "column": 1,
-                      "offset": 0
-                    },
-                    "end": {
-                      "line": 1,
-                      "column": 61,
-                      "offset": 60
-                    },
-                    "indent": []
-                  }
-                }
-              ],
-              "position": {
-                "start": {
-                  "line": 1,
-                  "column": 1,
-                  "offset": 0
-                },
-                "end": {
-                  "line": 1,
-                  "column": 61,
-                  "offset": 60
-                },
-                "indent": []
-              }
-            }
-          ],
-          "position": {
-            "start": {
-              "line": 1,
-              "column": 1,
-              "offset": 0
-            },
-            "end": {
-              "line": 1,
-              "column": 61,
-              "offset": 60
-            }
-          }
-        },
-        "type": {
-          "type": "NameExpression",
-          "name": "boolean"
-        }
-      },
-      {
-        "title": "property",
-        "name": "remoteHold",
-        "lineNumber": 13,
-        "description": {
-          "type": "root",
-          "children": [
-            {
-              "type": "paragraph",
-              "children": [
-                {
-                  "type": "text",
-                  "value": "Indicates whether this call is currently being held remotely.",
-                  "position": {
-                    "start": {
-                      "line": 1,
-                      "column": 1,
-                      "offset": 0
-                    },
-                    "end": {
-                      "line": 1,
-                      "column": 62,
-                      "offset": 61
-                    },
-                    "indent": []
-                  }
-                }
-              ],
-              "position": {
-                "start": {
-                  "line": 1,
-                  "column": 1,
-                  "offset": 0
-                },
-                "end": {
-                  "line": 1,
-                  "column": 62,
-                  "offset": 61
-                },
-                "indent": []
-              }
-            }
-          ],
-          "position": {
-            "start": {
-              "line": 1,
-              "column": 1,
-              "offset": 0
-            },
-            "end": {
-              "line": 1,
-              "column": 62,
-              "offset": 61
-            }
-          }
-        },
-        "type": {
-          "type": "NameExpression",
-          "name": "boolean"
-        }
-      },
-      {
-        "title": "property",
-        "name": "localTracks",
-        "lineNumber": 14,
-        "description": {
-          "type": "root",
-          "children": [
-            {
-              "type": "paragraph",
-              "children": [
-                {
-                  "type": "text",
-                  "value": "A list of Track IDs that the call is sending to the remote participant.",
-                  "position": {
-                    "start": {
-                      "line": 1,
-                      "column": 1,
-                      "offset": 0
-                    },
-                    "end": {
-                      "line": 1,
-                      "column": 72,
-                      "offset": 71
-                    },
-                    "indent": []
-                  }
-                }
-              ],
-              "position": {
-                "start": {
-                  "line": 1,
-                  "column": 1,
-                  "offset": 0
-                },
-                "end": {
-                  "line": 1,
-                  "column": 72,
-                  "offset": 71
-                },
-                "indent": []
-              }
-            }
-          ],
-          "position": {
-            "start": {
-              "line": 1,
-              "column": 1,
-              "offset": 0
-            },
-            "end": {
-              "line": 1,
-              "column": 72,
-              "offset": 71
-            }
-          }
-        },
-        "type": {
-          "type": "TypeApplication",
-          "expression": {
-            "type": "NameExpression",
-            "name": "Array"
-          },
-          "applications": [
-            {
-              "type": "NameExpression",
-              "name": "string"
-            }
-          ]
-        }
-      },
-      {
-        "title": "property",
-        "name": "remoteTracks",
-        "lineNumber": 15,
-        "description": {
-          "type": "root",
-          "children": [
-            {
-              "type": "paragraph",
-              "children": [
-                {
-                  "type": "text",
-                  "value": "A list of Track IDs that the call is receiving from the remote participant.",
-                  "position": {
-                    "start": {
-                      "line": 1,
-                      "column": 1,
-                      "offset": 0
-                    },
-                    "end": {
-                      "line": 1,
-                      "column": 76,
-                      "offset": 75
-                    },
-                    "indent": []
-                  }
-                }
-              ],
-              "position": {
-                "start": {
-                  "line": 1,
-                  "column": 1,
-                  "offset": 0
-                },
-                "end": {
-                  "line": 1,
-                  "column": 76,
-                  "offset": 75
-                },
-                "indent": []
-              }
-            }
-          ],
-          "position": {
-            "start": {
-              "line": 1,
-              "column": 1,
-              "offset": 0
-            },
-            "end": {
-              "line": 1,
-              "column": 76,
-              "offset": 75
-            }
-          }
-        },
-        "type": {
-          "type": "TypeApplication",
-          "expression": {
-            "type": "NameExpression",
-            "name": "Array"
-          },
-          "applications": [
-            {
-              "type": "NameExpression",
-              "name": "string"
-            }
-          ]
-        }
-      },
-      {
-        "title": "property",
-        "name": "remoteParticipant",
-        "lineNumber": 16,
-        "description": {
-          "type": "root",
-          "children": [
-            {
-              "type": "paragraph",
-              "children": [
-                {
-                  "type": "text",
-                  "value": "Information about the other call participant.",
-                  "position": {
-                    "start": {
-                      "line": 1,
-                      "column": 1,
-                      "offset": 0
-                    },
-                    "end": {
-                      "line": 1,
-                      "column": 46,
-                      "offset": 45
-                    },
-                    "indent": []
-                  }
-                }
-              ],
-              "position": {
-                "start": {
-                  "line": 1,
-                  "column": 1,
-                  "offset": 0
-                },
-                "end": {
-                  "line": 1,
-                  "column": 46,
-                  "offset": 45
-                },
-                "indent": []
-              }
-            }
-          ],
-          "position": {
-            "start": {
-              "line": 1,
-              "column": 1,
-              "offset": 0
-            },
-            "end": {
-              "line": 1,
-              "column": 46,
-              "offset": 45
-            }
-          }
-        },
-        "type": {
-          "type": "NameExpression",
-          "name": "Object"
-        },
-        "properties": [
-          {
-            "title": "property",
-            "name": "remoteParticipant.displayNumber",
-            "lineNumber": 17,
-            "description": {
-              "type": "root",
-              "children": [
-                {
-                  "type": "paragraph",
-                  "children": [
-                    {
-                      "type": "text",
-                      "value": "The User ID of the remote participant in the form \"username@domain\".",
-                      "position": {
-                        "start": {
-                          "line": 1,
-                          "column": 1,
-                          "offset": 0
-                        },
-                        "end": {
-                          "line": 1,
-                          "column": 69,
-                          "offset": 68
-                        },
-                        "indent": []
-                      }
-                    }
-                  ],
-                  "position": {
-                    "start": {
-                      "line": 1,
-                      "column": 1,
-                      "offset": 0
-                    },
-                    "end": {
-                      "line": 1,
-                      "column": 69,
-                      "offset": 68
-                    },
-                    "indent": []
-                  }
-                }
-              ],
-              "position": {
-                "start": {
-                  "line": 1,
-                  "column": 1,
-                  "offset": 0
-                },
-                "end": {
-                  "line": 1,
-                  "column": 69,
-                  "offset": 68
-                }
-              }
-            },
-            "type": {
-              "type": "OptionalType",
-              "expression": {
-                "type": "NameExpression",
-                "name": "string"
-              }
-            }
-          },
-          {
-            "title": "property",
-            "name": "remoteParticipant.displayName",
-            "lineNumber": 18,
-            "description": {
-              "type": "root",
-              "children": [
-                {
-                  "type": "paragraph",
-                  "children": [
-                    {
-                      "type": "text",
-                      "value": "The display name of the remote participant.",
-                      "position": {
-                        "start": {
-                          "line": 1,
-                          "column": 1,
-                          "offset": 0
-                        },
-                        "end": {
-                          "line": 1,
-                          "column": 44,
-                          "offset": 43
-                        },
-                        "indent": []
-                      }
-                    }
-                  ],
-                  "position": {
-                    "start": {
-                      "line": 1,
-                      "column": 1,
-                      "offset": 0
-                    },
-                    "end": {
-                      "line": 1,
-                      "column": 44,
-                      "offset": 43
-                    },
-                    "indent": []
-                  }
-                }
-              ],
-              "position": {
-                "start": {
-                  "line": 1,
-                  "column": 1,
-                  "offset": 0
-                },
-                "end": {
-                  "line": 1,
-                  "column": 44,
-                  "offset": 43
-                }
-              }
-            },
-            "type": {
-              "type": "OptionalType",
-              "expression": {
-                "type": "NameExpression",
-                "name": "string"
-              }
-            }
-          }
-        ]
-      },
-      {
-        "title": "property",
-        "name": "bandwidth",
-        "lineNumber": 19,
-        "description": {
-          "type": "root",
-          "children": [
-            {
-              "type": "paragraph",
-              "children": [
-                {
-                  "type": "text",
-                  "value": "The bandwidth limitations set for the call.",
-                  "position": {
-                    "start": {
-                      "line": 1,
-                      "column": 1,
-                      "offset": 0
-                    },
-                    "end": {
-                      "line": 1,
-                      "column": 44,
-                      "offset": 43
-                    },
-                    "indent": []
-                  }
-                }
-              ],
-              "position": {
-                "start": {
-                  "line": 1,
-                  "column": 1,
-                  "offset": 0
-                },
-                "end": {
-                  "line": 1,
-                  "column": 44,
-                  "offset": 43
-                },
-                "indent": []
-              }
-            }
-          ],
-          "position": {
-            "start": {
-              "line": 1,
-              "column": 1,
-              "offset": 0
-            },
-            "end": {
-              "line": 1,
-              "column": 44,
-              "offset": 43
-            }
-          }
-        },
-        "type": {
-          "type": "NameExpression",
-          "name": "BandwidthControls"
-        }
-      },
-      {
-        "title": "property",
-        "name": "startTime",
-        "lineNumber": 20,
-        "description": {
-          "type": "root",
-          "children": [
-            {
-              "type": "paragraph",
-              "children": [
-                {
-                  "type": "text",
-                  "value": "The start time of the call in milliseconds since the epoch.",
-                  "position": {
-                    "start": {
-                      "line": 1,
-                      "column": 1,
-                      "offset": 0
-                    },
-                    "end": {
-                      "line": 1,
-                      "column": 60,
-                      "offset": 59
-                    },
-                    "indent": []
-                  }
-                }
-              ],
-              "position": {
-                "start": {
-                  "line": 1,
-                  "column": 1,
-                  "offset": 0
-                },
-                "end": {
-                  "line": 1,
-                  "column": 60,
-                  "offset": 59
-                },
-                "indent": []
-              }
-            }
-          ],
-          "position": {
-            "start": {
-              "line": 1,
-              "column": 1,
-              "offset": 0
-            },
-            "end": {
-              "line": 1,
-              "column": 60,
-              "offset": 59
-            }
-          }
-        },
-        "type": {
-          "type": "NameExpression",
-          "name": "number"
-        }
-      },
-      {
-        "title": "property",
-        "name": "endTime",
-        "lineNumber": 21,
-        "description": {
-          "type": "root",
-          "children": [
-            {
-              "type": "paragraph",
-              "children": [
-                {
-                  "type": "text",
-                  "value": "The end time of the call in milliseconds since the epoch.",
-                  "position": {
-                    "start": {
-                      "line": 1,
-                      "column": 1,
-                      "offset": 0
-                    },
-                    "end": {
-                      "line": 1,
-                      "column": 58,
-                      "offset": 57
-                    },
-                    "indent": []
-                  }
-                }
-              ],
-              "position": {
-                "start": {
-                  "line": 1,
-                  "column": 1,
-                  "offset": 0
-                },
-                "end": {
-                  "line": 1,
-                  "column": 58,
-                  "offset": 57
-                },
-                "indent": []
-              }
-            }
-          ],
-          "position": {
-            "start": {
-              "line": 1,
-              "column": 1,
-              "offset": 0
-            },
-            "end": {
-              "line": 1,
-              "column": 58,
-              "offset": 57
-            }
-          }
-        },
-        "type": {
-          "type": "OptionalType",
-          "expression": {
-            "type": "NameExpression",
-            "name": "number"
-          }
-        }
-      }
-    ],
-    "returns": [],
-    "sees": [],
-    "throws": [],
-    "todos": [],
-    "access": "public",
-    "scope": "static",
-    "kind": "module",
-    "name": "CallObject",
-    "members": {
-      "global": [],
-      "inner": [],
-      "instance": [],
-      "events": [],
-      "static": []
-    },
-    "path": [
-      {
-        "name": "CallObject",
-        "kind": "module",
-        "scope": "static"
-      }
-    ],
-    "namespace": ".CallObject"
-  },
-  {
     "description": "",
     "tags": [
       {
@@ -28382,6 +27113,420 @@
       }
     ],
     "namespace": "SdpHandlerInfo"
+  },
+  {
+    "description": {
+      "type": "root",
+      "children": [
+        {
+          "type": "paragraph",
+          "children": [
+            {
+              "type": "text",
+              "value": "The form of an SDP handler function and the expected arguments that it receives.",
+              "position": {
+                "start": {
+                  "line": 1,
+                  "column": 1,
+                  "offset": 0
+                },
+                "end": {
+                  "line": 1,
+                  "column": 81,
+                  "offset": 80
+                },
+                "indent": []
+              }
+            }
+          ],
+          "position": {
+            "start": {
+              "line": 1,
+              "column": 1,
+              "offset": 0
+            },
+            "end": {
+              "line": 1,
+              "column": 81,
+              "offset": 80
+            },
+            "indent": []
+          }
+        }
+      ],
+      "position": {
+        "start": {
+          "line": 1,
+          "column": 1,
+          "offset": 0
+        },
+        "end": {
+          "line": 1,
+          "column": 81,
+          "offset": 80
+        }
+      }
+    },
+    "tags": [
+      {
+        "title": "public",
+        "description": null,
+        "lineNumber": 2,
+        "type": null
+      },
+      {
+        "title": "module",
+        "description": null,
+        "lineNumber": 3,
+        "type": null,
+        "name": "SdpHandlerFunction"
+      },
+      {
+        "title": "typedef",
+        "description": null,
+        "lineNumber": 4,
+        "type": {
+          "type": "NameExpression",
+          "name": "Function"
+        },
+        "name": "SdpHandlerFunction"
+      },
+      {
+        "title": "param",
+        "description": "The SDP so far (could have been modified by previous handlers).",
+        "lineNumber": 5,
+        "type": {
+          "type": "NameExpression",
+          "name": "Object"
+        },
+        "name": "newSdp"
+      },
+      {
+        "title": "param",
+        "description": "Additional information that might be useful when making SDP modifications.",
+        "lineNumber": 6,
+        "type": {
+          "type": "NameExpression",
+          "name": "SdpHandlerInfo"
+        },
+        "name": "info"
+      },
+      {
+        "title": "param",
+        "description": "The SDP in its initial state.",
+        "lineNumber": 7,
+        "type": {
+          "type": "NameExpression",
+          "name": "Object"
+        },
+        "name": "originalSdp"
+      },
+      {
+        "title": "returns",
+        "description": "The resulting modified SDP based on the changes made by this function.",
+        "lineNumber": 8,
+        "type": {
+          "type": "NameExpression",
+          "name": "Object"
+        }
+      }
+    ],
+    "loc": {
+      "start": {
+        "line": 123,
+        "column": 0
+      },
+      "end": {
+        "line": 132,
+        "column": 3
+      }
+    },
+    "context": {
+      "loc": {
+        "start": {
+          "line": 192,
+          "column": 0
+        },
+        "end": {
+          "line": 196,
+          "column": 1
+        }
+      },
+      "file": "/var/jenkins_home/workspace/Kandy.js_beta/packages/kandy/src/call/interfaceNew/api/index.js"
+    },
+    "augments": [],
+    "examples": [],
+    "params": [
+      {
+        "title": "param",
+        "name": "newSdp",
+        "lineNumber": 5,
+        "description": {
+          "type": "root",
+          "children": [
+            {
+              "type": "paragraph",
+              "children": [
+                {
+                  "type": "text",
+                  "value": "The SDP so far (could have been modified by previous handlers).",
+                  "position": {
+                    "start": {
+                      "line": 1,
+                      "column": 1,
+                      "offset": 0
+                    },
+                    "end": {
+                      "line": 1,
+                      "column": 64,
+                      "offset": 63
+                    },
+                    "indent": []
+                  }
+                }
+              ],
+              "position": {
+                "start": {
+                  "line": 1,
+                  "column": 1,
+                  "offset": 0
+                },
+                "end": {
+                  "line": 1,
+                  "column": 64,
+                  "offset": 63
+                },
+                "indent": []
+              }
+            }
+          ],
+          "position": {
+            "start": {
+              "line": 1,
+              "column": 1,
+              "offset": 0
+            },
+            "end": {
+              "line": 1,
+              "column": 64,
+              "offset": 63
+            }
+          }
+        },
+        "type": {
+          "type": "NameExpression",
+          "name": "Object"
+        }
+      },
+      {
+        "title": "param",
+        "name": "info",
+        "lineNumber": 6,
+        "description": {
+          "type": "root",
+          "children": [
+            {
+              "type": "paragraph",
+              "children": [
+                {
+                  "type": "text",
+                  "value": "Additional information that might be useful when making SDP modifications.",
+                  "position": {
+                    "start": {
+                      "line": 1,
+                      "column": 1,
+                      "offset": 0
+                    },
+                    "end": {
+                      "line": 1,
+                      "column": 75,
+                      "offset": 74
+                    },
+                    "indent": []
+                  }
+                }
+              ],
+              "position": {
+                "start": {
+                  "line": 1,
+                  "column": 1,
+                  "offset": 0
+                },
+                "end": {
+                  "line": 1,
+                  "column": 75,
+                  "offset": 74
+                },
+                "indent": []
+              }
+            }
+          ],
+          "position": {
+            "start": {
+              "line": 1,
+              "column": 1,
+              "offset": 0
+            },
+            "end": {
+              "line": 1,
+              "column": 75,
+              "offset": 74
+            }
+          }
+        },
+        "type": {
+          "type": "NameExpression",
+          "name": "SdpHandlerInfo"
+        }
+      },
+      {
+        "title": "param",
+        "name": "originalSdp",
+        "lineNumber": 7,
+        "description": {
+          "type": "root",
+          "children": [
+            {
+              "type": "paragraph",
+              "children": [
+                {
+                  "type": "text",
+                  "value": "The SDP in its initial state.",
+                  "position": {
+                    "start": {
+                      "line": 1,
+                      "column": 1,
+                      "offset": 0
+                    },
+                    "end": {
+                      "line": 1,
+                      "column": 30,
+                      "offset": 29
+                    },
+                    "indent": []
+                  }
+                }
+              ],
+              "position": {
+                "start": {
+                  "line": 1,
+                  "column": 1,
+                  "offset": 0
+                },
+                "end": {
+                  "line": 1,
+                  "column": 30,
+                  "offset": 29
+                },
+                "indent": []
+              }
+            }
+          ],
+          "position": {
+            "start": {
+              "line": 1,
+              "column": 1,
+              "offset": 0
+            },
+            "end": {
+              "line": 1,
+              "column": 30,
+              "offset": 29
+            }
+          }
+        },
+        "type": {
+          "type": "NameExpression",
+          "name": "Object"
+        }
+      }
+    ],
+    "properties": [],
+    "returns": [
+      {
+        "description": {
+          "type": "root",
+          "children": [
+            {
+              "type": "paragraph",
+              "children": [
+                {
+                  "type": "text",
+                  "value": "The resulting modified SDP based on the changes made by this function.",
+                  "position": {
+                    "start": {
+                      "line": 1,
+                      "column": 1,
+                      "offset": 0
+                    },
+                    "end": {
+                      "line": 1,
+                      "column": 71,
+                      "offset": 70
+                    },
+                    "indent": []
+                  }
+                }
+              ],
+              "position": {
+                "start": {
+                  "line": 1,
+                  "column": 1,
+                  "offset": 0
+                },
+                "end": {
+                  "line": 1,
+                  "column": 71,
+                  "offset": 70
+                },
+                "indent": []
+              }
+            }
+          ],
+          "position": {
+            "start": {
+              "line": 1,
+              "column": 1,
+              "offset": 0
+            },
+            "end": {
+              "line": 1,
+              "column": 71,
+              "offset": 70
+            }
+          }
+        },
+        "title": "returns",
+        "type": {
+          "type": "NameExpression",
+          "name": "Object"
+        }
+      }
+    ],
+    "sees": [],
+    "throws": [],
+    "todos": [],
+    "access": "public",
+    "kind": "typedef",
+    "name": "SdpHandlerFunction",
+    "type": {
+      "type": "NameExpression",
+      "name": "Function"
+    },
+    "members": {
+      "global": [],
+      "inner": [],
+      "instance": [],
+      "events": [],
+      "static": []
+    },
+    "path": [
+      {
+        "name": "SdpHandlerFunction",
+        "kind": "typedef"
+      }
+    ],
+    "namespace": "SdpHandlerFunction"
   },
   {
     "description": {
@@ -30314,63 +29459,302 @@
     "namespace": "DeviceInfo"
   },
   {
-    "description": "",
+    "description": {
+      "type": "root",
+      "children": [
+        {
+          "type": "paragraph",
+          "children": [
+            {
+              "type": "text",
+              "value": "Information about a Call.",
+              "position": {
+                "start": {
+                  "line": 1,
+                  "column": 1,
+                  "offset": 0
+                },
+                "end": {
+                  "line": 1,
+                  "column": 26,
+                  "offset": 25
+                },
+                "indent": []
+              }
+            }
+          ],
+          "position": {
+            "start": {
+              "line": 1,
+              "column": 1,
+              "offset": 0
+            },
+            "end": {
+              "line": 1,
+              "column": 26,
+              "offset": 25
+            },
+            "indent": []
+          }
+        },
+        {
+          "type": "paragraph",
+          "children": [
+            {
+              "type": "text",
+              "value": "Can be retrieved using the ",
+              "position": {
+                "start": {
+                  "line": 3,
+                  "column": 1,
+                  "offset": 27
+                },
+                "end": {
+                  "line": 3,
+                  "column": 28,
+                  "offset": 54
+                },
+                "indent": []
+              }
+            },
+            {
+              "type": "link",
+              "url": "#callsgetall",
+              "title": null,
+              "jsdoc": true,
+              "children": [
+                {
+                  "type": "text",
+                  "value": "call.getAll"
+                }
+              ],
+              "position": {
+                "start": {
+                  "line": 3,
+                  "column": 28,
+                  "offset": 54
+                },
+                "end": {
+                  "line": 3,
+                  "column": 60,
+                  "offset": 86
+                },
+                "indent": []
+              }
+            },
+            {
+              "type": "text",
+              "value": " or\n   ",
+              "position": {
+                "start": {
+                  "line": 3,
+                  "column": 60,
+                  "offset": 86
+                },
+                "end": {
+                  "line": 4,
+                  "column": 4,
+                  "offset": 93
+                },
+                "indent": [
+                  1
+                ]
+              }
+            },
+            {
+              "type": "link",
+              "url": "#callsgetbyid",
+              "title": null,
+              "jsdoc": true,
+              "children": [
+                {
+                  "type": "text",
+                  "value": "call.getById"
+                }
+              ],
+              "position": {
+                "start": {
+                  "line": 4,
+                  "column": 4,
+                  "offset": 93
+                },
+                "end": {
+                  "line": 4,
+                  "column": 38,
+                  "offset": 127
+                },
+                "indent": []
+              }
+            },
+            {
+              "type": "text",
+              "value": " APIs.",
+              "position": {
+                "start": {
+                  "line": 4,
+                  "column": 38,
+                  "offset": 127
+                },
+                "end": {
+                  "line": 4,
+                  "column": 44,
+                  "offset": 133
+                },
+                "indent": []
+              }
+            }
+          ],
+          "position": {
+            "start": {
+              "line": 3,
+              "column": 1,
+              "offset": 27
+            },
+            "end": {
+              "line": 4,
+              "column": 44,
+              "offset": 133
+            },
+            "indent": [
+              1
+            ]
+          }
+        }
+      ],
+      "position": {
+        "start": {
+          "line": 1,
+          "column": 1,
+          "offset": 0
+        },
+        "end": {
+          "line": 4,
+          "column": 44,
+          "offset": 133
+        }
+      }
+    },
     "tags": [
       {
         "title": "public",
         "description": null,
-        "lineNumber": 1,
+        "lineNumber": 6,
         "type": null
+      },
+      {
+        "title": "static",
+        "description": null,
+        "lineNumber": 7
       },
       {
         "title": "module",
         "description": null,
-        "lineNumber": 2,
+        "lineNumber": 8,
         "type": null,
-        "name": "IceServer"
-      },
-      {
-        "title": "typedef",
-        "description": null,
-        "lineNumber": 3,
-        "type": {
-          "type": "NameExpression",
-          "name": "Object"
-        },
-        "name": "IceServer"
+        "name": "CallObject"
       },
       {
         "title": "property",
-        "description": "Either an array of URLs for reaching out several ICE servers or a single URL for reaching one ICE server.",
-        "lineNumber": 4,
+        "description": "The ID of the call.",
+        "lineNumber": 9,
         "type": {
-          "type": "UnionType",
-          "elements": [
-            {
-              "type": "TypeApplication",
-              "expression": {
-                "type": "NameExpression",
-                "name": "Array"
-              },
-              "applications": [
-                {
-                  "type": "NameExpression",
-                  "name": "string"
-                }
-              ]
-            },
+          "type": "NameExpression",
+          "name": "string"
+        },
+        "name": "id"
+      },
+      {
+        "title": "property",
+        "description": "The direction in which the call was created. Can be 'outgoing' or 'incoming'.",
+        "lineNumber": 10,
+        "type": {
+          "type": "NameExpression",
+          "name": "string"
+        },
+        "name": "direction"
+      },
+      {
+        "title": "property",
+        "description": "The current state of the call. See {@link Calls.states call.states} for possible states.",
+        "lineNumber": 11,
+        "type": {
+          "type": "NameExpression",
+          "name": "string"
+        },
+        "name": "state"
+      },
+      {
+        "title": "property",
+        "description": "Indicates whether this call is currently being held locally.",
+        "lineNumber": 12,
+        "type": {
+          "type": "NameExpression",
+          "name": "boolean"
+        },
+        "name": "localHold"
+      },
+      {
+        "title": "property",
+        "description": "Indicates whether this call is currently being held remotely.",
+        "lineNumber": 13,
+        "type": {
+          "type": "NameExpression",
+          "name": "boolean"
+        },
+        "name": "remoteHold"
+      },
+      {
+        "title": "property",
+        "description": "A list of Track IDs that the call is sending to the remote participant.",
+        "lineNumber": 14,
+        "type": {
+          "type": "TypeApplication",
+          "expression": {
+            "type": "NameExpression",
+            "name": "Array"
+          },
+          "applications": [
             {
               "type": "NameExpression",
               "name": "string"
             }
           ]
         },
-        "name": "urls"
+        "name": "localTracks"
       },
       {
         "title": "property",
-        "description": "The credential needed by the ICE server.",
-        "lineNumber": 5,
+        "description": "A list of Track IDs that the call is receiving from the remote participant.",
+        "lineNumber": 15,
+        "type": {
+          "type": "TypeApplication",
+          "expression": {
+            "type": "NameExpression",
+            "name": "Array"
+          },
+          "applications": [
+            {
+              "type": "NameExpression",
+              "name": "string"
+            }
+          ]
+        },
+        "name": "remoteTracks"
+      },
+      {
+        "title": "property",
+        "description": "Information about the other call participant.",
+        "lineNumber": 16,
+        "type": {
+          "type": "NameExpression",
+          "name": "Object"
+        },
+        "name": "remoteParticipant"
+      },
+      {
+        "title": "property",
+        "description": "The User ID of the remote participant in the form \"username@domain\".",
+        "lineNumber": 17,
         "type": {
           "type": "OptionalType",
           "expression": {
@@ -30378,16 +29762,62 @@
             "name": "string"
           }
         },
-        "name": "credential"
+        "name": "remoteParticipant.displayNumber"
+      },
+      {
+        "title": "property",
+        "description": "The display name of the remote participant.",
+        "lineNumber": 18,
+        "type": {
+          "type": "OptionalType",
+          "expression": {
+            "type": "NameExpression",
+            "name": "string"
+          }
+        },
+        "name": "remoteParticipant.displayName"
+      },
+      {
+        "title": "property",
+        "description": "The bandwidth limitations set for the call.",
+        "lineNumber": 19,
+        "type": {
+          "type": "NameExpression",
+          "name": "BandwidthControls"
+        },
+        "name": "bandwidth"
+      },
+      {
+        "title": "property",
+        "description": "The start time of the call in milliseconds since the epoch.",
+        "lineNumber": 20,
+        "type": {
+          "type": "NameExpression",
+          "name": "number"
+        },
+        "name": "startTime"
+      },
+      {
+        "title": "property",
+        "description": "The end time of the call in milliseconds since the epoch.",
+        "lineNumber": 21,
+        "type": {
+          "type": "OptionalType",
+          "expression": {
+            "type": "NameExpression",
+            "name": "number"
+          }
+        },
+        "name": "endTime"
       }
     ],
     "loc": {
       "start": {
-        "line": 107,
+        "line": 13,
         "column": 0
       },
       "end": {
-        "line": 113,
+        "line": 35,
         "column": 3
       }
     },
@@ -30410,8 +29840,8 @@
     "properties": [
       {
         "title": "property",
-        "name": "urls",
-        "lineNumber": 4,
+        "name": "id",
+        "lineNumber": 9,
         "description": {
           "type": "root",
           "children": [
@@ -30420,7 +29850,7 @@
               "children": [
                 {
                   "type": "text",
-                  "value": "Either an array of URLs for reaching out several ICE servers or a single URL for reaching one ICE server.",
+                  "value": "The ID of the call.",
                   "position": {
                     "start": {
                       "line": 1,
@@ -30429,8 +29859,8 @@
                     },
                     "end": {
                       "line": 1,
-                      "column": 106,
-                      "offset": 105
+                      "column": 20,
+                      "offset": 19
                     },
                     "indent": []
                   }
@@ -30444,8 +29874,8 @@
                 },
                 "end": {
                   "line": 1,
-                  "column": 106,
-                  "offset": 105
+                  "column": 20,
+                  "offset": 19
                 },
                 "indent": []
               }
@@ -30459,27 +29889,365 @@
             },
             "end": {
               "line": 1,
-              "column": 106,
-              "offset": 105
+              "column": 20,
+              "offset": 19
             }
           }
         },
         "type": {
-          "type": "UnionType",
-          "elements": [
+          "type": "NameExpression",
+          "name": "string"
+        }
+      },
+      {
+        "title": "property",
+        "name": "direction",
+        "lineNumber": 10,
+        "description": {
+          "type": "root",
+          "children": [
             {
-              "type": "TypeApplication",
-              "expression": {
-                "type": "NameExpression",
-                "name": "Array"
-              },
-              "applications": [
+              "type": "paragraph",
+              "children": [
                 {
-                  "type": "NameExpression",
-                  "name": "string"
+                  "type": "text",
+                  "value": "The direction in which the call was created. Can be 'outgoing' or 'incoming'.",
+                  "position": {
+                    "start": {
+                      "line": 1,
+                      "column": 1,
+                      "offset": 0
+                    },
+                    "end": {
+                      "line": 1,
+                      "column": 78,
+                      "offset": 77
+                    },
+                    "indent": []
+                  }
                 }
-              ]
+              ],
+              "position": {
+                "start": {
+                  "line": 1,
+                  "column": 1,
+                  "offset": 0
+                },
+                "end": {
+                  "line": 1,
+                  "column": 78,
+                  "offset": 77
+                },
+                "indent": []
+              }
+            }
+          ],
+          "position": {
+            "start": {
+              "line": 1,
+              "column": 1,
+              "offset": 0
             },
+            "end": {
+              "line": 1,
+              "column": 78,
+              "offset": 77
+            }
+          }
+        },
+        "type": {
+          "type": "NameExpression",
+          "name": "string"
+        }
+      },
+      {
+        "title": "property",
+        "name": "state",
+        "lineNumber": 11,
+        "description": {
+          "type": "root",
+          "children": [
+            {
+              "type": "paragraph",
+              "children": [
+                {
+                  "type": "text",
+                  "value": "The current state of the call. See ",
+                  "position": {
+                    "start": {
+                      "line": 1,
+                      "column": 1,
+                      "offset": 0
+                    },
+                    "end": {
+                      "line": 1,
+                      "column": 36,
+                      "offset": 35
+                    },
+                    "indent": []
+                  }
+                },
+                {
+                  "type": "link",
+                  "url": "Calls.states",
+                  "title": null,
+                  "jsdoc": true,
+                  "children": [
+                    {
+                      "type": "text",
+                      "value": "call.states"
+                    }
+                  ],
+                  "position": {
+                    "start": {
+                      "line": 1,
+                      "column": 36,
+                      "offset": 35
+                    },
+                    "end": {
+                      "line": 1,
+                      "column": 68,
+                      "offset": 67
+                    },
+                    "indent": []
+                  }
+                },
+                {
+                  "type": "text",
+                  "value": " for possible states.",
+                  "position": {
+                    "start": {
+                      "line": 1,
+                      "column": 68,
+                      "offset": 67
+                    },
+                    "end": {
+                      "line": 1,
+                      "column": 89,
+                      "offset": 88
+                    },
+                    "indent": []
+                  }
+                }
+              ],
+              "position": {
+                "start": {
+                  "line": 1,
+                  "column": 1,
+                  "offset": 0
+                },
+                "end": {
+                  "line": 1,
+                  "column": 89,
+                  "offset": 88
+                },
+                "indent": []
+              }
+            }
+          ],
+          "position": {
+            "start": {
+              "line": 1,
+              "column": 1,
+              "offset": 0
+            },
+            "end": {
+              "line": 1,
+              "column": 89,
+              "offset": 88
+            }
+          }
+        },
+        "type": {
+          "type": "NameExpression",
+          "name": "string"
+        }
+      },
+      {
+        "title": "property",
+        "name": "localHold",
+        "lineNumber": 12,
+        "description": {
+          "type": "root",
+          "children": [
+            {
+              "type": "paragraph",
+              "children": [
+                {
+                  "type": "text",
+                  "value": "Indicates whether this call is currently being held locally.",
+                  "position": {
+                    "start": {
+                      "line": 1,
+                      "column": 1,
+                      "offset": 0
+                    },
+                    "end": {
+                      "line": 1,
+                      "column": 61,
+                      "offset": 60
+                    },
+                    "indent": []
+                  }
+                }
+              ],
+              "position": {
+                "start": {
+                  "line": 1,
+                  "column": 1,
+                  "offset": 0
+                },
+                "end": {
+                  "line": 1,
+                  "column": 61,
+                  "offset": 60
+                },
+                "indent": []
+              }
+            }
+          ],
+          "position": {
+            "start": {
+              "line": 1,
+              "column": 1,
+              "offset": 0
+            },
+            "end": {
+              "line": 1,
+              "column": 61,
+              "offset": 60
+            }
+          }
+        },
+        "type": {
+          "type": "NameExpression",
+          "name": "boolean"
+        }
+      },
+      {
+        "title": "property",
+        "name": "remoteHold",
+        "lineNumber": 13,
+        "description": {
+          "type": "root",
+          "children": [
+            {
+              "type": "paragraph",
+              "children": [
+                {
+                  "type": "text",
+                  "value": "Indicates whether this call is currently being held remotely.",
+                  "position": {
+                    "start": {
+                      "line": 1,
+                      "column": 1,
+                      "offset": 0
+                    },
+                    "end": {
+                      "line": 1,
+                      "column": 62,
+                      "offset": 61
+                    },
+                    "indent": []
+                  }
+                }
+              ],
+              "position": {
+                "start": {
+                  "line": 1,
+                  "column": 1,
+                  "offset": 0
+                },
+                "end": {
+                  "line": 1,
+                  "column": 62,
+                  "offset": 61
+                },
+                "indent": []
+              }
+            }
+          ],
+          "position": {
+            "start": {
+              "line": 1,
+              "column": 1,
+              "offset": 0
+            },
+            "end": {
+              "line": 1,
+              "column": 62,
+              "offset": 61
+            }
+          }
+        },
+        "type": {
+          "type": "NameExpression",
+          "name": "boolean"
+        }
+      },
+      {
+        "title": "property",
+        "name": "localTracks",
+        "lineNumber": 14,
+        "description": {
+          "type": "root",
+          "children": [
+            {
+              "type": "paragraph",
+              "children": [
+                {
+                  "type": "text",
+                  "value": "A list of Track IDs that the call is sending to the remote participant.",
+                  "position": {
+                    "start": {
+                      "line": 1,
+                      "column": 1,
+                      "offset": 0
+                    },
+                    "end": {
+                      "line": 1,
+                      "column": 72,
+                      "offset": 71
+                    },
+                    "indent": []
+                  }
+                }
+              ],
+              "position": {
+                "start": {
+                  "line": 1,
+                  "column": 1,
+                  "offset": 0
+                },
+                "end": {
+                  "line": 1,
+                  "column": 72,
+                  "offset": 71
+                },
+                "indent": []
+              }
+            }
+          ],
+          "position": {
+            "start": {
+              "line": 1,
+              "column": 1,
+              "offset": 0
+            },
+            "end": {
+              "line": 1,
+              "column": 72,
+              "offset": 71
+            }
+          }
+        },
+        "type": {
+          "type": "TypeApplication",
+          "expression": {
+            "type": "NameExpression",
+            "name": "Array"
+          },
+          "applications": [
             {
               "type": "NameExpression",
               "name": "string"
@@ -30489,8 +30257,8 @@
       },
       {
         "title": "property",
-        "name": "credential",
-        "lineNumber": 5,
+        "name": "remoteTracks",
+        "lineNumber": 15,
         "description": {
           "type": "root",
           "children": [
@@ -30499,7 +30267,7 @@
               "children": [
                 {
                   "type": "text",
-                  "value": "The credential needed by the ICE server.",
+                  "value": "A list of Track IDs that the call is receiving from the remote participant.",
                   "position": {
                     "start": {
                       "line": 1,
@@ -30508,8 +30276,8 @@
                     },
                     "end": {
                       "line": 1,
-                      "column": 41,
-                      "offset": 40
+                      "column": 76,
+                      "offset": 75
                     },
                     "indent": []
                   }
@@ -30523,8 +30291,8 @@
                 },
                 "end": {
                   "line": 1,
-                  "column": 41,
-                  "offset": 40
+                  "column": 76,
+                  "offset": 75
                 },
                 "indent": []
               }
@@ -30538,8 +30306,391 @@
             },
             "end": {
               "line": 1,
-              "column": 41,
-              "offset": 40
+              "column": 76,
+              "offset": 75
+            }
+          }
+        },
+        "type": {
+          "type": "TypeApplication",
+          "expression": {
+            "type": "NameExpression",
+            "name": "Array"
+          },
+          "applications": [
+            {
+              "type": "NameExpression",
+              "name": "string"
+            }
+          ]
+        }
+      },
+      {
+        "title": "property",
+        "name": "remoteParticipant",
+        "lineNumber": 16,
+        "description": {
+          "type": "root",
+          "children": [
+            {
+              "type": "paragraph",
+              "children": [
+                {
+                  "type": "text",
+                  "value": "Information about the other call participant.",
+                  "position": {
+                    "start": {
+                      "line": 1,
+                      "column": 1,
+                      "offset": 0
+                    },
+                    "end": {
+                      "line": 1,
+                      "column": 46,
+                      "offset": 45
+                    },
+                    "indent": []
+                  }
+                }
+              ],
+              "position": {
+                "start": {
+                  "line": 1,
+                  "column": 1,
+                  "offset": 0
+                },
+                "end": {
+                  "line": 1,
+                  "column": 46,
+                  "offset": 45
+                },
+                "indent": []
+              }
+            }
+          ],
+          "position": {
+            "start": {
+              "line": 1,
+              "column": 1,
+              "offset": 0
+            },
+            "end": {
+              "line": 1,
+              "column": 46,
+              "offset": 45
+            }
+          }
+        },
+        "type": {
+          "type": "NameExpression",
+          "name": "Object"
+        },
+        "properties": [
+          {
+            "title": "property",
+            "name": "remoteParticipant.displayNumber",
+            "lineNumber": 17,
+            "description": {
+              "type": "root",
+              "children": [
+                {
+                  "type": "paragraph",
+                  "children": [
+                    {
+                      "type": "text",
+                      "value": "The User ID of the remote participant in the form \"username@domain\".",
+                      "position": {
+                        "start": {
+                          "line": 1,
+                          "column": 1,
+                          "offset": 0
+                        },
+                        "end": {
+                          "line": 1,
+                          "column": 69,
+                          "offset": 68
+                        },
+                        "indent": []
+                      }
+                    }
+                  ],
+                  "position": {
+                    "start": {
+                      "line": 1,
+                      "column": 1,
+                      "offset": 0
+                    },
+                    "end": {
+                      "line": 1,
+                      "column": 69,
+                      "offset": 68
+                    },
+                    "indent": []
+                  }
+                }
+              ],
+              "position": {
+                "start": {
+                  "line": 1,
+                  "column": 1,
+                  "offset": 0
+                },
+                "end": {
+                  "line": 1,
+                  "column": 69,
+                  "offset": 68
+                }
+              }
+            },
+            "type": {
+              "type": "OptionalType",
+              "expression": {
+                "type": "NameExpression",
+                "name": "string"
+              }
+            }
+          },
+          {
+            "title": "property",
+            "name": "remoteParticipant.displayName",
+            "lineNumber": 18,
+            "description": {
+              "type": "root",
+              "children": [
+                {
+                  "type": "paragraph",
+                  "children": [
+                    {
+                      "type": "text",
+                      "value": "The display name of the remote participant.",
+                      "position": {
+                        "start": {
+                          "line": 1,
+                          "column": 1,
+                          "offset": 0
+                        },
+                        "end": {
+                          "line": 1,
+                          "column": 44,
+                          "offset": 43
+                        },
+                        "indent": []
+                      }
+                    }
+                  ],
+                  "position": {
+                    "start": {
+                      "line": 1,
+                      "column": 1,
+                      "offset": 0
+                    },
+                    "end": {
+                      "line": 1,
+                      "column": 44,
+                      "offset": 43
+                    },
+                    "indent": []
+                  }
+                }
+              ],
+              "position": {
+                "start": {
+                  "line": 1,
+                  "column": 1,
+                  "offset": 0
+                },
+                "end": {
+                  "line": 1,
+                  "column": 44,
+                  "offset": 43
+                }
+              }
+            },
+            "type": {
+              "type": "OptionalType",
+              "expression": {
+                "type": "NameExpression",
+                "name": "string"
+              }
+            }
+          }
+        ]
+      },
+      {
+        "title": "property",
+        "name": "bandwidth",
+        "lineNumber": 19,
+        "description": {
+          "type": "root",
+          "children": [
+            {
+              "type": "paragraph",
+              "children": [
+                {
+                  "type": "text",
+                  "value": "The bandwidth limitations set for the call.",
+                  "position": {
+                    "start": {
+                      "line": 1,
+                      "column": 1,
+                      "offset": 0
+                    },
+                    "end": {
+                      "line": 1,
+                      "column": 44,
+                      "offset": 43
+                    },
+                    "indent": []
+                  }
+                }
+              ],
+              "position": {
+                "start": {
+                  "line": 1,
+                  "column": 1,
+                  "offset": 0
+                },
+                "end": {
+                  "line": 1,
+                  "column": 44,
+                  "offset": 43
+                },
+                "indent": []
+              }
+            }
+          ],
+          "position": {
+            "start": {
+              "line": 1,
+              "column": 1,
+              "offset": 0
+            },
+            "end": {
+              "line": 1,
+              "column": 44,
+              "offset": 43
+            }
+          }
+        },
+        "type": {
+          "type": "NameExpression",
+          "name": "BandwidthControls"
+        }
+      },
+      {
+        "title": "property",
+        "name": "startTime",
+        "lineNumber": 20,
+        "description": {
+          "type": "root",
+          "children": [
+            {
+              "type": "paragraph",
+              "children": [
+                {
+                  "type": "text",
+                  "value": "The start time of the call in milliseconds since the epoch.",
+                  "position": {
+                    "start": {
+                      "line": 1,
+                      "column": 1,
+                      "offset": 0
+                    },
+                    "end": {
+                      "line": 1,
+                      "column": 60,
+                      "offset": 59
+                    },
+                    "indent": []
+                  }
+                }
+              ],
+              "position": {
+                "start": {
+                  "line": 1,
+                  "column": 1,
+                  "offset": 0
+                },
+                "end": {
+                  "line": 1,
+                  "column": 60,
+                  "offset": 59
+                },
+                "indent": []
+              }
+            }
+          ],
+          "position": {
+            "start": {
+              "line": 1,
+              "column": 1,
+              "offset": 0
+            },
+            "end": {
+              "line": 1,
+              "column": 60,
+              "offset": 59
+            }
+          }
+        },
+        "type": {
+          "type": "NameExpression",
+          "name": "number"
+        }
+      },
+      {
+        "title": "property",
+        "name": "endTime",
+        "lineNumber": 21,
+        "description": {
+          "type": "root",
+          "children": [
+            {
+              "type": "paragraph",
+              "children": [
+                {
+                  "type": "text",
+                  "value": "The end time of the call in milliseconds since the epoch.",
+                  "position": {
+                    "start": {
+                      "line": 1,
+                      "column": 1,
+                      "offset": 0
+                    },
+                    "end": {
+                      "line": 1,
+                      "column": 58,
+                      "offset": 57
+                    },
+                    "indent": []
+                  }
+                }
+              ],
+              "position": {
+                "start": {
+                  "line": 1,
+                  "column": 1,
+                  "offset": 0
+                },
+                "end": {
+                  "line": 1,
+                  "column": 58,
+                  "offset": 57
+                },
+                "indent": []
+              }
+            }
+          ],
+          "position": {
+            "start": {
+              "line": 1,
+              "column": 1,
+              "offset": 0
+            },
+            "end": {
+              "line": 1,
+              "column": 58,
+              "offset": 57
             }
           }
         },
@@ -30547,7 +30698,7 @@
           "type": "OptionalType",
           "expression": {
             "type": "NameExpression",
-            "name": "string"
+            "name": "number"
           }
         }
       }
@@ -30557,12 +30708,9 @@
     "throws": [],
     "todos": [],
     "access": "public",
-    "kind": "typedef",
-    "name": "IceServer",
-    "type": {
-      "type": "NameExpression",
-      "name": "Object"
-    },
+    "scope": "static",
+    "kind": "module",
+    "name": "CallObject",
     "members": {
       "global": [],
       "inner": [],
@@ -30572,11 +30720,12 @@
     },
     "path": [
       {
-        "name": "IceServer",
-        "kind": "typedef"
+        "name": "CallObject",
+        "kind": "module",
+        "scope": "static"
       }
     ],
-    "namespace": "IceServer"
+    "namespace": ".CallObject"
   },
   {
     "description": {
@@ -31137,420 +31286,6 @@
           "children": [
             {
               "type": "text",
-              "value": "The form of an SDP handler function and the expected arguments that it receives.",
-              "position": {
-                "start": {
-                  "line": 1,
-                  "column": 1,
-                  "offset": 0
-                },
-                "end": {
-                  "line": 1,
-                  "column": 81,
-                  "offset": 80
-                },
-                "indent": []
-              }
-            }
-          ],
-          "position": {
-            "start": {
-              "line": 1,
-              "column": 1,
-              "offset": 0
-            },
-            "end": {
-              "line": 1,
-              "column": 81,
-              "offset": 80
-            },
-            "indent": []
-          }
-        }
-      ],
-      "position": {
-        "start": {
-          "line": 1,
-          "column": 1,
-          "offset": 0
-        },
-        "end": {
-          "line": 1,
-          "column": 81,
-          "offset": 80
-        }
-      }
-    },
-    "tags": [
-      {
-        "title": "public",
-        "description": null,
-        "lineNumber": 2,
-        "type": null
-      },
-      {
-        "title": "module",
-        "description": null,
-        "lineNumber": 3,
-        "type": null,
-        "name": "SdpHandlerFunction"
-      },
-      {
-        "title": "typedef",
-        "description": null,
-        "lineNumber": 4,
-        "type": {
-          "type": "NameExpression",
-          "name": "Function"
-        },
-        "name": "SdpHandlerFunction"
-      },
-      {
-        "title": "param",
-        "description": "The SDP so far (could have been modified by previous handlers).",
-        "lineNumber": 5,
-        "type": {
-          "type": "NameExpression",
-          "name": "Object"
-        },
-        "name": "newSdp"
-      },
-      {
-        "title": "param",
-        "description": "Additional information that might be useful when making SDP modifications.",
-        "lineNumber": 6,
-        "type": {
-          "type": "NameExpression",
-          "name": "SdpHandlerInfo"
-        },
-        "name": "info"
-      },
-      {
-        "title": "param",
-        "description": "The SDP in its initial state.",
-        "lineNumber": 7,
-        "type": {
-          "type": "NameExpression",
-          "name": "Object"
-        },
-        "name": "originalSdp"
-      },
-      {
-        "title": "returns",
-        "description": "The resulting modified SDP based on the changes made by this function.",
-        "lineNumber": 8,
-        "type": {
-          "type": "NameExpression",
-          "name": "Object"
-        }
-      }
-    ],
-    "loc": {
-      "start": {
-        "line": 123,
-        "column": 0
-      },
-      "end": {
-        "line": 132,
-        "column": 3
-      }
-    },
-    "context": {
-      "loc": {
-        "start": {
-          "line": 192,
-          "column": 0
-        },
-        "end": {
-          "line": 196,
-          "column": 1
-        }
-      },
-      "file": "/var/jenkins_home/workspace/Kandy.js_beta/packages/kandy/src/call/interfaceNew/api/index.js"
-    },
-    "augments": [],
-    "examples": [],
-    "params": [
-      {
-        "title": "param",
-        "name": "newSdp",
-        "lineNumber": 5,
-        "description": {
-          "type": "root",
-          "children": [
-            {
-              "type": "paragraph",
-              "children": [
-                {
-                  "type": "text",
-                  "value": "The SDP so far (could have been modified by previous handlers).",
-                  "position": {
-                    "start": {
-                      "line": 1,
-                      "column": 1,
-                      "offset": 0
-                    },
-                    "end": {
-                      "line": 1,
-                      "column": 64,
-                      "offset": 63
-                    },
-                    "indent": []
-                  }
-                }
-              ],
-              "position": {
-                "start": {
-                  "line": 1,
-                  "column": 1,
-                  "offset": 0
-                },
-                "end": {
-                  "line": 1,
-                  "column": 64,
-                  "offset": 63
-                },
-                "indent": []
-              }
-            }
-          ],
-          "position": {
-            "start": {
-              "line": 1,
-              "column": 1,
-              "offset": 0
-            },
-            "end": {
-              "line": 1,
-              "column": 64,
-              "offset": 63
-            }
-          }
-        },
-        "type": {
-          "type": "NameExpression",
-          "name": "Object"
-        }
-      },
-      {
-        "title": "param",
-        "name": "info",
-        "lineNumber": 6,
-        "description": {
-          "type": "root",
-          "children": [
-            {
-              "type": "paragraph",
-              "children": [
-                {
-                  "type": "text",
-                  "value": "Additional information that might be useful when making SDP modifications.",
-                  "position": {
-                    "start": {
-                      "line": 1,
-                      "column": 1,
-                      "offset": 0
-                    },
-                    "end": {
-                      "line": 1,
-                      "column": 75,
-                      "offset": 74
-                    },
-                    "indent": []
-                  }
-                }
-              ],
-              "position": {
-                "start": {
-                  "line": 1,
-                  "column": 1,
-                  "offset": 0
-                },
-                "end": {
-                  "line": 1,
-                  "column": 75,
-                  "offset": 74
-                },
-                "indent": []
-              }
-            }
-          ],
-          "position": {
-            "start": {
-              "line": 1,
-              "column": 1,
-              "offset": 0
-            },
-            "end": {
-              "line": 1,
-              "column": 75,
-              "offset": 74
-            }
-          }
-        },
-        "type": {
-          "type": "NameExpression",
-          "name": "SdpHandlerInfo"
-        }
-      },
-      {
-        "title": "param",
-        "name": "originalSdp",
-        "lineNumber": 7,
-        "description": {
-          "type": "root",
-          "children": [
-            {
-              "type": "paragraph",
-              "children": [
-                {
-                  "type": "text",
-                  "value": "The SDP in its initial state.",
-                  "position": {
-                    "start": {
-                      "line": 1,
-                      "column": 1,
-                      "offset": 0
-                    },
-                    "end": {
-                      "line": 1,
-                      "column": 30,
-                      "offset": 29
-                    },
-                    "indent": []
-                  }
-                }
-              ],
-              "position": {
-                "start": {
-                  "line": 1,
-                  "column": 1,
-                  "offset": 0
-                },
-                "end": {
-                  "line": 1,
-                  "column": 30,
-                  "offset": 29
-                },
-                "indent": []
-              }
-            }
-          ],
-          "position": {
-            "start": {
-              "line": 1,
-              "column": 1,
-              "offset": 0
-            },
-            "end": {
-              "line": 1,
-              "column": 30,
-              "offset": 29
-            }
-          }
-        },
-        "type": {
-          "type": "NameExpression",
-          "name": "Object"
-        }
-      }
-    ],
-    "properties": [],
-    "returns": [
-      {
-        "description": {
-          "type": "root",
-          "children": [
-            {
-              "type": "paragraph",
-              "children": [
-                {
-                  "type": "text",
-                  "value": "The resulting modified SDP based on the changes made by this function.",
-                  "position": {
-                    "start": {
-                      "line": 1,
-                      "column": 1,
-                      "offset": 0
-                    },
-                    "end": {
-                      "line": 1,
-                      "column": 71,
-                      "offset": 70
-                    },
-                    "indent": []
-                  }
-                }
-              ],
-              "position": {
-                "start": {
-                  "line": 1,
-                  "column": 1,
-                  "offset": 0
-                },
-                "end": {
-                  "line": 1,
-                  "column": 71,
-                  "offset": 70
-                },
-                "indent": []
-              }
-            }
-          ],
-          "position": {
-            "start": {
-              "line": 1,
-              "column": 1,
-              "offset": 0
-            },
-            "end": {
-              "line": 1,
-              "column": 71,
-              "offset": 70
-            }
-          }
-        },
-        "title": "returns",
-        "type": {
-          "type": "NameExpression",
-          "name": "Object"
-        }
-      }
-    ],
-    "sees": [],
-    "throws": [],
-    "todos": [],
-    "access": "public",
-    "kind": "typedef",
-    "name": "SdpHandlerFunction",
-    "type": {
-      "type": "NameExpression",
-      "name": "Function"
-    },
-    "members": {
-      "global": [],
-      "inner": [],
-      "instance": [],
-      "events": [],
-      "static": []
-    },
-    "path": [
-      {
-        "name": "SdpHandlerFunction",
-        "kind": "typedef"
-      }
-    ],
-    "namespace": "SdpHandlerFunction"
-  },
-  {
-    "description": {
-      "type": "root",
-      "children": [
-        {
-          "type": "paragraph",
-          "children": [
-            {
-              "type": "text",
               "value": "The BandwidthControls type defines the format for configuring media and/or track bandwidth options.\nBandwidthControls only affect received remote tracks of the specified type.",
               "position": {
                 "start": {
@@ -31840,5 +31575,270 @@
       }
     ],
     "namespace": "BandwidthControls"
+  },
+  {
+    "description": "",
+    "tags": [
+      {
+        "title": "public",
+        "description": null,
+        "lineNumber": 1,
+        "type": null
+      },
+      {
+        "title": "module",
+        "description": null,
+        "lineNumber": 2,
+        "type": null,
+        "name": "IceServer"
+      },
+      {
+        "title": "typedef",
+        "description": null,
+        "lineNumber": 3,
+        "type": {
+          "type": "NameExpression",
+          "name": "Object"
+        },
+        "name": "IceServer"
+      },
+      {
+        "title": "property",
+        "description": "Either an array of URLs for reaching out several ICE servers or a single URL for reaching one ICE server.",
+        "lineNumber": 4,
+        "type": {
+          "type": "UnionType",
+          "elements": [
+            {
+              "type": "TypeApplication",
+              "expression": {
+                "type": "NameExpression",
+                "name": "Array"
+              },
+              "applications": [
+                {
+                  "type": "NameExpression",
+                  "name": "string"
+                }
+              ]
+            },
+            {
+              "type": "NameExpression",
+              "name": "string"
+            }
+          ]
+        },
+        "name": "urls"
+      },
+      {
+        "title": "property",
+        "description": "The credential needed by the ICE server.",
+        "lineNumber": 5,
+        "type": {
+          "type": "OptionalType",
+          "expression": {
+            "type": "NameExpression",
+            "name": "string"
+          }
+        },
+        "name": "credential"
+      }
+    ],
+    "loc": {
+      "start": {
+        "line": 107,
+        "column": 0
+      },
+      "end": {
+        "line": 113,
+        "column": 3
+      }
+    },
+    "context": {
+      "loc": {
+        "start": {
+          "line": 192,
+          "column": 0
+        },
+        "end": {
+          "line": 196,
+          "column": 1
+        }
+      },
+      "file": "/var/jenkins_home/workspace/Kandy.js_beta/packages/kandy/src/call/interfaceNew/api/index.js"
+    },
+    "augments": [],
+    "examples": [],
+    "params": [],
+    "properties": [
+      {
+        "title": "property",
+        "name": "urls",
+        "lineNumber": 4,
+        "description": {
+          "type": "root",
+          "children": [
+            {
+              "type": "paragraph",
+              "children": [
+                {
+                  "type": "text",
+                  "value": "Either an array of URLs for reaching out several ICE servers or a single URL for reaching one ICE server.",
+                  "position": {
+                    "start": {
+                      "line": 1,
+                      "column": 1,
+                      "offset": 0
+                    },
+                    "end": {
+                      "line": 1,
+                      "column": 106,
+                      "offset": 105
+                    },
+                    "indent": []
+                  }
+                }
+              ],
+              "position": {
+                "start": {
+                  "line": 1,
+                  "column": 1,
+                  "offset": 0
+                },
+                "end": {
+                  "line": 1,
+                  "column": 106,
+                  "offset": 105
+                },
+                "indent": []
+              }
+            }
+          ],
+          "position": {
+            "start": {
+              "line": 1,
+              "column": 1,
+              "offset": 0
+            },
+            "end": {
+              "line": 1,
+              "column": 106,
+              "offset": 105
+            }
+          }
+        },
+        "type": {
+          "type": "UnionType",
+          "elements": [
+            {
+              "type": "TypeApplication",
+              "expression": {
+                "type": "NameExpression",
+                "name": "Array"
+              },
+              "applications": [
+                {
+                  "type": "NameExpression",
+                  "name": "string"
+                }
+              ]
+            },
+            {
+              "type": "NameExpression",
+              "name": "string"
+            }
+          ]
+        }
+      },
+      {
+        "title": "property",
+        "name": "credential",
+        "lineNumber": 5,
+        "description": {
+          "type": "root",
+          "children": [
+            {
+              "type": "paragraph",
+              "children": [
+                {
+                  "type": "text",
+                  "value": "The credential needed by the ICE server.",
+                  "position": {
+                    "start": {
+                      "line": 1,
+                      "column": 1,
+                      "offset": 0
+                    },
+                    "end": {
+                      "line": 1,
+                      "column": 41,
+                      "offset": 40
+                    },
+                    "indent": []
+                  }
+                }
+              ],
+              "position": {
+                "start": {
+                  "line": 1,
+                  "column": 1,
+                  "offset": 0
+                },
+                "end": {
+                  "line": 1,
+                  "column": 41,
+                  "offset": 40
+                },
+                "indent": []
+              }
+            }
+          ],
+          "position": {
+            "start": {
+              "line": 1,
+              "column": 1,
+              "offset": 0
+            },
+            "end": {
+              "line": 1,
+              "column": 41,
+              "offset": 40
+            }
+          }
+        },
+        "type": {
+          "type": "OptionalType",
+          "expression": {
+            "type": "NameExpression",
+            "name": "string"
+          }
+        }
+      }
+    ],
+    "returns": [],
+    "sees": [],
+    "throws": [],
+    "todos": [],
+    "access": "public",
+    "kind": "typedef",
+    "name": "IceServer",
+    "type": {
+      "type": "NameExpression",
+      "name": "Object"
+    },
+    "members": {
+      "global": [],
+      "inner": [],
+      "instance": [],
+      "events": [],
+      "static": []
+    },
+    "path": [
+      {
+        "name": "IceServer",
+        "kind": "typedef"
+      }
+    ],
+    "namespace": "IceServer"
   }
 ]
