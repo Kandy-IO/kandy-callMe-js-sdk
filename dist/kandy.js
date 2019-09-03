@@ -43046,7 +43046,8 @@ async function makeRequest(options, requestId) {
        * If the response indicates an error and has a body, resolve the body as JSON
        * but no body return an empty object then return a `REQUEST` error
        */
-      responseBody = contentTypes.jsonType === contentType ? await response.json() : {};
+      const isJson = contentType && contentType.includes(contentTypes.jsonType);
+      responseBody = isJson ? await response.json() : {};
       return {
         body: responseBody,
         error: 'REQUEST',
@@ -43064,8 +43065,10 @@ async function makeRequest(options, requestId) {
         result
       };
     } else {
+      const isJson = contentType && contentType.includes(contentTypes.jsonType);
+
       responseBody = {};
-      if (contentTypes.jsonType === contentType && responseType === responseTypes.json) {
+      if (isJson && responseType === responseTypes.json) {
         responseBody = await response.json();
       } else if (responseType === responseTypes.blob) {
         responseBody = await response.blob();
