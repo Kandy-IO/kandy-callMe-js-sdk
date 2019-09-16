@@ -777,6 +777,102 @@ Contains information about a device.
 -   `kind` **[string][2]** The type of the device (audioinput, audiooutput, videoinput).
 -   `label` **[string][2]** The name of the device.
 
+## DevicesObject
+
+A collection of media devices and their information.
+
+**Properties**
+
+-   `camera` **[Array][10]&lt;[DeviceInfo][33]>** A list of camera device information.
+-   `microphone` **[Array][10]&lt;[DeviceInfo][33]>** A list of microphone device information.
+-   `speaker` **[Array][10]&lt;[DeviceInfo][33]>** A list of speaker device information.
+
+## TrackObject
+
+A Track is a stream of audio or video media from a single source.
+Tracks can be retrieved using the Media module's `getTrackById` API and manipulated with other functions of the Media module.
+
+**Properties**
+
+-   `containers` **[Array][10]&lt;[string][2]>** The list of CSS selectors that were used to render this Track.
+-   `disabled` **[boolean][6]** Indicator of whether this Track is disabled or not. If disabled, it cannot be re-enabled.
+-   `id` **[string][2]** The ID of the Track.
+-   `kind` **[string][2]** The kind of Track this is (audio, video).
+-   `label` **[string][2]** The label of the device this Track uses.
+-   `muted` **[boolean][6]** Indicator on whether this Track is muted or not.
+-   `state` **[string][2]** The state of this Track. Can be 'live' or 'ended'.
+-   `streamId` **[string][2]** The ID of the Media Stream that includes this Track.
+
+## MediaObject
+
+The state representation of a Media object.
+Media is a collection of Track objects.
+
+Type: [Object][5]
+
+**Properties**
+
+-   `id` **[string][2]** The ID of the Media object.
+-   `local` **[boolean][6]** Indicator on whether this media is local or remote.
+-   `tracks` **[Array][10]&lt;[TrackObject][21]>** A list of Track objects that are contained in this Media object.
+
+## SdpHandlerFunction
+
+The form of an SDP handler function and the expected arguments that it receives.
+
+Type: [Function][3]
+
+**Parameters**
+
+-   `newSdp` **[Object][5]** The SDP so far (could have been modified by previous handlers).
+-   `info` **[SdpHandlerInfo][34]** Additional information that might be useful when making SDP modifications.
+-   `originalSdp` **[Object][5]** The SDP in its initial state.
+
+Returns **[Object][5]** The resulting modified SDP based on the changes made by this function.
+
+## SdpHandlerInfo
+
+Type: [Object][5]
+
+**Properties**
+
+-   `type` **RTCSdpType** The session description's type.
+-   `endpoint` **[string][2]** Which end of the connection created the SDP.
+
+## IceServer
+
+Type: [Object][5]
+
+**Properties**
+
+-   `urls` **([Array][10]&lt;[string][2]> | [string][2])** Either an array of URLs for reaching out several ICE servers or a single URL for reaching one ICE server.
+-   `credential` **[string][2]?** The credential needed by the ICE server.
+
+## BandwidthControls
+
+The BandwidthControls type defines the format for configuring media and/or track bandwidth options.
+BandwidthControls only affect received remote tracks of the specified type.
+
+Type: [Object][5]
+
+**Properties**
+
+-   `audio` **[number][14]?** The desired bandwidth bitrate in kilobits per second for received remote audio.
+-   `video` **[number][14]?** The desired bandwidth bitrate in kilobits per second for received remote video.
+
+**Examples**
+
+```javascript
+// Specify received remote video bandwidth limits when making a call.
+client.call.make(destination, mediaConstraints,
+ {
+   bandwidth: {
+     video: 5
+   }
+ }
+)
+```
+
 ## MediaConstraint
 
 The MediaConstraint type defines the format for configuring media options.
@@ -810,102 +906,6 @@ client.call.make(destination, {
    }
 })
 ```
-
-## BandwidthControls
-
-The BandwidthControls type defines the format for configuring media and/or track bandwidth options.
-BandwidthControls only affect received remote tracks of the specified type.
-
-Type: [Object][5]
-
-**Properties**
-
--   `audio` **[number][14]?** The desired bandwidth bitrate in kilobits per second for received remote audio.
--   `video` **[number][14]?** The desired bandwidth bitrate in kilobits per second for received remote video.
-
-**Examples**
-
-```javascript
-// Specify received remote video bandwidth limits when making a call.
-client.call.make(destination, mediaConstraints,
- {
-   bandwidth: {
-     video: 5
-   }
- }
-)
-```
-
-## IceServer
-
-Type: [Object][5]
-
-**Properties**
-
--   `urls` **([Array][10]&lt;[string][2]> | [string][2])** Either an array of URLs for reaching out several ICE servers or a single URL for reaching one ICE server.
--   `credential` **[string][2]?** The credential needed by the ICE server.
-
-## SdpHandlerInfo
-
-Type: [Object][5]
-
-**Properties**
-
--   `type` **RTCSdpType** The session description's type.
--   `endpoint` **[string][2]** Which end of the connection created the SDP.
-
-## SdpHandlerFunction
-
-The form of an SDP handler function and the expected arguments that it receives.
-
-Type: [Function][3]
-
-**Parameters**
-
--   `newSdp` **[Object][5]** The SDP so far (could have been modified by previous handlers).
--   `info` **[SdpHandlerInfo][33]** Additional information that might be useful when making SDP modifications.
--   `originalSdp` **[Object][5]** The SDP in its initial state.
-
-Returns **[Object][5]** The resulting modified SDP based on the changes made by this function.
-
-## MediaObject
-
-The state representation of a Media object.
-Media is a collection of Track objects.
-
-Type: [Object][5]
-
-**Properties**
-
--   `id` **[string][2]** The ID of the Media object.
--   `local` **[boolean][6]** Indicator on whether this media is local or remote.
--   `tracks` **[Array][10]&lt;[TrackObject][21]>** A list of Track objects that are contained in this Media object.
-
-## TrackObject
-
-A Track is a stream of audio or video media from a single source.
-Tracks can be retrieved using the Media module's `getTrackById` API and manipulated with other functions of the Media module.
-
-**Properties**
-
--   `containers` **[Array][10]&lt;[string][2]>** The list of CSS selectors that were used to render this Track.
--   `disabled` **[boolean][6]** Indicator of whether this Track is disabled or not. If disabled, it cannot be re-enabled.
--   `id` **[string][2]** The ID of the Track.
--   `kind` **[string][2]** The kind of Track this is (audio, video).
--   `label` **[string][2]** The label of the device this Track uses.
--   `muted` **[boolean][6]** Indicator on whether this Track is muted or not.
--   `state` **[string][2]** The state of this Track. Can be 'live' or 'ended'.
--   `streamId` **[string][2]** The ID of the Media Stream that includes this Track.
-
-## DevicesObject
-
-A collection of media devices and their information.
-
-**Properties**
-
--   `camera` **[Array][10]&lt;[DeviceInfo][34]>** A list of camera device information.
--   `microphone` **[Array][10]&lt;[DeviceInfo][34]>** A list of microphone device information.
--   `speaker` **[Array][10]&lt;[DeviceInfo][34]>** A list of speaker device information.
 
 [1]: #config
 
@@ -971,6 +971,6 @@ A collection of media devices and their information.
 
 [32]: Calls.states
 
-[33]: #sdphandlerinfo
+[33]: #deviceinfo
 
-[34]: #deviceinfo
+[34]: #sdphandlerinfo
