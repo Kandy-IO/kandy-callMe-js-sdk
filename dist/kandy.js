@@ -1,7 +1,7 @@
 /**
  * Kandy.js
  * kandy.newCallMe.js
- * Version: 4.8.0-beta.140
+ * Version: 4.8.0-beta.141
  */
 (function webpackUniversalModuleDefinition(root, factory) {
 	if(typeof exports === 'object' && typeof module === 'object')
@@ -30235,7 +30235,7 @@ function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { de
  * Call functions are all part of the 'call' namespace.
  *
  * @public
- * @module Calls
+ * @namespace Calls
  */
 
 /**
@@ -30247,6 +30247,8 @@ function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { de
  * @public
  * @static
  * @module CallObject
+ * @typedef {Object} CallObject
+ * @memberof Calls
  * @property {string} id The ID of the call.
  * @property {string} direction The direction in which the call was created. Can be 'outgoing' or 'incoming'.
  * @property {string} state The current state of the call. See {@link Calls.states call.states} for possible states.
@@ -30297,6 +30299,7 @@ function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { de
  * @public
  * @module MediaConstraint
  * @typedef {Object} MediaConstraint
+ * @memberof Calls
  * @property {string} [exact] The required value for the constraint. Other values will not be accepted.
  * @property {string} [ideal] The ideal value for the constraint. Other values will be considered if necessary.
  * @example
@@ -30319,6 +30322,7 @@ function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { de
  * @public
  * @module BandwidthControls
  * @typedef {Object} BandwidthControls
+ * @memberof Calls
  * @property {number} [audio] The desired bandwidth bitrate in kilobits per second for received remote audio.
  * @property {number} [video] The desired bandwidth bitrate in kilobits per second for received remote video.
  * @example
@@ -30336,6 +30340,7 @@ function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { de
  * @public
  * @module IceServer
  * @typedef {Object} IceServer
+ * @memberof Calls
  * @property {Array<string>|string} urls Either an array of URLs for reaching out several ICE servers or a single URL for reaching one ICE server.
  * @property {string} [credential] The credential needed by the ICE server.
  */
@@ -30344,6 +30349,7 @@ function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { de
  * @public
  * @module SdpHandlerInfo
  * @typedef {Object} SdpHandlerInfo
+ * @memberof Calls
  * @property {RTCSdpType} type The session description's type.
  * @property {string} endpoint Which end of the connection created the SDP.
  */
@@ -30353,6 +30359,7 @@ function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { de
  * @public
  * @module SdpHandlerFunction
  * @typedef {Function} SdpHandlerFunction
+ * @memberof Calls
  * @param {Object} newSdp The SDP so far (could have been modified by previous handlers).
  * @param {SdpHandlerInfo} info Additional information that might be useful when making SDP modifications.
  * @param {Object} originalSdp The SDP in its initial state.
@@ -30366,6 +30373,7 @@ function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { de
  * @public
  * @module MediaObject
  * @typedef {Object} MediaObject
+ * @memberof Calls
  * @property {string} id The ID of the Media object.
  * @property {boolean} local Indicator on whether this media is local or remote.
  * @property {Array<TrackObject>} tracks A list of Track objects that are contained in this Media object.
@@ -30377,6 +30385,8 @@ function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { de
  *
  * @public
  * @module TrackObject
+ * @typedef {Object} TrackObject
+ * @memberof Calls
  * @property {Array<string>} containers The list of CSS selectors that were used to render this Track.
  * @property {boolean} disabled Indicator of whether this Track is disabled or not. If disabled, it cannot be re-enabled.
  * @property {string} id The ID of the Track.
@@ -30392,6 +30402,8 @@ function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { de
  *
  * @public
  * @module DevicesObject
+ * @typedef {Object} DevicesObject
+ * @memberof Calls
  * @property {Array<DeviceInfo>} camera A list of camera device information.
  * @property {Array<DeviceInfo>} microphone A list of microphone device information.
  * @property {Array<DeviceInfo>} speaker A list of speaker device information.
@@ -30402,6 +30414,8 @@ function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { de
  *
  * @public
  * @module DeviceInfo
+ * @typedef {Object} DeviceInfo
+ * @memberof Calls
  * @property {string} deviceId The ID of the device.
  * @property {string} groupId The group ID of the device. Devices that share a `groupId` belong to the same physical device.
  * @property {string} kind The type of the device (audioinput, audiooutput, videoinput).
@@ -39121,10 +39135,10 @@ function _interopRequireWildcard(obj) { if (obj && obj.__esModule) { return obj;
 const log = (0, _logs.getLogManager)().getLogger('CONFIG'); /**
                                                              * An interface for getting and updating the configuration Object.
                                                              *
-                                                             * Config functions are available directly on the SDK Object
+                                                             * Configuration functions are available directly on the SDK Object
                                                              *
                                                              * @public
-                                                             * @module Config
+                                                             * @module Configuration
                                                              * @requires config
                                                              */
 function api(context) {
@@ -39133,7 +39147,7 @@ function api(context) {
      * Gets the current configuration Object
      *
      * @public
-     * @memberof Config
+     * @memberof Configuration
      * @requires config
      * @method getConfig
      * @returns {Object} A configuration Object.
@@ -39148,7 +39162,7 @@ function api(context) {
      *
      * @public
      * @static
-     * @memberof Config
+     * @memberof Configuration
      * @requires config
      * @method updateConfig
      * @param {Object} newConfigValues Key-value pairs that will be placed into the store. See {@link config} for details on what key-value pairs are available for use.
@@ -39513,7 +39527,7 @@ const log = (0, _logs.getLogManager)().getLogger('CONNECTIVITY');
  * Connectivity functions are all part of the 'connection' namespace.
  *
  * @public
- * @module Connectivity
+ * @namespace Connectivity
  */
 
 function api({ dispatch, getState }) {
@@ -41526,7 +41540,7 @@ const factoryDefaults = {
    */
 };function factory(plugins, options = factoryDefaults) {
   // Log the SDK's version (templated by webpack) on initialization.
-  let version = '4.8.0-beta.140';
+  let version = '4.8.0-beta.141';
   log.info(`SDK version: ${version}`);
 
   var sagas = [];
@@ -41777,7 +41791,7 @@ var _fp = __webpack_require__("../../node_modules/lodash/fp.js");
 
 /**
  * The configuration object. This object defines what different configuration
- * values you can use when instantiating the SDK.
+ * values you can use when instantiating the SDK using the {@link #create create} function.
  * @public
  * @module config
  */
@@ -41791,7 +41805,7 @@ var _fp = __webpack_require__("../../node_modules/lodash/fp.js");
  * to be used for all calls.
  *
  * @public
- * @module sdpHandlers
+ * @namespace sdpHandlers
  * @example
  * import { create, sdpHandlers } from 'kandy';
  * const codecRemover = sdpHandlers.createCodecRemover(['VP8', 'VP9'])

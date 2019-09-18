@@ -7,6 +7,10 @@ Kandy.js change log.
 
 ## 4.8.0 - beta
 
+### Fixed
+
+- Fixed the ordering and nesting of types & namespaces in public documentation. `KAA-1880`
+
 ### Added
 
 - Added `displayName` option to `makeAnonymous` call api. `KAA-1909`
