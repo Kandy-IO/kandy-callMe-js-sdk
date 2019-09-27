@@ -251,6 +251,19 @@ Type: [Object][3]
 -   `startTime` **[number][7]** The start time of the call in milliseconds since the epoch.
 -   `endTime` **[number][7]?** The end time of the call in milliseconds since the epoch.
 
+### DeviceInfo
+
+Contains information about a device.
+
+Type: [Object][3]
+
+**Properties**
+
+-   `deviceId` **[string][4]** The ID of the device.
+-   `groupId` **[string][4]** The group ID of the device. Devices that share a `groupId` belong to the same physical device.
+-   `kind` **[string][4]** The type of the device (audioinput, audiooutput, videoinput).
+-   `label` **[string][4]** The name of the device.
+
 ### MediaConstraint
 
 The MediaConstraint type defines the format for configuring media options.
@@ -384,19 +397,6 @@ Type: [Object][3]
 -   `camera` **[Array][8]&lt;DeviceInfo>** A list of camera device information.
 -   `microphone` **[Array][8]&lt;DeviceInfo>** A list of microphone device information.
 -   `speaker` **[Array][8]&lt;DeviceInfo>** A list of speaker device information.
-
-### DeviceInfo
-
-Contains information about a device.
-
-Type: [Object][3]
-
-**Properties**
-
--   `deviceId` **[string][4]** The ID of the device.
--   `groupId` **[string][4]** The group ID of the device. Devices that share a `groupId` belong to the same physical device.
--   `kind` **[string][4]** The type of the device (audioinput, audiooutput, videoinput).
--   `label` **[string][4]** The name of the device.
 
 ### hold
 
