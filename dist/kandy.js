@@ -1,7 +1,7 @@
 /**
  * Kandy.js
  * kandy.newCallMe.js
- * Version: 4.8.0-beta.146
+ * Version: 4.8.0-beta.147
  */
 (function webpackUniversalModuleDefinition(root, factory) {
 	if(typeof exports === 'object' && typeof module === 'object')
@@ -32134,7 +32134,7 @@ function* createSession(callInfo) {
   const responseBodyType = callInfo.isAnonymous ? 'callMeResponse' : 'callControlResponse';
   if (response.error) {
     return {
-      error: handleLinkCallRequestError(response)
+      error: response.error
     };
   } else {
     return {
@@ -32211,7 +32211,7 @@ function* endSession(callInfo) {
 
   if (response.error) {
     return {
-      error: handleLinkCallRequestError(response)
+      error: response.error
     };
   } else {
     return {
@@ -41546,7 +41546,7 @@ const factoryDefaults = {
    */
 };function factory(plugins, options = factoryDefaults) {
   // Log the SDK's version (templated by webpack) on initialization.
-  let version = '4.8.0-beta.146';
+  let version = '4.8.0-beta.147';
   log.info(`SDK version: ${version}`);
 
   var sagas = [];
