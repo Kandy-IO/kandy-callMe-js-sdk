@@ -226,40 +226,6 @@ let callId = client.call.makeAnonymous(callee, credentials, callOptions);
 
 Returns **[string][4]** Id of the outgoing call.
 
-### MediaConstraint
-
-The MediaConstraint type defines the format for configuring media options.
-Either the `exact` or `ideal` property should be provided. If both are present, the
-   `exact` value will be used.
-
-When the `exact` value is provided, it will be the only value considered for the option.
-   If it cannot be used, the constraint will be considered an error.
-
-When the `ideal` value is provided, it will be considered as the optimal value for the option.
-   If it cannot be used, the closest acceptable value will be used instead.
-
-Type: [Object][3]
-
-**Properties**
-
--   `exact` **[string][4]?** The required value for the constraint. Other values will not be accepted.
--   `ideal` **[string][4]?** The ideal value for the constraint. Other values will be considered if necessary.
-
-**Examples**
-
-```javascript
-// Specify video resolution when making a call.
-client.call.make(destination, {
-   audio: true,
-   video: true,
-   videoOptions: {
-     // Set height and width constraints to ideally be 1280x720.
-     height: { ideal: 720 },
-     width: { ideal: 1280 }
-   }
-})
-```
-
 ### DeviceInfo
 
 Contains information about a device.
@@ -316,36 +282,11 @@ Type: [Object][3]
 -   `local` **[boolean][6]** Indicator on whether this media is local or remote.
 -   `tracks` **[Array][8]&lt;TrackObject>** A list of Track objects that are contained in this Media object.
 
-### CallObject
-
-Information about a Call.
-
-Can be retrieved using the [call.getAll][10] or
-   [call.getById][11] APIs.
-
-Type: [Object][3]
-
-**Properties**
-
--   `id` **[string][4]** The ID of the call.
--   `direction` **[string][4]** The direction in which the call was created. Can be 'outgoing' or 'incoming'.
--   `state` **[string][4]** The current state of the call. See [call.states][12] for possible states.
--   `localHold` **[boolean][6]** Indicates whether this call is currently being held locally.
--   `remoteHold` **[boolean][6]** Indicates whether this call is currently being held remotely.
--   `localTracks` **[Array][8]&lt;[string][4]>** A list of Track IDs that the call is sending to the remote participant.
--   `remoteTracks` **[Array][8]&lt;[string][4]>** A list of Track IDs that the call is receiving from the remote participant.
--   `remoteParticipant` **[Object][3]** Information about the other call participant.
-    -   `remoteParticipant.displayNumber` **[string][4]?** The User ID of the remote participant in the form "username@domain".
-    -   `remoteParticipant.displayName` **[string][4]?** The display name of the remote participant.
--   `bandwidth` **BandwidthControls** The bandwidth limitations set for the call.
--   `startTime` **[number][7]** The start time of the call in milliseconds since the epoch.
--   `endTime` **[number][7]?** The end time of the call in milliseconds since the epoch.
-
 ### SdpHandlerFunction
 
 The form of an SDP handler function and the expected arguments that it receives.
 
-Type: [Function][13]
+Type: [Function][10]
 
 **Parameters**
 
@@ -354,6 +295,24 @@ Type: [Function][13]
 -   `originalSdp` **[Object][3]** The SDP in its initial state.
 
 Returns **[Object][3]** The resulting modified SDP based on the changes made by this function.
+
+### SdpHandlerInfo
+
+Type: [Object][3]
+
+**Properties**
+
+-   `type` **RTCSdpType** The session description's type.
+-   `endpoint` **[string][4]** Which end of the connection created the SDP.
+
+### IceServer
+
+Type: [Object][3]
+
+**Properties**
+
+-   `urls` **([Array][8]&lt;[string][4]> | [string][4])** Either an array of URLs for reaching out several ICE servers or a single URL for reaching one ICE server.
+-   `credential` **[string][4]?** The credential needed by the ICE server.
 
 ### BandwidthControls
 
@@ -380,23 +339,64 @@ client.call.make(destination, mediaConstraints,
 )
 ```
 
-### IceServer
+### MediaConstraint
+
+The MediaConstraint type defines the format for configuring media options.
+Either the `exact` or `ideal` property should be provided. If both are present, the
+   `exact` value will be used.
+
+When the `exact` value is provided, it will be the only value considered for the option.
+   If it cannot be used, the constraint will be considered an error.
+
+When the `ideal` value is provided, it will be considered as the optimal value for the option.
+   If it cannot be used, the closest acceptable value will be used instead.
 
 Type: [Object][3]
 
 **Properties**
 
--   `urls` **([Array][8]&lt;[string][4]> | [string][4])** Either an array of URLs for reaching out several ICE servers or a single URL for reaching one ICE server.
--   `credential` **[string][4]?** The credential needed by the ICE server.
+-   `exact` **[string][4]?** The required value for the constraint. Other values will not be accepted.
+-   `ideal` **[string][4]?** The ideal value for the constraint. Other values will be considered if necessary.
 
-### SdpHandlerInfo
+**Examples**
+
+```javascript
+// Specify video resolution when making a call.
+client.call.make(destination, {
+   audio: true,
+   video: true,
+   videoOptions: {
+     // Set height and width constraints to ideally be 1280x720.
+     height: { ideal: 720 },
+     width: { ideal: 1280 }
+   }
+})
+```
+
+### CallObject
+
+Information about a Call.
+
+Can be retrieved using the [call.getAll][11] or
+   [call.getById][12] APIs.
 
 Type: [Object][3]
 
 **Properties**
 
--   `type` **RTCSdpType** The session description's type.
--   `endpoint` **[string][4]** Which end of the connection created the SDP.
+-   `id` **[string][4]** The ID of the call.
+-   `direction` **[string][4]** The direction in which the call was created. Can be 'outgoing' or 'incoming'.
+-   `state` **[string][4]** The current state of the call. See [call.states][13] for possible states.
+-   `localHold` **[boolean][6]** Indicates whether this call is currently being held locally.
+-   `remoteHold` **[boolean][6]** Indicates whether this call is currently being held remotely.
+-   `localTracks` **[Array][8]&lt;[string][4]>** A list of Track IDs that the call is sending to the remote participant.
+-   `remoteTracks` **[Array][8]&lt;[string][4]>** A list of Track IDs that the call is receiving from the remote participant.
+-   `remoteParticipant` **[Object][3]** Information about the other call participant.
+    -   `remoteParticipant.displayNumber` **[string][4]?** The User ID of the remote participant in the form "username@domain".
+    -   `remoteParticipant.displayName` **[string][4]?** The display name of the remote participant.
+-   `bandwidth` **BandwidthControls** The bandwidth limitations set for the call.
+-   `startTime` **[number][7]** The start time of the call in milliseconds since the epoch.
+-   `endTime` **[number][7]?** The end time of the call in milliseconds since the epoch.
 
 ### hold
 
@@ -643,7 +643,7 @@ Add an event listener for the specified event type.
 **Parameters**
 
 -   `type` **[string][4]** The event type for which to add the listener.
--   `listener` **[Function][13]** The listener for the event type. The parameters of the listener depend on the event type.
+-   `listener` **[Function][10]** The listener for the event type. The parameters of the listener depend on the event type.
 
 **Examples**
 
@@ -663,7 +663,7 @@ Removes an event listener for the specified event type.
 **Parameters**
 
 -   `type` **[string][4]** The event type for which to remote the listener.
--   `listener` **[Function][13]** The listener to remove.
+-   `listener` **[Function][10]** The listener to remove.
 
 
 -   Throws **[Error][20]** Invalid event type
@@ -674,7 +674,7 @@ Adds a global event listener
 
 **Parameters**
 
--   `listener` **[Function][13]** The event listener to add. The parameters are (type, ...args), where args depend on the event type.
+-   `listener` **[Function][10]** The event listener to add. The parameters are (type, ...args), where args depend on the event type.
 
 
 -   Throws **[Error][20]** Listener not a function
@@ -685,7 +685,7 @@ Removes a global event listener
 
 **Parameters**
 
--   `listener` **[Function][13]** The event listener to remove.
+-   `listener` **[Function][10]** The event listener to remove.
 
 
 -   Throws **[Error][20]** Listener not a function
@@ -933,13 +933,13 @@ Returns **SdpHandlerFunction** The resulting SDP handler that will remove the co
 
 [9]: #config
 
-[10]: #callsgetall
+[10]: https://developer.mozilla.org/docs/Web/JavaScript/Reference/Statements/function
 
-[11]: #callsgetbyid
+[11]: #callsgetall
 
-[12]: Calls.states
+[12]: #callsgetbyid
 
-[13]: https://developer.mozilla.org/docs/Web/JavaScript/Reference/Statements/function
+[13]: Calls.states
 
 [14]: #callsunhold
 
