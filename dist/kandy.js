@@ -1,7 +1,7 @@
 /**
  * Kandy.js
  * kandy.newCallMe.js
- * Version: 4.8.0-beta.149
+ * Version: 4.8.0-beta.150
  */
 (function webpackUniversalModuleDefinition(root, factory) {
 	if(typeof exports === 'object' && typeof module === 'object')
@@ -29839,7 +29839,7 @@ function callAPI({ dispatch, getState }) {
      * @public
      * @static
      * @memberof call
-     * @requires call_link
+     * @requires link_call
      * @method forward
      * @param {string} callId ID of the call being acted on.
      * @param {SIP_URI|TEL_URI} destination The destination to forward the call to.
@@ -29856,7 +29856,7 @@ function callAPI({ dispatch, getState }) {
      * @public
      * @static
      * @memberof call
-     * @requires call_cpaas
+     * @requires cpaas_call
      * @method forward
      * @param {string} callId ID of the call being acted on.
      * @param {UserID|PhoneNumber} destination The destination to forward the call to.
@@ -29907,7 +29907,7 @@ function callAPI({ dispatch, getState }) {
      * @public
      * @static
      * @memberof call
-     * @requires call_link
+     * @requires link_call
      * @method directTransfer
      * @param {string} callId ID of the call being acted on.
      * @param {SIP_URI|TEL_URI} destination The destination to transfer the call to.
@@ -29926,7 +29926,7 @@ function callAPI({ dispatch, getState }) {
      * @public
      * @static
      * @memberof call
-     * @requires call_cpaas
+     * @requires cpaas_call
      * @method directTransfer
      * @param {string} callId ID of the call being acted on.
      * @param {UserID|PhoneNumber} destination The destination to transfer the call to.
@@ -41509,7 +41509,7 @@ const factoryDefaults = {
    */
 };function factory(plugins, options = factoryDefaults) {
   // Log the SDK's version (templated by webpack) on initialization.
-  let version = '4.8.0-beta.149';
+  let version = '4.8.0-beta.150';
   log.info(`SDK version: ${version}`);
 
   var sagas = [];
