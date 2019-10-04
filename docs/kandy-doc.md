@@ -325,6 +325,27 @@ let callId = client.call.makeAnonymous(callee, credentials, callOptions);
 
 Returns **[string][5]** Id of the outgoing call.
 
+### DevicesObject
+
+A collection of media devices and their information.
+
+Type: [Object][4]
+
+**Properties**
+
+-   `camera` **[Array][9]&lt;DeviceInfo>** A list of camera device information.
+-   `microphone` **[Array][9]&lt;DeviceInfo>** A list of microphone device information.
+-   `speaker` **[Array][9]&lt;DeviceInfo>** A list of speaker device information.
+
+### SdpHandlerInfo
+
+Type: [Object][4]
+
+**Properties**
+
+-   `type` **RTCSdpType** The session description's type.
+-   `endpoint` **[string][5]** Which end of the connection created the SDP.
+
 ### SdpHandlerFunction
 
 The form of an SDP handler function and the expected arguments that it receives.
@@ -369,31 +390,6 @@ Type: [Object][4]
 -   `muted` **[boolean][7]** Indicator on whether this Track is muted or not.
 -   `state` **[string][5]** The state of this Track. Can be 'live' or 'ended'.
 -   `streamId` **[string][5]** The ID of the Media Stream that includes this Track.
-
-### DevicesObject
-
-A collection of media devices and their information.
-
-Type: [Object][4]
-
-**Properties**
-
--   `camera` **[Array][9]&lt;DeviceInfo>** A list of camera device information.
--   `microphone` **[Array][9]&lt;DeviceInfo>** A list of microphone device information.
--   `speaker` **[Array][9]&lt;DeviceInfo>** A list of speaker device information.
-
-### DeviceInfo
-
-Contains information about a device.
-
-Type: [Object][4]
-
-**Properties**
-
--   `deviceId` **[string][5]** The ID of the device.
--   `groupId` **[string][5]** The group ID of the device. Devices that share a `groupId` belong to the same physical device.
--   `kind` **[string][5]** The type of the device (audioinput, audiooutput, videoinput).
--   `label` **[string][5]** The name of the device.
 
 ### CallObject
 
@@ -454,6 +450,19 @@ client.call.make(destination, {
 })
 ```
 
+### DeviceInfo
+
+Contains information about a device.
+
+Type: [Object][4]
+
+**Properties**
+
+-   `deviceId` **[string][5]** The ID of the device.
+-   `groupId` **[string][5]** The group ID of the device. Devices that share a `groupId` belong to the same physical device.
+-   `kind` **[string][5]** The type of the device (audioinput, audiooutput, videoinput).
+-   `label` **[string][5]** The name of the device.
+
 ### BandwidthControls
 
 The BandwidthControls type defines the format for configuring media and/or track bandwidth options.
@@ -487,15 +496,6 @@ Type: [Object][4]
 
 -   `urls` **([Array][9]&lt;[string][5]> | [string][5])** Either an array of URLs for reaching out several ICE servers or a single URL for reaching one ICE server.
 -   `credential` **[string][5]?** The credential needed by the ICE server.
-
-### SdpHandlerInfo
-
-Type: [Object][4]
-
-**Properties**
-
--   `type` **RTCSdpType** The session description's type.
--   `endpoint` **[string][5]** Which end of the connection created the SDP.
 
 ### hold
 
