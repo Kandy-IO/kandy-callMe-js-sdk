@@ -393,6 +393,15 @@ client.call.make(destination, mediaConstraints,
 )
 ```
 
+### IceServer
+
+Type: [Object][4]
+
+**Properties**
+
+-   `urls` **([Array][9]&lt;[string][5]> | [string][5])** Either an array of URLs for reaching out several ICE servers or a single URL for reaching one ICE server.
+-   `credential` **[string][5]?** The credential needed by the ICE server.
+
 ### TrackObject
 
 A Track is a stream of audio or video media from a single source.
@@ -435,15 +444,6 @@ Type: [Object][4]
 -   `groupId` **[string][5]** The group ID of the device. Devices that share a `groupId` belong to the same physical device.
 -   `kind` **[string][5]** The type of the device (audioinput, audiooutput, videoinput).
 -   `label` **[string][5]** The name of the device.
-
-### IceServer
-
-Type: [Object][4]
-
-**Properties**
-
--   `urls` **([Array][9]&lt;[string][5]> | [string][5])** Either an array of URLs for reaching out several ICE servers or a single URL for reaching one ICE server.
--   `credential` **[string][5]?** The credential needed by the ICE server.
 
 ### SdpHandlerInfo
 
