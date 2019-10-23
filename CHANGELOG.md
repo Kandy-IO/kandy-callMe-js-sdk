@@ -10,8 +10,6 @@ Kandy.js change log.
 ### Added
 
 - Added Call functionality where local media tracks are deleted if they are not being used for the call. `KAA-1890`
-- Add Call support for receiving early media. `KAA-1975`
-  - When enabled via configuration (see `config.call.earlyMedia`), an outgoing Call may enter the "Early Media" state if the remote end responds with a provisional answer. This allows the Call to receive media before it has been answered.
 - Added a `call:operation` event which is fired by call operations to keep track of operation progress. `KAA-1949`
 
 ### Changed

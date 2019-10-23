@@ -1,7 +1,7 @@
 /**
  * Kandy.js
  * kandy.newCallMe.js
- * Version: 4.9.0-beta.168
+ * Version: 4.9.0-beta.170
  */
 (function webpackUniversalModuleDefinition(root, factory) {
 	if(typeof exports === 'object' && typeof module === 'object')
@@ -32398,6 +32398,15 @@ function* createSession(callInfo) {
     requestBody.supported.push('earlymedia');
   }
 
+  /*
+   * If there are no (extra) supported items, remove the field from the request
+   *    body. This is to avoid SPiDR rejecting the body when it is an empty
+   *    array (which happens for anonymous calls).
+   */
+  if (requestBody.supported.length === 0) {
+    delete requestBody.supported;
+  }
+
   if (callInfo.isAnonymous) {
     const getWebsocketIdResult = yield (0, _effects3.call)(_utils.getWebsocketId);
     if (getWebsocketIdResult.error) {
@@ -33893,6 +33902,8 @@ var _callMe = __webpack_require__("../kandy/src/call/interfaceNew/api/callMe.js"
 
 var _callMe2 = _interopRequireDefault(_callMe);
 
+var _logs = __webpack_require__("../kandy/src/logs/index.js");
+
 var _utils = __webpack_require__("../kandy/src/common/utils.js");
 
 var _fp = __webpack_require__("../../node_modules/lodash/fp.js");
@@ -33908,8 +33919,20 @@ function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { de
 function _interopRequireWildcard(obj) { if (obj && obj.__esModule) { return obj; } else { var newObj = {}; if (obj != null) { for (var key in obj) { if (Object.prototype.hasOwnProperty.call(obj, key)) newObj[key] = obj[key]; } } newObj.default = obj; return newObj; } }
 
 // Helpers.
+const log = (0, _logs.getLogManager)().getLogger('CALLME');
+
+// Libraries.
+
+
+// Other plugins.
 // Call plugin.
 function newCallMePlugin(options = {}) {
+  if (options.earlyMedia) {
+    // Link does not support earlyMedia for anonymous calls. Reference: ABE-24137
+    delete options.earlyMedia;
+    log.warn('Call configuration `earlyMedia` is not supported for CallMe calls.');
+  }
+
   const linkCallPlugin = (0, _link2.default)(options);
 
   return {
@@ -33926,9 +33949,6 @@ function newCallMePlugin(options = {}) {
  * @method anonymousInit
  * @param {function} otherInit The other plugin's init function.
  */
-
-
-// Libraries.
 function anonymousInit(otherInit) {
   return function* init({ webRTC }) {
     // Run the other plugin's init
@@ -42116,7 +42136,7 @@ const factoryDefaults = {
    */
 };function factory(plugins, options = factoryDefaults) {
   // Log the SDK's version (templated by webpack) on initialization.
-  let version = '4.9.0-beta.168';
+  let version = '4.9.0-beta.170';
   log.info(`SDK version: ${version}`);
 
   var sagas = [];
