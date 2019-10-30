@@ -1,7 +1,7 @@
 /**
  * Kandy.js
  * kandy.newCallMe.js
- * Version: 4.9.0-beta.175
+ * Version: 4.9.0-beta.176
  */
 (function webpackUniversalModuleDefinition(root, factory) {
 	if(typeof exports === 'object' && typeof module === 'object')
@@ -30694,6 +30694,7 @@ function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { de
 /**
  * The form of an SDP handler function and the expected arguments that it receives.
  * @public
+ * @static
  * @module SdpHandlerFunction
  * @typedef {Function} SdpHandlerFunction
  * @memberof call
@@ -42455,7 +42456,7 @@ const factoryDefaults = {
    */
 };function factory(plugins, options = factoryDefaults) {
   // Log the SDK's version (templated by webpack) on initialization.
-  let version = '4.9.0-beta.175';
+  let version = '4.9.0-beta.176';
   log.info(`SDK version: ${version}`);
 
   var sagas = [];
@@ -42717,7 +42718,7 @@ var _fp = __webpack_require__("../../node_modules/lodash/fp.js");
 
 /**
  * The configuration object. This object defines what different configuration
- * values you can use when instantiating the SDK using the {@link #create create} function.
+ * values you can use when instantiating the SDK using the {@link create} function.
  * @public
  * @module config
  */
@@ -42725,7 +42726,7 @@ var _fp = __webpack_require__("../../node_modules/lodash/fp.js");
 // Disabling eslint for the next comment as we want to be able to use a disallowed word
 // eslint-disable-next-line no-warning-comments
 /**
- * A set of {@link #sdphandlerfunction SdpHandlerFunction}s for manipulating SDP information.
+ * A set of {@link call.SdpHandlerFunction SdpHandlerFunction}s for manipulating SDP information.
  * These handlers are used to customize low-level call behaviour for very specific
  * environments and/or scenarios. They can be provided during SDK instantiation
  * to be used for all calls.
@@ -42933,7 +42934,7 @@ const logMgr = getLogManager(defaultOptions);
  * @requires logs
  * @instance
  * @param {Object} logs Logs configs.
- * @param  {string} [logs.logLevel='debug'] Log level to be set. See {@link Logger.levels levels}.
+ * @param  {string} [logs.logLevel='debug'] Log level to be set. See {@link logger.levels}.
  * @param  {boolean} [logs.flatten=false] Whether all logs should be output in a string-only format.
  * @param  {Object} [logs.logActions] Options specifically for action logs when logLevel is at DEBUG+ levels. Set this to false to not output action logs.
  * @param  {boolean} [logs.logActions.actionOnly=true] Only output information about the action itself. Omits the SDK context for when it occurred.
