@@ -1,7 +1,7 @@
 /**
  * Kandy.js
  * kandy.newCallMe.js
- * Version: 4.9.0-beta.179
+ * Version: 4.9.0-beta.180
  */
 (function webpackUniversalModuleDefinition(root, factory) {
 	if(typeof exports === 'object' && typeof module === 'object')
@@ -29418,19 +29418,19 @@ function callAPI({ dispatch, getState }) {
      * @memberof call
      * @requires cpaas_call
      * @method make
-     * @param {UserID|PhoneNumber} destination The desired destination.
+     * @param {call.UserID|call.PhoneNumber} destination The desired destination.
      * @param {Object} media The media options the call should be initialized with.
      * @param {boolean} [media.audio=false] Whether the call should have audio on start. Currently, audio-less calls are not supported.
      * @param {Object} [media.audioOptions] Options for configuring the call's audio.
-     * @param {MediaConstraint} [media.audioOptions.deviceId] ID of the microphone to receive audio from.
+     * @param {call.MediaConstraint} [media.audioOptions.deviceId] ID of the microphone to receive audio from.
      * @param {boolean} [media.video=false] Whether the call should have video on start.
      * @param {Object} [media.videoOptions] Options for configuring the call's video.
-     * @param {MediaConstraint} [media.videoOptions.deviceId] ID of the camera to receive video from.
-     * @param {MediaConstraint} [media.videoOptions.height] The height of the video.
-     * @param {MediaConstraint} [media.videoOptions.width] The width of the video.
-     * @param {MediaConstraint} [media.videoOptions.frameRate] The frame rate of the video.
+     * @param {call.MediaConstraint} [media.videoOptions.deviceId] ID of the camera to receive video from.
+     * @param {call.MediaConstraint} [media.videoOptions.height] The height of the video.
+     * @param {call.MediaConstraint} [media.videoOptions.width] The width of the video.
+     * @param {call.MediaConstraint} [media.videoOptions.frameRate] The frame rate of the video.
      * @param {Object} [options]
-     * @param {BandwidthControls} [options.bandwidth] Options for configuring media's bandwidth.
+     * @param {call.BandwidthControls} [options.bandwidth] Options for configuring media's bandwidth.
      * @returns {string} The generated ID of the newly created call.
      * @example
      * // Listen for the event emitted after making a call.
@@ -29474,24 +29474,24 @@ function callAPI({ dispatch, getState }) {
      * @memberof call
      * @requires link_call
      * @method make
-     * @param {SIP_URI|TEL_URI} destination The desired destination.
+     * @param {call.SIP_URI|call.TEL_URI} destination The desired destination.
      * @param {Object} media The media options the call should be initialized with.
      * @param {boolean} [media.audio=false] Whether the call should have audio on start. Currently, audio-less calls are not supported.
      * @param {Object} [media.audioOptions] Options for configuring the call's audio.
-     * @param {MediaConstraint} [media.audioOptions.deviceId] ID of the microphone to receive audio from.
+     * @param {call.MediaConstraint} [media.audioOptions.deviceId] ID of the microphone to receive audio from.
      * @param {boolean} [media.video=false] Whether the call should have video on start.
      * @param {boolean} [media.screen=false] Whether the call should have screenshare on start.
      * @param {Object} [media.videoOptions] Options for configuring the call's video.
      * @param {Object} [media.screenOptions] Options for configuring the call's screenShare.
-     * @param {MediaConstraint} [media.videoOptions.deviceId] ID of the camera to receive video from.
-     * @param {MediaConstraint} [media.videoOptions.height] The height of the video.
-     * @param {MediaConstraint} [media.videoOptions.width] The width of the video.
-     * @param {MediaConstraint} [media.videoOptions.frameRate] The frame rate of the video.
-     * @param {MediaConstraint} [media.screenOptions.height] The height of the screenShare.
-     * @param {MediaConstraint} [media.screenOptions.width] The width of the screenShare.
-     * @param {MediaConstraint} [media.screenOptions.frameRate] The frame rate of the screenShare.
+     * @param {call.MediaConstraint} [media.videoOptions.deviceId] ID of the camera to receive video from.
+     * @param {call.MediaConstraint} [media.videoOptions.height] The height of the video.
+     * @param {call.MediaConstraint} [media.videoOptions.width] The width of the video.
+     * @param {call.MediaConstraint} [media.videoOptions.frameRate] The frame rate of the video.
+     * @param {call.MediaConstraint} [media.screenOptions.height] The height of the screenShare.
+     * @param {call.MediaConstraint} [media.screenOptions.width] The width of the screenShare.
+     * @param {call.MediaConstraint} [media.screenOptions.frameRate] The frame rate of the screenShare.
      * @param {Object} [options]
-     * @param {BandwidthControls} [options.bandwidth] Options for configuring media's bandwidth.
+     * @param {call.BandwidthControls} [options.bandwidth] Options for configuring media's bandwidth.
      * @param {string} [options.displayName] Custom display name to be provided to the destination. Not supported in all environments and may use default display name.
      * @returns {string} The generated ID of the newly created call.
      * @example
@@ -29592,20 +29592,20 @@ function callAPI({ dispatch, getState }) {
      * @param {Object} media The media options the call should be initialized with.
      * @param {boolean} [media.audio=false] Whether the call should have audio on start. Currently, audio-less calls are not supported.
      * @param {Object} [media.audioOptions] Options for configuring the call's audio.
-     * @param {MediaConstraint} [media.audioOptions.deviceId] ID of the microphone to receive audio from.
+     * @param {call.MediaConstraint} [media.audioOptions.deviceId] ID of the microphone to receive audio from.
      * @param {boolean} [media.video=false] Whether the call should have video on start.
      * @param {boolean} [media.screen=false] Whether the call should have screenshare on start.
      * @param {Object} [media.videoOptions] Options for configuring the call's video.
      * @param {Object} [media.screenOptions] Options for configuring the call's screenShare.
-     * @param {MediaConstraint} [media.videoOptions.deviceId] ID of the camera to receive video from.
-     * @param {MediaConstraint} [media.videoOptions.height] The height of the video.
-     * @param {MediaConstraint} [media.videoOptions.width] The width of the video.
-     * @param {MediaConstraint} [media.videoOptions.frameRate] The frame rate of the video.
-     * @param {MediaConstraint} [media.screenOptions.height] The height of the screenShare.
-     * @param {MediaConstraint} [media.screenOptions.width] The width of the screenShare.
-     * @param {MediaConstraint} [media.screenOptions.frameRate] The frame rate of the screenShare.
+     * @param {call.MediaConstraint} [media.videoOptions.deviceId] ID of the camera to receive video from.
+     * @param {call.MediaConstraint} [media.videoOptions.height] The height of the video.
+     * @param {call.MediaConstraint} [media.videoOptions.width] The width of the video.
+     * @param {call.MediaConstraint} [media.videoOptions.frameRate] The frame rate of the video.
+     * @param {call.MediaConstraint} [media.screenOptions.height] The height of the screenShare.
+     * @param {call.MediaConstraint} [media.screenOptions.width] The width of the screenShare.
+     * @param {call.MediaConstraint} [media.screenOptions.frameRate] The frame rate of the screenShare.
      * @param {Object} [options]
-     * @param {BandwidthControls} [options.bandwidth] Options for configuring media's bandwidth.
+     * @param {call.BandwidthControls} [options.bandwidth] Options for configuring media's bandwidth.
      */
     answer(callId, media, options = {}) {
       log.debug(_logs.API_LOG_TAG + 'call.answer: ', callId, media, options);
@@ -29711,7 +29711,7 @@ function callAPI({ dispatch, getState }) {
      * @requires call
      * @requires callMe
      * @method getAll
-     * @return {Array<CallObject>} Call objects.
+     * @return {Array<call.CallObject>} Call objects.
      * @example
      * let calls = client.call.getAll()
      * let currentCalls = calls.filter(call => {
@@ -29733,7 +29733,7 @@ function callAPI({ dispatch, getState }) {
      * @static
      * @method getById
      * @param {string} callId The ID of the call to retrieve.
-     * @return {CallObject} A call object.
+     * @return {call.CallObject} A call object.
      */
     getById(callId) {
       log.debug(_logs.API_LOG_TAG + 'call.getById: ', callId);
@@ -29789,20 +29789,20 @@ function callAPI({ dispatch, getState }) {
      * @param {Object} [media={}] The media options to add to the call.
      * @param {boolean} [media.audio=false] Whether to add audio to the call.
      * @param {Object} [media.audioOptions] Options for configuring the call's audio.
-     * @param {MediaConstraint} [media.audioOptions.deviceId] ID of the microphone to receive audio from.
+     * @param {call.MediaConstraint} [media.audioOptions.deviceId] ID of the microphone to receive audio from.
      * @param {boolean} [media.video=false] Whether to add video to the call.
      * @param {boolean} [media.screen=false] Whether to add the screenshare to the call.
      * @param {Object} [media.videoOptions] Options for configuring the call's video.
      * @param {Object} [media.screenOptions] Options for configuring the call's screenShare.
-     * @param {MediaConstraint} [media.videoOptions.deviceId] ID of the camera to receive video from.
-     * @param {MediaConstraint} [media.videoOptions.height] The height of the video.
-     * @param {MediaConstraint} [media.videoOptions.width] The width of the video.
-     * @param {MediaConstraint} [media.videoOptions.frameRate] The frame rate of the video.
-     * @param {MediaConstraint} [media.screenOptions.height] The height of the screenShare.
-     * @param {MediaConstraint} [media.screenOptions.width] The width of the screenShare.
-     * @param {MediaConstraint} [media.screenOptions.frameRate] The frame rate of the screenShare.
+     * @param {call.MediaConstraint} [media.videoOptions.deviceId] ID of the camera to receive video from.
+     * @param {call.MediaConstraint} [media.videoOptions.height] The height of the video.
+     * @param {call.MediaConstraint} [media.videoOptions.width] The width of the video.
+     * @param {call.MediaConstraint} [media.videoOptions.frameRate] The frame rate of the video.
+     * @param {call.MediaConstraint} [media.screenOptions.height] The height of the screenShare.
+     * @param {call.MediaConstraint} [media.screenOptions.width] The width of the screenShare.
+     * @param {call.MediaConstraint} [media.screenOptions.frameRate] The frame rate of the screenShare.
      * @param {Object} [options]
-     * @param {BandwidthControls} [options.bandwidth] Options for configuring media's bandwidth.
+     * @param {call.BandwidthControls} [options.bandwidth] Options for configuring media's bandwidth.
      */
     addMedia(callId, media = {}, options = {}) {
       log.debug(_logs.API_LOG_TAG + 'call.addMedia: ', callId, media);
@@ -29833,7 +29833,7 @@ function callAPI({ dispatch, getState }) {
      * @param {string} callId The ID of the call to remove media from.
      * @param {Array} tracks A list of track IDs to remove.
      * @param {Object} [options]
-     * @param {BandwidthControls} [options.bandwidth] Options for configuring media's bandwidth.
+     * @param {call.BandwidthControls} [options.bandwidth] Options for configuring media's bandwidth.
      */
     removeMedia(callId, tracks, options = {}) {
       log.debug(_logs.API_LOG_TAG + 'call.removeMedia: ', callId, tracks);
@@ -30063,7 +30063,7 @@ function callAPI({ dispatch, getState }) {
      * @requires link_call
      * @method forward
      * @param {string} callId ID of the call being acted on.
-     * @param {SIP_URI|TEL_URI} destination The destination to forward the call to.
+     * @param {call.SIP_URI|call.TEL_URI} destination The destination to forward the call to.
      */
 
     /**
@@ -30083,7 +30083,7 @@ function callAPI({ dispatch, getState }) {
      * @requires cpaas_call
      * @method forward
      * @param {string} callId ID of the call being acted on.
-     * @param {UserID|PhoneNumber} destination The destination to forward the call to.
+     * @param {call.UserID|call.PhoneNumber} destination The destination to forward the call to.
      */
     forward(callId, destination) {
       const config = (0, _selectors.getOptions)(getState());
@@ -30152,7 +30152,7 @@ function callAPI({ dispatch, getState }) {
      * @requires link_call
      * @method directTransfer
      * @param {string} callId ID of the call being acted on.
-     * @param {SIP_URI|TEL_URI} destination The destination to transfer the call to.
+     * @param {call.SIP_URI|call.TEL_URI} destination The destination to transfer the call to.
      */
 
     /**
@@ -30179,7 +30179,7 @@ function callAPI({ dispatch, getState }) {
      * @requires cpaas_call
      * @method directTransfer
      * @param {string} callId ID of the call being acted on.
-     * @param {UserID|PhoneNumber} destination The destination to transfer the call to.
+     * @param {call.UserID|call.PhoneNumber} destination The destination to transfer the call to.
      */
     directTransfer(callId, destination) {
       const config = (0, _selectors.getOptions)(getState());
@@ -30249,13 +30249,13 @@ function callAPI({ dispatch, getState }) {
      * @param {Object} [media={}] The media options.
      * @param {boolean} [media.audio=false] Whether to create an audio track.
      * @param {Object} [media.audioOptions] Options for configuring the audio track.
-     * @param {MediaConstraint} [media.audioOptions.deviceId] ID of the microphone to receive audio from.
+     * @param {call.MediaConstraint} [media.audioOptions.deviceId] ID of the microphone to receive audio from.
      * @param {boolean} [media.video=false] Whether to create a video track.
      * @param {Object} [media.videoOptions] Options for configuring the video track.
-     * @param {MediaConstraint} [media.videoOptions.deviceId] ID of the camera to receive video from.
-     * @param {MediaConstraint} [media.videoOptions.height] The height of the video.
-     * @param {MediaConstraint} [media.videoOptions.width] The width of the video.
-     * @param {MediaConstraint} [media.videoOptions.frameRate] The frame rate of the video.
+     * @param {call.MediaConstraint} [media.videoOptions.deviceId] ID of the camera to receive video from.
+     * @param {call.MediaConstraint} [media.videoOptions.height] The height of the video.
+     * @param {call.MediaConstraint} [media.videoOptions.width] The width of the video.
+     * @param {call.MediaConstraint} [media.videoOptions.frameRate] The frame rate of the video.
      * @example
      * const callId = ...
      * // Get the video track used by the call.
@@ -30488,7 +30488,7 @@ function anonymousAPI(otherApi) {
          * @requires callMe
          * @memberof call
          * @method makeAnonymous
-         * @param  {string} callee       Full user ID of the call recipient.
+         * @param {string} callee       Full user ID of the call recipient.
          * @param {Object} credentials  Information needed to validate a token anonymous call.
          * @param {Object} credentials.realm The realm used to encrypt the tokens.
          * @param {Object} [credentials.accountToken] The encrypted account token of the account making the call.
@@ -30498,13 +30498,13 @@ function anonymousAPI(otherApi) {
          * @param {string} callOptions.from The URI of the user making the call.
          * @param {Boolean} [callOptions.audio=true] Whether the call should have audio on start. Currently, audio-less calls are not supported.
          * @param {Object} [callOptions.audioOptions] Options for configuring the call's audio.
-         * @param {MediaConstraint} [callOptions.audioOptions.deviceId] ID of the microphone to receive audio from.
+         * @param {call.MediaConstraint} [callOptions.audioOptions.deviceId] ID of the microphone to receive audio from.
          * @param {Boolean} [callOptions.video=false] Whether the call should have video on start.
          * @param {Object} [callOptions.videoOptions] Options for configuring the call's video.
-         * @param {MediaConstraint} [callOptions.videoOptions.deviceId] ID of the camera to receive video from.
-         * @param {MediaConstraint} [callOptions.videoOptions.height] The height of the video.
-         * @param {MediaConstraint} [callOptions.videoOptions.width] The width of the video.
-         * @param {MediaConstraint} [callOptions.videoOptions.frameRate] The frame rate of the video.
+         * @param {call.MediaConstraint} [callOptions.videoOptions.deviceId] ID of the camera to receive video from.
+         * @param {call.MediaConstraint} [callOptions.videoOptions.height] The height of the video.
+         * @param {call.MediaConstraint} [callOptions.videoOptions.width] The width of the video.
+         * @param {call.MediaConstraint} [callOptions.videoOptions.frameRate] The frame rate of the video.
          * @param {string} [callOptions.displayName] Custom display name to be provided to the destination. Only used with token-less anonymous calls. Not supported in all environments and may use default display name.
          * @return {string} Id of the outgoing call.
          * @example
@@ -30585,7 +30585,6 @@ function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { de
  *
  * @public
  * @static
- * @module CallObject
  * @typedef {Object} CallObject
  * @memberof call
  * @property {string} id The ID of the call.
@@ -30598,7 +30597,7 @@ function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { de
  * @property {Object} remoteParticipant Information about the other call participant.
  * @property {string} [remoteParticipant.displayNumber] The User ID of the remote participant in the form "username@domain".
  * @property {string} [remoteParticipant.displayName] The display name of the remote participant.
- * @property {BandwidthControls} bandwidth The bandwidth limitations set for the call.
+ * @property {call.BandwidthControls} bandwidth The bandwidth limitations set for the call.
  * @property {number} startTime The start time of the call in milliseconds since the epoch.
  * @property {number} [endTime] The end time of the call in milliseconds since the epoch.
  */
@@ -30634,7 +30633,7 @@ function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { de
  *    If it cannot be used, the closest acceptable value will be used instead.
  *
  * @public
- * @module MediaConstraint
+ * @static
  * @typedef {Object} MediaConstraint
  * @memberof call
  * @property {string} [exact] The required value for the constraint. Other values will not be accepted.
@@ -30657,7 +30656,7 @@ function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { de
  * BandwidthControls only affect received remote tracks of the specified type.
  *
  * @public
- * @module BandwidthControls
+ * @static
  * @typedef {Object} BandwidthControls
  * @memberof call
  * @property {number} [audio] The desired bandwidth bitrate in kilobits per second for received remote audio.
@@ -30675,7 +30674,7 @@ function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { de
 
 /**
  * @public
- * @module IceServer
+ * @static
  * @typedef {Object} IceServer
  * @memberof call
  * @property {Array<string>|string} urls Either an array of URLs for reaching out several ICE servers or a single URL for reaching one ICE server.
@@ -30684,7 +30683,7 @@ function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { de
 
 /**
  * @public
- * @module SdpHandlerInfo
+ * @static
  * @typedef {Object} SdpHandlerInfo
  * @memberof call
  * @property {RTCSdpType} type The session description's type.
@@ -30695,11 +30694,10 @@ function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { de
  * The form of an SDP handler function and the expected arguments that it receives.
  * @public
  * @static
- * @module SdpHandlerFunction
  * @typedef {Function} SdpHandlerFunction
  * @memberof call
  * @param {Object} newSdp The SDP so far (could have been modified by previous handlers).
- * @param {SdpHandlerInfo} info Additional information that might be useful when making SDP modifications.
+ * @param {call.SdpHandlerInfo} info Additional information that might be useful when making SDP modifications.
  * @param {Object} originalSdp The SDP in its initial state.
  * @returns {Object} The resulting modified SDP based on the changes made by this function.
  */
@@ -30709,12 +30707,12 @@ function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { de
  * Media is a collection of Track objects.
  *
  * @public
- * @module MediaObject
+ * @static
  * @typedef {Object} MediaObject
  * @memberof call
  * @property {string} id The ID of the Media object.
  * @property {boolean} local Indicator on whether this media is local or remote.
- * @property {Array<TrackObject>} tracks A list of Track objects that are contained in this Media object.
+ * @property {Array<call.TrackObject>} tracks A list of Track objects that are contained in this Media object.
  */
 
 /**
@@ -30722,7 +30720,7 @@ function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { de
  * Tracks can be retrieved using the Media module's `getTrackById` API and manipulated with other functions of the Media module.
  *
  * @public
- * @module TrackObject
+ * @static
  * @typedef {Object} TrackObject
  * @memberof call
  * @property {Array<string>} containers The list of CSS selectors that were used to render this Track.
@@ -30739,19 +30737,19 @@ function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { de
  * A collection of media devices and their information.
  *
  * @public
- * @module DevicesObject
+ * @static
  * @typedef {Object} DevicesObject
  * @memberof call
- * @property {Array<DeviceInfo>} camera A list of camera device information.
- * @property {Array<DeviceInfo>} microphone A list of microphone device information.
- * @property {Array<DeviceInfo>} speaker A list of speaker device information.
+ * @property {Array<call.DeviceInfo>} camera A list of camera device information.
+ * @property {Array<call.DeviceInfo>} microphone A list of microphone device information.
+ * @property {Array<call.DeviceInfo>} speaker A list of speaker device information.
  */
 
 /**
  * Contains information about a device.
  *
  * @public
- * @module DeviceInfo
+ * @static
  * @typedef {Object} DeviceInfo
  * @memberof call
  * @property {string} deviceId The ID of the device.
@@ -30880,7 +30878,7 @@ Object.defineProperty(exports, "__esModule", {
  *    If the transition is to "start" the operation, there will be no previous information.
  * @param {string} [params.previous.operation] The operation that was ongoing.
  * @param {string} [params.previous.status] The operation status before this change.
- * @param {BasicError} [params.error] An error object, if the operation was not successful.
+ * @param {api.BasicError} [params.error] An error object, if the operation was not successful.
  */
 const CALL_OPERATION = exports.CALL_OPERATION = 'call:operation';
 
@@ -30895,7 +30893,7 @@ const CALL_OPERATION = exports.CALL_OPERATION = 'call:operation';
  * @event call:start
  * @param {Object} params
  * @param {string} params.callId The ID of the call.
- * @param {BasicError} [params.error] An error object, if the operation was not successful.
+ * @param {api.BasicError} [params.error] An error object, if the operation was not successful.
  */
 const CALL_STARTED = exports.CALL_STARTED = 'call:start';
 
@@ -30910,7 +30908,7 @@ const CALL_STARTED = exports.CALL_STARTED = 'call:start';
  * @event call:join
  * @param {Object} params
  * @param {string} params.callId The ID of the call.
- * @param {BasicError} [params.error] An error object, if the operation was not successful.
+ * @param {api.BasicError} [params.error] An error object, if the operation was not successful.
  */
 const CALL_JOIN = exports.CALL_JOIN = 'call:join';
 
@@ -30925,7 +30923,7 @@ const CALL_JOIN = exports.CALL_JOIN = 'call:join';
  * @event call:receive
  * @param {Object} params
  * @param {string} params.callId The ID of the call.
- * @param {BasicError} [params.error] An error object, if the operation was not successful.
+ * @param {api.BasicError} [params.error] An error object, if the operation was not successful.
  * @example
  * client.on('call:receive', function(params) {
  *     // We have received a call, prompt the user to respond.
@@ -30950,7 +30948,7 @@ const CALL_INCOMING = exports.CALL_INCOMING = 'call:receive';
  * @param {string} [params.transition.reasonText] The reason for the state change.
  * @param {boolean} [params.previous.localHold] The previous local hold state. Present when the state change was a hold/unhold operation.
  * @param {boolean} [params.previous.remoteHold] The previous remote hold state. Present when the state change was a hold/unhold operation.
- * @param {BasicError} [params.error] An error object, if the operation was not successful.
+ * @param {api.BasicError} [params.error] An error object, if the operation was not successful.
  * @example
  * client.on('call:stateChange', function (params) {
  *     const call = client.call.getById(params.callId)
@@ -31046,7 +31044,7 @@ const CALL_TRACK_ENDED = exports.CALL_TRACK_ENDED = 'call:trackEnded';
  * @param {string} params.callId The ID of the Call to retrieve stats for.
  * @param {string} [params.trackId] The ID of the Track to retrieve stats for.
  * @param {string} params.result The RTCStatsReport.
- * @param {BasicError} [params.error] An error object, if the operation was not successful.
+ * @param {api.BasicError} [params.error] An error object, if the operation was not successful.
  */
 const STATS_RECEIVED = exports.STATS_RECEIVED = 'call:statsReceived';
 
@@ -31067,8 +31065,8 @@ const STATS_RECEIVED = exports.STATS_RECEIVED = 'call:statsReceived';
  * @param {Object} params
  * @param {string} params.callId The ID of the call where a track was replaced.
  * @param {string} [params.newTrackId] The ID of the new track that replaced the old track.
- * @param {TrackObject} [params.oldTrack] State of the replaced track.
- * @param {BasicError} [params.error] An error object, if the operation was not successful.
+ * @param {call.TrackObject} [params.oldTrack] State of the replaced track.
+ * @param {api.BasicError} [params.error] An error object, if the operation was not successful.
  */
 const CALL_TRACK_REPLACED = exports.CALL_TRACK_REPLACED = 'call:trackReplaced';
 
@@ -41419,7 +41417,6 @@ const connCheckMethods = exports.connCheckMethods = {
  *
  * @public
  * @static
- * @module UserID
  * @typedef {string} UserID
  * @memberof call
  * @requires cpaas_user_id
@@ -41430,7 +41427,6 @@ const connCheckMethods = exports.connCheckMethods = {
  *
  * @public
  * @static
- * @module SIP_URI
  * @typedef {string} SIP_URI
  * @memberof call
  * @requires link_user_id
@@ -41441,7 +41437,6 @@ const connCheckMethods = exports.connCheckMethods = {
  *
  * @public
  * @static
- * @module PhoneNumber
  * @typedef {string} PhoneNumber
  * @memberof call
  * @requires cpaas_pstn
@@ -41452,7 +41447,6 @@ const connCheckMethods = exports.connCheckMethods = {
  *
  * @public
  * @static
- * @module TEL_URI
  * @typedef {string} TEL_URI
  * @memberof call
  * @requires link_pstn
@@ -42456,7 +42450,7 @@ const factoryDefaults = {
    */
 };function factory(plugins, options = factoryDefaults) {
   // Log the SDK's version (templated by webpack) on initialization.
-  let version = '4.9.0-beta.179';
+  let version = '4.9.0-beta.180';
   log.info(`SDK version: ${version}`);
 
   var sagas = [];
