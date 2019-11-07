@@ -11,6 +11,10 @@ Kandy.js change log.
 
 - Added Call support for setting and sending custom parameters. `KAA-2063`
 
+### Fixed
+
+- Fixed public documentation hyperlinks for custom type definitions. `KAA-2011`
+
 ## 4.9.0 - 2019-11-01
 
 ### Added

@@ -1,7 +1,7 @@
 /**
  * Kandy.js
  * kandy.newCallMe.js
- * Version: 4.10.0-beta.188
+ * Version: 4.10.0-beta.189
  */
 (function webpackUniversalModuleDefinition(root, factory) {
 	if(typeof exports === 'object' && typeof module === 'object')
@@ -29521,7 +29521,7 @@ function callAPI({ dispatch, getState }) {
      * @param {Object} [options]
      * @param {call.BandwidthControls} [options.bandwidth] Options for configuring media's bandwidth.
      * @param {string} [options.displayName] Custom display name to be provided to the destination. Not supported in all environments and may use default display name.
-     * @param {Array<CustomParameter>} [options.customParameters] Custom SIP header parameters for the SIP backend
+     * @param {Array<call.CustomParameter>} [options.customParameters] Custom SIP header parameters for the SIP backend
      * @returns {string} The generated ID of the newly created call.
      * @example
      * // Listen for the event emitted after making a call.
@@ -29621,20 +29621,20 @@ function callAPI({ dispatch, getState }) {
      * @param {Object} media The media options the call should be initialized with.
      * @param {boolean} [media.audio=false] Whether the call should have audio on start. Currently, audio-less calls are not supported.
      * @param {Object} [media.audioOptions] Options for configuring the call's audio.
-     * @param {MediaConstraint} [media.audioOptions.deviceId] ID of the microphone to receive audio from.
+     * @param {call.MediaConstraint} [media.audioOptions.deviceId] ID of the microphone to receive audio from.
      * @param {boolean} [media.video=false] Whether the call should have video on start.
      * @param {boolean} [media.screen=false] Whether the call should have screenshare on start.
      * @param {Object} [media.videoOptions] Options for configuring the call's video.
      * @param {Object} [media.screenOptions] Options for configuring the call's screenShare.
-     * @param {MediaConstraint} [media.videoOptions.deviceId] ID of the camera to receive video from.
-     * @param {MediaConstraint} [media.videoOptions.height] The height of the video.
-     * @param {MediaConstraint} [media.videoOptions.width] The width of the video.
-     * @param {MediaConstraint} [media.videoOptions.frameRate] The frame rate of the video.
-     * @param {MediaConstraint} [media.screenOptions.height] The height of the screenShare.
-     * @param {MediaConstraint} [media.screenOptions.width] The width of the screenShare.
-     * @param {MediaConstraint} [media.screenOptions.frameRate] The frame rate of the screenShare.
+     * @param {call.MediaConstraint} [media.videoOptions.deviceId] ID of the camera to receive video from.
+     * @param {call.MediaConstraint} [media.videoOptions.height] The height of the video.
+     * @param {call.MediaConstraint} [media.videoOptions.width] The width of the video.
+     * @param {call.MediaConstraint} [media.videoOptions.frameRate] The frame rate of the video.
+     * @param {call.MediaConstraint} [media.screenOptions.height] The height of the screenShare.
+     * @param {call.MediaConstraint} [media.screenOptions.width] The width of the screenShare.
+     * @param {call.MediaConstraint} [media.screenOptions.frameRate] The frame rate of the screenShare.
      * @param {Object} [options]
-     * @param {BandwidthControls} [options.bandwidth] Options for configuring media's bandwidth.
+     * @param {call.BandwidthControls} [options.bandwidth] Options for configuring media's bandwidth.
      */
 
     /**
@@ -29682,7 +29682,7 @@ function callAPI({ dispatch, getState }) {
      * @param {call.MediaConstraint} [media.screenOptions.frameRate] The frame rate of the screenShare.
      * @param {Object} [options]
      * @param {call.BandwidthControls} [options.bandwidth] Options for configuring media's bandwidth.
-     * @param {Array<CustomParameter>} [options.customParameters] Custom SIP header parameters for the SIP backend
+     * @param {Array<call.CustomParameter>} [options.customParameters] Custom SIP header parameters for the SIP backend
      */
     answer(callId, media, options = {}) {
       log.debug(_logs.API_LOG_TAG + 'call.answer: ', callId, media, options);
@@ -29802,7 +29802,7 @@ function callAPI({ dispatch, getState }) {
      * @requires callMe
      * @method setCustomParameters
      * @param {string} callId The ID of the call.
-     * @param {Array<CustomParameter>} customParameters The custom parameters to set.
+     * @param {Array<call.CustomParameter>} customParameters The custom parameters to set.
      */
     setCustomParameters(callId, customParameters) {
       log.debug(_logs.API_LOG_TAG + 'call.setCustomParameters: ', callId, customParameters);
@@ -30635,7 +30635,7 @@ function anonymousAPI(otherApi) {
          * @param {call.MediaConstraint} [callOptions.videoOptions.width] The width of the video.
          * @param {call.MediaConstraint} [callOptions.videoOptions.frameRate] The frame rate of the video.
          * @param {string} [callOptions.displayName] Custom display name to be provided to the destination. Only used with token-less anonymous calls. Not supported in all environments and may use default display name.
-         * @param {Array<{CustomParameter}>} [callOptions.customParameters] Custom SIP header parameters for the SIP backend
+         * @param {Array<call.CustomParameter>} [callOptions.customParameters] Custom SIP header parameters for the SIP backend
          * @return {string} Id of the outgoing call.
          * @example
          * // Make a basic anonymous call.
@@ -30755,8 +30755,8 @@ function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { de
  * @property {Object} remoteParticipant Information about the other call participant.
  * @property {string} [remoteParticipant.displayNumber] The User ID of the remote participant in the form "username@domain".
  * @property {string} [remoteParticipant.displayName] The display name of the remote participant.
- * @property {BandwidthControls} bandwidth The bandwidth limitations set for the call.
- * @property {Array<CustomParameter>} customParameters The custom parameters set for the call.
+ * @property {call.BandwidthControls} bandwidth The bandwidth limitations set for the call.
+ * @property {Array<call.CustomParameter>} customParameters The custom parameters set for the call.
  * @property {number} startTime The start time of the call in milliseconds since the epoch.
  * @property {number} [endTime] The end time of the call in milliseconds since the epoch.
  */
@@ -32657,9 +32657,9 @@ const log = (0, _logs.getLogManager)().getLogger('CALL');
  * @instance
  * @param {Object} call The call configuration object.
  * @param {string} [call.sdpSemantics='unified-plan'] The sdpSemantics to use (`'unified-plan'` or `'plan-b'`).
- * @param {Array<IceServer>} [call.iceServers] The list of ICE servers to be used for calls.
+ * @param {Array<call.IceServer>} [call.iceServers] The list of ICE servers to be used for calls.
  * @param {boolean} [call.serverTurnCredentials=true] Whether server-provided TURN credentials should be used.
- * @param {Array<SdpHandlerFunction>} [call.sdpHandlers] List of SDP handler functions to modify SDP. Advanced usage.
+ * @param {Array<call.SdpHandlerFunction>} [call.sdpHandlers] List of SDP handler functions to modify SDP. Advanced usage.
  * @param {boolean} [call.removeH264Codecs=true] Whether to remove "H264" codec lines from incoming and outgoing SDP messages.
  * @param {boolean} [call.earlyMedia=false] Whether early media should be supported for calls.
  */
@@ -33049,7 +33049,7 @@ function* endSession(callInfo) {
  * @param  {Object} callInfo
  * @param  {string} callInfo.wrtcsSessionId ID that the server uses to identify the session.
  * @param  {string} callInfo.answer The local SDP to complete negotiation. This may be an offer is performing slow start answer.
- * @param  {Array<{CustomParameter}>} callInfo.customParameters The custom parameters of the call.
+ * @param  {Array<CustomParameter>} callInfo.customParameters The custom parameters of the call.
  * @return {Object} response Signalling response.
  * @return {Object} [response.error] An error object, if signalling failed.
  */
@@ -41777,7 +41777,6 @@ const connCheckMethods = exports.connCheckMethods = {
  *
  * @public
  * @static
- * @module UserID
  * @typedef {string} UserID
  * @memberof user
  * @requires cpaas_user_id
@@ -42821,7 +42820,7 @@ const factoryDefaults = {
    */
 };function factory(plugins, options = factoryDefaults) {
   // Log the SDK's version (templated by webpack) on initialization.
-  let version = '4.10.0-beta.188';
+  let version = '4.10.0-beta.189';
   log.info(`SDK version: ${version}`);
 
   var sagas = [];
@@ -43122,7 +43121,7 @@ var _fp = __webpack_require__("../../node_modules/lodash/fp.js");
  * @memberof sdpHandlers
  * @method createCodecRemover
  * @param {Array<string>} codecs A list of codec names to remove from the SDP.
- * @returns {SdpHandlerFunction} The resulting SDP handler that will remove the codec.
+ * @returns {call.SdpHandlerFunction} The resulting SDP handler that will remove the codec.
  * @example
  * import { create, sdpHandlers } from 'kandy';
  * const codecRemover = sdpHandlers.createCodecRemover(['VP8', 'VP9'])
@@ -44227,7 +44226,7 @@ const NOTI_CHANGE = exports.NOTI_CHANGE = 'notifications:change';
  * @memberof notification
  * @event notifications:error
  * @param {Object} params
- * @param {BasicError} params.error The Basic error object.
+ * @param {api.BasicError} params.error The Basic error object.
  * @param {string} params.channel The channel for the notification.
  */
 const NOTI_ERROR = exports.NOTI_ERROR = 'notifications:error';
@@ -46850,7 +46849,7 @@ function mediaAPI({ dispatch, getState }) {
      * @memberof media
      * @method getById
      * @param  {string} mediaId The ID of the Media to retrieve.
-     * @return {MediaObject} A Media object.
+     * @return {call.MediaObject} A Media object.
      */
     getById(mediaId) {
       log.debug(_logs.API_LOG_TAG + 'media.getById: ', mediaId);
@@ -46864,7 +46863,7 @@ function mediaAPI({ dispatch, getState }) {
      * @memberof media
      * @method getTrackById
      * @param  {string} trackId The ID of the Track to retrieve.
-     * @return {TrackObject} A Track object.
+     * @return {call.TrackObject} A Track object.
      */
     getTrackById(trackId) {
       log.debug(_logs.API_LOG_TAG + 'media.getByTrackId: ', trackId);
