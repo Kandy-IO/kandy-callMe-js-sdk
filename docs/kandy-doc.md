@@ -330,79 +330,6 @@ client.call.make(destination, mediaConstraints,
 )
 ```
 
-### BandwidthControls
-
-The BandwidthControls type defines the format for configuring media and/or track bandwidth options.
-BandwidthControls only affect received remote tracks of the specified type.
-
-Type: [Object][4]
-
-**Properties**
-
--   `audio` **[number][8]?** The desired bandwidth bitrate in kilobits per second for received remote audio.
--   `video` **[number][8]?** The desired bandwidth bitrate in kilobits per second for received remote video.
-
-**Examples**
-
-```javascript
-// Specify received remote video bandwidth limits when making a call.
-client.call.make(destination, mediaConstraints,
- {
-   bandwidth: {
-     video: 5
-   }
- }
-)
-```
-
-### SdpHandlerInfo
-
-Type: [Object][4]
-
-**Properties**
-
--   `type` **RTCSdpType** The session description's type.
--   `endpoint` **[string][5]** Which end of the connection created the SDP.
-
-### SdpHandlerFunction
-
-The form of an SDP handler function and the expected arguments that it receives.
-
-Type: [Function][11]
-
-**Parameters**
-
--   `newSdp` **[Object][4]** The SDP so far (could have been modified by previous handlers).
--   `info` **[call.SdpHandlerInfo][21]** Additional information that might be useful when making SDP modifications.
--   `originalSdp` **[Object][4]** The SDP in its initial state.
-
-Returns **[Object][4]** The resulting modified SDP based on the changes made by this function.
-
-### CallObject
-
-Information about a Call.
-
-Can be retrieved using the [call.getAll][20] or [call.getById][19] APIs.
-
-Type: [Object][4]
-
-**Properties**
-
--   `id` **[string][5]** The ID of the call.
--   `direction` **[string][5]** The direction in which the call was created. Can be 'outgoing' or 'incoming'.
--   `state` **[string][5]** The current state of the call. See [call.states][22] for possible states.
--   `localHold` **[boolean][7]** Indicates whether this call is currently being held locally.
--   `remoteHold` **[boolean][7]** Indicates whether this call is currently being held remotely.
--   `localTracks` **[Array][9]&lt;[string][5]>** A list of Track IDs that the call is sending to the remote participant.
--   `remoteTracks` **[Array][9]&lt;[string][5]>** A list of Track IDs that the call is receiving from the remote participant.
--   `remoteParticipant` **[Object][4]** Information about the other call participant.
-    -   `remoteParticipant.displayNumber` **[string][5]?** The User ID of the remote participant in the form "username@domain".
-    -   `remoteParticipant.displayName` **[string][5]?** The display name of the remote participant.
--   `bandwidth` **BandwidthControls** The bandwidth limitations set for the call.
--   `customParameters` **[Array][9]&lt;CustomParameter>** The custom parameters set for the call.
--   `startTime` **[number][8]** The start time of the call in milliseconds since the epoch.
--   `endTime` **[number][8]?** The end time of the call in milliseconds since the epoch.
-
 ### MediaConstraint
 
 The MediaConstraint type defines the format for configuring media options.
@@ -437,18 +364,87 @@ client.call.make(destination, {
 })
 ```
 
-### MediaObject
+### CallObject
 
-The state representation of a Media object.
-Media is a collection of Track objects.
+Information about a Call.
+
+Can be retrieved using the [call.getAll][20] or [call.getById][19] APIs.
 
 Type: [Object][4]
 
 **Properties**
 
--   `id` **[string][5]** The ID of the Media object.
--   `local` **[boolean][7]** Indicator on whether this media is local or remote.
--   `tracks` **[Array][9]&lt;[call.TrackObject][23]>** A list of Track objects that are contained in this Media object.
+-   `id` **[string][5]** The ID of the call.
+-   `direction` **[string][5]** The direction in which the call was created. Can be 'outgoing' or 'incoming'.
+-   `state` **[string][5]** The current state of the call. See [call.states][21] for possible states.
+-   `localHold` **[boolean][7]** Indicates whether this call is currently being held locally.
+-   `remoteHold` **[boolean][7]** Indicates whether this call is currently being held remotely.
+-   `localTracks` **[Array][9]&lt;[string][5]>** A list of Track IDs that the call is sending to the remote participant.
+-   `remoteTracks` **[Array][9]&lt;[string][5]>** A list of Track IDs that the call is receiving from the remote participant.
+-   `remoteParticipant` **[Object][4]** Information about the other call participant.
+    -   `remoteParticipant.displayNumber` **[string][5]?** The User ID of the remote participant in the form "username@domain".
+    -   `remoteParticipant.displayName` **[string][5]?** The display name of the remote participant.
+-   `bandwidth` **BandwidthControls** The bandwidth limitations set for the call.
+-   `customParameters` **[Array][9]&lt;CustomParameter>** The custom parameters set for the call.
+-   `startTime` **[number][8]** The start time of the call in milliseconds since the epoch.
+-   `endTime` **[number][8]?** The end time of the call in milliseconds since the epoch.
+
+### BandwidthControls
+
+The BandwidthControls type defines the format for configuring media and/or track bandwidth options.
+BandwidthControls only affect received remote tracks of the specified type.
+
+Type: [Object][4]
+
+**Properties**
+
+-   `audio` **[number][8]?** The desired bandwidth bitrate in kilobits per second for received remote audio.
+-   `video` **[number][8]?** The desired bandwidth bitrate in kilobits per second for received remote video.
+
+**Examples**
+
+```javascript
+// Specify received remote video bandwidth limits when making a call.
+client.call.make(destination, mediaConstraints,
+ {
+   bandwidth: {
+     video: 5
+   }
+ }
+)
+```
+
+### IceServer
+
+Type: [Object][4]
+
+**Properties**
+
+-   `urls` **([Array][9]&lt;[string][5]> | [string][5])** Either an array of URLs for reaching out several ICE servers or a single URL for reaching one ICE server.
+-   `credential` **[string][5]?** The credential needed by the ICE server.
+
+### SdpHandlerInfo
+
+Type: [Object][4]
+
+**Properties**
+
+-   `type` **RTCSdpType** The session description's type.
+-   `endpoint` **[string][5]** Which end of the connection created the SDP.
+
+### SdpHandlerFunction
+
+The form of an SDP handler function and the expected arguments that it receives.
+
+Type: [Function][11]
+
+**Parameters**
+
+-   `newSdp` **[Object][4]** The SDP so far (could have been modified by previous handlers).
+-   `info` **[call.SdpHandlerInfo][22]** Additional information that might be useful when making SDP modifications.
+-   `originalSdp` **[Object][4]** The SDP in its initial state.
+
+Returns **[Object][4]** The resulting modified SDP based on the changes made by this function.
 
 ### TrackObject
 
@@ -476,9 +472,9 @@ Type: [Object][4]
 
 **Properties**
 
--   `camera` **[Array][9]&lt;[call.DeviceInfo][24]>** A list of camera device information.
--   `microphone` **[Array][9]&lt;[call.DeviceInfo][24]>** A list of microphone device information.
--   `speaker` **[Array][9]&lt;[call.DeviceInfo][24]>** A list of speaker device information.
+-   `camera` **[Array][9]&lt;[call.DeviceInfo][23]>** A list of camera device information.
+-   `microphone` **[Array][9]&lt;[call.DeviceInfo][23]>** A list of microphone device information.
+-   `speaker` **[Array][9]&lt;[call.DeviceInfo][23]>** A list of speaker device information.
 
 ### DeviceInfo
 
@@ -493,14 +489,18 @@ Type: [Object][4]
 -   `kind` **[string][5]** The type of the device (audioinput, audiooutput, videoinput).
 -   `label` **[string][5]** The name of the device.
 
-### IceServer
+### MediaObject
+
+The state representation of a Media object.
+Media is a collection of Track objects.
 
 Type: [Object][4]
 
 **Properties**
 
--   `urls` **([Array][9]&lt;[string][5]> | [string][5])** Either an array of URLs for reaching out several ICE servers or a single URL for reaching one ICE server.
--   `credential` **[string][5]?** The credential needed by the ICE server.
+-   `id` **[string][5]** The ID of the Media object.
+-   `local` **[boolean][7]** Indicator on whether this media is local or remote.
+-   `tracks` **[Array][9]&lt;[call.TrackObject][24]>** A list of Track objects that are contained in this Media object.
 
 ### hold
 
@@ -680,6 +680,30 @@ The SDK will emit a [call:trackEnded][29]
 -   `options` **[Object][4]?**  (optional, default `{}`)
     -   `options.bandwidth` **[call.BandwidthControls][31]?** Options for configuring media's bandwidth.
 
+### sendDTMF
+
+Send DTMF tones to a call's audio.
+
+The provided tone can either be a single DTMF tone (eg. '1') or a
+   sequence of DTMF tones (eg. '123') which will be played one after the
+   other.
+
+The specified call must be either in Connected, Ringing, or Early Media
+   state, otherwise invoking this API will have no effect.
+
+The tones will be sent as out-of-band tones if supported by the call,
+   otherwise they will be added in-band to the call's audio.
+
+The progress of the operation will be tracked via the
+   [call:operation][26] event.
+
+**Parameters**
+
+-   `callId` **[string][5]** ID of the call being acted on.
+-   `tone` **[string][5]** DTMF tone(s) to send. Valid chracters are ['0','1','2','3','4','5','6','7','8','9','#','*' and ','].
+-   `duration` **[number][8]** The amount of time, in milliseconds, that each DTMF tone should last. (optional, default `100`)
+-   `intertoneGap` **[number][8]** The length of time, in milliseconds, to wait between tones. (optional, default `70`)
+
 ### startVideo
 
 Adds local video to an ongoing Call, to start sending to the remote
@@ -814,30 +838,6 @@ const screenTrack = videoTracks[0]
 // Remove screen from the call.
 client.call.removeMedia(callId, [ screenTrack ])
 ```
-
-### sendDTMF
-
-Send DTMF tones to a call's audio.
-
-The provided tone can either be a single DTMF tone (eg. '1') or a
-   sequence of DTMF tones (eg. '123') which will be played one after the
-   other.
-
-The specified call must be either in Connected, Ringing, or Early Media
-   state, otherwise invoking this API will have no effect.
-
-The tones will be sent as out-of-band tones if supported by the call,
-   otherwise they will be added in-band to the call's audio.
-
-The progress of the operation will be tracked via the
-   [call:operation][26] event.
-
-**Parameters**
-
--   `callId` **[string][5]** ID of the call being acted on.
--   `tone` **[string][5]** DTMF tone(s) to send. Valid chracters are ['0','1','2','3','4','5','6','7','8','9','#','*' and ','].
--   `duration` **[number][8]** The amount of time, in milliseconds, that each DTMF tone should last. (optional, default `100`)
--   `intertoneGap` **[number][8]** The length of time, in milliseconds, to wait between tones. (optional, default `70`)
 
 ### getStats
 
@@ -1283,13 +1283,13 @@ Returns **SdpHandlerFunction** The resulting SDP handler that will remove the co
 
 [20]: #callgetall
 
-[21]: #callsdphandlerinfo
+[21]: call.states
 
-[22]: call.states
+[22]: #callsdphandlerinfo
 
-[23]: #calltrackobject
+[23]: #calldeviceinfo
 
-[24]: #calldeviceinfo
+[24]: #calltrackobject
 
 [25]: #callunhold
 
