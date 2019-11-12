@@ -294,31 +294,6 @@ let callId = client.call.makeAnonymous(callee, credentials, callOptions);
 
 Returns **[string][5]** Id of the outgoing call.
 
-### CallObject
-
-Information about a Call.
-
-Can be retrieved using the [call.getAll][17] or [call.getById][18] APIs.
-
-Type: [Object][4]
-
-**Properties**
-
--   `id` **[string][5]** The ID of the call.
--   `direction` **[string][5]** The direction in which the call was created. Can be 'outgoing' or 'incoming'.
--   `state` **[string][5]** The current state of the call. See [call.states][19] for possible states.
--   `localHold` **[boolean][7]** Indicates whether this call is currently being held locally.
--   `remoteHold` **[boolean][7]** Indicates whether this call is currently being held remotely.
--   `localTracks` **[Array][9]&lt;[string][5]>** A list of Track IDs that the call is sending to the remote participant.
--   `remoteTracks` **[Array][9]&lt;[string][5]>** A list of Track IDs that the call is receiving from the remote participant.
--   `remoteParticipant` **[Object][4]** Information about the other call participant.
-    -   `remoteParticipant.displayNumber` **[string][5]?** The User ID of the remote participant in the form "username@domain".
-    -   `remoteParticipant.displayName` **[string][5]?** The display name of the remote participant.
--   `bandwidth` **[call.BandwidthControls][20]** The bandwidth limitations set for the call.
--   `customParameters` **[Array][9]&lt;[call.CustomParameter][16]>** The custom parameters set for the call.
--   `startTime` **[number][8]** The start time of the call in milliseconds since the epoch.
--   `endTime` **[number][8]?** The end time of the call in milliseconds since the epoch.
-
 ### BandwidthControls
 
 The BandwidthControls type defines the format for configuring media and/or track bandwidth options.
@@ -340,6 +315,112 @@ client.call.make(destination, mediaConstraints,
    bandwidth: {
      video: 5
    }
+ }
+)
+```
+
+### MediaObject
+
+The state representation of a Media object.
+Media is a collection of Track objects.
+
+Type: [Object][4]
+
+**Properties**
+
+-   `id` **[string][5]** The ID of the Media object.
+-   `local` **[boolean][7]** Indicator on whether this media is local or remote.
+-   `tracks` **[Array][9]&lt;[call.TrackObject][17]>** A list of Track objects that are contained in this Media object.
+
+### SdpHandlerFunction
+
+The form of an SDP handler function and the expected arguments that it receives.
+
+Type: [Function][13]
+
+**Parameters**
+
+-   `newSdp` **[Object][4]** The SDP so far (could have been modified by previous handlers).
+-   `info` **[call.SdpHandlerInfo][18]** Additional information that might be useful when making SDP modifications.
+-   `originalSdp` **[Object][4]** The SDP in its initial state.
+
+Returns **[Object][4]** The resulting modified SDP based on the changes made by this function.
+
+### SdpHandlerInfo
+
+Type: [Object][4]
+
+**Properties**
+
+-   `type` **RTCSdpType** The session description's type.
+-   `endpoint` **[string][5]** Which end of the connection created the SDP.
+
+### IceServer
+
+Type: [Object][4]
+
+**Properties**
+
+-   `urls` **([Array][9]&lt;[string][5]> | [string][5])** Either an array of URLs for reaching out several ICE servers or a single URL for reaching one ICE server.
+-   `credential` **[string][5]?** The credential needed by the ICE server.
+
+### CallObject
+
+Information about a Call.
+
+Can be retrieved using the [call.getAll][19] or [call.getById][20] APIs.
+
+Type: [Object][4]
+
+**Properties**
+
+-   `id` **[string][5]** The ID of the call.
+-   `direction` **[string][5]** The direction in which the call was created. Can be 'outgoing' or 'incoming'.
+-   `state` **[string][5]** The current state of the call. See [call.states][21] for possible states.
+-   `localHold` **[boolean][7]** Indicates whether this call is currently being held locally.
+-   `remoteHold` **[boolean][7]** Indicates whether this call is currently being held remotely.
+-   `localTracks` **[Array][9]&lt;[string][5]>** A list of Track IDs that the call is sending to the remote participant.
+-   `remoteTracks` **[Array][9]&lt;[string][5]>** A list of Track IDs that the call is receiving from the remote participant.
+-   `remoteParticipant` **[Object][4]** Information about the other call participant.
+    -   `remoteParticipant.displayNumber` **[string][5]?** The User ID of the remote participant in the form "username@domain".
+    -   `remoteParticipant.displayName` **[string][5]?** The display name of the remote participant.
+-   `bandwidth` **[call.BandwidthControls][22]** The bandwidth limitations set for the call.
+-   `customParameters` **[Array][9]&lt;[call.CustomParameter][16]>** The custom parameters set for the call.
+-   `startTime` **[number][8]** The start time of the call in milliseconds since the epoch.
+-   `endTime` **[number][8]?** The end time of the call in milliseconds since the epoch.
+
+### CustomParameter
+
+Custom SIP headers can be used to convey additional information to a SIP endpoint.
+
+These headers must be configured on the server prior to making a request, otherwise the request will fail when trying to set the headers.
+
+These headers can be specified with the [call.make][23] and [call.answer][24] APIs.
+They can also be set on a call using the [call.setCustomParameters][25], and sent using the [call.sendCustomParameters][26] API.
+
+A Call's custom parameters are a property of the Call's [CallObject][27],
+ which can be retrieved using the [call.getById][20] or
+ [call.getAll][19] APIs.
+
+Type: [Object][4]
+
+**Properties**
+
+-   `name` **[string][5]** The name of the custom parameter
+-   `value` **[string][5]** The value of the custom parameter
+
+**Examples**
+
+```javascript
+// Specify custom parameters when making a call.
+client.call.make(destination, mediaConstraints,
+ {
+   customParameters: [
+     {
+       name: 'X-GPS',
+       value: '42.686032,23.344565'
+     }
+   ]
  }
 )
 ```
@@ -399,9 +480,9 @@ Type: [Object][4]
 
 **Properties**
 
--   `camera` **[Array][9]&lt;[call.DeviceInfo][21]>** A list of camera device information.
--   `microphone` **[Array][9]&lt;[call.DeviceInfo][21]>** A list of microphone device information.
--   `speaker` **[Array][9]&lt;[call.DeviceInfo][21]>** A list of speaker device information.
+-   `camera` **[Array][9]&lt;[call.DeviceInfo][28]>** A list of camera device information.
+-   `microphone` **[Array][9]&lt;[call.DeviceInfo][28]>** A list of microphone device information.
+-   `speaker` **[Array][9]&lt;[call.DeviceInfo][28]>** A list of speaker device information.
 
 ### TrackObject
 
@@ -420,87 +501,6 @@ Type: [Object][4]
 -   `muted` **[boolean][7]** Indicator on whether this Track is muted or not.
 -   `state` **[string][5]** The state of this Track. Can be 'live' or 'ended'.
 -   `streamId` **[string][5]** The ID of the Media Stream that includes this Track.
-
-### CustomParameter
-
-Custom SIP headers can be used to convey additional information to a SIP endpoint.
-
-These headers must be configured on the server prior to making a request, otherwise the request will fail when trying to set the headers.
-
-These headers can be specified with the [call.make][22] and [call.answer][23] APIs.
-They can also be set on a call using the [call.setCustomParameters][24], and sent using the [call.sendCustomParameters][25] API.
-
-A Call's custom parameters are a property of the Call's [CallObject][26],
- which can be retrieved using the [call.getById][18] or
- [call.getAll][17] APIs.
-
-Type: [Object][4]
-
-**Properties**
-
--   `name` **[string][5]** The name of the custom parameter
--   `value` **[string][5]** The value of the custom parameter
-
-**Examples**
-
-```javascript
-// Specify custom parameters when making a call.
-client.call.make(destination, mediaConstraints,
- {
-   customParameters: [
-     {
-       name: 'X-GPS',
-       value: '42.686032,23.344565'
-     }
-   ]
- }
-)
-```
-
-### MediaObject
-
-The state representation of a Media object.
-Media is a collection of Track objects.
-
-Type: [Object][4]
-
-**Properties**
-
--   `id` **[string][5]** The ID of the Media object.
--   `local` **[boolean][7]** Indicator on whether this media is local or remote.
--   `tracks` **[Array][9]&lt;[call.TrackObject][27]>** A list of Track objects that are contained in this Media object.
-
-### SdpHandlerFunction
-
-The form of an SDP handler function and the expected arguments that it receives.
-
-Type: [Function][13]
-
-**Parameters**
-
--   `newSdp` **[Object][4]** The SDP so far (could have been modified by previous handlers).
--   `info` **[call.SdpHandlerInfo][28]** Additional information that might be useful when making SDP modifications.
--   `originalSdp` **[Object][4]** The SDP in its initial state.
-
-Returns **[Object][4]** The resulting modified SDP based on the changes made by this function.
-
-### SdpHandlerInfo
-
-Type: [Object][4]
-
-**Properties**
-
--   `type` **RTCSdpType** The session description's type.
--   `endpoint` **[string][5]** Which end of the connection created the SDP.
-
-### IceServer
-
-Type: [Object][4]
-
-**Properties**
-
--   `urls` **([Array][9]&lt;[string][5]> | [string][5])** Either an array of URLs for reaching out several ICE servers or a single URL for reaching one ICE server.
--   `credential` **[string][5]?** The credential needed by the ICE server.
 
 ### hold
 
@@ -554,11 +554,11 @@ The specified parameters will be saved as part of the call's information through
 All subsequent call operations will include these custom parameters.
 Therefore, invalid parameters, or parameters not previously configured on the server, will cause subsequent call operations to fail.
 
-A Call's custom parameters are a property of the Call's [CallObject][26],
-   which can be retrieved using the [call.getById][18] or
-   [call.getAll][17] APIs.
+A Call's custom parameters are a property of the Call's [CallObject][27],
+   which can be retrieved using the [call.getById][20] or
+   [call.getAll][19] APIs.
 
-The custom parameters set on a call can be sent directly with the [call.sendCustomParameters][25] API.
+The custom parameters set on a call can be sent directly with the [call.sendCustomParameters][26] API.
 
 Custom parameters can be removed from a call's information by setting them as undefined (e.g., `call.setCustomParameters(callId)`).
 Subsequent call operations will no longer send custom parameters.
@@ -572,11 +572,11 @@ Subsequent call operations will no longer send custom parameters.
 
 Send the custom parameters on an ongoing call.
 
-A Call's custom parameters are a property of the Call's [CallObject][26],
-   which can be retrieved using the [call.getById][18] or
-   [call.getAll][17] APIs.
+A Call's custom parameters are a property of the Call's [CallObject][27],
+   which can be retrieved using the [call.getById][20] or
+   [call.getAll][19] APIs.
 
-To change or remove the custom parameters on a call, use the [call.setCustomParameters][24] API.
+To change or remove the custom parameters on a call, use the [call.setCustomParameters][25] API.
 
 **Parameters**
 
@@ -660,7 +660,7 @@ The SDK will emit a [call:newTrack][34] event
         -   `media.screenOptions.width` **[call.MediaConstraint][15]?** The width of the screenShare.
         -   `media.screenOptions.frameRate` **[call.MediaConstraint][15]?** The frame rate of the screenShare.
 -   `options` **[Object][4]?**  (optional, default `{}`)
-    -   `options.bandwidth` **[call.BandwidthControls][20]?** Options for configuring media's bandwidth.
+    -   `options.bandwidth` **[call.BandwidthControls][22]?** Options for configuring media's bandwidth.
 
 ### removeMedia
 
@@ -678,7 +678,39 @@ The SDK will emit a [call:trackEnded][33]
 -   `callId` **[string][5]** The ID of the call to remove media from.
 -   `tracks` **[Array][9]** A list of track IDs to remove.
 -   `options` **[Object][4]?**  (optional, default `{}`)
-    -   `options.bandwidth` **[call.BandwidthControls][20]?** Options for configuring media's bandwidth.
+    -   `options.bandwidth` **[call.BandwidthControls][22]?** Options for configuring media's bandwidth.
+
+### startVideo
+
+Adds local video to an ongoing Call, to start sending to the remote
+   participant.
+
+The latest SDK release (v4.X+) has not yet implemented this API in the
+   same way that it was available in previous releases (v3.X). In place
+   of this API, the SDK has a more general API that can be used for this
+   same behaviour.
+
+The [call.addMedia][35] API can be used to perform the same behaviour
+   as `startVideo`. [call.addMedia][35] is a general-purpose API for
+   adding media to a call, which covers the same functionality as
+   `startVideo`. Selecting only video options when using
+   [call.addMedia][35] will perform the same behaviour as using
+   `startVideo`.
+
+**Examples**
+
+```javascript
+// Select media options for adding only video.
+const media = {
+   audio: false,
+   video: true,
+   videoOptions: { ... },
+   screen: false
+}
+
+// Add the selected media to the call.
+client.call.addMedia(callId, media)
+```
 
 ### startScreenshare
 
@@ -711,6 +743,30 @@ const media = {
 // Add the selected media to the call.
 client.call.addMedia(callId, media)
 ```
+
+### sendDTMF
+
+Send DTMF tones to a call's audio.
+
+The provided tone can either be a single DTMF tone (eg. '1') or a
+   sequence of DTMF tones (eg. '123') which will be played one after the
+   other.
+
+The specified call must be either in Connected, Ringing, or Early Media
+   state, otherwise invoking this API will have no effect.
+
+The tones will be sent as out-of-band tones if supported by the call,
+   otherwise they will be added in-band to the call's audio.
+
+The progress of the operation will be tracked via the
+   [call:operation][30] event.
+
+**Parameters**
+
+-   `callId` **[string][5]** ID of the call being acted on.
+-   `tone` **[string][5]** DTMF tone(s) to send. Valid chracters are ['0','1','2','3','4','5','6','7','8','9','#','*' and ','].
+-   `duration` **[number][8]** The amount of time, in milliseconds, that each DTMF tone should last. (optional, default `100`)
+-   `intertoneGap` **[number][8]** The length of time, in milliseconds, to wait between tones. (optional, default `70`)
 
 ### stopScreenshare
 
@@ -752,30 +808,6 @@ const screenTrack = videoTracks[0]
 client.call.removeMedia(callId, [ screenTrack ])
 ```
 
-### sendDTMF
-
-Send DTMF tones to a call's audio.
-
-The provided tone can either be a single DTMF tone (eg. '1') or a
-   sequence of DTMF tones (eg. '123') which will be played one after the
-   other.
-
-The specified call must be either in Connected, Ringing, or Early Media
-   state, otherwise invoking this API will have no effect.
-
-The tones will be sent as out-of-band tones if supported by the call,
-   otherwise they will be added in-band to the call's audio.
-
-The progress of the operation will be tracked via the
-   [call:operation][30] event.
-
-**Parameters**
-
--   `callId` **[string][5]** ID of the call being acted on.
--   `tone` **[string][5]** DTMF tone(s) to send. Valid chracters are ['0','1','2','3','4','5','6','7','8','9','#','*' and ','].
--   `duration` **[number][8]** The amount of time, in milliseconds, that each DTMF tone should last. (optional, default `100`)
--   `intertoneGap` **[number][8]** The length of time, in milliseconds, to wait between tones. (optional, default `70`)
-
 ### stopVideo
 
 Removes local video from an ongoing Call, stopping it from being sent
@@ -805,38 +837,6 @@ const videoTrack = call.localTracks.find(trackId => {
 
 // Remove video from the call.
 client.call.removeMedia(callId, [ videoTrack ])
-```
-
-### startVideo
-
-Adds local video to an ongoing Call, to start sending to the remote
-   participant.
-
-The latest SDK release (v4.X+) has not yet implemented this API in the
-   same way that it was available in previous releases (v3.X). In place
-   of this API, the SDK has a more general API that can be used for this
-   same behaviour.
-
-The [call.addMedia][35] API can be used to perform the same behaviour
-   as `startVideo`. [call.addMedia][35] is a general-purpose API for
-   adding media to a call, which covers the same functionality as
-   `startVideo`. Selecting only video options when using
-   [call.addMedia][35] will perform the same behaviour as using
-   `startVideo`.
-
-**Examples**
-
-```javascript
-// Select media options for adding only video.
-const media = {
-   audio: false,
-   video: true,
-   videoOptions: { ... },
-   screen: false
-}
-
-// Add the selected media to the call.
-client.call.addMedia(callId, media)
 ```
 
 ### getStats
@@ -993,7 +993,7 @@ The `setDefaultDevices` API from previous SDK releases (3.X) has been
 
 The devices used for a call can be selected as part of the APIs for
    starting the call. Microphone and/or camera can be chosen in the
-   [call.make][22] and [call.answer][23] APIs, and speaker can be
+   [call.make][23] and [call.answer][24] APIs, and speaker can be
    chosen when the audio track is rendered with the
    [media.renderTracks][40] API.
 
@@ -1083,7 +1083,7 @@ Retrieve an available Track object with a specific Track ID.
 
 -   `trackId` **[string][5]** The ID of the Track to retrieve.
 
-Returns **[call.TrackObject][27]** A Track object.
+Returns **[call.TrackObject][17]** A Track object.
 
 ### renderTracks
 
@@ -1275,29 +1275,29 @@ Returns **[call.SdpHandlerFunction][11]** The resulting SDP handler that will re
 
 [16]: #callcustomparameter
 
-[17]: #callgetall
+[17]: #calltrackobject
 
-[18]: #callgetbyid
+[18]: #callsdphandlerinfo
 
-[19]: call.states
+[19]: #callgetall
 
-[20]: #callbandwidthcontrols
+[20]: #callgetbyid
 
-[21]: #calldeviceinfo
+[21]: call.states
 
-[22]: call.make
+[22]: #callbandwidthcontrols
 
-[23]: call.answer
+[23]: call.make
 
-[24]: #callsetcustomparameters
+[24]: call.answer
 
-[25]: #callsendcustomparameters
+[25]: #callsetcustomparameters
 
-[26]: #callcallobject
+[26]: #callsendcustomparameters
 
-[27]: #calltrackobject
+[27]: #callcallobject
 
-[28]: #callsdphandlerinfo
+[28]: #calldeviceinfo
 
 [29]: #callunhold
 

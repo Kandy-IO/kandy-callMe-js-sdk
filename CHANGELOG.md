@@ -14,6 +14,7 @@ Kandy.js change log.
 ### Fixed
 
 - Fixed public documentation hyperlinks for custom type definitions. `KAA-2011`
+- Fixed a Call configuration issue where midcall operations may be slow when no ICE server configurations were provided.
 
 ## 4.9.0 - 2019-11-01
 
