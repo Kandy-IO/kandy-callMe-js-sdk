@@ -319,15 +319,6 @@ client.call.make(destination, mediaConstraints,
 )
 ```
 
-### IceServer
-
-Type: [Object][4]
-
-**Properties**
-
--   `urls` **([Array][9]&lt;[string][5]> | [string][5])** Either an array of URLs for reaching out several ICE servers or a single URL for reaching one ICE server.
--   `credential` **[string][5]?** The credential needed by the ICE server.
-
 ### CallObject
 
 Information about a Call.
@@ -353,54 +344,41 @@ Type: [Object][4]
 -   `startTime` **[number][8]** The start time of the call in milliseconds since the epoch.
 -   `endTime` **[number][8]?** The end time of the call in milliseconds since the epoch.
 
-### CustomParameter
+### SdpHandlerFunction
 
-Custom SIP headers can be used to convey additional information to a SIP endpoint.
+The form of an SDP handler function and the expected arguments that it receives.
 
-These headers must be configured on the server prior to making a request, otherwise the request will fail when trying to set the headers.
+Type: [Function][13]
 
-These headers can be specified with the [call.make][21] and [call.answer][22] APIs.
-They can also be set on a call using the [call.setCustomParameters][23], and sent using the [call.sendCustomParameters][24] API.
+**Parameters**
 
-A Call's custom parameters are a property of the Call's [CallObject][25],
- which can be retrieved using the [call.getById][18] or
- [call.getAll][17] APIs.
+-   `newSdp` **[Object][4]** The SDP so far (could have been modified by previous handlers).
+-   `info` **[call.SdpHandlerInfo][21]** Additional information that might be useful when making SDP modifications.
+-   `originalSdp` **[Object][4]** The SDP in its initial state.
 
-Type: [Object][4]
+Returns **[Object][4]** The resulting modified SDP based on the changes made by this function.
 
-**Properties**
+### MediaObject
 
--   `name` **[string][5]** The name of the custom parameter
--   `value` **[string][5]** The value of the custom parameter
-
-**Examples**
-
-```javascript
-// Specify custom parameters when making a call.
-client.call.make(destination, mediaConstraints,
- {
-   customParameters: [
-     {
-       name: 'X-GPS',
-       value: '42.686032,23.344565'
-     }
-   ]
- }
-)
-```
-
-### DeviceInfo
-
-Contains information about a device.
+The state representation of a Media object.
+Media is a collection of Track objects.
 
 Type: [Object][4]
 
 **Properties**
 
--   `deviceId` **[string][5]** The ID of the device.
--   `groupId` **[string][5]** The group ID of the device. Devices that share a `groupId` belong to the same physical device.
--   `kind` **[string][5]** The type of the device (audioinput, audiooutput, videoinput).
--   `label` **[string][5]** The name of the device.
+-   `id` **[string][5]** The ID of the Media object.
+-   `local` **[boolean][7]** Indicator on whether this media is local or remote.
+-   `tracks` **[Array][9]&lt;[call.TrackObject][22]>** A list of Track objects that are contained in this Media object.
+
+### SdpHandlerInfo
+
+Type: [Object][4]
+
+**Properties**
+
+-   `type` **RTCSdpType** The session description's type.
+-   `endpoint` **[string][5]** Which end of the connection created the SDP.
 
 ### MediaConstraint
 
@@ -436,17 +414,14 @@ client.call.make(destination, {
 })
 ```
 
-### DevicesObject
-
-A collection of media devices and their information.
+### IceServer
 
 Type: [Object][4]
 
 **Properties**
 
--   `camera` **[Array][9]&lt;[call.DeviceInfo][26]>** A list of camera device information.
--   `microphone` **[Array][9]&lt;[call.DeviceInfo][26]>** A list of microphone device information.
--   `speaker` **[Array][9]&lt;[call.DeviceInfo][26]>** A list of speaker device information.
+-   `urls` **([Array][9]&lt;[string][5]> | [string][5])** Either an array of URLs for reaching out several ICE servers or a single URL for reaching one ICE server.
+-   `credential` **[string][5]?** The credential needed by the ICE server.
 
 ### TrackObject
 
@@ -466,41 +441,66 @@ Type: [Object][4]
 -   `state` **[string][5]** The state of this Track. Can be 'live' or 'ended'.
 -   `streamId` **[string][5]** The ID of the Media Stream that includes this Track.
 
-### MediaObject
+### DevicesObject
 
-The state representation of a Media object.
-Media is a collection of Track objects.
-
-Type: [Object][4]
-
-**Properties**
-
--   `id` **[string][5]** The ID of the Media object.
--   `local` **[boolean][7]** Indicator on whether this media is local or remote.
--   `tracks` **[Array][9]&lt;[call.TrackObject][27]>** A list of Track objects that are contained in this Media object.
-
-### SdpHandlerFunction
-
-The form of an SDP handler function and the expected arguments that it receives.
-
-Type: [Function][13]
-
-**Parameters**
-
--   `newSdp` **[Object][4]** The SDP so far (could have been modified by previous handlers).
--   `info` **[call.SdpHandlerInfo][28]** Additional information that might be useful when making SDP modifications.
--   `originalSdp` **[Object][4]** The SDP in its initial state.
-
-Returns **[Object][4]** The resulting modified SDP based on the changes made by this function.
-
-### SdpHandlerInfo
+A collection of media devices and their information.
 
 Type: [Object][4]
 
 **Properties**
 
--   `type` **RTCSdpType** The session description's type.
--   `endpoint` **[string][5]** Which end of the connection created the SDP.
+-   `camera` **[Array][9]&lt;[call.DeviceInfo][23]>** A list of camera device information.
+-   `microphone` **[Array][9]&lt;[call.DeviceInfo][23]>** A list of microphone device information.
+-   `speaker` **[Array][9]&lt;[call.DeviceInfo][23]>** A list of speaker device information.
+
+### DeviceInfo
+
+Contains information about a device.
+
+Type: [Object][4]
+
+**Properties**
+
+-   `deviceId` **[string][5]** The ID of the device.
+-   `groupId` **[string][5]** The group ID of the device. Devices that share a `groupId` belong to the same physical device.
+-   `kind` **[string][5]** The type of the device (audioinput, audiooutput, videoinput).
+-   `label` **[string][5]** The name of the device.
+
+### CustomParameter
+
+Custom SIP headers can be used to convey additional information to a SIP endpoint.
+
+These headers must be configured on the server prior to making a request, otherwise the request will fail when trying to set the headers.
+
+These headers can be specified with the [call.make][24] and [call.answer][25] APIs.
+They can also be set on a call using the [call.setCustomParameters][26], and sent using the [call.sendCustomParameters][27] API.
+
+A Call's custom parameters are a property of the Call's [CallObject][28],
+ which can be retrieved using the [call.getById][18] or
+ [call.getAll][17] APIs.
+
+Type: [Object][4]
+
+**Properties**
+
+-   `name` **[string][5]** The name of the custom parameter
+-   `value` **[string][5]** The value of the custom parameter
+
+**Examples**
+
+```javascript
+// Specify custom parameters when making a call.
+client.call.make(destination, mediaConstraints,
+ {
+   customParameters: [
+     {
+       name: 'X-GPS',
+       value: '42.686032,23.344565'
+     }
+   ]
+ }
+)
+```
 
 ### hold
 
@@ -554,11 +554,11 @@ The specified parameters will be saved as part of the call's information through
 All subsequent call operations will include these custom parameters.
 Therefore, invalid parameters, or parameters not previously configured on the server, will cause subsequent call operations to fail.
 
-A Call's custom parameters are a property of the Call's [CallObject][25],
+A Call's custom parameters are a property of the Call's [CallObject][28],
    which can be retrieved using the [call.getById][18] or
    [call.getAll][17] APIs.
 
-The custom parameters set on a call can be sent directly with the [call.sendCustomParameters][24] API.
+The custom parameters set on a call can be sent directly with the [call.sendCustomParameters][27] API.
 
 Custom parameters can be removed from a call's information by setting them as undefined (e.g., `call.setCustomParameters(callId)`).
 Subsequent call operations will no longer send custom parameters.
@@ -572,11 +572,11 @@ Subsequent call operations will no longer send custom parameters.
 
 Send the custom parameters on an ongoing call.
 
-A Call's custom parameters are a property of the Call's [CallObject][25],
+A Call's custom parameters are a property of the Call's [CallObject][28],
    which can be retrieved using the [call.getById][18] or
    [call.getAll][17] APIs.
 
-To change or remove the custom parameters on a call, use the [call.setCustomParameters][23] API.
+To change or remove the custom parameters on a call, use the [call.setCustomParameters][26] API.
 
 **Parameters**
 
@@ -919,7 +919,7 @@ The `setDefaultDevices` API from previous SDK releases (3.X) has been
 
 The devices used for a call can be selected as part of the APIs for
    starting the call. Microphone and/or camera can be chosen in the
-   [call.make][21] and [call.answer][22] APIs, and speaker can be
+   [call.make][24] and [call.answer][25] APIs, and speaker can be
    chosen when the audio track is rendered with the
    [media.renderTracks][39] API.
 
@@ -1083,7 +1083,7 @@ Retrieve an available Track object with a specific Track ID.
 
 -   `trackId` **[string][5]** The ID of the Track to retrieve.
 
-Returns **[call.TrackObject][27]** A Track object.
+Returns **[call.TrackObject][22]** A Track object.
 
 ### renderTracks
 
@@ -1283,21 +1283,21 @@ Returns **[call.SdpHandlerFunction][11]** The resulting SDP handler that will re
 
 [20]: #callbandwidthcontrols
 
-[21]: call.make
+[21]: #callsdphandlerinfo
 
-[22]: call.answer
+[22]: #calltrackobject
 
-[23]: #callsetcustomparameters
+[23]: #calldeviceinfo
 
-[24]: #callsendcustomparameters
+[24]: call.make
 
-[25]: #callcallobject
+[25]: call.answer
 
-[26]: #calldeviceinfo
+[26]: #callsetcustomparameters
 
-[27]: #calltrackobject
+[27]: #callsendcustomparameters
 
-[28]: #callsdphandlerinfo
+[28]: #callcallobject
 
 [29]: #callunhold
 
