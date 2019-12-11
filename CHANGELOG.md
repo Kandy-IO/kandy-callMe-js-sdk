@@ -13,6 +13,10 @@ Kandy.js change log.
   - See `config.logs.handler`, `config.logs.logActions.handler`, `logger.LogHandler`, and `logger.LogEntry`.
   - An application can now provide a `LogHandler` function to the SDK via configuration. The SDK will use this function for logging information. By default, the SDK will continue to log information to the console.
 
+### Fixed
+
+- Fixed an issue where call was failing when the user(caller) has no user@domain format. `KAA-2131`
+
 ## 4.10.0 - 2019-11-29
 
 ### Added
