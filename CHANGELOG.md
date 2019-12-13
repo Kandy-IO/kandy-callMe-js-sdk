@@ -16,6 +16,7 @@ Kandy.js change log.
 ### Fixed
 
 - Fixed an issue where call was failing when the user(caller) has no user@domain format. `KAA-2131`
+- Fixed an issue where the user is not unsubscribing when the call ends. `KAA-2113`
 
 ## 4.10.0 - 2019-11-29
 

@@ -1,7 +1,7 @@
 /**
  * Kandy.js
  * kandy.newCallMe.js
- * Version: 4.11.0-beta.225
+ * Version: 4.11.0-beta.226
  */
 (function webpackUniversalModuleDefinition(root, factory) {
 	if(typeof exports === 'object' && typeof module === 'object')
@@ -34747,10 +34747,15 @@ var _extends2 = __webpack_require__("../../node_modules/babel-runtime/helpers/ex
 var _extends3 = _interopRequireDefault(_extends2);
 
 exports.makeAnonymousCallEntry = makeAnonymousCallEntry;
+exports.anonymousCallEnd = anonymousCallEnd;
 
 var _actionTypes = __webpack_require__("../../packages/kandy/src/call/interfaceNew/actionTypes.js");
 
 var actionTypes = _interopRequireWildcard(_actionTypes);
+
+var _actions = __webpack_require__("../../packages/kandy/src/auth/interface/actions.js");
+
+var authActions = _interopRequireWildcard(_actions);
 
 var _establish = __webpack_require__("../../packages/kandy/src/call/newCallMe/sagas/establish.js");
 
@@ -34771,18 +34776,35 @@ function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { de
  * @param {Object} deps.webRTC      The WebRTC stack.
  * @param {Array}  deps.sdpHandlers SDP handlers.
  */
-function* makeAnonymousCallEntry(deps) {
-  // TODO: Using `makeCall` for now but will need a custom callstack saga for this
-  yield (0, _effects.takeEvery)(actionTypes.MAKE_ANONYMOUS_CALL, _establish.makeAnonymousCall, (0, _extends3.default)({}, deps));
-}
-
-// Libraries.
 /**
  * Call saga index.
  * Defines which actions trigger which sagas.
  */
 
 // Call plugin.
+function* makeAnonymousCallEntry(deps) {
+  // TODO: Using `makeCall` for now but will need a custom callstack saga for this
+  yield (0, _effects.takeEvery)(actionTypes.MAKE_ANONYMOUS_CALL, _establish.makeAnonymousCall, (0, _extends3.default)({}, deps));
+}
+
+/**
+ * Entry saga for handling the "end of call" operations.
+ * @method anonymousCallEnd
+ */
+
+
+// Libraries.
+
+
+// Other plugins.
+function* anonymousCallEnd() {
+  while (true) {
+    yield (0, _effects.take)(actionTypes.END_CALL_FINISH);
+
+    // When the call ends, we want to disconnect the user.
+    yield (0, _effects.put)(authActions.disconnect());
+  }
+}
 
 /***/ }),
 
@@ -43082,7 +43104,7 @@ const factoryDefaults = {
    */
 };function factory(plugins, options = factoryDefaults) {
   // Log the SDK's version (templated by webpack) on initialization.
-  let version = '4.11.0-beta.225';
+  let version = '4.11.0-beta.226';
   log.info(`SDK version: ${version}`);
 
   var sagas = [];
