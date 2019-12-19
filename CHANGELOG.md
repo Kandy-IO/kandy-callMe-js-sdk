@@ -19,6 +19,7 @@ Kandy.js change log.
   - This fix re-introduces a previous issue fixed in v4.9.0: `KAA-1890`.
 - Fixed an issue where call was failing when the user(caller) has no user@domain format. `KAA-2131`
 - Fixed an issue where the user is not unsubscribing when the call ends. `KAA-2113`
+- Fixed an issue where callee(s) would not get notified when caller stops screen sharing through browser control. `KAA-2093`
 
 ## 4.10.0 - 2019-11-29
 
