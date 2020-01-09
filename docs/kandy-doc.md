@@ -349,6 +349,47 @@ Type: [Object][6]
 -   `startTime` **[number][11]** The start time of the call in milliseconds since the epoch.
 -   `endTime` **[number][11]?** The end time of the call in milliseconds since the epoch.
 
+### CustomParameter
+
+Custom SIP headers can be used to convey additional information to a SIP endpoint.
+
+These headers must be configured on the server prior to making a request, otherwise the request will fail when trying to set the headers.
+
+These headers can be specified with the [call.make][24] and [call.answer][25] APIs.
+They can also be set on a call using the [call.setCustomParameters][26], and sent using the [call.sendCustomParameters][27] API.
+
+Custom headers may be received anytime throughout the duration a call. A remote endpoint may send custom headers when starting a call,
+ answering a call, or during call updates such as hold/unhold and addition/removal of media in the call.
+ When these custom headers are received, the SDK will emit a [call:customParameters][28] event
+ which will contain the custom parameters that were received.
+
+A Call's custom parameters are a property of the Call's [CallObject][29],
+ which can be retrieved using the [call.getById][21] or
+ [call.getAll][20] APIs.
+
+Type: [Object][6]
+
+**Properties**
+
+-   `name` **[string][7]** The name of the custom parameter
+-   `value` **[string][7]** The value of the custom parameter
+
+**Examples**
+
+```javascript
+// Specify custom parameters when making a call.
+client.call.make(destination, mediaConstraints,
+ {
+   customParameters: [
+     {
+       name: 'X-GPS',
+       value: '42.686032,23.344565'
+     }
+   ]
+ }
+)
+```
+
 ### DevicesObject
 
 A collection of media devices and their information.
@@ -357,9 +398,9 @@ Type: [Object][6]
 
 **Properties**
 
--   `camera` **[Array][12]&lt;[call.DeviceInfo][24]>** A list of camera device information.
--   `microphone` **[Array][12]&lt;[call.DeviceInfo][24]>** A list of microphone device information.
--   `speaker` **[Array][12]&lt;[call.DeviceInfo][24]>** A list of speaker device information.
+-   `camera` **[Array][12]&lt;[call.DeviceInfo][30]>** A list of camera device information.
+-   `microphone` **[Array][12]&lt;[call.DeviceInfo][30]>** A list of microphone device information.
+-   `speaker` **[Array][12]&lt;[call.DeviceInfo][30]>** A list of speaker device information.
 
 ### TrackObject
 
@@ -390,7 +431,7 @@ Type: [Object][6]
 
 -   `id` **[string][7]** The ID of the Media object.
 -   `local` **[boolean][10]** Indicator on whether this media is local or remote.
--   `tracks` **[Array][12]&lt;[call.TrackObject][25]>** A list of Track objects that are contained in this Media object.
+-   `tracks` **[Array][12]&lt;[call.TrackObject][31]>** A list of Track objects that are contained in this Media object.
 
 ### SdpHandlerFunction
 
@@ -401,7 +442,7 @@ Type: [Function][14]
 **Parameters**
 
 -   `newSdp` **[Object][6]** The SDP so far (could have been modified by previous handlers).
--   `info` **[call.SdpHandlerInfo][26]** Additional information that might be useful when making SDP modifications.
+-   `info` **[call.SdpHandlerInfo][32]** Additional information that might be useful when making SDP modifications.
 -   `originalSdp` **[Object][6]** The SDP in its initial state.
 
 Returns **[Object][6]** The resulting modified SDP based on the changes made by this function.
@@ -449,6 +490,19 @@ client.call.make(destination, mediaConstraints,
 )
 ```
 
+### DeviceInfo
+
+Contains information about a device.
+
+Type: [Object][6]
+
+**Properties**
+
+-   `deviceId` **[string][7]** The ID of the device.
+-   `groupId` **[string][7]** The group ID of the device. Devices that share a `groupId` belong to the same physical device.
+-   `kind` **[string][7]** The type of the device (audioinput, audiooutput, videoinput).
+-   `label` **[string][7]** The name of the device.
+
 ### MediaConstraint
 
 The MediaConstraint type defines the format for configuring media options.
@@ -482,60 +536,6 @@ client.call.make(destination, {
    }
 })
 ```
-
-### CustomParameter
-
-Custom SIP headers can be used to convey additional information to a SIP endpoint.
-
-These headers must be configured on the server prior to making a request, otherwise the request will fail when trying to set the headers.
-
-These headers can be specified with the [call.make][27] and [call.answer][28] APIs.
-They can also be set on a call using the [call.setCustomParameters][29], and sent using the [call.sendCustomParameters][30] API.
-
-Custom headers may be received anytime throughout the duration a call. A remote endpoint may send custom headers when starting a call,
- answering a call, or during call updates such as hold/unhold and addition/removal of media in the call.
- When these custom headers are received, the SDK will emit a [call:customParameters][31] event
- which will contain the custom parameters that were received.
-
-A Call's custom parameters are a property of the Call's [CallObject][32],
- which can be retrieved using the [call.getById][21] or
- [call.getAll][20] APIs.
-
-Type: [Object][6]
-
-**Properties**
-
--   `name` **[string][7]** The name of the custom parameter
--   `value` **[string][7]** The value of the custom parameter
-
-**Examples**
-
-```javascript
-// Specify custom parameters when making a call.
-client.call.make(destination, mediaConstraints,
- {
-   customParameters: [
-     {
-       name: 'X-GPS',
-       value: '42.686032,23.344565'
-     }
-   ]
- }
-)
-```
-
-### DeviceInfo
-
-Contains information about a device.
-
-Type: [Object][6]
-
-**Properties**
-
--   `deviceId` **[string][7]** The ID of the device.
--   `groupId` **[string][7]** The group ID of the device. Devices that share a `groupId` belong to the same physical device.
--   `kind` **[string][7]** The type of the device (audioinput, audiooutput, videoinput).
--   `label` **[string][7]** The name of the device.
 
 ### hold
 
@@ -589,11 +589,11 @@ The specified parameters will be saved as part of the call's information through
 All subsequent call operations will include these custom parameters.
 Therefore, invalid parameters, or parameters not previously configured on the server, will cause subsequent call operations to fail.
 
-A Call's custom parameters are a property of the Call's [CallObject][32],
+A Call's custom parameters are a property of the Call's [CallObject][29],
    which can be retrieved using the [call.getById][21] or
    [call.getAll][20] APIs.
 
-The custom parameters set on a call can be sent directly with the [call.sendCustomParameters][30] API.
+The custom parameters set on a call can be sent directly with the [call.sendCustomParameters][27] API.
 
 Custom parameters can be removed from a call's information by setting them as undefined (e.g., `call.setCustomParameters(callId)`).
 Subsequent call operations will no longer send custom parameters.
@@ -608,11 +608,11 @@ Subsequent call operations will no longer send custom parameters.
 Send the custom parameters on an ongoing call to the server. The server may either consume the headers or relay them
 to another endpoint, depending on how the server is configured.
 
-A Call's custom parameters are a property of the Call's [CallObject][32],
+A Call's custom parameters are a property of the Call's [CallObject][29],
    which can be retrieved using the [call.getById][21] or
    [call.getAll][20] APIs.
 
-To change or remove the custom parameters on a call, use the [call.setCustomParameters][29] API.
+To change or remove the custom parameters on a call, use the [call.setCustomParameters][26] API.
 
 **Parameters**
 
@@ -761,6 +761,38 @@ The SDK will emit a [call:trackEnded][37]
 
 -   `callId` **[string][7]** ID of the call being acted on.
 
+### startScreenshare
+
+Adds local screenshare to an ongoing Call, to start sending to the remote
+   participant.
+
+The latest SDK release (v4.X+) has not yet implemented this API in the
+   same way that it was available in previous releases (v3.X). In place
+   of this API, the SDK has a more general API that can be used for this
+   same behaviour.
+
+The [call.addMedia][39] API can be used to perform the same behaviour
+   as `startScreenshare`. [call.addMedia][39] is a general-purpose API
+   for adding media to a call, which covers the same functionality as
+   `startScreenshare`. Selecting only screen options when using
+   [call.addMedia][39] will perform the same behaviour as using
+   `startScreenshare`.
+
+**Examples**
+
+```javascript
+// Select media options for adding only screenshare.
+const media = {
+   audio: false,
+   video: false,
+   screen: true,
+   screenOptions: { ... }
+}
+
+// Add the selected media to the call.
+client.call.addMedia(callId, media)
+```
+
 ### sendDTMF
 
 Send DTMF tones to a call's audio.
@@ -823,38 +855,6 @@ const screenTrack = videoTracks[0]
 
 // Remove screen from the call.
 client.call.removeMedia(callId, [ screenTrack ])
-```
-
-### startScreenshare
-
-Adds local screenshare to an ongoing Call, to start sending to the remote
-   participant.
-
-The latest SDK release (v4.X+) has not yet implemented this API in the
-   same way that it was available in previous releases (v3.X). In place
-   of this API, the SDK has a more general API that can be used for this
-   same behaviour.
-
-The [call.addMedia][39] API can be used to perform the same behaviour
-   as `startScreenshare`. [call.addMedia][39] is a general-purpose API
-   for adding media to a call, which covers the same functionality as
-   `startScreenshare`. Selecting only screen options when using
-   [call.addMedia][39] will perform the same behaviour as using
-   `startScreenshare`.
-
-**Examples**
-
-```javascript
-// Select media options for adding only screenshare.
-const media = {
-   audio: false,
-   video: false,
-   screen: true,
-   screenOptions: { ... }
-}
-
-// Add the selected media to the call.
-client.call.addMedia(callId, media)
 ```
 
 ### getStats
@@ -1011,7 +1011,7 @@ The `setDefaultDevices` API from previous SDK releases (3.X) has been
 
 The devices used for a call can be selected as part of the APIs for
    starting the call. Microphone and/or camera can be chosen in the
-   [call.make][27] and [call.answer][28] APIs, and speaker can be
+   [call.make][24] and [call.answer][25] APIs, and speaker can be
    chosen when the audio track is rendered with the
    [media.renderTracks][44] API.
 
@@ -1177,7 +1177,7 @@ Retrieve an available Track object with a specific Track ID.
 
 -   `trackId` **[string][7]** The ID of the Track to retrieve.
 
-Returns **[call.TrackObject][25]** A Track object.
+Returns **[call.TrackObject][31]** A Track object.
 
 ### renderTracks
 
@@ -1383,23 +1383,23 @@ Returns **[call.SdpHandlerFunction][15]** The resulting SDP handler that will re
 
 [23]: #callbandwidthcontrols
 
-[24]: #calldeviceinfo
+[24]: call.make
 
-[25]: #calltrackobject
+[25]: call.answer
 
-[26]: #callsdphandlerinfo
+[26]: #callsetcustomparameters
 
-[27]: call.make
+[27]: #callsendcustomparameters
 
-[28]: call.answer
+[28]: #calleventcallcustomparameters
 
-[29]: #callsetcustomparameters
+[29]: #callcallobject
 
-[30]: #callsendcustomparameters
+[30]: #calldeviceinfo
 
-[31]: #calleventcallcustomparameters
+[31]: #calltrackobject
 
-[32]: #callcallobject
+[32]: #callsdphandlerinfo
 
 [33]: #callunhold
 
