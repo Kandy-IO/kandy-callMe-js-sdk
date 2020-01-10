@@ -333,30 +333,109 @@ Type: [Object][6]
 -   `urls` **([Array][12]&lt;[string][7]> | [string][7])** Either an array of URLs for reaching out several ICE servers or a single URL for reaching one ICE server.
 -   `credential` **[string][7]?** The credential needed by the ICE server.
 
-### CallObject
+### DevicesObject
 
-Information about a Call.
-
-Can be retrieved using the [call.getAll][20] or [call.getById][21] APIs.
+A collection of media devices and their information.
 
 Type: [Object][6]
 
 **Properties**
 
--   `id` **[string][7]** The ID of the call.
--   `direction` **[string][7]** The direction in which the call was created. Can be 'outgoing' or 'incoming'.
--   `state` **[string][7]** The current state of the call. See [call.states][22] for possible states.
--   `localHold` **[boolean][10]** Indicates whether this call is currently being held locally.
--   `remoteHold` **[boolean][10]** Indicates whether this call is currently being held remotely.
--   `localTracks` **[Array][12]&lt;[string][7]>** A list of Track IDs that the call is sending to the remote participant.
--   `remoteTracks` **[Array][12]&lt;[string][7]>** A list of Track IDs that the call is receiving from the remote participant.
--   `remoteParticipant` **[Object][6]** Information about the other call participant.
-    -   `remoteParticipant.displayNumber` **[string][7]?** The User ID of the remote participant in the form "username@domain".
-    -   `remoteParticipant.displayName` **[string][7]?** The display name of the remote participant.
--   `bandwidth` **[call.BandwidthControls][23]** The bandwidth limitations set for the call.
--   `customParameters` **[Array][12]&lt;[call.CustomParameter][19]>** The custom parameters set for the call.
--   `startTime` **[number][11]** The start time of the call in milliseconds since the epoch.
--   `endTime` **[number][11]?** The end time of the call in milliseconds since the epoch.
+-   `camera` **[Array][12]&lt;[call.DeviceInfo][20]>** A list of camera device information.
+-   `microphone` **[Array][12]&lt;[call.DeviceInfo][20]>** A list of microphone device information.
+-   `speaker` **[Array][12]&lt;[call.DeviceInfo][20]>** A list of speaker device information.
+
+### TrackObject
+
+A Track is a stream of audio or video media from a single source.
+Tracks can be retrieved using the Media module's `getTrackById` API and manipulated with other functions of the Media module.
+
+Type: [Object][6]
+
+**Properties**
+
+-   `containers` **[Array][12]&lt;[string][7]>** The list of CSS selectors that were used to render this Track.
+-   `disabled` **[boolean][10]** Indicator of whether this Track is disabled or not. If disabled, it cannot be re-enabled.
+-   `id` **[string][7]** The ID of the Track.
+-   `kind` **[string][7]** The kind of Track this is (audio, video).
+-   `label` **[string][7]** The label of the device this Track uses.
+-   `muted` **[boolean][10]** Indicator on whether this Track is muted or not.
+-   `state` **[string][7]** The state of this Track. Can be 'live' or 'ended'.
+-   `streamId` **[string][7]** The ID of the Media Stream that includes this Track.
+
+### MediaObject
+
+The state representation of a Media object.
+Media is a collection of Track objects.
+
+Type: [Object][6]
+
+**Properties**
+
+-   `id` **[string][7]** The ID of the Media object.
+-   `local` **[boolean][10]** Indicator on whether this media is local or remote.
+-   `tracks` **[Array][12]&lt;[call.TrackObject][21]>** A list of Track objects that are contained in this Media object.
+
+### SdpHandlerFunction
+
+The form of an SDP handler function and the expected arguments that it receives.
+
+Type: [Function][14]
+
+**Parameters**
+
+-   `newSdp` **[Object][6]** The SDP so far (could have been modified by previous handlers).
+-   `info` **[call.SdpHandlerInfo][22]** Additional information that might be useful when making SDP modifications.
+-   `originalSdp` **[Object][6]** The SDP in its initial state.
+
+Returns **[Object][6]** The resulting modified SDP based on the changes made by this function.
+
+### SdpHandlerInfo
+
+Type: [Object][6]
+
+**Properties**
+
+-   `type` **RTCSdpType** The session description's type.
+-   `endpoint` **[string][7]** Which end of the connection created the SDP.
+
+### DeviceInfo
+
+Contains information about a device.
+
+Type: [Object][6]
+
+**Properties**
+
+-   `deviceId` **[string][7]** The ID of the device.
+-   `groupId` **[string][7]** The group ID of the device. Devices that share a `groupId` belong to the same physical device.
+-   `kind` **[string][7]** The type of the device (audioinput, audiooutput, videoinput).
+-   `label` **[string][7]** The name of the device.
+
+### BandwidthControls
+
+The BandwidthControls type defines the format for configuring media and/or track bandwidth options.
+BandwidthControls only affect received remote tracks of the specified type.
+
+Type: [Object][6]
+
+**Properties**
+
+-   `audio` **[number][11]?** The desired bandwidth bitrate in kilobits per second for received remote audio.
+-   `video` **[number][11]?** The desired bandwidth bitrate in kilobits per second for received remote video.
+
+**Examples**
+
+```javascript
+// Specify received remote video bandwidth limits when making a call.
+client.call.make(destination, mediaConstraints,
+ {
+   bandwidth: {
+     video: 5
+   }
+ }
+)
+```
 
 ### MediaConstraint
 
@@ -392,109 +471,30 @@ client.call.make(destination, {
 })
 ```
 
-### BandwidthControls
+### CallObject
 
-The BandwidthControls type defines the format for configuring media and/or track bandwidth options.
-BandwidthControls only affect received remote tracks of the specified type.
+Information about a Call.
 
-Type: [Object][6]
-
-**Properties**
-
--   `audio` **[number][11]?** The desired bandwidth bitrate in kilobits per second for received remote audio.
--   `video` **[number][11]?** The desired bandwidth bitrate in kilobits per second for received remote video.
-
-**Examples**
-
-```javascript
-// Specify received remote video bandwidth limits when making a call.
-client.call.make(destination, mediaConstraints,
- {
-   bandwidth: {
-     video: 5
-   }
- }
-)
-```
-
-### SdpHandlerInfo
+Can be retrieved using the [call.getAll][23] or [call.getById][24] APIs.
 
 Type: [Object][6]
 
 **Properties**
 
--   `type` **RTCSdpType** The session description's type.
--   `endpoint` **[string][7]** Which end of the connection created the SDP.
-
-### SdpHandlerFunction
-
-The form of an SDP handler function and the expected arguments that it receives.
-
-Type: [Function][14]
-
-**Parameters**
-
--   `newSdp` **[Object][6]** The SDP so far (could have been modified by previous handlers).
--   `info` **[call.SdpHandlerInfo][24]** Additional information that might be useful when making SDP modifications.
--   `originalSdp` **[Object][6]** The SDP in its initial state.
-
-Returns **[Object][6]** The resulting modified SDP based on the changes made by this function.
-
-### MediaObject
-
-The state representation of a Media object.
-Media is a collection of Track objects.
-
-Type: [Object][6]
-
-**Properties**
-
--   `id` **[string][7]** The ID of the Media object.
--   `local` **[boolean][10]** Indicator on whether this media is local or remote.
--   `tracks` **[Array][12]&lt;[call.TrackObject][25]>** A list of Track objects that are contained in this Media object.
-
-### TrackObject
-
-A Track is a stream of audio or video media from a single source.
-Tracks can be retrieved using the Media module's `getTrackById` API and manipulated with other functions of the Media module.
-
-Type: [Object][6]
-
-**Properties**
-
--   `containers` **[Array][12]&lt;[string][7]>** The list of CSS selectors that were used to render this Track.
--   `disabled` **[boolean][10]** Indicator of whether this Track is disabled or not. If disabled, it cannot be re-enabled.
--   `id` **[string][7]** The ID of the Track.
--   `kind` **[string][7]** The kind of Track this is (audio, video).
--   `label` **[string][7]** The label of the device this Track uses.
--   `muted` **[boolean][10]** Indicator on whether this Track is muted or not.
--   `state` **[string][7]** The state of this Track. Can be 'live' or 'ended'.
--   `streamId` **[string][7]** The ID of the Media Stream that includes this Track.
-
-### DevicesObject
-
-A collection of media devices and their information.
-
-Type: [Object][6]
-
-**Properties**
-
--   `camera` **[Array][12]&lt;[call.DeviceInfo][26]>** A list of camera device information.
--   `microphone` **[Array][12]&lt;[call.DeviceInfo][26]>** A list of microphone device information.
--   `speaker` **[Array][12]&lt;[call.DeviceInfo][26]>** A list of speaker device information.
-
-### DeviceInfo
-
-Contains information about a device.
-
-Type: [Object][6]
-
-**Properties**
-
--   `deviceId` **[string][7]** The ID of the device.
--   `groupId` **[string][7]** The group ID of the device. Devices that share a `groupId` belong to the same physical device.
--   `kind` **[string][7]** The type of the device (audioinput, audiooutput, videoinput).
--   `label` **[string][7]** The name of the device.
+-   `id` **[string][7]** The ID of the call.
+-   `direction` **[string][7]** The direction in which the call was created. Can be 'outgoing' or 'incoming'.
+-   `state` **[string][7]** The current state of the call. See [call.states][25] for possible states.
+-   `localHold` **[boolean][10]** Indicates whether this call is currently being held locally.
+-   `remoteHold` **[boolean][10]** Indicates whether this call is currently being held remotely.
+-   `localTracks` **[Array][12]&lt;[string][7]>** A list of Track IDs that the call is sending to the remote participant.
+-   `remoteTracks` **[Array][12]&lt;[string][7]>** A list of Track IDs that the call is receiving from the remote participant.
+-   `remoteParticipant` **[Object][6]** Information about the other call participant.
+    -   `remoteParticipant.displayNumber` **[string][7]?** The User ID of the remote participant in the form "username@domain".
+    -   `remoteParticipant.displayName` **[string][7]?** The display name of the remote participant.
+-   `bandwidth` **[call.BandwidthControls][26]** The bandwidth limitations set for the call.
+-   `customParameters` **[Array][12]&lt;[call.CustomParameter][19]>** The custom parameters set for the call.
+-   `startTime` **[number][11]** The start time of the call in milliseconds since the epoch.
+-   `endTime` **[number][11]?** The end time of the call in milliseconds since the epoch.
 
 ### CustomParameter
 
@@ -511,8 +511,8 @@ Custom headers may be received anytime throughout the duration a call. A remote 
  which will contain the custom parameters that were received.
 
 A Call's custom parameters are a property of the Call's [CallObject][32],
- which can be retrieved using the [call.getById][21] or
- [call.getAll][20] APIs.
+ which can be retrieved using the [call.getById][24] or
+ [call.getAll][23] APIs.
 
 Type: [Object][6]
 
@@ -590,8 +590,8 @@ All subsequent call operations will include these custom parameters.
 Therefore, invalid parameters, or parameters not previously configured on the server, will cause subsequent call operations to fail.
 
 A Call's custom parameters are a property of the Call's [CallObject][32],
-   which can be retrieved using the [call.getById][21] or
-   [call.getAll][20] APIs.
+   which can be retrieved using the [call.getById][24] or
+   [call.getAll][23] APIs.
 
 The custom parameters set on a call can be sent directly with the [call.sendCustomParameters][30] API.
 
@@ -609,8 +609,8 @@ Send the custom parameters on an ongoing call to the server. The server may eith
 to another endpoint, depending on how the server is configured.
 
 A Call's custom parameters are a property of the Call's [CallObject][32],
-   which can be retrieved using the [call.getById][21] or
-   [call.getAll][20] APIs.
+   which can be retrieved using the [call.getById][24] or
+   [call.getAll][23] APIs.
 
 To change or remove the custom parameters on a call, use the [call.setCustomParameters][29] API.
 
@@ -696,7 +696,7 @@ The SDK will emit a [call:newTrack][38] event
         -   `media.screenOptions.width` **[call.MediaConstraint][18]?** The width of the screenShare.
         -   `media.screenOptions.frameRate` **[call.MediaConstraint][18]?** The frame rate of the screenShare.
 -   `options` **[Object][6]?**  (optional, default `{}`)
-    -   `options.bandwidth` **[call.BandwidthControls][23]?** Options for configuring media's bandwidth.
+    -   `options.bandwidth` **[call.BandwidthControls][26]?** Options for configuring media's bandwidth.
 
 ### removeMedia
 
@@ -714,7 +714,7 @@ The SDK will emit a [call:trackEnded][37]
 -   `callId` **[string][7]** The ID of the call to remove media from.
 -   `tracks` **[Array][12]** A list of track IDs to remove.
 -   `options` **[Object][6]?**  (optional, default `{}`)
-    -   `options.bandwidth` **[call.BandwidthControls][23]?** Options for configuring media's bandwidth.
+    -   `options.bandwidth` **[call.BandwidthControls][26]?** Options for configuring media's bandwidth.
 
 ### startVideo
 
@@ -793,30 +793,6 @@ const media = {
 client.call.addMedia(callId, media)
 ```
 
-### sendDTMF
-
-Send DTMF tones to a call's audio.
-
-The provided tone can either be a single DTMF tone (eg. '1') or a
-   sequence of DTMF tones (eg. '123') which will be played one after the
-   other.
-
-The specified call must be either in Connected, Ringing, or Early Media
-   state, otherwise invoking this API will have no effect.
-
-The tones will be sent as out-of-band tones if supported by the call,
-   otherwise they will be added in-band to the call's audio.
-
-The progress of the operation will be tracked via the
-   [call:operation][34] event.
-
-**Parameters**
-
--   `callId` **[string][7]** ID of the call being acted on.
--   `tone` **[string][7]** DTMF tone(s) to send. Valid chracters are ['0','1','2','3','4','5','6','7','8','9','#','*' and ','].
--   `duration` **[number][11]** The amount of time, in milliseconds, that each DTMF tone should last. (optional, default `100`)
--   `intertoneGap` **[number][11]** The length of time, in milliseconds, to wait between tones. (optional, default `70`)
-
 ### stopScreenshare
 
 Removes local screenshare from an ongoing Call, stopping it from being
@@ -856,6 +832,30 @@ const screenTrack = videoTracks[0]
 // Remove screen from the call.
 client.call.removeMedia(callId, [ screenTrack ])
 ```
+
+### sendDTMF
+
+Send DTMF tones to a call's audio.
+
+The provided tone can either be a single DTMF tone (eg. '1') or a
+   sequence of DTMF tones (eg. '123') which will be played one after the
+   other.
+
+The specified call must be either in Connected, Ringing, or Early Media
+   state, otherwise invoking this API will have no effect.
+
+The tones will be sent as out-of-band tones if supported by the call,
+   otherwise they will be added in-band to the call's audio.
+
+The progress of the operation will be tracked via the
+   [call:operation][34] event.
+
+**Parameters**
+
+-   `callId` **[string][7]** ID of the call being acted on.
+-   `tone` **[string][7]** DTMF tone(s) to send. Valid chracters are ['0','1','2','3','4','5','6','7','8','9','#','*' and ','].
+-   `duration` **[number][11]** The amount of time, in milliseconds, that each DTMF tone should last. (optional, default `100`)
+-   `intertoneGap` **[number][11]** The length of time, in milliseconds, to wait between tones. (optional, default `70`)
 
 ### getStats
 
@@ -1177,7 +1177,7 @@ Retrieve an available Track object with a specific Track ID.
 
 -   `trackId` **[string][7]** The ID of the Track to retrieve.
 
-Returns **[call.TrackObject][25]** A Track object.
+Returns **[call.TrackObject][21]** A Track object.
 
 ### renderTracks
 
@@ -1375,19 +1375,19 @@ Returns **[call.SdpHandlerFunction][15]** The resulting SDP handler that will re
 
 [19]: #callcustomparameter
 
-[20]: #callgetall
+[20]: #calldeviceinfo
 
-[21]: #callgetbyid
+[21]: #calltrackobject
 
-[22]: call.states
+[22]: #callsdphandlerinfo
 
-[23]: #callbandwidthcontrols
+[23]: #callgetall
 
-[24]: #callsdphandlerinfo
+[24]: #callgetbyid
 
-[25]: #calltrackobject
+[25]: call.states
 
-[26]: #calldeviceinfo
+[26]: #callbandwidthcontrols
 
 [27]: call.make
 
