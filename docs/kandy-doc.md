@@ -406,19 +406,6 @@ client.call.make(destination, mediaConstraints,
 )
 ```
 
-### DeviceInfo
-
-Contains information about a device.
-
-Type: [Object][6]
-
-**Properties**
-
--   `deviceId` **[string][7]** The ID of the device.
--   `groupId` **[string][7]** The group ID of the device. Devices that share a `groupId` belong to the same physical device.
--   `kind` **[string][7]** The type of the device (audioinput, audiooutput, videoinput).
--   `label` **[string][7]** The name of the device.
-
 ### MediaConstraint
 
 The MediaConstraint type defines the format for configuring media options.
@@ -453,21 +440,46 @@ client.call.make(destination, {
 })
 ```
 
+### DevicesObject
+
+A collection of media devices and their information.
+
+Type: [Object][6]
+
+**Properties**
+
+-   `camera` **[Array][12]&lt;[call.DeviceInfo][25]>** A list of camera device information.
+-   `microphone` **[Array][12]&lt;[call.DeviceInfo][25]>** A list of microphone device information.
+-   `speaker` **[Array][12]&lt;[call.DeviceInfo][25]>** A list of speaker device information.
+
+### DeviceInfo
+
+Contains information about a device.
+
+Type: [Object][6]
+
+**Properties**
+
+-   `deviceId` **[string][7]** The ID of the device.
+-   `groupId` **[string][7]** The group ID of the device. Devices that share a `groupId` belong to the same physical device.
+-   `kind` **[string][7]** The type of the device (audioinput, audiooutput, videoinput).
+-   `label` **[string][7]** The name of the device.
+
 ### CustomParameter
 
 Custom SIP headers can be used to convey additional information to a SIP endpoint.
 
 These headers must be configured on the server prior to making a request, otherwise the request will fail when trying to set the headers.
 
-These headers can be specified with the [call.make][25] and [call.answer][26] APIs.
-They can also be set on a call using the [call.setCustomParameters][27], and sent using the [call.sendCustomParameters][28] API.
+These headers can be specified with the [call.make][26] and [call.answer][27] APIs.
+They can also be set on a call using the [call.setCustomParameters][28], and sent using the [call.sendCustomParameters][29] API.
 
 Custom headers may be received anytime throughout the duration a call. A remote endpoint may send custom headers when starting a call,
  answering a call, or during call updates such as hold/unhold and addition/removal of media in the call.
- When these custom headers are received, the SDK will emit a [call:customParameters][29] event
+ When these custom headers are received, the SDK will emit a [call:customParameters][30] event
  which will contain the custom parameters that were received.
 
-A Call's custom parameters are a property of the Call's [CallObject][30],
+A Call's custom parameters are a property of the Call's [CallObject][31],
  which can be retrieved using the [call.getById][21] or
  [call.getAll][20] APIs.
 
@@ -493,18 +505,6 @@ client.call.make(destination, mediaConstraints,
  }
 )
 ```
-
-### DevicesObject
-
-A collection of media devices and their information.
-
-Type: [Object][6]
-
-**Properties**
-
--   `camera` **[Array][12]&lt;[call.DeviceInfo][31]>** A list of camera device information.
--   `microphone` **[Array][12]&lt;[call.DeviceInfo][31]>** A list of microphone device information.
--   `speaker` **[Array][12]&lt;[call.DeviceInfo][31]>** A list of speaker device information.
 
 ### TrackObject
 
@@ -589,11 +589,11 @@ The specified parameters will be saved as part of the call's information through
 All subsequent call operations will include these custom parameters.
 Therefore, invalid parameters, or parameters not previously configured on the server, will cause subsequent call operations to fail.
 
-A Call's custom parameters are a property of the Call's [CallObject][30],
+A Call's custom parameters are a property of the Call's [CallObject][31],
    which can be retrieved using the [call.getById][21] or
    [call.getAll][20] APIs.
 
-The custom parameters set on a call can be sent directly with the [call.sendCustomParameters][28] API.
+The custom parameters set on a call can be sent directly with the [call.sendCustomParameters][29] API.
 
 Custom parameters can be removed from a call's information by setting them as undefined (e.g., `call.setCustomParameters(callId)`).
 Subsequent call operations will no longer send custom parameters.
@@ -608,11 +608,11 @@ Subsequent call operations will no longer send custom parameters.
 Send the custom parameters on an ongoing call to the server. The server may either consume the headers or relay them
 to another endpoint, depending on how the server is configured.
 
-A Call's custom parameters are a property of the Call's [CallObject][30],
+A Call's custom parameters are a property of the Call's [CallObject][31],
    which can be retrieved using the [call.getById][21] or
    [call.getAll][20] APIs.
 
-To change or remove the custom parameters on a call, use the [call.setCustomParameters][27] API.
+To change or remove the custom parameters on a call, use the [call.setCustomParameters][28] API.
 
 **Parameters**
 
@@ -761,30 +761,6 @@ The SDK will emit a [call:trackEnded][37]
 
 -   `callId` **[string][7]** ID of the call being acted on.
 
-### sendDTMF
-
-Send DTMF tones to a call's audio.
-
-The provided tone can either be a single DTMF tone (eg. '1') or a
-   sequence of DTMF tones (eg. '123') which will be played one after the
-   other.
-
-The specified call must be either in Connected, Ringing, or Early Media
-   state, otherwise invoking this API will have no effect.
-
-The tones will be sent as out-of-band tones if supported by the call,
-   otherwise they will be added in-band to the call's audio.
-
-The progress of the operation will be tracked via the
-   [call:operation][34] event.
-
-**Parameters**
-
--   `callId` **[string][7]** ID of the call being acted on.
--   `tone` **[string][7]** DTMF tone(s) to send. Valid chracters are ['0','1','2','3','4','5','6','7','8','9','#','*' and ','].
--   `duration` **[number][11]** The amount of time, in milliseconds, that each DTMF tone should last. (optional, default `100`)
--   `intertoneGap` **[number][11]** The length of time, in milliseconds, to wait between tones. (optional, default `70`)
-
 ### stopScreenshare
 
 Removes local screenshare from an ongoing Call, stopping it from being
@@ -824,6 +800,30 @@ const screenTrack = videoTracks[0]
 // Remove screen from the call.
 client.call.removeMedia(callId, [ screenTrack ])
 ```
+
+### sendDTMF
+
+Send DTMF tones to a call's audio.
+
+The provided tone can either be a single DTMF tone (eg. '1') or a
+   sequence of DTMF tones (eg. '123') which will be played one after the
+   other.
+
+The specified call must be either in Connected, Ringing, or Early Media
+   state, otherwise invoking this API will have no effect.
+
+The tones will be sent as out-of-band tones if supported by the call,
+   otherwise they will be added in-band to the call's audio.
+
+The progress of the operation will be tracked via the
+   [call:operation][34] event.
+
+**Parameters**
+
+-   `callId` **[string][7]** ID of the call being acted on.
+-   `tone` **[string][7]** DTMF tone(s) to send. Valid chracters are ['0','1','2','3','4','5','6','7','8','9','#','*' and ','].
+-   `duration` **[number][11]** The amount of time, in milliseconds, that each DTMF tone should last. (optional, default `100`)
+-   `intertoneGap` **[number][11]** The length of time, in milliseconds, to wait between tones. (optional, default `70`)
 
 ### startScreenshare
 
@@ -929,18 +929,6 @@ client.call.replaceTrack(callId, videoTrack.id, {
 })
 ```
 
-### setDefaultDevices
-
-The `setDefaultDevices` API from previous SDK releases (3.X) has been
-   deprecated in the latest releases (4.X+). The SDK no longer keeps
-   track of "default devices" on behalf of the application.
-
-The devices used for a call can be selected as part of the APIs for
-   starting the call. Microphone and/or camera can be chosen in the
-   [call.make][25] and [call.answer][26] APIs, and speaker can be
-   chosen when the audio track is rendered with the
-   [media.renderTracks][43] API.
-
 ### changeSpeaker
 
 Changes the speaker used for a Call's audio output. Supported on
@@ -954,8 +942,8 @@ The latest SDK release (v4.X+) has not yet implemented this API in the
 The same behaviour as the `changeSpeaker` API can be implemented by
    re-rendering the Call's audio track.  A speaker can be selected when
    rendering an audio track, so changing a speaker can be simulated
-   by unrendering the track with [media.removeTracks][44], then
-   re-rendering it with a new speaker with [media.renderTracks][43].
+   by unrendering the track with [media.removeTracks][43], then
+   re-rendering it with a new speaker with [media.renderTracks][44].
 
 **Examples**
 
@@ -1014,6 +1002,18 @@ const media = {
 // Change the call's camera by replacing the video track.
 client.call.replaceTrack(callId, videoTrack, media)
 ```
+
+### setDefaultDevices
+
+The `setDefaultDevices` API from previous SDK releases (3.X) has been
+   deprecated in the latest releases (4.X+). The SDK no longer keeps
+   track of "default devices" on behalf of the application.
+
+The devices used for a call can be selected as part of the APIs for
+   starting the call. Microphone and/or camera can be chosen in the
+   [call.make][26] and [call.answer][27] APIs, and speaker can be
+   chosen when the audio track is rendered with the
+   [media.renderTracks][44] API.
 
 ## connection
 
@@ -1385,19 +1385,19 @@ Returns **[call.SdpHandlerFunction][15]** The resulting SDP handler that will re
 
 [24]: #callsdphandlerinfo
 
-[25]: call.make
+[25]: #calldeviceinfo
 
-[26]: call.answer
+[26]: call.make
 
-[27]: #callsetcustomparameters
+[27]: call.answer
 
-[28]: #callsendcustomparameters
+[28]: #callsetcustomparameters
 
-[29]: #calleventcallcustomparameters
+[29]: #callsendcustomparameters
 
-[30]: #callcallobject
+[30]: #calleventcallcustomparameters
 
-[31]: #calldeviceinfo
+[31]: #callcallobject
 
 [32]: #calltrackobject
 
@@ -1421,9 +1421,9 @@ Returns **[call.SdpHandlerFunction][15]** The resulting SDP handler that will re
 
 [42]: #calleventcalltrackreplaced
 
-[43]: #mediarendertracks
+[43]: #mediaremovetracks
 
-[44]: #mediaremovetracks
+[44]: #mediarendertracks
 
 [45]: #callreplacetrack
 
