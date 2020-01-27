@@ -1,7 +1,7 @@
 /**
  * Kandy.js
  * kandy.newCallMe.js
- * Version: 4.12.0-beta.278
+ * Version: 4.12.0-beta.279
  */
 (function webpackUniversalModuleDefinition(root, factory) {
 	if(typeof exports === 'object' && typeof module === 'object')
@@ -26179,6 +26179,8 @@ var _noop2 = _interopRequireDefault(_noop);
 
 var _sagas = __webpack_require__("../../packages/kandy/src/auth/callMe/sagas.js");
 
+var _sagas2 = __webpack_require__("../../packages/kandy/src/auth/link/sagas.js");
+
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 /**
@@ -26206,16 +26208,15 @@ function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { de
  * @param  {Object} options Configuration options for authentication. See above.
  * @return {Object} A callMe authentication plugin.
  */
-// Re-use the no-op auth plugin.
 function callMeAuth(options = {}) {
   // Use the no-op auth plugin as a basis.
   let authComponents = (0, _noop2.default)(options);
 
   // Add in the sagas.
-  authComponents.sagas = [_sagas.anonymousConnect, _sagas.anonymousDisconnect];
+  authComponents.sagas = [_sagas.anonymousConnect, _sagas.anonymousDisconnect, _sagas2.extendSubscription];
 
   return authComponents;
-}
+} // Re-use the no-op auth plugin.
 
 /***/ }),
 
@@ -43348,7 +43349,7 @@ const factoryDefaults = {
    */
 };function factory(plugins, options = factoryDefaults) {
   // Log the SDK's version (templated by webpack) on initialization.
-  let version = '4.12.0-beta.278';
+  let version = '4.12.0-beta.279';
   log.info(`SDK version: ${version}`);
 
   var sagas = [];
