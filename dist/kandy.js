@@ -1,7 +1,7 @@
 /**
  * Kandy.js
  * kandy.newCallMe.js
- * Version: 4.12.0-beta.282
+ * Version: 4.12.0-beta.283
  */
 (function webpackUniversalModuleDefinition(root, factory) {
 	if(typeof exports === 'object' && typeof module === 'object')
@@ -42520,7 +42520,9 @@ const authCodes = exports.authCodes = {
 };const callHistoryCodes = exports.callHistoryCodes = {
   UNKNOWN_ERROR: 'callHistory:1',
   BAD_REQUEST: 'callHistory:2',
-  NOT_FOUND: 'callHistory:3'
+  NOT_FOUND: 'callHistory:3',
+  NOT_AUTHENTICATED: 'callHistory:4',
+  FORBIDDEN: 'callHistory:5'
   /**
    * @name clickToCallCodes
    */
@@ -43435,7 +43437,7 @@ const factoryDefaults = {
    */
 };function factory(plugins, options = factoryDefaults) {
   // Log the SDK's version (templated by webpack) on initialization.
-  let version = '4.12.0-beta.282';
+  let version = '4.12.0-beta.283';
   log.info(`SDK version: ${version}`);
 
   var sagas = [];
