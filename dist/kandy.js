@@ -1,7 +1,7 @@
 /**
  * Kandy.js
  * kandy.newCallMe.js
- * Version: 4.12.0-beta.284
+ * Version: 4.12.0-beta.285
  */
 (function webpackUniversalModuleDefinition(root, factory) {
 	if(typeof exports === 'object' && typeof module === 'object')
@@ -28887,6 +28887,7 @@ const SESSION_CREATED = exports.SESSION_CREATED = callPrefix + 'SESSION_CREATED'
 const MAKE_CALL_FINISH = exports.MAKE_CALL_FINISH = callPrefix + 'MAKE_FINISH';
 
 const MAKE_ANONYMOUS_CALL = exports.MAKE_ANONYMOUS_CALL = callPrefix + 'MAKE_ANONYMOUS_CALL';
+const MAKE_ANONYMOUS_CALL_FINISH = exports.MAKE_ANONYMOUS_CALL_FINISH = callPrefix + 'MAKE_ANONYMOUS_CALL_FINISH';
 
 const CALL_INCOMING = exports.CALL_INCOMING = callPrefix + 'INCOMING';
 
@@ -29018,6 +29019,7 @@ exports.sessionCreated = sessionCreated;
 exports.pendingMakeCall = pendingMakeCall;
 exports.makeCallFinish = makeCallFinish;
 exports.makeAnonymousCall = makeAnonymousCall;
+exports.makeAnonymousCallFinish = makeAnonymousCallFinish;
 exports.callIncoming = callIncoming;
 exports.callRinging = callRinging;
 exports.sessionProgress = sessionProgress;
@@ -29146,6 +29148,10 @@ function makeCallFinish(id, params) {
 
 function makeAnonymousCall(id, params) {
   return callActionHelper(actionTypes.MAKE_ANONYMOUS_CALL, id, params);
+}
+
+function makeAnonymousCallFinish(id, params) {
+  return callActionHelper(actionTypes.MAKE_ANONYMOUS_CALL_FINISH, id, params);
 }
 
 function callIncoming(id, params) {
@@ -31725,6 +31731,10 @@ callEvents[webrtcActionTypes.SESSION_TRACK_ENDED] = (action, context) => {
       callId: call.id
     }));
   }
+};
+
+callEvents[actionTypes.MAKE_ANONYMOUS_CALL_FINISH] = (action, context) => {
+  return callEventHandler(eventTypes.CALL_STARTED, action);
 };
 
 exports.default = (0, _extends3.default)({}, callEvents);
@@ -34739,7 +34749,7 @@ const log = (0, _logs.getLogManager)().getLogger('CALL');
 function* makeAnonymousCall(deps, action) {
   const anonUser = action.payload.callOptions.from;
   if (!anonUser) {
-    yield (0, _effects.put)(_actions.callActions.makeCallFinish(action.payload.id, {
+    yield (0, _effects.put)(_actions.callActions.makeAnonymousCallFinish(action.payload.id, {
       error: new _errors2.default({
         code: _errors.callCodes.INVALID_PARAM,
         message: 'callOptions has no `from` property'
@@ -34753,7 +34763,7 @@ function* makeAnonymousCall(deps, action) {
   // If any of these 4 properties exist, then we're attempting a time-based token anonymous call.
   // So if some of them exist and some of them are missing, generate an error informing the user about it.
   if ((realm || accountToken || toToken || fromToken) && (!realm || !accountToken || !toToken || !fromToken)) {
-    yield (0, _effects.put)(_actions.callActions.makeCallFinish(action.payload.id, {
+    yield (0, _effects.put)(_actions.callActions.makeAnonymousCallFinish(action.payload.id, {
       error: new _errors2.default({
         code: _errors.callCodes.INVALID_PARAM,
         message: 'Time-based token anonymous call missing one or more of the following properties: `realm`, `accountToken`, `toToken`, `fromToken`.'
@@ -34792,8 +34802,11 @@ function* makeAnonymousCall(deps, action) {
 
   if (connectResponse.error) {
     // Connection failed.
-    yield (0, _effects.put)(_actions.callActions.makeCallFinish(action.payload.id, {
-      error: connectResponse.payload
+    yield (0, _effects.put)(_actions.callActions.makeAnonymousCallFinish(action.payload.id, {
+      error: new _errors2.default({
+        code: _errors.callCodes.INVALID_PARAM,
+        message: 'Failed to connect to server.'
+      })
     }));
     return;
   }
@@ -43437,7 +43450,7 @@ const factoryDefaults = {
    */
 };function factory(plugins, options = factoryDefaults) {
   // Log the SDK's version (templated by webpack) on initialization.
-  let version = '4.12.0-beta.284';
+  let version = '4.12.0-beta.285';
   log.info(`SDK version: ${version}`);
 
   var sagas = [];
