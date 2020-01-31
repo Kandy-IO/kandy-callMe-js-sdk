@@ -1,7 +1,7 @@
 /**
  * Kandy.js
  * kandy.newCallMe.js
- * Version: 4.11.1
+ * Version: 4.12.0
  */
 (function webpackUniversalModuleDefinition(root, factory) {
 	if(typeof exports === 'object' && typeof module === 'object')
@@ -26179,6 +26179,8 @@ var _noop2 = _interopRequireDefault(_noop);
 
 var _sagas = __webpack_require__("../../packages/kandy/src/auth/callMe/sagas.js");
 
+var _sagas2 = __webpack_require__("../../packages/kandy/src/auth/link/sagas.js");
+
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 /**
@@ -26206,16 +26208,15 @@ function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { de
  * @param  {Object} options Configuration options for authentication. See above.
  * @return {Object} A callMe authentication plugin.
  */
-// Re-use the no-op auth plugin.
 function callMeAuth(options = {}) {
   // Use the no-op auth plugin as a basis.
   let authComponents = (0, _noop2.default)(options);
 
   // Add in the sagas.
-  authComponents.sagas = [_sagas.anonymousConnect, _sagas.anonymousDisconnect];
+  authComponents.sagas = [_sagas.anonymousConnect, _sagas.anonymousDisconnect, _sagas2.extendSubscription];
 
   return authComponents;
-}
+} // Re-use the no-op auth plugin.
 
 /***/ }),
 
@@ -28848,8 +28849,9 @@ function* validateCallState(callId, expected) {
  * However, if only SDES is available, don't disable it.
  * @method sanitizeSdesFromSdp
  * @param {Object} newSdp The sdp so far (could have been modified by previous handlers).
- * @param {RTCSdpType} info Information about the session description.
+ * @param {Object} info Information about the session description.
  * @param {RTCSdpType} info.type The session description's type.
+ * @param {string} info.step The step that will occur after the Pipeline is run.
  * @param {string} info.endpoint Which end of the connection created the SDP.
  * @param {Object} originalSdp The sdp in its initial state.
  * @return {Object} The sanitized sdp with crypto removed (if fingerprint exists)
@@ -28885,6 +28887,7 @@ const SESSION_CREATED = exports.SESSION_CREATED = callPrefix + 'SESSION_CREATED'
 const MAKE_CALL_FINISH = exports.MAKE_CALL_FINISH = callPrefix + 'MAKE_FINISH';
 
 const MAKE_ANONYMOUS_CALL = exports.MAKE_ANONYMOUS_CALL = callPrefix + 'MAKE_ANONYMOUS_CALL';
+const MAKE_ANONYMOUS_CALL_FINISH = exports.MAKE_ANONYMOUS_CALL_FINISH = callPrefix + 'MAKE_ANONYMOUS_CALL_FINISH';
 
 const CALL_INCOMING = exports.CALL_INCOMING = callPrefix + 'INCOMING';
 
@@ -28964,6 +28967,11 @@ const REPLACE_TRACK = exports.REPLACE_TRACK = callPrefix + 'REPLACE_TRACK';
 const REPLACE_TRACK_FINISH = exports.REPLACE_TRACK_FINISH = callPrefix + 'REPLACE_TRACK_FINISH';
 
 /**
+ * Miscellaneous call actions
+ */
+const CUSTOM_PARAMETERS_RECEIVED = exports.CUSTOM_PARAMETERS_RECEIVED = callPrefix + 'CUSTOM_PARAMETERS_RECEIVED';
+
+/**
  * Remote operation actions.
  */
 const CALL_REMOTE_HOLD_FINISH = exports.CALL_REMOTE_HOLD_FINISH = callPrefix + 'REMOTE_HOLD_FINISH';
@@ -29011,6 +29019,7 @@ exports.sessionCreated = sessionCreated;
 exports.pendingMakeCall = pendingMakeCall;
 exports.makeCallFinish = makeCallFinish;
 exports.makeAnonymousCall = makeAnonymousCall;
+exports.makeAnonymousCallFinish = makeAnonymousCallFinish;
 exports.callIncoming = callIncoming;
 exports.callRinging = callRinging;
 exports.sessionProgress = sessionProgress;
@@ -29032,6 +29041,7 @@ exports.unholdCallFinish = unholdCallFinish;
 exports.setCustomParameters = setCustomParameters;
 exports.sendCustomParameters = sendCustomParameters;
 exports.sendCustomParametersFinish = sendCustomParametersFinish;
+exports.customParametersReceived = customParametersReceived;
 exports.addMedia = addMedia;
 exports.addMediaFinish = addMediaFinish;
 exports.addBasicMedia = addBasicMedia;
@@ -29140,6 +29150,10 @@ function makeAnonymousCall(id, params) {
   return callActionHelper(actionTypes.MAKE_ANONYMOUS_CALL, id, params);
 }
 
+function makeAnonymousCallFinish(id, params) {
+  return callActionHelper(actionTypes.MAKE_ANONYMOUS_CALL_FINISH, id, params);
+}
+
 function callIncoming(id, params) {
   return callActionHelper(actionTypes.CALL_INCOMING, id, params);
 }
@@ -29229,6 +29243,10 @@ function sendCustomParameters(id, options) {
 
 function sendCustomParametersFinish(id, params) {
   return callActionHelper(actionTypes.SEND_CUSTOM_PARAMETERS_FINISH, id, params);
+}
+
+function customParametersReceived(id, params) {
+  return callActionHelper(actionTypes.CUSTOM_PARAMETERS_RECEIVED, id, params);
 }
 
 function addMedia(id, params) {
@@ -29868,7 +29886,8 @@ function callAPI({ dispatch, getState }) {
     },
 
     /**
-     * Send the custom parameters on an ongoing call.
+     * Send the custom parameters on an ongoing call to the server. The server may either consume the headers or relay them
+     * to another endpoint, depending on how the server is configured.
      *
      * A Call's custom parameters are a property of the Call's {@link call.CallObject CallObject},
      *    which can be retrieved using the {@link call.getById} or
@@ -30901,6 +30920,9 @@ function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { de
  * @typedef {Object} SdpHandlerInfo
  * @memberof call
  * @property {RTCSdpType} type The session description's type.
+ * @property {string} step The step that will occur after the SDP Handlers are run.
+ *    Will be either 'set' (the SDP will be set locally) or 'send' (the SDP will
+ *    be sent to the remote endpoint).
  * @property {string} endpoint Which end of the connection created the SDP.
  */
 
@@ -30979,6 +31001,11 @@ function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { de
  *
  * These headers can be specified with the {@link call.make} and {@link call.answer} APIs.
  * They can also be set on a call using the {@link call.setCustomParameters}, and sent using the {@link call.sendCustomParameters} API.
+ *
+ * Custom headers may be received anytime throughout the duration a call. A remote endpoint may send custom headers when starting a call,
+ *  answering a call, or during call updates such as hold/unhold and addition/removal of media in the call.
+ *  When these custom headers are received, the SDK will emit a {@link call.event:call:customParameters call:customParameters} event
+ *  which will contain the custom parameters that were received.
  *
  * A Call's custom parameters are a property of the Call's {@link call.CallObject CallObject},
  *  which can be retrieved using the {@link call.getById} or
@@ -31329,6 +31356,19 @@ const STATS_RECEIVED = exports.STATS_RECEIVED = 'call:statsReceived';
  */
 const CALL_TRACK_REPLACED = exports.CALL_TRACK_REPLACED = 'call:trackReplaced';
 
+/**
+ * Custom Parameters have been received for a Call.
+ *
+ * Please refer to {@link call.CustomParameter CustomParameter} for information on when this event may be emitted.
+ * @public
+ * @memberof call
+ * @event call:customParameters
+ * @param {Object} params
+ * @param {string} params.callId The ID of the Call in which custom parameters were received.
+ * @param {Array<call.CustomParameter>} params.customParameters The custom parameters received.
+ */
+const CUSTOM_PARAMETERS = exports.CUSTOM_PARAMETERS = 'call:customParameters';
+
 /***/ }),
 
 /***/ "../../packages/kandy/src/call/interfaceNew/events.js":
@@ -31648,6 +31688,12 @@ callEvents[actionTypes.SEND_CUSTOM_PARAMETERS_FINISH] = (action, params) => {
 };
 
 // other actions
+callEvents[actionTypes.CUSTOM_PARAMETERS_RECEIVED] = action => {
+  return callEventHandler(eventTypes.CUSTOM_PARAMETERS, action, {
+    customParameters: action.payload.customParameters
+  });
+};
+
 callEvents[actionTypes.CALL_INCOMING] = action => {
   return callEventHandler(eventTypes.CALL_INCOMING, action, {
     error: action.payload.error
@@ -31676,7 +31722,7 @@ callEvents[webrtcActionTypes.SESSION_NEW_TRACK] = (action, context) => {
   return null;
 };
 
-callEvents[webrtcActionTypes.SESSION_TRACK_ENDED] = (action, context) => {
+callEvents[webrtcActionTypes.SESSION_TRACK_REMOVED] = (action, context) => {
   const state = context.state;
   const call = (0, _selectors.getCallByWebrtcSessionId)(state, action.payload.id);
 
@@ -31685,6 +31731,10 @@ callEvents[webrtcActionTypes.SESSION_TRACK_ENDED] = (action, context) => {
       callId: call.id
     }));
   }
+};
+
+callEvents[actionTypes.MAKE_ANONYMOUS_CALL_FINISH] = (action, context) => {
+  return callEventHandler(eventTypes.CALL_STARTED, action);
 };
 
 exports.default = (0, _extends3.default)({}, callEvents);
@@ -33086,6 +33136,7 @@ function* updateCallRinging(callInfo) {
 }
 
 /**
+ * Sends the (new?) custom parameters of the call to the webRTC session on the server.
  * @method updateCustomParameters
  * @param {Object} callInfo
  * @param {string} callInfo.wrtcsSessionId    ID that the server uses to identify the session.
@@ -33576,7 +33627,8 @@ function* updateSessionResponse(callInfo) {
   options.body = (0, _stringify2.default)({
     [bodyType]: {
       type: 'respondCallUpdate',
-      sdp: callInfo.answer
+      sdp: callInfo.answer,
+      customParameters: callInfo.customParameters
     }
   });
 
@@ -33941,7 +33993,9 @@ function* incomingCallNotification(deps) {
       remoteName: message.callNotificationParams.callerName,
       remoteNumber: message.callNotificationParams.callerDisplayNumber,
       // Where the call was sent
-      calleeNumber: message.callNotificationParams.calleeDisplayNumber
+      calleeNumber: message.callNotificationParams.calleeDisplayNumber,
+      // Custom Parameters
+      customParameters: message.customParameters
 
       // Pass the incoming call parameters to the Callstack for handling.
     };yield (0, _effects.call)(_notifications.incomingCall, (0, _extends3.default)({}, deps, { requests }), params);
@@ -33979,7 +34033,8 @@ function* sessionProgressNotification(deps) {
       sdp: message.sessionParams.sdp,
       wrtcsSessionId: message.sessionParams.sessionData,
       remoteName: message.callNotificationParams.remoteName,
-      remoteNumber: message.callNotificationParams.remoteDisplayNumber
+      remoteNumber: message.callNotificationParams.remoteDisplayNumber,
+      customParameters: message.customParameters
     };
 
     yield (0, _effects.call)(_notifications.receiveEarlyMedia, deps, params);
@@ -34016,6 +34071,7 @@ function* callStatusNotification(deps) {
     if (eventType === 'callEnd' || eventType === 'sessionComplete') {
       yield (0, _effects.call)(_notifications.callStatusUpdateEnded, deps, params);
     } else if (eventType === 'ringing') {
+      params.customParameters = message.customParameters;
       yield (0, _effects.call)(_notifications.callStatusUpdateRinging, deps, params);
     } else if (eventType === 'sessionFail') {
       yield (0, _effects.call)(_notifications.callStatusUpdateFailed, deps, params);
@@ -34116,10 +34172,11 @@ function* receiveRemoteOffer(deps) {
     const params = (0, _extends3.default)({
       wrtcsSessionId: message.sessionParams.sessionData,
       sdp: message.sessionParams.sdp
-    }, remoteInfo);
+    }, remoteInfo, {
+      customParameters: message.customParameters
 
-    // Pass the call parameters to the Callstack for handling.
-    yield (0, _effects.call)(_notifications.parseCallRequest, (0, _extends3.default)({}, deps, { requests }), params);
+      // Pass the call parameters to the Callstack for handling.
+    });yield (0, _effects.call)(_notifications.parseCallRequest, (0, _extends3.default)({}, deps, { requests }), params);
   }
 
   // take() pattern for "update call w/ offer" notifications.
@@ -34159,10 +34216,12 @@ function* receiveRemoteAnswer(deps) {
       message: message.sessionParams.reasonText,
       code: message.statusCode
 
-    }, remoteInfo);
+    }, remoteInfo, {
 
-    // Pass the call parameters to the Callstack for handling.
-    yield (0, _effects.call)(_notifications.parseCallResponse, (0, _extends3.default)({}, deps, { requests }), params);
+      customParameters: message.customParameters
+
+      // Pass the call parameters to the Callstack for handling.
+    });yield (0, _effects.call)(_notifications.parseCallResponse, (0, _extends3.default)({}, deps, { requests }), params);
   }
 
   // take() pattern for "update call with answer" notifications.
@@ -34690,7 +34749,7 @@ const log = (0, _logs.getLogManager)().getLogger('CALL');
 function* makeAnonymousCall(deps, action) {
   const anonUser = action.payload.callOptions.from;
   if (!anonUser) {
-    yield (0, _effects.put)(_actions.callActions.makeCallFinish(action.payload.id, {
+    yield (0, _effects.put)(_actions.callActions.makeAnonymousCallFinish(action.payload.id, {
       error: new _errors2.default({
         code: _errors.callCodes.INVALID_PARAM,
         message: 'callOptions has no `from` property'
@@ -34704,7 +34763,7 @@ function* makeAnonymousCall(deps, action) {
   // If any of these 4 properties exist, then we're attempting a time-based token anonymous call.
   // So if some of them exist and some of them are missing, generate an error informing the user about it.
   if ((realm || accountToken || toToken || fromToken) && (!realm || !accountToken || !toToken || !fromToken)) {
-    yield (0, _effects.put)(_actions.callActions.makeCallFinish(action.payload.id, {
+    yield (0, _effects.put)(_actions.callActions.makeAnonymousCallFinish(action.payload.id, {
       error: new _errors2.default({
         code: _errors.callCodes.INVALID_PARAM,
         message: 'Time-based token anonymous call missing one or more of the following properties: `realm`, `accountToken`, `toToken`, `fromToken`.'
@@ -34743,8 +34802,11 @@ function* makeAnonymousCall(deps, action) {
 
   if (connectResponse.error) {
     // Connection failed.
-    yield (0, _effects.put)(_actions.callActions.makeCallFinish(action.payload.id, {
-      error: connectResponse.payload
+    yield (0, _effects.put)(_actions.callActions.makeAnonymousCallFinish(action.payload.id, {
+      error: new _errors2.default({
+        code: _errors.callCodes.INVALID_PARAM,
+        message: 'Failed to connect to server.'
+      })
     }));
     return;
   }
@@ -37919,7 +37981,7 @@ const log = (0, _logs.getLogManager)().getLogger('CALL');
 // Call plugin.
 function* incomingCall(deps, params) {
   const requests = deps.requests;
-  const { sdp, wrtcsSessionId, remoteNumber, remoteName, calleeNumber } = params;
+  const { sdp, wrtcsSessionId, remoteNumber, remoteName, calleeNumber, customParameters } = params;
 
   const callId = yield (0, _effects.call)(_v2.default);
 
@@ -37942,6 +38004,13 @@ function* incomingCall(deps, params) {
     isSlowStart: !sdp
   }));
 
+  // Dispatch a custom parameters received action/event if any custom parameters were received as part of the notification
+  if (customParameters) {
+    yield (0, _effects.put)(_actions.callActions.customParametersReceived(callId, {
+      customParameters
+    }));
+  }
+
   /**
    * An incoming call may or may not have an SDP offer associated with it.
    * If it has an SDP, then it is a "regular" call scenario and can be handled
@@ -37953,15 +38022,19 @@ function* incomingCall(deps, params) {
   if (sdp) {
     // Regular call.
     const turnInfo = yield (0, _effects.select)(_selectors.getTurnInfo);
-    const { trickleIceMode, sdpSemantics } = yield (0, _effects.select)(_selectors.getOptions);
+    const callOptions = yield (0, _effects.select)(_selectors.getOptions);
 
     // Since we have the remote offer SDP, we can setup a webRTC session.
     yield (0, _effects.call)(_establish.setupIncomingCall, deps, {
       offer: {
-        sdp
+        sdp,
+        type: 'offer'
       },
-      trickleIceMode,
-      sdpSemantics,
+      trickleIceMode: callOptions.sdpSemantics,
+      sdpSemantics: callOptions.sdpSemantics,
+      iceCollectionDelay: callOptions.iceCollectionDelay,
+      iceCollectionCheck: callOptions.iceCollectionCheck,
+      maxIceTimeout: callOptions.maxIceTimeout,
       turnInfo,
       callId
     });
@@ -38014,7 +38087,7 @@ function* incomingCall(deps, params) {
  * @param {string} params.remoteNumber Number of the remote participant.
  */
 function* parseCallRequest(deps, params) {
-  const { wrtcsSessionId, sdp, remoteName, remoteNumber } = params;
+  const { wrtcsSessionId, sdp, remoteName, remoteNumber, customParameters } = params;
   const targetCall = yield (0, _effects.select)(_selectors.getCallByWrtcsSessionId, wrtcsSessionId);
 
   if (!targetCall) {
@@ -38030,6 +38103,13 @@ function* parseCallRequest(deps, params) {
   // TODO: Make sure the call is able to receive a `respondCallRequest`
   //    notification (ie. has no pending operation).
   log.info(`Received update request ${sdp ? 'with' : 'without'} SDP for call: ${targetCall.id}. Processing.`);
+
+  // Dispatch a custom parameters received action/event if any custom parameters were received as part of the notification
+  if (customParameters) {
+    yield (0, _effects.put)(_actions.callActions.customParametersReceived(targetCall.id, {
+      customParameters
+    }));
+  }
 
   /**
    * How the request should be handled depends on whether it includes an SDP.
@@ -38069,7 +38149,7 @@ function* parseCallRequest(deps, params) {
  * @param {string} params.remoteNumber Number of the remote participant.
  */
 function* parseCallResponse(deps, params) {
-  const { wrtcsSessionId, sdp } = params;
+  const { wrtcsSessionId, sdp, customParameters } = params;
   const targetCall = yield (0, _effects.select)(_selectors.getCallByWrtcsSessionId, wrtcsSessionId);
 
   if (!targetCall) {
@@ -38087,6 +38167,13 @@ function* parseCallResponse(deps, params) {
   // TODO: Make sure the call is expecting a `respondCallUpdate` notification.
   //    ie. has a pending operation.
   log.info(`Received response for call: ${targetCall.id}. Processing.`);
+
+  // Dispatch a custom parameters received action/event if any custom parameters were received as part of the notification
+  if (customParameters) {
+    yield (0, _effects.put)(_actions.callActions.customParametersReceived(targetCall.id, {
+      customParameters
+    }));
+  }
 
   /**
    * Check that the notification was not an "error" notification.
@@ -38253,7 +38340,7 @@ function* callStatusUpdateEnded(deps, params) {
  * @param {string}   params.remoteNumber Number of the remote participant.
  */
 function* callStatusUpdateRinging(deps, params) {
-  const { wrtcsSessionId } = params;
+  const { wrtcsSessionId, customParameters } = params;
 
   const calls = yield (0, _effects.select)(_selectors.getCalls);
   // TODO: `find` --> IE11 support.
@@ -38269,6 +38356,13 @@ function* callStatusUpdateRinging(deps, params) {
   if (stateError) {
     log.debug(`Invalid call state: ${stateError.message}`);
     return;
+  }
+
+  // Dispatch a custom parameters received action/event if any custom parameters were received as part of the notification
+  if (customParameters) {
+    yield (0, _effects.put)(_actions.callActions.customParametersReceived(currentCall.id, {
+      customParameters
+    }));
   }
 
   yield (0, _effects.put)(_actions.callActions.callRinging(currentCall.id, {
@@ -38398,7 +38492,7 @@ function* callCancelled(deps, params) {
  * @param {Object} params       Parameters describing the notification.
  */
 function* receiveEarlyMedia(deps, params) {
-  const { wrtcsSessionId } = params;
+  const { wrtcsSessionId, customParameters } = params;
   const { webRTC, sdpHandlers } = deps;
 
   /**
@@ -38420,12 +38514,21 @@ function* receiveEarlyMedia(deps, params) {
     return;
   }
 
+  // Dispatch a custom parameters received action/event if any custom parameters were received as part of the notification
+  if (customParameters) {
+    yield (0, _effects.put)(_actions.callActions.customParametersReceived(currentCall.id, {
+      customParameters
+    }));
+  }
+
   try {
     /*
      * Run the remote SDP pranswer through any SDP handlers provided, then set it
      *    as the Session's remote description.
+     * This is the "pre set remote" stage.
      */
     const sdp = yield (0, _effects.call)(_pipeline2.default, sdpHandlers, params.sdp, {
+      step: 'set',
       type: 'pranswer',
       endpoint: 'remote'
     });
@@ -38858,6 +38961,8 @@ Object.defineProperty(exports, "__esModule", {
 exports.default = getOperation;
 exports.wasHold = wasHold;
 exports.wasUnhold = wasUnhold;
+exports.was3xHold = was3xHold;
+exports.was3xUnhold = was3xUnhold;
 exports.wasAddMedia = wasAddMedia;
 exports.wasRemoveMedia = wasRemoveMedia;
 exports.wasStartMoh = wasStartMoh;
@@ -38882,9 +38987,9 @@ function getOperation(mediaDiff) {
   // TODO: Make this more efficient?
   // TODO: These MoH checks should take into account current call state.
   //    Start/Stop MoH should only be possible in specific states.
-  if (wasHold(mediaDiff)) {
+  if (wasHold(mediaDiff) || was3xHold(mediaDiff)) {
     return _constants.OPERATIONS.HOLD;
-  } else if (wasUnhold(mediaDiff)) {
+  } else if (wasUnhold(mediaDiff) || was3xUnhold(mediaDiff)) {
     return _constants.OPERATIONS.UNHOLD;
   } else if (wasStartMoh(mediaDiff)) {
     // Check 'start MoH' before 'add media' because 'start MoH' is a special
@@ -39038,6 +39143,101 @@ function wasUnhold(mediaDiff) {
   });
 
   return startedFlowing && sameMedia && noUnchangedSend && didChange && onlyStartChanges;
+}
+
+/**
+ * A "3.X hold" opeation is when a v3.X SDK performs hold. This is for interop.
+ *
+ * This operation is the same as a "regular" hold, except that media changes to
+ *    sendonly instead of inactive.
+ *
+ * In terms of SDP changes, it is defined as:
+ *    1) At least one media was 'flowing' before the SDP change.
+ *    2) All changed media is not 'sendonly'.
+ *        ie. is being "v3.X held"
+ *    3) No media was added.
+ *    4) No media was removed.
+ *    5) All media that is unchanged is not sending/receiving.
+ *        ie. was already "held".
+ *
+ * @method was3xUnhold
+ * @param  {MediaDiff} mediaDiff Media differences described between two SDPs.
+ * @return {boolean}
+ */
+function was3xHold(mediaDiff) {
+  const { added, removed, changed, unchanged } = mediaDiff;
+
+  /*
+   * 1) Some media was flowing before the change.
+   * 2) All changed media is now "sendonly".
+   */
+  const wasFlowing = hadMediaFlowing(mediaDiff);
+  const allSendOnly = changed.every(({ media, changes }) => {
+    return changes.sending === _compareMedia.MEDIA_TRANSITIONS.SAME && changes.receiving === _compareMedia.MEDIA_TRANSITIONS.STOP;
+  });
+
+  /*
+   * 3) & 4) No media was added or removed.
+   */
+  const sameMedia = added.length === 0 && removed.length === 0;
+
+  /*
+   * 5) For all media that was not changed,
+   *    no media is being sent/received.
+   */
+  const noUnchangedSend = unchanged.every(media => {
+    return !media.willSend && !media.willReceive;
+  });
+
+  return wasFlowing && allSendOnly && sameMedia && noUnchangedSend;
+}
+
+/**
+ * A "3.X unhold" opeation is when a v3.X SDK performs unhold. This is for
+ *    interop.
+ *
+ * This operation is the same as a "regular" unhold, except that media changes
+ *    from sendonly instead of inactive.
+ *
+ * In terms of SDP changes, it is defined as:
+ *    1) Some media is flowing afterwards.
+ *    2) All media that changed was started receiving.
+ *        ie. is being "3.X unheld"
+ *    3) No media was added.
+ *    4) No media was removed.
+ *    5) All media that is unchanged is not sending/receiving.
+ *        ie. was (and still is) "held"
+ *
+ * @method was3xUnhold
+ * @param  {MediaDiff} mediaDiff Media differences described between two SDPs.
+ * @return {boolean}
+ */
+function was3xUnhold(mediaDiff) {
+  const { added, removed, changed, unchanged } = mediaDiff;
+
+  /*
+   * 1) Some media was flowing before the change.
+   * 2) All changed media is now went from "sendonly" to "sendrecv".
+   */
+  const isFlowing = hasMediaFlowing(mediaDiff);
+  const allSending = changed.every(({ media, changes }) => {
+    return changes.sending === _compareMedia.MEDIA_TRANSITIONS.SAME && changes.receiving === _compareMedia.MEDIA_TRANSITIONS.START;
+  });
+
+  /*
+   * 3) & 4) No media was added or removed.
+   */
+  const sameMedia = added.length === 0 && removed.length === 0;
+
+  /*
+   * 5) For all media that was not changed,
+   *    no media is being sent/received.
+   */
+  const noUnchangedSend = unchanged.every(media => {
+    return !media.willSend && !media.willReceive;
+  });
+
+  return isFlowing && allSending && sameMedia && noUnchangedSend;
 }
 
 /**
@@ -39421,8 +39621,11 @@ function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { de
  * @method sdpPipeline
  * @param  {Array}      handlers       List of functions that transform the SDP.
  * @param  {string}     sdp            The session description.
- * @param  {RTCSdpType} info           Information about the session description.
+ * @param  {Object}     info           Information about the session description.
  * @param  {RTCSdpType} info.type      The session description's type.
+ * @param  {string}     info.step      The step that will occur after the Pipeline is run.
+ *    Will be either 'set' (the SDP will be set locally) or 'send' (the SDP will be sent
+ *    to the remote endpoint).
  * @param  {string}     info.endpoint  Which end of the connection created the SDP.
  * @param  {boolean}    info.isInitiator Whether this session initiated the connection or not.
  * @param  {BandwidthControls} [info.bandwidth] Information about bandwidth controls.
@@ -39512,8 +39715,9 @@ const log = (0, _logs.getLogManager)().getLogger('SDPHANDLER');
  *
  * @method sanitizeSdesFromSdp
  * @param {Object} newSdp The SDP so far (could have been modified by previous handlers).
- * @param {RTCSdpType} info Information about the session description.
+ * @param {Object} info Information about the session description.
  * @param {RTCSdpType} info.type The session description's type.
+ * @param {string} info.step The step that will occur after the Pipeline is run.
  * @param {string} info.endpoint Which end of the connection created the SDP.
  * @param {Object} originalSdp The SDP in its initial state.
  * @return {Object} The sanitized SDP with crypto removed (if fingerprint exists)
@@ -39743,12 +39947,24 @@ function* setupCall(deps, mediaConstraints, sessionOptions) {
    */
   let offer = yield (0, _effects.call)([session, 'createOffer']);
 
+  // Run the SDP through the Pipeline before we set it locally.
+  //    This is the "pre set local" stage.
   offer.sdp = yield (0, _effects.call)(_pipeline2.default, sdpHandlers, offer.sdp, {
     type: offer.type,
+    step: 'set',
     endpoint: 'local',
     bandwidth
   });
   offer = yield (0, _effects.call)([session, 'setLocalDescription'], offer);
+
+  // Run the SDP through the Pipeline again before we send it to the remote side.
+  //    This is the "pre send local" stage.
+  offer.sdp = yield (0, _effects.call)(_pipeline2.default, sdpHandlers, offer.sdp, {
+    type: offer.type,
+    step: 'send',
+    endpoint: 'local',
+    bandwidth
+  });
 
   return {
     error: false,
@@ -39805,9 +40021,11 @@ function* setupIncomingCall(deps, sessionOptions) {
   /*
    * Run the remote SDP offer through any SDP handlers provided, then set it
    *    as the Session's remote description.
+   * This is the "pre set remote" stage.
    */
   offer.sdp = yield (0, _effects.call)(_pipeline2.default, sdpHandlers, offer.sdp, {
     type: offer.type,
+    step: 'set',
     endpoint: 'remote'
   });
 
@@ -39874,12 +40092,24 @@ function* answerWebrtcSession(deps, mediaConstraints, sessionOptions) {
    *    then set it as the Session's local description.
    */
   let answer = yield (0, _effects.call)([session, 'createAnswer']);
+
+  // This is the "pre set local" stage.
   answer.sdp = yield (0, _effects.call)(_pipeline2.default, sdpHandlers, answer.sdp, {
     type: answer.type,
+    step: 'set',
     endpoint: 'local',
     bandwidth
   });
   answer = yield (0, _effects.call)([session, 'setLocalDescription'], answer);
+
+  // Run the SDP through the Pipeline again before we send it to the remote side.
+  //    This is the "pre send local" stage.
+  answer.sdp = yield (0, _effects.call)(_pipeline2.default, sdpHandlers, answer.sdp, {
+    type: answer.type,
+    step: 'send',
+    endpoint: 'local',
+    bandwidth
+  });
 
   return {
     error: false,
@@ -40077,9 +40307,11 @@ function* handleOffer(deps, offer, webrtcSessionId, bandwidth) {
   /*
    * Run the remote SDP offer through any SDP handlers provided, then set it
    *    as the Session's remote description.
+   * This is the "pre set remote" stage.
    */
   offer = yield (0, _effects.call)(_pipeline2.default, sdpHandlers, offer, {
     type: 'offer',
+    step: 'set',
     endpoint: 'remote'
   });
 
@@ -40098,12 +40330,24 @@ function* handleOffer(deps, offer, webrtcSessionId, bandwidth) {
    *    then set it as the Session's local description.
    */
   let answer = yield (0, _effects.call)([session, 'createAnswer']);
+
+  // This is the "pre set local" stage.
   answer.sdp = yield (0, _effects.call)(_pipeline2.default, sdpHandlers, answer.sdp, {
     type: answer.type,
+    step: 'set',
     endpoint: 'local',
     bandwidth
   });
   answer = yield (0, _effects.call)([session, 'setLocalDescription'], answer);
+
+  // Run the SDP through the Pipeline again before we send it to the remote side.
+  //    This is the "pre send local" stage.
+  answer.sdp = yield (0, _effects.call)(_pipeline2.default, sdpHandlers, answer.sdp, {
+    type: answer.type,
+    step: 'send',
+    endpoint: 'local',
+    bandwidth
+  });
 
   return {
     answerSDP: answer.sdp
@@ -40142,12 +40386,23 @@ function* generateOffer(deps, sessionId, mediaDirections, bandwidth) {
   let offer = yield (0, _effects.call)([session, 'createOffer'], {
     mediaDirections
   });
+
+  // This is the "pre set local" stage.
   offer.sdp = yield (0, _effects.call)(_pipeline2.default, sdpHandlers, offer.sdp, {
     type: offer.type,
+    step: 'set',
     endpoint: 'local',
     bandwidth
   });
   offer = yield (0, _effects.call)([session, 'setLocalDescription'], offer);
+
+  // This is the "pre send local" stage.
+  offer.sdp = yield (0, _effects.call)(_pipeline2.default, sdpHandlers, offer.sdp, {
+    type: offer.type,
+    step: 'send',
+    endpoint: 'local',
+    bandwidth
+  });
 
   return offer;
 }
@@ -40195,12 +40450,23 @@ function* webRtcAddMedia(deps, mediaConstraints, sessionOptions) {
   // TODO: Make sure the session is in the correct signaling state to start a
   //    renegotiation operation.
   let offer = yield (0, _effects.call)([session, 'createOffer']);
+
+  // This is the "pre set local" stage.
   offer.sdp = yield (0, _effects.call)(_pipeline2.default, sdpHandlers, offer.sdp, {
     type: offer.type,
+    step: 'set',
     endpoint: 'local',
     bandwidth
   });
   offer = yield (0, _effects.call)([session, 'setLocalDescription'], offer);
+
+  // This is the "pre send local" stage.
+  offer.sdp = yield (0, _effects.call)(_pipeline2.default, sdpHandlers, offer.sdp, {
+    type: offer.type,
+    step: 'send',
+    endpoint: 'local',
+    bandwidth
+  });
 
   let mediaStates = [];
 
@@ -40268,12 +40534,23 @@ function* webRtcRemoveMedia(deps, sessionOptions) {
   // TODO: Make sure the session is in the correct signaling state to start a
   //    renegotiation operation.
   let offer = yield (0, _effects.call)([session, 'createOffer']);
+
+  // This is the "pre set local" stage.
   offer.sdp = yield (0, _effects.call)(_pipeline2.default, sdpHandlers, offer.sdp, {
     type: offer.type,
+    step: 'set',
     endpoint: 'local',
     bandwidth
   });
   offer = yield (0, _effects.call)([session, 'setLocalDescription'], offer);
+
+  // This is the "pre send local" stage.
+  offer.sdp = yield (0, _effects.call)(_pipeline2.default, sdpHandlers, offer.sdp, {
+    type: offer.type,
+    step: 'send',
+    endpoint: 'local',
+    bandwidth
+  });
 
   return {
     sdp: offer.sdp
@@ -40513,9 +40790,11 @@ function* receivedAnswer(deps, sessionInfo, targetCall) {
     /*
      * Run the remote SDP answer through any SDP handlers provided, then set it
      *    as the Session's remote description.
+     * This is the "pre set remote" stage.
      */
     answerSdp = yield (0, _effects.call)(_pipeline2.default, sdpHandlers, answerSdp, {
       type: 'answer',
+      step: 'set',
       endpoint: 'remote'
     });
     yield (0, _effects.call)([session, 'processAnswer'], {
@@ -42254,7 +42533,9 @@ const authCodes = exports.authCodes = {
 };const callHistoryCodes = exports.callHistoryCodes = {
   UNKNOWN_ERROR: 'callHistory:1',
   BAD_REQUEST: 'callHistory:2',
-  NOT_FOUND: 'callHistory:3'
+  NOT_FOUND: 'callHistory:3',
+  NOT_AUTHENTICATED: 'callHistory:4',
+  FORBIDDEN: 'callHistory:5'
   /**
    * @name clickToCallCodes
    */
@@ -42878,7 +43159,7 @@ function unsubscribe(listener) {
 
 /* Internal actions */
 
-/*
+/**
  * Emits an event of the specified type.
  *
  * @method emitEvent
@@ -42897,12 +43178,12 @@ function emitEvent(type, ...args) {
   };
 }
 
-/*
+/**
  * Define an alias for an event type.
  *
  * @method alias
- * @param {String} type The event type for which to add an alias.
- * @param {String} alias The alias name for the event type.
+ * @param {string} type The event type for which to add an alias.
+ * @param {string} alias The alias name for the event type.
  */
 function aliasEvent(type, alias) {
   if (type === undefined || alias === undefined) {
@@ -43169,7 +43450,7 @@ const factoryDefaults = {
    */
 };function factory(plugins, options = factoryDefaults) {
   // Log the SDK's version (templated by webpack) on initialization.
-  let version = '4.11.1';
+  let version = '4.12.0';
   log.info(`SDK version: ${version}`);
 
   var sagas = [];
@@ -44658,7 +44939,7 @@ const defaultState = {
     channelEnabled: false
   },
   PUSH: {
-    channelEnabled: false
+    channelEnabled: true
   },
   EXTERNAL: {
     channelEnabled: true
