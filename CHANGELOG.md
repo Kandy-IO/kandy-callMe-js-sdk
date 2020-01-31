@@ -5,7 +5,7 @@ Kandy.js change log.
 - This project adheres to [Semantic Versioning](http://semver.org/).
 - This change log follows [keepachangelog.com](http://keepachangelog.com/) recommendations.
 
-## 4.12.0 - beta
+## 4.12.0 - 2020-01-31
 
 ### Added
 
@@ -24,6 +24,7 @@ Kandy.js change log.
 - Fixed an SDP Handler issue where `SdpHandlerInfo.type` was undefined the first time an SDP Handler is called on receiving a call.
 - Fixed the issue where there was no refresh subscription and the Call will be torn down when the subscription expires. `KAA-2145`
 - Fixed a midcall issue where removal of a remote media track did not trigger an event notification to application level (when using unified-plan). `KAA-2150`
+- Fixed issue with anonymous calls where the SDK throws an error if you make an anonymous call with invalid credentials.  Now a more correct error will be shown. `KAA-2180`
 
 ## 4.11.1 - 2020-01-02
 

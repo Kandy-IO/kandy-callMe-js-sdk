@@ -1,7 +1,7 @@
 /**
  * Kandy.js
  * kandy.newCallMe.js
- * Version: 4.12.0-beta.289
+ * Version: 4.12.0-beta.290
  */
 (function webpackUniversalModuleDefinition(root, factory) {
 	if(typeof exports === 'object' && typeof module === 'object')
@@ -43450,7 +43450,7 @@ const factoryDefaults = {
    */
 };function factory(plugins, options = factoryDefaults) {
   // Log the SDK's version (templated by webpack) on initialization.
-  let version = '4.12.0-beta.289';
+  let version = '4.12.0-beta.290';
   log.info(`SDK version: ${version}`);
 
   var sagas = [];
