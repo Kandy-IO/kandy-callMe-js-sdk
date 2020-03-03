@@ -16,7 +16,9 @@ Kandy.js change log.
 - Added a new call configuration to trigger a resync of all active calls upon connecting to the websocket. `KAA-2154`
   - The new call configuration `resyncOnConnect` is disabled by default.
   - The resync feature requires Kandy Link 4.7.1+.
-
+- Add Call support for receiving early media. `KAA-2099`
+  - When enabled via configuration (see `config.call.earlyMedia`), an outgoing Call may enter the "Early Media" state if the remote end responds with a provisional answer. This allows the Call to receive media before it has been answered.
+  
 ### Fixed
 
 - Fixed a Call issue where a slow-start, remote hold operation, when entering a "dual hold" state, was not being processed correctly. `KAA-2183`

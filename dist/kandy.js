@@ -1,7 +1,7 @@
 /**
  * Kandy.js
  * kandy.newCallMe.js
- * Version: 4.14.0-beta.322
+ * Version: 4.14.0-beta.323
  */
 (function webpackUniversalModuleDefinition(root, factory) {
 	if(typeof exports === 'object' && typeof module === 'object')
@@ -34883,8 +34883,6 @@ var _callMe = __webpack_require__("../../packages/kandy/src/call/interfaceNew/ap
 
 var _callMe2 = _interopRequireDefault(_callMe);
 
-var _logs = __webpack_require__("../../packages/kandy/src/logs/index.js");
-
 var _utils = __webpack_require__("../../packages/kandy/src/common/utils.js");
 
 var _fp = __webpack_require__("../../node_modules/lodash/fp.js");
@@ -34900,20 +34898,8 @@ function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { de
 function _interopRequireWildcard(obj) { if (obj && obj.__esModule) { return obj; } else { var newObj = {}; if (obj != null) { for (var key in obj) { if (Object.prototype.hasOwnProperty.call(obj, key)) newObj[key] = obj[key]; } } newObj.default = obj; return newObj; } }
 
 // Helpers.
-const log = _logs.logManager.getLogger('CALLME');
-
-// Libraries.
-
-
-// Other plugins.
 // Call plugin.
 function newCallMePlugin(options = {}) {
-  if (options.earlyMedia) {
-    // Link does not support earlyMedia for anonymous calls. Reference: ABE-24137
-    delete options.earlyMedia;
-    log.warn('Call configuration `earlyMedia` is not supported for CallMe calls.');
-  }
-
   const linkCallPlugin = (0, _link2.default)(options);
 
   return {
@@ -34930,6 +34916,9 @@ function newCallMePlugin(options = {}) {
  * @method anonymousInit
  * @param {function} otherInit The other plugin's init function.
  */
+
+
+// Libraries.
 function anonymousInit(otherInit) {
   return function* init({ webRTC }) {
     // Run the other plugin's init
@@ -41218,7 +41207,7 @@ exports.getVersion = getVersion;
  * for the @@ tag below with actual version value.
  */
 function getVersion() {
-  return '4.14.0-beta.322';
+  return '4.14.0-beta.323';
 }
 
 /***/ }),
