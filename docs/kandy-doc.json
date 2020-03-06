@@ -15924,7 +15924,7 @@
                 "children": [
                   {
                     "type": "text",
-                    "value": "Custom SIP headers can be used to convey additional information to a SIP endpoint.",
+                    "value": "Contains information about a device.",
                     "position": {
                       "start": {
                         "line": 1,
@@ -15933,8 +15933,8 @@
                       },
                       "end": {
                         "line": 1,
-                        "column": 83,
-                        "offset": 82
+                        "column": 37,
+                        "offset": 36
                       },
                       "indent": []
                     }
@@ -15948,506 +15948,10 @@
                   },
                   "end": {
                     "line": 1,
-                    "column": 83,
-                    "offset": 82
+                    "column": 37,
+                    "offset": 36
                   },
                   "indent": []
-                }
-              },
-              {
-                "type": "paragraph",
-                "children": [
-                  {
-                    "type": "text",
-                    "value": "These headers must be configured on the server prior to making a request, otherwise the request will fail when trying to set the headers.",
-                    "position": {
-                      "start": {
-                        "line": 3,
-                        "column": 1,
-                        "offset": 84
-                      },
-                      "end": {
-                        "line": 3,
-                        "column": 138,
-                        "offset": 221
-                      },
-                      "indent": []
-                    }
-                  }
-                ],
-                "position": {
-                  "start": {
-                    "line": 3,
-                    "column": 1,
-                    "offset": 84
-                  },
-                  "end": {
-                    "line": 3,
-                    "column": 138,
-                    "offset": 221
-                  },
-                  "indent": []
-                }
-              },
-              {
-                "type": "paragraph",
-                "children": [
-                  {
-                    "type": "text",
-                    "value": "These headers can be specified with the ",
-                    "position": {
-                      "start": {
-                        "line": 5,
-                        "column": 1,
-                        "offset": 223
-                      },
-                      "end": {
-                        "line": 5,
-                        "column": 41,
-                        "offset": 263
-                      },
-                      "indent": []
-                    }
-                  },
-                  {
-                    "type": "link",
-                    "url": "call.make",
-                    "title": null,
-                    "jsdoc": true,
-                    "children": [
-                      {
-                        "type": "text",
-                        "value": "call.make"
-                      }
-                    ],
-                    "position": {
-                      "start": {
-                        "line": 5,
-                        "column": 41,
-                        "offset": 263
-                      },
-                      "end": {
-                        "line": 5,
-                        "column": 58,
-                        "offset": 280
-                      },
-                      "indent": []
-                    }
-                  },
-                  {
-                    "type": "text",
-                    "value": " and ",
-                    "position": {
-                      "start": {
-                        "line": 5,
-                        "column": 58,
-                        "offset": 280
-                      },
-                      "end": {
-                        "line": 5,
-                        "column": 63,
-                        "offset": 285
-                      },
-                      "indent": []
-                    }
-                  },
-                  {
-                    "type": "link",
-                    "url": "call.answer",
-                    "title": null,
-                    "jsdoc": true,
-                    "children": [
-                      {
-                        "type": "text",
-                        "value": "call.answer"
-                      }
-                    ],
-                    "position": {
-                      "start": {
-                        "line": 5,
-                        "column": 63,
-                        "offset": 285
-                      },
-                      "end": {
-                        "line": 5,
-                        "column": 82,
-                        "offset": 304
-                      },
-                      "indent": []
-                    }
-                  },
-                  {
-                    "type": "text",
-                    "value": " APIs.\nThey can also be set on a call using the ",
-                    "position": {
-                      "start": {
-                        "line": 5,
-                        "column": 82,
-                        "offset": 304
-                      },
-                      "end": {
-                        "line": 6,
-                        "column": 42,
-                        "offset": 352
-                      },
-                      "indent": [
-                        1
-                      ]
-                    }
-                  },
-                  {
-                    "type": "link",
-                    "url": "#callsetcustomparameters",
-                    "title": null,
-                    "jsdoc": true,
-                    "children": [
-                      {
-                        "type": "text",
-                        "value": "call.setCustomParameters"
-                      }
-                    ],
-                    "position": {
-                      "start": {
-                        "line": 6,
-                        "column": 42,
-                        "offset": 352
-                      },
-                      "end": {
-                        "line": 6,
-                        "column": 74,
-                        "offset": 384
-                      },
-                      "indent": []
-                    }
-                  },
-                  {
-                    "type": "text",
-                    "value": ", and sent using the ",
-                    "position": {
-                      "start": {
-                        "line": 6,
-                        "column": 74,
-                        "offset": 384
-                      },
-                      "end": {
-                        "line": 6,
-                        "column": 95,
-                        "offset": 405
-                      },
-                      "indent": []
-                    }
-                  },
-                  {
-                    "type": "link",
-                    "url": "#callsendcustomparameters",
-                    "title": null,
-                    "jsdoc": true,
-                    "children": [
-                      {
-                        "type": "text",
-                        "value": "call.sendCustomParameters"
-                      }
-                    ],
-                    "position": {
-                      "start": {
-                        "line": 6,
-                        "column": 95,
-                        "offset": 405
-                      },
-                      "end": {
-                        "line": 6,
-                        "column": 128,
-                        "offset": 438
-                      },
-                      "indent": []
-                    }
-                  },
-                  {
-                    "type": "text",
-                    "value": " API.",
-                    "position": {
-                      "start": {
-                        "line": 6,
-                        "column": 128,
-                        "offset": 438
-                      },
-                      "end": {
-                        "line": 6,
-                        "column": 133,
-                        "offset": 443
-                      },
-                      "indent": []
-                    }
-                  }
-                ],
-                "position": {
-                  "start": {
-                    "line": 5,
-                    "column": 1,
-                    "offset": 223
-                  },
-                  "end": {
-                    "line": 6,
-                    "column": 133,
-                    "offset": 443
-                  },
-                  "indent": [
-                    1
-                  ]
-                }
-              },
-              {
-                "type": "paragraph",
-                "children": [
-                  {
-                    "type": "text",
-                    "value": "Custom headers may be received anytime throughout the duration a call. A remote endpoint may send custom headers when starting a call,\n answering a call, or during call updates such as hold/unhold and addition/removal of media in the call.\n When these custom headers are received, the SDK will emit a ",
-                    "position": {
-                      "start": {
-                        "line": 8,
-                        "column": 1,
-                        "offset": 445
-                      },
-                      "end": {
-                        "line": 10,
-                        "column": 62,
-                        "offset": 746
-                      },
-                      "indent": [
-                        1,
-                        1
-                      ]
-                    }
-                  },
-                  {
-                    "type": "link",
-                    "url": "#calleventcallcustomparameters",
-                    "title": null,
-                    "jsdoc": true,
-                    "children": [
-                      {
-                        "type": "text",
-                        "value": "call:customParameters"
-                      }
-                    ],
-                    "position": {
-                      "start": {
-                        "line": 10,
-                        "column": 62,
-                        "offset": 746
-                      },
-                      "end": {
-                        "line": 10,
-                        "column": 124,
-                        "offset": 808
-                      },
-                      "indent": []
-                    }
-                  },
-                  {
-                    "type": "text",
-                    "value": " event\n which will contain the custom parameters that were received.",
-                    "position": {
-                      "start": {
-                        "line": 10,
-                        "column": 124,
-                        "offset": 808
-                      },
-                      "end": {
-                        "line": 11,
-                        "column": 62,
-                        "offset": 876
-                      },
-                      "indent": [
-                        1
-                      ]
-                    }
-                  }
-                ],
-                "position": {
-                  "start": {
-                    "line": 8,
-                    "column": 1,
-                    "offset": 445
-                  },
-                  "end": {
-                    "line": 11,
-                    "column": 62,
-                    "offset": 876
-                  },
-                  "indent": [
-                    1,
-                    1,
-                    1
-                  ]
-                }
-              },
-              {
-                "type": "paragraph",
-                "children": [
-                  {
-                    "type": "text",
-                    "value": "A Call's custom parameters are a property of the Call's ",
-                    "position": {
-                      "start": {
-                        "line": 13,
-                        "column": 1,
-                        "offset": 878
-                      },
-                      "end": {
-                        "line": 13,
-                        "column": 57,
-                        "offset": 934
-                      },
-                      "indent": []
-                    }
-                  },
-                  {
-                    "type": "link",
-                    "url": "#callcallobject",
-                    "title": null,
-                    "jsdoc": true,
-                    "children": [
-                      {
-                        "type": "text",
-                        "value": "CallObject"
-                      }
-                    ],
-                    "position": {
-                      "start": {
-                        "line": 13,
-                        "column": 57,
-                        "offset": 934
-                      },
-                      "end": {
-                        "line": 13,
-                        "column": 91,
-                        "offset": 968
-                      },
-                      "indent": []
-                    }
-                  },
-                  {
-                    "type": "text",
-                    "value": ",\n which can be retrieved using the ",
-                    "position": {
-                      "start": {
-                        "line": 13,
-                        "column": 91,
-                        "offset": 968
-                      },
-                      "end": {
-                        "line": 14,
-                        "column": 35,
-                        "offset": 1004
-                      },
-                      "indent": [
-                        1
-                      ]
-                    }
-                  },
-                  {
-                    "type": "link",
-                    "url": "#callgetbyid",
-                    "title": null,
-                    "jsdoc": true,
-                    "children": [
-                      {
-                        "type": "text",
-                        "value": "call.getById"
-                      }
-                    ],
-                    "position": {
-                      "start": {
-                        "line": 14,
-                        "column": 35,
-                        "offset": 1004
-                      },
-                      "end": {
-                        "line": 14,
-                        "column": 55,
-                        "offset": 1024
-                      },
-                      "indent": []
-                    }
-                  },
-                  {
-                    "type": "text",
-                    "value": " or\n ",
-                    "position": {
-                      "start": {
-                        "line": 14,
-                        "column": 55,
-                        "offset": 1024
-                      },
-                      "end": {
-                        "line": 15,
-                        "column": 2,
-                        "offset": 1029
-                      },
-                      "indent": [
-                        1
-                      ]
-                    }
-                  },
-                  {
-                    "type": "link",
-                    "url": "#callgetall",
-                    "title": null,
-                    "jsdoc": true,
-                    "children": [
-                      {
-                        "type": "text",
-                        "value": "call.getAll"
-                      }
-                    ],
-                    "position": {
-                      "start": {
-                        "line": 15,
-                        "column": 2,
-                        "offset": 1029
-                      },
-                      "end": {
-                        "line": 15,
-                        "column": 21,
-                        "offset": 1048
-                      },
-                      "indent": []
-                    }
-                  },
-                  {
-                    "type": "text",
-                    "value": " APIs.",
-                    "position": {
-                      "start": {
-                        "line": 15,
-                        "column": 21,
-                        "offset": 1048
-                      },
-                      "end": {
-                        "line": 15,
-                        "column": 27,
-                        "offset": 1054
-                      },
-                      "indent": []
-                    }
-                  }
-                ],
-                "position": {
-                  "start": {
-                    "line": 13,
-                    "column": 1,
-                    "offset": 878
-                  },
-                  "end": {
-                    "line": 15,
-                    "column": 27,
-                    "offset": 1054
-                  },
-                  "indent": [
-                    1,
-                    1
-                  ]
                 }
               }
             ],
@@ -16458,9 +15962,9 @@
                 "offset": 0
               },
               "end": {
-                "line": 15,
-                "column": 27,
-                "offset": 1054
+                "line": 1,
+                "column": 37,
+                "offset": 36
               }
             }
           },
@@ -16468,81 +15972,77 @@
             {
               "title": "public",
               "description": null,
-              "lineNumber": 17,
+              "lineNumber": 3,
               "type": null
             },
             {
               "title": "static",
               "description": null,
-              "lineNumber": 18
-            },
-            {
-              "title": "module",
-              "description": null,
-              "lineNumber": 19,
-              "type": null,
-              "name": "CustomParameter"
+              "lineNumber": 4
             },
             {
               "title": "typedef",
               "description": null,
-              "lineNumber": 20,
+              "lineNumber": 5,
               "type": {
                 "type": "NameExpression",
                 "name": "Object"
               },
-              "name": "CustomParameter"
+              "name": "DeviceInfo"
             },
             {
               "title": "memberof",
               "description": "call",
-              "lineNumber": 21
-            },
-            {
-              "title": "requires",
-              "description": null,
-              "lineNumber": 22,
-              "name": "link_call"
-            },
-            {
-              "title": "requires",
-              "description": null,
-              "lineNumber": 23,
-              "name": "callMe"
+              "lineNumber": 6
             },
             {
               "title": "property",
-              "description": "The name of the custom parameter",
-              "lineNumber": 24,
+              "description": "The ID of the device.",
+              "lineNumber": 7,
               "type": {
                 "type": "NameExpression",
                 "name": "string"
               },
-              "name": "name"
+              "name": "deviceId"
             },
             {
               "title": "property",
-              "description": "The value of the custom parameter",
-              "lineNumber": 25,
+              "description": "The group ID of the device. Devices that share a `groupId` belong to the same physical device.",
+              "lineNumber": 8,
               "type": {
                 "type": "NameExpression",
                 "name": "string"
               },
-              "name": "value"
+              "name": "groupId"
             },
             {
-              "title": "example",
-              "description": "// Specify custom parameters when making a call.\nclient.call.make(destination, mediaConstraints,\n {\n   customParameters: [\n     {\n       name: 'X-GPS',\n       value: '42.686032,23.344565'\n     }\n   ]\n }\n)",
-              "lineNumber": 26
+              "title": "property",
+              "description": "The type of the device (audioinput, audiooutput, videoinput).",
+              "lineNumber": 9,
+              "type": {
+                "type": "NameExpression",
+                "name": "string"
+              },
+              "name": "kind"
+            },
+            {
+              "title": "property",
+              "description": "The name of the device.",
+              "lineNumber": 10,
+              "type": {
+                "type": "NameExpression",
+                "name": "string"
+              },
+              "name": "label"
             }
           ],
           "loc": {
             "start": {
-              "line": 222,
+              "line": 209,
               "column": 0
             },
             "end": {
-              "line": 260,
+              "line": 220,
               "column": 3
             }
           },
@@ -16560,17 +16060,13 @@
             "file": "/var/jenkins_home/workspace/Kandy.js_beta/packages/kandy/src/call/interfaceNew/api/index.js"
           },
           "augments": [],
-          "examples": [
-            {
-              "description": "// Specify custom parameters when making a call.\nclient.call.make(destination, mediaConstraints,\n {\n   customParameters: [\n     {\n       name: 'X-GPS',\n       value: '42.686032,23.344565'\n     }\n   ]\n }\n)"
-            }
-          ],
+          "examples": [],
           "params": [],
           "properties": [
             {
               "title": "property",
-              "name": "name",
-              "lineNumber": 24,
+              "name": "deviceId",
+              "lineNumber": 7,
               "description": {
                 "type": "root",
                 "children": [
@@ -16579,7 +16075,7 @@
                     "children": [
                       {
                         "type": "text",
-                        "value": "The name of the custom parameter",
+                        "value": "The ID of the device.",
                         "position": {
                           "start": {
                             "line": 1,
@@ -16588,8 +16084,8 @@
                           },
                           "end": {
                             "line": 1,
-                            "column": 33,
-                            "offset": 32
+                            "column": 22,
+                            "offset": 21
                           },
                           "indent": []
                         }
@@ -16603,8 +16099,8 @@
                       },
                       "end": {
                         "line": 1,
-                        "column": 33,
-                        "offset": 32
+                        "column": 22,
+                        "offset": 21
                       },
                       "indent": []
                     }
@@ -16618,8 +16114,8 @@
                   },
                   "end": {
                     "line": 1,
-                    "column": 33,
-                    "offset": 32
+                    "column": 22,
+                    "offset": 21
                   }
                 }
               },
@@ -16630,8 +16126,8 @@
             },
             {
               "title": "property",
-              "name": "value",
-              "lineNumber": 25,
+              "name": "groupId",
+              "lineNumber": 8,
               "description": {
                 "type": "root",
                 "children": [
@@ -16640,7 +16136,7 @@
                     "children": [
                       {
                         "type": "text",
-                        "value": "The value of the custom parameter",
+                        "value": "The group ID of the device. Devices that share a ",
                         "position": {
                           "start": {
                             "line": 1,
@@ -16649,8 +16145,42 @@
                           },
                           "end": {
                             "line": 1,
-                            "column": 34,
-                            "offset": 33
+                            "column": 50,
+                            "offset": 49
+                          },
+                          "indent": []
+                        }
+                      },
+                      {
+                        "type": "inlineCode",
+                        "value": "groupId",
+                        "position": {
+                          "start": {
+                            "line": 1,
+                            "column": 50,
+                            "offset": 49
+                          },
+                          "end": {
+                            "line": 1,
+                            "column": 59,
+                            "offset": 58
+                          },
+                          "indent": []
+                        }
+                      },
+                      {
+                        "type": "text",
+                        "value": " belong to the same physical device.",
+                        "position": {
+                          "start": {
+                            "line": 1,
+                            "column": 59,
+                            "offset": 58
+                          },
+                          "end": {
+                            "line": 1,
+                            "column": 95,
+                            "offset": 94
                           },
                           "indent": []
                         }
@@ -16664,8 +16194,8 @@
                       },
                       "end": {
                         "line": 1,
-                        "column": 34,
-                        "offset": 33
+                        "column": 95,
+                        "offset": 94
                       },
                       "indent": []
                     }
@@ -16679,8 +16209,130 @@
                   },
                   "end": {
                     "line": 1,
-                    "column": 34,
-                    "offset": 33
+                    "column": 95,
+                    "offset": 94
+                  }
+                }
+              },
+              "type": {
+                "type": "NameExpression",
+                "name": "string"
+              }
+            },
+            {
+              "title": "property",
+              "name": "kind",
+              "lineNumber": 9,
+              "description": {
+                "type": "root",
+                "children": [
+                  {
+                    "type": "paragraph",
+                    "children": [
+                      {
+                        "type": "text",
+                        "value": "The type of the device (audioinput, audiooutput, videoinput).",
+                        "position": {
+                          "start": {
+                            "line": 1,
+                            "column": 1,
+                            "offset": 0
+                          },
+                          "end": {
+                            "line": 1,
+                            "column": 62,
+                            "offset": 61
+                          },
+                          "indent": []
+                        }
+                      }
+                    ],
+                    "position": {
+                      "start": {
+                        "line": 1,
+                        "column": 1,
+                        "offset": 0
+                      },
+                      "end": {
+                        "line": 1,
+                        "column": 62,
+                        "offset": 61
+                      },
+                      "indent": []
+                    }
+                  }
+                ],
+                "position": {
+                  "start": {
+                    "line": 1,
+                    "column": 1,
+                    "offset": 0
+                  },
+                  "end": {
+                    "line": 1,
+                    "column": 62,
+                    "offset": 61
+                  }
+                }
+              },
+              "type": {
+                "type": "NameExpression",
+                "name": "string"
+              }
+            },
+            {
+              "title": "property",
+              "name": "label",
+              "lineNumber": 10,
+              "description": {
+                "type": "root",
+                "children": [
+                  {
+                    "type": "paragraph",
+                    "children": [
+                      {
+                        "type": "text",
+                        "value": "The name of the device.",
+                        "position": {
+                          "start": {
+                            "line": 1,
+                            "column": 1,
+                            "offset": 0
+                          },
+                          "end": {
+                            "line": 1,
+                            "column": 24,
+                            "offset": 23
+                          },
+                          "indent": []
+                        }
+                      }
+                    ],
+                    "position": {
+                      "start": {
+                        "line": 1,
+                        "column": 1,
+                        "offset": 0
+                      },
+                      "end": {
+                        "line": 1,
+                        "column": 24,
+                        "offset": 23
+                      },
+                      "indent": []
+                    }
+                  }
+                ],
+                "position": {
+                  "start": {
+                    "line": 1,
+                    "column": 1,
+                    "offset": 0
+                  },
+                  "end": {
+                    "line": 1,
+                    "column": 24,
+                    "offset": 23
                   }
                 }
               },
@@ -16697,7 +16349,7 @@
           "access": "public",
           "scope": "static",
           "kind": "typedef",
-          "name": "CustomParameter",
+          "name": "DeviceInfo",
           "type": {
             "type": "NameExpression",
             "name": "Object"
@@ -16715,12 +16367,12 @@
               "name": "call"
             },
             {
-              "name": "CustomParameter",
+              "name": "DeviceInfo",
               "kind": "typedef",
               "scope": "static"
             }
           ],
-          "namespace": "call.CustomParameter"
+          "namespace": "call.DeviceInfo"
         },
         {
           "description": {
@@ -18927,133 +18579,83 @@
           "namespace": "call.SdpHandlerInfo"
         },
         {
-          "description": {
-            "type": "root",
-            "children": [
-              {
-                "type": "paragraph",
-                "children": [
-                  {
-                    "type": "text",
-                    "value": "Contains information about a device.",
-                    "position": {
-                      "start": {
-                        "line": 1,
-                        "column": 1,
-                        "offset": 0
-                      },
-                      "end": {
-                        "line": 1,
-                        "column": 37,
-                        "offset": 36
-                      },
-                      "indent": []
-                    }
-                  }
-                ],
-                "position": {
-                  "start": {
-                    "line": 1,
-                    "column": 1,
-                    "offset": 0
-                  },
-                  "end": {
-                    "line": 1,
-                    "column": 37,
-                    "offset": 36
-                  },
-                  "indent": []
-                }
-              }
-            ],
-            "position": {
-              "start": {
-                "line": 1,
-                "column": 1,
-                "offset": 0
-              },
-              "end": {
-                "line": 1,
-                "column": 37,
-                "offset": 36
-              }
-            }
-          },
+          "description": "",
           "tags": [
             {
               "title": "public",
               "description": null,
-              "lineNumber": 3,
+              "lineNumber": 1,
               "type": null
             },
             {
               "title": "static",
               "description": null,
-              "lineNumber": 4
+              "lineNumber": 2
             },
             {
               "title": "typedef",
               "description": null,
-              "lineNumber": 5,
+              "lineNumber": 3,
               "type": {
                 "type": "NameExpression",
                 "name": "Object"
               },
-              "name": "DeviceInfo"
+              "name": "IceServer"
             },
             {
               "title": "memberof",
               "description": "call",
-              "lineNumber": 6
+              "lineNumber": 4
             },
             {
               "title": "property",
-              "description": "The ID of the device.",
-              "lineNumber": 7,
+              "description": "Either an array of URLs for reaching out several ICE servers or a single URL for reaching one ICE server. See {@link https://developer.mozilla.org/en-US/docs/Web/API/RTCIceServer/urls RTCIceServers.urls documentation} to learn more about the actual url format.",
+              "lineNumber": 5,
               "type": {
-                "type": "NameExpression",
-                "name": "string"
+                "type": "UnionType",
+                "elements": [
+                  {
+                    "type": "TypeApplication",
+                    "expression": {
+                      "type": "NameExpression",
+                      "name": "Array"
+                    },
+                    "applications": [
+                      {
+                        "type": "NameExpression",
+                        "name": "string"
+                      }
+                    ]
+                  },
+                  {
+                    "type": "NameExpression",
+                    "name": "string"
+                  }
+                ]
               },
-              "name": "deviceId"
+              "name": "urls"
             },
             {
               "title": "property",
-              "description": "The group ID of the device. Devices that share a `groupId` belong to the same physical device.",
-              "lineNumber": 8,
+              "description": "The credential needed by the ICE server.",
+              "lineNumber": 6,
               "type": {
-                "type": "NameExpression",
-                "name": "string"
+                "type": "OptionalType",
+                "expression": {
+                  "type": "NameExpression",
+                  "name": "string"
+                }
               },
-              "name": "groupId"
-            },
-            {
-              "title": "property",
-              "description": "The type of the device (audioinput, audiooutput, videoinput).",
-              "lineNumber": 9,
-              "type": {
-                "type": "NameExpression",
-                "name": "string"
-              },
-              "name": "kind"
-            },
-            {
-              "title": "property",
-              "description": "The name of the device.",
-              "lineNumber": 10,
-              "type": {
-                "type": "NameExpression",
-                "name": "string"
-              },
-              "name": "label"
+              "name": "credential"
             }
           ],
           "loc": {
             "start": {
-              "line": 209,
+              "line": 136,
               "column": 0
             },
             "end": {
-              "line": 220,
+              "line": 143,
               "column": 3
             }
           },
@@ -19076,8 +18678,8 @@
           "properties": [
             {
               "title": "property",
-              "name": "deviceId",
-              "lineNumber": 7,
+              "name": "urls",
+              "lineNumber": 5,
               "description": {
                 "type": "root",
                 "children": [
@@ -19086,7 +18688,7 @@
                     "children": [
                       {
                         "type": "text",
-                        "value": "The ID of the device.",
+                        "value": "Either an array of URLs for reaching out several ICE servers or a single URL for reaching one ICE server. See ",
                         "position": {
                           "start": {
                             "line": 1,
@@ -19095,8 +18697,50 @@
                           },
                           "end": {
                             "line": 1,
-                            "column": 22,
-                            "offset": 21
+                            "column": 111,
+                            "offset": 110
+                          },
+                          "indent": []
+                        }
+                      },
+                      {
+                        "type": "link",
+                        "url": "https://developer.mozilla.org/en-US/docs/Web/API/RTCIceServer/urls",
+                        "title": null,
+                        "jsdoc": true,
+                        "children": [
+                          {
+                            "type": "text",
+                            "value": "RTCIceServers.urls documentation"
+                          }
+                        ],
+                        "position": {
+                          "start": {
+                            "line": 1,
+                            "column": 111,
+                            "offset": 110
+                          },
+                          "end": {
+                            "line": 1,
+                            "column": 218,
+                            "offset": 217
+                          },
+                          "indent": []
+                        }
+                      },
+                      {
+                        "type": "text",
+                        "value": " to learn more about the actual url format.",
+                        "position": {
+                          "start": {
+                            "line": 1,
+                            "column": 218,
+                            "offset": 217
+                          },
+                          "end": {
+                            "line": 1,
+                            "column": 261,
+                            "offset": 260
                           },
                           "indent": []
                         }
@@ -19110,8 +18754,8 @@
                       },
                       "end": {
                         "line": 1,
-                        "column": 22,
-                        "offset": 21
+                        "column": 261,
+                        "offset": 260
                       },
                       "indent": []
                     }
@@ -19125,20 +18769,38 @@
                   },
                   "end": {
                     "line": 1,
-                    "column": 22,
-                    "offset": 21
+                    "column": 261,
+                    "offset": 260
                   }
                 }
               },
               "type": {
-                "type": "NameExpression",
-                "name": "string"
+                "type": "UnionType",
+                "elements": [
+                  {
+                    "type": "TypeApplication",
+                    "expression": {
+                      "type": "NameExpression",
+                      "name": "Array"
+                    },
+                    "applications": [
+                      {
+                        "type": "NameExpression",
+                        "name": "string"
+                      }
+                    ]
+                  },
+                  {
+                    "type": "NameExpression",
+                    "name": "string"
+                  }
+                ]
               }
             },
             {
               "title": "property",
-              "name": "groupId",
-              "lineNumber": 8,
+              "name": "credential",
+              "lineNumber": 6,
               "description": {
                 "type": "root",
                 "children": [
@@ -19147,7 +18809,7 @@
                     "children": [
                       {
                         "type": "text",
-                        "value": "The group ID of the device. Devices that share a ",
+                        "value": "The credential needed by the ICE server.",
                         "position": {
                           "start": {
                             "line": 1,
@@ -19156,42 +18818,8 @@
                           },
                           "end": {
                             "line": 1,
-                            "column": 50,
-                            "offset": 49
-                          },
-                          "indent": []
-                        }
-                      },
-                      {
-                        "type": "inlineCode",
-                        "value": "groupId",
-                        "position": {
-                          "start": {
-                            "line": 1,
-                            "column": 50,
-                            "offset": 49
-                          },
-                          "end": {
-                            "line": 1,
-                            "column": 59,
-                            "offset": 58
-                          },
-                          "indent": []
-                        }
-                      },
-                      {
-                        "type": "text",
-                        "value": " belong to the same physical device.",
-                        "position": {
-                          "start": {
-                            "line": 1,
-                            "column": 59,
-                            "offset": 58
-                          },
-                          "end": {
-                            "line": 1,
-                            "column": 95,
-                            "offset": 94
+                            "column": 41,
+                            "offset": 40
                           },
                           "indent": []
                         }
@@ -19205,8 +18833,8 @@
                       },
                       "end": {
                         "line": 1,
-                        "column": 95,
-                        "offset": 94
+                        "column": 41,
+                        "offset": 40
                       },
                       "indent": []
                     }
@@ -19220,136 +18848,17 @@
                   },
                   "end": {
                     "line": 1,
-                    "column": 95,
-                    "offset": 94
+                    "column": 41,
+                    "offset": 40
                   }
                 }
               },
               "type": {
-                "type": "NameExpression",
-                "name": "string"
-              }
-            },
-            {
-              "title": "property",
-              "name": "kind",
-              "lineNumber": 9,
-              "description": {
-                "type": "root",
-                "children": [
-                  {
-                    "type": "paragraph",
-                    "children": [
-                      {
-                        "type": "text",
-                        "value": "The type of the device (audioinput, audiooutput, videoinput).",
-                        "position": {
-                          "start": {
-                            "line": 1,
-                            "column": 1,
-                            "offset": 0
-                          },
-                          "end": {
-                            "line": 1,
-                            "column": 62,
-                            "offset": 61
-                          },
-                          "indent": []
-                        }
-                      }
-                    ],
-                    "position": {
-                      "start": {
-                        "line": 1,
-                        "column": 1,
-                        "offset": 0
-                      },
-                      "end": {
-                        "line": 1,
-                        "column": 62,
-                        "offset": 61
-                      },
-                      "indent": []
-                    }
-                  }
-                ],
-                "position": {
-                  "start": {
-                    "line": 1,
-                    "column": 1,
-                    "offset": 0
-                  },
-                  "end": {
-                    "line": 1,
-                    "column": 62,
-                    "offset": 61
-                  }
+                "type": "OptionalType",
+                "expression": {
+                  "type": "NameExpression",
+                  "name": "string"
                 }
-              },
-              "type": {
-                "type": "NameExpression",
-                "name": "string"
-              }
-            },
-            {
-              "title": "property",
-              "name": "label",
-              "lineNumber": 10,
-              "description": {
-                "type": "root",
-                "children": [
-                  {
-                    "type": "paragraph",
-                    "children": [
-                      {
-                        "type": "text",
-                        "value": "The name of the device.",
-                        "position": {
-                          "start": {
-                            "line": 1,
-                            "column": 1,
-                            "offset": 0
-                          },
-                          "end": {
-                            "line": 1,
-                            "column": 24,
-                            "offset": 23
-                          },
-                          "indent": []
-                        }
-                      }
-                    ],
-                    "position": {
-                      "start": {
-                        "line": 1,
-                        "column": 1,
-                        "offset": 0
-                      },
-                      "end": {
-                        "line": 1,
-                        "column": 24,
-                        "offset": 23
-                      },
-                      "indent": []
-                    }
-                  }
-                ],
-                "position": {
-                  "start": {
-                    "line": 1,
-                    "column": 1,
-                    "offset": 0
-                  },
-                  "end": {
-                    "line": 1,
-                    "column": 24,
-                    "offset": 23
-                  }
-                }
-              },
-              "type": {
-                "type": "NameExpression",
-                "name": "string"
               }
             }
           ],
@@ -19360,7 +18869,7 @@
           "access": "public",
           "scope": "static",
           "kind": "typedef",
-          "name": "DeviceInfo",
+          "name": "IceServer",
           "type": {
             "type": "NameExpression",
             "name": "Object"
@@ -19378,12 +18887,819 @@
               "name": "call"
             },
             {
-              "name": "DeviceInfo",
+              "name": "IceServer",
               "kind": "typedef",
               "scope": "static"
             }
           ],
-          "namespace": "call.DeviceInfo"
+          "namespace": "call.IceServer"
+        },
+        {
+          "description": {
+            "type": "root",
+            "children": [
+              {
+                "type": "paragraph",
+                "children": [
+                  {
+                    "type": "text",
+                    "value": "Custom SIP headers can be used to convey additional information to a SIP endpoint.",
+                    "position": {
+                      "start": {
+                        "line": 1,
+                        "column": 1,
+                        "offset": 0
+                      },
+                      "end": {
+                        "line": 1,
+                        "column": 83,
+                        "offset": 82
+                      },
+                      "indent": []
+                    }
+                  }
+                ],
+                "position": {
+                  "start": {
+                    "line": 1,
+                    "column": 1,
+                    "offset": 0
+                  },
+                  "end": {
+                    "line": 1,
+                    "column": 83,
+                    "offset": 82
+                  },
+                  "indent": []
+                }
+              },
+              {
+                "type": "paragraph",
+                "children": [
+                  {
+                    "type": "text",
+                    "value": "These headers must be configured on the server prior to making a request, otherwise the request will fail when trying to set the headers.",
+                    "position": {
+                      "start": {
+                        "line": 3,
+                        "column": 1,
+                        "offset": 84
+                      },
+                      "end": {
+                        "line": 3,
+                        "column": 138,
+                        "offset": 221
+                      },
+                      "indent": []
+                    }
+                  }
+                ],
+                "position": {
+                  "start": {
+                    "line": 3,
+                    "column": 1,
+                    "offset": 84
+                  },
+                  "end": {
+                    "line": 3,
+                    "column": 138,
+                    "offset": 221
+                  },
+                  "indent": []
+                }
+              },
+              {
+                "type": "paragraph",
+                "children": [
+                  {
+                    "type": "text",
+                    "value": "These headers can be specified with the ",
+                    "position": {
+                      "start": {
+                        "line": 5,
+                        "column": 1,
+                        "offset": 223
+                      },
+                      "end": {
+                        "line": 5,
+                        "column": 41,
+                        "offset": 263
+                      },
+                      "indent": []
+                    }
+                  },
+                  {
+                    "type": "link",
+                    "url": "call.make",
+                    "title": null,
+                    "jsdoc": true,
+                    "children": [
+                      {
+                        "type": "text",
+                        "value": "call.make"
+                      }
+                    ],
+                    "position": {
+                      "start": {
+                        "line": 5,
+                        "column": 41,
+                        "offset": 263
+                      },
+                      "end": {
+                        "line": 5,
+                        "column": 58,
+                        "offset": 280
+                      },
+                      "indent": []
+                    }
+                  },
+                  {
+                    "type": "text",
+                    "value": " and ",
+                    "position": {
+                      "start": {
+                        "line": 5,
+                        "column": 58,
+                        "offset": 280
+                      },
+                      "end": {
+                        "line": 5,
+                        "column": 63,
+                        "offset": 285
+                      },
+                      "indent": []
+                    }
+                  },
+                  {
+                    "type": "link",
+                    "url": "call.answer",
+                    "title": null,
+                    "jsdoc": true,
+                    "children": [
+                      {
+                        "type": "text",
+                        "value": "call.answer"
+                      }
+                    ],
+                    "position": {
+                      "start": {
+                        "line": 5,
+                        "column": 63,
+                        "offset": 285
+                      },
+                      "end": {
+                        "line": 5,
+                        "column": 82,
+                        "offset": 304
+                      },
+                      "indent": []
+                    }
+                  },
+                  {
+                    "type": "text",
+                    "value": " APIs.\nThey can also be set on a call using the ",
+                    "position": {
+                      "start": {
+                        "line": 5,
+                        "column": 82,
+                        "offset": 304
+                      },
+                      "end": {
+                        "line": 6,
+                        "column": 42,
+                        "offset": 352
+                      },
+                      "indent": [
+                        1
+                      ]
+                    }
+                  },
+                  {
+                    "type": "link",
+                    "url": "#callsetcustomparameters",
+                    "title": null,
+                    "jsdoc": true,
+                    "children": [
+                      {
+                        "type": "text",
+                        "value": "call.setCustomParameters"
+                      }
+                    ],
+                    "position": {
+                      "start": {
+                        "line": 6,
+                        "column": 42,
+                        "offset": 352
+                      },
+                      "end": {
+                        "line": 6,
+                        "column": 74,
+                        "offset": 384
+                      },
+                      "indent": []
+                    }
+                  },
+                  {
+                    "type": "text",
+                    "value": ", and sent using the ",
+                    "position": {
+                      "start": {
+                        "line": 6,
+                        "column": 74,
+                        "offset": 384
+                      },
+                      "end": {
+                        "line": 6,
+                        "column": 95,
+                        "offset": 405
+                      },
+                      "indent": []
+                    }
+                  },
+                  {
+                    "type": "link",
+                    "url": "#callsendcustomparameters",
+                    "title": null,
+                    "jsdoc": true,
+                    "children": [
+                      {
+                        "type": "text",
+                        "value": "call.sendCustomParameters"
+                      }
+                    ],
+                    "position": {
+                      "start": {
+                        "line": 6,
+                        "column": 95,
+                        "offset": 405
+                      },
+                      "end": {
+                        "line": 6,
+                        "column": 128,
+                        "offset": 438
+                      },
+                      "indent": []
+                    }
+                  },
+                  {
+                    "type": "text",
+                    "value": " API.",
+                    "position": {
+                      "start": {
+                        "line": 6,
+                        "column": 128,
+                        "offset": 438
+                      },
+                      "end": {
+                        "line": 6,
+                        "column": 133,
+                        "offset": 443
+                      },
+                      "indent": []
+                    }
+                  }
+                ],
+                "position": {
+                  "start": {
+                    "line": 5,
+                    "column": 1,
+                    "offset": 223
+                  },
+                  "end": {
+                    "line": 6,
+                    "column": 133,
+                    "offset": 443
+                  },
+                  "indent": [
+                    1
+                  ]
+                }
+              },
+              {
+                "type": "paragraph",
+                "children": [
+                  {
+                    "type": "text",
+                    "value": "Custom headers may be received anytime throughout the duration a call. A remote endpoint may send custom headers when starting a call,\n answering a call, or during call updates such as hold/unhold and addition/removal of media in the call.\n When these custom headers are received, the SDK will emit a ",
+                    "position": {
+                      "start": {
+                        "line": 8,
+                        "column": 1,
+                        "offset": 445
+                      },
+                      "end": {
+                        "line": 10,
+                        "column": 62,
+                        "offset": 746
+                      },
+                      "indent": [
+                        1,
+                        1
+                      ]
+                    }
+                  },
+                  {
+                    "type": "link",
+                    "url": "#calleventcallcustomparameters",
+                    "title": null,
+                    "jsdoc": true,
+                    "children": [
+                      {
+                        "type": "text",
+                        "value": "call:customParameters"
+                      }
+                    ],
+                    "position": {
+                      "start": {
+                        "line": 10,
+                        "column": 62,
+                        "offset": 746
+                      },
+                      "end": {
+                        "line": 10,
+                        "column": 124,
+                        "offset": 808
+                      },
+                      "indent": []
+                    }
+                  },
+                  {
+                    "type": "text",
+                    "value": " event\n which will contain the custom parameters that were received.",
+                    "position": {
+                      "start": {
+                        "line": 10,
+                        "column": 124,
+                        "offset": 808
+                      },
+                      "end": {
+                        "line": 11,
+                        "column": 62,
+                        "offset": 876
+                      },
+                      "indent": [
+                        1
+                      ]
+                    }
+                  }
+                ],
+                "position": {
+                  "start": {
+                    "line": 8,
+                    "column": 1,
+                    "offset": 445
+                  },
+                  "end": {
+                    "line": 11,
+                    "column": 62,
+                    "offset": 876
+                  },
+                  "indent": [
+                    1,
+                    1,
+                    1
+                  ]
+                }
+              },
+              {
+                "type": "paragraph",
+                "children": [
+                  {
+                    "type": "text",
+                    "value": "A Call's custom parameters are a property of the Call's ",
+                    "position": {
+                      "start": {
+                        "line": 13,
+                        "column": 1,
+                        "offset": 878
+                      },
+                      "end": {
+                        "line": 13,
+                        "column": 57,
+                        "offset": 934
+                      },
+                      "indent": []
+                    }
+                  },
+                  {
+                    "type": "link",
+                    "url": "#callcallobject",
+                    "title": null,
+                    "jsdoc": true,
+                    "children": [
+                      {
+                        "type": "text",
+                        "value": "CallObject"
+                      }
+                    ],
+                    "position": {
+                      "start": {
+                        "line": 13,
+                        "column": 57,
+                        "offset": 934
+                      },
+                      "end": {
+                        "line": 13,
+                        "column": 91,
+                        "offset": 968
+                      },
+                      "indent": []
+                    }
+                  },
+                  {
+                    "type": "text",
+                    "value": ",\n which can be retrieved using the ",
+                    "position": {
+                      "start": {
+                        "line": 13,
+                        "column": 91,
+                        "offset": 968
+                      },
+                      "end": {
+                        "line": 14,
+                        "column": 35,
+                        "offset": 1004
+                      },
+                      "indent": [
+                        1
+                      ]
+                    }
+                  },
+                  {
+                    "type": "link",
+                    "url": "#callgetbyid",
+                    "title": null,
+                    "jsdoc": true,
+                    "children": [
+                      {
+                        "type": "text",
+                        "value": "call.getById"
+                      }
+                    ],
+                    "position": {
+                      "start": {
+                        "line": 14,
+                        "column": 35,
+                        "offset": 1004
+                      },
+                      "end": {
+                        "line": 14,
+                        "column": 55,
+                        "offset": 1024
+                      },
+                      "indent": []
+                    }
+                  },
+                  {
+                    "type": "text",
+                    "value": " or\n ",
+                    "position": {
+                      "start": {
+                        "line": 14,
+                        "column": 55,
+                        "offset": 1024
+                      },
+                      "end": {
+                        "line": 15,
+                        "column": 2,
+                        "offset": 1029
+                      },
+                      "indent": [
+                        1
+                      ]
+                    }
+                  },
+                  {
+                    "type": "link",
+                    "url": "#callgetall",
+                    "title": null,
+                    "jsdoc": true,
+                    "children": [
+                      {
+                        "type": "text",
+                        "value": "call.getAll"
+                      }
+                    ],
+                    "position": {
+                      "start": {
+                        "line": 15,
+                        "column": 2,
+                        "offset": 1029
+                      },
+                      "end": {
+                        "line": 15,
+                        "column": 21,
+                        "offset": 1048
+                      },
+                      "indent": []
+                    }
+                  },
+                  {
+                    "type": "text",
+                    "value": " APIs.",
+                    "position": {
+                      "start": {
+                        "line": 15,
+                        "column": 21,
+                        "offset": 1048
+                      },
+                      "end": {
+                        "line": 15,
+                        "column": 27,
+                        "offset": 1054
+                      },
+                      "indent": []
+                    }
+                  }
+                ],
+                "position": {
+                  "start": {
+                    "line": 13,
+                    "column": 1,
+                    "offset": 878
+                  },
+                  "end": {
+                    "line": 15,
+                    "column": 27,
+                    "offset": 1054
+                  },
+                  "indent": [
+                    1,
+                    1
+                  ]
+                }
+              }
+            ],
+            "position": {
+              "start": {
+                "line": 1,
+                "column": 1,
+                "offset": 0
+              },
+              "end": {
+                "line": 15,
+                "column": 27,
+                "offset": 1054
+              }
+            }
+          },
+          "tags": [
+            {
+              "title": "public",
+              "description": null,
+              "lineNumber": 17,
+              "type": null
+            },
+            {
+              "title": "static",
+              "description": null,
+              "lineNumber": 18
+            },
+            {
+              "title": "module",
+              "description": null,
+              "lineNumber": 19,
+              "type": null,
+              "name": "CustomParameter"
+            },
+            {
+              "title": "typedef",
+              "description": null,
+              "lineNumber": 20,
+              "type": {
+                "type": "NameExpression",
+                "name": "Object"
+              },
+              "name": "CustomParameter"
+            },
+            {
+              "title": "memberof",
+              "description": "call",
+              "lineNumber": 21
+            },
+            {
+              "title": "requires",
+              "description": null,
+              "lineNumber": 22,
+              "name": "link_call"
+            },
+            {
+              "title": "requires",
+              "description": null,
+              "lineNumber": 23,
+              "name": "callMe"
+            },
+            {
+              "title": "property",
+              "description": "The name of the custom parameter",
+              "lineNumber": 24,
+              "type": {
+                "type": "NameExpression",
+                "name": "string"
+              },
+              "name": "name"
+            },
+            {
+              "title": "property",
+              "description": "The value of the custom parameter",
+              "lineNumber": 25,
+              "type": {
+                "type": "NameExpression",
+                "name": "string"
+              },
+              "name": "value"
+            },
+            {
+              "title": "example",
+              "description": "// Specify custom parameters when making a call.\nclient.call.make(destination, mediaConstraints,\n {\n   customParameters: [\n     {\n       name: 'X-GPS',\n       value: '42.686032,23.344565'\n     }\n   ]\n }\n)",
+              "lineNumber": 26
+            }
+          ],
+          "loc": {
+            "start": {
+              "line": 222,
+              "column": 0
+            },
+            "end": {
+              "line": 260,
+              "column": 3
+            }
+          },
+          "context": {
+            "loc": {
+              "start": {
+                "line": 271,
+                "column": 0
+              },
+              "end": {
+                "line": 275,
+                "column": 1
+              }
+            },
+            "file": "/var/jenkins_home/workspace/Kandy.js_beta/packages/kandy/src/call/interfaceNew/api/index.js"
+          },
+          "augments": [],
+          "examples": [
+            {
+              "description": "// Specify custom parameters when making a call.\nclient.call.make(destination, mediaConstraints,\n {\n   customParameters: [\n     {\n       name: 'X-GPS',\n       value: '42.686032,23.344565'\n     }\n   ]\n }\n)"
+            }
+          ],
+          "params": [],
+          "properties": [
+            {
+              "title": "property",
+              "name": "name",
+              "lineNumber": 24,
+              "description": {
+                "type": "root",
+                "children": [
+                  {
+                    "type": "paragraph",
+                    "children": [
+                      {
+                        "type": "text",
+                        "value": "The name of the custom parameter",
+                        "position": {
+                          "start": {
+                            "line": 1,
+                            "column": 1,
+                            "offset": 0
+                          },
+                          "end": {
+                            "line": 1,
+                            "column": 33,
+                            "offset": 32
+                          },
+                          "indent": []
+                        }
+                      }
+                    ],
+                    "position": {
+                      "start": {
+                        "line": 1,
+                        "column": 1,
+                        "offset": 0
+                      },
+                      "end": {
+                        "line": 1,
+                        "column": 33,
+                        "offset": 32
+                      },
+                      "indent": []
+                    }
+                  }
+                ],
+                "position": {
+                  "start": {
+                    "line": 1,
+                    "column": 1,
+                    "offset": 0
+                  },
+                  "end": {
+                    "line": 1,
+                    "column": 33,
+                    "offset": 32
+                  }
+                }
+              },
+              "type": {
+                "type": "NameExpression",
+                "name": "string"
+              }
+            },
+            {
+              "title": "property",
+              "name": "value",
+              "lineNumber": 25,
+              "description": {
+                "type": "root",
+                "children": [
+                  {
+                    "type": "paragraph",
+                    "children": [
+                      {
+                        "type": "text",
+                        "value": "The value of the custom parameter",
+                        "position": {
+                          "start": {
+                            "line": 1,
+                            "column": 1,
+                            "offset": 0
+                          },
+                          "end": {
+                            "line": 1,
+                            "column": 34,
+                            "offset": 33
+                          },
+                          "indent": []
+                        }
+                      }
+                    ],
+                    "position": {
+                      "start": {
+                        "line": 1,
+                        "column": 1,
+                        "offset": 0
+                      },
+                      "end": {
+                        "line": 1,
+                        "column": 34,
+                        "offset": 33
+                      },
+                      "indent": []
+                    }
+                  }
+                ],
+                "position": {
+                  "start": {
+                    "line": 1,
+                    "column": 1,
+                    "offset": 0
+                  },
+                  "end": {
+                    "line": 1,
+                    "column": 34,
+                    "offset": 33
+                  }
+                }
+              },
+              "type": {
+                "type": "NameExpression",
+                "name": "string"
+              }
+            }
+          ],
+          "returns": [],
+          "sees": [],
+          "throws": [],
+          "todos": [],
+          "access": "public",
+          "scope": "static",
+          "kind": "typedef",
+          "name": "CustomParameter",
+          "type": {
+            "type": "NameExpression",
+            "name": "Object"
+          },
+          "memberof": "call",
+          "members": {
+            "global": [],
+            "inner": [],
+            "instance": [],
+            "events": [],
+            "static": []
+          },
+          "path": [
+            {
+              "name": "call"
+            },
+            {
+              "name": "CustomParameter",
+              "kind": "typedef",
+              "scope": "static"
+            }
+          ],
+          "namespace": "call.CustomParameter"
         },
         {
           "description": {
@@ -21332,322 +21648,6 @@
             }
           ],
           "namespace": "call.MediaConstraint"
-        },
-        {
-          "description": "",
-          "tags": [
-            {
-              "title": "public",
-              "description": null,
-              "lineNumber": 1,
-              "type": null
-            },
-            {
-              "title": "static",
-              "description": null,
-              "lineNumber": 2
-            },
-            {
-              "title": "typedef",
-              "description": null,
-              "lineNumber": 3,
-              "type": {
-                "type": "NameExpression",
-                "name": "Object"
-              },
-              "name": "IceServer"
-            },
-            {
-              "title": "memberof",
-              "description": "call",
-              "lineNumber": 4
-            },
-            {
-              "title": "property",
-              "description": "Either an array of URLs for reaching out several ICE servers or a single URL for reaching one ICE server. See {@link https://developer.mozilla.org/en-US/docs/Web/API/RTCIceServer/urls RTCIceServers.urls documentation} to learn more about the actual url format.",
-              "lineNumber": 5,
-              "type": {
-                "type": "UnionType",
-                "elements": [
-                  {
-                    "type": "TypeApplication",
-                    "expression": {
-                      "type": "NameExpression",
-                      "name": "Array"
-                    },
-                    "applications": [
-                      {
-                        "type": "NameExpression",
-                        "name": "string"
-                      }
-                    ]
-                  },
-                  {
-                    "type": "NameExpression",
-                    "name": "string"
-                  }
-                ]
-              },
-              "name": "urls"
-            },
-            {
-              "title": "property",
-              "description": "The credential needed by the ICE server.",
-              "lineNumber": 6,
-              "type": {
-                "type": "OptionalType",
-                "expression": {
-                  "type": "NameExpression",
-                  "name": "string"
-                }
-              },
-              "name": "credential"
-            }
-          ],
-          "loc": {
-            "start": {
-              "line": 136,
-              "column": 0
-            },
-            "end": {
-              "line": 143,
-              "column": 3
-            }
-          },
-          "context": {
-            "loc": {
-              "start": {
-                "line": 271,
-                "column": 0
-              },
-              "end": {
-                "line": 275,
-                "column": 1
-              }
-            },
-            "file": "/var/jenkins_home/workspace/Kandy.js_beta/packages/kandy/src/call/interfaceNew/api/index.js"
-          },
-          "augments": [],
-          "examples": [],
-          "params": [],
-          "properties": [
-            {
-              "title": "property",
-              "name": "urls",
-              "lineNumber": 5,
-              "description": {
-                "type": "root",
-                "children": [
-                  {
-                    "type": "paragraph",
-                    "children": [
-                      {
-                        "type": "text",
-                        "value": "Either an array of URLs for reaching out several ICE servers or a single URL for reaching one ICE server. See ",
-                        "position": {
-                          "start": {
-                            "line": 1,
-                            "column": 1,
-                            "offset": 0
-                          },
-                          "end": {
-                            "line": 1,
-                            "column": 111,
-                            "offset": 110
-                          },
-                          "indent": []
-                        }
-                      },
-                      {
-                        "type": "link",
-                        "url": "https://developer.mozilla.org/en-US/docs/Web/API/RTCIceServer/urls",
-                        "title": null,
-                        "jsdoc": true,
-                        "children": [
-                          {
-                            "type": "text",
-                            "value": "RTCIceServers.urls documentation"
-                          }
-                        ],
-                        "position": {
-                          "start": {
-                            "line": 1,
-                            "column": 111,
-                            "offset": 110
-                          },
-                          "end": {
-                            "line": 1,
-                            "column": 218,
-                            "offset": 217
-                          },
-                          "indent": []
-                        }
-                      },
-                      {
-                        "type": "text",
-                        "value": " to learn more about the actual url format.",
-                        "position": {
-                          "start": {
-                            "line": 1,
-                            "column": 218,
-                            "offset": 217
-                          },
-                          "end": {
-                            "line": 1,
-                            "column": 261,
-                            "offset": 260
-                          },
-                          "indent": []
-                        }
-                      }
-                    ],
-                    "position": {
-                      "start": {
-                        "line": 1,
-                        "column": 1,
-                        "offset": 0
-                      },
-                      "end": {
-                        "line": 1,
-                        "column": 261,
-                        "offset": 260
-                      },
-                      "indent": []
-                    }
-                  }
-                ],
-                "position": {
-                  "start": {
-                    "line": 1,
-                    "column": 1,
-                    "offset": 0
-                  },
-                  "end": {
-                    "line": 1,
-                    "column": 261,
-                    "offset": 260
-                  }
-                }
-              },
-              "type": {
-                "type": "UnionType",
-                "elements": [
-                  {
-                    "type": "TypeApplication",
-                    "expression": {
-                      "type": "NameExpression",
-                      "name": "Array"
-                    },
-                    "applications": [
-                      {
-                        "type": "NameExpression",
-                        "name": "string"
-                      }
-                    ]
-                  },
-                  {
-                    "type": "NameExpression",
-                    "name": "string"
-                  }
-                ]
-              }
-            },
-            {
-              "title": "property",
-              "name": "credential",
-              "lineNumber": 6,
-              "description": {
-                "type": "root",
-                "children": [
-                  {
-                    "type": "paragraph",
-                    "children": [
-                      {
-                        "type": "text",
-                        "value": "The credential needed by the ICE server.",
-                        "position": {
-                          "start": {
-                            "line": 1,
-                            "column": 1,
-                            "offset": 0
-                          },
-                          "end": {
-                            "line": 1,
-                            "column": 41,
-                            "offset": 40
-                          },
-                          "indent": []
-                        }
-                      }
-                    ],
-                    "position": {
-                      "start": {
-                        "line": 1,
-                        "column": 1,
-                        "offset": 0
-                      },
-                      "end": {
-                        "line": 1,
-                        "column": 41,
-                        "offset": 40
-                      },
-                      "indent": []
-                    }
-                  }
-                ],
-                "position": {
-                  "start": {
-                    "line": 1,
-                    "column": 1,
-                    "offset": 0
-                  },
-                  "end": {
-                    "line": 1,
-                    "column": 41,
-                    "offset": 40
-                  }
-                }
-              },
-              "type": {
-                "type": "OptionalType",
-                "expression": {
-                  "type": "NameExpression",
-                  "name": "string"
-                }
-              }
-            }
-          ],
-          "returns": [],
-          "sees": [],
-          "throws": [],
-          "todos": [],
-          "access": "public",
-          "scope": "static",
-          "kind": "typedef",
-          "name": "IceServer",
-          "type": {
-            "type": "NameExpression",
-            "name": "Object"
-          },
-          "memberof": "call",
-          "members": {
-            "global": [],
-            "inner": [],
-            "instance": [],
-            "events": [],
-            "static": []
-          },
-          "path": [
-            {
-              "name": "call"
-            },
-            {
-              "name": "IceServer",
-              "kind": "typedef",
-              "scope": "static"
-            }
-          ],
-          "namespace": "call.IceServer"
         },
         {
           "description": {
@@ -30983,6 +30983,11 @@
               "title": "example",
               "description": "const callId = ...\n// Get the video track used by the call.\nconst videoTrack = ...\n\n// Replace the specified video track of the call with a new\n//    video track.\nclient.call.replaceTrack(callId, videoTrack.id, {\n  // The track should be replaced with a video track using\n  //    a specific device. This effectively changes the input\n  //    device for an ongoing call.\n  video: true,\n  videoOptions: {\n    deviceId: cameraId\n  }\n})",
               "lineNumber": 33
+            },
+            {
+              "title": "example",
+              "description": "const callId = ...\n// Get the video track used by the call.\nconst videoTrack = ...\n\n// Can also replace the specified video track of the call with a new\n// screen sharing track because screen sharing is delivered as a video stream to remote peer.\n// User will then be prompted to pick a specific screen to share and thus the device id will be selected.\nclient.call.replaceTrack(callId, videoTrack.id, {\n  // The track should be replaced with a screen sharing track.\n  // Note that 'screenOptions' property is not mandatory, as API will use default values\n  // for properties like: width, height, frameRate.\n  screen: true\n})",
+              "lineNumber": 50
             }
           ],
           "loc": {
@@ -30991,18 +30996,18 @@
               "column": 4
             },
             "end": {
-              "line": 1065,
+              "line": 1080,
               "column": 7
             }
           },
           "context": {
             "loc": {
               "start": {
-                "line": 1066,
+                "line": 1081,
                 "column": 4
               },
               "end": {
-                "line": 1072,
+                "line": 1088,
                 "column": 5
               }
             },
@@ -31012,6 +31017,9 @@
           "examples": [
             {
               "description": "const callId = ...\n// Get the video track used by the call.\nconst videoTrack = ...\n\n// Replace the specified video track of the call with a new\n//    video track.\nclient.call.replaceTrack(callId, videoTrack.id, {\n  // The track should be replaced with a video track using\n  //    a specific device. This effectively changes the input\n  //    device for an ongoing call.\n  video: true,\n  videoOptions: {\n    deviceId: cameraId\n  }\n})"
+            },
+            {
+              "description": "const callId = ...\n// Get the video track used by the call.\nconst videoTrack = ...\n\n// Can also replace the specified video track of the call with a new\n// screen sharing track because screen sharing is delivered as a video stream to remote peer.\n// User will then be prompted to pick a specific screen to share and thus the device id will be selected.\nclient.call.replaceTrack(callId, videoTrack.id, {\n  // The track should be replaced with a screen sharing track.\n  // Note that 'screenOptions' property is not mandatory, as API will use default values\n  // for properties like: width, height, frameRate.\n  screen: true\n})"
             }
           ],
           "params": [
@@ -31816,6 +31824,324 @@
                 "children": [
                   {
                     "type": "text",
+                    "value": "Changes the camera and/or microphone used for a Call's media input.",
+                    "position": {
+                      "start": {
+                        "line": 1,
+                        "column": 1,
+                        "offset": 0
+                      },
+                      "end": {
+                        "line": 1,
+                        "column": 68,
+                        "offset": 67
+                      },
+                      "indent": []
+                    }
+                  }
+                ],
+                "position": {
+                  "start": {
+                    "line": 1,
+                    "column": 1,
+                    "offset": 0
+                  },
+                  "end": {
+                    "line": 1,
+                    "column": 68,
+                    "offset": 67
+                  },
+                  "indent": []
+                }
+              },
+              {
+                "type": "paragraph",
+                "children": [
+                  {
+                    "type": "text",
+                    "value": "The latest SDK release (v4.X+) has not yet implemented this API in the\n   same way that it was available in previous releases (v3.X). In place\n   of this API, the SDK has a more general API that can be used for this\n   same behaviour.",
+                    "position": {
+                      "start": {
+                        "line": 3,
+                        "column": 1,
+                        "offset": 69
+                      },
+                      "end": {
+                        "line": 6,
+                        "column": 19,
+                        "offset": 303
+                      },
+                      "indent": [
+                        1,
+                        1,
+                        1
+                      ]
+                    }
+                  }
+                ],
+                "position": {
+                  "start": {
+                    "line": 3,
+                    "column": 1,
+                    "offset": 69
+                  },
+                  "end": {
+                    "line": 6,
+                    "column": 19,
+                    "offset": 303
+                  },
+                  "indent": [
+                    1,
+                    1,
+                    1
+                  ]
+                }
+              },
+              {
+                "type": "paragraph",
+                "children": [
+                  {
+                    "type": "text",
+                    "value": "The same behaviour as the ",
+                    "position": {
+                      "start": {
+                        "line": 8,
+                        "column": 1,
+                        "offset": 305
+                      },
+                      "end": {
+                        "line": 8,
+                        "column": 27,
+                        "offset": 331
+                      },
+                      "indent": []
+                    }
+                  },
+                  {
+                    "type": "inlineCode",
+                    "value": "changeInputDevices",
+                    "position": {
+                      "start": {
+                        "line": 8,
+                        "column": 27,
+                        "offset": 331
+                      },
+                      "end": {
+                        "line": 8,
+                        "column": 47,
+                        "offset": 351
+                      },
+                      "indent": []
+                    }
+                  },
+                  {
+                    "type": "text",
+                    "value": " API can be implemented\n   using the general-purpose ",
+                    "position": {
+                      "start": {
+                        "line": 8,
+                        "column": 47,
+                        "offset": 351
+                      },
+                      "end": {
+                        "line": 9,
+                        "column": 30,
+                        "offset": 404
+                      },
+                      "indent": [
+                        1
+                      ]
+                    }
+                  },
+                  {
+                    "type": "link",
+                    "url": "#callreplacetrack",
+                    "title": null,
+                    "jsdoc": true,
+                    "children": [
+                      {
+                        "type": "text",
+                        "value": "call.replaceTrack"
+                      }
+                    ],
+                    "position": {
+                      "start": {
+                        "line": 9,
+                        "column": 30,
+                        "offset": 404
+                      },
+                      "end": {
+                        "line": 9,
+                        "column": 55,
+                        "offset": 429
+                      },
+                      "indent": []
+                    }
+                  },
+                  {
+                    "type": "text",
+                    "value": " API. This API can\n   be used to replace an existing media track with a new track of the\n   same type, allowing an application to change certain aspects of the\n   media, such as input device.",
+                    "position": {
+                      "start": {
+                        "line": 9,
+                        "column": 55,
+                        "offset": 429
+                      },
+                      "end": {
+                        "line": 12,
+                        "column": 32,
+                        "offset": 620
+                      },
+                      "indent": [
+                        1,
+                        1,
+                        1
+                      ]
+                    }
+                  }
+                ],
+                "position": {
+                  "start": {
+                    "line": 8,
+                    "column": 1,
+                    "offset": 305
+                  },
+                  "end": {
+                    "line": 12,
+                    "column": 32,
+                    "offset": 620
+                  },
+                  "indent": [
+                    1,
+                    1,
+                    1,
+                    1
+                  ]
+                }
+              }
+            ],
+            "position": {
+              "start": {
+                "line": 1,
+                "column": 1,
+                "offset": 0
+              },
+              "end": {
+                "line": 12,
+                "column": 32,
+                "offset": 620
+              }
+            }
+          },
+          "tags": [
+            {
+              "title": "public",
+              "description": null,
+              "lineNumber": 13,
+              "type": null
+            },
+            {
+              "title": "static",
+              "description": null,
+              "lineNumber": 14
+            },
+            {
+              "title": "method",
+              "description": null,
+              "lineNumber": 15,
+              "name": "changeInputDevices"
+            },
+            {
+              "title": "memberof",
+              "description": "call",
+              "lineNumber": 16
+            },
+            {
+              "title": "requires",
+              "description": null,
+              "lineNumber": 17,
+              "name": "call"
+            },
+            {
+              "title": "requires",
+              "description": null,
+              "lineNumber": 18,
+              "name": "callMe"
+            },
+            {
+              "title": "example",
+              "description": "const call = client.call.getById(callId)\n// Get the ID of the Call's video track.\nconst videoTrack = call.localTracks.find(trackId => {\n   const track = client.media.getTrackById(trackId)\n   return track.kind === 'video'\n})\n\n// Select the new video options.\nconst media = {\n   video: true,\n   videoOptions: {\n       deviceId: 'cameraId'\n   }\n}\n\n// Change the call's camera by replacing the video track.\nclient.call.replaceTrack(callId, videoTrack, media)",
+              "lineNumber": 19
+            }
+          ],
+          "loc": {
+            "start": {
+              "line": 1153,
+              "column": 4
+            },
+            "end": {
+              "line": 1190,
+              "column": 7
+            }
+          },
+          "context": {
+            "loc": {
+              "start": {
+                "line": 1133,
+                "column": 4
+              },
+              "end": {
+                "line": 1133,
+                "column": 23
+              }
+            },
+            "file": "/var/jenkins_home/workspace/Kandy.js_beta/packages/kandy/src/call/interfaceNew/api/call.js"
+          },
+          "augments": [],
+          "examples": [
+            {
+              "description": "const call = client.call.getById(callId)\n// Get the ID of the Call's video track.\nconst videoTrack = call.localTracks.find(trackId => {\n   const track = client.media.getTrackById(trackId)\n   return track.kind === 'video'\n})\n\n// Select the new video options.\nconst media = {\n   video: true,\n   videoOptions: {\n       deviceId: 'cameraId'\n   }\n}\n\n// Change the call's camera by replacing the video track.\nclient.call.replaceTrack(callId, videoTrack, media)"
+            }
+          ],
+          "params": [],
+          "properties": [],
+          "returns": [],
+          "sees": [],
+          "throws": [],
+          "todos": [],
+          "access": "public",
+          "scope": "static",
+          "kind": "function",
+          "name": "changeInputDevices",
+          "memberof": "call",
+          "members": {
+            "global": [],
+            "inner": [],
+            "instance": [],
+            "events": [],
+            "static": []
+          },
+          "path": [
+            {
+              "name": "call"
+            },
+            {
+              "name": "changeInputDevices",
+              "kind": "function",
+              "scope": "static"
+            }
+          ],
+          "namespace": "call.changeInputDevices"
+        },
+        {
+          "description": {
+            "type": "root",
+            "children": [
+              {
+                "type": "paragraph",
+                "children": [
+                  {
+                    "type": "text",
                     "value": "The ",
                     "position": {
                       "start": {
@@ -32110,22 +32436,22 @@
           ],
           "loc": {
             "start": {
-              "line": 1119,
+              "line": 1135,
               "column": 4
             },
             "end": {
-              "line": 1135,
+              "line": 1151,
               "column": 7
             }
           },
           "context": {
             "loc": {
               "start": {
-                "line": 1117,
+                "line": 1133,
                 "column": 4
               },
               "end": {
-                "line": 1117,
+                "line": 1133,
                 "column": 23
               }
             },
@@ -32162,324 +32488,6 @@
             }
           ],
           "namespace": "call.setDefaultDevices"
-        },
-        {
-          "description": {
-            "type": "root",
-            "children": [
-              {
-                "type": "paragraph",
-                "children": [
-                  {
-                    "type": "text",
-                    "value": "Changes the camera and/or microphone used for a Call's media input.",
-                    "position": {
-                      "start": {
-                        "line": 1,
-                        "column": 1,
-                        "offset": 0
-                      },
-                      "end": {
-                        "line": 1,
-                        "column": 68,
-                        "offset": 67
-                      },
-                      "indent": []
-                    }
-                  }
-                ],
-                "position": {
-                  "start": {
-                    "line": 1,
-                    "column": 1,
-                    "offset": 0
-                  },
-                  "end": {
-                    "line": 1,
-                    "column": 68,
-                    "offset": 67
-                  },
-                  "indent": []
-                }
-              },
-              {
-                "type": "paragraph",
-                "children": [
-                  {
-                    "type": "text",
-                    "value": "The latest SDK release (v4.X+) has not yet implemented this API in the\n   same way that it was available in previous releases (v3.X). In place\n   of this API, the SDK has a more general API that can be used for this\n   same behaviour.",
-                    "position": {
-                      "start": {
-                        "line": 3,
-                        "column": 1,
-                        "offset": 69
-                      },
-                      "end": {
-                        "line": 6,
-                        "column": 19,
-                        "offset": 303
-                      },
-                      "indent": [
-                        1,
-                        1,
-                        1
-                      ]
-                    }
-                  }
-                ],
-                "position": {
-                  "start": {
-                    "line": 3,
-                    "column": 1,
-                    "offset": 69
-                  },
-                  "end": {
-                    "line": 6,
-                    "column": 19,
-                    "offset": 303
-                  },
-                  "indent": [
-                    1,
-                    1,
-                    1
-                  ]
-                }
-              },
-              {
-                "type": "paragraph",
-                "children": [
-                  {
-                    "type": "text",
-                    "value": "The same behaviour as the ",
-                    "position": {
-                      "start": {
-                        "line": 8,
-                        "column": 1,
-                        "offset": 305
-                      },
-                      "end": {
-                        "line": 8,
-                        "column": 27,
-                        "offset": 331
-                      },
-                      "indent": []
-                    }
-                  },
-                  {
-                    "type": "inlineCode",
-                    "value": "changeInputDevices",
-                    "position": {
-                      "start": {
-                        "line": 8,
-                        "column": 27,
-                        "offset": 331
-                      },
-                      "end": {
-                        "line": 8,
-                        "column": 47,
-                        "offset": 351
-                      },
-                      "indent": []
-                    }
-                  },
-                  {
-                    "type": "text",
-                    "value": " API can be implemented\n   using the general-purpose ",
-                    "position": {
-                      "start": {
-                        "line": 8,
-                        "column": 47,
-                        "offset": 351
-                      },
-                      "end": {
-                        "line": 9,
-                        "column": 30,
-                        "offset": 404
-                      },
-                      "indent": [
-                        1
-                      ]
-                    }
-                  },
-                  {
-                    "type": "link",
-                    "url": "#callreplacetrack",
-                    "title": null,
-                    "jsdoc": true,
-                    "children": [
-                      {
-                        "type": "text",
-                        "value": "call.replaceTrack"
-                      }
-                    ],
-                    "position": {
-                      "start": {
-                        "line": 9,
-                        "column": 30,
-                        "offset": 404
-                      },
-                      "end": {
-                        "line": 9,
-                        "column": 55,
-                        "offset": 429
-                      },
-                      "indent": []
-                    }
-                  },
-                  {
-                    "type": "text",
-                    "value": " API. This API can\n   be used to replace an existing media track with a new track of the\n   same type, allowing an application to change certain aspects of the\n   media, such as input device.",
-                    "position": {
-                      "start": {
-                        "line": 9,
-                        "column": 55,
-                        "offset": 429
-                      },
-                      "end": {
-                        "line": 12,
-                        "column": 32,
-                        "offset": 620
-                      },
-                      "indent": [
-                        1,
-                        1,
-                        1
-                      ]
-                    }
-                  }
-                ],
-                "position": {
-                  "start": {
-                    "line": 8,
-                    "column": 1,
-                    "offset": 305
-                  },
-                  "end": {
-                    "line": 12,
-                    "column": 32,
-                    "offset": 620
-                  },
-                  "indent": [
-                    1,
-                    1,
-                    1,
-                    1
-                  ]
-                }
-              }
-            ],
-            "position": {
-              "start": {
-                "line": 1,
-                "column": 1,
-                "offset": 0
-              },
-              "end": {
-                "line": 12,
-                "column": 32,
-                "offset": 620
-              }
-            }
-          },
-          "tags": [
-            {
-              "title": "public",
-              "description": null,
-              "lineNumber": 13,
-              "type": null
-            },
-            {
-              "title": "static",
-              "description": null,
-              "lineNumber": 14
-            },
-            {
-              "title": "method",
-              "description": null,
-              "lineNumber": 15,
-              "name": "changeInputDevices"
-            },
-            {
-              "title": "memberof",
-              "description": "call",
-              "lineNumber": 16
-            },
-            {
-              "title": "requires",
-              "description": null,
-              "lineNumber": 17,
-              "name": "call"
-            },
-            {
-              "title": "requires",
-              "description": null,
-              "lineNumber": 18,
-              "name": "callMe"
-            },
-            {
-              "title": "example",
-              "description": "const call = client.call.getById(callId)\n// Get the ID of the Call's video track.\nconst videoTrack = call.localTracks.find(trackId => {\n   const track = client.media.getTrackById(trackId)\n   return track.kind === 'video'\n})\n\n// Select the new video options.\nconst media = {\n   video: true,\n   videoOptions: {\n       deviceId: 'cameraId'\n   }\n}\n\n// Change the call's camera by replacing the video track.\nclient.call.replaceTrack(callId, videoTrack, media)",
-              "lineNumber": 19
-            }
-          ],
-          "loc": {
-            "start": {
-              "line": 1137,
-              "column": 4
-            },
-            "end": {
-              "line": 1174,
-              "column": 7
-            }
-          },
-          "context": {
-            "loc": {
-              "start": {
-                "line": 1117,
-                "column": 4
-              },
-              "end": {
-                "line": 1117,
-                "column": 23
-              }
-            },
-            "file": "/var/jenkins_home/workspace/Kandy.js_beta/packages/kandy/src/call/interfaceNew/api/call.js"
-          },
-          "augments": [],
-          "examples": [
-            {
-              "description": "const call = client.call.getById(callId)\n// Get the ID of the Call's video track.\nconst videoTrack = call.localTracks.find(trackId => {\n   const track = client.media.getTrackById(trackId)\n   return track.kind === 'video'\n})\n\n// Select the new video options.\nconst media = {\n   video: true,\n   videoOptions: {\n       deviceId: 'cameraId'\n   }\n}\n\n// Change the call's camera by replacing the video track.\nclient.call.replaceTrack(callId, videoTrack, media)"
-            }
-          ],
-          "params": [],
-          "properties": [],
-          "returns": [],
-          "sees": [],
-          "throws": [],
-          "todos": [],
-          "access": "public",
-          "scope": "static",
-          "kind": "function",
-          "name": "changeInputDevices",
-          "memberof": "call",
-          "members": {
-            "global": [],
-            "inner": [],
-            "instance": [],
-            "events": [],
-            "static": []
-          },
-          "path": [
-            {
-              "name": "call"
-            },
-            {
-              "name": "changeInputDevices",
-              "kind": "function",
-              "scope": "static"
-            }
-          ],
-          "namespace": "call.changeInputDevices"
         },
         {
           "description": {
@@ -32788,22 +32796,22 @@
           ],
           "loc": {
             "start": {
-              "line": 1176,
+              "line": 1192,
               "column": 4
             },
             "end": {
-              "line": 1213,
+              "line": 1229,
               "column": 7
             }
           },
           "context": {
             "loc": {
               "start": {
-                "line": 1117,
+                "line": 1133,
                 "column": 4
               },
               "end": {
-                "line": 1117,
+                "line": 1133,
                 "column": 23
               }
             },
@@ -34265,324 +34273,6 @@
                 "children": [
                   {
                     "type": "text",
-                    "value": "A LogHandler can be used to customize how the SDK should log information. By\n   default, the SDK will log information to the console, but a LogHandler can\n   be configured to change this behaviour.",
-                    "position": {
-                      "start": {
-                        "line": 1,
-                        "column": 1,
-                        "offset": 0
-                      },
-                      "end": {
-                        "line": 3,
-                        "column": 43,
-                        "offset": 197
-                      },
-                      "indent": [
-                        1,
-                        1
-                      ]
-                    }
-                  }
-                ],
-                "position": {
-                  "start": {
-                    "line": 1,
-                    "column": 1,
-                    "offset": 0
-                  },
-                  "end": {
-                    "line": 3,
-                    "column": 43,
-                    "offset": 197
-                  },
-                  "indent": [
-                    1,
-                    1
-                  ]
-                }
-              },
-              {
-                "type": "paragraph",
-                "children": [
-                  {
-                    "type": "text",
-                    "value": "A LogHandler can be provided to the SDK as part of its configuration (see\n   ",
-                    "position": {
-                      "start": {
-                        "line": 5,
-                        "column": 1,
-                        "offset": 199
-                      },
-                      "end": {
-                        "line": 6,
-                        "column": 4,
-                        "offset": 276
-                      },
-                      "indent": [
-                        1
-                      ]
-                    }
-                  },
-                  {
-                    "type": "link",
-                    "url": "#configconfiglogs",
-                    "title": null,
-                    "jsdoc": true,
-                    "children": [
-                      {
-                        "type": "text",
-                        "value": "config.logs"
-                      }
-                    ],
-                    "position": {
-                      "start": {
-                        "line": 6,
-                        "column": 4,
-                        "offset": 276
-                      },
-                      "end": {
-                        "line": 6,
-                        "column": 41,
-                        "offset": 313
-                      },
-                      "indent": []
-                    }
-                  },
-                  {
-                    "type": "text",
-                    "value": "). The SDK will then provide this\n   function with the logged information.",
-                    "position": {
-                      "start": {
-                        "line": 6,
-                        "column": 41,
-                        "offset": 313
-                      },
-                      "end": {
-                        "line": 7,
-                        "column": 41,
-                        "offset": 387
-                      },
-                      "indent": [
-                        1
-                      ]
-                    }
-                  }
-                ],
-                "position": {
-                  "start": {
-                    "line": 5,
-                    "column": 1,
-                    "offset": 199
-                  },
-                  "end": {
-                    "line": 7,
-                    "column": 41,
-                    "offset": 387
-                  },
-                  "indent": [
-                    1,
-                    1
-                  ]
-                }
-              }
-            ],
-            "position": {
-              "start": {
-                "line": 1,
-                "column": 1,
-                "offset": 0
-              },
-              "end": {
-                "line": 7,
-                "column": 41,
-                "offset": 387
-              }
-            }
-          },
-          "tags": [
-            {
-              "title": "public",
-              "description": null,
-              "lineNumber": 9,
-              "type": null
-            },
-            {
-              "title": "static",
-              "description": null,
-              "lineNumber": 10
-            },
-            {
-              "title": "typedef",
-              "description": null,
-              "lineNumber": 11,
-              "type": {
-                "type": "NameExpression",
-                "name": "Function"
-              },
-              "name": "LogHandler"
-            },
-            {
-              "title": "memberof",
-              "description": "logger",
-              "lineNumber": 12
-            },
-            {
-              "title": "requires",
-              "description": null,
-              "lineNumber": 13,
-              "name": "logs"
-            },
-            {
-              "title": "param",
-              "description": "The LogEntry to be logged.",
-              "lineNumber": 14,
-              "type": {
-                "type": "NameExpression",
-                "name": "Object"
-              },
-              "name": "LogEntry"
-            },
-            {
-              "title": "example",
-              "description": "// Define a custom function to handle logs.\nfunction logHandler (logEntry) {\n  // Compile the meta info of the log for a prefix.\n  const { timestamp, level, target } = logEntry\n  let { method } = logEntry\n  const logInfo = `${timestamp} - ${target.type} - ${level}`\n\n  // Assume that the first message parameter is a string.\n  const [log, ...extra] = logEntry.messages\n\n  // For the timer methods, don't actually use the console methods.\n  //    The Logger already did the timing, so simply log out the info.\n  if (['time', 'timeLog', 'timeEnd'].includes(method)) {\n    method = 'debug'\n  }\n\n  console[method](`${logInfo} - ${log}`, ...extra)\n}\n\n// Provide the LogHandler as part of the SDK configurations.\nconst configs = { ... }\nconfigs.logs.handler = logHandler\nconst client = create(configs)",
-              "lineNumber": 15
-            }
-          ],
-          "loc": {
-            "start": {
-              "line": 54,
-              "column": 0
-            },
-            "end": {
-              "line": 93,
-              "column": 3
-            }
-          },
-          "context": {
-            "loc": {
-              "start": {
-                "line": 1,
-                "column": 0
-              },
-              "end": {
-                "line": 94,
-                "column": 0
-              }
-            },
-            "file": "/var/jenkins_home/workspace/Kandy.js_beta/packages/kandy/src/logs/docs.js"
-          },
-          "augments": [],
-          "examples": [
-            {
-              "description": "// Define a custom function to handle logs.\nfunction logHandler (logEntry) {\n  // Compile the meta info of the log for a prefix.\n  const { timestamp, level, target } = logEntry\n  let { method } = logEntry\n  const logInfo = `${timestamp} - ${target.type} - ${level}`\n\n  // Assume that the first message parameter is a string.\n  const [log, ...extra] = logEntry.messages\n\n  // For the timer methods, don't actually use the console methods.\n  //    The Logger already did the timing, so simply log out the info.\n  if (['time', 'timeLog', 'timeEnd'].includes(method)) {\n    method = 'debug'\n  }\n\n  console[method](`${logInfo} - ${log}`, ...extra)\n}\n\n// Provide the LogHandler as part of the SDK configurations.\nconst configs = { ... }\nconfigs.logs.handler = logHandler\nconst client = create(configs)"
-            }
-          ],
-          "params": [
-            {
-              "title": "param",
-              "name": "LogEntry",
-              "lineNumber": 14,
-              "description": {
-                "type": "root",
-                "children": [
-                  {
-                    "type": "paragraph",
-                    "children": [
-                      {
-                        "type": "text",
-                        "value": "The LogEntry to be logged.",
-                        "position": {
-                          "start": {
-                            "line": 1,
-                            "column": 1,
-                            "offset": 0
-                          },
-                          "end": {
-                            "line": 1,
-                            "column": 27,
-                            "offset": 26
-                          },
-                          "indent": []
-                        }
-                      }
-                    ],
-                    "position": {
-                      "start": {
-                        "line": 1,
-                        "column": 1,
-                        "offset": 0
-                      },
-                      "end": {
-                        "line": 1,
-                        "column": 27,
-                        "offset": 26
-                      },
-                      "indent": []
-                    }
-                  }
-                ],
-                "position": {
-                  "start": {
-                    "line": 1,
-                    "column": 1,
-                    "offset": 0
-                  },
-                  "end": {
-                    "line": 1,
-                    "column": 27,
-                    "offset": 26
-                  }
-                }
-              },
-              "type": {
-                "type": "NameExpression",
-                "name": "Object"
-              }
-            }
-          ],
-          "properties": [],
-          "returns": [],
-          "sees": [],
-          "throws": [],
-          "todos": [],
-          "access": "public",
-          "scope": "static",
-          "kind": "typedef",
-          "name": "LogHandler",
-          "type": {
-            "type": "NameExpression",
-            "name": "Function"
-          },
-          "memberof": "logger",
-          "members": {
-            "global": [],
-            "inner": [],
-            "instance": [],
-            "events": [],
-            "static": []
-          },
-          "path": [
-            {
-              "name": "logger",
-              "kind": "namespace"
-            },
-            {
-              "name": "LogHandler",
-              "kind": "typedef",
-              "scope": "static"
-            }
-          ],
-          "namespace": "logger.LogHandler"
-        },
-        {
-          "description": {
-            "type": "root",
-            "children": [
-              {
-                "type": "paragraph",
-                "children": [
-                  {
-                    "type": "text",
                     "value": "A LogEntry object is the data that the SDK compiles when information is\n   logged. It contains both the logged information and meta-info about when\n   and who logged it.",
                     "position": {
                       "start": {
@@ -35527,6 +35217,324 @@
             }
           ],
           "namespace": "logger.LogEntry"
+        },
+        {
+          "description": {
+            "type": "root",
+            "children": [
+              {
+                "type": "paragraph",
+                "children": [
+                  {
+                    "type": "text",
+                    "value": "A LogHandler can be used to customize how the SDK should log information. By\n   default, the SDK will log information to the console, but a LogHandler can\n   be configured to change this behaviour.",
+                    "position": {
+                      "start": {
+                        "line": 1,
+                        "column": 1,
+                        "offset": 0
+                      },
+                      "end": {
+                        "line": 3,
+                        "column": 43,
+                        "offset": 197
+                      },
+                      "indent": [
+                        1,
+                        1
+                      ]
+                    }
+                  }
+                ],
+                "position": {
+                  "start": {
+                    "line": 1,
+                    "column": 1,
+                    "offset": 0
+                  },
+                  "end": {
+                    "line": 3,
+                    "column": 43,
+                    "offset": 197
+                  },
+                  "indent": [
+                    1,
+                    1
+                  ]
+                }
+              },
+              {
+                "type": "paragraph",
+                "children": [
+                  {
+                    "type": "text",
+                    "value": "A LogHandler can be provided to the SDK as part of its configuration (see\n   ",
+                    "position": {
+                      "start": {
+                        "line": 5,
+                        "column": 1,
+                        "offset": 199
+                      },
+                      "end": {
+                        "line": 6,
+                        "column": 4,
+                        "offset": 276
+                      },
+                      "indent": [
+                        1
+                      ]
+                    }
+                  },
+                  {
+                    "type": "link",
+                    "url": "#configconfiglogs",
+                    "title": null,
+                    "jsdoc": true,
+                    "children": [
+                      {
+                        "type": "text",
+                        "value": "config.logs"
+                      }
+                    ],
+                    "position": {
+                      "start": {
+                        "line": 6,
+                        "column": 4,
+                        "offset": 276
+                      },
+                      "end": {
+                        "line": 6,
+                        "column": 41,
+                        "offset": 313
+                      },
+                      "indent": []
+                    }
+                  },
+                  {
+                    "type": "text",
+                    "value": "). The SDK will then provide this\n   function with the logged information.",
+                    "position": {
+                      "start": {
+                        "line": 6,
+                        "column": 41,
+                        "offset": 313
+                      },
+                      "end": {
+                        "line": 7,
+                        "column": 41,
+                        "offset": 387
+                      },
+                      "indent": [
+                        1
+                      ]
+                    }
+                  }
+                ],
+                "position": {
+                  "start": {
+                    "line": 5,
+                    "column": 1,
+                    "offset": 199
+                  },
+                  "end": {
+                    "line": 7,
+                    "column": 41,
+                    "offset": 387
+                  },
+                  "indent": [
+                    1,
+                    1
+                  ]
+                }
+              }
+            ],
+            "position": {
+              "start": {
+                "line": 1,
+                "column": 1,
+                "offset": 0
+              },
+              "end": {
+                "line": 7,
+                "column": 41,
+                "offset": 387
+              }
+            }
+          },
+          "tags": [
+            {
+              "title": "public",
+              "description": null,
+              "lineNumber": 9,
+              "type": null
+            },
+            {
+              "title": "static",
+              "description": null,
+              "lineNumber": 10
+            },
+            {
+              "title": "typedef",
+              "description": null,
+              "lineNumber": 11,
+              "type": {
+                "type": "NameExpression",
+                "name": "Function"
+              },
+              "name": "LogHandler"
+            },
+            {
+              "title": "memberof",
+              "description": "logger",
+              "lineNumber": 12
+            },
+            {
+              "title": "requires",
+              "description": null,
+              "lineNumber": 13,
+              "name": "logs"
+            },
+            {
+              "title": "param",
+              "description": "The LogEntry to be logged.",
+              "lineNumber": 14,
+              "type": {
+                "type": "NameExpression",
+                "name": "Object"
+              },
+              "name": "LogEntry"
+            },
+            {
+              "title": "example",
+              "description": "// Define a custom function to handle logs.\nfunction logHandler (logEntry) {\n  // Compile the meta info of the log for a prefix.\n  const { timestamp, level, target } = logEntry\n  let { method } = logEntry\n  const logInfo = `${timestamp} - ${target.type} - ${level}`\n\n  // Assume that the first message parameter is a string.\n  const [log, ...extra] = logEntry.messages\n\n  // For the timer methods, don't actually use the console methods.\n  //    The Logger already did the timing, so simply log out the info.\n  if (['time', 'timeLog', 'timeEnd'].includes(method)) {\n    method = 'debug'\n  }\n\n  console[method](`${logInfo} - ${log}`, ...extra)\n}\n\n// Provide the LogHandler as part of the SDK configurations.\nconst configs = { ... }\nconfigs.logs.handler = logHandler\nconst client = create(configs)",
+              "lineNumber": 15
+            }
+          ],
+          "loc": {
+            "start": {
+              "line": 54,
+              "column": 0
+            },
+            "end": {
+              "line": 93,
+              "column": 3
+            }
+          },
+          "context": {
+            "loc": {
+              "start": {
+                "line": 1,
+                "column": 0
+              },
+              "end": {
+                "line": 94,
+                "column": 0
+              }
+            },
+            "file": "/var/jenkins_home/workspace/Kandy.js_beta/packages/kandy/src/logs/docs.js"
+          },
+          "augments": [],
+          "examples": [
+            {
+              "description": "// Define a custom function to handle logs.\nfunction logHandler (logEntry) {\n  // Compile the meta info of the log for a prefix.\n  const { timestamp, level, target } = logEntry\n  let { method } = logEntry\n  const logInfo = `${timestamp} - ${target.type} - ${level}`\n\n  // Assume that the first message parameter is a string.\n  const [log, ...extra] = logEntry.messages\n\n  // For the timer methods, don't actually use the console methods.\n  //    The Logger already did the timing, so simply log out the info.\n  if (['time', 'timeLog', 'timeEnd'].includes(method)) {\n    method = 'debug'\n  }\n\n  console[method](`${logInfo} - ${log}`, ...extra)\n}\n\n// Provide the LogHandler as part of the SDK configurations.\nconst configs = { ... }\nconfigs.logs.handler = logHandler\nconst client = create(configs)"
+            }
+          ],
+          "params": [
+            {
+              "title": "param",
+              "name": "LogEntry",
+              "lineNumber": 14,
+              "description": {
+                "type": "root",
+                "children": [
+                  {
+                    "type": "paragraph",
+                    "children": [
+                      {
+                        "type": "text",
+                        "value": "The LogEntry to be logged.",
+                        "position": {
+                          "start": {
+                            "line": 1,
+                            "column": 1,
+                            "offset": 0
+                          },
+                          "end": {
+                            "line": 1,
+                            "column": 27,
+                            "offset": 26
+                          },
+                          "indent": []
+                        }
+                      }
+                    ],
+                    "position": {
+                      "start": {
+                        "line": 1,
+                        "column": 1,
+                        "offset": 0
+                      },
+                      "end": {
+                        "line": 1,
+                        "column": 27,
+                        "offset": 26
+                      },
+                      "indent": []
+                    }
+                  }
+                ],
+                "position": {
+                  "start": {
+                    "line": 1,
+                    "column": 1,
+                    "offset": 0
+                  },
+                  "end": {
+                    "line": 1,
+                    "column": 27,
+                    "offset": 26
+                  }
+                }
+              },
+              "type": {
+                "type": "NameExpression",
+                "name": "Object"
+              }
+            }
+          ],
+          "properties": [],
+          "returns": [],
+          "sees": [],
+          "throws": [],
+          "todos": [],
+          "access": "public",
+          "scope": "static",
+          "kind": "typedef",
+          "name": "LogHandler",
+          "type": {
+            "type": "NameExpression",
+            "name": "Function"
+          },
+          "memberof": "logger",
+          "members": {
+            "global": [],
+            "inner": [],
+            "instance": [],
+            "events": [],
+            "static": []
+          },
+          "path": [
+            {
+              "name": "logger",
+              "kind": "namespace"
+            },
+            {
+              "name": "LogHandler",
+              "kind": "typedef",
+              "scope": "static"
+            }
+          ],
+          "namespace": "logger.LogHandler"
         }
       ]
     },
