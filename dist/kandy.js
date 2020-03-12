@@ -1,7 +1,7 @@
 /**
  * Kandy.js
  * kandy.newCallMe.js
- * Version: 4.14.0-beta.333
+ * Version: 4.14.0-beta.334
  */
 (function webpackUniversalModuleDefinition(root, factory) {
 	if(typeof exports === 'object' && typeof module === 'object')
@@ -28438,7 +28438,7 @@ function* unsubscribe(connection, subscriptionURL) {
   };const response = yield (0, _effects2.default)(requestOptions, connection.requestOptions);
 
   if (response.error) {
-    if (response.payload.body) {
+    if (response.payload.body && response.payload.body.subscribeResponse) {
       // Handle errors from the server.
       let { statusCode } = response.payload.body.subscribeResponse;
       log.debug(`Failed to unsubscribe user with status code ${statusCode}.`);
@@ -41284,7 +41284,7 @@ exports.getVersion = getVersion;
  * for the @@ tag below with actual version value.
  */
 function getVersion() {
-  return '4.14.0-beta.333';
+  return '4.14.0-beta.334';
 }
 
 /***/ }),
