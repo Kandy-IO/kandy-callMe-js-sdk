@@ -7,6 +7,10 @@ Kandy.js change log.
 
 ## 4.14.0 - beta
 
+### Fixed
+
+- Added checking for media willSend and willReceive when a Hold operation is received in case the remote side answered an audio only call with audio and video. `KAA-2209`
+
 ### Added
 
 - Add Call support for receiving early media. `KAA-2099`
