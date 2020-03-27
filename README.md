@@ -1,4 +1,4 @@
-# @kandy-io/callme-sdk
+# Kandy CallMe JavaScript SDK
 
 ## Install
 
@@ -14,15 +14,25 @@ To install a particular build branch or beta branch with the Github URL, run:
 
 ### In the browser :
 ```html
-<script src="https://unpkg.com/@kandy-io/callme-sdk@4.13.0/dist/kandy.js"
-  integrity="sha384-ZQVVb4onz5YrWl7vKTZgvrPanEisxQ4T0MWM7cXeSvvoZFNF/3ci6YA2Wp6bMhGW"
+<script src="https://unpkg.com/@kandy-io/callme-sdk@4.14.0/dist/kandy.js"
+  integrity="sha384-5HkxLJvXRBEThsC+QQcGcap+Z6tAxCYSCHoUkzj0lPRondn0j45D4rlY+8iRN0He"
   crossorigin="anonymous">
 </script>
 ```
-## Reference
+## Documentation
 
 The information about tutorials and documents can be found in the links below
 
 * `Documents`: [docs](https://kandy-io.github.io/kandy-callMe-js-sdk/docs)
 
 
+
+## Compatiblity
+
+| Browsers | Versions              | Operating Systems              |
+|----------|-----------------------|--------------------------------|
+| Chrome   | Last 3 Major Versions | Windows, MacOS, Linux, Android |
+| Firefox  | Last 3 Major Versions | Windows, MacOS, Linux          |
+| Edge     | Latest Major Version  | Windows, MacOS                 |
+| Safari   | Latest Major Version  | MacOS, iOS                     |
+| Electron | Last 2 Major Versions | Windows, MacOS, Linux          |
