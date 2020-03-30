@@ -15800,7 +15800,7 @@
                 "children": [
                   {
                     "type": "text",
-                    "value": "The MediaConstraint type defines the format for configuring media options.\nEither the ",
+                    "value": "A collection of media devices and their information.",
                     "position": {
                       "start": {
                         "line": 1,
@@ -15808,115 +15808,9 @@
                         "offset": 0
                       },
                       "end": {
-                        "line": 2,
-                        "column": 12,
-                        "offset": 86
-                      },
-                      "indent": [
-                        1
-                      ]
-                    }
-                  },
-                  {
-                    "type": "inlineCode",
-                    "value": "exact",
-                    "position": {
-                      "start": {
-                        "line": 2,
-                        "column": 12,
-                        "offset": 86
-                      },
-                      "end": {
-                        "line": 2,
-                        "column": 19,
-                        "offset": 93
-                      },
-                      "indent": []
-                    }
-                  },
-                  {
-                    "type": "text",
-                    "value": " or ",
-                    "position": {
-                      "start": {
-                        "line": 2,
-                        "column": 19,
-                        "offset": 93
-                      },
-                      "end": {
-                        "line": 2,
-                        "column": 23,
-                        "offset": 97
-                      },
-                      "indent": []
-                    }
-                  },
-                  {
-                    "type": "inlineCode",
-                    "value": "ideal",
-                    "position": {
-                      "start": {
-                        "line": 2,
-                        "column": 23,
-                        "offset": 97
-                      },
-                      "end": {
-                        "line": 2,
-                        "column": 30,
-                        "offset": 104
-                      },
-                      "indent": []
-                    }
-                  },
-                  {
-                    "type": "text",
-                    "value": " property should be provided. If both are present, the\n   ",
-                    "position": {
-                      "start": {
-                        "line": 2,
-                        "column": 30,
-                        "offset": 104
-                      },
-                      "end": {
-                        "line": 3,
-                        "column": 4,
-                        "offset": 162
-                      },
-                      "indent": [
-                        1
-                      ]
-                    }
-                  },
-                  {
-                    "type": "inlineCode",
-                    "value": "exact",
-                    "position": {
-                      "start": {
-                        "line": 3,
-                        "column": 4,
-                        "offset": 162
-                      },
-                      "end": {
-                        "line": 3,
-                        "column": 11,
-                        "offset": 169
-                      },
-                      "indent": []
-                    }
-                  },
-                  {
-                    "type": "text",
-                    "value": " value will be used.",
-                    "position": {
-                      "start": {
-                        "line": 3,
-                        "column": 11,
-                        "offset": 169
-                      },
-                      "end": {
-                        "line": 3,
-                        "column": 31,
-                        "offset": 189
+                        "line": 1,
+                        "column": 53,
+                        "offset": 52
                       },
                       "indent": []
                     }
@@ -15929,160 +15823,11 @@
                     "offset": 0
                   },
                   "end": {
-                    "line": 3,
-                    "column": 31,
-                    "offset": 189
+                    "line": 1,
+                    "column": 53,
+                    "offset": 52
                   },
-                  "indent": [
-                    1,
-                    1
-                  ]
-                }
-              },
-              {
-                "type": "paragraph",
-                "children": [
-                  {
-                    "type": "text",
-                    "value": "When the ",
-                    "position": {
-                      "start": {
-                        "line": 5,
-                        "column": 1,
-                        "offset": 191
-                      },
-                      "end": {
-                        "line": 5,
-                        "column": 10,
-                        "offset": 200
-                      },
-                      "indent": []
-                    }
-                  },
-                  {
-                    "type": "inlineCode",
-                    "value": "exact",
-                    "position": {
-                      "start": {
-                        "line": 5,
-                        "column": 10,
-                        "offset": 200
-                      },
-                      "end": {
-                        "line": 5,
-                        "column": 17,
-                        "offset": 207
-                      },
-                      "indent": []
-                    }
-                  },
-                  {
-                    "type": "text",
-                    "value": " value is provided, it will be the only value considered for the option.\n   If it cannot be used, the constraint will be considered an error.",
-                    "position": {
-                      "start": {
-                        "line": 5,
-                        "column": 17,
-                        "offset": 207
-                      },
-                      "end": {
-                        "line": 6,
-                        "column": 69,
-                        "offset": 348
-                      },
-                      "indent": [
-                        1
-                      ]
-                    }
-                  }
-                ],
-                "position": {
-                  "start": {
-                    "line": 5,
-                    "column": 1,
-                    "offset": 191
-                  },
-                  "end": {
-                    "line": 6,
-                    "column": 69,
-                    "offset": 348
-                  },
-                  "indent": [
-                    1
-                  ]
-                }
-              },
-              {
-                "type": "paragraph",
-                "children": [
-                  {
-                    "type": "text",
-                    "value": "When the ",
-                    "position": {
-                      "start": {
-                        "line": 8,
-                        "column": 1,
-                        "offset": 350
-                      },
-                      "end": {
-                        "line": 8,
-                        "column": 10,
-                        "offset": 359
-                      },
-                      "indent": []
-                    }
-                  },
-                  {
-                    "type": "inlineCode",
-                    "value": "ideal",
-                    "position": {
-                      "start": {
-                        "line": 8,
-                        "column": 10,
-                        "offset": 359
-                      },
-                      "end": {
-                        "line": 8,
-                        "column": 17,
-                        "offset": 366
-                      },
-                      "indent": []
-                    }
-                  },
-                  {
-                    "type": "text",
-                    "value": " value is provided, it will be considered as the optimal value for the option.\n   If it cannot be used, the closest acceptable value will be used instead.",
-                    "position": {
-                      "start": {
-                        "line": 8,
-                        "column": 17,
-                        "offset": 366
-                      },
-                      "end": {
-                        "line": 9,
-                        "column": 76,
-                        "offset": 520
-                      },
-                      "indent": [
-                        1
-                      ]
-                    }
-                  }
-                ],
-                "position": {
-                  "start": {
-                    "line": 8,
-                    "column": 1,
-                    "offset": 350
-                  },
-                  "end": {
-                    "line": 9,
-                    "column": 76,
-                    "offset": 520
-                  },
-                  "indent": [
-                    1
-                  ]
+                  "indent": []
                 }
               }
             ],
@@ -16093,9 +15838,9 @@
                 "offset": 0
               },
               "end": {
-                "line": 9,
-                "column": 76,
-                "offset": 520
+                "line": 1,
+                "column": 53,
+                "offset": 52
               }
             }
           },
@@ -16103,68 +15848,94 @@
             {
               "title": "public",
               "description": null,
-              "lineNumber": 11,
+              "lineNumber": 3,
               "type": null
             },
             {
               "title": "static",
               "description": null,
-              "lineNumber": 12
+              "lineNumber": 4
             },
             {
               "title": "typedef",
               "description": null,
-              "lineNumber": 13,
+              "lineNumber": 5,
               "type": {
                 "type": "NameExpression",
                 "name": "Object"
               },
-              "name": "MediaConstraint"
+              "name": "DevicesObject"
             },
             {
               "title": "memberof",
               "description": "call",
-              "lineNumber": 14
+              "lineNumber": 6
             },
             {
               "title": "property",
-              "description": "The required value for the constraint. Other values will not be accepted.",
-              "lineNumber": 15,
+              "description": "A list of camera device information.",
+              "lineNumber": 7,
               "type": {
-                "type": "OptionalType",
+                "type": "TypeApplication",
                 "expression": {
                   "type": "NameExpression",
-                  "name": "string"
-                }
+                  "name": "Array"
+                },
+                "applications": [
+                  {
+                    "type": "NameExpression",
+                    "name": "call.DeviceInfo"
+                  }
+                ]
               },
-              "name": "exact"
+              "name": "camera"
             },
             {
               "title": "property",
-              "description": "The ideal value for the constraint. Other values will be considered if necessary.",
-              "lineNumber": 16,
+              "description": "A list of microphone device information.",
+              "lineNumber": 8,
               "type": {
-                "type": "OptionalType",
+                "type": "TypeApplication",
                 "expression": {
                   "type": "NameExpression",
-                  "name": "string"
-                }
+                  "name": "Array"
+                },
+                "applications": [
+                  {
+                    "type": "NameExpression",
+                    "name": "call.DeviceInfo"
+                  }
+                ]
               },
-              "name": "ideal"
+              "name": "microphone"
             },
             {
-              "title": "example",
-              "description": "// Specify video resolution when making a call.\nclient.call.make(destination, {\n   audio: true,\n   video: true,\n   videoOptions: {\n     // Set height and width constraints to ideally be 1280x720.\n     height: { ideal: 720 },\n     width: { ideal: 1280 }\n   }\n})",
-              "lineNumber": 17
+              "title": "property",
+              "description": "A list of speaker device information.",
+              "lineNumber": 9,
+              "type": {
+                "type": "TypeApplication",
+                "expression": {
+                  "type": "NameExpression",
+                  "name": "Array"
+                },
+                "applications": [
+                  {
+                    "type": "NameExpression",
+                    "name": "call.DeviceInfo"
+                  }
+                ]
+              },
+              "name": "speaker"
             }
           ],
           "loc": {
             "start": {
-              "line": 89,
+              "line": 201,
               "column": 0
             },
             "end": {
-              "line": 117,
+              "line": 211,
               "column": 3
             }
           },
@@ -16182,17 +15953,13 @@
             "file": "/var/jenkins_home/workspace/Kandy.js_beta/packages/kandy/src/call/interfaceNew/api/index.js"
           },
           "augments": [],
-          "examples": [
-            {
-              "description": "// Specify video resolution when making a call.\nclient.call.make(destination, {\n   audio: true,\n   video: true,\n   videoOptions: {\n     // Set height and width constraints to ideally be 1280x720.\n     height: { ideal: 720 },\n     width: { ideal: 1280 }\n   }\n})"
-            }
-          ],
+          "examples": [],
           "params": [],
           "properties": [
             {
               "title": "property",
-              "name": "exact",
-              "lineNumber": 15,
+              "name": "camera",
+              "lineNumber": 7,
               "description": {
                 "type": "root",
                 "children": [
@@ -16201,7 +15968,7 @@
                     "children": [
                       {
                         "type": "text",
-                        "value": "The required value for the constraint. Other values will not be accepted.",
+                        "value": "A list of camera device information.",
                         "position": {
                           "start": {
                             "line": 1,
@@ -16210,8 +15977,8 @@
                           },
                           "end": {
                             "line": 1,
-                            "column": 74,
-                            "offset": 73
+                            "column": 37,
+                            "offset": 36
                           },
                           "indent": []
                         }
@@ -16225,8 +15992,8 @@
                       },
                       "end": {
                         "line": 1,
-                        "column": 74,
-                        "offset": 73
+                        "column": 37,
+                        "offset": 36
                       },
                       "indent": []
                     }
@@ -16240,23 +16007,29 @@
                   },
                   "end": {
                     "line": 1,
-                    "column": 74,
-                    "offset": 73
+                    "column": 37,
+                    "offset": 36
                   }
                 }
               },
               "type": {
-                "type": "OptionalType",
+                "type": "TypeApplication",
                 "expression": {
                   "type": "NameExpression",
-                  "name": "string"
-                }
+                  "name": "Array"
+                },
+                "applications": [
+                  {
+                    "type": "NameExpression",
+                    "name": "call.DeviceInfo"
+                  }
+                ]
               }
             },
             {
               "title": "property",
-              "name": "ideal",
-              "lineNumber": 16,
+              "name": "microphone",
+              "lineNumber": 8,
               "description": {
                 "type": "root",
                 "children": [
@@ -16265,7 +16038,7 @@
                     "children": [
                       {
                         "type": "text",
-                        "value": "The ideal value for the constraint. Other values will be considered if necessary.",
+                        "value": "A list of microphone device information.",
                         "position": {
                           "start": {
                             "line": 1,
@@ -16274,8 +16047,8 @@
                           },
                           "end": {
                             "line": 1,
-                            "column": 82,
-                            "offset": 81
+                            "column": 41,
+                            "offset": 40
                           },
                           "indent": []
                         }
@@ -16289,8 +16062,8 @@
                       },
                       "end": {
                         "line": 1,
-                        "column": 82,
-                        "offset": 81
+                        "column": 41,
+                        "offset": 40
                       },
                       "indent": []
                     }
@@ -16304,17 +16077,93 @@
                   },
                   "end": {
                     "line": 1,
-                    "column": 82,
-                    "offset": 81
+                    "column": 41,
+                    "offset": 40
                   }
                 }
               },
               "type": {
-                "type": "OptionalType",
+                "type": "TypeApplication",
                 "expression": {
                   "type": "NameExpression",
-                  "name": "string"
+                  "name": "Array"
+                },
+                "applications": [
+                  {
+                    "type": "NameExpression",
+                    "name": "call.DeviceInfo"
+                  }
+                ]
+              }
+            },
+            {
+              "title": "property",
+              "name": "speaker",
+              "lineNumber": 9,
+              "description": {
+                "type": "root",
+                "children": [
+                  {
+                    "type": "paragraph",
+                    "children": [
+                      {
+                        "type": "text",
+                        "value": "A list of speaker device information.",
+                        "position": {
+                          "start": {
+                            "line": 1,
+                            "column": 1,
+                            "offset": 0
+                          },
+                          "end": {
+                            "line": 1,
+                            "column": 38,
+                            "offset": 37
+                          },
+                          "indent": []
+                        }
+                      }
+                    ],
+                    "position": {
+                      "start": {
+                        "line": 1,
+                        "column": 1,
+                        "offset": 0
+                      },
+                      "end": {
+                        "line": 1,
+                        "column": 38,
+                        "offset": 37
+                      },
+                      "indent": []
+                    }
+                  }
+                ],
+                "position": {
+                  "start": {
+                    "line": 1,
+                    "column": 1,
+                    "offset": 0
+                  },
+                  "end": {
+                    "line": 1,
+                    "column": 38,
+                    "offset": 37
+                  }
                 }
+              },
+              "type": {
+                "type": "TypeApplication",
+                "expression": {
+                  "type": "NameExpression",
+                  "name": "Array"
+                },
+                "applications": [
+                  {
+                    "type": "NameExpression",
+                    "name": "call.DeviceInfo"
+                  }
+                ]
               }
             }
           ],
@@ -16325,7 +16174,7 @@
           "access": "public",
           "scope": "static",
           "kind": "typedef",
-          "name": "MediaConstraint",
+          "name": "DevicesObject",
           "type": {
             "type": "NameExpression",
             "name": "Object"
@@ -16343,12 +16192,12 @@
               "name": "call"
             },
             {
-              "name": "MediaConstraint",
+              "name": "DevicesObject",
               "kind": "typedef",
               "scope": "static"
             }
           ],
-          "namespace": "call.MediaConstraint"
+          "namespace": "call.DevicesObject"
         },
         {
           "description": {
@@ -17156,873 +17005,6 @@
             }
           ],
           "namespace": "call.CustomParameter"
-        },
-        {
-          "description": {
-            "type": "root",
-            "children": [
-              {
-                "type": "paragraph",
-                "children": [
-                  {
-                    "type": "text",
-                    "value": "Contains information about a device.",
-                    "position": {
-                      "start": {
-                        "line": 1,
-                        "column": 1,
-                        "offset": 0
-                      },
-                      "end": {
-                        "line": 1,
-                        "column": 37,
-                        "offset": 36
-                      },
-                      "indent": []
-                    }
-                  }
-                ],
-                "position": {
-                  "start": {
-                    "line": 1,
-                    "column": 1,
-                    "offset": 0
-                  },
-                  "end": {
-                    "line": 1,
-                    "column": 37,
-                    "offset": 36
-                  },
-                  "indent": []
-                }
-              }
-            ],
-            "position": {
-              "start": {
-                "line": 1,
-                "column": 1,
-                "offset": 0
-              },
-              "end": {
-                "line": 1,
-                "column": 37,
-                "offset": 36
-              }
-            }
-          },
-          "tags": [
-            {
-              "title": "public",
-              "description": null,
-              "lineNumber": 3,
-              "type": null
-            },
-            {
-              "title": "static",
-              "description": null,
-              "lineNumber": 4
-            },
-            {
-              "title": "typedef",
-              "description": null,
-              "lineNumber": 5,
-              "type": {
-                "type": "NameExpression",
-                "name": "Object"
-              },
-              "name": "DeviceInfo"
-            },
-            {
-              "title": "memberof",
-              "description": "call",
-              "lineNumber": 6
-            },
-            {
-              "title": "property",
-              "description": "The ID of the device.",
-              "lineNumber": 7,
-              "type": {
-                "type": "NameExpression",
-                "name": "string"
-              },
-              "name": "deviceId"
-            },
-            {
-              "title": "property",
-              "description": "The group ID of the device. Devices that share a `groupId` belong to the same physical device.",
-              "lineNumber": 8,
-              "type": {
-                "type": "NameExpression",
-                "name": "string"
-              },
-              "name": "groupId"
-            },
-            {
-              "title": "property",
-              "description": "The type of the device (audioinput, audiooutput, videoinput).",
-              "lineNumber": 9,
-              "type": {
-                "type": "NameExpression",
-                "name": "string"
-              },
-              "name": "kind"
-            },
-            {
-              "title": "property",
-              "description": "The name of the device.",
-              "lineNumber": 10,
-              "type": {
-                "type": "NameExpression",
-                "name": "string"
-              },
-              "name": "label"
-            }
-          ],
-          "loc": {
-            "start": {
-              "line": 213,
-              "column": 0
-            },
-            "end": {
-              "line": 224,
-              "column": 3
-            }
-          },
-          "context": {
-            "loc": {
-              "start": {
-                "line": 275,
-                "column": 0
-              },
-              "end": {
-                "line": 279,
-                "column": 1
-              }
-            },
-            "file": "/var/jenkins_home/workspace/Kandy.js_beta/packages/kandy/src/call/interfaceNew/api/index.js"
-          },
-          "augments": [],
-          "examples": [],
-          "params": [],
-          "properties": [
-            {
-              "title": "property",
-              "name": "deviceId",
-              "lineNumber": 7,
-              "description": {
-                "type": "root",
-                "children": [
-                  {
-                    "type": "paragraph",
-                    "children": [
-                      {
-                        "type": "text",
-                        "value": "The ID of the device.",
-                        "position": {
-                          "start": {
-                            "line": 1,
-                            "column": 1,
-                            "offset": 0
-                          },
-                          "end": {
-                            "line": 1,
-                            "column": 22,
-                            "offset": 21
-                          },
-                          "indent": []
-                        }
-                      }
-                    ],
-                    "position": {
-                      "start": {
-                        "line": 1,
-                        "column": 1,
-                        "offset": 0
-                      },
-                      "end": {
-                        "line": 1,
-                        "column": 22,
-                        "offset": 21
-                      },
-                      "indent": []
-                    }
-                  }
-                ],
-                "position": {
-                  "start": {
-                    "line": 1,
-                    "column": 1,
-                    "offset": 0
-                  },
-                  "end": {
-                    "line": 1,
-                    "column": 22,
-                    "offset": 21
-                  }
-                }
-              },
-              "type": {
-                "type": "NameExpression",
-                "name": "string"
-              }
-            },
-            {
-              "title": "property",
-              "name": "groupId",
-              "lineNumber": 8,
-              "description": {
-                "type": "root",
-                "children": [
-                  {
-                    "type": "paragraph",
-                    "children": [
-                      {
-                        "type": "text",
-                        "value": "The group ID of the device. Devices that share a ",
-                        "position": {
-                          "start": {
-                            "line": 1,
-                            "column": 1,
-                            "offset": 0
-                          },
-                          "end": {
-                            "line": 1,
-                            "column": 50,
-                            "offset": 49
-                          },
-                          "indent": []
-                        }
-                      },
-                      {
-                        "type": "inlineCode",
-                        "value": "groupId",
-                        "position": {
-                          "start": {
-                            "line": 1,
-                            "column": 50,
-                            "offset": 49
-                          },
-                          "end": {
-                            "line": 1,
-                            "column": 59,
-                            "offset": 58
-                          },
-                          "indent": []
-                        }
-                      },
-                      {
-                        "type": "text",
-                        "value": " belong to the same physical device.",
-                        "position": {
-                          "start": {
-                            "line": 1,
-                            "column": 59,
-                            "offset": 58
-                          },
-                          "end": {
-                            "line": 1,
-                            "column": 95,
-                            "offset": 94
-                          },
-                          "indent": []
-                        }
-                      }
-                    ],
-                    "position": {
-                      "start": {
-                        "line": 1,
-                        "column": 1,
-                        "offset": 0
-                      },
-                      "end": {
-                        "line": 1,
-                        "column": 95,
-                        "offset": 94
-                      },
-                      "indent": []
-                    }
-                  }
-                ],
-                "position": {
-                  "start": {
-                    "line": 1,
-                    "column": 1,
-                    "offset": 0
-                  },
-                  "end": {
-                    "line": 1,
-                    "column": 95,
-                    "offset": 94
-                  }
-                }
-              },
-              "type": {
-                "type": "NameExpression",
-                "name": "string"
-              }
-            },
-            {
-              "title": "property",
-              "name": "kind",
-              "lineNumber": 9,
-              "description": {
-                "type": "root",
-                "children": [
-                  {
-                    "type": "paragraph",
-                    "children": [
-                      {
-                        "type": "text",
-                        "value": "The type of the device (audioinput, audiooutput, videoinput).",
-                        "position": {
-                          "start": {
-                            "line": 1,
-                            "column": 1,
-                            "offset": 0
-                          },
-                          "end": {
-                            "line": 1,
-                            "column": 62,
-                            "offset": 61
-                          },
-                          "indent": []
-                        }
-                      }
-                    ],
-                    "position": {
-                      "start": {
-                        "line": 1,
-                        "column": 1,
-                        "offset": 0
-                      },
-                      "end": {
-                        "line": 1,
-                        "column": 62,
-                        "offset": 61
-                      },
-                      "indent": []
-                    }
-                  }
-                ],
-                "position": {
-                  "start": {
-                    "line": 1,
-                    "column": 1,
-                    "offset": 0
-                  },
-                  "end": {
-                    "line": 1,
-                    "column": 62,
-                    "offset": 61
-                  }
-                }
-              },
-              "type": {
-                "type": "NameExpression",
-                "name": "string"
-              }
-            },
-            {
-              "title": "property",
-              "name": "label",
-              "lineNumber": 10,
-              "description": {
-                "type": "root",
-                "children": [
-                  {
-                    "type": "paragraph",
-                    "children": [
-                      {
-                        "type": "text",
-                        "value": "The name of the device.",
-                        "position": {
-                          "start": {
-                            "line": 1,
-                            "column": 1,
-                            "offset": 0
-                          },
-                          "end": {
-                            "line": 1,
-                            "column": 24,
-                            "offset": 23
-                          },
-                          "indent": []
-                        }
-                      }
-                    ],
-                    "position": {
-                      "start": {
-                        "line": 1,
-                        "column": 1,
-                        "offset": 0
-                      },
-                      "end": {
-                        "line": 1,
-                        "column": 24,
-                        "offset": 23
-                      },
-                      "indent": []
-                    }
-                  }
-                ],
-                "position": {
-                  "start": {
-                    "line": 1,
-                    "column": 1,
-                    "offset": 0
-                  },
-                  "end": {
-                    "line": 1,
-                    "column": 24,
-                    "offset": 23
-                  }
-                }
-              },
-              "type": {
-                "type": "NameExpression",
-                "name": "string"
-              }
-            }
-          ],
-          "returns": [],
-          "sees": [],
-          "throws": [],
-          "todos": [],
-          "access": "public",
-          "scope": "static",
-          "kind": "typedef",
-          "name": "DeviceInfo",
-          "type": {
-            "type": "NameExpression",
-            "name": "Object"
-          },
-          "memberof": "call",
-          "members": {
-            "global": [],
-            "inner": [],
-            "instance": [],
-            "events": [],
-            "static": []
-          },
-          "path": [
-            {
-              "name": "call"
-            },
-            {
-              "name": "DeviceInfo",
-              "kind": "typedef",
-              "scope": "static"
-            }
-          ],
-          "namespace": "call.DeviceInfo"
-        },
-        {
-          "description": {
-            "type": "root",
-            "children": [
-              {
-                "type": "paragraph",
-                "children": [
-                  {
-                    "type": "text",
-                    "value": "A collection of media devices and their information.",
-                    "position": {
-                      "start": {
-                        "line": 1,
-                        "column": 1,
-                        "offset": 0
-                      },
-                      "end": {
-                        "line": 1,
-                        "column": 53,
-                        "offset": 52
-                      },
-                      "indent": []
-                    }
-                  }
-                ],
-                "position": {
-                  "start": {
-                    "line": 1,
-                    "column": 1,
-                    "offset": 0
-                  },
-                  "end": {
-                    "line": 1,
-                    "column": 53,
-                    "offset": 52
-                  },
-                  "indent": []
-                }
-              }
-            ],
-            "position": {
-              "start": {
-                "line": 1,
-                "column": 1,
-                "offset": 0
-              },
-              "end": {
-                "line": 1,
-                "column": 53,
-                "offset": 52
-              }
-            }
-          },
-          "tags": [
-            {
-              "title": "public",
-              "description": null,
-              "lineNumber": 3,
-              "type": null
-            },
-            {
-              "title": "static",
-              "description": null,
-              "lineNumber": 4
-            },
-            {
-              "title": "typedef",
-              "description": null,
-              "lineNumber": 5,
-              "type": {
-                "type": "NameExpression",
-                "name": "Object"
-              },
-              "name": "DevicesObject"
-            },
-            {
-              "title": "memberof",
-              "description": "call",
-              "lineNumber": 6
-            },
-            {
-              "title": "property",
-              "description": "A list of camera device information.",
-              "lineNumber": 7,
-              "type": {
-                "type": "TypeApplication",
-                "expression": {
-                  "type": "NameExpression",
-                  "name": "Array"
-                },
-                "applications": [
-                  {
-                    "type": "NameExpression",
-                    "name": "call.DeviceInfo"
-                  }
-                ]
-              },
-              "name": "camera"
-            },
-            {
-              "title": "property",
-              "description": "A list of microphone device information.",
-              "lineNumber": 8,
-              "type": {
-                "type": "TypeApplication",
-                "expression": {
-                  "type": "NameExpression",
-                  "name": "Array"
-                },
-                "applications": [
-                  {
-                    "type": "NameExpression",
-                    "name": "call.DeviceInfo"
-                  }
-                ]
-              },
-              "name": "microphone"
-            },
-            {
-              "title": "property",
-              "description": "A list of speaker device information.",
-              "lineNumber": 9,
-              "type": {
-                "type": "TypeApplication",
-                "expression": {
-                  "type": "NameExpression",
-                  "name": "Array"
-                },
-                "applications": [
-                  {
-                    "type": "NameExpression",
-                    "name": "call.DeviceInfo"
-                  }
-                ]
-              },
-              "name": "speaker"
-            }
-          ],
-          "loc": {
-            "start": {
-              "line": 201,
-              "column": 0
-            },
-            "end": {
-              "line": 211,
-              "column": 3
-            }
-          },
-          "context": {
-            "loc": {
-              "start": {
-                "line": 275,
-                "column": 0
-              },
-              "end": {
-                "line": 279,
-                "column": 1
-              }
-            },
-            "file": "/var/jenkins_home/workspace/Kandy.js_beta/packages/kandy/src/call/interfaceNew/api/index.js"
-          },
-          "augments": [],
-          "examples": [],
-          "params": [],
-          "properties": [
-            {
-              "title": "property",
-              "name": "camera",
-              "lineNumber": 7,
-              "description": {
-                "type": "root",
-                "children": [
-                  {
-                    "type": "paragraph",
-                    "children": [
-                      {
-                        "type": "text",
-                        "value": "A list of camera device information.",
-                        "position": {
-                          "start": {
-                            "line": 1,
-                            "column": 1,
-                            "offset": 0
-                          },
-                          "end": {
-                            "line": 1,
-                            "column": 37,
-                            "offset": 36
-                          },
-                          "indent": []
-                        }
-                      }
-                    ],
-                    "position": {
-                      "start": {
-                        "line": 1,
-                        "column": 1,
-                        "offset": 0
-                      },
-                      "end": {
-                        "line": 1,
-                        "column": 37,
-                        "offset": 36
-                      },
-                      "indent": []
-                    }
-                  }
-                ],
-                "position": {
-                  "start": {
-                    "line": 1,
-                    "column": 1,
-                    "offset": 0
-                  },
-                  "end": {
-                    "line": 1,
-                    "column": 37,
-                    "offset": 36
-                  }
-                }
-              },
-              "type": {
-                "type": "TypeApplication",
-                "expression": {
-                  "type": "NameExpression",
-                  "name": "Array"
-                },
-                "applications": [
-                  {
-                    "type": "NameExpression",
-                    "name": "call.DeviceInfo"
-                  }
-                ]
-              }
-            },
-            {
-              "title": "property",
-              "name": "microphone",
-              "lineNumber": 8,
-              "description": {
-                "type": "root",
-                "children": [
-                  {
-                    "type": "paragraph",
-                    "children": [
-                      {
-                        "type": "text",
-                        "value": "A list of microphone device information.",
-                        "position": {
-                          "start": {
-                            "line": 1,
-                            "column": 1,
-                            "offset": 0
-                          },
-                          "end": {
-                            "line": 1,
-                            "column": 41,
-                            "offset": 40
-                          },
-                          "indent": []
-                        }
-                      }
-                    ],
-                    "position": {
-                      "start": {
-                        "line": 1,
-                        "column": 1,
-                        "offset": 0
-                      },
-                      "end": {
-                        "line": 1,
-                        "column": 41,
-                        "offset": 40
-                      },
-                      "indent": []
-                    }
-                  }
-                ],
-                "position": {
-                  "start": {
-                    "line": 1,
-                    "column": 1,
-                    "offset": 0
-                  },
-                  "end": {
-                    "line": 1,
-                    "column": 41,
-                    "offset": 40
-                  }
-                }
-              },
-              "type": {
-                "type": "TypeApplication",
-                "expression": {
-                  "type": "NameExpression",
-                  "name": "Array"
-                },
-                "applications": [
-                  {
-                    "type": "NameExpression",
-                    "name": "call.DeviceInfo"
-                  }
-                ]
-              }
-            },
-            {
-              "title": "property",
-              "name": "speaker",
-              "lineNumber": 9,
-              "description": {
-                "type": "root",
-                "children": [
-                  {
-                    "type": "paragraph",
-                    "children": [
-                      {
-                        "type": "text",
-                        "value": "A list of speaker device information.",
-                        "position": {
-                          "start": {
-                            "line": 1,
-                            "column": 1,
-                            "offset": 0
-                          },
-                          "end": {
-                            "line": 1,
-                            "column": 38,
-                            "offset": 37
-                          },
-                          "indent": []
-                        }
-                      }
-                    ],
-                    "position": {
-                      "start": {
-                        "line": 1,
-                        "column": 1,
-                        "offset": 0
-                      },
-                      "end": {
-                        "line": 1,
-                        "column": 38,
-                        "offset": 37
-                      },
-                      "indent": []
-                    }
-                  }
-                ],
-                "position": {
-                  "start": {
-                    "line": 1,
-                    "column": 1,
-                    "offset": 0
-                  },
-                  "end": {
-                    "line": 1,
-                    "column": 38,
-                    "offset": 37
-                  }
-                }
-              },
-              "type": {
-                "type": "TypeApplication",
-                "expression": {
-                  "type": "NameExpression",
-                  "name": "Array"
-                },
-                "applications": [
-                  {
-                    "type": "NameExpression",
-                    "name": "call.DeviceInfo"
-                  }
-                ]
-              }
-            }
-          ],
-          "returns": [],
-          "sees": [],
-          "throws": [],
-          "todos": [],
-          "access": "public",
-          "scope": "static",
-          "kind": "typedef",
-          "name": "DevicesObject",
-          "type": {
-            "type": "NameExpression",
-            "name": "Object"
-          },
-          "memberof": "call",
-          "members": {
-            "global": [],
-            "inner": [],
-            "instance": [],
-            "events": [],
-            "static": []
-          },
-          "path": [
-            {
-              "name": "call"
-            },
-            {
-              "name": "DevicesObject",
-              "kind": "typedef",
-              "scope": "static"
-            }
-          ],
-          "namespace": "call.DevicesObject"
         },
         {
           "description": {
@@ -19821,83 +18803,133 @@
           "namespace": "call.SdpHandlerInfo"
         },
         {
-          "description": "",
+          "description": {
+            "type": "root",
+            "children": [
+              {
+                "type": "paragraph",
+                "children": [
+                  {
+                    "type": "text",
+                    "value": "Contains information about a device.",
+                    "position": {
+                      "start": {
+                        "line": 1,
+                        "column": 1,
+                        "offset": 0
+                      },
+                      "end": {
+                        "line": 1,
+                        "column": 37,
+                        "offset": 36
+                      },
+                      "indent": []
+                    }
+                  }
+                ],
+                "position": {
+                  "start": {
+                    "line": 1,
+                    "column": 1,
+                    "offset": 0
+                  },
+                  "end": {
+                    "line": 1,
+                    "column": 37,
+                    "offset": 36
+                  },
+                  "indent": []
+                }
+              }
+            ],
+            "position": {
+              "start": {
+                "line": 1,
+                "column": 1,
+                "offset": 0
+              },
+              "end": {
+                "line": 1,
+                "column": 37,
+                "offset": 36
+              }
+            }
+          },
           "tags": [
             {
               "title": "public",
               "description": null,
-              "lineNumber": 1,
+              "lineNumber": 3,
               "type": null
             },
             {
               "title": "static",
               "description": null,
-              "lineNumber": 2
+              "lineNumber": 4
             },
             {
               "title": "typedef",
               "description": null,
-              "lineNumber": 3,
+              "lineNumber": 5,
               "type": {
                 "type": "NameExpression",
                 "name": "Object"
               },
-              "name": "IceServer"
+              "name": "DeviceInfo"
             },
             {
               "title": "memberof",
               "description": "call",
-              "lineNumber": 4
+              "lineNumber": 6
             },
             {
               "title": "property",
-              "description": "Either an array of URLs for reaching out several ICE servers or a single URL for reaching one ICE server. See {@link https://developer.mozilla.org/en-US/docs/Web/API/RTCIceServer/urls RTCIceServers.urls documentation} to learn more about the actual url format.",
-              "lineNumber": 5,
+              "description": "The ID of the device.",
+              "lineNumber": 7,
               "type": {
-                "type": "UnionType",
-                "elements": [
-                  {
-                    "type": "TypeApplication",
-                    "expression": {
-                      "type": "NameExpression",
-                      "name": "Array"
-                    },
-                    "applications": [
-                      {
-                        "type": "NameExpression",
-                        "name": "string"
-                      }
-                    ]
-                  },
-                  {
-                    "type": "NameExpression",
-                    "name": "string"
-                  }
-                ]
+                "type": "NameExpression",
+                "name": "string"
               },
-              "name": "urls"
+              "name": "deviceId"
             },
             {
               "title": "property",
-              "description": "The credential needed by the ICE server.",
-              "lineNumber": 6,
+              "description": "The group ID of the device. Devices that share a `groupId` belong to the same physical device.",
+              "lineNumber": 8,
               "type": {
-                "type": "OptionalType",
-                "expression": {
-                  "type": "NameExpression",
-                  "name": "string"
-                }
+                "type": "NameExpression",
+                "name": "string"
               },
-              "name": "credential"
+              "name": "groupId"
+            },
+            {
+              "title": "property",
+              "description": "The type of the device (audioinput, audiooutput, videoinput).",
+              "lineNumber": 9,
+              "type": {
+                "type": "NameExpression",
+                "name": "string"
+              },
+              "name": "kind"
+            },
+            {
+              "title": "property",
+              "description": "The name of the device.",
+              "lineNumber": 10,
+              "type": {
+                "type": "NameExpression",
+                "name": "string"
+              },
+              "name": "label"
             }
           ],
           "loc": {
             "start": {
-              "line": 140,
+              "line": 213,
               "column": 0
             },
             "end": {
-              "line": 147,
+              "line": 224,
               "column": 3
             }
           },
@@ -19920,8 +18952,8 @@
           "properties": [
             {
               "title": "property",
-              "name": "urls",
-              "lineNumber": 5,
+              "name": "deviceId",
+              "lineNumber": 7,
               "description": {
                 "type": "root",
                 "children": [
@@ -19930,7 +18962,7 @@
                     "children": [
                       {
                         "type": "text",
-                        "value": "Either an array of URLs for reaching out several ICE servers or a single URL for reaching one ICE server. See ",
+                        "value": "The ID of the device.",
                         "position": {
                           "start": {
                             "line": 1,
@@ -19939,50 +18971,8 @@
                           },
                           "end": {
                             "line": 1,
-                            "column": 111,
-                            "offset": 110
-                          },
-                          "indent": []
-                        }
-                      },
-                      {
-                        "type": "link",
-                        "url": "https://developer.mozilla.org/en-US/docs/Web/API/RTCIceServer/urls",
-                        "title": null,
-                        "jsdoc": true,
-                        "children": [
-                          {
-                            "type": "text",
-                            "value": "RTCIceServers.urls documentation"
-                          }
-                        ],
-                        "position": {
-                          "start": {
-                            "line": 1,
-                            "column": 111,
-                            "offset": 110
-                          },
-                          "end": {
-                            "line": 1,
-                            "column": 218,
-                            "offset": 217
-                          },
-                          "indent": []
-                        }
-                      },
-                      {
-                        "type": "text",
-                        "value": " to learn more about the actual url format.",
-                        "position": {
-                          "start": {
-                            "line": 1,
-                            "column": 218,
-                            "offset": 217
-                          },
-                          "end": {
-                            "line": 1,
-                            "column": 261,
-                            "offset": 260
+                            "column": 22,
+                            "offset": 21
                           },
                           "indent": []
                         }
@@ -19996,8 +18986,8 @@
                       },
                       "end": {
                         "line": 1,
-                        "column": 261,
-                        "offset": 260
+                        "column": 22,
+                        "offset": 21
                       },
                       "indent": []
                     }
@@ -20011,38 +19001,20 @@
                   },
                   "end": {
                     "line": 1,
-                    "column": 261,
-                    "offset": 260
+                    "column": 22,
+                    "offset": 21
                   }
                 }
               },
               "type": {
-                "type": "UnionType",
-                "elements": [
-                  {
-                    "type": "TypeApplication",
-                    "expression": {
-                      "type": "NameExpression",
-                      "name": "Array"
-                    },
-                    "applications": [
-                      {
-                        "type": "NameExpression",
-                        "name": "string"
-                      }
-                    ]
-                  },
-                  {
-                    "type": "NameExpression",
-                    "name": "string"
-                  }
-                ]
+                "type": "NameExpression",
+                "name": "string"
               }
             },
             {
               "title": "property",
-              "name": "credential",
-              "lineNumber": 6,
+              "name": "groupId",
+              "lineNumber": 8,
               "description": {
                 "type": "root",
                 "children": [
@@ -20051,7 +19023,7 @@
                     "children": [
                       {
                         "type": "text",
-                        "value": "The credential needed by the ICE server.",
+                        "value": "The group ID of the device. Devices that share a ",
                         "position": {
                           "start": {
                             "line": 1,
@@ -20060,8 +19032,42 @@
                           },
                           "end": {
                             "line": 1,
-                            "column": 41,
-                            "offset": 40
+                            "column": 50,
+                            "offset": 49
+                          },
+                          "indent": []
+                        }
+                      },
+                      {
+                        "type": "inlineCode",
+                        "value": "groupId",
+                        "position": {
+                          "start": {
+                            "line": 1,
+                            "column": 50,
+                            "offset": 49
+                          },
+                          "end": {
+                            "line": 1,
+                            "column": 59,
+                            "offset": 58
+                          },
+                          "indent": []
+                        }
+                      },
+                      {
+                        "type": "text",
+                        "value": " belong to the same physical device.",
+                        "position": {
+                          "start": {
+                            "line": 1,
+                            "column": 59,
+                            "offset": 58
+                          },
+                          "end": {
+                            "line": 1,
+                            "column": 95,
+                            "offset": 94
                           },
                           "indent": []
                         }
@@ -20075,8 +19081,8 @@
                       },
                       "end": {
                         "line": 1,
-                        "column": 41,
-                        "offset": 40
+                        "column": 95,
+                        "offset": 94
                       },
                       "indent": []
                     }
@@ -20090,17 +19096,136 @@
                   },
                   "end": {
                     "line": 1,
-                    "column": 41,
-                    "offset": 40
+                    "column": 95,
+                    "offset": 94
                   }
                 }
               },
               "type": {
-                "type": "OptionalType",
-                "expression": {
-                  "type": "NameExpression",
-                  "name": "string"
+                "type": "NameExpression",
+                "name": "string"
+              }
+            },
+            {
+              "title": "property",
+              "name": "kind",
+              "lineNumber": 9,
+              "description": {
+                "type": "root",
+                "children": [
+                  {
+                    "type": "paragraph",
+                    "children": [
+                      {
+                        "type": "text",
+                        "value": "The type of the device (audioinput, audiooutput, videoinput).",
+                        "position": {
+                          "start": {
+                            "line": 1,
+                            "column": 1,
+                            "offset": 0
+                          },
+                          "end": {
+                            "line": 1,
+                            "column": 62,
+                            "offset": 61
+                          },
+                          "indent": []
+                        }
+                      }
+                    ],
+                    "position": {
+                      "start": {
+                        "line": 1,
+                        "column": 1,
+                        "offset": 0
+                      },
+                      "end": {
+                        "line": 1,
+                        "column": 62,
+                        "offset": 61
+                      },
+                      "indent": []
+                    }
+                  }
+                ],
+                "position": {
+                  "start": {
+                    "line": 1,
+                    "column": 1,
+                    "offset": 0
+                  },
+                  "end": {
+                    "line": 1,
+                    "column": 62,
+                    "offset": 61
+                  }
                 }
+              },
+              "type": {
+                "type": "NameExpression",
+                "name": "string"
+              }
+            },
+            {
+              "title": "property",
+              "name": "label",
+              "lineNumber": 10,
+              "description": {
+                "type": "root",
+                "children": [
+                  {
+                    "type": "paragraph",
+                    "children": [
+                      {
+                        "type": "text",
+                        "value": "The name of the device.",
+                        "position": {
+                          "start": {
+                            "line": 1,
+                            "column": 1,
+                            "offset": 0
+                          },
+                          "end": {
+                            "line": 1,
+                            "column": 24,
+                            "offset": 23
+                          },
+                          "indent": []
+                        }
+                      }
+                    ],
+                    "position": {
+                      "start": {
+                        "line": 1,
+                        "column": 1,
+                        "offset": 0
+                      },
+                      "end": {
+                        "line": 1,
+                        "column": 24,
+                        "offset": 23
+                      },
+                      "indent": []
+                    }
+                  }
+                ],
+                "position": {
+                  "start": {
+                    "line": 1,
+                    "column": 1,
+                    "offset": 0
+                  },
+                  "end": {
+                    "line": 1,
+                    "column": 24,
+                    "offset": 23
+                  }
+                }
+              },
+              "type": {
+                "type": "NameExpression",
+                "name": "string"
               }
             }
           ],
@@ -20111,7 +19236,7 @@
           "access": "public",
           "scope": "static",
           "kind": "typedef",
-          "name": "IceServer",
+          "name": "DeviceInfo",
           "type": {
             "type": "NameExpression",
             "name": "Object"
@@ -20129,12 +19254,12 @@
               "name": "call"
             },
             {
-              "name": "IceServer",
+              "name": "DeviceInfo",
               "kind": "typedef",
               "scope": "static"
             }
           ],
-          "namespace": "call.IceServer"
+          "namespace": "call.DeviceInfo"
         },
         {
           "description": {
@@ -20443,6 +19568,565 @@
             }
           ],
           "namespace": "call.BandwidthControls"
+        },
+        {
+          "description": {
+            "type": "root",
+            "children": [
+              {
+                "type": "paragraph",
+                "children": [
+                  {
+                    "type": "text",
+                    "value": "The MediaConstraint type defines the format for configuring media options.\nEither the ",
+                    "position": {
+                      "start": {
+                        "line": 1,
+                        "column": 1,
+                        "offset": 0
+                      },
+                      "end": {
+                        "line": 2,
+                        "column": 12,
+                        "offset": 86
+                      },
+                      "indent": [
+                        1
+                      ]
+                    }
+                  },
+                  {
+                    "type": "inlineCode",
+                    "value": "exact",
+                    "position": {
+                      "start": {
+                        "line": 2,
+                        "column": 12,
+                        "offset": 86
+                      },
+                      "end": {
+                        "line": 2,
+                        "column": 19,
+                        "offset": 93
+                      },
+                      "indent": []
+                    }
+                  },
+                  {
+                    "type": "text",
+                    "value": " or ",
+                    "position": {
+                      "start": {
+                        "line": 2,
+                        "column": 19,
+                        "offset": 93
+                      },
+                      "end": {
+                        "line": 2,
+                        "column": 23,
+                        "offset": 97
+                      },
+                      "indent": []
+                    }
+                  },
+                  {
+                    "type": "inlineCode",
+                    "value": "ideal",
+                    "position": {
+                      "start": {
+                        "line": 2,
+                        "column": 23,
+                        "offset": 97
+                      },
+                      "end": {
+                        "line": 2,
+                        "column": 30,
+                        "offset": 104
+                      },
+                      "indent": []
+                    }
+                  },
+                  {
+                    "type": "text",
+                    "value": " property should be provided. If both are present, the\n   ",
+                    "position": {
+                      "start": {
+                        "line": 2,
+                        "column": 30,
+                        "offset": 104
+                      },
+                      "end": {
+                        "line": 3,
+                        "column": 4,
+                        "offset": 162
+                      },
+                      "indent": [
+                        1
+                      ]
+                    }
+                  },
+                  {
+                    "type": "inlineCode",
+                    "value": "exact",
+                    "position": {
+                      "start": {
+                        "line": 3,
+                        "column": 4,
+                        "offset": 162
+                      },
+                      "end": {
+                        "line": 3,
+                        "column": 11,
+                        "offset": 169
+                      },
+                      "indent": []
+                    }
+                  },
+                  {
+                    "type": "text",
+                    "value": " value will be used.",
+                    "position": {
+                      "start": {
+                        "line": 3,
+                        "column": 11,
+                        "offset": 169
+                      },
+                      "end": {
+                        "line": 3,
+                        "column": 31,
+                        "offset": 189
+                      },
+                      "indent": []
+                    }
+                  }
+                ],
+                "position": {
+                  "start": {
+                    "line": 1,
+                    "column": 1,
+                    "offset": 0
+                  },
+                  "end": {
+                    "line": 3,
+                    "column": 31,
+                    "offset": 189
+                  },
+                  "indent": [
+                    1,
+                    1
+                  ]
+                }
+              },
+              {
+                "type": "paragraph",
+                "children": [
+                  {
+                    "type": "text",
+                    "value": "When the ",
+                    "position": {
+                      "start": {
+                        "line": 5,
+                        "column": 1,
+                        "offset": 191
+                      },
+                      "end": {
+                        "line": 5,
+                        "column": 10,
+                        "offset": 200
+                      },
+                      "indent": []
+                    }
+                  },
+                  {
+                    "type": "inlineCode",
+                    "value": "exact",
+                    "position": {
+                      "start": {
+                        "line": 5,
+                        "column": 10,
+                        "offset": 200
+                      },
+                      "end": {
+                        "line": 5,
+                        "column": 17,
+                        "offset": 207
+                      },
+                      "indent": []
+                    }
+                  },
+                  {
+                    "type": "text",
+                    "value": " value is provided, it will be the only value considered for the option.\n   If it cannot be used, the constraint will be considered an error.",
+                    "position": {
+                      "start": {
+                        "line": 5,
+                        "column": 17,
+                        "offset": 207
+                      },
+                      "end": {
+                        "line": 6,
+                        "column": 69,
+                        "offset": 348
+                      },
+                      "indent": [
+                        1
+                      ]
+                    }
+                  }
+                ],
+                "position": {
+                  "start": {
+                    "line": 5,
+                    "column": 1,
+                    "offset": 191
+                  },
+                  "end": {
+                    "line": 6,
+                    "column": 69,
+                    "offset": 348
+                  },
+                  "indent": [
+                    1
+                  ]
+                }
+              },
+              {
+                "type": "paragraph",
+                "children": [
+                  {
+                    "type": "text",
+                    "value": "When the ",
+                    "position": {
+                      "start": {
+                        "line": 8,
+                        "column": 1,
+                        "offset": 350
+                      },
+                      "end": {
+                        "line": 8,
+                        "column": 10,
+                        "offset": 359
+                      },
+                      "indent": []
+                    }
+                  },
+                  {
+                    "type": "inlineCode",
+                    "value": "ideal",
+                    "position": {
+                      "start": {
+                        "line": 8,
+                        "column": 10,
+                        "offset": 359
+                      },
+                      "end": {
+                        "line": 8,
+                        "column": 17,
+                        "offset": 366
+                      },
+                      "indent": []
+                    }
+                  },
+                  {
+                    "type": "text",
+                    "value": " value is provided, it will be considered as the optimal value for the option.\n   If it cannot be used, the closest acceptable value will be used instead.",
+                    "position": {
+                      "start": {
+                        "line": 8,
+                        "column": 17,
+                        "offset": 366
+                      },
+                      "end": {
+                        "line": 9,
+                        "column": 76,
+                        "offset": 520
+                      },
+                      "indent": [
+                        1
+                      ]
+                    }
+                  }
+                ],
+                "position": {
+                  "start": {
+                    "line": 8,
+                    "column": 1,
+                    "offset": 350
+                  },
+                  "end": {
+                    "line": 9,
+                    "column": 76,
+                    "offset": 520
+                  },
+                  "indent": [
+                    1
+                  ]
+                }
+              }
+            ],
+            "position": {
+              "start": {
+                "line": 1,
+                "column": 1,
+                "offset": 0
+              },
+              "end": {
+                "line": 9,
+                "column": 76,
+                "offset": 520
+              }
+            }
+          },
+          "tags": [
+            {
+              "title": "public",
+              "description": null,
+              "lineNumber": 11,
+              "type": null
+            },
+            {
+              "title": "static",
+              "description": null,
+              "lineNumber": 12
+            },
+            {
+              "title": "typedef",
+              "description": null,
+              "lineNumber": 13,
+              "type": {
+                "type": "NameExpression",
+                "name": "Object"
+              },
+              "name": "MediaConstraint"
+            },
+            {
+              "title": "memberof",
+              "description": "call",
+              "lineNumber": 14
+            },
+            {
+              "title": "property",
+              "description": "The required value for the constraint. Other values will not be accepted.",
+              "lineNumber": 15,
+              "type": {
+                "type": "OptionalType",
+                "expression": {
+                  "type": "NameExpression",
+                  "name": "string"
+                }
+              },
+              "name": "exact"
+            },
+            {
+              "title": "property",
+              "description": "The ideal value for the constraint. Other values will be considered if necessary.",
+              "lineNumber": 16,
+              "type": {
+                "type": "OptionalType",
+                "expression": {
+                  "type": "NameExpression",
+                  "name": "string"
+                }
+              },
+              "name": "ideal"
+            },
+            {
+              "title": "example",
+              "description": "// Specify video resolution when making a call.\nclient.call.make(destination, {\n   audio: true,\n   video: true,\n   videoOptions: {\n     // Set height and width constraints to ideally be 1280x720.\n     height: { ideal: 720 },\n     width: { ideal: 1280 }\n   }\n})",
+              "lineNumber": 17
+            }
+          ],
+          "loc": {
+            "start": {
+              "line": 89,
+              "column": 0
+            },
+            "end": {
+              "line": 117,
+              "column": 3
+            }
+          },
+          "context": {
+            "loc": {
+              "start": {
+                "line": 275,
+                "column": 0
+              },
+              "end": {
+                "line": 279,
+                "column": 1
+              }
+            },
+            "file": "/var/jenkins_home/workspace/Kandy.js_beta/packages/kandy/src/call/interfaceNew/api/index.js"
+          },
+          "augments": [],
+          "examples": [
+            {
+              "description": "// Specify video resolution when making a call.\nclient.call.make(destination, {\n   audio: true,\n   video: true,\n   videoOptions: {\n     // Set height and width constraints to ideally be 1280x720.\n     height: { ideal: 720 },\n     width: { ideal: 1280 }\n   }\n})"
+            }
+          ],
+          "params": [],
+          "properties": [
+            {
+              "title": "property",
+              "name": "exact",
+              "lineNumber": 15,
+              "description": {
+                "type": "root",
+                "children": [
+                  {
+                    "type": "paragraph",
+                    "children": [
+                      {
+                        "type": "text",
+                        "value": "The required value for the constraint. Other values will not be accepted.",
+                        "position": {
+                          "start": {
+                            "line": 1,
+                            "column": 1,
+                            "offset": 0
+                          },
+                          "end": {
+                            "line": 1,
+                            "column": 74,
+                            "offset": 73
+                          },
+                          "indent": []
+                        }
+                      }
+                    ],
+                    "position": {
+                      "start": {
+                        "line": 1,
+                        "column": 1,
+                        "offset": 0
+                      },
+                      "end": {
+                        "line": 1,
+                        "column": 74,
+                        "offset": 73
+                      },
+                      "indent": []
+                    }
+                  }
+                ],
+                "position": {
+                  "start": {
+                    "line": 1,
+                    "column": 1,
+                    "offset": 0
+                  },
+                  "end": {
+                    "line": 1,
+                    "column": 74,
+                    "offset": 73
+                  }
+                }
+              },
+              "type": {
+                "type": "OptionalType",
+                "expression": {
+                  "type": "NameExpression",
+                  "name": "string"
+                }
+              }
+            },
+            {
+              "title": "property",
+              "name": "ideal",
+              "lineNumber": 16,
+              "description": {
+                "type": "root",
+                "children": [
+                  {
+                    "type": "paragraph",
+                    "children": [
+                      {
+                        "type": "text",
+                        "value": "The ideal value for the constraint. Other values will be considered if necessary.",
+                        "position": {
+                          "start": {
+                            "line": 1,
+                            "column": 1,
+                            "offset": 0
+                          },
+                          "end": {
+                            "line": 1,
+                            "column": 82,
+                            "offset": 81
+                          },
+                          "indent": []
+                        }
+                      }
+                    ],
+                    "position": {
+                      "start": {
+                        "line": 1,
+                        "column": 1,
+                        "offset": 0
+                      },
+                      "end": {
+                        "line": 1,
+                        "column": 82,
+                        "offset": 81
+                      },
+                      "indent": []
+                    }
+                  }
+                ],
+                "position": {
+                  "start": {
+                    "line": 1,
+                    "column": 1,
+                    "offset": 0
+                  },
+                  "end": {
+                    "line": 1,
+                    "column": 82,
+                    "offset": 81
+                  }
+                }
+              },
+              "type": {
+                "type": "OptionalType",
+                "expression": {
+                  "type": "NameExpression",
+                  "name": "string"
+                }
+              }
+            }
+          ],
+          "returns": [],
+          "sees": [],
+          "throws": [],
+          "todos": [],
+          "access": "public",
+          "scope": "static",
+          "kind": "typedef",
+          "name": "MediaConstraint",
+          "type": {
+            "type": "NameExpression",
+            "name": "Object"
+          },
+          "memberof": "call",
+          "members": {
+            "global": [],
+            "inner": [],
+            "instance": [],
+            "events": [],
+            "static": []
+          },
+          "path": [
+            {
+              "name": "call"
+            },
+            {
+              "name": "MediaConstraint",
+              "kind": "typedef",
+              "scope": "static"
+            }
+          ],
+          "namespace": "call.MediaConstraint"
         },
         {
           "description": {
@@ -21974,6 +21658,322 @@
             }
           ],
           "namespace": "call.CallObject"
+        },
+        {
+          "description": "",
+          "tags": [
+            {
+              "title": "public",
+              "description": null,
+              "lineNumber": 1,
+              "type": null
+            },
+            {
+              "title": "static",
+              "description": null,
+              "lineNumber": 2
+            },
+            {
+              "title": "typedef",
+              "description": null,
+              "lineNumber": 3,
+              "type": {
+                "type": "NameExpression",
+                "name": "Object"
+              },
+              "name": "IceServer"
+            },
+            {
+              "title": "memberof",
+              "description": "call",
+              "lineNumber": 4
+            },
+            {
+              "title": "property",
+              "description": "Either an array of URLs for reaching out several ICE servers or a single URL for reaching one ICE server. See {@link https://developer.mozilla.org/en-US/docs/Web/API/RTCIceServer/urls RTCIceServers.urls documentation} to learn more about the actual url format.",
+              "lineNumber": 5,
+              "type": {
+                "type": "UnionType",
+                "elements": [
+                  {
+                    "type": "TypeApplication",
+                    "expression": {
+                      "type": "NameExpression",
+                      "name": "Array"
+                    },
+                    "applications": [
+                      {
+                        "type": "NameExpression",
+                        "name": "string"
+                      }
+                    ]
+                  },
+                  {
+                    "type": "NameExpression",
+                    "name": "string"
+                  }
+                ]
+              },
+              "name": "urls"
+            },
+            {
+              "title": "property",
+              "description": "The credential needed by the ICE server.",
+              "lineNumber": 6,
+              "type": {
+                "type": "OptionalType",
+                "expression": {
+                  "type": "NameExpression",
+                  "name": "string"
+                }
+              },
+              "name": "credential"
+            }
+          ],
+          "loc": {
+            "start": {
+              "line": 140,
+              "column": 0
+            },
+            "end": {
+              "line": 147,
+              "column": 3
+            }
+          },
+          "context": {
+            "loc": {
+              "start": {
+                "line": 275,
+                "column": 0
+              },
+              "end": {
+                "line": 279,
+                "column": 1
+              }
+            },
+            "file": "/var/jenkins_home/workspace/Kandy.js_beta/packages/kandy/src/call/interfaceNew/api/index.js"
+          },
+          "augments": [],
+          "examples": [],
+          "params": [],
+          "properties": [
+            {
+              "title": "property",
+              "name": "urls",
+              "lineNumber": 5,
+              "description": {
+                "type": "root",
+                "children": [
+                  {
+                    "type": "paragraph",
+                    "children": [
+                      {
+                        "type": "text",
+                        "value": "Either an array of URLs for reaching out several ICE servers or a single URL for reaching one ICE server. See ",
+                        "position": {
+                          "start": {
+                            "line": 1,
+                            "column": 1,
+                            "offset": 0
+                          },
+                          "end": {
+                            "line": 1,
+                            "column": 111,
+                            "offset": 110
+                          },
+                          "indent": []
+                        }
+                      },
+                      {
+                        "type": "link",
+                        "url": "https://developer.mozilla.org/en-US/docs/Web/API/RTCIceServer/urls",
+                        "title": null,
+                        "jsdoc": true,
+                        "children": [
+                          {
+                            "type": "text",
+                            "value": "RTCIceServers.urls documentation"
+                          }
+                        ],
+                        "position": {
+                          "start": {
+                            "line": 1,
+                            "column": 111,
+                            "offset": 110
+                          },
+                          "end": {
+                            "line": 1,
+                            "column": 218,
+                            "offset": 217
+                          },
+                          "indent": []
+                        }
+                      },
+                      {
+                        "type": "text",
+                        "value": " to learn more about the actual url format.",
+                        "position": {
+                          "start": {
+                            "line": 1,
+                            "column": 218,
+                            "offset": 217
+                          },
+                          "end": {
+                            "line": 1,
+                            "column": 261,
+                            "offset": 260
+                          },
+                          "indent": []
+                        }
+                      }
+                    ],
+                    "position": {
+                      "start": {
+                        "line": 1,
+                        "column": 1,
+                        "offset": 0
+                      },
+                      "end": {
+                        "line": 1,
+                        "column": 261,
+                        "offset": 260
+                      },
+                      "indent": []
+                    }
+                  }
+                ],
+                "position": {
+                  "start": {
+                    "line": 1,
+                    "column": 1,
+                    "offset": 0
+                  },
+                  "end": {
+                    "line": 1,
+                    "column": 261,
+                    "offset": 260
+                  }
+                }
+              },
+              "type": {
+                "type": "UnionType",
+                "elements": [
+                  {
+                    "type": "TypeApplication",
+                    "expression": {
+                      "type": "NameExpression",
+                      "name": "Array"
+                    },
+                    "applications": [
+                      {
+                        "type": "NameExpression",
+                        "name": "string"
+                      }
+                    ]
+                  },
+                  {
+                    "type": "NameExpression",
+                    "name": "string"
+                  }
+                ]
+              }
+            },
+            {
+              "title": "property",
+              "name": "credential",
+              "lineNumber": 6,
+              "description": {
+                "type": "root",
+                "children": [
+                  {
+                    "type": "paragraph",
+                    "children": [
+                      {
+                        "type": "text",
+                        "value": "The credential needed by the ICE server.",
+                        "position": {
+                          "start": {
+                            "line": 1,
+                            "column": 1,
+                            "offset": 0
+                          },
+                          "end": {
+                            "line": 1,
+                            "column": 41,
+                            "offset": 40
+                          },
+                          "indent": []
+                        }
+                      }
+                    ],
+                    "position": {
+                      "start": {
+                        "line": 1,
+                        "column": 1,
+                        "offset": 0
+                      },
+                      "end": {
+                        "line": 1,
+                        "column": 41,
+                        "offset": 40
+                      },
+                      "indent": []
+                    }
+                  }
+                ],
+                "position": {
+                  "start": {
+                    "line": 1,
+                    "column": 1,
+                    "offset": 0
+                  },
+                  "end": {
+                    "line": 1,
+                    "column": 41,
+                    "offset": 40
+                  }
+                }
+              },
+              "type": {
+                "type": "OptionalType",
+                "expression": {
+                  "type": "NameExpression",
+                  "name": "string"
+                }
+              }
+            }
+          ],
+          "returns": [],
+          "sees": [],
+          "throws": [],
+          "todos": [],
+          "access": "public",
+          "scope": "static",
+          "kind": "typedef",
+          "name": "IceServer",
+          "type": {
+            "type": "NameExpression",
+            "name": "Object"
+          },
+          "memberof": "call",
+          "members": {
+            "global": [],
+            "inner": [],
+            "instance": [],
+            "events": [],
+            "static": []
+          },
+          "path": [
+            {
+              "name": "call"
+            },
+            {
+              "name": "IceServer",
+              "kind": "typedef",
+              "scope": "static"
+            }
+          ],
+          "namespace": "call.IceServer"
         },
         {
           "description": {
@@ -28682,7 +28682,7 @@
                 "children": [
                   {
                     "type": "text",
-                    "value": "Removes local screenshare from an ongoing Call, stopping it from being\n   sent to the remote participant.",
+                    "value": "Adds local screenshare to an ongoing Call, to start sending to the remote\n   participant.",
                     "position": {
                       "start": {
                         "line": 1,
@@ -28691,8 +28691,8 @@
                       },
                       "end": {
                         "line": 2,
-                        "column": 35,
-                        "offset": 105
+                        "column": 16,
+                        "offset": 89
                       },
                       "indent": [
                         1
@@ -28708,8 +28708,8 @@
                   },
                   "end": {
                     "line": 2,
-                    "column": 35,
-                    "offset": 105
+                    "column": 16,
+                    "offset": 89
                   },
                   "indent": [
                     1
@@ -28726,12 +28726,12 @@
                       "start": {
                         "line": 4,
                         "column": 1,
-                        "offset": 107
+                        "offset": 91
                       },
                       "end": {
                         "line": 7,
                         "column": 19,
-                        "offset": 341
+                        "offset": 325
                       },
                       "indent": [
                         1,
@@ -28745,12 +28745,12 @@
                   "start": {
                     "line": 4,
                     "column": 1,
-                    "offset": 107
+                    "offset": 91
                   },
                   "end": {
                     "line": 7,
                     "column": 19,
-                    "offset": 341
+                    "offset": 325
                   },
                   "indent": [
                     1,
@@ -28769,54 +28769,54 @@
                       "start": {
                         "line": 9,
                         "column": 1,
-                        "offset": 343
+                        "offset": 327
                       },
                       "end": {
                         "line": 9,
                         "column": 5,
-                        "offset": 347
+                        "offset": 331
                       },
                       "indent": []
                     }
                   },
                   {
                     "type": "link",
-                    "url": "#callremovemedia",
+                    "url": "#calladdmedia",
                     "title": null,
                     "jsdoc": true,
                     "children": [
                       {
                         "type": "text",
-                        "value": "call.removeMedia"
+                        "value": "call.addMedia"
                       }
                     ],
                     "position": {
                       "start": {
                         "line": 9,
                         "column": 5,
-                        "offset": 347
+                        "offset": 331
                       },
                       "end": {
                         "line": 9,
-                        "column": 29,
-                        "offset": 371
+                        "column": 26,
+                        "offset": 352
                       },
                       "indent": []
                     }
                   },
                   {
                     "type": "text",
-                    "value": " API can be used to perform the same\n   behaviour as ",
+                    "value": " API can be used to perform the same behaviour\n   as ",
                     "position": {
                       "start": {
                         "line": 9,
-                        "column": 29,
-                        "offset": 371
+                        "column": 26,
+                        "offset": 352
                       },
                       "end": {
                         "line": 10,
-                        "column": 17,
-                        "offset": 424
+                        "column": 7,
+                        "offset": 405
                       },
                       "indent": [
                         1
@@ -28825,17 +28825,17 @@
                   },
                   {
                     "type": "inlineCode",
-                    "value": "stopScreenshare",
+                    "value": "startScreenshare",
                     "position": {
                       "start": {
                         "line": 10,
-                        "column": 17,
-                        "offset": 424
+                        "column": 7,
+                        "offset": 405
                       },
                       "end": {
                         "line": 10,
-                        "column": 34,
-                        "offset": 441
+                        "column": 25,
+                        "offset": 423
                       },
                       "indent": []
                     }
@@ -28846,55 +28846,55 @@
                     "position": {
                       "start": {
                         "line": 10,
-                        "column": 34,
-                        "offset": 441
+                        "column": 25,
+                        "offset": 423
                       },
                       "end": {
                         "line": 10,
-                        "column": 36,
-                        "offset": 443
+                        "column": 27,
+                        "offset": 425
                       },
                       "indent": []
                     }
                   },
                   {
                     "type": "link",
-                    "url": "#callremovemedia",
+                    "url": "#calladdmedia",
                     "title": null,
                     "jsdoc": true,
                     "children": [
                       {
                         "type": "text",
-                        "value": "call.removeMedia"
+                        "value": "call.addMedia"
                       }
                     ],
                     "position": {
                       "start": {
                         "line": 10,
-                        "column": 36,
-                        "offset": 443
+                        "column": 27,
+                        "offset": 425
                       },
                       "end": {
                         "line": 10,
-                        "column": 60,
-                        "offset": 467
+                        "column": 48,
+                        "offset": 446
                       },
                       "indent": []
                     }
                   },
                   {
                     "type": "text",
-                    "value": " is a\n   general-purpose API for removing media from a call, which covers the\n   same functionality as ",
+                    "value": " is a general-purpose API\n   for adding media to a call, which covers the same functionality as\n   ",
                     "position": {
                       "start": {
                         "line": 10,
-                        "column": 60,
-                        "offset": 467
+                        "column": 48,
+                        "offset": 446
                       },
                       "end": {
                         "line": 12,
-                        "column": 26,
-                        "offset": 570
+                        "column": 4,
+                        "offset": 545
                       },
                       "indent": [
                         1,
@@ -28904,34 +28904,34 @@
                   },
                   {
                     "type": "inlineCode",
-                    "value": "stopScreenshare",
+                    "value": "startScreenshare",
                     "position": {
                       "start": {
                         "line": 12,
-                        "column": 26,
-                        "offset": 570
+                        "column": 4,
+                        "offset": 545
                       },
                       "end": {
                         "line": 12,
-                        "column": 43,
-                        "offset": 587
+                        "column": 22,
+                        "offset": 563
                       },
                       "indent": []
                     }
                   },
                   {
                     "type": "text",
-                    "value": ". Specifying only the screen\n   track when using ",
+                    "value": ". Selecting only screen options when using\n   ",
                     "position": {
                       "start": {
                         "line": 12,
-                        "column": 43,
-                        "offset": 587
+                        "column": 22,
+                        "offset": 563
                       },
                       "end": {
                         "line": 13,
-                        "column": 21,
-                        "offset": 636
+                        "column": 4,
+                        "offset": 609
                       },
                       "indent": [
                         1
@@ -28940,42 +28940,42 @@
                   },
                   {
                     "type": "link",
-                    "url": "#callremovemedia",
+                    "url": "#calladdmedia",
                     "title": null,
                     "jsdoc": true,
                     "children": [
                       {
                         "type": "text",
-                        "value": "call.removeMedia"
+                        "value": "call.addMedia"
                       }
                     ],
                     "position": {
                       "start": {
                         "line": 13,
-                        "column": 21,
-                        "offset": 636
+                        "column": 4,
+                        "offset": 609
                       },
                       "end": {
                         "line": 13,
-                        "column": 45,
-                        "offset": 660
+                        "column": 25,
+                        "offset": 630
                       },
                       "indent": []
                     }
                   },
                   {
                     "type": "text",
-                    "value": " will perform the same\n   behaviour as using ",
+                    "value": " will perform the same behaviour as using\n   ",
                     "position": {
                       "start": {
                         "line": 13,
-                        "column": 45,
-                        "offset": 660
+                        "column": 25,
+                        "offset": 630
                       },
                       "end": {
                         "line": 14,
-                        "column": 23,
-                        "offset": 705
+                        "column": 4,
+                        "offset": 675
                       },
                       "indent": [
                         1
@@ -28984,17 +28984,17 @@
                   },
                   {
                     "type": "inlineCode",
-                    "value": "stopScreenshare",
+                    "value": "startScreenshare",
                     "position": {
                       "start": {
                         "line": 14,
-                        "column": 23,
-                        "offset": 705
+                        "column": 4,
+                        "offset": 675
                       },
                       "end": {
                         "line": 14,
-                        "column": 40,
-                        "offset": 722
+                        "column": 22,
+                        "offset": 693
                       },
                       "indent": []
                     }
@@ -29005,13 +29005,13 @@
                     "position": {
                       "start": {
                         "line": 14,
-                        "column": 40,
-                        "offset": 722
+                        "column": 22,
+                        "offset": 693
                       },
                       "end": {
                         "line": 14,
-                        "column": 41,
-                        "offset": 723
+                        "column": 23,
+                        "offset": 694
                       },
                       "indent": []
                     }
@@ -29021,59 +29021,16 @@
                   "start": {
                     "line": 9,
                     "column": 1,
-                    "offset": 343
+                    "offset": 327
                   },
                   "end": {
                     "line": 14,
-                    "column": 41,
-                    "offset": 723
+                    "column": 23,
+                    "offset": 694
                   },
                   "indent": [
                     1,
                     1,
-                    1,
-                    1,
-                    1
-                  ]
-                }
-              },
-              {
-                "type": "paragraph",
-                "children": [
-                  {
-                    "type": "text",
-                    "value": "There is a caveat that if a Call has multiple video tracks (for example,\n   both a video and a screen track), the SDK itself cannot yet\n   differentiate one from the other. The application will need to know\n   which track was the screen track in this scenario.",
-                    "position": {
-                      "start": {
-                        "line": 16,
-                        "column": 1,
-                        "offset": 725
-                      },
-                      "end": {
-                        "line": 19,
-                        "column": 54,
-                        "offset": 985
-                      },
-                      "indent": [
-                        1,
-                        1,
-                        1
-                      ]
-                    }
-                  }
-                ],
-                "position": {
-                  "start": {
-                    "line": 16,
-                    "column": 1,
-                    "offset": 725
-                  },
-                  "end": {
-                    "line": 19,
-                    "column": 54,
-                    "offset": 985
-                  },
-                  "indent": [
                     1,
                     1,
                     1
@@ -29088,9 +29045,9 @@
                 "offset": 0
               },
               "end": {
-                "line": 19,
-                "column": 54,
-                "offset": 985
+                "line": 14,
+                "column": 23,
+                "offset": 694
               }
             }
           },
@@ -29098,50 +29055,50 @@
             {
               "title": "public",
               "description": null,
-              "lineNumber": 20,
+              "lineNumber": 16,
               "type": null
             },
             {
               "title": "static",
               "description": null,
-              "lineNumber": 21
+              "lineNumber": 17
             },
             {
               "title": "method",
               "description": null,
-              "lineNumber": 22,
-              "name": "stopScreenshare"
+              "lineNumber": 18,
+              "name": "startScreenshare"
             },
             {
               "title": "memberof",
               "description": "call",
-              "lineNumber": 23
+              "lineNumber": 19
             },
             {
               "title": "requires",
               "description": null,
-              "lineNumber": 24,
+              "lineNumber": 20,
               "name": "call"
             },
             {
               "title": "requires",
               "description": null,
-              "lineNumber": 25,
+              "lineNumber": 21,
               "name": "callMe"
             },
             {
               "title": "example",
-              "description": "const call = client.call.getById(callId)\n// Get the ID of any/all video tracks on the call.\nconst videoTracks = call.localTracks.filter(trackId => {\n   const track = call.media.getTrackById(trackId)\n   // Both video and screen tracks have kind of 'video'.\n   return track.kind === 'video'\n})\n\n// Pick out the screen track.\nconst screenTrack = videoTracks[0]\n\n// Remove screen from the call.\nclient.call.removeMedia(callId, [ screenTrack ])",
-              "lineNumber": 26
+              "description": "// Select media options for adding only screenshare.\nconst media = {\n   audio: false,\n   video: false,\n   screen: true,\n   screenOptions: { ... }\n}\n\n// Add the selected media to the call.\nclient.call.addMedia(callId, media)",
+              "lineNumber": 22
             }
           ],
           "loc": {
             "start": {
-              "line": 678,
+              "line": 643,
               "column": 4
             },
             "end": {
-              "line": 718,
+              "line": 676,
               "column": 7
             }
           },
@@ -29161,7 +29118,7 @@
           "augments": [],
           "examples": [
             {
-              "description": "const call = client.call.getById(callId)\n// Get the ID of any/all video tracks on the call.\nconst videoTracks = call.localTracks.filter(trackId => {\n   const track = call.media.getTrackById(trackId)\n   // Both video and screen tracks have kind of 'video'.\n   return track.kind === 'video'\n})\n\n// Pick out the screen track.\nconst screenTrack = videoTracks[0]\n\n// Remove screen from the call.\nclient.call.removeMedia(callId, [ screenTrack ])"
+              "description": "// Select media options for adding only screenshare.\nconst media = {\n   audio: false,\n   video: false,\n   screen: true,\n   screenOptions: { ... }\n}\n\n// Add the selected media to the call.\nclient.call.addMedia(callId, media)"
             }
           ],
           "params": [],
@@ -29173,7 +29130,7 @@
           "access": "public",
           "scope": "static",
           "kind": "function",
-          "name": "stopScreenshare",
+          "name": "startScreenshare",
           "memberof": "call",
           "members": {
             "global": [],
@@ -29187,12 +29144,12 @@
               "name": "call"
             },
             {
-              "name": "stopScreenshare",
+              "name": "startScreenshare",
               "kind": "function",
               "scope": "static"
             }
           ],
-          "namespace": "call.stopScreenshare"
+          "namespace": "call.startScreenshare"
         },
         {
           "description": {
@@ -29896,7 +29853,7 @@
                 "children": [
                   {
                     "type": "text",
-                    "value": "Adds local screenshare to an ongoing Call, to start sending to the remote\n   participant.",
+                    "value": "Removes local screenshare from an ongoing Call, stopping it from being\n   sent to the remote participant.",
                     "position": {
                       "start": {
                         "line": 1,
@@ -29905,8 +29862,8 @@
                       },
                       "end": {
                         "line": 2,
-                        "column": 16,
-                        "offset": 89
+                        "column": 35,
+                        "offset": 105
                       },
                       "indent": [
                         1
@@ -29922,8 +29879,8 @@
                   },
                   "end": {
                     "line": 2,
-                    "column": 16,
-                    "offset": 89
+                    "column": 35,
+                    "offset": 105
                   },
                   "indent": [
                     1
@@ -29940,12 +29897,12 @@
                       "start": {
                         "line": 4,
                         "column": 1,
-                        "offset": 91
+                        "offset": 107
                       },
                       "end": {
                         "line": 7,
                         "column": 19,
-                        "offset": 325
+                        "offset": 341
                       },
                       "indent": [
                         1,
@@ -29959,12 +29916,12 @@
                   "start": {
                     "line": 4,
                     "column": 1,
-                    "offset": 91
+                    "offset": 107
                   },
                   "end": {
                     "line": 7,
                     "column": 19,
-                    "offset": 325
+                    "offset": 341
                   },
                   "indent": [
                     1,
@@ -29983,54 +29940,54 @@
                       "start": {
                         "line": 9,
                         "column": 1,
-                        "offset": 327
+                        "offset": 343
                       },
                       "end": {
                         "line": 9,
                         "column": 5,
-                        "offset": 331
+                        "offset": 347
                       },
                       "indent": []
                     }
                   },
                   {
                     "type": "link",
-                    "url": "#calladdmedia",
+                    "url": "#callremovemedia",
                     "title": null,
                     "jsdoc": true,
                     "children": [
                       {
                         "type": "text",
-                        "value": "call.addMedia"
+                        "value": "call.removeMedia"
                       }
                     ],
                     "position": {
                       "start": {
                         "line": 9,
                         "column": 5,
-                        "offset": 331
+                        "offset": 347
                       },
                       "end": {
                         "line": 9,
-                        "column": 26,
-                        "offset": 352
+                        "column": 29,
+                        "offset": 371
                       },
                       "indent": []
                     }
                   },
                   {
                     "type": "text",
-                    "value": " API can be used to perform the same behaviour\n   as ",
+                    "value": " API can be used to perform the same\n   behaviour as ",
                     "position": {
                       "start": {
                         "line": 9,
-                        "column": 26,
-                        "offset": 352
+                        "column": 29,
+                        "offset": 371
                       },
                       "end": {
                         "line": 10,
-                        "column": 7,
-                        "offset": 405
+                        "column": 17,
+                        "offset": 424
                       },
                       "indent": [
                         1
@@ -30039,17 +29996,17 @@
                   },
                   {
                     "type": "inlineCode",
-                    "value": "startScreenshare",
+                    "value": "stopScreenshare",
                     "position": {
                       "start": {
                         "line": 10,
-                        "column": 7,
-                        "offset": 405
+                        "column": 17,
+                        "offset": 424
                       },
                       "end": {
                         "line": 10,
-                        "column": 25,
-                        "offset": 423
+                        "column": 34,
+                        "offset": 441
                       },
                       "indent": []
                     }
@@ -30060,55 +30017,55 @@
                     "position": {
                       "start": {
                         "line": 10,
-                        "column": 25,
-                        "offset": 423
+                        "column": 34,
+                        "offset": 441
                       },
                       "end": {
                         "line": 10,
-                        "column": 27,
-                        "offset": 425
+                        "column": 36,
+                        "offset": 443
                       },
                       "indent": []
                     }
                   },
                   {
                     "type": "link",
-                    "url": "#calladdmedia",
+                    "url": "#callremovemedia",
                     "title": null,
                     "jsdoc": true,
                     "children": [
                       {
                         "type": "text",
-                        "value": "call.addMedia"
+                        "value": "call.removeMedia"
                       }
                     ],
                     "position": {
                       "start": {
                         "line": 10,
-                        "column": 27,
-                        "offset": 425
+                        "column": 36,
+                        "offset": 443
                       },
                       "end": {
                         "line": 10,
-                        "column": 48,
-                        "offset": 446
+                        "column": 60,
+                        "offset": 467
                       },
                       "indent": []
                     }
                   },
                   {
                     "type": "text",
-                    "value": " is a general-purpose API\n   for adding media to a call, which covers the same functionality as\n   ",
+                    "value": " is a\n   general-purpose API for removing media from a call, which covers the\n   same functionality as ",
                     "position": {
                       "start": {
                         "line": 10,
-                        "column": 48,
-                        "offset": 446
+                        "column": 60,
+                        "offset": 467
                       },
                       "end": {
                         "line": 12,
-                        "column": 4,
-                        "offset": 545
+                        "column": 26,
+                        "offset": 570
                       },
                       "indent": [
                         1,
@@ -30118,34 +30075,34 @@
                   },
                   {
                     "type": "inlineCode",
-                    "value": "startScreenshare",
+                    "value": "stopScreenshare",
                     "position": {
                       "start": {
                         "line": 12,
-                        "column": 4,
-                        "offset": 545
+                        "column": 26,
+                        "offset": 570
                       },
                       "end": {
                         "line": 12,
-                        "column": 22,
-                        "offset": 563
+                        "column": 43,
+                        "offset": 587
                       },
                       "indent": []
                     }
                   },
                   {
                     "type": "text",
-                    "value": ". Selecting only screen options when using\n   ",
+                    "value": ". Specifying only the screen\n   track when using ",
                     "position": {
                       "start": {
                         "line": 12,
-                        "column": 22,
-                        "offset": 563
+                        "column": 43,
+                        "offset": 587
                       },
                       "end": {
                         "line": 13,
-                        "column": 4,
-                        "offset": 609
+                        "column": 21,
+                        "offset": 636
                       },
                       "indent": [
                         1
@@ -30154,42 +30111,42 @@
                   },
                   {
                     "type": "link",
-                    "url": "#calladdmedia",
+                    "url": "#callremovemedia",
                     "title": null,
                     "jsdoc": true,
                     "children": [
                       {
                         "type": "text",
-                        "value": "call.addMedia"
+                        "value": "call.removeMedia"
                       }
                     ],
                     "position": {
                       "start": {
                         "line": 13,
-                        "column": 4,
-                        "offset": 609
+                        "column": 21,
+                        "offset": 636
                       },
                       "end": {
                         "line": 13,
-                        "column": 25,
-                        "offset": 630
+                        "column": 45,
+                        "offset": 660
                       },
                       "indent": []
                     }
                   },
                   {
                     "type": "text",
-                    "value": " will perform the same behaviour as using\n   ",
+                    "value": " will perform the same\n   behaviour as using ",
                     "position": {
                       "start": {
                         "line": 13,
-                        "column": 25,
-                        "offset": 630
+                        "column": 45,
+                        "offset": 660
                       },
                       "end": {
                         "line": 14,
-                        "column": 4,
-                        "offset": 675
+                        "column": 23,
+                        "offset": 705
                       },
                       "indent": [
                         1
@@ -30198,17 +30155,17 @@
                   },
                   {
                     "type": "inlineCode",
-                    "value": "startScreenshare",
+                    "value": "stopScreenshare",
                     "position": {
                       "start": {
                         "line": 14,
-                        "column": 4,
-                        "offset": 675
+                        "column": 23,
+                        "offset": 705
                       },
                       "end": {
                         "line": 14,
-                        "column": 22,
-                        "offset": 693
+                        "column": 40,
+                        "offset": 722
                       },
                       "indent": []
                     }
@@ -30219,13 +30176,13 @@
                     "position": {
                       "start": {
                         "line": 14,
-                        "column": 22,
-                        "offset": 693
+                        "column": 40,
+                        "offset": 722
                       },
                       "end": {
                         "line": 14,
-                        "column": 23,
-                        "offset": 694
+                        "column": 41,
+                        "offset": 723
                       },
                       "indent": []
                     }
@@ -30235,16 +30192,59 @@
                   "start": {
                     "line": 9,
                     "column": 1,
-                    "offset": 327
+                    "offset": 343
                   },
                   "end": {
                     "line": 14,
-                    "column": 23,
-                    "offset": 694
+                    "column": 41,
+                    "offset": 723
                   },
                   "indent": [
                     1,
                     1,
+                    1,
+                    1,
+                    1
+                  ]
+                }
+              },
+              {
+                "type": "paragraph",
+                "children": [
+                  {
+                    "type": "text",
+                    "value": "There is a caveat that if a Call has multiple video tracks (for example,\n   both a video and a screen track), the SDK itself cannot yet\n   differentiate one from the other. The application will need to know\n   which track was the screen track in this scenario.",
+                    "position": {
+                      "start": {
+                        "line": 16,
+                        "column": 1,
+                        "offset": 725
+                      },
+                      "end": {
+                        "line": 19,
+                        "column": 54,
+                        "offset": 985
+                      },
+                      "indent": [
+                        1,
+                        1,
+                        1
+                      ]
+                    }
+                  }
+                ],
+                "position": {
+                  "start": {
+                    "line": 16,
+                    "column": 1,
+                    "offset": 725
+                  },
+                  "end": {
+                    "line": 19,
+                    "column": 54,
+                    "offset": 985
+                  },
+                  "indent": [
                     1,
                     1,
                     1
@@ -30259,9 +30259,9 @@
                 "offset": 0
               },
               "end": {
-                "line": 14,
-                "column": 23,
-                "offset": 694
+                "line": 19,
+                "column": 54,
+                "offset": 985
               }
             }
           },
@@ -30269,50 +30269,50 @@
             {
               "title": "public",
               "description": null,
-              "lineNumber": 16,
+              "lineNumber": 20,
               "type": null
             },
             {
               "title": "static",
               "description": null,
-              "lineNumber": 17
+              "lineNumber": 21
             },
             {
               "title": "method",
               "description": null,
-              "lineNumber": 18,
-              "name": "startScreenshare"
+              "lineNumber": 22,
+              "name": "stopScreenshare"
             },
             {
               "title": "memberof",
               "description": "call",
-              "lineNumber": 19
+              "lineNumber": 23
             },
             {
               "title": "requires",
               "description": null,
-              "lineNumber": 20,
+              "lineNumber": 24,
               "name": "call"
             },
             {
               "title": "requires",
               "description": null,
-              "lineNumber": 21,
+              "lineNumber": 25,
               "name": "callMe"
             },
             {
               "title": "example",
-              "description": "// Select media options for adding only screenshare.\nconst media = {\n   audio: false,\n   video: false,\n   screen: true,\n   screenOptions: { ... }\n}\n\n// Add the selected media to the call.\nclient.call.addMedia(callId, media)",
-              "lineNumber": 22
+              "description": "const call = client.call.getById(callId)\n// Get the ID of any/all video tracks on the call.\nconst videoTracks = call.localTracks.filter(trackId => {\n   const track = call.media.getTrackById(trackId)\n   // Both video and screen tracks have kind of 'video'.\n   return track.kind === 'video'\n})\n\n// Pick out the screen track.\nconst screenTrack = videoTracks[0]\n\n// Remove screen from the call.\nclient.call.removeMedia(callId, [ screenTrack ])",
+              "lineNumber": 26
             }
           ],
           "loc": {
             "start": {
-              "line": 643,
+              "line": 678,
               "column": 4
             },
             "end": {
-              "line": 676,
+              "line": 718,
               "column": 7
             }
           },
@@ -30332,7 +30332,7 @@
           "augments": [],
           "examples": [
             {
-              "description": "// Select media options for adding only screenshare.\nconst media = {\n   audio: false,\n   video: false,\n   screen: true,\n   screenOptions: { ... }\n}\n\n// Add the selected media to the call.\nclient.call.addMedia(callId, media)"
+              "description": "const call = client.call.getById(callId)\n// Get the ID of any/all video tracks on the call.\nconst videoTracks = call.localTracks.filter(trackId => {\n   const track = call.media.getTrackById(trackId)\n   // Both video and screen tracks have kind of 'video'.\n   return track.kind === 'video'\n})\n\n// Pick out the screen track.\nconst screenTrack = videoTracks[0]\n\n// Remove screen from the call.\nclient.call.removeMedia(callId, [ screenTrack ])"
             }
           ],
           "params": [],
@@ -30344,7 +30344,7 @@
           "access": "public",
           "scope": "static",
           "kind": "function",
-          "name": "startScreenshare",
+          "name": "stopScreenshare",
           "memberof": "call",
           "members": {
             "global": [],
@@ -30358,12 +30358,12 @@
               "name": "call"
             },
             {
-              "name": "startScreenshare",
+              "name": "stopScreenshare",
               "kind": "function",
               "scope": "static"
             }
           ],
-          "namespace": "call.startScreenshare"
+          "namespace": "call.stopScreenshare"
         },
         {
           "description": {
@@ -34599,6 +34599,324 @@
                 "children": [
                   {
                     "type": "text",
+                    "value": "A LogHandler can be used to customize how the SDK should log information. By\n   default, the SDK will log information to the console, but a LogHandler can\n   be configured to change this behaviour.",
+                    "position": {
+                      "start": {
+                        "line": 1,
+                        "column": 1,
+                        "offset": 0
+                      },
+                      "end": {
+                        "line": 3,
+                        "column": 43,
+                        "offset": 197
+                      },
+                      "indent": [
+                        1,
+                        1
+                      ]
+                    }
+                  }
+                ],
+                "position": {
+                  "start": {
+                    "line": 1,
+                    "column": 1,
+                    "offset": 0
+                  },
+                  "end": {
+                    "line": 3,
+                    "column": 43,
+                    "offset": 197
+                  },
+                  "indent": [
+                    1,
+                    1
+                  ]
+                }
+              },
+              {
+                "type": "paragraph",
+                "children": [
+                  {
+                    "type": "text",
+                    "value": "A LogHandler can be provided to the SDK as part of its configuration (see\n   ",
+                    "position": {
+                      "start": {
+                        "line": 5,
+                        "column": 1,
+                        "offset": 199
+                      },
+                      "end": {
+                        "line": 6,
+                        "column": 4,
+                        "offset": 276
+                      },
+                      "indent": [
+                        1
+                      ]
+                    }
+                  },
+                  {
+                    "type": "link",
+                    "url": "#configconfiglogs",
+                    "title": null,
+                    "jsdoc": true,
+                    "children": [
+                      {
+                        "type": "text",
+                        "value": "config.logs"
+                      }
+                    ],
+                    "position": {
+                      "start": {
+                        "line": 6,
+                        "column": 4,
+                        "offset": 276
+                      },
+                      "end": {
+                        "line": 6,
+                        "column": 41,
+                        "offset": 313
+                      },
+                      "indent": []
+                    }
+                  },
+                  {
+                    "type": "text",
+                    "value": "). The SDK will then provide this\n   function with the logged information.",
+                    "position": {
+                      "start": {
+                        "line": 6,
+                        "column": 41,
+                        "offset": 313
+                      },
+                      "end": {
+                        "line": 7,
+                        "column": 41,
+                        "offset": 387
+                      },
+                      "indent": [
+                        1
+                      ]
+                    }
+                  }
+                ],
+                "position": {
+                  "start": {
+                    "line": 5,
+                    "column": 1,
+                    "offset": 199
+                  },
+                  "end": {
+                    "line": 7,
+                    "column": 41,
+                    "offset": 387
+                  },
+                  "indent": [
+                    1,
+                    1
+                  ]
+                }
+              }
+            ],
+            "position": {
+              "start": {
+                "line": 1,
+                "column": 1,
+                "offset": 0
+              },
+              "end": {
+                "line": 7,
+                "column": 41,
+                "offset": 387
+              }
+            }
+          },
+          "tags": [
+            {
+              "title": "public",
+              "description": null,
+              "lineNumber": 9,
+              "type": null
+            },
+            {
+              "title": "static",
+              "description": null,
+              "lineNumber": 10
+            },
+            {
+              "title": "typedef",
+              "description": null,
+              "lineNumber": 11,
+              "type": {
+                "type": "NameExpression",
+                "name": "Function"
+              },
+              "name": "LogHandler"
+            },
+            {
+              "title": "memberof",
+              "description": "logger",
+              "lineNumber": 12
+            },
+            {
+              "title": "requires",
+              "description": null,
+              "lineNumber": 13,
+              "name": "logs"
+            },
+            {
+              "title": "param",
+              "description": "The LogEntry to be logged.",
+              "lineNumber": 14,
+              "type": {
+                "type": "NameExpression",
+                "name": "Object"
+              },
+              "name": "LogEntry"
+            },
+            {
+              "title": "example",
+              "description": "// Define a custom function to handle logs.\nfunction logHandler (logEntry) {\n  // Compile the meta info of the log for a prefix.\n  const { timestamp, level, target } = logEntry\n  let { method } = logEntry\n  const logInfo = `${timestamp} - ${target.type} - ${level}`\n\n  // Assume that the first message parameter is a string.\n  const [log, ...extra] = logEntry.messages\n\n  // For the timer methods, don't actually use the console methods.\n  //    The Logger already did the timing, so simply log out the info.\n  if (['time', 'timeLog', 'timeEnd'].includes(method)) {\n    method = 'debug'\n  }\n\n  console[method](`${logInfo} - ${log}`, ...extra)\n}\n\n// Provide the LogHandler as part of the SDK configurations.\nconst configs = { ... }\nconfigs.logs.handler = logHandler\nconst client = create(configs)",
+              "lineNumber": 15
+            }
+          ],
+          "loc": {
+            "start": {
+              "line": 54,
+              "column": 0
+            },
+            "end": {
+              "line": 93,
+              "column": 3
+            }
+          },
+          "context": {
+            "loc": {
+              "start": {
+                "line": 1,
+                "column": 0
+              },
+              "end": {
+                "line": 94,
+                "column": 0
+              }
+            },
+            "file": "/var/jenkins_home/workspace/Kandy.js_beta/packages/kandy/src/logs/docs.js"
+          },
+          "augments": [],
+          "examples": [
+            {
+              "description": "// Define a custom function to handle logs.\nfunction logHandler (logEntry) {\n  // Compile the meta info of the log for a prefix.\n  const { timestamp, level, target } = logEntry\n  let { method } = logEntry\n  const logInfo = `${timestamp} - ${target.type} - ${level}`\n\n  // Assume that the first message parameter is a string.\n  const [log, ...extra] = logEntry.messages\n\n  // For the timer methods, don't actually use the console methods.\n  //    The Logger already did the timing, so simply log out the info.\n  if (['time', 'timeLog', 'timeEnd'].includes(method)) {\n    method = 'debug'\n  }\n\n  console[method](`${logInfo} - ${log}`, ...extra)\n}\n\n// Provide the LogHandler as part of the SDK configurations.\nconst configs = { ... }\nconfigs.logs.handler = logHandler\nconst client = create(configs)"
+            }
+          ],
+          "params": [
+            {
+              "title": "param",
+              "name": "LogEntry",
+              "lineNumber": 14,
+              "description": {
+                "type": "root",
+                "children": [
+                  {
+                    "type": "paragraph",
+                    "children": [
+                      {
+                        "type": "text",
+                        "value": "The LogEntry to be logged.",
+                        "position": {
+                          "start": {
+                            "line": 1,
+                            "column": 1,
+                            "offset": 0
+                          },
+                          "end": {
+                            "line": 1,
+                            "column": 27,
+                            "offset": 26
+                          },
+                          "indent": []
+                        }
+                      }
+                    ],
+                    "position": {
+                      "start": {
+                        "line": 1,
+                        "column": 1,
+                        "offset": 0
+                      },
+                      "end": {
+                        "line": 1,
+                        "column": 27,
+                        "offset": 26
+                      },
+                      "indent": []
+                    }
+                  }
+                ],
+                "position": {
+                  "start": {
+                    "line": 1,
+                    "column": 1,
+                    "offset": 0
+                  },
+                  "end": {
+                    "line": 1,
+                    "column": 27,
+                    "offset": 26
+                  }
+                }
+              },
+              "type": {
+                "type": "NameExpression",
+                "name": "Object"
+              }
+            }
+          ],
+          "properties": [],
+          "returns": [],
+          "sees": [],
+          "throws": [],
+          "todos": [],
+          "access": "public",
+          "scope": "static",
+          "kind": "typedef",
+          "name": "LogHandler",
+          "type": {
+            "type": "NameExpression",
+            "name": "Function"
+          },
+          "memberof": "logger",
+          "members": {
+            "global": [],
+            "inner": [],
+            "instance": [],
+            "events": [],
+            "static": []
+          },
+          "path": [
+            {
+              "name": "logger",
+              "kind": "namespace"
+            },
+            {
+              "name": "LogHandler",
+              "kind": "typedef",
+              "scope": "static"
+            }
+          ],
+          "namespace": "logger.LogHandler"
+        },
+        {
+          "description": {
+            "type": "root",
+            "children": [
+              {
+                "type": "paragraph",
+                "children": [
+                  {
+                    "type": "text",
                     "value": "A LogEntry object is the data that the SDK compiles when information is\n   logged. It contains both the logged information and meta-info about when\n   and who logged it.",
                     "position": {
                       "start": {
@@ -35543,324 +35861,6 @@
             }
           ],
           "namespace": "logger.LogEntry"
-        },
-        {
-          "description": {
-            "type": "root",
-            "children": [
-              {
-                "type": "paragraph",
-                "children": [
-                  {
-                    "type": "text",
-                    "value": "A LogHandler can be used to customize how the SDK should log information. By\n   default, the SDK will log information to the console, but a LogHandler can\n   be configured to change this behaviour.",
-                    "position": {
-                      "start": {
-                        "line": 1,
-                        "column": 1,
-                        "offset": 0
-                      },
-                      "end": {
-                        "line": 3,
-                        "column": 43,
-                        "offset": 197
-                      },
-                      "indent": [
-                        1,
-                        1
-                      ]
-                    }
-                  }
-                ],
-                "position": {
-                  "start": {
-                    "line": 1,
-                    "column": 1,
-                    "offset": 0
-                  },
-                  "end": {
-                    "line": 3,
-                    "column": 43,
-                    "offset": 197
-                  },
-                  "indent": [
-                    1,
-                    1
-                  ]
-                }
-              },
-              {
-                "type": "paragraph",
-                "children": [
-                  {
-                    "type": "text",
-                    "value": "A LogHandler can be provided to the SDK as part of its configuration (see\n   ",
-                    "position": {
-                      "start": {
-                        "line": 5,
-                        "column": 1,
-                        "offset": 199
-                      },
-                      "end": {
-                        "line": 6,
-                        "column": 4,
-                        "offset": 276
-                      },
-                      "indent": [
-                        1
-                      ]
-                    }
-                  },
-                  {
-                    "type": "link",
-                    "url": "#configconfiglogs",
-                    "title": null,
-                    "jsdoc": true,
-                    "children": [
-                      {
-                        "type": "text",
-                        "value": "config.logs"
-                      }
-                    ],
-                    "position": {
-                      "start": {
-                        "line": 6,
-                        "column": 4,
-                        "offset": 276
-                      },
-                      "end": {
-                        "line": 6,
-                        "column": 41,
-                        "offset": 313
-                      },
-                      "indent": []
-                    }
-                  },
-                  {
-                    "type": "text",
-                    "value": "). The SDK will then provide this\n   function with the logged information.",
-                    "position": {
-                      "start": {
-                        "line": 6,
-                        "column": 41,
-                        "offset": 313
-                      },
-                      "end": {
-                        "line": 7,
-                        "column": 41,
-                        "offset": 387
-                      },
-                      "indent": [
-                        1
-                      ]
-                    }
-                  }
-                ],
-                "position": {
-                  "start": {
-                    "line": 5,
-                    "column": 1,
-                    "offset": 199
-                  },
-                  "end": {
-                    "line": 7,
-                    "column": 41,
-                    "offset": 387
-                  },
-                  "indent": [
-                    1,
-                    1
-                  ]
-                }
-              }
-            ],
-            "position": {
-              "start": {
-                "line": 1,
-                "column": 1,
-                "offset": 0
-              },
-              "end": {
-                "line": 7,
-                "column": 41,
-                "offset": 387
-              }
-            }
-          },
-          "tags": [
-            {
-              "title": "public",
-              "description": null,
-              "lineNumber": 9,
-              "type": null
-            },
-            {
-              "title": "static",
-              "description": null,
-              "lineNumber": 10
-            },
-            {
-              "title": "typedef",
-              "description": null,
-              "lineNumber": 11,
-              "type": {
-                "type": "NameExpression",
-                "name": "Function"
-              },
-              "name": "LogHandler"
-            },
-            {
-              "title": "memberof",
-              "description": "logger",
-              "lineNumber": 12
-            },
-            {
-              "title": "requires",
-              "description": null,
-              "lineNumber": 13,
-              "name": "logs"
-            },
-            {
-              "title": "param",
-              "description": "The LogEntry to be logged.",
-              "lineNumber": 14,
-              "type": {
-                "type": "NameExpression",
-                "name": "Object"
-              },
-              "name": "LogEntry"
-            },
-            {
-              "title": "example",
-              "description": "// Define a custom function to handle logs.\nfunction logHandler (logEntry) {\n  // Compile the meta info of the log for a prefix.\n  const { timestamp, level, target } = logEntry\n  let { method } = logEntry\n  const logInfo = `${timestamp} - ${target.type} - ${level}`\n\n  // Assume that the first message parameter is a string.\n  const [log, ...extra] = logEntry.messages\n\n  // For the timer methods, don't actually use the console methods.\n  //    The Logger already did the timing, so simply log out the info.\n  if (['time', 'timeLog', 'timeEnd'].includes(method)) {\n    method = 'debug'\n  }\n\n  console[method](`${logInfo} - ${log}`, ...extra)\n}\n\n// Provide the LogHandler as part of the SDK configurations.\nconst configs = { ... }\nconfigs.logs.handler = logHandler\nconst client = create(configs)",
-              "lineNumber": 15
-            }
-          ],
-          "loc": {
-            "start": {
-              "line": 54,
-              "column": 0
-            },
-            "end": {
-              "line": 93,
-              "column": 3
-            }
-          },
-          "context": {
-            "loc": {
-              "start": {
-                "line": 1,
-                "column": 0
-              },
-              "end": {
-                "line": 94,
-                "column": 0
-              }
-            },
-            "file": "/var/jenkins_home/workspace/Kandy.js_beta/packages/kandy/src/logs/docs.js"
-          },
-          "augments": [],
-          "examples": [
-            {
-              "description": "// Define a custom function to handle logs.\nfunction logHandler (logEntry) {\n  // Compile the meta info of the log for a prefix.\n  const { timestamp, level, target } = logEntry\n  let { method } = logEntry\n  const logInfo = `${timestamp} - ${target.type} - ${level}`\n\n  // Assume that the first message parameter is a string.\n  const [log, ...extra] = logEntry.messages\n\n  // For the timer methods, don't actually use the console methods.\n  //    The Logger already did the timing, so simply log out the info.\n  if (['time', 'timeLog', 'timeEnd'].includes(method)) {\n    method = 'debug'\n  }\n\n  console[method](`${logInfo} - ${log}`, ...extra)\n}\n\n// Provide the LogHandler as part of the SDK configurations.\nconst configs = { ... }\nconfigs.logs.handler = logHandler\nconst client = create(configs)"
-            }
-          ],
-          "params": [
-            {
-              "title": "param",
-              "name": "LogEntry",
-              "lineNumber": 14,
-              "description": {
-                "type": "root",
-                "children": [
-                  {
-                    "type": "paragraph",
-                    "children": [
-                      {
-                        "type": "text",
-                        "value": "The LogEntry to be logged.",
-                        "position": {
-                          "start": {
-                            "line": 1,
-                            "column": 1,
-                            "offset": 0
-                          },
-                          "end": {
-                            "line": 1,
-                            "column": 27,
-                            "offset": 26
-                          },
-                          "indent": []
-                        }
-                      }
-                    ],
-                    "position": {
-                      "start": {
-                        "line": 1,
-                        "column": 1,
-                        "offset": 0
-                      },
-                      "end": {
-                        "line": 1,
-                        "column": 27,
-                        "offset": 26
-                      },
-                      "indent": []
-                    }
-                  }
-                ],
-                "position": {
-                  "start": {
-                    "line": 1,
-                    "column": 1,
-                    "offset": 0
-                  },
-                  "end": {
-                    "line": 1,
-                    "column": 27,
-                    "offset": 26
-                  }
-                }
-              },
-              "type": {
-                "type": "NameExpression",
-                "name": "Object"
-              }
-            }
-          ],
-          "properties": [],
-          "returns": [],
-          "sees": [],
-          "throws": [],
-          "todos": [],
-          "access": "public",
-          "scope": "static",
-          "kind": "typedef",
-          "name": "LogHandler",
-          "type": {
-            "type": "NameExpression",
-            "name": "Function"
-          },
-          "memberof": "logger",
-          "members": {
-            "global": [],
-            "inner": [],
-            "instance": [],
-            "events": [],
-            "static": []
-          },
-          "path": [
-            {
-              "name": "logger",
-              "kind": "namespace"
-            },
-            {
-              "name": "LogHandler",
-              "kind": "typedef",
-              "scope": "static"
-            }
-          ],
-          "namespace": "logger.LogHandler"
         }
       ]
     },

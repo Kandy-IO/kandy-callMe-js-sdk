@@ -5,11 +5,12 @@ Kandy.js change log.
 - This project adheres to [Semantic Versioning](http://semver.org/).
 - This change log follows [keepachangelog.com](http://keepachangelog.com/) recommendations.
 
-## 4.14.0 - beta
+## 4.14.0 - 2020-03-27
 
 ### Fixed
 
 - Added checking for media willSend and willReceive when a Hold operation is received in case the remote side answered an audio only call with audio and video. `KAA-2209`
+- Fixed an issue where an existing local video track could not be replaced by a screen sharing track. `KAA-2144`
 
 ### Added
 
@@ -30,7 +31,6 @@ Kandy.js change log.
 
 - Fixed a Call issue where a slow-start, remote hold operation, when entering a "dual hold" state, was not being processed correctly. `KAA-2183`
 - Fixed problems with Firefox Hold/Unhold under `plan-b` sdpSemantics by making it impossible to start the SDK in `plan-b` under any browser that is not Chrome. `KAA-2174`
-- Fixed an issue where an existing local video track could not be replaced by a screen sharing track. `KAA-2144`
 
 ## 4.12.0 - 2020-01-31
 
