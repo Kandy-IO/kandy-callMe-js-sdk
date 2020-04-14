@@ -16983,7 +16983,7 @@
                 "children": [
                   {
                     "type": "text",
-                    "value": "Custom SIP headers can be used to convey additional information to a SIP endpoint.",
+                    "value": "A Track is a stream of audio or video media from a single source.\nTracks can be retrieved using the Media module's ",
                     "position": {
                       "start": {
                         "line": 1,
@@ -16991,9 +16991,45 @@
                         "offset": 0
                       },
                       "end": {
-                        "line": 1,
-                        "column": 83,
-                        "offset": 82
+                        "line": 2,
+                        "column": 50,
+                        "offset": 115
+                      },
+                      "indent": [
+                        1
+                      ]
+                    }
+                  },
+                  {
+                    "type": "inlineCode",
+                    "value": "getTrackById",
+                    "position": {
+                      "start": {
+                        "line": 2,
+                        "column": 50,
+                        "offset": 115
+                      },
+                      "end": {
+                        "line": 2,
+                        "column": 64,
+                        "offset": 129
+                      },
+                      "indent": []
+                    }
+                  },
+                  {
+                    "type": "text",
+                    "value": " API and manipulated with other functions of the Media module.",
+                    "position": {
+                      "start": {
+                        "line": 2,
+                        "column": 64,
+                        "offset": 129
+                      },
+                      "end": {
+                        "line": 2,
+                        "column": 126,
+                        "offset": 191
                       },
                       "indent": []
                     }
@@ -17006,505 +17042,11 @@
                     "offset": 0
                   },
                   "end": {
-                    "line": 1,
-                    "column": 83,
-                    "offset": 82
-                  },
-                  "indent": []
-                }
-              },
-              {
-                "type": "paragraph",
-                "children": [
-                  {
-                    "type": "text",
-                    "value": "These headers must be configured on the server prior to making a request, otherwise the request will fail when trying to set the headers.",
-                    "position": {
-                      "start": {
-                        "line": 3,
-                        "column": 1,
-                        "offset": 84
-                      },
-                      "end": {
-                        "line": 3,
-                        "column": 138,
-                        "offset": 221
-                      },
-                      "indent": []
-                    }
-                  }
-                ],
-                "position": {
-                  "start": {
-                    "line": 3,
-                    "column": 1,
-                    "offset": 84
-                  },
-                  "end": {
-                    "line": 3,
-                    "column": 138,
-                    "offset": 221
-                  },
-                  "indent": []
-                }
-              },
-              {
-                "type": "paragraph",
-                "children": [
-                  {
-                    "type": "text",
-                    "value": "These headers can be specified with the ",
-                    "position": {
-                      "start": {
-                        "line": 5,
-                        "column": 1,
-                        "offset": 223
-                      },
-                      "end": {
-                        "line": 5,
-                        "column": 41,
-                        "offset": 263
-                      },
-                      "indent": []
-                    }
-                  },
-                  {
-                    "type": "link",
-                    "url": "call.make",
-                    "title": null,
-                    "jsdoc": true,
-                    "children": [
-                      {
-                        "type": "text",
-                        "value": "call.make"
-                      }
-                    ],
-                    "position": {
-                      "start": {
-                        "line": 5,
-                        "column": 41,
-                        "offset": 263
-                      },
-                      "end": {
-                        "line": 5,
-                        "column": 58,
-                        "offset": 280
-                      },
-                      "indent": []
-                    }
-                  },
-                  {
-                    "type": "text",
-                    "value": " and ",
-                    "position": {
-                      "start": {
-                        "line": 5,
-                        "column": 58,
-                        "offset": 280
-                      },
-                      "end": {
-                        "line": 5,
-                        "column": 63,
-                        "offset": 285
-                      },
-                      "indent": []
-                    }
-                  },
-                  {
-                    "type": "link",
-                    "url": "call.answer",
-                    "title": null,
-                    "jsdoc": true,
-                    "children": [
-                      {
-                        "type": "text",
-                        "value": "call.answer"
-                      }
-                    ],
-                    "position": {
-                      "start": {
-                        "line": 5,
-                        "column": 63,
-                        "offset": 285
-                      },
-                      "end": {
-                        "line": 5,
-                        "column": 82,
-                        "offset": 304
-                      },
-                      "indent": []
-                    }
-                  },
-                  {
-                    "type": "text",
-                    "value": " APIs.\nThey can also be set on a call using the ",
-                    "position": {
-                      "start": {
-                        "line": 5,
-                        "column": 82,
-                        "offset": 304
-                      },
-                      "end": {
-                        "line": 6,
-                        "column": 42,
-                        "offset": 352
-                      },
-                      "indent": [
-                        1
-                      ]
-                    }
-                  },
-                  {
-                    "type": "link",
-                    "url": "#callsetcustomparameters",
-                    "title": null,
-                    "jsdoc": true,
-                    "children": [
-                      {
-                        "type": "text",
-                        "value": "call.setCustomParameters"
-                      }
-                    ],
-                    "position": {
-                      "start": {
-                        "line": 6,
-                        "column": 42,
-                        "offset": 352
-                      },
-                      "end": {
-                        "line": 6,
-                        "column": 74,
-                        "offset": 384
-                      },
-                      "indent": []
-                    }
-                  },
-                  {
-                    "type": "text",
-                    "value": ", and sent using the ",
-                    "position": {
-                      "start": {
-                        "line": 6,
-                        "column": 74,
-                        "offset": 384
-                      },
-                      "end": {
-                        "line": 6,
-                        "column": 95,
-                        "offset": 405
-                      },
-                      "indent": []
-                    }
-                  },
-                  {
-                    "type": "link",
-                    "url": "#callsendcustomparameters",
-                    "title": null,
-                    "jsdoc": true,
-                    "children": [
-                      {
-                        "type": "text",
-                        "value": "call.sendCustomParameters"
-                      }
-                    ],
-                    "position": {
-                      "start": {
-                        "line": 6,
-                        "column": 95,
-                        "offset": 405
-                      },
-                      "end": {
-                        "line": 6,
-                        "column": 128,
-                        "offset": 438
-                      },
-                      "indent": []
-                    }
-                  },
-                  {
-                    "type": "text",
-                    "value": " API.",
-                    "position": {
-                      "start": {
-                        "line": 6,
-                        "column": 128,
-                        "offset": 438
-                      },
-                      "end": {
-                        "line": 6,
-                        "column": 133,
-                        "offset": 443
-                      },
-                      "indent": []
-                    }
-                  }
-                ],
-                "position": {
-                  "start": {
-                    "line": 5,
-                    "column": 1,
-                    "offset": 223
-                  },
-                  "end": {
-                    "line": 6,
-                    "column": 133,
-                    "offset": 443
+                    "line": 2,
+                    "column": 126,
+                    "offset": 191
                   },
                   "indent": [
-                    1
-                  ]
-                }
-              },
-              {
-                "type": "paragraph",
-                "children": [
-                  {
-                    "type": "text",
-                    "value": "Custom headers may be received anytime throughout the duration a call. A remote endpoint may send custom headers when starting a call,\n answering a call, or during call updates such as hold/unhold and addition/removal of media in the call.\n When these custom headers are received, the SDK will emit a ",
-                    "position": {
-                      "start": {
-                        "line": 8,
-                        "column": 1,
-                        "offset": 445
-                      },
-                      "end": {
-                        "line": 10,
-                        "column": 62,
-                        "offset": 746
-                      },
-                      "indent": [
-                        1,
-                        1
-                      ]
-                    }
-                  },
-                  {
-                    "type": "link",
-                    "url": "#calleventcallcustomparameters",
-                    "title": null,
-                    "jsdoc": true,
-                    "children": [
-                      {
-                        "type": "text",
-                        "value": "call:customParameters"
-                      }
-                    ],
-                    "position": {
-                      "start": {
-                        "line": 10,
-                        "column": 62,
-                        "offset": 746
-                      },
-                      "end": {
-                        "line": 10,
-                        "column": 124,
-                        "offset": 808
-                      },
-                      "indent": []
-                    }
-                  },
-                  {
-                    "type": "text",
-                    "value": " event\n which will contain the custom parameters that were received.",
-                    "position": {
-                      "start": {
-                        "line": 10,
-                        "column": 124,
-                        "offset": 808
-                      },
-                      "end": {
-                        "line": 11,
-                        "column": 62,
-                        "offset": 876
-                      },
-                      "indent": [
-                        1
-                      ]
-                    }
-                  }
-                ],
-                "position": {
-                  "start": {
-                    "line": 8,
-                    "column": 1,
-                    "offset": 445
-                  },
-                  "end": {
-                    "line": 11,
-                    "column": 62,
-                    "offset": 876
-                  },
-                  "indent": [
-                    1,
-                    1,
-                    1
-                  ]
-                }
-              },
-              {
-                "type": "paragraph",
-                "children": [
-                  {
-                    "type": "text",
-                    "value": "A Call's custom parameters are a property of the Call's ",
-                    "position": {
-                      "start": {
-                        "line": 13,
-                        "column": 1,
-                        "offset": 878
-                      },
-                      "end": {
-                        "line": 13,
-                        "column": 57,
-                        "offset": 934
-                      },
-                      "indent": []
-                    }
-                  },
-                  {
-                    "type": "link",
-                    "url": "#callcallobject",
-                    "title": null,
-                    "jsdoc": true,
-                    "children": [
-                      {
-                        "type": "text",
-                        "value": "CallObject"
-                      }
-                    ],
-                    "position": {
-                      "start": {
-                        "line": 13,
-                        "column": 57,
-                        "offset": 934
-                      },
-                      "end": {
-                        "line": 13,
-                        "column": 91,
-                        "offset": 968
-                      },
-                      "indent": []
-                    }
-                  },
-                  {
-                    "type": "text",
-                    "value": ",\n which can be retrieved using the ",
-                    "position": {
-                      "start": {
-                        "line": 13,
-                        "column": 91,
-                        "offset": 968
-                      },
-                      "end": {
-                        "line": 14,
-                        "column": 35,
-                        "offset": 1004
-                      },
-                      "indent": [
-                        1
-                      ]
-                    }
-                  },
-                  {
-                    "type": "link",
-                    "url": "#callgetbyid",
-                    "title": null,
-                    "jsdoc": true,
-                    "children": [
-                      {
-                        "type": "text",
-                        "value": "call.getById"
-                      }
-                    ],
-                    "position": {
-                      "start": {
-                        "line": 14,
-                        "column": 35,
-                        "offset": 1004
-                      },
-                      "end": {
-                        "line": 14,
-                        "column": 55,
-                        "offset": 1024
-                      },
-                      "indent": []
-                    }
-                  },
-                  {
-                    "type": "text",
-                    "value": " or\n ",
-                    "position": {
-                      "start": {
-                        "line": 14,
-                        "column": 55,
-                        "offset": 1024
-                      },
-                      "end": {
-                        "line": 15,
-                        "column": 2,
-                        "offset": 1029
-                      },
-                      "indent": [
-                        1
-                      ]
-                    }
-                  },
-                  {
-                    "type": "link",
-                    "url": "#callgetall",
-                    "title": null,
-                    "jsdoc": true,
-                    "children": [
-                      {
-                        "type": "text",
-                        "value": "call.getAll"
-                      }
-                    ],
-                    "position": {
-                      "start": {
-                        "line": 15,
-                        "column": 2,
-                        "offset": 1029
-                      },
-                      "end": {
-                        "line": 15,
-                        "column": 21,
-                        "offset": 1048
-                      },
-                      "indent": []
-                    }
-                  },
-                  {
-                    "type": "text",
-                    "value": " APIs.",
-                    "position": {
-                      "start": {
-                        "line": 15,
-                        "column": 21,
-                        "offset": 1048
-                      },
-                      "end": {
-                        "line": 15,
-                        "column": 27,
-                        "offset": 1054
-                      },
-                      "indent": []
-                    }
-                  }
-                ],
-                "position": {
-                  "start": {
-                    "line": 13,
-                    "column": 1,
-                    "offset": 878
-                  },
-                  "end": {
-                    "line": 15,
-                    "column": 27,
-                    "offset": 1054
-                  },
-                  "indent": [
-                    1,
                     1
                   ]
                 }
@@ -17517,9 +17059,9 @@
                 "offset": 0
               },
               "end": {
-                "line": 15,
-                "column": 27,
-                "offset": 1054
+                "line": 2,
+                "column": 126,
+                "offset": 191
               }
             }
           },
@@ -17527,81 +17069,126 @@
             {
               "title": "public",
               "description": null,
-              "lineNumber": 17,
+              "lineNumber": 4,
               "type": null
             },
             {
               "title": "static",
               "description": null,
-              "lineNumber": 18
-            },
-            {
-              "title": "module",
-              "description": null,
-              "lineNumber": 19,
-              "type": null,
-              "name": "CustomParameter"
+              "lineNumber": 5
             },
             {
               "title": "typedef",
               "description": null,
-              "lineNumber": 20,
+              "lineNumber": 6,
               "type": {
                 "type": "NameExpression",
                 "name": "Object"
               },
-              "name": "CustomParameter"
+              "name": "TrackObject"
             },
             {
               "title": "memberof",
               "description": "call",
-              "lineNumber": 21
-            },
-            {
-              "title": "requires",
-              "description": null,
-              "lineNumber": 22,
-              "name": "link_call"
-            },
-            {
-              "title": "requires",
-              "description": null,
-              "lineNumber": 23,
-              "name": "callMe"
+              "lineNumber": 7
             },
             {
               "title": "property",
-              "description": "The name of the custom parameter",
-              "lineNumber": 24,
+              "description": "The list of CSS selectors that were used to render this Track.",
+              "lineNumber": 8,
+              "type": {
+                "type": "TypeApplication",
+                "expression": {
+                  "type": "NameExpression",
+                  "name": "Array"
+                },
+                "applications": [
+                  {
+                    "type": "NameExpression",
+                    "name": "string"
+                  }
+                ]
+              },
+              "name": "containers"
+            },
+            {
+              "title": "property",
+              "description": "Indicator of whether this Track is disabled or not. If disabled, it cannot be re-enabled.",
+              "lineNumber": 9,
+              "type": {
+                "type": "NameExpression",
+                "name": "boolean"
+              },
+              "name": "disabled"
+            },
+            {
+              "title": "property",
+              "description": "The ID of the Track.",
+              "lineNumber": 10,
               "type": {
                 "type": "NameExpression",
                 "name": "string"
               },
-              "name": "name"
+              "name": "id"
             },
             {
               "title": "property",
-              "description": "The value of the custom parameter",
-              "lineNumber": 25,
+              "description": "The kind of Track this is (audio, video).",
+              "lineNumber": 11,
               "type": {
                 "type": "NameExpression",
                 "name": "string"
               },
-              "name": "value"
+              "name": "kind"
             },
             {
-              "title": "example",
-              "description": "// Specify custom parameters when making a call.\nclient.call.make(destination, mediaConstraints,\n {\n   customParameters: [\n     {\n       name: 'X-GPS',\n       value: '42.686032,23.344565'\n     }\n   ]\n }\n)",
-              "lineNumber": 26
+              "title": "property",
+              "description": "The label of the device this Track uses.",
+              "lineNumber": 12,
+              "type": {
+                "type": "NameExpression",
+                "name": "string"
+              },
+              "name": "label"
+            },
+            {
+              "title": "property",
+              "description": "Indicator on whether this Track is muted or not.",
+              "lineNumber": 13,
+              "type": {
+                "type": "NameExpression",
+                "name": "boolean"
+              },
+              "name": "muted"
+            },
+            {
+              "title": "property",
+              "description": "The state of this Track. Can be 'live' or 'ended'.",
+              "lineNumber": 14,
+              "type": {
+                "type": "NameExpression",
+                "name": "string"
+              },
+              "name": "state"
+            },
+            {
+              "title": "property",
+              "description": "The ID of the Media Stream that includes this Track.",
+              "lineNumber": 15,
+              "type": {
+                "type": "NameExpression",
+                "name": "string"
+              },
+              "name": "streamId"
             }
           ],
           "loc": {
             "start": {
-              "line": 226,
+              "line": 183,
               "column": 0
             },
             "end": {
-              "line": 264,
+              "line": 199,
               "column": 3
             }
           },
@@ -17619,17 +17206,13 @@
             "file": "/var/jenkins_home/workspace/Kandy.js_beta/packages/kandy/src/call/interfaceNew/api/index.js"
           },
           "augments": [],
-          "examples": [
-            {
-              "description": "// Specify custom parameters when making a call.\nclient.call.make(destination, mediaConstraints,\n {\n   customParameters: [\n     {\n       name: 'X-GPS',\n       value: '42.686032,23.344565'\n     }\n   ]\n }\n)"
-            }
-          ],
+          "examples": [],
           "params": [],
           "properties": [
             {
               "title": "property",
-              "name": "name",
-              "lineNumber": 24,
+              "name": "containers",
+              "lineNumber": 8,
               "description": {
                 "type": "root",
                 "children": [
@@ -17638,7 +17221,7 @@
                     "children": [
                       {
                         "type": "text",
-                        "value": "The name of the custom parameter",
+                        "value": "The list of CSS selectors that were used to render this Track.",
                         "position": {
                           "start": {
                             "line": 1,
@@ -17647,8 +17230,8 @@
                           },
                           "end": {
                             "line": 1,
-                            "column": 33,
-                            "offset": 32
+                            "column": 63,
+                            "offset": 62
                           },
                           "indent": []
                         }
@@ -17662,8 +17245,8 @@
                       },
                       "end": {
                         "line": 1,
-                        "column": 33,
-                        "offset": 32
+                        "column": 63,
+                        "offset": 62
                       },
                       "indent": []
                     }
@@ -17677,8 +17260,139 @@
                   },
                   "end": {
                     "line": 1,
-                    "column": 33,
-                    "offset": 32
+                    "column": 63,
+                    "offset": 62
+                  }
+                }
+              },
+              "type": {
+                "type": "TypeApplication",
+                "expression": {
+                  "type": "NameExpression",
+                  "name": "Array"
+                },
+                "applications": [
+                  {
+                    "type": "NameExpression",
+                    "name": "string"
+                  }
+                ]
+              }
+            },
+            {
+              "title": "property",
+              "name": "disabled",
+              "lineNumber": 9,
+              "description": {
+                "type": "root",
+                "children": [
+                  {
+                    "type": "paragraph",
+                    "children": [
+                      {
+                        "type": "text",
+                        "value": "Indicator of whether this Track is disabled or not. If disabled, it cannot be re-enabled.",
+                        "position": {
+                          "start": {
+                            "line": 1,
+                            "column": 1,
+                            "offset": 0
+                          },
+                          "end": {
+                            "line": 1,
+                            "column": 90,
+                            "offset": 89
+                          },
+                          "indent": []
+                        }
+                      }
+                    ],
+                    "position": {
+                      "start": {
+                        "line": 1,
+                        "column": 1,
+                        "offset": 0
+                      },
+                      "end": {
+                        "line": 1,
+                        "column": 90,
+                        "offset": 89
+                      },
+                      "indent": []
+                    }
+                  }
+                ],
+                "position": {
+                  "start": {
+                    "line": 1,
+                    "column": 1,
+                    "offset": 0
+                  },
+                  "end": {
+                    "line": 1,
+                    "column": 90,
+                    "offset": 89
+                  }
+                }
+              },
+              "type": {
+                "type": "NameExpression",
+                "name": "boolean"
+              }
+            },
+            {
+              "title": "property",
+              "name": "id",
+              "lineNumber": 10,
+              "description": {
+                "type": "root",
+                "children": [
+                  {
+                    "type": "paragraph",
+                    "children": [
+                      {
+                        "type": "text",
+                        "value": "The ID of the Track.",
+                        "position": {
+                          "start": {
+                            "line": 1,
+                            "column": 1,
+                            "offset": 0
+                          },
+                          "end": {
+                            "line": 1,
+                            "column": 21,
+                            "offset": 20
+                          },
+                          "indent": []
+                        }
+                      }
+                    ],
+                    "position": {
+                      "start": {
+                        "line": 1,
+                        "column": 1,
+                        "offset": 0
+                      },
+                      "end": {
+                        "line": 1,
+                        "column": 21,
+                        "offset": 20
+                      },
+                      "indent": []
+                    }
+                  }
+                ],
+                "position": {
+                  "start": {
+                    "line": 1,
+                    "column": 1,
+                    "offset": 0
+                  },
+                  "end": {
+                    "line": 1,
+                    "column": 21,
+                    "offset": 20
                   }
                 }
               },
@@ -17689,8 +17403,8 @@
             },
             {
               "title": "property",
-              "name": "value",
-              "lineNumber": 25,
+              "name": "kind",
+              "lineNumber": 11,
               "description": {
                 "type": "root",
                 "children": [
@@ -17699,7 +17413,7 @@
                     "children": [
                       {
                         "type": "text",
-                        "value": "The value of the custom parameter",
+                        "value": "The kind of Track this is (audio, video).",
                         "position": {
                           "start": {
                             "line": 1,
@@ -17708,8 +17422,8 @@
                           },
                           "end": {
                             "line": 1,
-                            "column": 34,
-                            "offset": 33
+                            "column": 42,
+                            "offset": 41
                           },
                           "indent": []
                         }
@@ -17723,8 +17437,8 @@
                       },
                       "end": {
                         "line": 1,
-                        "column": 34,
-                        "offset": 33
+                        "column": 42,
+                        "offset": 41
                       },
                       "indent": []
                     }
@@ -17738,8 +17452,252 @@
                   },
                   "end": {
                     "line": 1,
-                    "column": 34,
-                    "offset": 33
+                    "column": 42,
+                    "offset": 41
+                  }
+                }
+              },
+              "type": {
+                "type": "NameExpression",
+                "name": "string"
+              }
+            },
+            {
+              "title": "property",
+              "name": "label",
+              "lineNumber": 12,
+              "description": {
+                "type": "root",
+                "children": [
+                  {
+                    "type": "paragraph",
+                    "children": [
+                      {
+                        "type": "text",
+                        "value": "The label of the device this Track uses.",
+                        "position": {
+                          "start": {
+                            "line": 1,
+                            "column": 1,
+                            "offset": 0
+                          },
+                          "end": {
+                            "line": 1,
+                            "column": 41,
+                            "offset": 40
+                          },
+                          "indent": []
+                        }
+                      }
+                    ],
+                    "position": {
+                      "start": {
+                        "line": 1,
+                        "column": 1,
+                        "offset": 0
+                      },
+                      "end": {
+                        "line": 1,
+                        "column": 41,
+                        "offset": 40
+                      },
+                      "indent": []
+                    }
+                  }
+                ],
+                "position": {
+                  "start": {
+                    "line": 1,
+                    "column": 1,
+                    "offset": 0
+                  },
+                  "end": {
+                    "line": 1,
+                    "column": 41,
+                    "offset": 40
+                  }
+                }
+              },
+              "type": {
+                "type": "NameExpression",
+                "name": "string"
+              }
+            },
+            {
+              "title": "property",
+              "name": "muted",
+              "lineNumber": 13,
+              "description": {
+                "type": "root",
+                "children": [
+                  {
+                    "type": "paragraph",
+                    "children": [
+                      {
+                        "type": "text",
+                        "value": "Indicator on whether this Track is muted or not.",
+                        "position": {
+                          "start": {
+                            "line": 1,
+                            "column": 1,
+                            "offset": 0
+                          },
+                          "end": {
+                            "line": 1,
+                            "column": 49,
+                            "offset": 48
+                          },
+                          "indent": []
+                        }
+                      }
+                    ],
+                    "position": {
+                      "start": {
+                        "line": 1,
+                        "column": 1,
+                        "offset": 0
+                      },
+                      "end": {
+                        "line": 1,
+                        "column": 49,
+                        "offset": 48
+                      },
+                      "indent": []
+                    }
+                  }
+                ],
+                "position": {
+                  "start": {
+                    "line": 1,
+                    "column": 1,
+                    "offset": 0
+                  },
+                  "end": {
+                    "line": 1,
+                    "column": 49,
+                    "offset": 48
+                  }
+                }
+              },
+              "type": {
+                "type": "NameExpression",
+                "name": "boolean"
+              }
+            },
+            {
+              "title": "property",
+              "name": "state",
+              "lineNumber": 14,
+              "description": {
+                "type": "root",
+                "children": [
+                  {
+                    "type": "paragraph",
+                    "children": [
+                      {
+                        "type": "text",
+                        "value": "The state of this Track. Can be 'live' or 'ended'.",
+                        "position": {
+                          "start": {
+                            "line": 1,
+                            "column": 1,
+                            "offset": 0
+                          },
+                          "end": {
+                            "line": 1,
+                            "column": 51,
+                            "offset": 50
+                          },
+                          "indent": []
+                        }
+                      }
+                    ],
+                    "position": {
+                      "start": {
+                        "line": 1,
+                        "column": 1,
+                        "offset": 0
+                      },
+                      "end": {
+                        "line": 1,
+                        "column": 51,
+                        "offset": 50
+                      },
+                      "indent": []
+                    }
+                  }
+                ],
+                "position": {
+                  "start": {
+                    "line": 1,
+                    "column": 1,
+                    "offset": 0
+                  },
+                  "end": {
+                    "line": 1,
+                    "column": 51,
+                    "offset": 50
+                  }
+                }
+              },
+              "type": {
+                "type": "NameExpression",
+                "name": "string"
+              }
+            },
+            {
+              "title": "property",
+              "name": "streamId",
+              "lineNumber": 15,
+              "description": {
+                "type": "root",
+                "children": [
+                  {
+                    "type": "paragraph",
+                    "children": [
+                      {
+                        "type": "text",
+                        "value": "The ID of the Media Stream that includes this Track.",
+                        "position": {
+                          "start": {
+                            "line": 1,
+                            "column": 1,
+                            "offset": 0
+                          },
+                          "end": {
+                            "line": 1,
+                            "column": 53,
+                            "offset": 52
+                          },
+                          "indent": []
+                        }
+                      }
+                    ],
+                    "position": {
+                      "start": {
+                        "line": 1,
+                        "column": 1,
+                        "offset": 0
+                      },
+                      "end": {
+                        "line": 1,
+                        "column": 53,
+                        "offset": 52
+                      },
+                      "indent": []
+                    }
+                  }
+                ],
+                "position": {
+                  "start": {
+                    "line": 1,
+                    "column": 1,
+                    "offset": 0
+                  },
+                  "end": {
+                    "line": 1,
+                    "column": 53,
+                    "offset": 52
                   }
                 }
               },
@@ -17756,7 +17714,7 @@
           "access": "public",
           "scope": "static",
           "kind": "typedef",
-          "name": "CustomParameter",
+          "name": "TrackObject",
           "type": {
             "type": "NameExpression",
             "name": "Object"
@@ -17774,12 +17732,12 @@
               "name": "call"
             },
             {
-              "name": "CustomParameter",
+              "name": "TrackObject",
               "kind": "typedef",
               "scope": "static"
             }
           ],
-          "namespace": "call.CustomParameter"
+          "namespace": "call.TrackObject"
         },
         {
           "description": {
@@ -19321,6 +19279,813 @@
                 "children": [
                   {
                     "type": "text",
+                    "value": "Custom SIP headers can be used to convey additional information to a SIP endpoint.",
+                    "position": {
+                      "start": {
+                        "line": 1,
+                        "column": 1,
+                        "offset": 0
+                      },
+                      "end": {
+                        "line": 1,
+                        "column": 83,
+                        "offset": 82
+                      },
+                      "indent": []
+                    }
+                  }
+                ],
+                "position": {
+                  "start": {
+                    "line": 1,
+                    "column": 1,
+                    "offset": 0
+                  },
+                  "end": {
+                    "line": 1,
+                    "column": 83,
+                    "offset": 82
+                  },
+                  "indent": []
+                }
+              },
+              {
+                "type": "paragraph",
+                "children": [
+                  {
+                    "type": "text",
+                    "value": "These headers must be configured on the server prior to making a request, otherwise the request will fail when trying to set the headers.",
+                    "position": {
+                      "start": {
+                        "line": 3,
+                        "column": 1,
+                        "offset": 84
+                      },
+                      "end": {
+                        "line": 3,
+                        "column": 138,
+                        "offset": 221
+                      },
+                      "indent": []
+                    }
+                  }
+                ],
+                "position": {
+                  "start": {
+                    "line": 3,
+                    "column": 1,
+                    "offset": 84
+                  },
+                  "end": {
+                    "line": 3,
+                    "column": 138,
+                    "offset": 221
+                  },
+                  "indent": []
+                }
+              },
+              {
+                "type": "paragraph",
+                "children": [
+                  {
+                    "type": "text",
+                    "value": "These headers can be specified with the ",
+                    "position": {
+                      "start": {
+                        "line": 5,
+                        "column": 1,
+                        "offset": 223
+                      },
+                      "end": {
+                        "line": 5,
+                        "column": 41,
+                        "offset": 263
+                      },
+                      "indent": []
+                    }
+                  },
+                  {
+                    "type": "link",
+                    "url": "call.make",
+                    "title": null,
+                    "jsdoc": true,
+                    "children": [
+                      {
+                        "type": "text",
+                        "value": "call.make"
+                      }
+                    ],
+                    "position": {
+                      "start": {
+                        "line": 5,
+                        "column": 41,
+                        "offset": 263
+                      },
+                      "end": {
+                        "line": 5,
+                        "column": 58,
+                        "offset": 280
+                      },
+                      "indent": []
+                    }
+                  },
+                  {
+                    "type": "text",
+                    "value": " and ",
+                    "position": {
+                      "start": {
+                        "line": 5,
+                        "column": 58,
+                        "offset": 280
+                      },
+                      "end": {
+                        "line": 5,
+                        "column": 63,
+                        "offset": 285
+                      },
+                      "indent": []
+                    }
+                  },
+                  {
+                    "type": "link",
+                    "url": "call.answer",
+                    "title": null,
+                    "jsdoc": true,
+                    "children": [
+                      {
+                        "type": "text",
+                        "value": "call.answer"
+                      }
+                    ],
+                    "position": {
+                      "start": {
+                        "line": 5,
+                        "column": 63,
+                        "offset": 285
+                      },
+                      "end": {
+                        "line": 5,
+                        "column": 82,
+                        "offset": 304
+                      },
+                      "indent": []
+                    }
+                  },
+                  {
+                    "type": "text",
+                    "value": " APIs.\nThey can also be set on a call using the ",
+                    "position": {
+                      "start": {
+                        "line": 5,
+                        "column": 82,
+                        "offset": 304
+                      },
+                      "end": {
+                        "line": 6,
+                        "column": 42,
+                        "offset": 352
+                      },
+                      "indent": [
+                        1
+                      ]
+                    }
+                  },
+                  {
+                    "type": "link",
+                    "url": "#callsetcustomparameters",
+                    "title": null,
+                    "jsdoc": true,
+                    "children": [
+                      {
+                        "type": "text",
+                        "value": "call.setCustomParameters"
+                      }
+                    ],
+                    "position": {
+                      "start": {
+                        "line": 6,
+                        "column": 42,
+                        "offset": 352
+                      },
+                      "end": {
+                        "line": 6,
+                        "column": 74,
+                        "offset": 384
+                      },
+                      "indent": []
+                    }
+                  },
+                  {
+                    "type": "text",
+                    "value": ", and sent using the ",
+                    "position": {
+                      "start": {
+                        "line": 6,
+                        "column": 74,
+                        "offset": 384
+                      },
+                      "end": {
+                        "line": 6,
+                        "column": 95,
+                        "offset": 405
+                      },
+                      "indent": []
+                    }
+                  },
+                  {
+                    "type": "link",
+                    "url": "#callsendcustomparameters",
+                    "title": null,
+                    "jsdoc": true,
+                    "children": [
+                      {
+                        "type": "text",
+                        "value": "call.sendCustomParameters"
+                      }
+                    ],
+                    "position": {
+                      "start": {
+                        "line": 6,
+                        "column": 95,
+                        "offset": 405
+                      },
+                      "end": {
+                        "line": 6,
+                        "column": 128,
+                        "offset": 438
+                      },
+                      "indent": []
+                    }
+                  },
+                  {
+                    "type": "text",
+                    "value": " API.",
+                    "position": {
+                      "start": {
+                        "line": 6,
+                        "column": 128,
+                        "offset": 438
+                      },
+                      "end": {
+                        "line": 6,
+                        "column": 133,
+                        "offset": 443
+                      },
+                      "indent": []
+                    }
+                  }
+                ],
+                "position": {
+                  "start": {
+                    "line": 5,
+                    "column": 1,
+                    "offset": 223
+                  },
+                  "end": {
+                    "line": 6,
+                    "column": 133,
+                    "offset": 443
+                  },
+                  "indent": [
+                    1
+                  ]
+                }
+              },
+              {
+                "type": "paragraph",
+                "children": [
+                  {
+                    "type": "text",
+                    "value": "Custom headers may be received anytime throughout the duration a call. A remote endpoint may send custom headers when starting a call,\n answering a call, or during call updates such as hold/unhold and addition/removal of media in the call.\n When these custom headers are received, the SDK will emit a ",
+                    "position": {
+                      "start": {
+                        "line": 8,
+                        "column": 1,
+                        "offset": 445
+                      },
+                      "end": {
+                        "line": 10,
+                        "column": 62,
+                        "offset": 746
+                      },
+                      "indent": [
+                        1,
+                        1
+                      ]
+                    }
+                  },
+                  {
+                    "type": "link",
+                    "url": "#calleventcallcustomparameters",
+                    "title": null,
+                    "jsdoc": true,
+                    "children": [
+                      {
+                        "type": "text",
+                        "value": "call:customParameters"
+                      }
+                    ],
+                    "position": {
+                      "start": {
+                        "line": 10,
+                        "column": 62,
+                        "offset": 746
+                      },
+                      "end": {
+                        "line": 10,
+                        "column": 124,
+                        "offset": 808
+                      },
+                      "indent": []
+                    }
+                  },
+                  {
+                    "type": "text",
+                    "value": " event\n which will contain the custom parameters that were received.",
+                    "position": {
+                      "start": {
+                        "line": 10,
+                        "column": 124,
+                        "offset": 808
+                      },
+                      "end": {
+                        "line": 11,
+                        "column": 62,
+                        "offset": 876
+                      },
+                      "indent": [
+                        1
+                      ]
+                    }
+                  }
+                ],
+                "position": {
+                  "start": {
+                    "line": 8,
+                    "column": 1,
+                    "offset": 445
+                  },
+                  "end": {
+                    "line": 11,
+                    "column": 62,
+                    "offset": 876
+                  },
+                  "indent": [
+                    1,
+                    1,
+                    1
+                  ]
+                }
+              },
+              {
+                "type": "paragraph",
+                "children": [
+                  {
+                    "type": "text",
+                    "value": "A Call's custom parameters are a property of the Call's ",
+                    "position": {
+                      "start": {
+                        "line": 13,
+                        "column": 1,
+                        "offset": 878
+                      },
+                      "end": {
+                        "line": 13,
+                        "column": 57,
+                        "offset": 934
+                      },
+                      "indent": []
+                    }
+                  },
+                  {
+                    "type": "link",
+                    "url": "#callcallobject",
+                    "title": null,
+                    "jsdoc": true,
+                    "children": [
+                      {
+                        "type": "text",
+                        "value": "CallObject"
+                      }
+                    ],
+                    "position": {
+                      "start": {
+                        "line": 13,
+                        "column": 57,
+                        "offset": 934
+                      },
+                      "end": {
+                        "line": 13,
+                        "column": 91,
+                        "offset": 968
+                      },
+                      "indent": []
+                    }
+                  },
+                  {
+                    "type": "text",
+                    "value": ",\n which can be retrieved using the ",
+                    "position": {
+                      "start": {
+                        "line": 13,
+                        "column": 91,
+                        "offset": 968
+                      },
+                      "end": {
+                        "line": 14,
+                        "column": 35,
+                        "offset": 1004
+                      },
+                      "indent": [
+                        1
+                      ]
+                    }
+                  },
+                  {
+                    "type": "link",
+                    "url": "#callgetbyid",
+                    "title": null,
+                    "jsdoc": true,
+                    "children": [
+                      {
+                        "type": "text",
+                        "value": "call.getById"
+                      }
+                    ],
+                    "position": {
+                      "start": {
+                        "line": 14,
+                        "column": 35,
+                        "offset": 1004
+                      },
+                      "end": {
+                        "line": 14,
+                        "column": 55,
+                        "offset": 1024
+                      },
+                      "indent": []
+                    }
+                  },
+                  {
+                    "type": "text",
+                    "value": " or\n ",
+                    "position": {
+                      "start": {
+                        "line": 14,
+                        "column": 55,
+                        "offset": 1024
+                      },
+                      "end": {
+                        "line": 15,
+                        "column": 2,
+                        "offset": 1029
+                      },
+                      "indent": [
+                        1
+                      ]
+                    }
+                  },
+                  {
+                    "type": "link",
+                    "url": "#callgetall",
+                    "title": null,
+                    "jsdoc": true,
+                    "children": [
+                      {
+                        "type": "text",
+                        "value": "call.getAll"
+                      }
+                    ],
+                    "position": {
+                      "start": {
+                        "line": 15,
+                        "column": 2,
+                        "offset": 1029
+                      },
+                      "end": {
+                        "line": 15,
+                        "column": 21,
+                        "offset": 1048
+                      },
+                      "indent": []
+                    }
+                  },
+                  {
+                    "type": "text",
+                    "value": " APIs.",
+                    "position": {
+                      "start": {
+                        "line": 15,
+                        "column": 21,
+                        "offset": 1048
+                      },
+                      "end": {
+                        "line": 15,
+                        "column": 27,
+                        "offset": 1054
+                      },
+                      "indent": []
+                    }
+                  }
+                ],
+                "position": {
+                  "start": {
+                    "line": 13,
+                    "column": 1,
+                    "offset": 878
+                  },
+                  "end": {
+                    "line": 15,
+                    "column": 27,
+                    "offset": 1054
+                  },
+                  "indent": [
+                    1,
+                    1
+                  ]
+                }
+              }
+            ],
+            "position": {
+              "start": {
+                "line": 1,
+                "column": 1,
+                "offset": 0
+              },
+              "end": {
+                "line": 15,
+                "column": 27,
+                "offset": 1054
+              }
+            }
+          },
+          "tags": [
+            {
+              "title": "public",
+              "description": null,
+              "lineNumber": 17,
+              "type": null
+            },
+            {
+              "title": "static",
+              "description": null,
+              "lineNumber": 18
+            },
+            {
+              "title": "module",
+              "description": null,
+              "lineNumber": 19,
+              "type": null,
+              "name": "CustomParameter"
+            },
+            {
+              "title": "typedef",
+              "description": null,
+              "lineNumber": 20,
+              "type": {
+                "type": "NameExpression",
+                "name": "Object"
+              },
+              "name": "CustomParameter"
+            },
+            {
+              "title": "memberof",
+              "description": "call",
+              "lineNumber": 21
+            },
+            {
+              "title": "requires",
+              "description": null,
+              "lineNumber": 22,
+              "name": "link_call"
+            },
+            {
+              "title": "requires",
+              "description": null,
+              "lineNumber": 23,
+              "name": "callMe"
+            },
+            {
+              "title": "property",
+              "description": "The name of the custom parameter",
+              "lineNumber": 24,
+              "type": {
+                "type": "NameExpression",
+                "name": "string"
+              },
+              "name": "name"
+            },
+            {
+              "title": "property",
+              "description": "The value of the custom parameter",
+              "lineNumber": 25,
+              "type": {
+                "type": "NameExpression",
+                "name": "string"
+              },
+              "name": "value"
+            },
+            {
+              "title": "example",
+              "description": "// Specify custom parameters when making a call.\nclient.call.make(destination, mediaConstraints,\n {\n   customParameters: [\n     {\n       name: 'X-GPS',\n       value: '42.686032,23.344565'\n     }\n   ]\n }\n)",
+              "lineNumber": 26
+            }
+          ],
+          "loc": {
+            "start": {
+              "line": 226,
+              "column": 0
+            },
+            "end": {
+              "line": 264,
+              "column": 3
+            }
+          },
+          "context": {
+            "loc": {
+              "start": {
+                "line": 275,
+                "column": 0
+              },
+              "end": {
+                "line": 279,
+                "column": 1
+              }
+            },
+            "file": "/var/jenkins_home/workspace/Kandy.js_beta/packages/kandy/src/call/interfaceNew/api/index.js"
+          },
+          "augments": [],
+          "examples": [
+            {
+              "description": "// Specify custom parameters when making a call.\nclient.call.make(destination, mediaConstraints,\n {\n   customParameters: [\n     {\n       name: 'X-GPS',\n       value: '42.686032,23.344565'\n     }\n   ]\n }\n)"
+            }
+          ],
+          "params": [],
+          "properties": [
+            {
+              "title": "property",
+              "name": "name",
+              "lineNumber": 24,
+              "description": {
+                "type": "root",
+                "children": [
+                  {
+                    "type": "paragraph",
+                    "children": [
+                      {
+                        "type": "text",
+                        "value": "The name of the custom parameter",
+                        "position": {
+                          "start": {
+                            "line": 1,
+                            "column": 1,
+                            "offset": 0
+                          },
+                          "end": {
+                            "line": 1,
+                            "column": 33,
+                            "offset": 32
+                          },
+                          "indent": []
+                        }
+                      }
+                    ],
+                    "position": {
+                      "start": {
+                        "line": 1,
+                        "column": 1,
+                        "offset": 0
+                      },
+                      "end": {
+                        "line": 1,
+                        "column": 33,
+                        "offset": 32
+                      },
+                      "indent": []
+                    }
+                  }
+                ],
+                "position": {
+                  "start": {
+                    "line": 1,
+                    "column": 1,
+                    "offset": 0
+                  },
+                  "end": {
+                    "line": 1,
+                    "column": 33,
+                    "offset": 32
+                  }
+                }
+              },
+              "type": {
+                "type": "NameExpression",
+                "name": "string"
+              }
+            },
+            {
+              "title": "property",
+              "name": "value",
+              "lineNumber": 25,
+              "description": {
+                "type": "root",
+                "children": [
+                  {
+                    "type": "paragraph",
+                    "children": [
+                      {
+                        "type": "text",
+                        "value": "The value of the custom parameter",
+                        "position": {
+                          "start": {
+                            "line": 1,
+                            "column": 1,
+                            "offset": 0
+                          },
+                          "end": {
+                            "line": 1,
+                            "column": 34,
+                            "offset": 33
+                          },
+                          "indent": []
+                        }
+                      }
+                    ],
+                    "position": {
+                      "start": {
+                        "line": 1,
+                        "column": 1,
+                        "offset": 0
+                      },
+                      "end": {
+                        "line": 1,
+                        "column": 34,
+                        "offset": 33
+                      },
+                      "indent": []
+                    }
+                  }
+                ],
+                "position": {
+                  "start": {
+                    "line": 1,
+                    "column": 1,
+                    "offset": 0
+                  },
+                  "end": {
+                    "line": 1,
+                    "column": 34,
+                    "offset": 33
+                  }
+                }
+              },
+              "type": {
+                "type": "NameExpression",
+                "name": "string"
+              }
+            }
+          ],
+          "returns": [],
+          "sees": [],
+          "throws": [],
+          "todos": [],
+          "access": "public",
+          "scope": "static",
+          "kind": "typedef",
+          "name": "CustomParameter",
+          "type": {
+            "type": "NameExpression",
+            "name": "Object"
+          },
+          "memberof": "call",
+          "members": {
+            "global": [],
+            "inner": [],
+            "instance": [],
+            "events": [],
+            "static": []
+          },
+          "path": [
+            {
+              "name": "call"
+            },
+            {
+              "name": "CustomParameter",
+              "kind": "typedef",
+              "scope": "static"
+            }
+          ],
+          "namespace": "call.CustomParameter"
+        },
+        {
+          "description": {
+            "type": "root",
+            "children": [
+              {
+                "type": "paragraph",
+                "children": [
+                  {
+                    "type": "text",
                     "value": "Contains information about a device.",
                     "position": {
                       "start": {
@@ -19770,1179 +20535,6 @@
             }
           ],
           "namespace": "call.DeviceInfo"
-        },
-        {
-          "description": {
-            "type": "root",
-            "children": [
-              {
-                "type": "paragraph",
-                "children": [
-                  {
-                    "type": "text",
-                    "value": "A collection of media devices and their information.",
-                    "position": {
-                      "start": {
-                        "line": 1,
-                        "column": 1,
-                        "offset": 0
-                      },
-                      "end": {
-                        "line": 1,
-                        "column": 53,
-                        "offset": 52
-                      },
-                      "indent": []
-                    }
-                  }
-                ],
-                "position": {
-                  "start": {
-                    "line": 1,
-                    "column": 1,
-                    "offset": 0
-                  },
-                  "end": {
-                    "line": 1,
-                    "column": 53,
-                    "offset": 52
-                  },
-                  "indent": []
-                }
-              }
-            ],
-            "position": {
-              "start": {
-                "line": 1,
-                "column": 1,
-                "offset": 0
-              },
-              "end": {
-                "line": 1,
-                "column": 53,
-                "offset": 52
-              }
-            }
-          },
-          "tags": [
-            {
-              "title": "public",
-              "description": null,
-              "lineNumber": 3,
-              "type": null
-            },
-            {
-              "title": "static",
-              "description": null,
-              "lineNumber": 4
-            },
-            {
-              "title": "typedef",
-              "description": null,
-              "lineNumber": 5,
-              "type": {
-                "type": "NameExpression",
-                "name": "Object"
-              },
-              "name": "DevicesObject"
-            },
-            {
-              "title": "memberof",
-              "description": "call",
-              "lineNumber": 6
-            },
-            {
-              "title": "property",
-              "description": "A list of camera device information.",
-              "lineNumber": 7,
-              "type": {
-                "type": "TypeApplication",
-                "expression": {
-                  "type": "NameExpression",
-                  "name": "Array"
-                },
-                "applications": [
-                  {
-                    "type": "NameExpression",
-                    "name": "call.DeviceInfo"
-                  }
-                ]
-              },
-              "name": "camera"
-            },
-            {
-              "title": "property",
-              "description": "A list of microphone device information.",
-              "lineNumber": 8,
-              "type": {
-                "type": "TypeApplication",
-                "expression": {
-                  "type": "NameExpression",
-                  "name": "Array"
-                },
-                "applications": [
-                  {
-                    "type": "NameExpression",
-                    "name": "call.DeviceInfo"
-                  }
-                ]
-              },
-              "name": "microphone"
-            },
-            {
-              "title": "property",
-              "description": "A list of speaker device information.",
-              "lineNumber": 9,
-              "type": {
-                "type": "TypeApplication",
-                "expression": {
-                  "type": "NameExpression",
-                  "name": "Array"
-                },
-                "applications": [
-                  {
-                    "type": "NameExpression",
-                    "name": "call.DeviceInfo"
-                  }
-                ]
-              },
-              "name": "speaker"
-            }
-          ],
-          "loc": {
-            "start": {
-              "line": 201,
-              "column": 0
-            },
-            "end": {
-              "line": 211,
-              "column": 3
-            }
-          },
-          "context": {
-            "loc": {
-              "start": {
-                "line": 275,
-                "column": 0
-              },
-              "end": {
-                "line": 279,
-                "column": 1
-              }
-            },
-            "file": "/var/jenkins_home/workspace/Kandy.js_beta/packages/kandy/src/call/interfaceNew/api/index.js"
-          },
-          "augments": [],
-          "examples": [],
-          "params": [],
-          "properties": [
-            {
-              "title": "property",
-              "name": "camera",
-              "lineNumber": 7,
-              "description": {
-                "type": "root",
-                "children": [
-                  {
-                    "type": "paragraph",
-                    "children": [
-                      {
-                        "type": "text",
-                        "value": "A list of camera device information.",
-                        "position": {
-                          "start": {
-                            "line": 1,
-                            "column": 1,
-                            "offset": 0
-                          },
-                          "end": {
-                            "line": 1,
-                            "column": 37,
-                            "offset": 36
-                          },
-                          "indent": []
-                        }
-                      }
-                    ],
-                    "position": {
-                      "start": {
-                        "line": 1,
-                        "column": 1,
-                        "offset": 0
-                      },
-                      "end": {
-                        "line": 1,
-                        "column": 37,
-                        "offset": 36
-                      },
-                      "indent": []
-                    }
-                  }
-                ],
-                "position": {
-                  "start": {
-                    "line": 1,
-                    "column": 1,
-                    "offset": 0
-                  },
-                  "end": {
-                    "line": 1,
-                    "column": 37,
-                    "offset": 36
-                  }
-                }
-              },
-              "type": {
-                "type": "TypeApplication",
-                "expression": {
-                  "type": "NameExpression",
-                  "name": "Array"
-                },
-                "applications": [
-                  {
-                    "type": "NameExpression",
-                    "name": "call.DeviceInfo"
-                  }
-                ]
-              }
-            },
-            {
-              "title": "property",
-              "name": "microphone",
-              "lineNumber": 8,
-              "description": {
-                "type": "root",
-                "children": [
-                  {
-                    "type": "paragraph",
-                    "children": [
-                      {
-                        "type": "text",
-                        "value": "A list of microphone device information.",
-                        "position": {
-                          "start": {
-                            "line": 1,
-                            "column": 1,
-                            "offset": 0
-                          },
-                          "end": {
-                            "line": 1,
-                            "column": 41,
-                            "offset": 40
-                          },
-                          "indent": []
-                        }
-                      }
-                    ],
-                    "position": {
-                      "start": {
-                        "line": 1,
-                        "column": 1,
-                        "offset": 0
-                      },
-                      "end": {
-                        "line": 1,
-                        "column": 41,
-                        "offset": 40
-                      },
-                      "indent": []
-                    }
-                  }
-                ],
-                "position": {
-                  "start": {
-                    "line": 1,
-                    "column": 1,
-                    "offset": 0
-                  },
-                  "end": {
-                    "line": 1,
-                    "column": 41,
-                    "offset": 40
-                  }
-                }
-              },
-              "type": {
-                "type": "TypeApplication",
-                "expression": {
-                  "type": "NameExpression",
-                  "name": "Array"
-                },
-                "applications": [
-                  {
-                    "type": "NameExpression",
-                    "name": "call.DeviceInfo"
-                  }
-                ]
-              }
-            },
-            {
-              "title": "property",
-              "name": "speaker",
-              "lineNumber": 9,
-              "description": {
-                "type": "root",
-                "children": [
-                  {
-                    "type": "paragraph",
-                    "children": [
-                      {
-                        "type": "text",
-                        "value": "A list of speaker device information.",
-                        "position": {
-                          "start": {
-                            "line": 1,
-                            "column": 1,
-                            "offset": 0
-                          },
-                          "end": {
-                            "line": 1,
-                            "column": 38,
-                            "offset": 37
-                          },
-                          "indent": []
-                        }
-                      }
-                    ],
-                    "position": {
-                      "start": {
-                        "line": 1,
-                        "column": 1,
-                        "offset": 0
-                      },
-                      "end": {
-                        "line": 1,
-                        "column": 38,
-                        "offset": 37
-                      },
-                      "indent": []
-                    }
-                  }
-                ],
-                "position": {
-                  "start": {
-                    "line": 1,
-                    "column": 1,
-                    "offset": 0
-                  },
-                  "end": {
-                    "line": 1,
-                    "column": 38,
-                    "offset": 37
-                  }
-                }
-              },
-              "type": {
-                "type": "TypeApplication",
-                "expression": {
-                  "type": "NameExpression",
-                  "name": "Array"
-                },
-                "applications": [
-                  {
-                    "type": "NameExpression",
-                    "name": "call.DeviceInfo"
-                  }
-                ]
-              }
-            }
-          ],
-          "returns": [],
-          "sees": [],
-          "throws": [],
-          "todos": [],
-          "access": "public",
-          "scope": "static",
-          "kind": "typedef",
-          "name": "DevicesObject",
-          "type": {
-            "type": "NameExpression",
-            "name": "Object"
-          },
-          "memberof": "call",
-          "members": {
-            "global": [],
-            "inner": [],
-            "instance": [],
-            "events": [],
-            "static": []
-          },
-          "path": [
-            {
-              "name": "call"
-            },
-            {
-              "name": "DevicesObject",
-              "kind": "typedef",
-              "scope": "static"
-            }
-          ],
-          "namespace": "call.DevicesObject"
-        },
-        {
-          "description": {
-            "type": "root",
-            "children": [
-              {
-                "type": "paragraph",
-                "children": [
-                  {
-                    "type": "text",
-                    "value": "A Track is a stream of audio or video media from a single source.\nTracks can be retrieved using the Media module's ",
-                    "position": {
-                      "start": {
-                        "line": 1,
-                        "column": 1,
-                        "offset": 0
-                      },
-                      "end": {
-                        "line": 2,
-                        "column": 50,
-                        "offset": 115
-                      },
-                      "indent": [
-                        1
-                      ]
-                    }
-                  },
-                  {
-                    "type": "inlineCode",
-                    "value": "getTrackById",
-                    "position": {
-                      "start": {
-                        "line": 2,
-                        "column": 50,
-                        "offset": 115
-                      },
-                      "end": {
-                        "line": 2,
-                        "column": 64,
-                        "offset": 129
-                      },
-                      "indent": []
-                    }
-                  },
-                  {
-                    "type": "text",
-                    "value": " API and manipulated with other functions of the Media module.",
-                    "position": {
-                      "start": {
-                        "line": 2,
-                        "column": 64,
-                        "offset": 129
-                      },
-                      "end": {
-                        "line": 2,
-                        "column": 126,
-                        "offset": 191
-                      },
-                      "indent": []
-                    }
-                  }
-                ],
-                "position": {
-                  "start": {
-                    "line": 1,
-                    "column": 1,
-                    "offset": 0
-                  },
-                  "end": {
-                    "line": 2,
-                    "column": 126,
-                    "offset": 191
-                  },
-                  "indent": [
-                    1
-                  ]
-                }
-              }
-            ],
-            "position": {
-              "start": {
-                "line": 1,
-                "column": 1,
-                "offset": 0
-              },
-              "end": {
-                "line": 2,
-                "column": 126,
-                "offset": 191
-              }
-            }
-          },
-          "tags": [
-            {
-              "title": "public",
-              "description": null,
-              "lineNumber": 4,
-              "type": null
-            },
-            {
-              "title": "static",
-              "description": null,
-              "lineNumber": 5
-            },
-            {
-              "title": "typedef",
-              "description": null,
-              "lineNumber": 6,
-              "type": {
-                "type": "NameExpression",
-                "name": "Object"
-              },
-              "name": "TrackObject"
-            },
-            {
-              "title": "memberof",
-              "description": "call",
-              "lineNumber": 7
-            },
-            {
-              "title": "property",
-              "description": "The list of CSS selectors that were used to render this Track.",
-              "lineNumber": 8,
-              "type": {
-                "type": "TypeApplication",
-                "expression": {
-                  "type": "NameExpression",
-                  "name": "Array"
-                },
-                "applications": [
-                  {
-                    "type": "NameExpression",
-                    "name": "string"
-                  }
-                ]
-              },
-              "name": "containers"
-            },
-            {
-              "title": "property",
-              "description": "Indicator of whether this Track is disabled or not. If disabled, it cannot be re-enabled.",
-              "lineNumber": 9,
-              "type": {
-                "type": "NameExpression",
-                "name": "boolean"
-              },
-              "name": "disabled"
-            },
-            {
-              "title": "property",
-              "description": "The ID of the Track.",
-              "lineNumber": 10,
-              "type": {
-                "type": "NameExpression",
-                "name": "string"
-              },
-              "name": "id"
-            },
-            {
-              "title": "property",
-              "description": "The kind of Track this is (audio, video).",
-              "lineNumber": 11,
-              "type": {
-                "type": "NameExpression",
-                "name": "string"
-              },
-              "name": "kind"
-            },
-            {
-              "title": "property",
-              "description": "The label of the device this Track uses.",
-              "lineNumber": 12,
-              "type": {
-                "type": "NameExpression",
-                "name": "string"
-              },
-              "name": "label"
-            },
-            {
-              "title": "property",
-              "description": "Indicator on whether this Track is muted or not.",
-              "lineNumber": 13,
-              "type": {
-                "type": "NameExpression",
-                "name": "boolean"
-              },
-              "name": "muted"
-            },
-            {
-              "title": "property",
-              "description": "The state of this Track. Can be 'live' or 'ended'.",
-              "lineNumber": 14,
-              "type": {
-                "type": "NameExpression",
-                "name": "string"
-              },
-              "name": "state"
-            },
-            {
-              "title": "property",
-              "description": "The ID of the Media Stream that includes this Track.",
-              "lineNumber": 15,
-              "type": {
-                "type": "NameExpression",
-                "name": "string"
-              },
-              "name": "streamId"
-            }
-          ],
-          "loc": {
-            "start": {
-              "line": 183,
-              "column": 0
-            },
-            "end": {
-              "line": 199,
-              "column": 3
-            }
-          },
-          "context": {
-            "loc": {
-              "start": {
-                "line": 275,
-                "column": 0
-              },
-              "end": {
-                "line": 279,
-                "column": 1
-              }
-            },
-            "file": "/var/jenkins_home/workspace/Kandy.js_beta/packages/kandy/src/call/interfaceNew/api/index.js"
-          },
-          "augments": [],
-          "examples": [],
-          "params": [],
-          "properties": [
-            {
-              "title": "property",
-              "name": "containers",
-              "lineNumber": 8,
-              "description": {
-                "type": "root",
-                "children": [
-                  {
-                    "type": "paragraph",
-                    "children": [
-                      {
-                        "type": "text",
-                        "value": "The list of CSS selectors that were used to render this Track.",
-                        "position": {
-                          "start": {
-                            "line": 1,
-                            "column": 1,
-                            "offset": 0
-                          },
-                          "end": {
-                            "line": 1,
-                            "column": 63,
-                            "offset": 62
-                          },
-                          "indent": []
-                        }
-                      }
-                    ],
-                    "position": {
-                      "start": {
-                        "line": 1,
-                        "column": 1,
-                        "offset": 0
-                      },
-                      "end": {
-                        "line": 1,
-                        "column": 63,
-                        "offset": 62
-                      },
-                      "indent": []
-                    }
-                  }
-                ],
-                "position": {
-                  "start": {
-                    "line": 1,
-                    "column": 1,
-                    "offset": 0
-                  },
-                  "end": {
-                    "line": 1,
-                    "column": 63,
-                    "offset": 62
-                  }
-                }
-              },
-              "type": {
-                "type": "TypeApplication",
-                "expression": {
-                  "type": "NameExpression",
-                  "name": "Array"
-                },
-                "applications": [
-                  {
-                    "type": "NameExpression",
-                    "name": "string"
-                  }
-                ]
-              }
-            },
-            {
-              "title": "property",
-              "name": "disabled",
-              "lineNumber": 9,
-              "description": {
-                "type": "root",
-                "children": [
-                  {
-                    "type": "paragraph",
-                    "children": [
-                      {
-                        "type": "text",
-                        "value": "Indicator of whether this Track is disabled or not. If disabled, it cannot be re-enabled.",
-                        "position": {
-                          "start": {
-                            "line": 1,
-                            "column": 1,
-                            "offset": 0
-                          },
-                          "end": {
-                            "line": 1,
-                            "column": 90,
-                            "offset": 89
-                          },
-                          "indent": []
-                        }
-                      }
-                    ],
-                    "position": {
-                      "start": {
-                        "line": 1,
-                        "column": 1,
-                        "offset": 0
-                      },
-                      "end": {
-                        "line": 1,
-                        "column": 90,
-                        "offset": 89
-                      },
-                      "indent": []
-                    }
-                  }
-                ],
-                "position": {
-                  "start": {
-                    "line": 1,
-                    "column": 1,
-                    "offset": 0
-                  },
-                  "end": {
-                    "line": 1,
-                    "column": 90,
-                    "offset": 89
-                  }
-                }
-              },
-              "type": {
-                "type": "NameExpression",
-                "name": "boolean"
-              }
-            },
-            {
-              "title": "property",
-              "name": "id",
-              "lineNumber": 10,
-              "description": {
-                "type": "root",
-                "children": [
-                  {
-                    "type": "paragraph",
-                    "children": [
-                      {
-                        "type": "text",
-                        "value": "The ID of the Track.",
-                        "position": {
-                          "start": {
-                            "line": 1,
-                            "column": 1,
-                            "offset": 0
-                          },
-                          "end": {
-                            "line": 1,
-                            "column": 21,
-                            "offset": 20
-                          },
-                          "indent": []
-                        }
-                      }
-                    ],
-                    "position": {
-                      "start": {
-                        "line": 1,
-                        "column": 1,
-                        "offset": 0
-                      },
-                      "end": {
-                        "line": 1,
-                        "column": 21,
-                        "offset": 20
-                      },
-                      "indent": []
-                    }
-                  }
-                ],
-                "position": {
-                  "start": {
-                    "line": 1,
-                    "column": 1,
-                    "offset": 0
-                  },
-                  "end": {
-                    "line": 1,
-                    "column": 21,
-                    "offset": 20
-                  }
-                }
-              },
-              "type": {
-                "type": "NameExpression",
-                "name": "string"
-              }
-            },
-            {
-              "title": "property",
-              "name": "kind",
-              "lineNumber": 11,
-              "description": {
-                "type": "root",
-                "children": [
-                  {
-                    "type": "paragraph",
-                    "children": [
-                      {
-                        "type": "text",
-                        "value": "The kind of Track this is (audio, video).",
-                        "position": {
-                          "start": {
-                            "line": 1,
-                            "column": 1,
-                            "offset": 0
-                          },
-                          "end": {
-                            "line": 1,
-                            "column": 42,
-                            "offset": 41
-                          },
-                          "indent": []
-                        }
-                      }
-                    ],
-                    "position": {
-                      "start": {
-                        "line": 1,
-                        "column": 1,
-                        "offset": 0
-                      },
-                      "end": {
-                        "line": 1,
-                        "column": 42,
-                        "offset": 41
-                      },
-                      "indent": []
-                    }
-                  }
-                ],
-                "position": {
-                  "start": {
-                    "line": 1,
-                    "column": 1,
-                    "offset": 0
-                  },
-                  "end": {
-                    "line": 1,
-                    "column": 42,
-                    "offset": 41
-                  }
-                }
-              },
-              "type": {
-                "type": "NameExpression",
-                "name": "string"
-              }
-            },
-            {
-              "title": "property",
-              "name": "label",
-              "lineNumber": 12,
-              "description": {
-                "type": "root",
-                "children": [
-                  {
-                    "type": "paragraph",
-                    "children": [
-                      {
-                        "type": "text",
-                        "value": "The label of the device this Track uses.",
-                        "position": {
-                          "start": {
-                            "line": 1,
-                            "column": 1,
-                            "offset": 0
-                          },
-                          "end": {
-                            "line": 1,
-                            "column": 41,
-                            "offset": 40
-                          },
-                          "indent": []
-                        }
-                      }
-                    ],
-                    "position": {
-                      "start": {
-                        "line": 1,
-                        "column": 1,
-                        "offset": 0
-                      },
-                      "end": {
-                        "line": 1,
-                        "column": 41,
-                        "offset": 40
-                      },
-                      "indent": []
-                    }
-                  }
-                ],
-                "position": {
-                  "start": {
-                    "line": 1,
-                    "column": 1,
-                    "offset": 0
-                  },
-                  "end": {
-                    "line": 1,
-                    "column": 41,
-                    "offset": 40
-                  }
-                }
-              },
-              "type": {
-                "type": "NameExpression",
-                "name": "string"
-              }
-            },
-            {
-              "title": "property",
-              "name": "muted",
-              "lineNumber": 13,
-              "description": {
-                "type": "root",
-                "children": [
-                  {
-                    "type": "paragraph",
-                    "children": [
-                      {
-                        "type": "text",
-                        "value": "Indicator on whether this Track is muted or not.",
-                        "position": {
-                          "start": {
-                            "line": 1,
-                            "column": 1,
-                            "offset": 0
-                          },
-                          "end": {
-                            "line": 1,
-                            "column": 49,
-                            "offset": 48
-                          },
-                          "indent": []
-                        }
-                      }
-                    ],
-                    "position": {
-                      "start": {
-                        "line": 1,
-                        "column": 1,
-                        "offset": 0
-                      },
-                      "end": {
-                        "line": 1,
-                        "column": 49,
-                        "offset": 48
-                      },
-                      "indent": []
-                    }
-                  }
-                ],
-                "position": {
-                  "start": {
-                    "line": 1,
-                    "column": 1,
-                    "offset": 0
-                  },
-                  "end": {
-                    "line": 1,
-                    "column": 49,
-                    "offset": 48
-                  }
-                }
-              },
-              "type": {
-                "type": "NameExpression",
-                "name": "boolean"
-              }
-            },
-            {
-              "title": "property",
-              "name": "state",
-              "lineNumber": 14,
-              "description": {
-                "type": "root",
-                "children": [
-                  {
-                    "type": "paragraph",
-                    "children": [
-                      {
-                        "type": "text",
-                        "value": "The state of this Track. Can be 'live' or 'ended'.",
-                        "position": {
-                          "start": {
-                            "line": 1,
-                            "column": 1,
-                            "offset": 0
-                          },
-                          "end": {
-                            "line": 1,
-                            "column": 51,
-                            "offset": 50
-                          },
-                          "indent": []
-                        }
-                      }
-                    ],
-                    "position": {
-                      "start": {
-                        "line": 1,
-                        "column": 1,
-                        "offset": 0
-                      },
-                      "end": {
-                        "line": 1,
-                        "column": 51,
-                        "offset": 50
-                      },
-                      "indent": []
-                    }
-                  }
-                ],
-                "position": {
-                  "start": {
-                    "line": 1,
-                    "column": 1,
-                    "offset": 0
-                  },
-                  "end": {
-                    "line": 1,
-                    "column": 51,
-                    "offset": 50
-                  }
-                }
-              },
-              "type": {
-                "type": "NameExpression",
-                "name": "string"
-              }
-            },
-            {
-              "title": "property",
-              "name": "streamId",
-              "lineNumber": 15,
-              "description": {
-                "type": "root",
-                "children": [
-                  {
-                    "type": "paragraph",
-                    "children": [
-                      {
-                        "type": "text",
-                        "value": "The ID of the Media Stream that includes this Track.",
-                        "position": {
-                          "start": {
-                            "line": 1,
-                            "column": 1,
-                            "offset": 0
-                          },
-                          "end": {
-                            "line": 1,
-                            "column": 53,
-                            "offset": 52
-                          },
-                          "indent": []
-                        }
-                      }
-                    ],
-                    "position": {
-                      "start": {
-                        "line": 1,
-                        "column": 1,
-                        "offset": 0
-                      },
-                      "end": {
-                        "line": 1,
-                        "column": 53,
-                        "offset": 52
-                      },
-                      "indent": []
-                    }
-                  }
-                ],
-                "position": {
-                  "start": {
-                    "line": 1,
-                    "column": 1,
-                    "offset": 0
-                  },
-                  "end": {
-                    "line": 1,
-                    "column": 53,
-                    "offset": 52
-                  }
-                }
-              },
-              "type": {
-                "type": "NameExpression",
-                "name": "string"
-              }
-            }
-          ],
-          "returns": [],
-          "sees": [],
-          "throws": [],
-          "todos": [],
-          "access": "public",
-          "scope": "static",
-          "kind": "typedef",
-          "name": "TrackObject",
-          "type": {
-            "type": "NameExpression",
-            "name": "Object"
-          },
-          "memberof": "call",
-          "members": {
-            "global": [],
-            "inner": [],
-            "instance": [],
-            "events": [],
-            "static": []
-          },
-          "path": [
-            {
-              "name": "call"
-            },
-            {
-              "name": "TrackObject",
-              "kind": "typedef",
-              "scope": "static"
-            }
-          ],
-          "namespace": "call.TrackObject"
         },
         {
           "description": {
@@ -21742,6 +21334,414 @@
             }
           ],
           "namespace": "call.SdpHandlerFunction"
+        },
+        {
+          "description": {
+            "type": "root",
+            "children": [
+              {
+                "type": "paragraph",
+                "children": [
+                  {
+                    "type": "text",
+                    "value": "A collection of media devices and their information.",
+                    "position": {
+                      "start": {
+                        "line": 1,
+                        "column": 1,
+                        "offset": 0
+                      },
+                      "end": {
+                        "line": 1,
+                        "column": 53,
+                        "offset": 52
+                      },
+                      "indent": []
+                    }
+                  }
+                ],
+                "position": {
+                  "start": {
+                    "line": 1,
+                    "column": 1,
+                    "offset": 0
+                  },
+                  "end": {
+                    "line": 1,
+                    "column": 53,
+                    "offset": 52
+                  },
+                  "indent": []
+                }
+              }
+            ],
+            "position": {
+              "start": {
+                "line": 1,
+                "column": 1,
+                "offset": 0
+              },
+              "end": {
+                "line": 1,
+                "column": 53,
+                "offset": 52
+              }
+            }
+          },
+          "tags": [
+            {
+              "title": "public",
+              "description": null,
+              "lineNumber": 3,
+              "type": null
+            },
+            {
+              "title": "static",
+              "description": null,
+              "lineNumber": 4
+            },
+            {
+              "title": "typedef",
+              "description": null,
+              "lineNumber": 5,
+              "type": {
+                "type": "NameExpression",
+                "name": "Object"
+              },
+              "name": "DevicesObject"
+            },
+            {
+              "title": "memberof",
+              "description": "call",
+              "lineNumber": 6
+            },
+            {
+              "title": "property",
+              "description": "A list of camera device information.",
+              "lineNumber": 7,
+              "type": {
+                "type": "TypeApplication",
+                "expression": {
+                  "type": "NameExpression",
+                  "name": "Array"
+                },
+                "applications": [
+                  {
+                    "type": "NameExpression",
+                    "name": "call.DeviceInfo"
+                  }
+                ]
+              },
+              "name": "camera"
+            },
+            {
+              "title": "property",
+              "description": "A list of microphone device information.",
+              "lineNumber": 8,
+              "type": {
+                "type": "TypeApplication",
+                "expression": {
+                  "type": "NameExpression",
+                  "name": "Array"
+                },
+                "applications": [
+                  {
+                    "type": "NameExpression",
+                    "name": "call.DeviceInfo"
+                  }
+                ]
+              },
+              "name": "microphone"
+            },
+            {
+              "title": "property",
+              "description": "A list of speaker device information.",
+              "lineNumber": 9,
+              "type": {
+                "type": "TypeApplication",
+                "expression": {
+                  "type": "NameExpression",
+                  "name": "Array"
+                },
+                "applications": [
+                  {
+                    "type": "NameExpression",
+                    "name": "call.DeviceInfo"
+                  }
+                ]
+              },
+              "name": "speaker"
+            }
+          ],
+          "loc": {
+            "start": {
+              "line": 201,
+              "column": 0
+            },
+            "end": {
+              "line": 211,
+              "column": 3
+            }
+          },
+          "context": {
+            "loc": {
+              "start": {
+                "line": 275,
+                "column": 0
+              },
+              "end": {
+                "line": 279,
+                "column": 1
+              }
+            },
+            "file": "/var/jenkins_home/workspace/Kandy.js_beta/packages/kandy/src/call/interfaceNew/api/index.js"
+          },
+          "augments": [],
+          "examples": [],
+          "params": [],
+          "properties": [
+            {
+              "title": "property",
+              "name": "camera",
+              "lineNumber": 7,
+              "description": {
+                "type": "root",
+                "children": [
+                  {
+                    "type": "paragraph",
+                    "children": [
+                      {
+                        "type": "text",
+                        "value": "A list of camera device information.",
+                        "position": {
+                          "start": {
+                            "line": 1,
+                            "column": 1,
+                            "offset": 0
+                          },
+                          "end": {
+                            "line": 1,
+                            "column": 37,
+                            "offset": 36
+                          },
+                          "indent": []
+                        }
+                      }
+                    ],
+                    "position": {
+                      "start": {
+                        "line": 1,
+                        "column": 1,
+                        "offset": 0
+                      },
+                      "end": {
+                        "line": 1,
+                        "column": 37,
+                        "offset": 36
+                      },
+                      "indent": []
+                    }
+                  }
+                ],
+                "position": {
+                  "start": {
+                    "line": 1,
+                    "column": 1,
+                    "offset": 0
+                  },
+                  "end": {
+                    "line": 1,
+                    "column": 37,
+                    "offset": 36
+                  }
+                }
+              },
+              "type": {
+                "type": "TypeApplication",
+                "expression": {
+                  "type": "NameExpression",
+                  "name": "Array"
+                },
+                "applications": [
+                  {
+                    "type": "NameExpression",
+                    "name": "call.DeviceInfo"
+                  }
+                ]
+              }
+            },
+            {
+              "title": "property",
+              "name": "microphone",
+              "lineNumber": 8,
+              "description": {
+                "type": "root",
+                "children": [
+                  {
+                    "type": "paragraph",
+                    "children": [
+                      {
+                        "type": "text",
+                        "value": "A list of microphone device information.",
+                        "position": {
+                          "start": {
+                            "line": 1,
+                            "column": 1,
+                            "offset": 0
+                          },
+                          "end": {
+                            "line": 1,
+                            "column": 41,
+                            "offset": 40
+                          },
+                          "indent": []
+                        }
+                      }
+                    ],
+                    "position": {
+                      "start": {
+                        "line": 1,
+                        "column": 1,
+                        "offset": 0
+                      },
+                      "end": {
+                        "line": 1,
+                        "column": 41,
+                        "offset": 40
+                      },
+                      "indent": []
+                    }
+                  }
+                ],
+                "position": {
+                  "start": {
+                    "line": 1,
+                    "column": 1,
+                    "offset": 0
+                  },
+                  "end": {
+                    "line": 1,
+                    "column": 41,
+                    "offset": 40
+                  }
+                }
+              },
+              "type": {
+                "type": "TypeApplication",
+                "expression": {
+                  "type": "NameExpression",
+                  "name": "Array"
+                },
+                "applications": [
+                  {
+                    "type": "NameExpression",
+                    "name": "call.DeviceInfo"
+                  }
+                ]
+              }
+            },
+            {
+              "title": "property",
+              "name": "speaker",
+              "lineNumber": 9,
+              "description": {
+                "type": "root",
+                "children": [
+                  {
+                    "type": "paragraph",
+                    "children": [
+                      {
+                        "type": "text",
+                        "value": "A list of speaker device information.",
+                        "position": {
+                          "start": {
+                            "line": 1,
+                            "column": 1,
+                            "offset": 0
+                          },
+                          "end": {
+                            "line": 1,
+                            "column": 38,
+                            "offset": 37
+                          },
+                          "indent": []
+                        }
+                      }
+                    ],
+                    "position": {
+                      "start": {
+                        "line": 1,
+                        "column": 1,
+                        "offset": 0
+                      },
+                      "end": {
+                        "line": 1,
+                        "column": 38,
+                        "offset": 37
+                      },
+                      "indent": []
+                    }
+                  }
+                ],
+                "position": {
+                  "start": {
+                    "line": 1,
+                    "column": 1,
+                    "offset": 0
+                  },
+                  "end": {
+                    "line": 1,
+                    "column": 38,
+                    "offset": 37
+                  }
+                }
+              },
+              "type": {
+                "type": "TypeApplication",
+                "expression": {
+                  "type": "NameExpression",
+                  "name": "Array"
+                },
+                "applications": [
+                  {
+                    "type": "NameExpression",
+                    "name": "call.DeviceInfo"
+                  }
+                ]
+              }
+            }
+          ],
+          "returns": [],
+          "sees": [],
+          "throws": [],
+          "todos": [],
+          "access": "public",
+          "scope": "static",
+          "kind": "typedef",
+          "name": "DevicesObject",
+          "type": {
+            "type": "NameExpression",
+            "name": "Object"
+          },
+          "memberof": "call",
+          "members": {
+            "global": [],
+            "inner": [],
+            "instance": [],
+            "events": [],
+            "static": []
+          },
+          "path": [
+            {
+              "name": "call"
+            },
+            {
+              "name": "DevicesObject",
+              "kind": "typedef",
+              "scope": "static"
+            }
+          ],
+          "namespace": "call.DevicesObject"
         },
         {
           "description": "",
@@ -29160,527 +29160,6 @@
                 "children": [
                   {
                     "type": "text",
-                    "value": "Removes local screenshare from an ongoing Call, stopping it from being\n   sent to the remote participant.",
-                    "position": {
-                      "start": {
-                        "line": 1,
-                        "column": 1,
-                        "offset": 0
-                      },
-                      "end": {
-                        "line": 2,
-                        "column": 35,
-                        "offset": 105
-                      },
-                      "indent": [
-                        1
-                      ]
-                    }
-                  }
-                ],
-                "position": {
-                  "start": {
-                    "line": 1,
-                    "column": 1,
-                    "offset": 0
-                  },
-                  "end": {
-                    "line": 2,
-                    "column": 35,
-                    "offset": 105
-                  },
-                  "indent": [
-                    1
-                  ]
-                }
-              },
-              {
-                "type": "paragraph",
-                "children": [
-                  {
-                    "type": "text",
-                    "value": "The latest SDK release (v4.X+) has not yet implemented this API in the\n   same way that it was available in previous releases (v3.X). In place\n   of this API, the SDK has a more general API that can be used for this\n   same behaviour.",
-                    "position": {
-                      "start": {
-                        "line": 4,
-                        "column": 1,
-                        "offset": 107
-                      },
-                      "end": {
-                        "line": 7,
-                        "column": 19,
-                        "offset": 341
-                      },
-                      "indent": [
-                        1,
-                        1,
-                        1
-                      ]
-                    }
-                  }
-                ],
-                "position": {
-                  "start": {
-                    "line": 4,
-                    "column": 1,
-                    "offset": 107
-                  },
-                  "end": {
-                    "line": 7,
-                    "column": 19,
-                    "offset": 341
-                  },
-                  "indent": [
-                    1,
-                    1,
-                    1
-                  ]
-                }
-              },
-              {
-                "type": "paragraph",
-                "children": [
-                  {
-                    "type": "text",
-                    "value": "The ",
-                    "position": {
-                      "start": {
-                        "line": 9,
-                        "column": 1,
-                        "offset": 343
-                      },
-                      "end": {
-                        "line": 9,
-                        "column": 5,
-                        "offset": 347
-                      },
-                      "indent": []
-                    }
-                  },
-                  {
-                    "type": "link",
-                    "url": "#callremovemedia",
-                    "title": null,
-                    "jsdoc": true,
-                    "children": [
-                      {
-                        "type": "text",
-                        "value": "call.removeMedia"
-                      }
-                    ],
-                    "position": {
-                      "start": {
-                        "line": 9,
-                        "column": 5,
-                        "offset": 347
-                      },
-                      "end": {
-                        "line": 9,
-                        "column": 29,
-                        "offset": 371
-                      },
-                      "indent": []
-                    }
-                  },
-                  {
-                    "type": "text",
-                    "value": " API can be used to perform the same\n   behaviour as ",
-                    "position": {
-                      "start": {
-                        "line": 9,
-                        "column": 29,
-                        "offset": 371
-                      },
-                      "end": {
-                        "line": 10,
-                        "column": 17,
-                        "offset": 424
-                      },
-                      "indent": [
-                        1
-                      ]
-                    }
-                  },
-                  {
-                    "type": "inlineCode",
-                    "value": "stopScreenshare",
-                    "position": {
-                      "start": {
-                        "line": 10,
-                        "column": 17,
-                        "offset": 424
-                      },
-                      "end": {
-                        "line": 10,
-                        "column": 34,
-                        "offset": 441
-                      },
-                      "indent": []
-                    }
-                  },
-                  {
-                    "type": "text",
-                    "value": ". ",
-                    "position": {
-                      "start": {
-                        "line": 10,
-                        "column": 34,
-                        "offset": 441
-                      },
-                      "end": {
-                        "line": 10,
-                        "column": 36,
-                        "offset": 443
-                      },
-                      "indent": []
-                    }
-                  },
-                  {
-                    "type": "link",
-                    "url": "#callremovemedia",
-                    "title": null,
-                    "jsdoc": true,
-                    "children": [
-                      {
-                        "type": "text",
-                        "value": "call.removeMedia"
-                      }
-                    ],
-                    "position": {
-                      "start": {
-                        "line": 10,
-                        "column": 36,
-                        "offset": 443
-                      },
-                      "end": {
-                        "line": 10,
-                        "column": 60,
-                        "offset": 467
-                      },
-                      "indent": []
-                    }
-                  },
-                  {
-                    "type": "text",
-                    "value": " is a\n   general-purpose API for removing media from a call, which covers the\n   same functionality as ",
-                    "position": {
-                      "start": {
-                        "line": 10,
-                        "column": 60,
-                        "offset": 467
-                      },
-                      "end": {
-                        "line": 12,
-                        "column": 26,
-                        "offset": 570
-                      },
-                      "indent": [
-                        1,
-                        1
-                      ]
-                    }
-                  },
-                  {
-                    "type": "inlineCode",
-                    "value": "stopScreenshare",
-                    "position": {
-                      "start": {
-                        "line": 12,
-                        "column": 26,
-                        "offset": 570
-                      },
-                      "end": {
-                        "line": 12,
-                        "column": 43,
-                        "offset": 587
-                      },
-                      "indent": []
-                    }
-                  },
-                  {
-                    "type": "text",
-                    "value": ". Specifying only the screen\n   track when using ",
-                    "position": {
-                      "start": {
-                        "line": 12,
-                        "column": 43,
-                        "offset": 587
-                      },
-                      "end": {
-                        "line": 13,
-                        "column": 21,
-                        "offset": 636
-                      },
-                      "indent": [
-                        1
-                      ]
-                    }
-                  },
-                  {
-                    "type": "link",
-                    "url": "#callremovemedia",
-                    "title": null,
-                    "jsdoc": true,
-                    "children": [
-                      {
-                        "type": "text",
-                        "value": "call.removeMedia"
-                      }
-                    ],
-                    "position": {
-                      "start": {
-                        "line": 13,
-                        "column": 21,
-                        "offset": 636
-                      },
-                      "end": {
-                        "line": 13,
-                        "column": 45,
-                        "offset": 660
-                      },
-                      "indent": []
-                    }
-                  },
-                  {
-                    "type": "text",
-                    "value": " will perform the same\n   behaviour as using ",
-                    "position": {
-                      "start": {
-                        "line": 13,
-                        "column": 45,
-                        "offset": 660
-                      },
-                      "end": {
-                        "line": 14,
-                        "column": 23,
-                        "offset": 705
-                      },
-                      "indent": [
-                        1
-                      ]
-                    }
-                  },
-                  {
-                    "type": "inlineCode",
-                    "value": "stopScreenshare",
-                    "position": {
-                      "start": {
-                        "line": 14,
-                        "column": 23,
-                        "offset": 705
-                      },
-                      "end": {
-                        "line": 14,
-                        "column": 40,
-                        "offset": 722
-                      },
-                      "indent": []
-                    }
-                  },
-                  {
-                    "type": "text",
-                    "value": ".",
-                    "position": {
-                      "start": {
-                        "line": 14,
-                        "column": 40,
-                        "offset": 722
-                      },
-                      "end": {
-                        "line": 14,
-                        "column": 41,
-                        "offset": 723
-                      },
-                      "indent": []
-                    }
-                  }
-                ],
-                "position": {
-                  "start": {
-                    "line": 9,
-                    "column": 1,
-                    "offset": 343
-                  },
-                  "end": {
-                    "line": 14,
-                    "column": 41,
-                    "offset": 723
-                  },
-                  "indent": [
-                    1,
-                    1,
-                    1,
-                    1,
-                    1
-                  ]
-                }
-              },
-              {
-                "type": "paragraph",
-                "children": [
-                  {
-                    "type": "text",
-                    "value": "There is a caveat that if a Call has multiple video tracks (for example,\n   both a video and a screen track), the SDK itself cannot yet\n   differentiate one from the other. The application will need to know\n   which track was the screen track in this scenario.",
-                    "position": {
-                      "start": {
-                        "line": 16,
-                        "column": 1,
-                        "offset": 725
-                      },
-                      "end": {
-                        "line": 19,
-                        "column": 54,
-                        "offset": 985
-                      },
-                      "indent": [
-                        1,
-                        1,
-                        1
-                      ]
-                    }
-                  }
-                ],
-                "position": {
-                  "start": {
-                    "line": 16,
-                    "column": 1,
-                    "offset": 725
-                  },
-                  "end": {
-                    "line": 19,
-                    "column": 54,
-                    "offset": 985
-                  },
-                  "indent": [
-                    1,
-                    1,
-                    1
-                  ]
-                }
-              }
-            ],
-            "position": {
-              "start": {
-                "line": 1,
-                "column": 1,
-                "offset": 0
-              },
-              "end": {
-                "line": 19,
-                "column": 54,
-                "offset": 985
-              }
-            }
-          },
-          "tags": [
-            {
-              "title": "public",
-              "description": null,
-              "lineNumber": 20,
-              "type": null
-            },
-            {
-              "title": "static",
-              "description": null,
-              "lineNumber": 21
-            },
-            {
-              "title": "method",
-              "description": null,
-              "lineNumber": 22,
-              "name": "stopScreenshare"
-            },
-            {
-              "title": "memberof",
-              "description": "call",
-              "lineNumber": 23
-            },
-            {
-              "title": "requires",
-              "description": null,
-              "lineNumber": 24,
-              "name": "call"
-            },
-            {
-              "title": "requires",
-              "description": null,
-              "lineNumber": 25,
-              "name": "callMe"
-            },
-            {
-              "title": "example",
-              "description": "const call = client.call.getById(callId)\n// Get the ID of any/all video tracks on the call.\nconst videoTracks = call.localTracks.filter(trackId => {\n   const track = call.media.getTrackById(trackId)\n   // Both video and screen tracks have kind of 'video'.\n   return track.kind === 'video'\n})\n\n// Pick out the screen track.\nconst screenTrack = videoTracks[0]\n\n// Remove screen from the call.\nclient.call.removeMedia(callId, [ screenTrack ])",
-              "lineNumber": 26
-            }
-          ],
-          "loc": {
-            "start": {
-              "line": 678,
-              "column": 4
-            },
-            "end": {
-              "line": 718,
-              "column": 7
-            }
-          },
-          "context": {
-            "loc": {
-              "start": {
-                "line": 748,
-                "column": 4
-              },
-              "end": {
-                "line": 751,
-                "column": 5
-              }
-            },
-            "file": "/var/jenkins_home/workspace/Kandy.js_beta/packages/kandy/src/call/interfaceNew/api/call.js"
-          },
-          "augments": [],
-          "examples": [
-            {
-              "description": "const call = client.call.getById(callId)\n// Get the ID of any/all video tracks on the call.\nconst videoTracks = call.localTracks.filter(trackId => {\n   const track = call.media.getTrackById(trackId)\n   // Both video and screen tracks have kind of 'video'.\n   return track.kind === 'video'\n})\n\n// Pick out the screen track.\nconst screenTrack = videoTracks[0]\n\n// Remove screen from the call.\nclient.call.removeMedia(callId, [ screenTrack ])"
-            }
-          ],
-          "params": [],
-          "properties": [],
-          "returns": [],
-          "sees": [],
-          "throws": [],
-          "todos": [],
-          "access": "public",
-          "scope": "static",
-          "kind": "function",
-          "name": "stopScreenshare",
-          "memberof": "call",
-          "members": {
-            "global": [],
-            "inner": [],
-            "instance": [],
-            "events": [],
-            "static": []
-          },
-          "path": [
-            {
-              "name": "call"
-            },
-            {
-              "name": "stopScreenshare",
-              "kind": "function",
-              "scope": "static"
-            }
-          ],
-          "namespace": "call.stopScreenshare"
-        },
-        {
-          "description": {
-            "type": "root",
-            "children": [
-              {
-                "type": "paragraph",
-                "children": [
-                  {
-                    "type": "text",
                     "value": "Send DTMF tones to a call's audio.",
                     "position": {
                       "start": {
@@ -30364,6 +29843,527 @@
             }
           ],
           "namespace": "call.sendDTMF"
+        },
+        {
+          "description": {
+            "type": "root",
+            "children": [
+              {
+                "type": "paragraph",
+                "children": [
+                  {
+                    "type": "text",
+                    "value": "Removes local screenshare from an ongoing Call, stopping it from being\n   sent to the remote participant.",
+                    "position": {
+                      "start": {
+                        "line": 1,
+                        "column": 1,
+                        "offset": 0
+                      },
+                      "end": {
+                        "line": 2,
+                        "column": 35,
+                        "offset": 105
+                      },
+                      "indent": [
+                        1
+                      ]
+                    }
+                  }
+                ],
+                "position": {
+                  "start": {
+                    "line": 1,
+                    "column": 1,
+                    "offset": 0
+                  },
+                  "end": {
+                    "line": 2,
+                    "column": 35,
+                    "offset": 105
+                  },
+                  "indent": [
+                    1
+                  ]
+                }
+              },
+              {
+                "type": "paragraph",
+                "children": [
+                  {
+                    "type": "text",
+                    "value": "The latest SDK release (v4.X+) has not yet implemented this API in the\n   same way that it was available in previous releases (v3.X). In place\n   of this API, the SDK has a more general API that can be used for this\n   same behaviour.",
+                    "position": {
+                      "start": {
+                        "line": 4,
+                        "column": 1,
+                        "offset": 107
+                      },
+                      "end": {
+                        "line": 7,
+                        "column": 19,
+                        "offset": 341
+                      },
+                      "indent": [
+                        1,
+                        1,
+                        1
+                      ]
+                    }
+                  }
+                ],
+                "position": {
+                  "start": {
+                    "line": 4,
+                    "column": 1,
+                    "offset": 107
+                  },
+                  "end": {
+                    "line": 7,
+                    "column": 19,
+                    "offset": 341
+                  },
+                  "indent": [
+                    1,
+                    1,
+                    1
+                  ]
+                }
+              },
+              {
+                "type": "paragraph",
+                "children": [
+                  {
+                    "type": "text",
+                    "value": "The ",
+                    "position": {
+                      "start": {
+                        "line": 9,
+                        "column": 1,
+                        "offset": 343
+                      },
+                      "end": {
+                        "line": 9,
+                        "column": 5,
+                        "offset": 347
+                      },
+                      "indent": []
+                    }
+                  },
+                  {
+                    "type": "link",
+                    "url": "#callremovemedia",
+                    "title": null,
+                    "jsdoc": true,
+                    "children": [
+                      {
+                        "type": "text",
+                        "value": "call.removeMedia"
+                      }
+                    ],
+                    "position": {
+                      "start": {
+                        "line": 9,
+                        "column": 5,
+                        "offset": 347
+                      },
+                      "end": {
+                        "line": 9,
+                        "column": 29,
+                        "offset": 371
+                      },
+                      "indent": []
+                    }
+                  },
+                  {
+                    "type": "text",
+                    "value": " API can be used to perform the same\n   behaviour as ",
+                    "position": {
+                      "start": {
+                        "line": 9,
+                        "column": 29,
+                        "offset": 371
+                      },
+                      "end": {
+                        "line": 10,
+                        "column": 17,
+                        "offset": 424
+                      },
+                      "indent": [
+                        1
+                      ]
+                    }
+                  },
+                  {
+                    "type": "inlineCode",
+                    "value": "stopScreenshare",
+                    "position": {
+                      "start": {
+                        "line": 10,
+                        "column": 17,
+                        "offset": 424
+                      },
+                      "end": {
+                        "line": 10,
+                        "column": 34,
+                        "offset": 441
+                      },
+                      "indent": []
+                    }
+                  },
+                  {
+                    "type": "text",
+                    "value": ". ",
+                    "position": {
+                      "start": {
+                        "line": 10,
+                        "column": 34,
+                        "offset": 441
+                      },
+                      "end": {
+                        "line": 10,
+                        "column": 36,
+                        "offset": 443
+                      },
+                      "indent": []
+                    }
+                  },
+                  {
+                    "type": "link",
+                    "url": "#callremovemedia",
+                    "title": null,
+                    "jsdoc": true,
+                    "children": [
+                      {
+                        "type": "text",
+                        "value": "call.removeMedia"
+                      }
+                    ],
+                    "position": {
+                      "start": {
+                        "line": 10,
+                        "column": 36,
+                        "offset": 443
+                      },
+                      "end": {
+                        "line": 10,
+                        "column": 60,
+                        "offset": 467
+                      },
+                      "indent": []
+                    }
+                  },
+                  {
+                    "type": "text",
+                    "value": " is a\n   general-purpose API for removing media from a call, which covers the\n   same functionality as ",
+                    "position": {
+                      "start": {
+                        "line": 10,
+                        "column": 60,
+                        "offset": 467
+                      },
+                      "end": {
+                        "line": 12,
+                        "column": 26,
+                        "offset": 570
+                      },
+                      "indent": [
+                        1,
+                        1
+                      ]
+                    }
+                  },
+                  {
+                    "type": "inlineCode",
+                    "value": "stopScreenshare",
+                    "position": {
+                      "start": {
+                        "line": 12,
+                        "column": 26,
+                        "offset": 570
+                      },
+                      "end": {
+                        "line": 12,
+                        "column": 43,
+                        "offset": 587
+                      },
+                      "indent": []
+                    }
+                  },
+                  {
+                    "type": "text",
+                    "value": ". Specifying only the screen\n   track when using ",
+                    "position": {
+                      "start": {
+                        "line": 12,
+                        "column": 43,
+                        "offset": 587
+                      },
+                      "end": {
+                        "line": 13,
+                        "column": 21,
+                        "offset": 636
+                      },
+                      "indent": [
+                        1
+                      ]
+                    }
+                  },
+                  {
+                    "type": "link",
+                    "url": "#callremovemedia",
+                    "title": null,
+                    "jsdoc": true,
+                    "children": [
+                      {
+                        "type": "text",
+                        "value": "call.removeMedia"
+                      }
+                    ],
+                    "position": {
+                      "start": {
+                        "line": 13,
+                        "column": 21,
+                        "offset": 636
+                      },
+                      "end": {
+                        "line": 13,
+                        "column": 45,
+                        "offset": 660
+                      },
+                      "indent": []
+                    }
+                  },
+                  {
+                    "type": "text",
+                    "value": " will perform the same\n   behaviour as using ",
+                    "position": {
+                      "start": {
+                        "line": 13,
+                        "column": 45,
+                        "offset": 660
+                      },
+                      "end": {
+                        "line": 14,
+                        "column": 23,
+                        "offset": 705
+                      },
+                      "indent": [
+                        1
+                      ]
+                    }
+                  },
+                  {
+                    "type": "inlineCode",
+                    "value": "stopScreenshare",
+                    "position": {
+                      "start": {
+                        "line": 14,
+                        "column": 23,
+                        "offset": 705
+                      },
+                      "end": {
+                        "line": 14,
+                        "column": 40,
+                        "offset": 722
+                      },
+                      "indent": []
+                    }
+                  },
+                  {
+                    "type": "text",
+                    "value": ".",
+                    "position": {
+                      "start": {
+                        "line": 14,
+                        "column": 40,
+                        "offset": 722
+                      },
+                      "end": {
+                        "line": 14,
+                        "column": 41,
+                        "offset": 723
+                      },
+                      "indent": []
+                    }
+                  }
+                ],
+                "position": {
+                  "start": {
+                    "line": 9,
+                    "column": 1,
+                    "offset": 343
+                  },
+                  "end": {
+                    "line": 14,
+                    "column": 41,
+                    "offset": 723
+                  },
+                  "indent": [
+                    1,
+                    1,
+                    1,
+                    1,
+                    1
+                  ]
+                }
+              },
+              {
+                "type": "paragraph",
+                "children": [
+                  {
+                    "type": "text",
+                    "value": "There is a caveat that if a Call has multiple video tracks (for example,\n   both a video and a screen track), the SDK itself cannot yet\n   differentiate one from the other. The application will need to know\n   which track was the screen track in this scenario.",
+                    "position": {
+                      "start": {
+                        "line": 16,
+                        "column": 1,
+                        "offset": 725
+                      },
+                      "end": {
+                        "line": 19,
+                        "column": 54,
+                        "offset": 985
+                      },
+                      "indent": [
+                        1,
+                        1,
+                        1
+                      ]
+                    }
+                  }
+                ],
+                "position": {
+                  "start": {
+                    "line": 16,
+                    "column": 1,
+                    "offset": 725
+                  },
+                  "end": {
+                    "line": 19,
+                    "column": 54,
+                    "offset": 985
+                  },
+                  "indent": [
+                    1,
+                    1,
+                    1
+                  ]
+                }
+              }
+            ],
+            "position": {
+              "start": {
+                "line": 1,
+                "column": 1,
+                "offset": 0
+              },
+              "end": {
+                "line": 19,
+                "column": 54,
+                "offset": 985
+              }
+            }
+          },
+          "tags": [
+            {
+              "title": "public",
+              "description": null,
+              "lineNumber": 20,
+              "type": null
+            },
+            {
+              "title": "static",
+              "description": null,
+              "lineNumber": 21
+            },
+            {
+              "title": "method",
+              "description": null,
+              "lineNumber": 22,
+              "name": "stopScreenshare"
+            },
+            {
+              "title": "memberof",
+              "description": "call",
+              "lineNumber": 23
+            },
+            {
+              "title": "requires",
+              "description": null,
+              "lineNumber": 24,
+              "name": "call"
+            },
+            {
+              "title": "requires",
+              "description": null,
+              "lineNumber": 25,
+              "name": "callMe"
+            },
+            {
+              "title": "example",
+              "description": "const call = client.call.getById(callId)\n// Get the ID of any/all video tracks on the call.\nconst videoTracks = call.localTracks.filter(trackId => {\n   const track = call.media.getTrackById(trackId)\n   // Both video and screen tracks have kind of 'video'.\n   return track.kind === 'video'\n})\n\n// Pick out the screen track.\nconst screenTrack = videoTracks[0]\n\n// Remove screen from the call.\nclient.call.removeMedia(callId, [ screenTrack ])",
+              "lineNumber": 26
+            }
+          ],
+          "loc": {
+            "start": {
+              "line": 678,
+              "column": 4
+            },
+            "end": {
+              "line": 718,
+              "column": 7
+            }
+          },
+          "context": {
+            "loc": {
+              "start": {
+                "line": 748,
+                "column": 4
+              },
+              "end": {
+                "line": 751,
+                "column": 5
+              }
+            },
+            "file": "/var/jenkins_home/workspace/Kandy.js_beta/packages/kandy/src/call/interfaceNew/api/call.js"
+          },
+          "augments": [],
+          "examples": [
+            {
+              "description": "const call = client.call.getById(callId)\n// Get the ID of any/all video tracks on the call.\nconst videoTracks = call.localTracks.filter(trackId => {\n   const track = call.media.getTrackById(trackId)\n   // Both video and screen tracks have kind of 'video'.\n   return track.kind === 'video'\n})\n\n// Pick out the screen track.\nconst screenTrack = videoTracks[0]\n\n// Remove screen from the call.\nclient.call.removeMedia(callId, [ screenTrack ])"
+            }
+          ],
+          "params": [],
+          "properties": [],
+          "returns": [],
+          "sees": [],
+          "throws": [],
+          "todos": [],
+          "access": "public",
+          "scope": "static",
+          "kind": "function",
+          "name": "stopScreenshare",
+          "memberof": "call",
+          "members": {
+            "global": [],
+            "inner": [],
+            "instance": [],
+            "events": [],
+            "static": []
+          },
+          "path": [
+            {
+              "name": "call"
+            },
+            {
+              "name": "stopScreenshare",
+              "kind": "function",
+              "scope": "static"
+            }
+          ],
+          "namespace": "call.stopScreenshare"
         },
         {
           "description": {
@@ -32150,7 +32150,7 @@
                 "children": [
                   {
                     "type": "text",
-                    "value": "Changes the camera and/or microphone used for a Call's media input.",
+                    "value": "Changes the speaker used for a Call's audio output. Supported on\n   browser's that support HTMLMediaElement.setSinkId().",
                     "position": {
                       "start": {
                         "line": 1,
@@ -32158,11 +32158,13 @@
                         "offset": 0
                       },
                       "end": {
-                        "line": 1,
-                        "column": 68,
-                        "offset": 67
+                        "line": 2,
+                        "column": 56,
+                        "offset": 120
                       },
-                      "indent": []
+                      "indent": [
+                        1
+                      ]
                     }
                   }
                 ],
@@ -32173,11 +32175,13 @@
                     "offset": 0
                   },
                   "end": {
-                    "line": 1,
-                    "column": 68,
-                    "offset": 67
+                    "line": 2,
+                    "column": 56,
+                    "offset": 120
                   },
-                  "indent": []
+                  "indent": [
+                    1
+                  ]
                 }
               },
               {
@@ -32188,14 +32192,14 @@
                     "value": "The latest SDK release (v4.X+) has not yet implemented this API in the\n   same way that it was available in previous releases (v3.X). In place\n   of this API, the SDK has a more general API that can be used for this\n   same behaviour.",
                     "position": {
                       "start": {
-                        "line": 3,
+                        "line": 4,
                         "column": 1,
-                        "offset": 69
+                        "offset": 122
                       },
                       "end": {
-                        "line": 6,
+                        "line": 7,
                         "column": 19,
-                        "offset": 303
+                        "offset": 356
                       },
                       "indent": [
                         1,
@@ -32207,14 +32211,14 @@
                 ],
                 "position": {
                   "start": {
-                    "line": 3,
+                    "line": 4,
                     "column": 1,
-                    "offset": 69
+                    "offset": 122
                   },
                   "end": {
-                    "line": 6,
+                    "line": 7,
                     "column": 19,
-                    "offset": 303
+                    "offset": 356
                   },
                   "indent": [
                     1,
@@ -32231,48 +32235,94 @@
                     "value": "The same behaviour as the ",
                     "position": {
                       "start": {
-                        "line": 8,
+                        "line": 9,
                         "column": 1,
-                        "offset": 305
+                        "offset": 358
                       },
                       "end": {
-                        "line": 8,
+                        "line": 9,
                         "column": 27,
-                        "offset": 331
+                        "offset": 384
                       },
                       "indent": []
                     }
                   },
                   {
                     "type": "inlineCode",
-                    "value": "changeInputDevices",
+                    "value": "changeSpeaker",
                     "position": {
                       "start": {
-                        "line": 8,
+                        "line": 9,
                         "column": 27,
-                        "offset": 331
+                        "offset": 384
                       },
                       "end": {
-                        "line": 8,
-                        "column": 47,
-                        "offset": 351
+                        "line": 9,
+                        "column": 42,
+                        "offset": 399
                       },
                       "indent": []
                     }
                   },
                   {
                     "type": "text",
-                    "value": " API can be implemented\n   using the general-purpose ",
+                    "value": " API can be implemented by\n   re-rendering the Call's audio track.  A speaker can be selected when\n   rendering an audio track, so changing a speaker can be simulated\n   by unrendering the track with ",
                     "position": {
                       "start": {
-                        "line": 8,
-                        "column": 47,
-                        "offset": 351
+                        "line": 9,
+                        "column": 42,
+                        "offset": 399
                       },
                       "end": {
-                        "line": 9,
-                        "column": 30,
-                        "offset": 404
+                        "line": 12,
+                        "column": 34,
+                        "offset": 599
+                      },
+                      "indent": [
+                        1,
+                        1,
+                        1
+                      ]
+                    }
+                  },
+                  {
+                    "type": "link",
+                    "url": "#mediaremovetracks",
+                    "title": null,
+                    "jsdoc": true,
+                    "children": [
+                      {
+                        "type": "text",
+                        "value": "media.removeTracks"
+                      }
+                    ],
+                    "position": {
+                      "start": {
+                        "line": 12,
+                        "column": 34,
+                        "offset": 599
+                      },
+                      "end": {
+                        "line": 12,
+                        "column": 60,
+                        "offset": 625
+                      },
+                      "indent": []
+                    }
+                  },
+                  {
+                    "type": "text",
+                    "value": ", then\n   re-rendering it with a new speaker with ",
+                    "position": {
+                      "start": {
+                        "line": 12,
+                        "column": 60,
+                        "offset": 625
+                      },
+                      "end": {
+                        "line": 13,
+                        "column": 44,
+                        "offset": 675
                       },
                       "indent": [
                         1
@@ -32281,61 +32331,57 @@
                   },
                   {
                     "type": "link",
-                    "url": "#callreplacetrack",
+                    "url": "#mediarendertracks",
                     "title": null,
                     "jsdoc": true,
                     "children": [
                       {
                         "type": "text",
-                        "value": "call.replaceTrack"
+                        "value": "media.renderTracks"
                       }
                     ],
                     "position": {
                       "start": {
-                        "line": 9,
-                        "column": 30,
-                        "offset": 404
+                        "line": 13,
+                        "column": 44,
+                        "offset": 675
                       },
                       "end": {
-                        "line": 9,
-                        "column": 55,
-                        "offset": 429
+                        "line": 13,
+                        "column": 70,
+                        "offset": 701
                       },
                       "indent": []
                     }
                   },
                   {
                     "type": "text",
-                    "value": " API. This API can\n   be used to replace an existing media track with a new track of the\n   same type, allowing an application to change certain aspects of the\n   media, such as input device.",
+                    "value": ".",
                     "position": {
                       "start": {
-                        "line": 9,
-                        "column": 55,
-                        "offset": 429
+                        "line": 13,
+                        "column": 70,
+                        "offset": 701
                       },
                       "end": {
-                        "line": 12,
-                        "column": 32,
-                        "offset": 620
+                        "line": 13,
+                        "column": 71,
+                        "offset": 702
                       },
-                      "indent": [
-                        1,
-                        1,
-                        1
-                      ]
+                      "indent": []
                     }
                   }
                 ],
                 "position": {
                   "start": {
-                    "line": 8,
+                    "line": 9,
                     "column": 1,
-                    "offset": 305
+                    "offset": 358
                   },
                   "end": {
-                    "line": 12,
-                    "column": 32,
-                    "offset": 620
+                    "line": 13,
+                    "column": 71,
+                    "offset": 702
                   },
                   "indent": [
                     1,
@@ -32353,9 +32399,9 @@
                 "offset": 0
               },
               "end": {
-                "line": 12,
-                "column": 32,
-                "offset": 620
+                "line": 13,
+                "column": 71,
+                "offset": 702
               }
             }
           },
@@ -32363,50 +32409,50 @@
             {
               "title": "public",
               "description": null,
-              "lineNumber": 13,
+              "lineNumber": 14,
               "type": null
             },
             {
               "title": "static",
               "description": null,
-              "lineNumber": 14
+              "lineNumber": 15
             },
             {
               "title": "method",
               "description": null,
-              "lineNumber": 15,
-              "name": "changeInputDevices"
+              "lineNumber": 16,
+              "name": "changeSpeaker"
             },
             {
               "title": "memberof",
               "description": "call",
-              "lineNumber": 16
-            },
-            {
-              "title": "requires",
-              "description": null,
-              "lineNumber": 17,
-              "name": "call"
+              "lineNumber": 17
             },
             {
               "title": "requires",
               "description": null,
               "lineNumber": 18,
+              "name": "call"
+            },
+            {
+              "title": "requires",
+              "description": null,
+              "lineNumber": 19,
               "name": "callMe"
             },
             {
               "title": "example",
-              "description": "const call = client.call.getById(callId)\n// Get the ID of the Call's video track.\nconst videoTrack = call.localTracks.find(trackId => {\n   const track = client.media.getTrackById(trackId)\n   return track.kind === 'video'\n})\n\n// Select the new video options.\nconst media = {\n   video: true,\n   videoOptions: {\n       deviceId: 'cameraId'\n   }\n}\n\n// Change the call's camera by replacing the video track.\nclient.call.replaceTrack(callId, videoTrack, media)",
-              "lineNumber": 19
+              "description": "const call = client.call.getById(callId)\n// Get the ID of the Call's audio track.\nconst audioTrack = call.localTracks.find(trackId => {\n   const track = client.media.getTrackById(trackId)\n   return track.kind === 'audio'\n})\n\n// Where the audio track was previously rendered.\nconst audioContainer = ...\n\n// Unrender the audio track we want to change speaker for.\nclient.media.removeTrack([ audioTrack ], audioContainer)\n// Re-render the audio track with a new speaker.\nclient.media.renderTrack([ audioTrack ], audioContainer, {\n   speakerId: 'speakerId'\n})",
+              "lineNumber": 20
             }
           ],
           "loc": {
             "start": {
-              "line": 1154,
+              "line": 1193,
               "column": 4
             },
             "end": {
-              "line": 1191,
+              "line": 1230,
               "column": 7
             }
           },
@@ -32426,7 +32472,7 @@
           "augments": [],
           "examples": [
             {
-              "description": "const call = client.call.getById(callId)\n// Get the ID of the Call's video track.\nconst videoTrack = call.localTracks.find(trackId => {\n   const track = client.media.getTrackById(trackId)\n   return track.kind === 'video'\n})\n\n// Select the new video options.\nconst media = {\n   video: true,\n   videoOptions: {\n       deviceId: 'cameraId'\n   }\n}\n\n// Change the call's camera by replacing the video track.\nclient.call.replaceTrack(callId, videoTrack, media)"
+              "description": "const call = client.call.getById(callId)\n// Get the ID of the Call's audio track.\nconst audioTrack = call.localTracks.find(trackId => {\n   const track = client.media.getTrackById(trackId)\n   return track.kind === 'audio'\n})\n\n// Where the audio track was previously rendered.\nconst audioContainer = ...\n\n// Unrender the audio track we want to change speaker for.\nclient.media.removeTrack([ audioTrack ], audioContainer)\n// Re-render the audio track with a new speaker.\nclient.media.renderTrack([ audioTrack ], audioContainer, {\n   speakerId: 'speakerId'\n})"
             }
           ],
           "params": [],
@@ -32438,7 +32484,7 @@
           "access": "public",
           "scope": "static",
           "kind": "function",
-          "name": "changeInputDevices",
+          "name": "changeSpeaker",
           "memberof": "call",
           "members": {
             "global": [],
@@ -32452,12 +32498,12 @@
               "name": "call"
             },
             {
-              "name": "changeInputDevices",
+              "name": "changeSpeaker",
               "kind": "function",
               "scope": "static"
             }
           ],
-          "namespace": "call.changeInputDevices"
+          "namespace": "call.changeSpeaker"
         },
         {
           "description": {
@@ -32824,7 +32870,7 @@
                 "children": [
                   {
                     "type": "text",
-                    "value": "Changes the speaker used for a Call's audio output. Supported on\n   browser's that support HTMLMediaElement.setSinkId().",
+                    "value": "Changes the camera and/or microphone used for a Call's media input.",
                     "position": {
                       "start": {
                         "line": 1,
@@ -32832,13 +32878,11 @@
                         "offset": 0
                       },
                       "end": {
-                        "line": 2,
-                        "column": 56,
-                        "offset": 120
+                        "line": 1,
+                        "column": 68,
+                        "offset": 67
                       },
-                      "indent": [
-                        1
-                      ]
+                      "indent": []
                     }
                   }
                 ],
@@ -32849,13 +32893,11 @@
                     "offset": 0
                   },
                   "end": {
-                    "line": 2,
-                    "column": 56,
-                    "offset": 120
+                    "line": 1,
+                    "column": 68,
+                    "offset": 67
                   },
-                  "indent": [
-                    1
-                  ]
+                  "indent": []
                 }
               },
               {
@@ -32866,14 +32908,14 @@
                     "value": "The latest SDK release (v4.X+) has not yet implemented this API in the\n   same way that it was available in previous releases (v3.X). In place\n   of this API, the SDK has a more general API that can be used for this\n   same behaviour.",
                     "position": {
                       "start": {
-                        "line": 4,
+                        "line": 3,
                         "column": 1,
-                        "offset": 122
+                        "offset": 69
                       },
                       "end": {
-                        "line": 7,
+                        "line": 6,
                         "column": 19,
-                        "offset": 356
+                        "offset": 303
                       },
                       "indent": [
                         1,
@@ -32885,14 +32927,14 @@
                 ],
                 "position": {
                   "start": {
-                    "line": 4,
+                    "line": 3,
                     "column": 1,
-                    "offset": 122
+                    "offset": 69
                   },
                   "end": {
-                    "line": 7,
+                    "line": 6,
                     "column": 19,
-                    "offset": 356
+                    "offset": 303
                   },
                   "indent": [
                     1,
@@ -32909,94 +32951,48 @@
                     "value": "The same behaviour as the ",
                     "position": {
                       "start": {
-                        "line": 9,
+                        "line": 8,
                         "column": 1,
-                        "offset": 358
+                        "offset": 305
                       },
                       "end": {
-                        "line": 9,
+                        "line": 8,
                         "column": 27,
-                        "offset": 384
+                        "offset": 331
                       },
                       "indent": []
                     }
                   },
                   {
                     "type": "inlineCode",
-                    "value": "changeSpeaker",
+                    "value": "changeInputDevices",
                     "position": {
                       "start": {
-                        "line": 9,
+                        "line": 8,
                         "column": 27,
-                        "offset": 384
+                        "offset": 331
                       },
                       "end": {
-                        "line": 9,
-                        "column": 42,
-                        "offset": 399
+                        "line": 8,
+                        "column": 47,
+                        "offset": 351
                       },
                       "indent": []
                     }
                   },
                   {
                     "type": "text",
-                    "value": " API can be implemented by\n   re-rendering the Call's audio track.  A speaker can be selected when\n   rendering an audio track, so changing a speaker can be simulated\n   by unrendering the track with ",
+                    "value": " API can be implemented\n   using the general-purpose ",
                     "position": {
                       "start": {
+                        "line": 8,
+                        "column": 47,
+                        "offset": 351
+                      },
+                      "end": {
                         "line": 9,
-                        "column": 42,
-                        "offset": 399
-                      },
-                      "end": {
-                        "line": 12,
-                        "column": 34,
-                        "offset": 599
-                      },
-                      "indent": [
-                        1,
-                        1,
-                        1
-                      ]
-                    }
-                  },
-                  {
-                    "type": "link",
-                    "url": "#mediaremovetracks",
-                    "title": null,
-                    "jsdoc": true,
-                    "children": [
-                      {
-                        "type": "text",
-                        "value": "media.removeTracks"
-                      }
-                    ],
-                    "position": {
-                      "start": {
-                        "line": 12,
-                        "column": 34,
-                        "offset": 599
-                      },
-                      "end": {
-                        "line": 12,
-                        "column": 60,
-                        "offset": 625
-                      },
-                      "indent": []
-                    }
-                  },
-                  {
-                    "type": "text",
-                    "value": ", then\n   re-rendering it with a new speaker with ",
-                    "position": {
-                      "start": {
-                        "line": 12,
-                        "column": 60,
-                        "offset": 625
-                      },
-                      "end": {
-                        "line": 13,
-                        "column": 44,
-                        "offset": 675
+                        "column": 30,
+                        "offset": 404
                       },
                       "indent": [
                         1
@@ -33005,57 +33001,61 @@
                   },
                   {
                     "type": "link",
-                    "url": "#mediarendertracks",
+                    "url": "#callreplacetrack",
                     "title": null,
                     "jsdoc": true,
                     "children": [
                       {
                         "type": "text",
-                        "value": "media.renderTracks"
+                        "value": "call.replaceTrack"
                       }
                     ],
                     "position": {
                       "start": {
-                        "line": 13,
-                        "column": 44,
-                        "offset": 675
+                        "line": 9,
+                        "column": 30,
+                        "offset": 404
                       },
                       "end": {
-                        "line": 13,
-                        "column": 70,
-                        "offset": 701
+                        "line": 9,
+                        "column": 55,
+                        "offset": 429
                       },
                       "indent": []
                     }
                   },
                   {
                     "type": "text",
-                    "value": ".",
+                    "value": " API. This API can\n   be used to replace an existing media track with a new track of the\n   same type, allowing an application to change certain aspects of the\n   media, such as input device.",
                     "position": {
                       "start": {
-                        "line": 13,
-                        "column": 70,
-                        "offset": 701
+                        "line": 9,
+                        "column": 55,
+                        "offset": 429
                       },
                       "end": {
-                        "line": 13,
-                        "column": 71,
-                        "offset": 702
+                        "line": 12,
+                        "column": 32,
+                        "offset": 620
                       },
-                      "indent": []
+                      "indent": [
+                        1,
+                        1,
+                        1
+                      ]
                     }
                   }
                 ],
                 "position": {
                   "start": {
-                    "line": 9,
+                    "line": 8,
                     "column": 1,
-                    "offset": 358
+                    "offset": 305
                   },
                   "end": {
-                    "line": 13,
-                    "column": 71,
-                    "offset": 702
+                    "line": 12,
+                    "column": 32,
+                    "offset": 620
                   },
                   "indent": [
                     1,
@@ -33073,9 +33073,9 @@
                 "offset": 0
               },
               "end": {
-                "line": 13,
-                "column": 71,
-                "offset": 702
+                "line": 12,
+                "column": 32,
+                "offset": 620
               }
             }
           },
@@ -33083,50 +33083,50 @@
             {
               "title": "public",
               "description": null,
-              "lineNumber": 14,
+              "lineNumber": 13,
               "type": null
             },
             {
               "title": "static",
               "description": null,
-              "lineNumber": 15
+              "lineNumber": 14
             },
             {
               "title": "method",
               "description": null,
-              "lineNumber": 16,
-              "name": "changeSpeaker"
+              "lineNumber": 15,
+              "name": "changeInputDevices"
             },
             {
               "title": "memberof",
               "description": "call",
-              "lineNumber": 17
+              "lineNumber": 16
             },
             {
               "title": "requires",
               "description": null,
-              "lineNumber": 18,
+              "lineNumber": 17,
               "name": "call"
             },
             {
               "title": "requires",
               "description": null,
-              "lineNumber": 19,
+              "lineNumber": 18,
               "name": "callMe"
             },
             {
               "title": "example",
-              "description": "const call = client.call.getById(callId)\n// Get the ID of the Call's audio track.\nconst audioTrack = call.localTracks.find(trackId => {\n   const track = client.media.getTrackById(trackId)\n   return track.kind === 'audio'\n})\n\n// Where the audio track was previously rendered.\nconst audioContainer = ...\n\n// Unrender the audio track we want to change speaker for.\nclient.media.removeTrack([ audioTrack ], audioContainer)\n// Re-render the audio track with a new speaker.\nclient.media.renderTrack([ audioTrack ], audioContainer, {\n   speakerId: 'speakerId'\n})",
-              "lineNumber": 20
+              "description": "const call = client.call.getById(callId)\n// Get the ID of the Call's video track.\nconst videoTrack = call.localTracks.find(trackId => {\n   const track = client.media.getTrackById(trackId)\n   return track.kind === 'video'\n})\n\n// Select the new video options.\nconst media = {\n   video: true,\n   videoOptions: {\n       deviceId: 'cameraId'\n   }\n}\n\n// Change the call's camera by replacing the video track.\nclient.call.replaceTrack(callId, videoTrack, media)",
+              "lineNumber": 19
             }
           ],
           "loc": {
             "start": {
-              "line": 1193,
+              "line": 1154,
               "column": 4
             },
             "end": {
-              "line": 1230,
+              "line": 1191,
               "column": 7
             }
           },
@@ -33146,7 +33146,7 @@
           "augments": [],
           "examples": [
             {
-              "description": "const call = client.call.getById(callId)\n// Get the ID of the Call's audio track.\nconst audioTrack = call.localTracks.find(trackId => {\n   const track = client.media.getTrackById(trackId)\n   return track.kind === 'audio'\n})\n\n// Where the audio track was previously rendered.\nconst audioContainer = ...\n\n// Unrender the audio track we want to change speaker for.\nclient.media.removeTrack([ audioTrack ], audioContainer)\n// Re-render the audio track with a new speaker.\nclient.media.renderTrack([ audioTrack ], audioContainer, {\n   speakerId: 'speakerId'\n})"
+              "description": "const call = client.call.getById(callId)\n// Get the ID of the Call's video track.\nconst videoTrack = call.localTracks.find(trackId => {\n   const track = client.media.getTrackById(trackId)\n   return track.kind === 'video'\n})\n\n// Select the new video options.\nconst media = {\n   video: true,\n   videoOptions: {\n       deviceId: 'cameraId'\n   }\n}\n\n// Change the call's camera by replacing the video track.\nclient.call.replaceTrack(callId, videoTrack, media)"
             }
           ],
           "params": [],
@@ -33158,7 +33158,7 @@
           "access": "public",
           "scope": "static",
           "kind": "function",
-          "name": "changeSpeaker",
+          "name": "changeInputDevices",
           "memberof": "call",
           "members": {
             "global": [],
@@ -33172,12 +33172,12 @@
               "name": "call"
             },
             {
-              "name": "changeSpeaker",
+              "name": "changeInputDevices",
               "kind": "function",
               "scope": "static"
             }
           ],
-          "namespace": "call.changeSpeaker"
+          "namespace": "call.changeInputDevices"
         }
       ]
     },
