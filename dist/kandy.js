@@ -1,7 +1,7 @@
 /**
  * Kandy.js
  * kandy.newCallMe.js
- * Version: 4.15.0-beta.368
+ * Version: 4.15.0-beta.374
  */
 (function webpackUniversalModuleDefinition(root, factory) {
 	if(typeof exports === 'object' && typeof module === 'object')
@@ -31318,17 +31318,13 @@ var _fp = __webpack_require__("../../node_modules/lodash/fp.js");
 
 var _effects = __webpack_require__("../../node_modules/redux-saga/es/effects.js");
 
+var _kandyWebrtc = __webpack_require__("../../packages/webrtc/src/interface/index.js");
+
 function _interopRequireWildcard(obj) { if (obj && obj.__esModule) { return obj; } else { var newObj = {}; if (obj != null) { for (var key in obj) { if (Object.prototype.hasOwnProperty.call(obj, key)) newObj[key] = obj[key]; } } newObj.default = obj; return newObj; } }
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
-// Libraries.
-
-
-// Helpers.
-
-
-// Other plugins.
+// Call plugin.
 const log = _logs.logManager.getLogger('CALL');
 
 // eslint-disable-next-line no-warning-comments
@@ -31358,8 +31354,23 @@ const log = _logs.logManager.getLogger('CALL');
  * @param {boolean} [call.earlyMedia=false] Whether early media should be supported for calls.
  * @param {boolean} [call.resyncOnConnect=false] Whether the SDK should re-sync all call states after connecting (requires Kandy Link 4.7.1+).
  */
-// Call plugin.
+
+
+// Libraries.
+
+
+// Helpers.
+
+
+// Other plugins.
 function callsLink(options = {}) {
+  const { mediaDevices, peerConnection } = (0, _kandyWebrtc.getWebRTCSupportCapabilities)();
+  if (!mediaDevices || !peerConnection) {
+    log.warn('Calls are not supported on this platform due to lack of WebRTC support. Call APIs will not be available.');
+    return;
+  }
+
+  // Check for WebRTC support.
   const defaultOptions = {
     // The list of TURN/STUN servers to use.
     iceServers: [],
@@ -33238,23 +33249,39 @@ var _callMe = __webpack_require__("../../packages/kandy/src/call/interfaceNew/ap
 
 var _callMe2 = _interopRequireDefault(_callMe);
 
+var _link = __webpack_require__("../../packages/kandy/src/call/link/index.js");
+
+var _link2 = _interopRequireDefault(_link);
+
+var _logs = __webpack_require__("../../packages/kandy/src/logs/index.js");
+
 var _utils = __webpack_require__("../../packages/kandy/src/common/utils.js");
 
 var _fp = __webpack_require__("../../node_modules/lodash/fp.js");
 
 var _effects = __webpack_require__("../../node_modules/redux-saga/es/effects.js");
 
-var _link = __webpack_require__("../../packages/kandy/src/call/link/index.js");
-
-var _link2 = _interopRequireDefault(_link);
+var _kandyWebrtc = __webpack_require__("../../packages/webrtc/src/interface/index.js");
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 function _interopRequireWildcard(obj) { if (obj && obj.__esModule) { return obj; } else { var newObj = {}; if (obj != null) { for (var key in obj) { if (Object.prototype.hasOwnProperty.call(obj, key)) newObj[key] = obj[key]; } } newObj.default = obj; return newObj; } }
 
 // Helpers.
+
+
+// Other plugins
 // Call plugin.
+const log = _logs.logManager.getLogger('CALLME');
+
+// Libraries.
 function newCallMePlugin(options = {}) {
+  const { mediaDevices, peerConnection } = (0, _kandyWebrtc.getWebRTCSupportCapabilities)();
+  if (!mediaDevices || !peerConnection) {
+    log.warn('Calls are not supported on this platform due to lack of WebRTC support. CallMe APIs will not be available.');
+    return;
+  }
+
   const linkCallPlugin = (0, _link2.default)(options);
 
   return {
@@ -33271,9 +33298,6 @@ function newCallMePlugin(options = {}) {
  * @method anonymousInit
  * @param {function} otherInit The other plugin's init function.
  */
-
-
-// Libraries.
 function anonymousInit(otherInit) {
   return function* init({ webRTC }) {
     // Run the other plugin's init
@@ -39771,7 +39795,7 @@ exports.getVersion = getVersion;
  * for the @@ tag below with actual version value.
  */
 function getVersion() {
-  return '4.15.0-beta.368';
+  return '4.15.0-beta.374';
 }
 
 /***/ }),
@@ -42367,6 +42391,9 @@ const factoryDefaults = {
       return next(action);
     }
   };
+
+  // Remove undefined plugins. Those are plugins that failed to load for some reason.
+  plugins = plugins.filter(plugin => Boolean(plugin));
 
   // Run all the plugins to build the context.
   // Set up each plugin component individually.
@@ -46445,6 +46472,12 @@ function initializeStack() {
 }
 
 function webRtcPlugin() {
+  const { mediaDevices, peerConnection } = (0, _kandyWebrtc.getWebRTCSupportCapabilities)();
+  if (!mediaDevices || !peerConnection) {
+    log.warn('Calls are not supported on this platform due to lack of WebRTC support. Media APIs will not be available.');
+    return;
+  }
+
   // Initialize the webRTC.
   const webRTC = (0, _kandyWebrtc2.default)();
 
@@ -50954,6 +50987,8 @@ const PEER = exports.PEER = {
 Object.defineProperty(exports, "__esModule", {
   value: true
 });
+exports.getBrowserDetails = getBrowserDetails;
+exports.getWebRTCSupportCapabilities = getWebRTCSupportCapabilities;
 exports.default = initialize;
 
 var _track = __webpack_require__("../../packages/webrtc/src/models/track.js");
@@ -51006,11 +51041,34 @@ function _interopRequireWildcard(obj) { if (obj && obj.__esModule) { return obj;
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
+/**
+ * @returns The browser details as provided by webrtc-adapter
+ */
 // Models.
+function getBrowserDetails() {
+  return _adapter_no_edge2.default.browserDetails;
+}
+
+/**
+ * @returns An dictionary of features that are supported on this platform.
+ */
+
+
+// SDP helpers.
+
+
+// Managers.
+function getWebRTCSupportCapabilities() {
+  return {
+    mediaDevices: Boolean(navigator.mediaDevices),
+    peerConnection: Boolean(window.RTCPeerConnection)
+  };
+}
+
 function initialize() {
   const log = _logs.logManager.getLogger('WebRTC');
 
-  const browserDetails = _adapter_no_edge2.default.browserDetails;
+  const browserDetails = getBrowserDetails();
   if (browserDetails.version) {
     log.debug(`Browser details: ${browserDetails.browser}, version ${browserDetails.version}.`);
   } else {
@@ -51049,16 +51107,10 @@ function initialize() {
       pipeline: _pipeline2.default,
       handlers: sdpHandlers
     },
-    getBrowserDetails: () => {
-      return browserDetails;
-    }
+    // Export this on the webRTC stack for backwards compatibility.
+    getBrowserDetails
   };
 }
-
-// SDP helpers.
-
-
-// Managers.
 
 /***/ }),
 
