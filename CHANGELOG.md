@@ -5,6 +5,21 @@ Kandy.js change log.
 - This project adheres to [Semantic Versioning](http://semver.org/).
 - This change log follows [keepachangelog.com](http://keepachangelog.com/) recommendations.
 
+## 4.15.0 - 2020-04-30
+
+### Added
+
+- Added the handling of mute/unmute events which are being generated when a media source is muted/unmuted by triggers that are outside of SDK's control. `KAA-1641`
+
+### Fixed
+
+- Removed the need for remote party properties (callNotificationParams) to be present in a sessionProgress notification. `KAA-2271`
+
+### Changed
+
+- Improved logs for Calls. `KAA-2219`
+- Improved behaviour when loading SDK into browser that doesn't support WebRTC. `KAA-2238` `KAA-2258`
+
 ## 4.14.0 - 2020-03-27
 
 ### Fixed
