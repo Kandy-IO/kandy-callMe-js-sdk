@@ -19,6 +19,10 @@ Kandy.js change log.
 - Added new Call option for configuring DSCP markings on the media traffic. `KAA-2256`
 - DSCP controls can be configured with the `call.make`, `call.answer`, `call.addMedia`, and `call.startVideo` Call APIs.
 
+### Fixed
+
+- Removed the need for remote party properties (callNotificationParams) to be present in notifications. `KAA-2271`
+
 ### Changed
 
 - Improved the `call.startVideo` API to allow for configuring additional options such as bandwidth.
