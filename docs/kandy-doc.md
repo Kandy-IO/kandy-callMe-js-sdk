@@ -110,6 +110,7 @@ Configuration options for the call feature.
     -   `call.earlyMedia` **[boolean][10]** Whether early media should be supported for calls. (optional, default `false`)
     -   `call.resyncOnConnect` **[boolean][10]** Whether the SDK should re-sync all call states after connecting (requires Kandy Link 4.7.1+). (optional, default `false`)
     -   `call.mediaBrokerOnly` **[boolean][10]** Whether all Calls will be anchored on the MediaBroker instead of being peer-to-peer. Set to true if the backend is configured for broker only mode. (optional, default `false`)
+    -   `call.removeBundling` **[boolean][10]** Whether to remove a=group attributes to stop media bundling from incoming and outgoing SDP messages. (optional, default `false`)
 
 ### config.connectivity
 
@@ -819,6 +820,38 @@ The SDK will emit a [call:trackEnded][40]
 
 -   `callId` **[string][7]** ID of the call being acted on.
 
+### startScreenshare
+
+Adds local screenshare to an ongoing Call, to start sending to the remote
+   participant.
+
+The latest SDK release (v4.X+) has not yet implemented this API in the
+   same way that it was available in previous releases (v3.X). In place
+   of this API, the SDK has a more general API that can be used for this
+   same behaviour.
+
+The [call.addMedia][43] API can be used to perform the same behaviour
+   as `startScreenshare`. [call.addMedia][43] is a general-purpose API
+   for adding media to a call, which covers the same functionality as
+   `startScreenshare`. Selecting only screen options when using
+   [call.addMedia][43] will perform the same behaviour as using
+   `startScreenshare`.
+
+**Examples**
+
+```javascript
+// Select media options for adding only screenshare.
+const media = {
+   audio: false,
+   video: false,
+   screen: true,
+   screenOptions: { ... }
+}
+
+// Add the selected media to the call.
+client.call.addMedia(callId, media)
+```
+
 ### stopScreenshare
 
 Removes local screenshare from an ongoing Call, stopping it from being
@@ -882,38 +915,6 @@ The progress of the operation will be tracked via the
 -   `tone` **[string][7]** DTMF tone(s) to send. Valid chracters are ['0','1','2','3','4','5','6','7','8','9','#','*' and ','].
 -   `duration` **[number][11]** The amount of time, in milliseconds, that each DTMF tone should last. (optional, default `100`)
 -   `intertoneGap` **[number][11]** The length of time, in milliseconds, to wait between tones. (optional, default `70`)
-
-### startScreenshare
-
-Adds local screenshare to an ongoing Call, to start sending to the remote
-   participant.
-
-The latest SDK release (v4.X+) has not yet implemented this API in the
-   same way that it was available in previous releases (v3.X). In place
-   of this API, the SDK has a more general API that can be used for this
-   same behaviour.
-
-The [call.addMedia][43] API can be used to perform the same behaviour
-   as `startScreenshare`. [call.addMedia][43] is a general-purpose API
-   for adding media to a call, which covers the same functionality as
-   `startScreenshare`. Selecting only screen options when using
-   [call.addMedia][43] will perform the same behaviour as using
-   `startScreenshare`.
-
-**Examples**
-
-```javascript
-// Select media options for adding only screenshare.
-const media = {
-   audio: false,
-   video: false,
-   screen: true,
-   screenOptions: { ... }
-}
-
-// Add the selected media to the call.
-client.call.addMedia(callId, media)
-```
 
 ### getStats
 
@@ -1017,6 +1018,43 @@ This API is a wrapper for the static method [RTCRtpSender.getCapabilities()][48]
 
 -   `kind` **[string][7]** The kind of media, i.e., 'audio' or 'video', to get the list of available codecs of.
 
+### changeSpeaker
+
+Changes the speaker used for a Call's audio output. Supported on
+   browser's that support HTMLMediaElement.setSinkId().
+
+The latest SDK release (v4.X+) has not yet implemented this API in the
+   same way that it was available in previous releases (v3.X). In place
+   of this API, the SDK has a more general API that can be used for this
+   same behaviour.
+
+The same behaviour as the `changeSpeaker` API can be implemented by
+   re-rendering the Call's audio track.  A speaker can be selected when
+   rendering an audio track, so changing a speaker can be simulated
+   by unrendering the track with [media.removeTracks][49], then
+   re-rendering it with a new speaker with [media.renderTracks][50].
+
+**Examples**
+
+```javascript
+const call = client.call.getById(callId)
+// Get the ID of the Call's audio track.
+const audioTrack = call.localTracks.find(trackId => {
+   const track = client.media.getTrackById(trackId)
+   return track.kind === 'audio'
+})
+
+// Where the audio track was previously rendered.
+const audioContainer = ...
+
+// Unrender the audio track we want to change speaker for.
+client.media.removeTrack([ audioTrack ], audioContainer)
+// Re-render the audio track with a new speaker.
+client.media.renderTrack([ audioTrack ], audioContainer, {
+   speakerId: 'speakerId'
+})
+```
+
 ### setDefaultDevices
 
 The `setDefaultDevices` API from previous SDK releases (3.X) has been
@@ -1027,7 +1065,7 @@ The devices used for a call can be selected as part of the APIs for
    starting the call. Microphone and/or camera can be chosen in the
    [call.make][26] and [call.answer][27] APIs, and speaker can be
    chosen when the audio track is rendered with the
-   [media.renderTracks][49] API.
+   [media.renderTracks][50] API.
 
 ### changeInputDevices
 
@@ -1039,7 +1077,7 @@ The latest SDK release (v4.X+) has not yet implemented this API in the
    same behaviour.
 
 The same behaviour as the `changeInputDevices` API can be implemented
-   using the general-purpose [call.replaceTrack][50] API. This API can
+   using the general-purpose [call.replaceTrack][51] API. This API can
    be used to replace an existing media track with a new track of the
    same type, allowing an application to change certain aspects of the
    media, such as input device.
@@ -1064,43 +1102,6 @@ const media = {
 
 // Change the call's camera by replacing the video track.
 client.call.replaceTrack(callId, videoTrack, media)
-```
-
-### changeSpeaker
-
-Changes the speaker used for a Call's audio output. Supported on
-   browser's that support HTMLMediaElement.setSinkId().
-
-The latest SDK release (v4.X+) has not yet implemented this API in the
-   same way that it was available in previous releases (v3.X). In place
-   of this API, the SDK has a more general API that can be used for this
-   same behaviour.
-
-The same behaviour as the `changeSpeaker` API can be implemented by
-   re-rendering the Call's audio track.  A speaker can be selected when
-   rendering an audio track, so changing a speaker can be simulated
-   by unrendering the track with [media.removeTracks][51], then
-   re-rendering it with a new speaker with [media.renderTracks][49].
-
-**Examples**
-
-```javascript
-const call = client.call.getById(callId)
-// Get the ID of the Call's audio track.
-const audioTrack = call.localTracks.find(trackId => {
-   const track = client.media.getTrackById(trackId)
-   return track.kind === 'audio'
-})
-
-// Where the audio track was previously rendered.
-const audioContainer = ...
-
-// Unrender the audio track we want to change speaker for.
-client.media.removeTrack([ audioTrack ], audioContainer)
-// Re-render the audio track with a new speaker.
-client.media.renderTrack([ audioTrack ], audioContainer, {
-   speakerId: 'speakerId'
-})
 ```
 
 ## connection
@@ -1145,50 +1146,6 @@ Possible levels for the SDK logger.
 -   `WARN` **[string][7]** Log issues that may cause problems or unexpected behaviour.
 -   `INFO` **[string][7]** Log useful information and messages to indicate the SDK's internal operations.
 -   `DEBUG` **[string][7]** Log information to help diagnose problematic behaviour.
-
-### LogHandler
-
-A LogHandler can be used to customize how the SDK should log information. By
-   default, the SDK will log information to the console, but a LogHandler can
-   be configured to change this behaviour.
-
-A LogHandler can be provided to the SDK as part of its configuration (see
-   [config.logs][52]). The SDK will then provide this
-   function with the logged information.
-
-Type: [Function][14]
-
-**Parameters**
-
--   `LogEntry` **[Object][6]** The LogEntry to be logged.
-
-**Examples**
-
-```javascript
-// Define a custom function to handle logs.
-function logHandler (logEntry) {
-  // Compile the meta info of the log for a prefix.
-  const { timestamp, level, target } = logEntry
-  let { method } = logEntry
-  const logInfo = `${timestamp} - ${target.type} - ${level}`
-
-  // Assume that the first message parameter is a string.
-  const [log, ...extra] = logEntry.messages
-
-  // For the timer methods, don't actually use the console methods.
-  //    The Logger already did the timing, so simply log out the info.
-  if (['time', 'timeLog', 'timeEnd'].includes(method)) {
-    method = 'debug'
-  }
-
-  console[method](`${logInfo} - ${log}`, ...extra)
-}
-
-// Provide the LogHandler as part of the SDK configurations.
-const configs = { ... }
-configs.logs.handler = logHandler
-const client = create(configs)
-```
 
 ### LogEntry
 
@@ -1237,6 +1194,50 @@ function defaultLogHandler (logEntry) {
 
   console[method](`${logInfo} - ${log}`, ...extra)
 }
+```
+
+### LogHandler
+
+A LogHandler can be used to customize how the SDK should log information. By
+   default, the SDK will log information to the console, but a LogHandler can
+   be configured to change this behaviour.
+
+A LogHandler can be provided to the SDK as part of its configuration (see
+   [config.logs][52]). The SDK will then provide this
+   function with the logged information.
+
+Type: [Function][14]
+
+**Parameters**
+
+-   `LogEntry` **[Object][6]** The LogEntry to be logged.
+
+**Examples**
+
+```javascript
+// Define a custom function to handle logs.
+function logHandler (logEntry) {
+  // Compile the meta info of the log for a prefix.
+  const { timestamp, level, target } = logEntry
+  let { method } = logEntry
+  const logInfo = `${timestamp} - ${target.type} - ${level}`
+
+  // Assume that the first message parameter is a string.
+  const [log, ...extra] = logEntry.messages
+
+  // For the timer methods, don't actually use the console methods.
+  //    The Logger already did the timing, so simply log out the info.
+  if (['time', 'timeLog', 'timeEnd'].includes(method)) {
+    method = 'debug'
+  }
+
+  console[method](`${logInfo} - ${log}`, ...extra)
+}
+
+// Provide the LogHandler as part of the SDK configurations.
+const configs = { ... }
+configs.logs.handler = logHandler
+const client = create(configs)
 ```
 
 ## media
@@ -1588,11 +1589,11 @@ Returns **[call.SdpHandlerFunction][15]** The resulting SDP handler that will re
 
 [48]: https://w3c.github.io/webrtc-pc/#dom-rtcrtpsender-getcapabilities
 
-[49]: #mediarendertracks
+[49]: #mediaremovetracks
 
-[50]: #callreplacetrack
+[50]: #mediarendertracks
 
-[51]: #mediaremovetracks
+[51]: #callreplacetrack
 
 [52]: #configconfiglogs
 
