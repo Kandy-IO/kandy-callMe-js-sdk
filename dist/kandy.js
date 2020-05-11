@@ -1,7 +1,7 @@
 /**
  * Kandy.js
  * kandy.newCallMe.js
- * Version: 4.16.0-beta.401
+ * Version: 4.16.0-beta.402
  */
 (function webpackUniversalModuleDefinition(root, factory) {
 	if(typeof exports === 'object' && typeof module === 'object')
@@ -39797,7 +39797,7 @@ exports.getVersion = getVersion;
  * for the @@ tag below with actual version value.
  */
 function getVersion() {
-  return '4.16.0-beta.401';
+  return '4.16.0-beta.402';
 }
 
 /***/ }),
@@ -45757,6 +45757,8 @@ exports.getSubscriptions = getSubscriptions;
 
 var _fp = __webpack_require__("../../node_modules/lodash/fp.js");
 
+var _selectors = __webpack_require__("../../packages/kandy/src/auth/interface/selectors.js");
+
 /**
  * Plugin selector function to expose state globally
  * @param  {Object} pluginState The localized (plugin) state
@@ -45771,6 +45773,9 @@ function getExposedState(pluginState) {
  * @method getSubscriptionConfig
  * @return {Object}
  */
+
+
+// Auth selectors for backwards compatability.
 function getSubscriptionConfig(state) {
   return (0, _fp.cloneDeep)(state.config.subscription);
 }
@@ -45804,7 +45809,10 @@ function getNotificationChannels(state) {
  * @return {Array}
  */
 function getSubscribedServices(state, type) {
-  let subscriptions = state.subscription.subscriptions;
+  const info = getSubscriptionInfo(state);
+  // For backwards compability, make sure that this is an array. It isn't when
+  //    the old Auth plugin is being used (eg. Link v3.X).
+  let subscriptions = Array.isArray(info) ? info : [info];
 
   // If a type was specified, filter out subscriptions of other types.
   if (type) {
@@ -45812,8 +45820,14 @@ function getSubscribedServices(state, type) {
   }
 
   // Massage the subscriptions to be a list of service names.
-  subscriptions = subscriptions.map(subscription => subscription.service);
-  return (0, _fp.cloneDeep)(subscriptions);
+
+  // For Link, subscription.service is an array of strings (all services).
+  // For CPaaS, subscription.service is a string (single service).
+  // Process the subscriptions in a way that will provide an array of strings in
+  //    both cases.
+  return subscriptions.reduce((acc, currentSub) => {
+    return acc.concat(currentSub.service);
+  }, []);
 }
 
 /**
@@ -45822,7 +45836,15 @@ function getSubscribedServices(state, type) {
  * @return {Object}
  */
 function getSubscriptionInfo(state) {
-  return (0, _fp.cloneDeep)(state.subscription.subscriptions);
+  if (state.subscription) {
+    return (0, _fp.cloneDeep)(state.subscription.subscriptions);
+  } else {
+    // For backwards compatability, also check if the authentication substate
+    //    has subscription info. It will have the info when the oldAuth plugin
+    //    is being used (eg. Link v3.X).
+    // Warning: This returns an object, unlike the above which returns an array.
+    return (0, _fp.cloneDeep)((0, _selectors.getSubscriptionInfo)(state));
+  }
 }
 
 /**
