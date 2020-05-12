@@ -1,7 +1,7 @@
 /**
  * Kandy.js
  * kandy.newCallMe.js
- * Version: 4.16.0-beta.404
+ * Version: 4.16.0-beta.405
  */
 (function webpackUniversalModuleDefinition(root, factory) {
 	if(typeof exports === 'object' && typeof module === 'object')
@@ -23986,15 +23986,17 @@ function* anonymousConnect() {
       service: ['callMe']
     });
 
+    log.info('Subscribing to callMe service.');
     const response = yield (0, _effects2.call)(_requests.subscribe, subscriptionInfo, credentials, requestOptions);
 
     if (response.error) {
+      log.info('Subscription failed. Error: ', response.error);
       // Subscription failed.
       yield (0, _effects2.put)(actions.connectFinished(response, _constants.platforms.LINK));
       return;
     } else if (!response.subscriptionParams.service.includes('callMe')) {
       // Subscription was successful, but didn't include the callMe service.
-      log.debug('Call Me service not provided with subscription.');
+      log.info('Subscription failed. Call Me service not provided with subscription.');
       yield (0, _effects2.put)(actions.connectFinished({
         error: new _errors2.default({
           message: 'Subscription failed to receive required service: callMe',
@@ -24004,6 +24006,8 @@ function* anonymousConnect() {
       return;
     }
 
+    log.info('Successfully subscribed to callMe service. Connecting to websocket.');
+
     // Connect the websocket.
     const websocketInfo = (0, _extends3.default)({}, config.websocket, {
       url: response.subscriptionParams.notificationChannel
@@ -24012,12 +24016,14 @@ function* anonymousConnect() {
     });const wsResponse = yield (0, _effects.connectWebsocket)(websocketInfo, _constants.platforms.LINK);
 
     if (wsResponse.error) {
+      log.info('Failed to connect to websocket. Error: ', wsResponse.error);
       // Websocket failed to connect.
       yield (0, _effects2.put)(actions.connectFinished({
         error: wsResponse.payload
       }, _constants.platforms.LINK));
       return;
     }
+    log.info('Successfully connected to websocket.');
 
     // Workaround.
     // FCS anonymous calls is dependent on having a value set in localStorage.
@@ -24065,6 +24071,7 @@ function* anonymousDisconnect() {
     yield (0, _effects2.take)(actionTypes.DISCONNECT);
     let { username } = yield (0, _effects2.select)(_selectors.getConnectionInfo);
 
+    log.info('Unsubscribing from callMe services.');
     // Call the link disconnect saga.
     yield (0, _effects2.call)(_sagas.disconnect);
 
@@ -25854,16 +25861,25 @@ function* disconnect() {
     response = yield (0, _effects.call)(_requests.unsubscribe, connection, subscription.url);
   }
 
+  if (response.error) {
+    log.info('Failed to unsubscribe from services. Error: ', response.error);
+    // We should still continue and attempt to also disconnect to websocket ?
+  }
+
+  log.info('Successfully unsubscribed from services.');
   const wsState = yield (0, _effects.select)(_selectors2.getConnectionState, platform);
   if (wsState.connected) {
+    log.info('Disconnecting from websocket.');
     // disconnect from the websocket
     yield (0, _effects2.disconnectWebsocket)(undefined, platform);
   }
 
   // Dispatch disconnect finished action appropriate for the response.
   if (response.error) {
+    log.info('Failed to disconnect from websocket. Error: ', response.error);
     yield (0, _effects.put)(actions.disconnectFinished(response));
   } else {
+    log.info('Successfully disconnected from websocket.');
     // We enter this block if we unsubscribed succesfully OR we never even called unsub. Either way we are unsubscribed.
     yield (0, _effects.put)(actions.disconnectFinished());
   }
@@ -26108,6 +26124,7 @@ function* subscribe(connection, credentials, extras = {}) {
   //      options for this request. Priority is for the options defined here.
   requestOptions = (0, _utils.mergeValues)(extras, requestOptions);
 
+  log.info(`Subscribing user ${credentials.username}`);
   // Send the subscription request.
   const response = yield (0, _effects2.default)(requestOptions);
 
@@ -26156,7 +26173,7 @@ function* subscribe(connection, credentials, extras = {}) {
 
     let subscribedServices = subscribeResponse.subscriptionParams.service;
     let servicesInfo = yield (0, _effects3.call)(_services.parseSpidrServices, connection.service, subscribedServices);
-    log.debug(`Subscribed user. Service subscription status: ${servicesInfo.status}`);
+    log.debug(`Successfully subscribed user. Service subscription status: ${servicesInfo.status}`);
 
     return (0, _extends3.default)({
       error: false,
@@ -26183,9 +26200,11 @@ function* unsubscribe(connection, subscriptionURL) {
   requestOptions.headers = {
     Accept: 'application/json',
     'Content-Type': 'application/json'
+  };
 
-    // Send the unsubscribe request.
-  };const response = yield (0, _effects2.default)(requestOptions, connection.requestOptions);
+  log.info('Unsubscribing user.');
+  // Send the unsubscribe request.
+  const response = yield (0, _effects2.default)(requestOptions, connection.requestOptions);
 
   if (response.error) {
     if (response.payload.body && response.payload.body.subscribeResponse) {
@@ -26220,16 +26239,19 @@ function* unsubscribe(connection, subscriptionURL) {
     let platform = yield (0, _effects3.select)(_selectors.getPlatform);
 
     if (platform === _constants.platforms.LINK && unsubResponse.statusCode === 0) {
+      log.info('Successfully unsubscribed user.');
       // Link success response.
       return (0, _extends3.default)({
         error: false
       }, unsubResponse);
     } else if (platform === _constants.platforms.UC && unsubResponse.statusCode === 0) {
+      log.info('Successfully unsubscribed user.');
       // Link success response.
       return (0, _extends3.default)({
         error: false
       }, unsubResponse);
     } else {
+      log.info('Failed to unsubscribe user. Status Code: ', unsubResponse.statusCode);
       // Unknown statusCode, consider as failure.
       return {
         error: new _errors2.default({
@@ -26278,6 +26300,7 @@ function* resubscribe(connection, subscription) {
     }
   });
 
+  log.info('Resubscribing user.');
   // Send the subscription update request.
   const response = yield (0, _effects2.default)(requestOptions, connection.requestOptions);
 
@@ -26315,7 +26338,7 @@ function* resubscribe(connection, subscription) {
     if (resubResponse.statusCode === 0 || resubResponse.statusCode === 2) {
       let subscribedServices = resubResponse.subscriptionParams.service;
       let servicesInfo = yield (0, _effects3.call)(_services.parseSpidrServices, subscription.service, subscribedServices);
-      log.debug(`Resubscribed user. Service resubscription status: ${servicesInfo.status}`);
+      log.debug(`Successfully resubscribed user. Service resubscription status: ${servicesInfo.status}`);
 
       // Success.
       return (0, _extends3.default)({
@@ -26323,6 +26346,7 @@ function* resubscribe(connection, subscription) {
         servicesInfo
       }, resubResponse);
     } else {
+      log.info('Failed to resubscribe user. Status Code: ', resubResponse.statusCode);
       // Unknown statusCode, consider as failure.
       return {
         error: new _errors2.default({
@@ -39797,7 +39821,7 @@ exports.getVersion = getVersion;
  * for the @@ tag below with actual version value.
  */
 function getVersion() {
-  return '4.16.0-beta.404';
+  return '4.16.0-beta.405';
 }
 
 /***/ }),
