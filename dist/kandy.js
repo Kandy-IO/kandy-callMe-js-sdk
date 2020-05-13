@@ -1,7 +1,7 @@
 /**
  * Kandy.js
  * kandy.newCallMe.js
- * Version: 4.16.0-beta.408
+ * Version: 4.16.0-beta.409
  */
 (function webpackUniversalModuleDefinition(root, factory) {
 	if(typeof exports === 'object' && typeof module === 'object')
@@ -29287,7 +29287,7 @@ const CALL_JOIN = exports.CALL_JOIN = 'call:join';
 /**
  * A new incoming call has been received.
  *
- * Information about the Call can be retrieved using the {@linkcall.getById}
+ * Information about the Call can be retrieved using the {@link call.getById}
  *    API.
  *
  * @public
@@ -29373,7 +29373,7 @@ const CALL_REMOVED_MEDIA = exports.CALL_REMOVED_MEDIA = 'call:removedMedia';
  *    the {@link call.addMedia} API.
  *
  * Information about the Track can be retrieved using the
- *    {@linkmedia.getTrackById} API.
+ *    {@link media.getTrackById} API.
  *
  * @public
  * @memberof call
@@ -39821,7 +39821,7 @@ exports.getVersion = getVersion;
  * for the @@ tag below with actual version value.
  */
 function getVersion() {
-  return '4.16.0-beta.408';
+  return '4.16.0-beta.409';
 }
 
 /***/ }),
