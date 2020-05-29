@@ -5,6 +5,33 @@ Kandy.js change log.
 - This project adheres to [Semantic Versioning](http://semver.org/).
 - This change log follows [keepachangelog.com](http://keepachangelog.com/) recommendations.
 
+## 4.16.0 - 2020-05-29
+
+### Added
+
+- Added new call config option 'mediaBrokerOnly'. When set to true the SDK will
+  not try to recreate a calls PeerConnection. This is intended for backends configured
+  to disallow peer to peer connections. `KAA-2259`
+- Added new Call API `call.getAvailableCodecs` which can be used to return a list of available codecs
+  supported by the browser. `KAA-2275`
+- Added a configuration parameter that allows the user to choose the authentication
+  method for the WebSocket.`KAA-2279`
+- Added new Call option for configuring DSCP markings on the media traffic. `KAA-2256`
+- DSCP controls can be configured with the `call.make`, `call.answer`, `call.addMedia`, and `call.startVideo` Call APIs.
+- Added `removeBundling` flag to the call config for users that want to turn it off. `KAA-2338`
+
+### Fixed
+
+- Removed the need for remote party properties (callNotificationParams) to be present in notifications. `KAA-2271`
+- Fixed Firefox calling Chrome issue related to media bundling. `KAA-2282`
+- Fixed the triggering of call:trackEnded event (on caller's side) when a media track is removed as well as duplication of such event (on callee's side) when plan-b is used. `KAA-2343`
+- Fixed an issue with removing media for a 'Connected' Call (after an earlier attempt was made while the Call was 'On Hold') `KAA-2353`
+
+### Changed
+
+- Improved the `call.startVideo` API to allow for configuring additional options such as bandwidth.
+- The default for `removeBundling` has been changed to be `false`, thereby enabling media bundling. `KAA-2338`
+
 ## 4.15.0 - 2020-04-30
 
 ### Added
@@ -24,13 +51,13 @@ Kandy.js change log.
 
 ### Fixed
 
-- Added checking for media willSend and willReceive when a Hold operation is received in case the remote side answered an audio only call with audio and video. `KAA-2209`
 - Fixed an issue where an existing local video track could not be replaced by a screen sharing track. `KAA-2144`
 
 ### Added
 
 - Add Call support for receiving early media. `KAA-2099`
   - When enabled via configuration (see `config.call.earlyMedia`), an outgoing Call may enter the "Early Media" state if the remote end responds with a provisional answer. This allows the Call to receive media before it has been answered.
+- Added checking for media willSend and willReceive when a Hold operation is received in case the remote side answered an audio only call with audio and video. `KAA-2209`
 
 ## 4.13.0 - 2020-02-28
 
