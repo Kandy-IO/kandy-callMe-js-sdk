@@ -364,19 +364,17 @@ let callId = client.call.makeAnonymous(callee, credentials, callOptions);
 
 Returns **[string][7]** Id of the outgoing call.
 
-### DSCPControls
+### DevicesObject
 
-The DSCPControls type defines the format for configuring network priorities (DSCP marking) for the media traffic.
-
-If DSCPControls are not configured for a call the network priority of the traffic for all media kinds will be the default (i.e., "low").
+A collection of media devices and their information.
 
 Type: [Object][6]
 
 **Properties**
 
--   `audioNetworkPriority` **RTCPriorityType?** The desired network priority for audio traffic (see [RTCPriorityType Enum][21] for the list of possible values).
--   `videoNetworkPriority` **RTCPriorityType?** The desired network priority for video traffic (see [RTCPriorityType Enum][21] for the list of possible values).
--   `screenNetworkPriority` **RTCPriorityType?** The desired network priority for screen share traffic (see [RTCPriorityType Enum][21] for the list of possible values).
+-   `camera` **[Array][12]&lt;[call.DeviceInfo][21]>** A list of camera device information.
+-   `microphone` **[Array][12]&lt;[call.DeviceInfo][21]>** A list of microphone device information.
+-   `speaker` **[Array][12]&lt;[call.DeviceInfo][21]>** A list of speaker device information.
 
 ### CallObject
 
@@ -438,19 +436,6 @@ client.call.make(destination, {
    }
 })
 ```
-
-### DeviceInfo
-
-Contains information about a device.
-
-Type: [Object][6]
-
-**Properties**
-
--   `deviceId` **[string][7]** The ID of the device.
--   `groupId` **[string][7]** The group ID of the device. Devices that share a `groupId` belong to the same physical device.
--   `kind` **[string][7]** The type of the device (audioinput, audiooutput, videoinput).
--   `label` **[string][7]** The name of the device.
 
 ### TrackObject
 
@@ -515,17 +500,19 @@ Type: [Object][6]
 -   `urls` **([Array][12]&lt;[string][7]> | [string][7])** Either an array of URLs for reaching out several ICE servers or a single URL for reaching one ICE server. See [RTCIceServers.urls documentation][28] to learn more about the actual url format.
 -   `credential` **[string][7]?** The credential needed by the ICE server.
 
-### DevicesObject
+### DSCPControls
 
-A collection of media devices and their information.
+The DSCPControls type defines the format for configuring network priorities (DSCP marking) for the media traffic.
+
+If DSCPControls are not configured for a call the network priority of the traffic for all media kinds will be the default (i.e., "low").
 
 Type: [Object][6]
 
 **Properties**
 
--   `camera` **[Array][12]&lt;[call.DeviceInfo][29]>** A list of camera device information.
--   `microphone` **[Array][12]&lt;[call.DeviceInfo][29]>** A list of microphone device information.
--   `speaker` **[Array][12]&lt;[call.DeviceInfo][29]>** A list of speaker device information.
+-   `audioNetworkPriority` **RTCPriorityType?** The desired network priority for audio traffic (see [RTCPriorityType Enum][29] for the list of possible values).
+-   `videoNetworkPriority` **RTCPriorityType?** The desired network priority for video traffic (see [RTCPriorityType Enum][29] for the list of possible values).
+-   `screenNetworkPriority` **RTCPriorityType?** The desired network priority for screen share traffic (see [RTCPriorityType Enum][29] for the list of possible values).
 
 ### BandwidthControls
 
@@ -592,6 +579,19 @@ client.call.make(destination, mediaConstraints,
  }
 )
 ```
+
+### DeviceInfo
+
+Contains information about a device.
+
+Type: [Object][6]
+
+**Properties**
+
+-   `deviceId` **[string][7]** The ID of the device.
+-   `groupId` **[string][7]** The group ID of the device. Devices that share a `groupId` belong to the same physical device.
+-   `kind` **[string][7]** The type of the device (audioinput, audiooutput, videoinput).
+-   `label` **[string][7]** The name of the device.
 
 ### hold
 
@@ -1034,6 +1034,43 @@ This is an advanced feature, changing the SDP handlers mid-call may cause
 
 -   `sdpHandlers` **[Array][12]&lt;[call.SdpHandlerFunction][15]>** The list of SDP handler functions to modify SDP.
 
+### changeSpeaker
+
+Changes the speaker used for a Call's audio output. Supported on
+   browser's that support HTMLMediaElement.setSinkId().
+
+The latest SDK release (v4.X+) has not yet implemented this API in the
+   same way that it was available in previous releases (v3.X). In place
+   of this API, the SDK has a more general API that can be used for this
+   same behaviour.
+
+The same behaviour as the `changeSpeaker` API can be implemented by
+   re-rendering the Call's audio track.  A speaker can be selected when
+   rendering an audio track, so changing a speaker can be simulated
+   by unrendering the track with [media.removeTracks][50], then
+   re-rendering it with a new speaker with [media.renderTracks][51].
+
+**Examples**
+
+```javascript
+const call = client.call.getById(callId)
+// Get the ID of the Call's audio track.
+const audioTrack = call.localTracks.find(trackId => {
+   const track = client.media.getTrackById(trackId)
+   return track.kind === 'audio'
+})
+
+// Where the audio track was previously rendered.
+const audioContainer = ...
+
+// Unrender the audio track we want to change speaker for.
+client.media.removeTrack([ audioTrack ], audioContainer)
+// Re-render the audio track with a new speaker.
+client.media.renderTrack([ audioTrack ], audioContainer, {
+   speakerId: 'speakerId'
+})
+```
+
 ### changeInputDevices
 
 Changes the camera and/or microphone used for a Call's media input.
@@ -1044,7 +1081,7 @@ The latest SDK release (v4.X+) has not yet implemented this API in the
    same behaviour.
 
 The same behaviour as the `changeInputDevices` API can be implemented
-   using the general-purpose [call.replaceTrack][50] API. This API can
+   using the general-purpose [call.replaceTrack][52] API. This API can
    be used to replace an existing media track with a new track of the
    same type, allowing an application to change certain aspects of the
    media, such as input device.
@@ -1082,43 +1119,6 @@ The devices used for a call can be selected as part of the APIs for
    [call.make][30] and [call.answer][31] APIs, and speaker can be
    chosen when the audio track is rendered with the
    [media.renderTracks][51] API.
-
-### changeSpeaker
-
-Changes the speaker used for a Call's audio output. Supported on
-   browser's that support HTMLMediaElement.setSinkId().
-
-The latest SDK release (v4.X+) has not yet implemented this API in the
-   same way that it was available in previous releases (v3.X). In place
-   of this API, the SDK has a more general API that can be used for this
-   same behaviour.
-
-The same behaviour as the `changeSpeaker` API can be implemented by
-   re-rendering the Call's audio track.  A speaker can be selected when
-   rendering an audio track, so changing a speaker can be simulated
-   by unrendering the track with [media.removeTracks][52], then
-   re-rendering it with a new speaker with [media.renderTracks][51].
-
-**Examples**
-
-```javascript
-const call = client.call.getById(callId)
-// Get the ID of the Call's audio track.
-const audioTrack = call.localTracks.find(trackId => {
-   const track = client.media.getTrackById(trackId)
-   return track.kind === 'audio'
-})
-
-// Where the audio track was previously rendered.
-const audioContainer = ...
-
-// Unrender the audio track we want to change speaker for.
-client.media.removeTrack([ audioTrack ], audioContainer)
-// Re-render the audio track with a new speaker.
-client.media.renderTrack([ audioTrack ], audioContainer, {
-   speakerId: 'speakerId'
-})
-```
 
 ## connection
 
@@ -1554,7 +1554,7 @@ Returns **[call.SdpHandlerFunction][15]** The resulting SDP handler that will re
 
 [20]: #callcustomparameter
 
-[21]: https://www.w3.org/TR/webrtc-priority/#rtc-priority-type
+[21]: #calldeviceinfo
 
 [22]: #callgetall
 
@@ -1570,7 +1570,7 @@ Returns **[call.SdpHandlerFunction][15]** The resulting SDP handler that will re
 
 [28]: https://developer.mozilla.org/en-US/docs/Web/API/RTCIceServer/urls
 
-[29]: #calldeviceinfo
+[29]: https://www.w3.org/TR/webrtc-priority/#rtc-priority-type
 
 [30]: call.make
 
@@ -1612,11 +1612,11 @@ Returns **[call.SdpHandlerFunction][15]** The resulting SDP handler that will re
 
 [49]: #callsdphandlerfunction
 
-[50]: #callreplacetrack
+[50]: #mediaremovetracks
 
 [51]: #mediarendertracks
 
-[52]: #mediaremovetracks
+[52]: #callreplacetrack
 
 [53]: #configconfiglogs
 
