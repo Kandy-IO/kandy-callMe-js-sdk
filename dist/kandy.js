@@ -1,7 +1,7 @@
 /**
  * Kandy.js
  * kandy.newCallMe.js
- * Version: 4.17.0-beta.443
+ * Version: 4.17.0-beta.444
  */
 (function webpackUniversalModuleDefinition(root, factory) {
 	if(typeof exports === 'object' && typeof module === 'object')
@@ -26838,8 +26838,9 @@ function* validateCallState(callId, expected) {
  * However, if only SDES is available, don't disable it.
  * @method sanitizeSdesFromSdp
  * @param {Object} newSdp The sdp so far (could have been modified by previous handlers).
- * @param {RTCSdpType} info Information about the session description.
+ * @param {Object} info Information about the session description.
  * @param {RTCSdpType} info.type The session description's type.
+ * @param {string} info.step The step that will occur after the Pipeline is run.
  * @param {string} info.endpoint Which end of the connection created the SDP.
  * @param {Object} originalSdp The sdp in its initial state.
  * @return {Object} The sanitized sdp with crypto removed (if fingerprint exists)
@@ -29077,6 +29078,9 @@ function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { de
  * @typedef {Object} SdpHandlerInfo
  * @memberof call
  * @property {RTCSdpType} type The session description's type.
+ * @property {string} step The step that will occur after the SDP Handlers are run.
+ *    Will be either 'set' (the SDP will be set locally) or 'send' (the SDP will
+ *    be sent to the remote endpoint).
  * @property {string} endpoint Which end of the connection created the SDP.
  */
 
@@ -36471,7 +36475,8 @@ function* incomingCall(deps, params) {
     // Since we have the remote offer SDP, we can setup a webRTC session.
     yield (0, _effects.call)(_establish.setupIncomingCall, deps, {
       offer: {
-        sdp
+        sdp,
+        type: 'offer'
       },
       trickleIceMode: callOptions.trickleIceMode,
       sdpSemantics: callOptions.sdpSemantics,
@@ -37057,10 +37062,12 @@ function* receiveEarlyMedia(deps, params) {
     /*
      * Run the remote SDP pranswer through any SDP handlers provided, then set it
      *    as the Session's remote description.
+     * This is the "pre set remote" stage.
      */
     const callConfigOptions = yield (0, _effects.select)(_selectors.getOptions);
     const sdp = yield (0, _effects.call)(_pipeline2.default, callConfigOptions.sdpHandlers, params.sdp, {
       type: 'pranswer',
+      step: 'set',
       endpoint: 'remote'
     });
     yield (0, _effects.call)([session, 'processAnswer'], {
@@ -38276,8 +38283,11 @@ const log = _logs.logManager.getLogger('SDP');
  * @method sdpPipeline
  * @param  {Array}      handlers       List of functions that transform the SDP.
  * @param  {string}     sdp            The session description.
- * @param  {RTCSdpType} info           Information about the session description.
+ * @param  {Object}     info           Information about the session description.
  * @param  {RTCSdpType} info.type      The session description's type.
+ * @param  {string}     info.step      The step that will occur after the Pipeline is run.
+ *    Will be either 'set' (the SDP will be set locally) or 'send' (the SDP will be sent
+ *    to the remote endpoint).
  * @param  {string}     info.endpoint  Which end of the connection created the SDP.
  * @param  {boolean}    info.isInitiator Whether this session initiated the connection or not.
  * @param  {BandwidthControls} [info.bandwidth] Information about bandwidth controls.
@@ -38414,8 +38424,9 @@ const log = _logs.logManager.getLogger('SDPHANDLER');
  *
  * @method sanitizeSdesFromSdp
  * @param {Object} newSdp The SDP so far (could have been modified by previous handlers).
- * @param {RTCSdpType} info Information about the session description.
+ * @param {Object} info Information about the session description.
  * @param {RTCSdpType} info.type The session description's type.
+ * @param {string} info.step The step that will occur after the Pipeline is run.
  * @param {string} info.endpoint Which end of the connection created the SDP.
  * @param {Object} originalSdp The SDP in its initial state.
  * @return {Object} The sanitized SDP with crypto removed (if fingerprint exists)
@@ -38752,12 +38763,24 @@ function* setupCall(deps, mediaConstraints, sessionOptions) {
   let offer = yield (0, _effects.call)([session, 'createOffer']);
 
   let callConfigOptions = yield (0, _effects.select)(_selectors.getOptions);
+  // Run the SDP through the Pipeline before we set it locally.
+  //    This is the "pre set local" stage.
   offer.sdp = yield (0, _effects.call)(_pipeline2.default, callConfigOptions.sdpHandlers, offer.sdp, {
     type: offer.type,
+    step: 'set',
     endpoint: 'local',
     bandwidth
   });
   offer = yield (0, _effects.call)([session, 'setLocalDescription'], offer);
+
+  // Run the SDP through the Pipeline again before we send it to the remote side.
+  //    This is the "pre send local" stage.
+  offer.sdp = yield (0, _effects.call)(_pipeline2.default, callConfigOptions.sdpHandlers, offer.sdp, {
+    type: offer.type,
+    step: 'send',
+    endpoint: 'local',
+    bandwidth
+  });
 
   log.info('Finished setting up local WebRTC portions of call.');
   return {
@@ -38831,10 +38854,12 @@ function* setupIncomingCall(deps, sessionOptions) {
   /*
    * Run the remote SDP offer through any SDP handlers provided, then set it
    *    as the Session's remote description.
+   * This is the "pre set remote" stage.
    */
   let callConfigOptions = yield (0, _effects.select)(_selectors.getOptions);
   offer.sdp = yield (0, _effects.call)(_pipeline2.default, callConfigOptions.sdpHandlers, offer.sdp, {
     type: offer.type,
+    step: 'set',
     endpoint: 'remote'
   });
 
@@ -38914,14 +38939,26 @@ function* answerWebrtcSession(deps, mediaConstraints, sessionOptions) {
    */
   let answer = yield (0, _effects.call)([session, 'createAnswer']);
   let callConfigOptions = yield (0, _effects.select)(_selectors.getOptions);
+  // This is the "pre set local" stage.
   answer.sdp = yield (0, _effects.call)(_pipeline2.default, callConfigOptions.sdpHandlers, answer.sdp, {
     type: answer.type,
+    step: 'set',
     endpoint: 'local',
     bandwidth
   });
   answer = yield (0, _effects.call)([session, 'setLocalDescription'], answer);
 
+  // Run the SDP through the Pipeline again before we send it to the remote side.
+  //    This is the "pre send local" stage.
+  answer.sdp = yield (0, _effects.call)(_pipeline2.default, callConfigOptions.sdpHandlers, answer.sdp, {
+    type: answer.type,
+    step: 'send',
+    endpoint: 'local',
+    bandwidth
+  });
+
   log.info('Finished setting up local WebRTC portions of call.');
+
   return {
     error: false,
     answerSDP: answer.sdp,
@@ -39146,10 +39183,12 @@ function* handleOffer(deps, offer, webrtcSessionId, bandwidth) {
   /*
    * Run the remote SDP offer through any SDP handlers provided, then set it
    *    as the Session's remote description.
+   * This is the "pre set remote" stage.
    */
   const callConfigOptions = yield (0, _effects.select)(_selectors.getOptions);
   offer = yield (0, _effects.call)(_pipeline2.default, callConfigOptions.sdpHandlers, offer, {
     type: 'offer',
+    step: 'set',
     endpoint: 'remote'
   });
 
@@ -39168,12 +39207,24 @@ function* handleOffer(deps, offer, webrtcSessionId, bandwidth) {
    *    then set it as the Session's local description.
    */
   let answer = yield (0, _effects.call)([session, 'createAnswer']);
+
+  // This is the "pre set local" stage.
   answer.sdp = yield (0, _effects.call)(_pipeline2.default, callConfigOptions.sdpHandlers, answer.sdp, {
     type: answer.type,
+    step: 'set',
     endpoint: 'local',
     bandwidth
   });
   answer = yield (0, _effects.call)([session, 'setLocalDescription'], answer);
+
+  // Run the SDP through the Pipeline again before we send it to the remote side.
+  //    This is the "pre send local" stage.
+  answer.sdp = yield (0, _effects.call)(_pipeline2.default, callConfigOptions.sdpHandlers, answer.sdp, {
+    type: answer.type,
+    step: 'send',
+    endpoint: 'local',
+    bandwidth
+  });
 
   return {
     answerSDP: answer.sdp
@@ -39212,12 +39263,22 @@ function* generateOffer(deps, sessionId, mediaDirections, bandwidth) {
     mediaDirections
   });
   const callConfigOptions = yield (0, _effects.select)(_selectors.getOptions);
+  // This is the "pre set local" stage.
   offer.sdp = yield (0, _effects.call)(_pipeline2.default, callConfigOptions.sdpHandlers, offer.sdp, {
     type: offer.type,
+    step: 'set',
     endpoint: 'local',
     bandwidth
   });
   offer = yield (0, _effects.call)([session, 'setLocalDescription'], offer);
+
+  // This is the "pre send local" stage.
+  offer.sdp = yield (0, _effects.call)(_pipeline2.default, callConfigOptions.sdpHandlers, offer.sdp, {
+    type: offer.type,
+    step: 'send',
+    endpoint: 'local',
+    bandwidth
+  });
 
   return offer;
 }
@@ -39276,12 +39337,22 @@ function* webRtcAddMedia(deps, mediaConstraints, sessionOptions) {
   //    renegotiation operation.
   let offer = yield (0, _effects.call)([session, 'createOffer']);
   const callConfigOptions = yield (0, _effects.select)(_selectors.getOptions);
+  // This is the "pre set local" stage.
   offer.sdp = yield (0, _effects.call)(_pipeline2.default, callConfigOptions.sdpHandlers, offer.sdp, {
     type: offer.type,
+    step: 'set',
     endpoint: 'local',
     bandwidth
   });
   offer = yield (0, _effects.call)([session, 'setLocalDescription'], offer);
+
+  // This is the "pre send local" stage.
+  offer.sdp = yield (0, _effects.call)(_pipeline2.default, callConfigOptions.sdpHandlers, offer.sdp, {
+    type: offer.type,
+    step: 'send',
+    endpoint: 'local',
+    bandwidth
+  });
 
   let mediaStates = [];
 
@@ -39349,12 +39420,22 @@ function* webRtcRemoveMedia(deps, sessionOptions) {
   //    renegotiation operation.
   let offer = yield (0, _effects.call)([session, 'createOffer']);
   const callConfigOptions = yield (0, _effects.select)(_selectors.getOptions);
+  // This is the "pre set local" stage.
   offer.sdp = yield (0, _effects.call)(_pipeline2.default, callConfigOptions.sdpHandlers, offer.sdp, {
     type: offer.type,
+    step: 'set',
     endpoint: 'local',
     bandwidth
   });
   offer = yield (0, _effects.call)([session, 'setLocalDescription'], offer);
+
+  // This is the "pre send local" stage.
+  offer.sdp = yield (0, _effects.call)(_pipeline2.default, callConfigOptions.sdpHandlers, offer.sdp, {
+    type: offer.type,
+    step: 'send',
+    endpoint: 'local',
+    bandwidth
+  });
 
   return {
     sdp: offer.sdp
@@ -39623,9 +39704,11 @@ function* receivedAnswer(deps, sessionInfo, targetCall) {
     /*
      * Run the remote SDP answer through any SDP handlers provided, then set it
      *    as the Session's remote description.
+     * This is the "pre set remote" stage.
      */
     answerSdp = yield (0, _effects.call)(_pipeline2.default, sdpHandlers, answerSdp, {
       type: 'answer',
+      step: 'set',
       endpoint: 'remote'
     });
     yield (0, _effects.call)([session, 'processAnswer'], {
@@ -39920,7 +40003,7 @@ exports.getVersion = getVersion;
  * for the @@ tag below with actual version value.
  */
 function getVersion() {
-  return '4.17.0-beta.443';
+  return '4.17.0-beta.444';
 }
 
 /***/ }),
