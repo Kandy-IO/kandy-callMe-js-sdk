@@ -1,7 +1,7 @@
 /**
  * Kandy.js
  * kandy.newCallMe.js
- * Version: 4.17.0-beta.447
+ * Version: 4.17.0-beta.448
  */
 (function webpackUniversalModuleDefinition(root, factory) {
 	if(typeof exports === 'object' && typeof module === 'object')
@@ -24200,7 +24200,7 @@ Object.defineProperty(exports, "__esModule", {
 });
 exports.connect = connect;
 exports.setConnectionInfo = setConnectionInfo;
-exports.connectionOccured = connectionOccured;
+exports.connectionOccurred = connectionOccurred;
 exports.connectFinished = connectFinished;
 exports.getUserDetails = getUserDetails;
 exports.userDetailsReceived = userDetailsReceived;
@@ -24260,21 +24260,22 @@ function setConnectionInfo({ userInfo, connection }, platform) {
 }
 
 /**
- * Connection Occured action.
+ * Connection occurred action.
  * Signifies that a connection has been made to a service, but that the connection
  *      workflow has not finished yet. Intended for use in scenarios where the
  *      workflow connects to multiple services, to represent the "intermediate"
  *      connections.
  *
- * @method connectionOccured
+ * @method connectionOccurred
  * @param  {Object} $0
  * @param  {Object} $0.subscription
  * @param  {Object} $0.connection
- * @param  {Object} [$0.error] An error message. Only present if an error occured.
+ * @param  {Object} [$0.error] An error message. Only present if an error occurred.
  * @param  {string} platform The backend platform used for the connection.
  * @return {Object} A flux standard action.
  */
-function connectionOccured({ subscription, connection, error }, platform) {
+function connectionOccurred({ subscription, connection, error }, platform) {
+  // TODO: Is this action used anywhere?
   var action = {
     type: actionTypes.CONNECTION_OCCURRED,
     meta: { platform }
@@ -24299,7 +24300,7 @@ function connectionOccured({ subscription, connection, error }, platform) {
  * @param {Object} $0.subscription A subscription object. Contains what services to subscribe to.
  * @param {Object} $0.userInfo An object representing the user information.
  * @param {Object} $0.connection A connection object. Information about how to connect to the backend services.
- * @param {string} [$0.error] An error message. Only present if an error occured.
+ * @param {string} [$0.error] An error message. Only present if an error occurred.
  * @param {string} platform The backend platform we are currently on.
  * @param {boolean} isSSO Boolean for whether the current connection scenario is SSO or not.
  * @return {Object} A flux standard action.
@@ -24402,7 +24403,7 @@ function disconnectFinished({ error, reason } = {}) {
  *
  * @method resubscribeFinished
  * @param {Object} $0
- * @param {string} [$0.error] An error message. Only present if an error occured.
+ * @param {string} [$0.error] An error message. Only present if an error occurred.
  * @param {string} [$0.attemptNum] The attempt number of this resubscription.
  * @param {string} platform The backend platform we are currently on.
  * @return {Object} A flux standard action.
@@ -24549,7 +24550,7 @@ function setCredentials({ username, password, authname, hmacToken, bearerAccessT
  * @param {Object} $0
  * @param {Object} $0.userInfo An object representing the user information.
  * @param {Object} $0.connection A connection object. Information about how to connect to the backend services.
- * @param {string} [$0.error] An error message. Only present if an error occured.
+ * @param {string} [$0.error] An error message. Only present if an error occurred.
  * @param {string} platform The backend platform we are currently on.
  * @return {Object} A flux standard action.
  */
@@ -24855,7 +24856,7 @@ function api({ dispatch, getState }) {
      * @returns {Object} connection The connection state.
      * @returns {boolean} connection.isConnected Whether the authenticated user is currently connected.
      * @returns {boolean} connection.isPending Whether the authenticated user's connection is currently pending.
-     * @returns {Object} connection.error The error object if an error occured.
+     * @returns {Object} connection.error The error object if an error occurred.
      * @returns {string} connection.error.message The error message.
      * @returns {string} connection.error.stack The stack trace of the error.
      */
@@ -25164,7 +25165,7 @@ reducers[actionTypes.CONNECT_FINISHED] = {
   }
 };
 
-// On connection occured, store the connection information into state, but do
+// On connection occurred, store the connection information into state, but do
 // not update any status state. The connection has not yet finished.
 reducers[actionTypes.CONNECTION_OCCURRED] = {
   next(state, action) {
@@ -29128,6 +29129,10 @@ function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { de
  * @property {string} kind The kind of Track this is (audio, video).
  * @property {string} label The label of the device this Track uses.
  * @property {boolean} muted Indicator on whether this Track is muted or not.
+ * @property {boolean} sourceMuted Indicator on whether this Track is receiving media from its source or not.
+ *    When true, the Track can be considered removed. This indicator is affected by actions outside the
+ *    control of the SDK, such as the remote endpoint of a Call stopping to send media for a remote Track,
+ *    or the browser temporarily disabling the SDK's access to a local Track's source.
  * @property {string} state The state of this Track. Can be 'live' or 'ended'.
  * @property {string} streamId The ID of the Media Stream that includes this Track.
  */
@@ -34075,7 +34080,7 @@ function* makeCall(deps, action) {
     removeBundling: callOptions.removeBundling
   });
 
-  // An error occured while trying to setup the WebRTC portion of the call.
+  // An error occurred while trying to setup the WebRTC portion of the call.
   //    Report the error and mark the call as ended.
   if (error) {
     log.info(`Failed to initiate call. Changing to ${_constants.CALL_STATES.ENDED}.`);
@@ -39660,7 +39665,7 @@ function* isSameSdpSessionId(webRTC, sessionId, sdp) {
  * @param {string} sessionInfo.sessionId ID for the local webRTC Session.
  * @param {string} sessionInfo.answerSdp The received answer SDP.
  * @param {Object} targetCall Information about the call that this Session is associated with.
- * @returns {Object} Error object if any have occured. Undefined otherwise.
+ * @returns {Object} Error object if any have occurred. Undefined otherwise.
  */
 
 
@@ -40008,7 +40013,7 @@ exports.getVersion = getVersion;
  * for the @@ tag below with actual version value.
  */
 function getVersion() {
-  return '4.17.0-beta.447';
+  return '4.17.0-beta.448';
 }
 
 /***/ }),
@@ -42441,7 +42446,7 @@ function api({ dispatch }) {
   var api = {};
 
   /**
-   * Add an event listener for the specified event type. The event is emmited by the SDK instance.
+   * Add an event listener for the specified event type. The event is emitted by the SDK instance.
    *
    * @public
    * @memberof api
@@ -42461,7 +42466,7 @@ function api({ dispatch }) {
   };
 
   /**
-   * Removes an event listener for the specified event type. The event is emmited by the SDK instance.
+   * Removes an event listener for the specified event type. The event is emitted by the SDK instance.
    *
    * @public
    * @memberof api
@@ -44617,7 +44622,7 @@ Object.defineProperty(exports, "__esModule", {
 const NOTI_CHANGE = exports.NOTI_CHANGE = 'notifications:change';
 
 /**
- * An error occured with push notifications.
+ * An error occurred with push notifications.
  *
  * @public
  * @requires push
