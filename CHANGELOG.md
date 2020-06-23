@@ -18,6 +18,7 @@ Kandy.js change log.
 - Fixed a Call issue where SDP Handlers were not given the opportunity to act on a local SDP before it was sent to the remote endpoint. `KAA-2136`
 - Fixed issue where `call.states` JS doc block was not included as part of public documentation for callMe SDK. `KAA-2366`
 - Fixed the custom header (sent by any request to backend & used for analytics) so that its value reflects the actual platform (or service) used by SDK. `KAA-2395`
+- Normalized error data returned from all REST requests to internal components. Doesn't impact public API. `KAA-2348`
 - Fixed an issue with `sdpHandlers.createCodecRemover` where it wasn't handling multiple codecs selectors with the same name. `KAA-2416`
 
 ## 4.16.0 - 2020-05-29
