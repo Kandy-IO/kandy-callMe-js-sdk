@@ -11,6 +11,8 @@ Kandy.js change log.
 
 - Added new parameter validation to all configs used with the `create` function. Incorrect parameters will log a `VALIDATION` message. `KAA-2223`
 - Added documentation about `CodecSelectors` for `sdpHandlers.createCodecRemover`.
+- Added Call functionality for the `makeAnonymous` API to start a call with screenshare. `KAA-2424`
+  - See the `callOptions.screen` and `callOptions.screenOptions` parameters in the documentation.
 - Added callId parameter passed to SDP pipeline handlers `call.SdpHandlerFunction`. `KAA-2242`
 
 ### Fixed
@@ -22,6 +24,7 @@ Kandy.js change log.
 - Fixed an issue where replacing a track and then ending it wasn't emitting the proper `call:trackEnded` event. `KAA-2370` `KAA-2387`
 - Normalized error data returned from all REST requests to internal components. Doesn't impact public API. `KAA-2348`
 - Fixed an issue with `sdpHandlers.createCodecRemover` where it wasn't handling multiple codecs selectors with the same name. `KAA-2416`
+- Fixed a Call issue the `makeAnonymous` API would not use the `audioOptions` and `videoOptions` options when starting a call. `KAA-2424`
 
 ## 4.16.0 - 2020-05-29
 

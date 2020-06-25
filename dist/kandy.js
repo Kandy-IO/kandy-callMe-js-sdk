@@ -1,7 +1,7 @@
 /**
  * Kandy.js
  * kandy.newCallMe.js
- * Version: 4.17.0-beta.459
+ * Version: 4.17.0-beta.460
  */
 (function webpackUniversalModuleDefinition(root, factory) {
 	if(typeof exports === 'object' && typeof module === 'object')
@@ -27146,7 +27146,16 @@ function makeCallFinish(id, params) {
 }
 
 function makeAnonymousCall(id, params) {
-  return callActionHelper(actionTypes.MAKE_ANONYMOUS_CALL, id, params);
+  return {
+    type: actionTypes.MAKE_ANONYMOUS_CALL,
+    payload: {
+      id,
+      callee: params.callee,
+      credentials: params.credentials,
+      mediaConstraints: params.mediaConstraints,
+      callOptions: params.callOptions
+    }
+  };
 }
 
 function makeAnonymousCallFinish(id, params) {
@@ -28788,6 +28797,10 @@ Object.defineProperty(exports, "__esModule", {
   value: true
 });
 
+var _objectWithoutProperties2 = __webpack_require__("../../node_modules/babel-runtime/helpers/objectWithoutProperties.js");
+
+var _objectWithoutProperties3 = _interopRequireDefault(_objectWithoutProperties2);
+
 var _extends2 = __webpack_require__("../../node_modules/babel-runtime/helpers/extends.js");
 
 var _extends3 = _interopRequireDefault(_extends2);
@@ -28855,6 +28868,11 @@ function anonymousAPI(otherApi) {
          * @param {call.MediaConstraint} [callOptions.videoOptions.height] The height of the video.
          * @param {call.MediaConstraint} [callOptions.videoOptions.width] The width of the video.
          * @param {call.MediaConstraint} [callOptions.videoOptions.frameRate] The frame rate of the video.
+         * @param {Boolean} [callOptions.screen=false] Whether the call should have screenshare on start.
+         * @param {Object} [callOptions.screenOptions] Options for configuring the call's screenShare.
+         * @param {call.MediaConstraint} [callOptions.screenOptions.height] The height of the screenShare.
+         * @param {call.MediaConstraint} [callOptions.screenOptions.width] The width of the screenShare.
+         * @param {call.MediaConstraint} [callOptions.screenOptions.frameRate] The frame rate of the screenShare.
          * @param {string} [callOptions.displayName] Custom display name to be provided to the destination. Only used with token-less anonymous calls. Not supported in all environments and may use default display name.
          * @param {Array<call.CustomParameter>} [callOptions.customParameters] Custom SIP header parameters for the SIP backend
          * @return {string} Id of the outgoing call.
@@ -28890,9 +28908,25 @@ function anonymousAPI(otherApi) {
          * let callId = client.call.makeAnonymous(callee, credentials, callOptions);
          */
         makeAnonymous(callee, credentials = {}, callOptions = {}) {
-          // Create our own call ID for storing in state.
-          const callId = (0, _uuid.v4)();
-          dispatch(_actions.callActions.makeAnonymousCall(callId, { callee, credentials, callOptions }));
+          // Separate the media constraints from the callOptions.
+          const { audio, audioOptions, video, videoOptions, screen, screenOptions } = callOptions,
+                options = (0, _objectWithoutProperties3.default)(callOptions, ['audio', 'audioOptions', 'video', 'videoOptions', 'screen', 'screenOptions']);
+
+          // Massage the media constraints into a gUM-like format.
+          //    This is done the same way as the make API does it.
+          const mediaConstraints = {
+            audio: audio && !(0, _fp.isEmpty)(audioOptions) ? audioOptions : audio,
+            video: video && !(0, _fp.isEmpty)(videoOptions) ? videoOptions : video,
+            screenShare: screen && !(0, _fp.isEmpty)(screenOptions) ? screenOptions : screen
+
+            // Create our own call ID for storing in state.
+          };const callId = (0, _uuid.v4)();
+          dispatch(_actions.callActions.makeAnonymousCall(callId, {
+            callee,
+            credentials,
+            mediaConstraints,
+            callOptions: options
+          }));
           return callId;
         }
       })
@@ -33152,7 +33186,7 @@ function* makeAnonymousCall(deps, action) {
   // Make the call normally after we're subscribed.
   yield (0, _effects.put)(_actions.callActions.makeCall(action.payload.id, {
     participantAddress: isTokenBased ? callee : (0, _normalization.normalizeSipUri)(callee),
-    mediaConstraints: action.payload.callOptions,
+    mediaConstraints: action.payload.mediaConstraints,
     isAnonymous: true,
     account,
     from: isTokenBased ? caller : (0, _normalization.normalizeSipUri)(caller),
@@ -40061,7 +40095,7 @@ exports.getVersion = getVersion;
  * for the @@ tag below with actual version value.
  */
 function getVersion() {
-  return '4.17.0-beta.459';
+  return '4.17.0-beta.460';
 }
 
 /***/ }),
