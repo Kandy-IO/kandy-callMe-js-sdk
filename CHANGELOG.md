@@ -5,17 +5,38 @@ Kandy.js change log.
 - This project adheres to [Semantic Versioning](http://semver.org/).
 - This change log follows [keepachangelog.com](http://keepachangelog.com/) recommendations.
 
+## 4.17.0 - 2020-06-26
+
+### Added
+
+- Added new parameter validation to all configs used with the `create` function. Incorrect parameters will log a `VALIDATION` message. `KAA-2223`
+- Added documentation about `CodecSelectors` for `sdpHandlers.createCodecRemover`.
+- Added Call functionality for the `makeAnonymous` API to start a call with screenshare. `KAA-2424`
+  - See the `callOptions.screen` and `callOptions.screenOptions` parameters in the documentation.
+- Added callId parameter passed to SDP pipeline handlers `call.SdpHandlerFunction`. `KAA-2242`
+
+### Fixed
+
+- Fixed a Call issue where the callee would not receive a `call:newTrack` event for the remote tracks when answering the call. `KAA-2380`
+- Fixed a Call issue where SDP Handlers were not given the opportunity to act on a local SDP before it was sent to the remote endpoint. `KAA-2136`
+- Fixed issue where `call.states` JS doc block was not included as part of public documentation for callMe SDK. `KAA-2366`
+- Fixed the custom header (sent by any request to backend & used for analytics) so that its value reflects the actual platform (or service) used by SDK. `KAA-2395`
+- Fixed an issue where replacing a track and then ending it wasn't emitting the proper `call:trackEnded` event. `KAA-2370` `KAA-2387`
+- Normalized error data returned from all REST requests to internal components. Doesn't impact public API. `KAA-2348`
+- Fixed an issue with `sdpHandlers.createCodecRemover` where it wasn't handling multiple codecs selectors with the same name. `KAA-2416`
+- Fixed a Call issue the `makeAnonymous` API would not use the `audioOptions` and `videoOptions` options when starting a call. `KAA-2424`
+
+### Changed
+
+- Changed `call.getAvailableCodecs` Call API to return a Promise, so that caller can get the list of codecs as part of invkoing this API, without the need to setup a separate event listener. This does not impact the existing use of API. `KAA-2423`
+
 ## 4.16.0 - 2020-05-29
 
 ### Added
 
-- Added new call config option 'mediaBrokerOnly'. When set to true the SDK will
-  not try to recreate a calls PeerConnection. This is intended for backends configured
-  to disallow peer to peer connections. `KAA-2259`
-- Added new Call API `call.getAvailableCodecs` which can be used to return a list of available codecs
-  supported by the browser. `KAA-2275`
-- Added a configuration parameter that allows the user to choose the authentication
-  method for the WebSocket.`KAA-2279`
+- Added new call config option 'mediaBrokerOnly'. When set to true the SDK will not try to recreate a calls PeerConnection. This is intended for backends configured to disallow peer to peer connections. `KAA-2259`
+- Added new Call API `call.getAvailableCodecs` which can be used to return a list of available codecs supported by the browser. `KAA-2275`
+- Added a configuration parameter that allows the user to choose the authentication method for the WebSocket.`KAA-2279`
 - Added new Call option for configuring DSCP markings on the media traffic. `KAA-2256`
 - DSCP controls can be configured with the `call.make`, `call.answer`, `call.addMedia`, and `call.startVideo` Call APIs.
 - Added `removeBundling` flag to the call config for users that want to turn it off. `KAA-2338`

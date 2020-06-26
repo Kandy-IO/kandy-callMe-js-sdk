@@ -1,7 +1,7 @@
 /**
  * Kandy.js
  * kandy.newCallMe.js
- * Version: 4.16.0
+ * Version: 4.17.0
  */
 (function webpackUniversalModuleDefinition(root, factory) {
 	if(typeof exports === 'object' && typeof module === 'object')
@@ -23418,12 +23418,12 @@ var _fp = __webpack_require__("../../node_modules/lodash/fp.js");
  * const newSdp = codecRemover(<SDP Object>); // the incoming SDP object
  * console.log(newSdp)
  */
-function createCodecRemover(config) {
-    if (!config) {
-        config = [];
+function createCodecRemover(codecs) {
+    if (!codecs) {
+        codecs = [];
     }
-    // We allow the user to pass in a config of objects or strings, so here we format the strings into objects for uniformity.
-    config = config.map(function (item) {
+    // We allow the user to pass in a codecs of objects or strings, so here we format the strings into objects for uniformity.
+    codecs = codecs.map(function (item) {
         return typeof item === 'string' ? { name: item } : item;
     });
 
@@ -23450,14 +23450,14 @@ function createCodecRemover(config) {
         var newSdp = (0, _fp.cloneDeep)(currentSdp);
 
         // This is an array of strings representing codec names we want to remove.
-        var codecStringsToRemove = config.map(function (codec) {
+        var codecStringsToRemove = codecs.map(function (codec) {
             return codec.name;
         });
 
         newSdp.media.forEach(function (media) {
             // This is an array of just the codes (codec payloads) that we FOR SURE want to remove.
             var finalRemoveList = [];
-            // This is an array of RTP objects who have codecs that are the same as strings passed in via config.
+            // This is an array of RTP objects who have codecs that are the same as strings passed in via codecs.
             var filteredRtp = [];
 
             // If the current rtp.codec is in the codecStringsToRemove list, add the rtp to filteredRtp
@@ -23466,13 +23466,13 @@ function createCodecRemover(config) {
             });
 
             filteredRtp.forEach(function (rtp) {
-                // We grab the relevantCodec config object from the passed in config, based on the name string.
-                var relevantCodec = (0, _fp.find)(function (codec) {
+                // We grab the relevantCodec codecs object from the passed in codecs, based on the name string.
+                var relevantCodecs = codecs.filter(function (codec) {
                     return codec.name === rtp.codec;
-                }, config);
+                });
 
-                // We check the relevantCodec. If it is not present, then we have no config info for this specific rtp.
-                if (relevantCodec) {
+                // We check the relevantCodec. If it is not present, then we have no codecs info for this specific rtp.
+                relevantCodecs.forEach(function (relevantCodec) {
                     // If fmtpParams doesnt exist or is of length 0 then we assume we can remove all instances of this codec
                     if (!relevantCodec.fmtpParams || relevantCodec.fmtpParams && relevantCodec.fmtpParams.length === 0) {
                         // We want to delete this codec no matter what, since no fmtp params were included.
@@ -23492,7 +23492,7 @@ function createCodecRemover(config) {
                             }
                         });
                     }
-                }
+                });
             });
 
             // At this point we should have an array (finalRemoveList) that contains all ORIGINAL codec payloads that we need to remove.
@@ -23846,6 +23846,7 @@ module.exports = str => encodeURIComponent(str).replace(/[!'()*]/g, x => `%${x.c
 Object.defineProperty(exports, "__esModule", {
   value: true
 });
+exports.defaultOptions = undefined;
 exports.default = callMeAuth;
 
 var _noop = __webpack_require__("../../packages/kandy/src/auth/noop/index.js");
@@ -23855,6 +23856,8 @@ var _noop2 = _interopRequireDefault(_noop);
 var _sagas = __webpack_require__("../../packages/kandy/src/auth/callMe/sagas.js");
 
 var _sagas2 = __webpack_require__("../../packages/kandy/src/auth/oldLink/sagas.js");
+
+var _validation = __webpack_require__("../../packages/kandy/src/common/validation/index.js");
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
@@ -23866,16 +23869,50 @@ function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { de
  * @instance
  * @param {Object} authentication Authentication configs.
  * @param {Object} authentication.subscription
- * @param {string} [authentication.subscription.protocol=https] Protocol to be used for subscription requests.
+ * @param {string} [authentication.subscription.protocol='https'] Protocol to be used for subscription requests.
  * @param {string} authentication.subscription.server Server to be used for subscription requests.
  * @param {Number} [authentication.subscription.port=443] Port to be used for subscription requests.
- * @param {string} [authentication.subscription.version=1] Version of the REST API to be used.
  * @param {Array} [authentication.subscription.service] Services to subscribe to for notifications.
  * @param {Object} authentication.websocket
- * @param {string} [authentication.websocket.protocol=wss] Protocol to be used for websocket notifications.
+ * @param {string} [authentication.websocket.protocol='wss'] Protocol to be used for websocket notifications.
  * @param {string} authentication.websocket.server Server to be used for websocket notifications.
  * @param {Number} [authentication.websocket.port=443] Port to be used for websocket notifications.
  */
+
+// Re-use the no-op auth plugin.
+const defaultOptions = exports.defaultOptions = {
+  subscription: {
+    protocol: 'https',
+    server: null,
+    port: 443,
+    version: '1', // not documented, but important
+    service: [],
+    websocket: {
+      protocol: 'wss',
+      server: null,
+      port: 443
+    }
+  }
+
+  // config validation
+};
+
+// Parse and/or Validate
+const v8nValidation = _validation.validation.schema({
+  subscription: _validation.validation.schema({
+    protocol: (0, _validation.enums)(['http', 'https']),
+    server: _validation.validation.string(),
+    port: _validation.validation.positive(),
+    version: (0, _validation.enums)(['1']), // not documented, but important
+    service: _validation.validation.array().every.string(),
+    websocket: _validation.validation.schema({
+      protocol: _validation.validation.string(),
+      server: _validation.validation.string(),
+      port: _validation.validation.positive()
+    })
+  })
+});
+const parseOptions = (0, _validation.parse)('authentication', v8nValidation);
 
 /**
  * Auth plugin factory for callMe scenarios.
@@ -23884,6 +23921,8 @@ function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { de
  * @return {Object} A callMe authentication plugin.
  */
 function callMeAuth(options = {}) {
+  parseOptions(options);
+
   // Use the no-op auth plugin as a basis.
   let authComponents = (0, _noop2.default)(options);
 
@@ -23891,7 +23930,7 @@ function callMeAuth(options = {}) {
   authComponents.sagas = [_sagas.anonymousConnect, _sagas.anonymousDisconnect, _sagas2.extendSubscription];
 
   return authComponents;
-} // Re-use the no-op auth plugin.
+}
 
 /***/ }),
 
@@ -24161,7 +24200,7 @@ Object.defineProperty(exports, "__esModule", {
 });
 exports.connect = connect;
 exports.setConnectionInfo = setConnectionInfo;
-exports.connectionOccured = connectionOccured;
+exports.connectionOccurred = connectionOccurred;
 exports.connectFinished = connectFinished;
 exports.getUserDetails = getUserDetails;
 exports.userDetailsReceived = userDetailsReceived;
@@ -24221,21 +24260,22 @@ function setConnectionInfo({ userInfo, connection }, platform) {
 }
 
 /**
- * Connection Occured action.
+ * Connection occurred action.
  * Signifies that a connection has been made to a service, but that the connection
  *      workflow has not finished yet. Intended for use in scenarios where the
  *      workflow connects to multiple services, to represent the "intermediate"
  *      connections.
  *
- * @method connectionOccured
+ * @method connectionOccurred
  * @param  {Object} $0
  * @param  {Object} $0.subscription
  * @param  {Object} $0.connection
- * @param  {Object} [$0.error] An error message. Only present if an error occured.
+ * @param  {Object} [$0.error] An error message. Only present if an error occurred.
  * @param  {string} platform The backend platform used for the connection.
  * @return {Object} A flux standard action.
  */
-function connectionOccured({ subscription, connection, error }, platform) {
+function connectionOccurred({ subscription, connection, error }, platform) {
+  // TODO: Is this action used anywhere?
   var action = {
     type: actionTypes.CONNECTION_OCCURRED,
     meta: { platform }
@@ -24260,7 +24300,7 @@ function connectionOccured({ subscription, connection, error }, platform) {
  * @param {Object} $0.subscription A subscription object. Contains what services to subscribe to.
  * @param {Object} $0.userInfo An object representing the user information.
  * @param {Object} $0.connection A connection object. Information about how to connect to the backend services.
- * @param {string} [$0.error] An error message. Only present if an error occured.
+ * @param {string} [$0.error] An error message. Only present if an error occurred.
  * @param {string} platform The backend platform we are currently on.
  * @param {boolean} isSSO Boolean for whether the current connection scenario is SSO or not.
  * @return {Object} A flux standard action.
@@ -24363,7 +24403,7 @@ function disconnectFinished({ error, reason } = {}) {
  *
  * @method resubscribeFinished
  * @param {Object} $0
- * @param {string} [$0.error] An error message. Only present if an error occured.
+ * @param {string} [$0.error] An error message. Only present if an error occurred.
  * @param {string} [$0.attemptNum] The attempt number of this resubscription.
  * @param {string} platform The backend platform we are currently on.
  * @return {Object} A flux standard action.
@@ -24510,7 +24550,7 @@ function setCredentials({ username, password, authname, hmacToken, bearerAccessT
  * @param {Object} $0
  * @param {Object} $0.userInfo An object representing the user information.
  * @param {Object} $0.connection A connection object. Information about how to connect to the backend services.
- * @param {string} [$0.error] An error message. Only present if an error occured.
+ * @param {string} [$0.error] An error message. Only present if an error occurred.
  * @param {string} platform The backend platform we are currently on.
  * @return {Object} A flux standard action.
  */
@@ -24816,7 +24856,7 @@ function api({ dispatch, getState }) {
      * @returns {Object} connection The connection state.
      * @returns {boolean} connection.isConnected Whether the authenticated user is currently connected.
      * @returns {boolean} connection.isPending Whether the authenticated user's connection is currently pending.
-     * @returns {Object} connection.error The error object if an error occured.
+     * @returns {Object} connection.error The error object if an error occurred.
      * @returns {string} connection.error.message The error message.
      * @returns {string} connection.error.stack The stack trace of the error.
      */
@@ -25125,7 +25165,7 @@ reducers[actionTypes.CONNECT_FINISHED] = {
   }
 };
 
-// On connection occured, store the connection information into state, but do
+// On connection occurred, store the connection information into state, but do
 // not update any status state. The connection has not yet finished.
 reducers[actionTypes.CONNECTION_OCCURRED] = {
   next(state, action) {
@@ -26101,6 +26141,11 @@ const log = _logs.logManager.getLogger('AUTH');
 
 // Libraries.
 function* subscribe(connection, credentials, extras = {}) {
+  /*
+   * TODO: Clean-up / fix the function signature. The requestOptions (eg. headers)
+   *    are mixed with the API options (eg. client correlator) when they're used
+   *    for unrelated purposes.
+   */
   let subscribeType = connection.isAnonymous ? 'anonymous' : 'user';
   let requestOptions = {};
   requestOptions.method = 'POST';
@@ -26799,8 +26844,9 @@ function* validateCallState(callId, expected) {
  * However, if only SDES is available, don't disable it.
  * @method sanitizeSdesFromSdp
  * @param {Object} newSdp The sdp so far (could have been modified by previous handlers).
- * @param {RTCSdpType} info Information about the session description.
+ * @param {Object} info Information about the session description.
  * @param {RTCSdpType} info.type The session description's type.
+ * @param {string} info.step The step that will occur after the Pipeline is run.
  * @param {string} info.endpoint Which end of the connection created the SDP.
  * @param {Object} originalSdp The sdp in its initial state.
  * @return {Object} The sanitized sdp with crypto removed (if fingerprint exists)
@@ -27100,7 +27146,16 @@ function makeCallFinish(id, params) {
 }
 
 function makeAnonymousCall(id, params) {
-  return callActionHelper(actionTypes.MAKE_ANONYMOUS_CALL, id, params);
+  return {
+    type: actionTypes.MAKE_ANONYMOUS_CALL,
+    payload: {
+      id,
+      callee: params.callee,
+      credentials: params.credentials,
+      mediaConstraints: params.mediaConstraints,
+      callOptions: params.callOptions
+    }
+  };
 }
 
 function makeAnonymousCallFinish(id, params) {
@@ -27302,10 +27357,13 @@ function pendingOperation(id, params) {
   return callActionHelper(actionTypes.PENDING_OPERATION, id, params);
 }
 
-function getAvailableCodecs(params) {
+function getAvailableCodecs(params, deferred) {
   const action = {
     type: actionTypes.GET_AVAILABLE_CODECS,
-    payload: (0, _extends3.default)({}, params)
+    payload: (0, _extends3.default)({}, params),
+    meta: {
+      deferred
+    }
   };
   return action;
 }
@@ -27440,9 +27498,15 @@ var _normalization = __webpack_require__("../../packages/kandy/src/call/utils/no
 
 var _selectors2 = __webpack_require__("../../packages/kandy/src/auth/interface/selectors.js");
 
+var _actions2 = __webpack_require__("../../packages/kandy/src/config/interface/actions.js");
+
 var _uuid = __webpack_require__("../../node_modules/uuid/dist/esm-browser/index.js");
 
 var _fp = __webpack_require__("../../node_modules/lodash/fp.js");
+
+var _pDefer = __webpack_require__("../../node_modules/p-defer/index.js");
+
+var _pDefer2 = _interopRequireDefault(_pDefer);
 
 var _constants = __webpack_require__("../../packages/kandy/src/call/constants.js");
 
@@ -27450,9 +27514,11 @@ var _logs = __webpack_require__("../../packages/kandy/src/logs/index.js");
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
-// Libraries.
 // Call plugin.
 const log = _logs.logManager.getLogger('CALL');
+
+// Libraries.
+
 
 // Other plugins.
 function callAPI({ dispatch, getState }) {
@@ -28532,8 +28598,9 @@ function callAPI({ dispatch, getState }) {
     /**
      * Retrieve the list of available and supported codecs based on the browser's capabilities for sending media.
      *
-     * The SDK emits a {@link call.event:call:availableCodecs call:availableCodecs} event
-     *  upon retrieving the list of available and supported codecs.
+     * This API will return a promise which, when resolved, it will contain the list of available and supported codecs.
+     * In addition, the SDK emits a {@link call.event:call:availableCodecs call:availableCodecs} event
+     *  upon retrieving that list of codecs.
      *
      * This API is a wrapper for the static method {@link https://w3c.github.io/webrtc-pc/#dom-rtcrtpsender-getcapabilities RTCRtpSender.getCapabilities()}.
      *  Firefox browser does not currently support this method. Therefore, this API will not work on Firefox.
@@ -28548,12 +28615,40 @@ function callAPI({ dispatch, getState }) {
     getAvailableCodecs(kind) {
       log.debug(`${_logs.API_LOG_TAG}call.getAvailableCodecs, kind: ${kind}`);
 
-      // TODO: Remove this once parameter validation is available for APIs
-      if (kind !== 'audio' && kind !== 'video') {
-        log.info(`Cannot retrieve codecs for media kind ${kind}. Only 'audio' or 'video' kind supported.`);
-        return;
-      }
-      dispatch(_actions.callActions.getAvailableCodecs({ kind }));
+      const deferredResult = (0, _pDefer2.default)();
+
+      // Trigger the action, but include a defered result which caller can use when
+      // we actually obtain the data (i.e. list of codecs) from WebRTCManager.
+      dispatch(_actions.callActions.getAvailableCodecs({ kind }, deferredResult));
+
+      return deferredResult.promise;
+    },
+
+    /**
+     * Set {@link call.SdpHandlerFunction SDP Handler Functions} that will be run as part of a pipeline for all future calls.
+     *  This will replace any SDP Handlers that were previously set.
+     *
+     * SDP handlers can be used to make modifications to the SDP (e.g., removing certain codecs)
+     *  before they are processed or sent to the other side.
+     *
+     * This is an advanced feature, changing the SDP handlers mid-call may cause
+     *  unexpected behaviour in future call operations for that call.
+     *
+     * @public
+     * @static
+     * @memberof call
+     * @requires call
+     * @requires callMe
+     * @param {Array<call.SdpHandlerFunction>} sdpHandlers The list of SDP handler functions to modify SDP.
+     */
+    setSdpHandlers(sdpHandlers) {
+      log.debug(`${_logs.API_LOG_TAG}call.setSdpHandlers, sdpHandlers:`, sdpHandlers);
+
+      const config = (0, _selectors.getOptions)(getState());
+      const options = {
+        removeH264Codecs: config.removeH264Codecs
+      };
+      dispatch((0, _actions2.setSdpHandlers)(sdpHandlers, options));
     },
 
     /**
@@ -28577,6 +28672,7 @@ function callAPI({ dispatch, getState }) {
      * @public
      * @static
      * @memberof call
+     * @requires callMe
      * @requires call
      * @type {Object}
      * @property {string} INITIATING The (outgoing) call is being started. While in this state, no Call operations can be performed until Call gets into Initiated state.
@@ -28712,6 +28808,10 @@ Object.defineProperty(exports, "__esModule", {
   value: true
 });
 
+var _objectWithoutProperties2 = __webpack_require__("../../node_modules/babel-runtime/helpers/objectWithoutProperties.js");
+
+var _objectWithoutProperties3 = _interopRequireDefault(_objectWithoutProperties2);
+
 var _extends2 = __webpack_require__("../../node_modules/babel-runtime/helpers/extends.js");
 
 var _extends3 = _interopRequireDefault(_extends2);
@@ -28779,6 +28879,11 @@ function anonymousAPI(otherApi) {
          * @param {call.MediaConstraint} [callOptions.videoOptions.height] The height of the video.
          * @param {call.MediaConstraint} [callOptions.videoOptions.width] The width of the video.
          * @param {call.MediaConstraint} [callOptions.videoOptions.frameRate] The frame rate of the video.
+         * @param {Boolean} [callOptions.screen=false] Whether the call should have screenshare on start.
+         * @param {Object} [callOptions.screenOptions] Options for configuring the call's screenShare.
+         * @param {call.MediaConstraint} [callOptions.screenOptions.height] The height of the screenShare.
+         * @param {call.MediaConstraint} [callOptions.screenOptions.width] The width of the screenShare.
+         * @param {call.MediaConstraint} [callOptions.screenOptions.frameRate] The frame rate of the screenShare.
          * @param {string} [callOptions.displayName] Custom display name to be provided to the destination. Only used with token-less anonymous calls. Not supported in all environments and may use default display name.
          * @param {Array<call.CustomParameter>} [callOptions.customParameters] Custom SIP header parameters for the SIP backend
          * @return {string} Id of the outgoing call.
@@ -28814,9 +28919,25 @@ function anonymousAPI(otherApi) {
          * let callId = client.call.makeAnonymous(callee, credentials, callOptions);
          */
         makeAnonymous(callee, credentials = {}, callOptions = {}) {
-          // Create our own call ID for storing in state.
-          const callId = (0, _uuid.v4)();
-          dispatch(_actions.callActions.makeAnonymousCall(callId, { callee, credentials, callOptions }));
+          // Separate the media constraints from the callOptions.
+          const { audio, audioOptions, video, videoOptions, screen, screenOptions } = callOptions,
+                options = (0, _objectWithoutProperties3.default)(callOptions, ['audio', 'audioOptions', 'video', 'videoOptions', 'screen', 'screenOptions']);
+
+          // Massage the media constraints into a gUM-like format.
+          //    This is done the same way as the make API does it.
+          const mediaConstraints = {
+            audio: audio && !(0, _fp.isEmpty)(audioOptions) ? audioOptions : audio,
+            video: video && !(0, _fp.isEmpty)(videoOptions) ? videoOptions : video,
+            screenShare: screen && !(0, _fp.isEmpty)(screenOptions) ? screenOptions : screen
+
+            // Create our own call ID for storing in state.
+          };const callId = (0, _uuid.v4)();
+          dispatch(_actions.callActions.makeAnonymousCall(callId, {
+            callee,
+            credentials,
+            mediaConstraints,
+            callOptions: options
+          }));
           return callId;
         }
       })
@@ -29008,7 +29129,11 @@ function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { de
  * @static
  * @typedef {Object} SdpHandlerInfo
  * @memberof call
+ * @property {string} callId The id corresponding to the call for which the handler is being run.
  * @property {RTCSdpType} type The session description's type.
+ * @property {string} step The step that will occur after the SDP Handlers are run.
+ *    Will be either 'set' (the SDP will be set locally) or 'send' (the SDP will
+ *    be sent to the remote endpoint).
  * @property {string} endpoint Which end of the connection created the SDP.
  */
 
@@ -29051,6 +29176,10 @@ function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { de
  * @property {string} kind The kind of Track this is (audio, video).
  * @property {string} label The label of the device this Track uses.
  * @property {boolean} muted Indicator on whether this Track is muted or not.
+ * @property {boolean} sourceMuted Indicator on whether this Track is receiving media from its source or not.
+ *    When true, the Track can be considered removed. This indicator is affected by actions outside the
+ *    control of the SDK, such as the remote endpoint of a Call stopping to send media for a remote Track,
+ *    or the browser temporarily disabling the SDK's access to a local Track's source.
  * @property {string} state The state of this Track. Can be 'live' or 'ended'.
  * @property {string} streamId The ID of the Media Stream that includes this Track.
  */
@@ -29736,7 +29865,7 @@ callEvents[actionTypes.REMOVE_MEDIA_FINISH] = (action, params) => {
 };
 
 /*
- * Currently the RENEGOTIATE operation is only triggered after an unsolicted removal of media,
+ * Currently the RENEGOTIATE operation is only triggered after an unsolicited removal of media,
  *  hence the CALL_REMOVED_MEDIA event handler is used
  */
 callEvents[actionTypes.RENEGOTIATE_FINISH] = (action, params) => {
@@ -29745,7 +29874,7 @@ callEvents[actionTypes.RENEGOTIATE_FINISH] = (action, params) => {
     transition: _constants.OP_TRANSITIONS.FINISH,
     isLocal: action.payload.local
   })), callEventHandler(eventTypes.CALL_REMOVED_MEDIA, action, {
-    loca: action.payload.local,
+    local: action.payload.local,
     tracks: action.payload.tracks,
     error: action.payload.error
   })];
@@ -30908,15 +31037,9 @@ var _actions = __webpack_require__("../../packages/kandy/src/events/interface/ac
 
 var _actions2 = __webpack_require__("../../packages/kandy/src/config/interface/actions.js");
 
-var _utils = __webpack_require__("../../packages/kandy/src/callstack/utils/index.js");
-
 var _logs = __webpack_require__("../../packages/kandy/src/logs/index.js");
 
-var _utils2 = __webpack_require__("../../packages/kandy/src/common/utils.js");
-
-var _codecRemover = __webpack_require__("../../packages/fcs/src/js/sdp/codecRemover.js");
-
-var _codecRemover2 = _interopRequireDefault(_codecRemover);
+var _utils = __webpack_require__("../../packages/kandy/src/common/utils.js");
 
 var _fp = __webpack_require__("../../node_modules/lodash/fp.js");
 
@@ -30933,9 +31056,6 @@ function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { de
 // Libraries.
 
 
-// Helpers.
-
-
 // Other plugins.
 const log = _logs.logManager.getLogger('CALL');
 
@@ -30947,7 +31067,7 @@ const log = _logs.logManager.getLogger('CALL');
  * @memberof config
  * @instance
  * @param {Object} call The call configuration object.
- * @param {string} [call.sdpSemantics='unified-plan'] The sdpSemantics to use (`'unified-plan'` or `'plan-b'`).
+ * @param {string} [call.sdpSemantics='plan-b'] The sdpSemantics to use (`'unified-plan'` or `'plan-b'`).
  * @param {Array<call.IceServer>} [call.iceServers] The list of ICE servers to be used for calls.
  * @param {number} [call.iceCollectionDelay=1000] Time, in milliseconds, to delay in between
  *    ICE candidate checks. If ICE collection does not complete normally, the SDK will check
@@ -30969,53 +31089,56 @@ const log = _logs.logManager.getLogger('CALL');
  * @param {boolean} [call.removeBundling=false] Whether to remove a=group attributes to stop media bundling from incoming and outgoing SDP messages.
  */
 
+/**
+ * @private
+ * @name config.call
+ * @memberof config
+ * @instance
+ * @param {string} [trickleIceMode='NONE'] The Trickle ICE method to use for calls. Currently, no mode is supported.
+ * @param {boolean} [normalizeDestination=true] Specifies whether or not SIP address normalization will be applied.
+ */
+
 
 // Parse and/or Validate
+
+
+// Helpers.
 // Call plugin.
 const defaultOptions = {
-  // The list of TURN/STUN servers to use.
-  iceServers: [],
-  // Time in ms to what between checking ICE candidates during negotiation.
-  iceCollectionDelay: 1000,
-  // The maximum time, in ms, to wait before timing out ICE collection.
-  maxIceTimeout: 3000,
   // TODO: Remove this once all the browsers use unified-plan
   sdpSemantics: 'plan-b',
-  // Whether the SDK should fetch turn credentials.
-  serverTurnCredentials: true,
-  // Trickle ICE method to use for calls.
-  trickleIceMode: 'NONE',
-  // SDP handlers to be included in the pipeline for every operation.
-  sdpHandlers: [],
-  // filter out H264 Codec
-  removeH264Codecs: true,
-  // Set this to false to bypass sip address normalization
-  normalizeDestination: true,
-  earlyMedia: false,
+  iceServers: [],
+  iceCollectionDelay: 1000,
+  maxIceTimeout: 3000,
   // Defaults set by the Webrtc stack:
   //    iceCollectionCheck: Has at least one relay candidate.
+  serverTurnCredentials: true,
+  sdpHandlers: [],
+  removeH264Codecs: true,
+  earlyMedia: false,
   resyncOnConnect: false,
-  // Set this to true to force all calls to be anchored to the MediaBroker instead
-  // of peer to peer.
   mediaBrokerOnly: false,
-  // Remove a=group attributes to stop media bundling
-  removeBundling: false
+  removeBundling: false,
+  trickleIceMode: 'NONE',
+  normalizeDestination: true
 
   // config validation
-};const v8nSdpSemantics = _validation.val.passesAnyOf(_validation.val.exact('unified-plan'), _validation.val.exact('plan-b'));
-const v8nValidation = _validation.val.schema({
-  sdpSemantics: v8nSdpSemantics,
-  iceServers: _validation.val.array(),
-  iceCollectionDelay: _validation.val.number(),
-  maxIceTimeout: _validation.val.number(),
-  iceCollectionCheck: _validation.val.optional(_validation.val.function()),
-  serverTurnCredentials: _validation.val.boolean(),
-  sdpHandlers: _validation.val.array(),
-  removeH264Codecs: _validation.val.boolean(),
-  earlyMedia: _validation.val.boolean(),
-  resyncOnConnect: _validation.val.boolean(),
-  mediaBrokerOnly: _validation.val.boolean(),
-  removeBundling: _validation.val.boolean()
+};const v8nValidation = _validation.validation.schema({
+  sdpSemantics: (0, _validation.enums)(['unified-plan', 'plan-b']),
+  iceServers: _validation.validation.array(),
+  iceCollectionDelay: _validation.validation.positive(),
+  maxIceTimeout: _validation.validation.positive(),
+  // Defaults set by the Webrtc stack:
+  //    iceCollectionCheck: v8n.optional(v8n.function()),
+  serverTurnCredentials: _validation.validation.boolean(),
+  sdpHandlers: _validation.validation.array(),
+  removeH264Codecs: _validation.validation.boolean(),
+  earlyMedia: _validation.validation.boolean(),
+  resyncOnConnect: _validation.validation.boolean(),
+  mediaBrokerOnly: _validation.validation.boolean(),
+  removeBundling: _validation.validation.boolean(),
+  trickleIceMode: _validation.validation.string(),
+  normalizeDestination: _validation.validation.boolean()
 });
 const parseOptions = (0, _validation.parse)('call', v8nValidation);
 
@@ -31033,7 +31156,7 @@ function callsLink(options = {}) {
     delete options.iceserver;
   }
 
-  options = (0, _utils2.mergeValues)(defaultOptions, options);
+  options = (0, _utils.mergeValues)(defaultOptions, options);
   parseOptions(options);
 
   function* init({ webRTC }) {
@@ -31048,35 +31171,19 @@ function callsLink(options = {}) {
     yield (0, _effects.put)((0, _actions2.update)(options, _interfaceNew2.default.name));
     yield (0, _effects.put)((0, _actions.mapEvents)(_events2.default));
 
-    /*
-     * Set SDP handlers to be used for every operation:
-     *
-     * 1. Application provided SDP handlers.
-     *
-     * 2. Disable DTLS-SDES crypto method (ie. delete the line) if there's a better
-     *    crypto method enabled. WebRTC only allows one method to be enabled.
-     *    This is needed for interoperability with non-browser endpoints that include
-     *    SDES as a fallback method.
-     *
-     * 3. [optional] Disable H264 Codecs for video calls, used to reduce SDP size
-     *
-     * 4. Modify sdp and add bandwidth limits on it if bandwidth controls are provided.
-     */
-    let sdpHandlers = options.sdpHandlers;
-    if (options.removeH264Codecs) {
-      sdpHandlers.push((0, _codecRemover2.default)(['H264']));
-    }
-    sdpHandlers.push(_utils.sanitizeSdesFromSdp);
-    sdpHandlers.push(_utils.modifySdpBandwidth);
+    // Update the SDP handlers in the config (user provided + some of our own)
+    const sdpHandlerOptions = {
+      removeH264Codecs: options.removeH264Codecs
+    };
+    yield (0, _effects.put)((0, _actions2.setSdpHandlers)(options.sdpHandlers, sdpHandlerOptions));
 
     // Dependencies to be provided to every call saga.
     const deps = {
-      webRTC: webRTC.managers,
-      sdpHandlers
+      webRTC: webRTC.managers
 
       // Wrap the call sagas in a function that provides them with the webRTC stack.
     };const wrappedSagas = (0, _fp.values)(sagas).map(saga => {
-      return (0, _utils2.autoRestart)(() => saga(deps));
+      return (0, _utils.autoRestart)(() => saga(deps));
     });
 
     // Run all of the sagas.
@@ -32089,7 +32196,6 @@ const log = _logs.logManager.getLogger('CALL');
  * @method createCall
  * @param {Object} deps             Dependencies to be injected.
  * @param {Object} deps.webRTC      The WebRTC stack.
- * @param {Array}  deps.sdpHandlers SDP handlers.
  */
 
 
@@ -32112,7 +32218,6 @@ function* createCall(deps) {
  * @method answerCall
  * @param {Object} deps             Dependencies to be injected.
  * @param {Object} deps.webRTC      The WebRTC stack.
- * @param {Array}  deps.sdpHandlers SDP handlers.
  */
 function* answerCallEntry(deps) {
   yield (0, _effects.takeEvery)(actionTypes.ANSWER_CALL, _establish.answerCall, (0, _extends3.default)({}, deps, { requests }));
@@ -32123,7 +32228,6 @@ function* answerCallEntry(deps) {
  * @method rejectCall
  * @param {Object} deps             Dependencies to be injected.
  * @param {Object} deps.webRTC      The WebRTC stack.
- * @param {Array}  deps.sdpHandlers SDP handlers.
  */
 function* rejectCallEntry(deps) {
   yield (0, _effects.takeEvery)(actionTypes.REJECT_CALL, _establish.rejectCall, (0, _extends3.default)({}, deps, { requests }));
@@ -32134,7 +32238,6 @@ function* rejectCallEntry(deps) {
  * @method addMedia
  * @param {Object} deps             Dependencies to be injected.
  * @param {Object} deps.webRTC      The WebRTC stack.
- * @param {Array}  deps.sdpHandlers SDP handlers.
  */
 function* addMediaEntry(deps) {
   yield (0, _effects.takeEvery)(actionTypes.ADD_MEDIA, midcallSagas.addMedia, (0, _extends3.default)({}, deps, { requests }));
@@ -32145,7 +32248,6 @@ function* addMediaEntry(deps) {
  * @method removeMedia
  * @param {Object} deps             Dependencies to be injected.
  * @param {Object} deps.webRTC      The WebRTC stack.
- * @param {Array}  deps.sdpHandlers SDP handlers.
  */
 function* removeMediaEntry(deps) {
   yield (0, _effects.takeEvery)(actionTypes.REMOVE_MEDIA, midcallSagas.removeMedia, (0, _extends3.default)({}, deps, { requests }));
@@ -32156,7 +32258,6 @@ function* removeMediaEntry(deps) {
  * @method addMedia
  * @param {Object} deps             Dependencies to be injected.
  * @param {Object} deps.webRTC      The WebRTC stack.
- * @param {Array}  deps.sdpHandlers SDP handlers.
  */
 function* addBasicMediaEntry(deps) {
   yield (0, _effects.takeEvery)(actionTypes.ADD_BASIC_MEDIA, midcallSagas.addBasicMedia, (0, _extends3.default)({}, deps, { requests }));
@@ -32167,7 +32268,6 @@ function* addBasicMediaEntry(deps) {
  * @method removeMedia
  * @param {Object} deps             Dependencies to be injected.
  * @param {Object} deps.webRTC      The WebRTC stack.
- * @param {Array}  deps.sdpHandlers SDP handlers.
  */
 function* removeBasicMediaEntry(deps) {
   yield (0, _effects.takeEvery)(actionTypes.REMOVE_BASIC_MEDIA, midcallSagas.removeBasicMedia, (0, _extends3.default)({}, deps, { requests }));
@@ -32178,7 +32278,6 @@ function* removeBasicMediaEntry(deps) {
  * @method checkRenegotiationFlagEntry
  * @param {Object} deps             Dependencies to be injected.
  * @param {Object} deps.webRTC      The WebRTC stack.
- * @param {Array}  deps.sdpHandlers SDP handlers.
  */
 function* checkRenegotiationFlagEntry(deps) {
   yield (0, _effects.takeEvery)(webrtcActionTypes.SESSION_TRACK_ENDED, midcallSagas.checkRenegotiationFlag, (0, _extends3.default)({}, deps, { requests }));
@@ -32189,7 +32288,6 @@ function* checkRenegotiationFlagEntry(deps) {
  * @method renegotiationEntry
  * @param {Object} deps             Dependencies to be injected.
  * @param {Object} deps.webRTC      The WebRTC stack.
- * @param {Array}  deps.sdpHandlers SDP handlers.
  */
 function* renegotiationEntry(deps) {
   yield (0, _effects.takeEvery)(actionTypes.RENEGOTIATE, midcallSagas.renegotiate, (0, _extends3.default)({}, deps, { requests }));
@@ -32200,7 +32298,6 @@ function* renegotiationEntry(deps) {
  * @method sendDTMF
  * @param {Object} deps             Dependencies to be injected.
  * @param {Object} deps.webRTC      The WebRTC stack.
- * @param {Array}  deps.sdpHandlers SDP handlers.
  */
 function* sendDtmfEntry(deps) {
   /**
@@ -32221,7 +32318,6 @@ function* sendDtmfEntry(deps) {
  * @method incomingCallNotification
  * @param {Object} deps             Dependencies to be injected.
  * @param {Object} deps.webRTC      The WebRTC stack.
- * @param {Array}  deps.sdpHandlers SDP handlers.
  */
 function* incomingCallNotification(deps) {
   /**
@@ -32265,7 +32361,6 @@ function* incomingCallNotification(deps) {
  * @method sessionProgressNotification
  * @param {Object} deps             Dependencies to be injected.
  * @param {Object} deps.webRTC      The WebRTC stack.
- * @param {Array}  deps.sdpHandlers SDP handlers.
  */
 function* sessionProgressNotification(deps) {
   function progressPattern(action) {
@@ -32302,7 +32397,6 @@ function* sessionProgressNotification(deps) {
  * @method callStatusNotification
  * @param {Object} deps             Dependencies to be injected.
  * @param {Object} deps.webRTC      The WebRTC stack.
- * @param {Array}  deps.sdpHandlers SDP handlers.
  */
 function* callStatusNotification(deps) {
   function statusUpdatePattern(status) {
@@ -32346,7 +32440,6 @@ function* callStatusNotification(deps) {
  * @method callCancelNotification
  * @param {Object} deps             Dependencies to be injected.
  * @param {Object} deps.webRTC      The WebRTC stack.
- * @param {Array}  deps.sdpHandlers SDP handlers.
  */
 function* callCancelNotification(deps) {
   // Redux-saga take pattern.
@@ -32411,7 +32504,6 @@ function* callCancelNotification(deps) {
  * @method receiveRemoteOffer
  * @param {Object} deps             Dependencies to be injected.
  * @param {Object} deps.webRTC      The WebRTC stack.
- * @param {Array}  deps.sdpHandlers SDP handlers.
  */
 function* receiveRemoteOffer(deps) {
   /**
@@ -32450,7 +32542,6 @@ function* receiveRemoteOffer(deps) {
  * @method receiveRemoteAnswer
  * @param {Object} deps             Dependencies to be injected.
  * @param {Object} deps.webRTC      The WebRTC stack.
- * @param {Array}  deps.sdpHandlers SDP handlers.
  */
 function* receiveRemoteAnswer(deps) {
   /**
@@ -32493,7 +32584,6 @@ function* receiveRemoteAnswer(deps) {
  * @method endCall
  * @param {Object} deps             Dependencies to be injected.
  * @param {Object} deps.webRTC      The WebRTC stack.
- * @param {Array}  deps.sdpHandlers SDP handlers.
  */
 function* endCallEntry(deps) {
   yield (0, _effects.takeEvery)(actionTypes.END_CALL, midcallSagas.endCall, (0, _extends3.default)({}, deps, { requests }));
@@ -32504,7 +32594,6 @@ function* endCallEntry(deps) {
  * @method ignoreCall
  * @param {Object} deps             Dependencies to be injected.
  * @param {Object} deps.webRTC      The WebRTC stack.
- * @param {Array}  deps.sdpHandlers SDP handlers.
  */
 function* ignoreCallEntry(deps) {
   yield (0, _effects.takeEvery)(actionTypes.IGNORE_CALL, _establish.ignoreCall, (0, _extends3.default)({}, deps));
@@ -32518,7 +32607,6 @@ function* ignoreCallEntry(deps) {
  * @method holdCall
  * @param {Object} deps             Dependencies to be injected.
  * @param {Object} deps.webRTC      The WebRTC stack.
- * @param {Array}  deps.sdpHandlers SDP handlers.
  */
 function* holdCall(deps) {
   yield (0, _effects.takeEvery)(actionTypes.CALL_HOLD, midcallSagas.offerInactiveMedia, (0, _extends3.default)({}, deps, { requests }));
@@ -32532,7 +32620,6 @@ function* holdCall(deps) {
  * @method unholdCall
  * @param {Object} deps             Dependencies to be injected.
  * @param {Object} deps.webRTC      The WebRTC stack.
- * @param {Array}  deps.sdpHandlers SDP handlers.
  */
 function* unholdCall(deps) {
   yield (0, _effects.takeEvery)(actionTypes.CALL_UNHOLD, midcallSagas.offerFullMedia, (0, _extends3.default)({}, deps, { requests }));
@@ -32543,7 +32630,6 @@ function* unholdCall(deps) {
  * @method sendCustomParameters
  * @param {Object} deps             Dependencies to be injected.
  * @param {Object} deps.webRTC      The WebRTC stack.
- * @param {Array}  deps.sdpHandlers SDP handlers.
  */
 function* sendCustomParameters(deps) {
   yield (0, _effects.takeEvery)(actionTypes.SEND_CUSTOM_PARAMETERS, midcallSagas.sendCustomParameters, (0, _extends3.default)({}, deps, { requests }));
@@ -32555,7 +32641,6 @@ function* sendCustomParameters(deps) {
  * @method callAudit
  * @param {Object} deps             Dependencies to be injected.
  * @param {Object} deps.webRTC      The WebRTC stack.
- * @param {Array}  deps.sdpHandlers SDP handlers.
  */
 function* callAudit(deps) {
   const actionTypesToDoAuditOn = [actionTypes.ANSWER_CALL, actionTypes.CALL_ACCEPTED, actionTypes.MAKE_CALL_FINISH];
@@ -32574,7 +32659,6 @@ function* callAudit(deps) {
  * We need to check the session status of all active calls upon websocket connection to ensure all call states are up to date
  * @param {Object} deps             Dependencies to be injected.
  * @param {Object} deps.webRTC      The WebRTC stack.
- * @param {Array}  deps.sdpHandlers SDP handlers.
  */
 function* getSessionsOnWSConnect(deps) {
   yield (0, _effects.takeEvery)(connectivityActionTypes.WS_CONNECT_FINISHED, _support2.getSessions, (0, _extends3.default)({}, deps, { requests }));
@@ -32585,7 +32669,6 @@ function* getSessionsOnWSConnect(deps) {
  * @method getStats
  * @param {Object} deps             Dependencies to be injected.
  * @param {Object} deps.webRTC      The WebRTC stack.
- * @param {Array}  deps.sdpHandlers SDP handlers.
  */
 function* getStatsEntry(deps) {
   yield (0, _effects.takeEvery)(actionTypes.GET_STATS, midcallSagas.getStats, deps);
@@ -32610,7 +32693,6 @@ function* setTurnCredentials() {
  * @method forwardCallEntry
  * @param {Object} deps             Dependencies to be injected.
  * @param {Object} deps.webRTC      The WebRTC stack.
- * @param {Array}  deps.sdpHandlers SDP handlers.
  */
 function* forwardCallEntry(deps) {
   yield (0, _effects.takeEvery)(actionTypes.FORWARD_CALL, _establish.forwardCall, (0, _extends3.default)({}, deps, { requests }));
@@ -32621,7 +32703,6 @@ function* forwardCallEntry(deps) {
  * @method consultativeTransferEntry
  * @param {Object} deps             Dependencies to be injected.
  * @param {Object} deps.webRTC      The WebRTC stack.
- * @param {Array}  deps.sdpHandlers SDP handlers.
  */
 function* consultativeTransferEntry(deps) {
   yield (0, _effects.takeEvery)(actionTypes.CONSULTATIVE_TRANSFER, midcallSagas.consultativeTransfer, (0, _extends3.default)({}, deps, { requests }));
@@ -32632,7 +32713,6 @@ function* consultativeTransferEntry(deps) {
  * @method directTransferEntry
  * @param {Object} deps             Dependencies to be injected.
  * @param {Object} deps.webRTC      The WebRTC stack.
- * @param {Array}  deps.sdpHandlers SDP handlers.
  */
 function* directTransferEntry(deps) {
   yield (0, _effects.takeEvery)(actionTypes.DIRECT_TRANSFER, midcallSagas.directTransfer, (0, _extends3.default)({}, deps, { requests }));
@@ -32643,7 +32723,6 @@ function* directTransferEntry(deps) {
  * @method joinEntry
  * @param {Object} deps             Dependencies to be injected.
  * @param {Object} deps.webRTC      The WebRTC stack.
- * @param {Array}  deps.sdpHandlers SDP handlers.
  */
 function* joinEntry(deps) {
   yield (0, _effects.takeEvery)(actionTypes.JOIN, midcallSagas.join, (0, _extends3.default)({}, deps, { requests }));
@@ -32917,22 +32996,43 @@ var _effects = __webpack_require__("../../node_modules/redux-saga/dist/redux-sag
 
 var _kandyWebrtc = __webpack_require__("../../packages/webrtc/src/interface/index.js");
 
+var _validation = __webpack_require__("../../packages/kandy/src/common/validation/index.js");
+
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 function _interopRequireWildcard(obj) { if (obj && obj.__esModule) { return obj; } else { var newObj = {}; if (obj != null) { for (var key in obj) { if (Object.prototype.hasOwnProperty.call(obj, key)) newObj[key] = obj[key]; } } newObj.default = obj; return newObj; } }
+
+// Libraries.
+const log = _logs.logManager.getLogger('CALLME');
+
+// config validation
+
+
+// Parse and/or Validate
+
 
 // Helpers.
 
 
 // Other plugins
 // Call plugin.
-const log = _logs.logManager.getLogger('CALLME');
+const v8nValidation = _validation.validation.schema({
+  sdpSemantics: (0, _validation.enums)(['unified-plan', 'plan-b']),
+  iceServers: _validation.validation.optional(_validation.validation.array()),
+  iceCollectionDelay: _validation.validation.positive(),
+  maxIceTimeout: _validation.validation.positive(),
+  iceCollectionCheck: _validation.validation.optional(_validation.validation.function()),
+  serverTurnCredentials: _validation.validation.boolean(),
+  sdpHandlers: _validation.validation.optional(_validation.validation.array()),
+  removeH264Codecs: _validation.validation.boolean(),
+  earlyMedia: _validation.validation.boolean(),
+  resyncOnConnect: _validation.validation.boolean(),
+  mediaBrokerOnly: _validation.validation.boolean()
+});
+const parseOptions = (0, _validation.parse)('call', v8nValidation);
 
-// TODO: Document newCallMePlugin options
-
-
-// Libraries.
 function newCallMePlugin(options = {}) {
+  parseOptions(options);
   const { mediaDevices, peerConnection } = (0, _kandyWebrtc.getWebRTCSupportCapabilities)();
   if (!mediaDevices || !peerConnection) {
     log.warn('Calls are not supported on this platform due to lack of WebRTC support. CallMe APIs will not be available.');
@@ -33097,7 +33197,7 @@ function* makeAnonymousCall(deps, action) {
   // Make the call normally after we're subscribed.
   yield (0, _effects.put)(_actions.callActions.makeCall(action.payload.id, {
     participantAddress: isTokenBased ? callee : (0, _normalization.normalizeSipUri)(callee),
-    mediaConstraints: action.payload.callOptions,
+    mediaConstraints: action.payload.mediaConstraints,
     isAnonymous: true,
     account,
     from: isTokenBased ? caller : (0, _normalization.normalizeSipUri)(caller),
@@ -33150,7 +33250,6 @@ function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { de
  * @method makeAnonymousCallEntry
  * @param {Object} deps             Dependencies to be injected.
  * @param {Object} deps.webRTC      The WebRTC stack.
- * @param {Array}  deps.sdpHandlers SDP handlers.
  */
 /**
  * Call saga index.
@@ -33988,7 +34087,6 @@ var _effects = __webpack_require__("../../node_modules/redux-saga/dist/redux-sag
  * @param {Object}   deps.webRTC   The WebRTC stack.
  * @param {Object}   deps.requests The set of platform-specific signalling functions.
  * @param {Function} deps.requests.createSession "Make call" signalling function.
- * @param {Array}    deps.sdpHandlers The list of SDP handlers to run.
  * @param {Object}   action        An action of type `MAKE_CALL`.
  */
 
@@ -34029,7 +34127,7 @@ function* makeCall(deps, action) {
     removeBundling: callOptions.removeBundling
   });
 
-  // An error occured while trying to setup the WebRTC portion of the call.
+  // An error occurred while trying to setup the WebRTC portion of the call.
   //    Report the error and mark the call as ended.
   if (error) {
     log.info(`Failed to initiate call. Changing to ${_constants.CALL_STATES.ENDED}.`);
@@ -34115,7 +34213,6 @@ function* makeCall(deps, action) {
  * @param {Object}   deps.webRTC   The WebRTC stack.
  * @param {Object}   deps.requests The set of platform-specific signalling functions.
  * @param {Function} deps.requests.answerSession "Answer call" signalling function.
- * @param {Array}    deps.sdpHandlers The list of SDP handlers to run.
  * @param {Object}   action        An "answer call" action.
  */
 
@@ -34590,7 +34687,6 @@ function* endCall(deps, action) {
  * @param {Object}   deps.webRTC   The WebRTC stack.
  * @param {Object}   deps.requests The set of platform-specific signalling functions.
  * @param {Function} deps.requests.updateSession "Update call" signalling function.
- * @param {Array}    deps.sdpHandlers The list of SDP handlers to run.
  * @param {Object}   action An action of type `CALL_HOLD`.
  */
 function* offerInactiveMedia(deps, action) {
@@ -34676,7 +34772,6 @@ function* offerInactiveMedia(deps, action) {
  * @param {Object}   deps.webRTC   The WebRTC stack.
  * @param {Object}   deps.requests The set of platform-specific signalling functions.
  * @param {Function} deps.requests.updateSession "Update call" signalling function.
- * @param {Array}    deps.sdpHandlers The list of SDP handlers to run.
  * @param {Object}   action        A "unhold call" action.
  */
 function* offerFullMedia(deps, action) {
@@ -34748,7 +34843,6 @@ function* offerFullMedia(deps, action) {
  * @param {Object}   deps.webRTC                            The WebRTC stack.
  * @param {Object}   deps.requests                          The set of platform-specific signalling functions.
  * @param {Function} deps.requests.updateCustomParameters   "Update call" signalling function.
- * @param {Array}    deps.sdpHandlers                       The list of SDP handlers to run.
  * @param {Object} action A "sent Custom Parameters" action.
  */
 function* sendCustomParameters(deps, action) {
@@ -34886,7 +34980,6 @@ function* getStats(deps, action) {
  * @param {Object}   deps.webRTC   The WebRTC stack.
  * @param {Object}   deps.requests requests that addMedia relies on
  * @param {Function} deps.requests.updateSession request to update the session on the backend
- * @param {Array}    deps.sdpHandlers The list of SDP handlers to run.
  * @param {Object}   action        An "add media" action.
  */
 function* addMedia(deps, action) {
@@ -34986,7 +35079,6 @@ function* addMedia(deps, action) {
  * @param {Object}   deps.webRTC   The WebRTC stack.
  * @param {Object}   deps.requests The set of platform-specific signalling functions.
  * @param {Function} deps.requests.updateSession "Update call" signalling function.
- * @param {Array}    deps.sdpHandlers The list of SDP handlers to run.
  * @param {Object}   action An action of type `REMOVE_MEDIA`.
  */
 function* removeMedia(deps, action) {
@@ -35121,7 +35213,6 @@ function* checkRenegotiationFlag(deps, action) {
  * @param {Object}   deps.webRTC   The WebRTC stack.
  * @param {Object}   deps.requests The set of platform-specific signalling functions.
  * @param {Function} deps.requests.updateSession "Update call" signalling function.
- * @param {Array}    deps.sdpHandlers The list of SDP handlers to run.
  * @param {Object}   action An action of type `RENEGOTIATE`.
  */
 function* renegotiate(deps, action) {
@@ -35213,7 +35304,6 @@ function* renegotiate(deps, action) {
  * @param {Object}   deps.webRTC   The WebRTC stack.
  * @param {Object}   deps.requests requests that addMedia relies on
  * @param {Function} deps.requests.updateSession request to update the session on the backend
- * @param {Array}    deps.sdpHandlers The list of SDP handlers to run.
  * @param {Object}   action        An action of type `ADD_BASIC_MEDIA`.
  */
 function* addBasicMedia(deps, action) {
@@ -35254,7 +35344,6 @@ function* addBasicMedia(deps, action) {
  * @param {Object}   deps.webRTC   The WebRTC stack.
  * @param {Object}   deps.requests The set of platform-specific signalling functions.
  * @param {Function} deps.requests.updateSession "Update call" signalling function.
- * @param {Array}    deps.sdpHandlers The list of SDP handlers to run.
  * @param {Object}   action An action of type `REMOVE_BASIC_MEDIA`.
  */
 function* removeBasicMedia(deps, action) {
@@ -35699,7 +35788,6 @@ const log = _logs.logManager.getLogger('CALL');
  * @param {Object}   deps.webRTC   The WebRTC stack.
  * @param {Object}   deps.requests The set of platform-specific signalling functions.
  * @param {Function} deps.requests.updateSessionResponse "Respond to offer" signalling function.
- * @param {Array}    deps.sdpHandlers The list of SDP handlers to run.
  * @param {Object}   targetCall    The call being acted on.
  * @param {Object}   params        Parameters of the update request.
  * @param {string}   params.sdp          A remote offer SDP.
@@ -35897,7 +35985,6 @@ function* handleUpdateRequest(deps, targetCall, params) {
  * @param {Object}   deps.webRTC   The WebRTC stack.
  * @param {Object}   deps.requests The set of platform-specific signalling functions.
  * @param {Function} deps.requests.updateSessionResponse "Respond to offer" signalling function.
- * @param {Array}    deps.sdpHandlers The list of SDP handlers to run.
  * @param  {Object} targetCall The call being acted on.
  * @param {Object}   params       Parameters of the update request.
  * @param {string}   params.remoteNumber Number of the remote participant.
@@ -36009,7 +36096,6 @@ function* handleSlowUpdateRequest(deps, targetCall, params) {
  * @param {Object}  deps          Dependencies that the saga uses.
  * @param {Object}  deps.webRTC   The WebRTC stack.
  * @param {Object}  deps.requests The set of platform-specific signalling functions.
- * @param {Array}   deps.sdpHandlers The list of SDP handlers to run.
  * @param  {Object} targetCall The call being acted on.
  * @param  {Object} params
  * @param  {string} params.sdp A remote answer SDP.
@@ -36151,7 +36237,6 @@ function* handleUpdateResponse(deps, targetCall, params) {
  * @param {Object}  deps          Dependencies that the saga uses.
  * @param {Object}  deps.webRTC   The WebRTC stack.
  * @param {Object}  deps.requests The set of platform-specific signalling functions.
- * @param {Array}   deps.sdpHandlers The list of SDP handlers to run.
  * @param  {Object} targetCall The call being acted on.
  * @param  {Object} params
  * @param  {string} params.sdp A remote answer SDP.
@@ -36361,7 +36446,6 @@ function _interopRequireWildcard(obj) { if (obj && obj.__esModule) { return obj;
  * @param {Object}   deps.webRTC   The WebRTC stack.
  * @param {Object}   deps.requests The set of platform-specific signalling functions.
  * @param {Function} deps.requests.updateCallRinging "Update call" signalling function.
- * @param {Array}    deps.sdpHandlers The list of SDP handlers to run.
  * @param {Object}   params        Parameters describing the incoming call.
  * @param {string}   [params.sdp]  The remote SDP offer included with the notification (if any).
  * @param {string}   params.wrtcsSessionId ID that the server uses to identify the session.
@@ -36448,7 +36532,8 @@ function* incomingCall(deps, params) {
     // Since we have the remote offer SDP, we can setup a webRTC session.
     yield (0, _effects.call)(_establish.setupIncomingCall, deps, {
       offer: {
-        sdp
+        sdp,
+        type: 'offer'
       },
       trickleIceMode: callOptions.trickleIceMode,
       sdpSemantics: callOptions.sdpSemantics,
@@ -36996,7 +37081,7 @@ function* callCancelled(deps, params) {
  */
 function* receiveEarlyMedia(deps, params) {
   const { wrtcsSessionId, customParameters } = params;
-  const { webRTC, sdpHandlers } = deps;
+  const { webRTC } = deps;
 
   /**
    * Get the call from state.
@@ -37034,9 +37119,13 @@ function* receiveEarlyMedia(deps, params) {
     /*
      * Run the remote SDP pranswer through any SDP handlers provided, then set it
      *    as the Session's remote description.
+     * This is the "pre set remote" stage.
      */
-    const sdp = yield (0, _effects.call)(_pipeline2.default, sdpHandlers, params.sdp, {
+    const callConfigOptions = yield (0, _effects.select)(_selectors.getOptions);
+    const sdp = yield (0, _effects.call)(_pipeline2.default, callConfigOptions.sdpHandlers, params.sdp, {
+      callId: currentCall.id,
       type: 'pranswer',
+      step: 'set',
       endpoint: 'remote'
     });
     yield (0, _effects.call)([session, 'processAnswer'], {
@@ -38252,10 +38341,13 @@ const log = _logs.logManager.getLogger('SDP');
  * @method sdpPipeline
  * @param  {Array}      handlers       List of functions that transform the SDP.
  * @param  {string}     sdp            The session description.
- * @param  {RTCSdpType} info           Information about the session description.
+ * @param  {Object}     info           Information about the session description.
+ * @param  {string}     info.callId    The id corresponding to the call on which this pipeline is being run.
  * @param  {RTCSdpType} info.type      The session description's type.
+ * @param  {string}     info.step      The step that will occur after the Pipeline is run.
+ *    Will be either 'set' (the SDP will be set locally) or 'send' (the SDP will be sent
+ *    to the remote endpoint).
  * @param  {string}     info.endpoint  Which end of the connection created the SDP.
- * @param  {boolean}    info.isInitiator Whether this session initiated the connection or not.
  * @param  {BandwidthControls} [info.bandwidth] Information about bandwidth controls.
  * @return {string}     The modified session description.
  */
@@ -38269,6 +38361,7 @@ function runPipeline(handlers, sdp, info) {
   if ((0, _fp.isArray)(handlers)) {
     handlers.forEach(handler => {
       if ((0, _fp.isFunction)(handler)) {
+        log.debug(`Running SDP handler ${handler.name}.`);
         newSdp = handler(newSdp, info, originalSdp);
       } else {
         log.error(`SDP handler not a function; skipping.`);
@@ -38389,8 +38482,9 @@ const log = _logs.logManager.getLogger('SDPHANDLER');
  *
  * @method sanitizeSdesFromSdp
  * @param {Object} newSdp The SDP so far (could have been modified by previous handlers).
- * @param {RTCSdpType} info Information about the session description.
+ * @param {Object} info Information about the session description.
  * @param {RTCSdpType} info.type The session description's type.
+ * @param {string} info.step The step that will occur after the Pipeline is run.
  * @param {string} info.endpoint Which end of the connection created the SDP.
  * @param {Object} originalSdp The SDP in its initial state.
  * @return {Object} The sanitized SDP with crypto removed (if fingerprint exists)
@@ -38573,12 +38667,31 @@ function* getAvailableCodecs(deps, action) {
 
   const { kind } = action.payload;
 
+  // TODO: Remove this once parameter validation is available for APIs
+  if (kind !== 'audio' && kind !== 'video') {
+    let errorMsg = `Cannot retrieve codecs for media kind ${kind}. Only 'audio' or 'video' kind supported.`;
+    log.info(errorMsg);
+    yield (0, _effects.call)([action.meta.deferred, 'reject'], {
+      error: errorMsg
+    });
+    return;
+  }
+
   log.info(`Retrieving list of available codecs for media kind '${kind}'.`);
 
   // Get the list of codecs from the general WebRTCManager
   const codecs = yield (0, _effects.call)([webRTC.webrtcManager, 'getAvailableCodecs'], kind);
   log.debug('Successfully retrieved codec list:', codecs);
 
+  // We got codecs, so 'resolve' the deferred result and respond with the list of codecs.
+  // NOTE: There does not seem to be a path for failure, as RTCRtpSender.getCapabilities(kind)
+  //       always returns something according to API doc
+  //       (including null, if there are simply no capabilities present),
+  //       so no need to handle 'reject' case.
+  yield (0, _effects.call)([action.meta.deferred, 'resolve'], codecs);
+
+  // Signal the completion of request by triggering an action complete, which
+  // in turn will issue an event at the application layer.
   yield (0, _effects.put)(callActions.availableCodecsRetrieved({
     kind,
     codecs
@@ -38605,6 +38718,8 @@ exports.answerWebrtcSession = answerWebrtcSession;
 
 var _actions = __webpack_require__("../../packages/kandy/src/call/interfaceNew/actions/index.js");
 
+var _selectors = __webpack_require__("../../packages/kandy/src/call/interfaceNew/selectors.js");
+
 var _logs = __webpack_require__("../../packages/kandy/src/logs/index.js");
 
 var _pipeline = __webpack_require__("../../packages/kandy/src/callstack/sdp/pipeline.js");
@@ -38629,7 +38744,6 @@ function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { de
  * @method setupCall
  * @param  {Object} deps
  * @param  {Object} deps.webRTC      The WebRTC stack.
- * @param  {Array}  deps.sdpHandlers SDP handlers.
  * @param  {Object} mediaConstraints Video and audio media constraints
  * @param  {boolean} mediaConstraints.audio Whether to enable audio or not
  * @param  {boolean} mediaConstraints.video Whether to enable video or not
@@ -38650,9 +38764,8 @@ function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { de
 
 
 // WebRTC operations.
-// Call plugin.
 function* setupCall(deps, mediaConstraints, sessionOptions) {
-  const { webRTC, sdpHandlers } = deps;
+  const { webRTC } = deps;
 
   const log = _logs.logManager.getLogger('CALL', sessionOptions.callId);
   log.info('Setting up local WebRTC portions of call.');
@@ -38726,17 +38839,36 @@ function* setupCall(deps, mediaConstraints, sessionOptions) {
    */
   let offer = yield (0, _effects.call)([session, 'createOffer']);
 
-  offer.sdp = yield (0, _effects.call)(_pipeline2.default, sdpHandlers, offer.sdp, {
+  let callConfigOptions = yield (0, _effects.select)(_selectors.getOptions);
+  // Run the SDP through the Pipeline before we set it locally.
+  //    This is the "pre set local" stage.
+  offer.sdp = yield (0, _effects.call)(_pipeline2.default, callConfigOptions.sdpHandlers, offer.sdp, {
+    callId,
     type: offer.type,
+    step: 'set',
     endpoint: 'local',
     bandwidth
   });
   offer = yield (0, _effects.call)([session, 'setLocalDescription'], offer);
 
+  // Run the SDP through the Pipeline again before we send it to the remote side.
+  //    This is the "pre send local" stage.
+  // Assign it to a new variable because some browsers enforce the read-only
+  //    properties of a RTCSessionDescription object. The object from
+  //    setLocalDescription is enforced read-only, but the `offer` before that
+  //    is not enforced.
+  const newSdp = yield (0, _effects.call)(_pipeline2.default, callConfigOptions.sdpHandlers, offer.sdp, {
+    callId,
+    type: offer.type,
+    step: 'send',
+    endpoint: 'local',
+    bandwidth
+  });
+
   log.info('Finished setting up local WebRTC portions of call.');
   return {
     error: false,
-    offerSdp: offer.sdp,
+    offerSdp: newSdp,
     sessionId: session.id,
     mediaIds: medias.map(media => media.media.id)
   };
@@ -38748,7 +38880,6 @@ function* setupCall(deps, mediaConstraints, sessionOptions) {
  * @method setupIncomingCall
  * @param  {Object} deps
  * @param  {Object} deps.webRTC      The WebRTC stack.
- * @param  {Array}  deps.sdpHandlers SDP handlers.
  * @param  {Object} sessionOptions
  * @param  {string} sessionOptions.callId the local call id
  * @param  {Object} sessionOptions.sdpSemantics semantics for the SDP, contains video and audio constraints
@@ -38766,8 +38897,9 @@ function* setupCall(deps, mediaConstraints, sessionOptions) {
 
 
 // Helpers
+// Call plugin.
 function* setupIncomingCall(deps, sessionOptions) {
-  const { webRTC, sdpHandlers } = deps;
+  const { webRTC } = deps;
   const {
     sdpSemantics,
     turnInfo,
@@ -38797,12 +38929,21 @@ function* setupIncomingCall(deps, sessionOptions) {
     }
   });
 
+  // Trigger a new action specifying that the session has been created
+  yield (0, _effects.put)(_actions.callActions.sessionCreated(callId, {
+    webrtcSessionId: session.id
+  }));
+
   /*
    * Run the remote SDP offer through any SDP handlers provided, then set it
    *    as the Session's remote description.
+   * This is the "pre set remote" stage.
    */
-  offer.sdp = yield (0, _effects.call)(_pipeline2.default, sdpHandlers, offer.sdp, {
+  let callConfigOptions = yield (0, _effects.select)(_selectors.getOptions);
+  offer.sdp = yield (0, _effects.call)(_pipeline2.default, callConfigOptions.sdpHandlers, offer.sdp, {
+    callId,
     type: offer.type,
+    step: 'set',
     endpoint: 'remote'
   });
 
@@ -38810,11 +38951,6 @@ function* setupIncomingCall(deps, sessionOptions) {
     type: 'offer',
     sdp: offer.sdp
   });
-
-  // Trigger a new action specifying that the session has been created
-  yield (0, _effects.put)(_actions.callActions.sessionCreated(callId, {
-    webrtcSessionId: session.id
-  }));
 
   log.info('Finished setting up remote WebRTC portions of call.');
   return session.id;
@@ -38826,7 +38962,6 @@ function* setupIncomingCall(deps, sessionOptions) {
  * @method answerWebrtcSession
  * @param  {Object} deps
  * @param  {Object} deps.webRTC      The WebRTC stack.
- * @param  {Array}  deps.sdpHandlers SDP handlers.
  * @param  {Object} mediaConstraints Video and audio media constraints
  * @param  {boolean} mediaConstraints.audio Whether to enable audio or not
  * @param  {boolean} mediaConstraints.video Whether to enable video or not
@@ -38839,10 +38974,10 @@ function* setupIncomingCall(deps, sessionOptions) {
  * @return {string} Object.mediaId an identifier for media
  */
 function* answerWebrtcSession(deps, mediaConstraints, sessionOptions) {
-  const { webRTC, sdpHandlers } = deps;
-  const { sessionId, bandwidth, dscpControls } = sessionOptions;
+  const { webRTC } = deps;
+  const { sessionId, bandwidth, dscpControls, callId } = sessionOptions;
 
-  const log = _logs.logManager.getLogger('CALL', sessionOptions.callId);
+  const log = _logs.logManager.getLogger('CALL', callId);
   log.info('Setting up local WebRTC portions of call.');
 
   // Get the webRTC session that represents this call.
@@ -38887,17 +39022,36 @@ function* answerWebrtcSession(deps, mediaConstraints, sessionOptions) {
    *    then set it as the Session's local description.
    */
   let answer = yield (0, _effects.call)([session, 'createAnswer']);
-  answer.sdp = yield (0, _effects.call)(_pipeline2.default, sdpHandlers, answer.sdp, {
+  let callConfigOptions = yield (0, _effects.select)(_selectors.getOptions);
+  // This is the "pre set local" stage.
+  answer.sdp = yield (0, _effects.call)(_pipeline2.default, callConfigOptions.sdpHandlers, answer.sdp, {
+    callId,
     type: answer.type,
+    step: 'set',
     endpoint: 'local',
     bandwidth
   });
   answer = yield (0, _effects.call)([session, 'setLocalDescription'], answer);
 
+  // Run the SDP through the Pipeline again before we send it to the remote side.
+  //    This is the "pre send local" stage.
+  // Assign it to a new variable because some browsers enforce the read-only
+  //    properties of a RTCSessionDescription object. The object from
+  //    setLocalDescription is enforced read-only, but the `offer` before that
+  //    is not enforced.
+  const newSdp = yield (0, _effects.call)(_pipeline2.default, callConfigOptions.sdpHandlers, answer.sdp, {
+    callId,
+    type: answer.type,
+    step: 'send',
+    endpoint: 'local',
+    bandwidth
+  });
+
   log.info('Finished setting up local WebRTC portions of call.');
+
   return {
     error: false,
-    answerSDP: answer.sdp,
+    answerSDP: newSdp,
     mediaIds: medias.map(media => media.media.id)
   };
 }
@@ -39037,6 +39191,8 @@ var _errors = __webpack_require__("../../packages/kandy/src/errors/index.js");
 
 var _errors2 = _interopRequireDefault(_errors);
 
+var _selectors = __webpack_require__("../../packages/kandy/src/call/interfaceNew/selectors.js");
+
 var _media = __webpack_require__("../../packages/kandy/src/callstack/webrtc/media.js");
 
 var mediaOps = _interopRequireWildcard(_media);
@@ -39050,6 +39206,10 @@ function _interopRequireWildcard(obj) { if (obj && obj.__esModule) { return obj;
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 // Libraries
+
+
+// Other Plugins
+// Callstack plugin.
 const log = _logs.logManager.getLogger('CALLSTACK');
 
 /**
@@ -39061,10 +39221,6 @@ const log = _logs.logManager.getLogger('CALLSTACK');
 
 
 // WebRTC operations.
-
-
-// Other Plugins
-// Callstack plugin.
 function* recreatePeer(webRTC, sessionId) {
   const session = yield (0, _effects.call)([webRTC.sessionManager, 'get'], sessionId);
   if (!session) {
@@ -39100,14 +39256,13 @@ function* closeCall(webRTC, sessionId) {
  * @method handleOffer
  * @param  {Object} deps
  * @param  {Object} deps.webRTC      The WebRTC stack.
- * @param  {Array}  deps.sdpHandlers SDP handlers.
  * @param  {string} offer Session Description protocol offer
  * @param  {string} webrtcSessionId local webrtc session id
  * @param {BandwidthControls} bandwidth bandwidth configurations to use
  * @returns {Object}
  */
 function* handleOffer(deps, offer, webrtcSessionId, bandwidth) {
-  const { webRTC, sdpHandlers } = deps;
+  const { webRTC } = deps;
   const session = yield (0, _effects.call)([webRTC.sessionManager, 'get'], webrtcSessionId);
 
   if (!session) {
@@ -39115,12 +39270,18 @@ function* handleOffer(deps, offer, webrtcSessionId, bandwidth) {
     return;
   }
 
+  const { id: callId } = yield (0, _effects.select)(_selectors.getCallByWebrtcSessionId, webrtcSessionId);
+
   /*
    * Run the remote SDP offer through any SDP handlers provided, then set it
    *    as the Session's remote description.
+   * This is the "pre set remote" stage.
    */
-  offer = yield (0, _effects.call)(_pipeline2.default, sdpHandlers, offer, {
+  const callConfigOptions = yield (0, _effects.select)(_selectors.getOptions);
+  offer = yield (0, _effects.call)(_pipeline2.default, callConfigOptions.sdpHandlers, offer, {
+    callId,
     type: 'offer',
+    step: 'set',
     endpoint: 'remote'
   });
 
@@ -39139,15 +39300,33 @@ function* handleOffer(deps, offer, webrtcSessionId, bandwidth) {
    *    then set it as the Session's local description.
    */
   let answer = yield (0, _effects.call)([session, 'createAnswer']);
-  answer.sdp = yield (0, _effects.call)(_pipeline2.default, sdpHandlers, answer.sdp, {
+
+  // This is the "pre set local" stage.
+  answer.sdp = yield (0, _effects.call)(_pipeline2.default, callConfigOptions.sdpHandlers, answer.sdp, {
+    callId,
     type: answer.type,
+    step: 'set',
     endpoint: 'local',
     bandwidth
   });
   answer = yield (0, _effects.call)([session, 'setLocalDescription'], answer);
 
+  // Run the SDP through the Pipeline again before we send it to the remote side.
+  //    This is the "pre send local" stage.
+  // Assign it to a new variable because some browsers enforce the read-only
+  //    properties of a RTCSessionDescription object. The object from
+  //    setLocalDescription is enforced read-only, but the `offer` before that
+  //    is not enforced.
+  const newSdp = yield (0, _effects.call)(_pipeline2.default, callConfigOptions.sdpHandlers, answer.sdp, {
+    callId,
+    type: answer.type,
+    step: 'send',
+    endpoint: 'local',
+    bandwidth
+  });
+
   return {
-    answerSDP: answer.sdp
+    answerSDP: newSdp
   };
 }
 
@@ -39157,7 +39336,6 @@ function* handleOffer(deps, offer, webrtcSessionId, bandwidth) {
  * @method generateOffer
  * @param {Object} deps
  * @param {Object} deps.webRTC      The WebRTC stack.
- * @param {Array}  deps.sdpHandlers SDP handlers.
  * @param {string} sessionId the local webRTC session id, used to lookup the session object
  * @param {Object} mediaDirections
  * @param {string} mediaDirections.audio mode of audio add to the sdp offer
@@ -39166,13 +39344,15 @@ function* handleOffer(deps, offer, webrtcSessionId, bandwidth) {
  * @return {Object} offer object containing a Session Description Protocol
  */
 function* generateOffer(deps, sessionId, mediaDirections, bandwidth) {
-  const { webRTC, sdpHandlers } = deps;
+  const { webRTC } = deps;
   const session = yield (0, _effects.call)([webRTC.sessionManager, 'get'], sessionId);
 
   if (!session) {
     log.debug(`webRTC session ${sessionId} not found.`);
     return;
   }
+
+  const { id: callId } = yield (0, _effects.select)(_selectors.getCallByWebrtcSessionId, sessionId);
 
   /*
    * Create the local SDP offer, run it through any provided SDP handlers,
@@ -39183,14 +39363,31 @@ function* generateOffer(deps, sessionId, mediaDirections, bandwidth) {
   let offer = yield (0, _effects.call)([session, 'createOffer'], {
     mediaDirections
   });
-  offer.sdp = yield (0, _effects.call)(_pipeline2.default, sdpHandlers, offer.sdp, {
+  const callConfigOptions = yield (0, _effects.select)(_selectors.getOptions);
+  // This is the "pre set local" stage.
+  offer.sdp = yield (0, _effects.call)(_pipeline2.default, callConfigOptions.sdpHandlers, offer.sdp, {
+    callId,
     type: offer.type,
+    step: 'set',
     endpoint: 'local',
     bandwidth
   });
   offer = yield (0, _effects.call)([session, 'setLocalDescription'], offer);
 
-  return offer;
+  // This is the "pre send local" stage.
+  // Assign it to a new variable because some browsers enforce the read-only
+  //    properties of a RTCSessionDescription object. The object from
+  //    setLocalDescription is enforced read-only, but the `offer` before that
+  //    is not enforced.
+  const newSdp = yield (0, _effects.call)(_pipeline2.default, callConfigOptions.sdpHandlers, offer.sdp, {
+    callId,
+    type: offer.type,
+    step: 'send',
+    endpoint: 'local',
+    bandwidth
+  });
+
+  return { type: offer.type, sdp: newSdp };
 }
 
 /**
@@ -39198,7 +39395,6 @@ function* generateOffer(deps, sessionId, mediaDirections, bandwidth) {
  *
  * @param {Object} deps
  * @param {Object} deps.webRTC      The WebRTC stack.
- * @param {Array}  deps.sdpHandlers SDP handlers.
  * @param  {Object} mediaConstraints Video and audio media constraints
  * @param  {boolean} mediaConstraints.audio Whether to enable audio or not
  * @param  {boolean} mediaConstraints.video Whether to enable video or not
@@ -39210,7 +39406,7 @@ function* generateOffer(deps, sessionId, mediaDirections, bandwidth) {
  * @return {Object} Object.media media object containing tracks
  */
 function* webRtcAddMedia(deps, mediaConstraints, sessionOptions) {
-  const { webRTC, sdpHandlers } = deps;
+  const { webRTC } = deps;
   const { medias, error } = yield (0, _effects.call)(mediaOps.createLocal, webRTC, mediaConstraints);
   const { sessionId, bandwidth, dscpControls } = sessionOptions;
 
@@ -39218,6 +39414,7 @@ function* webRtcAddMedia(deps, mediaConstraints, sessionOptions) {
     return { error };
   }
   const session = yield (0, _effects.call)([webRTC.sessionManager, 'get'], sessionId);
+  const { id: callId } = yield (0, _effects.select)(_selectors.getCallByWebrtcSessionId, sessionId);
 
   let screenTracks = [];
   let audioTracks = [];
@@ -39247,12 +39444,29 @@ function* webRtcAddMedia(deps, mediaConstraints, sessionOptions) {
   // TODO: Make sure the session is in the correct signaling state to start a
   //    renegotiation operation.
   let offer = yield (0, _effects.call)([session, 'createOffer']);
-  offer.sdp = yield (0, _effects.call)(_pipeline2.default, sdpHandlers, offer.sdp, {
+  const callConfigOptions = yield (0, _effects.select)(_selectors.getOptions);
+  // This is the "pre set local" stage.
+  offer.sdp = yield (0, _effects.call)(_pipeline2.default, callConfigOptions.sdpHandlers, offer.sdp, {
+    callId,
     type: offer.type,
+    step: 'set',
     endpoint: 'local',
     bandwidth
   });
   offer = yield (0, _effects.call)([session, 'setLocalDescription'], offer);
+
+  // This is the "pre send local" stage.
+  // Assign it to a new variable because some browsers enforce the read-only
+  //    properties of a RTCSessionDescription object. The object from
+  //    setLocalDescription is enforced read-only, but the `offer` before that
+  //    is not enforced.
+  const newSdp = yield (0, _effects.call)(_pipeline2.default, callConfigOptions.sdpHandlers, offer.sdp, {
+    callId,
+    type: offer.type,
+    step: 'send',
+    endpoint: 'local',
+    bandwidth
+  });
 
   let mediaStates = [];
 
@@ -39262,7 +39476,7 @@ function* webRtcAddMedia(deps, mediaConstraints, sessionOptions) {
     mediaStates = [...mediaStates, mediaState];
   }
 
-  return { error: false, medias: mediaStates, sdp: offer.sdp };
+  return { error: false, medias: mediaStates, sdp: newSdp };
 }
 
 /**
@@ -39270,7 +39484,6 @@ function* webRtcAddMedia(deps, mediaConstraints, sessionOptions) {
  *
  * @param {Object} deps
  * @param {Object} deps.webRTC      The WebRTC stack.
- * @param {Array}  deps.sdpHandlers SDP handlers.
  * @param {Object} sessionOptions
  * @param  {string} sessionOptions.sessionId The local webrtc session id
  * @param {Array} sessionOptions.tracks A list of track IDs to remove
@@ -39279,7 +39492,7 @@ function* webRtcAddMedia(deps, mediaConstraints, sessionOptions) {
  * @return {string} Object.sdp An offer in the form of a Session Description Protocol
  */
 function* webRtcRemoveMedia(deps, sessionOptions) {
-  const { webRTC, sdpHandlers } = deps;
+  const { webRTC } = deps;
   const { sessionId, tracks, bandwidth } = sessionOptions;
 
   // Get the tracks that we want to remove
@@ -39303,6 +39516,7 @@ function* webRtcRemoveMedia(deps, sessionOptions) {
   }
 
   const session = yield (0, _effects.call)([webRTC.sessionManager, 'get'], sessionId);
+  const { id: callId } = yield (0, _effects.select)(_selectors.getCallByWebrtcSessionId, sessionId);
 
   // Removes tracks from peer (Will stop tracks from being sent to remote participant).
   // Does NOT end the tracks.
@@ -39320,15 +39534,32 @@ function* webRtcRemoveMedia(deps, sessionOptions) {
   // TODO: Make sure the session is in the correct signaling state to start a
   //    renegotiation operation.
   let offer = yield (0, _effects.call)([session, 'createOffer']);
-  offer.sdp = yield (0, _effects.call)(_pipeline2.default, sdpHandlers, offer.sdp, {
+  const callConfigOptions = yield (0, _effects.select)(_selectors.getOptions);
+  // This is the "pre set local" stage.
+  offer.sdp = yield (0, _effects.call)(_pipeline2.default, callConfigOptions.sdpHandlers, offer.sdp, {
+    callId,
     type: offer.type,
+    step: 'set',
     endpoint: 'local',
     bandwidth
   });
   offer = yield (0, _effects.call)([session, 'setLocalDescription'], offer);
 
+  // This is the "pre send local" stage.
+  // Assign it to a new variable because some browsers enforce the read-only
+  //    properties of a RTCSessionDescription object. The object from
+  //    setLocalDescription is enforced read-only, but the `offer` before that
+  //    is not enforced.
+  const newSdp = yield (0, _effects.call)(_pipeline2.default, callConfigOptions.sdpHandlers, offer.sdp, {
+    callId,
+    type: offer.type,
+    step: 'send',
+    endpoint: 'local',
+    bandwidth
+  });
+
   return {
-    sdp: offer.sdp
+    sdp: newSdp
   };
 }
 
@@ -39484,6 +39715,8 @@ var _errors = __webpack_require__("../../packages/kandy/src/errors/index.js");
 
 var _errors2 = _interopRequireDefault(_errors);
 
+var _selectors = __webpack_require__("../../packages/kandy/src/call/interfaceNew/selectors.js");
+
 var _utils = __webpack_require__("../../packages/kandy/src/callstack/utils/index.js");
 
 var _sdp = __webpack_require__("../../packages/kandy/src/callstack/utils/sdp.js");
@@ -39508,7 +39741,6 @@ function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { de
 
 
 // Helpers.
-// Other Plugins
 function* isSameSdpSessionId(webRTC, sessionId, sdp) {
   const session = yield (0, _effects.call)([webRTC.sessionManager, 'get'], sessionId);
   const currentDesc = yield (0, _effects.call)([session, 'getRemoteDescription']);
@@ -39544,13 +39776,14 @@ function* isSameSdpSessionId(webRTC, sessionId, sdp) {
  * @param {string} sessionInfo.sessionId ID for the local webRTC Session.
  * @param {string} sessionInfo.answerSdp The received answer SDP.
  * @param {Object} targetCall Information about the call that this Session is associated with.
- * @returns {Object} Error object if any have occured. Undefined otherwise.
+ * @returns {Object} Error object if any have occurred. Undefined otherwise.
  */
 
 
 // Libraries.
+// Other Plugins
 function* receivedAnswer(deps, sessionInfo, targetCall) {
-  const { webRTC, sdpHandlers } = deps;
+  const { webRTC } = deps;
   const log = _logs.logManager.getLogger('CALL', targetCall.id);
   log.debug(`Processing SDP answer for session ${sessionInfo.sessionId}.`);
 
@@ -39565,6 +39798,8 @@ function* receivedAnswer(deps, sessionInfo, targetCall) {
   }
   // TODO: Ensure Session is in the correct signaling state for an answer SDP.
 
+  const callConfigOptions = yield (0, _effects.select)(_selectors.getOptions);
+  let sdpHandlers = callConfigOptions.sdpHandlers;
   /*
    * If the answer we received has DTLS role of 'actpass', then this is not a
    *    normal webRTC scenario. An answer SDP cannot have 'actpass' as the role.
@@ -39578,7 +39813,7 @@ function* receivedAnswer(deps, sessionInfo, targetCall) {
      */
     const newRole = targetCall.isCaller ? 'passive' : 'active';
     log.debug(`Received answer SDP has role of actpass. Changing to ${newRole}.`);
-    sdpHandlers.push((0, _utils.changeDtlsRoleTo)(newRole));
+    sdpHandlers = [...sdpHandlers, (0, _utils.changeDtlsRoleTo)(newRole)];
   }
 
   /*
@@ -39590,9 +39825,12 @@ function* receivedAnswer(deps, sessionInfo, targetCall) {
     /*
      * Run the remote SDP answer through any SDP handlers provided, then set it
      *    as the Session's remote description.
+     * This is the "pre set remote" stage.
      */
     answerSdp = yield (0, _effects.call)(_pipeline2.default, sdpHandlers, answerSdp, {
+      callId: targetCall.id,
       type: 'answer',
+      step: 'set',
       endpoint: 'remote'
     });
     yield (0, _effects.call)([session, 'processAnswer'], {
@@ -39642,6 +39880,7 @@ exports.mergeValues = mergeValues;
 exports.toQueryString = toQueryString;
 exports.autoRestart = autoRestart;
 exports.forwardAction = forwardAction;
+exports.normalizeServices = normalizeServices;
 
 var _fp = __webpack_require__("../../node_modules/lodash/fp.js");
 
@@ -39727,6 +39966,21 @@ function* forwardAction(action) {
   yield (0, _effects.put)(action);
 }
 
+/**
+ * Ensures that services are in the same format understood by the server regardless,
+ * of whether the client provides services as strings or objects.
+ * @param {Array} services The list of services requested by the client.
+ * @return {Array} A normalized list of services requested by the client.
+ */
+function normalizeServices(services = []) {
+  return services.map(service => {
+    if ((0, _fp.isPlainObject)(service) && service.hasOwnProperty('service')) {
+      return service;
+    }
+    return { service: service };
+  });
+}
+
 /***/ }),
 
 /***/ "../../packages/kandy/src/common/validation/index.js":
@@ -39738,83 +39992,118 @@ function* forwardAction(action) {
 Object.defineProperty(exports, "__esModule", {
   value: true
 });
-exports.parse = exports.enums = exports.val = undefined;
+exports.parse = exports.validationResults = exports.errorMessages = exports.enums = exports.validation = undefined;
 
 var _stringify = __webpack_require__("../../node_modules/babel-runtime/core-js/json/stringify.js");
 
 var _stringify2 = _interopRequireDefault(_stringify);
 
-var _v8n = __webpack_require__("../../node_modules/v8n/dist/v8n.esm.js");
-
-var _v8n2 = _interopRequireDefault(_v8n);
-
 var _fp = __webpack_require__("../../node_modules/lodash/fp.js");
 
 var _logs = __webpack_require__("../../packages/kandy/src/logs/index.js");
 
+var _v8n = __webpack_require__("../../node_modules/v8n/dist/v8n.esm.js");
+
+var _v8n2 = _interopRequireDefault(_v8n);
+
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
-// Get the logger
-const log = _logs.logManager.getLogger('VALIDATION');
-
-// Custom v8n Rules
-// Imports
+// Custom v8n Rules - https://imbrn.github.io/v8n/api/#extend
 _v8n2.default.extend({
   function: () => value => typeof value === 'function'
 });
 
-// Exports
-const val = exports.val = (0, _v8n2.default)();
+// EXPORTS / IO
+/**
+ * This wrapper generates error messages from v8n Validation Errors. https://imbrn.github.io/v8n/api/#validationerror
+ * They are logged using LogManager as a warning to our customers when they mess up arguments.
+ * To use: `import { enums, validation as v8n, parse } from '<relativePath>/common/validation'`.
+ * Build up your validation using v8n.string, v8n.number, v8n.schema, enums, etc.
+ * Enums is not part of the v8n library, but provided here for ease of use
+ * const v8nValidation = v8n.schema({
+      sdpSemantics: enums(['unified-plan', 'plan-b']),
+      iceServers: v8n.array(),
+      iceCollectionDelay: v8n.positive(),
+      serverTurnCredentials: v8n.boolean(),
+      iceCollectionCheck: v8n.optional(v8n.function())
+    })
+ * Create a validator like this: `const parseOptions = parse('nameOfArg', v8nValidation)`
+ * Run that validator against the actual values: `parseOptions(options)`
+ * Returns the input either way and logs errors, in the future will throw errors on invalid data.
+ */
+const validation = exports.validation = (0, _v8n2.default)();
 
-// Takes any number of parameters, strings or numbers, and maps them to v8n.exact
-// Best way to replicate enums currently.
-// TODO: Add an enums function to v8n
-// const v8nSdpSemantics = val.passesAnyOf(val.exact('unified-plan'), val.exact('plan-b'))
-// Is done this way because v8n has some `_this = this` going on which messes up various map functions
-const enums = exports.enums = (...values) => val.passesAnyOf(...values.map(value => val.exact(value)));
+// TODO: Add an enums function to the v8n library
+// Use as such: `prop: enums( [ 'red', 'blue', 'green' ] )
+const enums = exports.enums = values => {
+  // Map iteratee isn't just `v8n().exact` due to v8n() returning a new ProxyContext each time
+  const v8nExact = value => (0, _v8n2.default)().exact(value);
+  const exactValues = (0, _fp.map)(v8nExact)(values);
+  return (0, _v8n2.default)().passesAnyOf(...exactValues);
+};
 
-const parse = exports.parse = (name, schema) => input => {
-  const result = schema.testAll(input);
+// Name -> v8nRule -> Input -> [String]
+const errorMessages = exports.errorMessages = name => v8nRule => input => (0, _fp.flatMap)(validationErrorMessages(name))(validationResults(v8nRule)(input));
 
-  if ((0, _fp.isEmpty)(result)) {
+const validationResults = exports.validationResults = v8nRule => input => v8nRule.testAll(input);
+
+// (Name, v8nRule) -> Input -> IO Input
+const parse = exports.parse = (name, v8nRule) => input => {
+  const errors = errorMessages(name)(v8nRule)(input);
+
+  if ((0, _fp.isEmpty)(errors)) {
     return input;
   } else {
-    const errors = (0, _fp.map)(validationErrorMessage(name))(result);
-
-    log.info(prettyPrint(errors));
-
+    const log = _logs.logManager.getLogger('VALIDATION');
+    log.info(prettyPrint(errors)); // This is an IO side-effect
     return input;
   }
 };
 
-// error message handling
-const validationErrorMessage = name => ({ cause, rule, target, value }) => {
+// DEFINITIONS
+
+// Name -> ValidationError -> [String]
+// https://imbrn.github.io/v8n/api/#validationerror
+const validationErrorMessages = name => validationError => {
+  const startingPath = [];
+  return validationErrorMessageHelper(startingPath)(name)(validationError);
+};
+
+// [String] -> Name -> ValidationError -> [String]
+const validationErrorMessageHelper = acc => name => ({ cause, rule, target, value }) => {
+  const path = (0, _fp.concat)(acc)(target || name);
   if ((0, _fp.isArray)(cause)) {
-    return { [`${target || name}`]: (0, _fp.map)(validationErrorMessage(target))(cause) };
+    const newVEM = validationErrorMessageHelper(path)(target);
+    return (0, _fp.flatMap)(newVEM)(cause);
   } else {
-    return `${target || name} has value of '${value}', but it should be ${ruleMessage(rule)}`;
+    return `${(0, _fp.join)('.')(path)} has value of '${value}', but it should be ${ruleMessage(rule)}`;
   }
 };
 
+// Rule -> String
+// https://imbrn.github.io/v8n/api/#rule
 const ruleMessage = ({ name, args }) => {
-  const startsWithVowel = string => /[aeiou]/i.test(string[0]);
   switch (name) {
     case 'schema':
       return 'Schema';
 
     case 'passesAnyOf':
-      // To get the values of an enum
-      return `any of '${args.flatMap(arg => arg.chain[0].args).join("', '")}'`;
+      const enumValues = (0, _fp.map)(enumName)(args);
+      return `any of '${(0, _fp.join)("', '")(enumValues)}'`;
 
     case 'between':
       return `between ${args.join(', ')}`;
 
     default:
-      return `${startsWithVowel(name) ? 'an' : 'a'} ${name}`;
+      return `${aOrAn(name)} ${name}`;
   }
 };
 
+// HELPERS
+const enumName = arg => arg.chain[0].args; // v8n internals
 const prettyPrint = (0, _fp.partial)(_stringify2.default)([_fp.__, null, 4]);
+// https://dictionary.cambridge.org/grammar/british-grammar/a-an-and-the
+const aOrAn = string => /[aeiou]/i.test(string[0]) ? 'an' : 'a';
 
 /***/ }),
 
@@ -39836,7 +40125,7 @@ exports.getVersion = getVersion;
  * for the @@ tag below with actual version value.
  */
 function getVersion() {
-  return '4.16.0';
+  return '4.17.0';
 }
 
 /***/ }),
@@ -39897,6 +40186,8 @@ const PREFIX = '@@KANDY/';
 
 const CONFIG_UPDATE = exports.CONFIG_UPDATE = PREFIX + 'CONFIG_UPDATE';
 
+const SET_SDP_HANDLERS = exports.SET_SDP_HANDLERS = PREFIX + 'SET_SDP_HANDLERS';
+
 /***/ }),
 
 /***/ "../../packages/kandy/src/config/interface/actions.js":
@@ -39909,10 +40200,19 @@ Object.defineProperty(exports, "__esModule", {
   value: true
 });
 exports.update = update;
+exports.setSdpHandlers = setSdpHandlers;
 
 var _actionTypes = __webpack_require__("../../packages/kandy/src/config/interface/actionTypes.js");
 
 var actionTypes = _interopRequireWildcard(_actionTypes);
+
+var _utils = __webpack_require__("../../packages/kandy/src/callstack/utils/index.js");
+
+var _codecRemover = __webpack_require__("../../packages/fcs/src/js/sdp/codecRemover.js");
+
+var _codecRemover2 = _interopRequireDefault(_codecRemover);
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 function _interopRequireWildcard(obj) { if (obj && obj.__esModule) { return obj; } else { var newObj = {}; if (obj != null) { for (var key in obj) { if (Object.prototype.hasOwnProperty.call(obj, key)) newObj[key] = obj[key]; } } newObj.default = obj; return newObj; } }
 
@@ -39937,6 +40237,43 @@ function update(values, pluginName = '') {
   return {
     type: actionTypes.CONFIG_UPDATE,
     payload: payload
+  };
+}
+
+/**
+ * Updates the SDP Handlers in the call plugin configs
+ *
+ * @method setSdpHandlers
+ * @param {Array<call.SdpHandlerFunction>} sdpHandlers The list of SDP handler to set in the config.
+ * @param {Object}                         options     Options to configure extra sdp handlers
+ * @returns {Object} A flux standard action.
+ */
+function setSdpHandlers(sdpHandlers, options) {
+  /*
+   * Set SDP handlers to be used for every operation:
+   *
+   * 1. Application provided SDP handlers.
+   *
+   * 2. Disable DTLS-SDES crypto method (ie. delete the line) if there's a better
+   *    crypto method enabled. WebRTC only allows one method to be enabled.
+   *    This is needed for interoperability with non-browser endpoints that include
+   *    SDES as a fallback method.
+   *
+   * 3. [optional] Disable H264 Codecs for video calls, used to reduce SDP size
+   *
+   * 4. Modify sdp and add bandwidth limits on it if bandwidth controls are provided.
+   */
+  if (options.removeH264Codecs) {
+    sdpHandlers.push((0, _codecRemover2.default)(['H264']));
+  }
+  sdpHandlers.push(_utils.sanitizeSdesFromSdp);
+  sdpHandlers.push(_utils.modifySdpBandwidth);
+
+  return {
+    type: actionTypes.SET_SDP_HANDLERS,
+    payload: {
+      sdpHandlers
+    }
   };
 }
 
@@ -40046,6 +40383,10 @@ Object.defineProperty(exports, "__esModule", {
   value: true
 });
 
+var _extends2 = __webpack_require__("../../node_modules/babel-runtime/helpers/extends.js");
+
+var _extends3 = _interopRequireDefault(_extends2);
+
 var _actionTypes = __webpack_require__("../../packages/kandy/src/config/interface/actionTypes.js");
 
 var actionTypes = _interopRequireWildcard(_actionTypes);
@@ -40056,11 +40397,23 @@ var _fp = __webpack_require__("../../node_modules/lodash/fp.js");
 
 function _interopRequireWildcard(obj) { if (obj && obj.__esModule) { return obj; } else { var newObj = {}; if (obj != null) { for (var key in obj) { if (Object.prototype.hasOwnProperty.call(obj, key)) newObj[key] = obj[key]; } } newObj.default = obj; return newObj; } }
 
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
 const reducers = {};
 
 reducers[actionTypes.CONFIG_UPDATE] = {
   next(state, action) {
     return (0, _fp.merge)(state, action.payload);
+  }
+};
+
+reducers[actionTypes.SET_SDP_HANDLERS] = {
+  next(state, action) {
+    return (0, _extends3.default)({}, state, {
+      call: (0, _extends3.default)({}, state.call, {
+        sdpHandlers: action.payload.sdpHandlers
+      })
+    });
   }
 };
 
@@ -41327,17 +41680,17 @@ const defaultValues = {
 };
 
 // Parse and/or Validate
-const v8nValidation = _validation.val.schema({
-  method: _validation.val.string(),
-  pingInterval: _validation.val.number(),
-  reconnectLimit: _validation.val.number(),
-  reconnectDelay: _validation.val.number(),
-  reconnectTimeMultiplier: _validation.val.number(),
-  reconnectTimeLimit: _validation.val.number(),
-  autoReconnect: _validation.val.boolean(),
-  maxMissedPings: _validation.val.number(),
-  checkConnectivity: _validation.val.boolean(),
-  webSocketOAuthMode: _validation.val.string()
+const v8nValidation = _validation.validation.schema({
+  method: (0, _validation.enums)([_constants.connCheckMethods.KEEP_ALIVE]),
+  pingInterval: _validation.validation.positive(),
+  reconnectLimit: _validation.validation.positive(),
+  reconnectDelay: _validation.validation.positive(),
+  reconnectTimeMultiplier: _validation.validation.positive(),
+  reconnectTimeLimit: _validation.validation.positive(),
+  autoReconnect: _validation.validation.boolean(),
+  maxMissedPings: _validation.validation.positive(),
+  checkConnectivity: _validation.validation.boolean(),
+  webSocketOAuthMode: _validation.validation.string()
 });
 const parseOptions = (0, _validation.parse)('connectivity', v8nValidation);
 
@@ -42205,7 +42558,7 @@ function api({ dispatch }) {
   var api = {};
 
   /**
-   * Add an event listener for the specified event type. The event is emmited by the SDK instance.
+   * Add an event listener for the specified event type. The event is emitted by the SDK instance.
    *
    * @public
    * @memberof api
@@ -42225,7 +42578,7 @@ function api({ dispatch }) {
   };
 
   /**
-   * Removes an event listener for the specified event type. The event is emmited by the SDK instance.
+   * Removes an event listener for the specified event type. The event is emitted by the SDK instance.
    *
    * @public
    * @memberof api
@@ -42427,9 +42780,9 @@ const factoryDefaults = {
   allowProxy: false
 
   // config validation
-};const v8nValidation = _validation.val.schema({
-  enableReduxDevTools: _validation.val.boolean(),
-  allowProxy: _validation.val.boolean()
+};const v8nValidation = _validation.validation.schema({
+  enableReduxDevTools: _validation.validation.boolean(),
+  allowProxy: _validation.validation.boolean()
 });
 const parseOptions = (0, _validation.parse)('common', v8nValidation);
 
@@ -42976,6 +43329,7 @@ function titleFormatter(action, time, took) {
 Object.defineProperty(exports, "__esModule", {
   value: true
 });
+exports.defaultOptions = undefined;
 
 var _actionHandler = __webpack_require__("../../packages/kandy/src/logs/actions/actionHandler.js");
 
@@ -43007,7 +43361,7 @@ function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { de
  *    to the console.
  * @param  {boolean} [logs.enableFcsLogs=true] Enable the detailed call logger
  *    for v3.X. Requires log level debug.
- * @param {Object} [logs.logActions] Options specifically for action logs when
+ * @param {Object|boolean} [logs.logActions] Options specifically for action logs when
  *    logLevel is at DEBUG+ levels. Set this to false to not output action logs.
  * @param {logger.LogHandler} [logs.logActions.handler] The function to receive action
  *    log entries from the SDK. If not provided, a default handler will be used
@@ -43019,10 +43373,12 @@ function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { de
  *    inspected on the console.
  * @param {boolean} [logs.logActions.diff=false] Include a diff of what SDK
  *    context was changed by the action.
+ * @param {string}  [logs.logActions.level='debug'] Log level to be set
+ *    on the action logs
  * @param {boolean} [logs.logActions.exposePayloads=false] Allow action payloads
  *    to be exposed in the logs, potentially displaying sensitive information.
  */
-exports.default = {
+const defaultOptions = exports.defaultOptions = {
   logLevel: 'debug',
   handler: undefined,
   enableFcsLogs: true,
@@ -43036,6 +43392,37 @@ exports.default = {
     level: 'debug',
     exposePayloads: false
   }
+  /*
+   * TODO: Figure out a way to work around this.
+   * Can't use validation in logging because validation uses logging to output errors.
+   * Circular dependency, have to refactor.
+   * Code:
+   ```javascript
+  // Parse and/or Validate
+  // import { enums, validation as v8n, parse } from '../common/validation'
+  const defaultValidation = v8n.schema({
+    logLevel: enums(['silent', 'error', 'warn', 'info', 'debug']),
+    handler: v8n.optional(v8n.function()),
+    enableFcsLogs: v8n.boolean(),
+    logActions: v8n.optional(
+      v8n.passesAnyOf(
+        v8n.schema({
+          handler: v8n.optional(v8n.function()),
+          actionOnly: v8n.boolean(),
+          collapsed: v8n.boolean(),
+          diff: v8n.boolean(),
+          exposePayloads: v8n.boolean()
+        }),
+        // OR
+        v8n.boolean()
+      )
+    )
+  })
+  
+  export const parseLogConfig = parse('logger', defaultValidation)
+  ```
+  */
+
 };
 
 /***/ }),
@@ -43569,8 +43956,6 @@ var actions = _interopRequireWildcard(_actions);
 
 var _config = __webpack_require__("../../packages/kandy/src/logs/config.js");
 
-var _config2 = _interopRequireDefault(_config);
-
 var _sagas = __webpack_require__("../../packages/kandy/src/logs/sagas.js");
 
 var _actions2 = __webpack_require__("../../packages/kandy/src/logs/actions/index.js");
@@ -43604,7 +43989,7 @@ Usually plugins factories are in the index.js file of their corresponding folder
 This used to be the case. However this file was also being used to host the logManager
 that is being used with the SDK.
 
-Since the logManager is being included in almost every file it was preferrable to rename this
+Since the logManager is being included in almost every file it was preferable to rename this
 file rather than point 100s of files to a new place for the logManager.
 **/
 
@@ -43625,7 +44010,8 @@ function logPlugin(options = {}) {
     logger.warn('Invalid log level configuration provided; using default instead.');
   }
 
-  options = (0, _utils.mergeValues)(_config2.default, options);
+  options = (0, _utils.mergeValues)(_config.defaultOptions, options);
+
   // Now that we have the application's log configs, update everything to
   //    use those values instead of default values.
   _index.logManager.setLevel(options.logLevel);
@@ -44348,7 +44734,7 @@ Object.defineProperty(exports, "__esModule", {
 const NOTI_CHANGE = exports.NOTI_CHANGE = 'notifications:change';
 
 /**
- * An error occured with push notifications.
+ * An error occurred with push notifications.
  *
  * @public
  * @requires push
@@ -44628,8 +45014,12 @@ function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { de
  * @param {string} [notifications.pushRegistration.version] - Version for the push registration server.
  */
 
-// config validation
-const v8nNotificationModes = _validation.val.passesAnyOf(_validation.val.exact('any-channel'), _validation.val.exact('push-channel-only'));
+const defaultOptions = {
+  idCacheLength: 100,
+  incomingCallNotificationMode: 'any-channel'
+
+  // config validation
+};
 
 // Parse and/or Validate
 
@@ -44639,15 +45029,14 @@ const v8nNotificationModes = _validation.val.passesAnyOf(_validation.val.exact('
 
 // Other plugins.
 // Notification plugin.
-
-const v8nValidation = _validation.val.schema({
-  idCacheLength: _validation.val.number(),
-  incomingCallNotificationMode: v8nNotificationModes,
-  pushRegistration: _validation.val.optional(_validation.val.schema({
-    server: _validation.val.string(),
-    port: _validation.val.string(),
-    protocol: _validation.val.string(),
-    version: _validation.val.string()
+const v8nValidation = _validation.validation.schema({
+  idCacheLength: _validation.validation.positive(),
+  incomingCallNotificationMode: (0, _validation.enums)(['any-channel', 'push-channel-only']),
+  pushRegistration: _validation.validation.optional(_validation.validation.schema({
+    server: _validation.validation.string(),
+    port: _validation.validation.string(),
+    protocol: _validation.validation.string(),
+    version: _validation.validation.string()
   }))
 });
 const parseOptions = (0, _validation.parse)('notifications', v8nValidation);
@@ -44659,10 +45048,6 @@ const parseOptions = (0, _validation.parse)('notifications', v8nValidation);
  * @return {Object} plugin - A notifications plugin.
  */
 function notifications(options = {}) {
-  const defaultOptions = {
-    idCacheLength: 100,
-    incomingCallNotificationMode: 'any-channel'
-  };
   const pluginOptions = (0, _fp.defaultsDeep)(defaultOptions, options);
   parseOptions(pluginOptions);
 
@@ -45293,7 +45678,11 @@ var _effects = __webpack_require__("../../node_modules/redux-saga/dist/redux-sag
 
 var _selectors = __webpack_require__("../../packages/kandy/src/request/interface/selectors.js");
 
+var _selectors2 = __webpack_require__("../../packages/kandy/src/auth/interface/selectors.js");
+
 var _version = __webpack_require__("../../packages/kandy/src/common/version.js");
+
+var _constants = __webpack_require__("../../packages/kandy/src/constants.js");
 
 function _interopRequireWildcard(obj) { if (obj && obj.__esModule) { return obj; } else { var newObj = {}; if (obj != null) { for (var key in obj) { if (Object.prototype.hasOwnProperty.call(obj, key)) newObj[key] = obj[key]; } } newObj.default = obj; return newObj; } }
 
@@ -45319,6 +45708,9 @@ function request(options, commonOptions) {
  */
 
 
+// Constants
+
+
 // Libraries.
 // Requests plugin.
 function* requestSaga(options, commonOptions) {
@@ -45328,9 +45720,28 @@ function* requestSaga(options, commonOptions) {
 
   const useCustomHeader = yield (0, _effects.select)(_selectors.injectAgentVersionHeader);
   if (useCustomHeader) {
+    let platform = yield (0, _effects.select)(_selectors2.getPlatform);
+
+    // Assume request is for CPaaS platform, by default.
+    let headerValue = `cpaas-js-sdk/${(0, _version.getVersion)()}`;
+
+    // Check if request is for callMe service, otherwise determine the apropriate platform.
+    // (callMe service uses Link platform for call requests)
+    if (options.url && options.url.includes('/anonymous/')) {
+      headerValue = `callme-js-sdk/${(0, _version.getVersion)()}`;
+    } else {
+      // Check the actual platform used
+      if (platform === _constants.platforms.UC) {
+        headerValue = `uc-js-sdk/${(0, _version.getVersion)()}`;
+      } else if (platform === _constants.platforms.LINK) {
+        headerValue = `link-js-sdk/${(0, _version.getVersion)()}`;
+      }
+    }
+
+    // Note that the same headerName is used for all platforms & services.
     options = (0, _utils.mergeValues)(options, {
       headers: {
-        'X-Cpaas-Agent': `cpaas-js-sdk/${(0, _version.getVersion)()}`
+        'X-Cpaas-Agent': headerValue
       }
     });
   }
@@ -45353,6 +45764,10 @@ Object.defineProperty(exports, "__esModule", {
   value: true
 });
 exports.__testonly__ = undefined;
+
+var _extends2 = __webpack_require__("../../node_modules/babel-runtime/helpers/extends.js");
+
+var _extends3 = _interopRequireDefault(_extends2);
 
 var _objectWithoutProperties2 = __webpack_require__("../../node_modules/babel-runtime/helpers/objectWithoutProperties.js");
 
@@ -45380,6 +45795,8 @@ var _logs = __webpack_require__("../../packages/kandy/src/logs/index.js");
 
 var _actions2 = __webpack_require__("../../packages/kandy/src/config/interface/actions.js");
 
+var _validation = __webpack_require__("../../packages/kandy/src/common/validation/index.js");
+
 function _interopRequireWildcard(obj) { if (obj && obj.__esModule) { return obj; } else { var newObj = {}; if (obj != null) { for (var key in obj) { if (Object.prototype.hasOwnProperty.call(obj, key)) newObj[key] = obj[key]; } } newObj.default = obj; return newObj; } }
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
@@ -45387,6 +45804,9 @@ function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { de
 /**
  * Enum declaring the valid request response data types that are available to be handled
  */
+
+
+// State setters.
 const responseTypes = (0, _freeze2.default)({
   json: 'json',
   blob: 'blob',
@@ -45394,7 +45814,7 @@ const responseTypes = (0, _freeze2.default)({
   none: 'none'
 });
 
-// State setters.
+// Parse and/or Validate
 
 
 const contentTypes = (0, _freeze2.default)({
@@ -45410,18 +45830,25 @@ const pluginName = 'requests';
 /**
  * Configurable properties 'published' by this "Request" plugin.
  *
- * @property {boolean} injectAgentVersionHeader Option to automatically inject an agent version header to every REST request.
+ * @property {boolean} [injectAgentVersionHeader=true] Option to automatically inject an agent version header to every REST request.
  *            This header is used to help with diagnostics and analytics in a completely anonymous fashion.
  *            TODO: Set it to 'true' after server side whitelists that actual custom header.
  */
 const defaultOptions = {
   injectAgentVersionHeader: true
+};
 
-  /*
-   * HTTP request plugin.
-   */
-};function request(options = {}) {
+const v8nValidation = _validation.validation.schema({
+  injectAgentVersionHeader: _validation.validation.boolean()
+});
+const parseOptions = (0, _validation.parse)('request', v8nValidation);
+
+/*
+ * HTTP request plugin.
+ */
+function request(options = {}) {
   options = (0, _utils.mergeValues)(defaultOptions, options);
+  parseOptions(options);
 
   function* init() {
     yield (0, _effects.put)((0, _actions2.update)(options, pluginName));
@@ -45460,7 +45887,7 @@ function* handleRequest(action) {
  * Currently this processes the request and assumes nothing about the response.
  * - If the response has a body, it will always be parsed and forwarded on.
  *      - If no body, then an empty object in its place.
- * - If the fetch succeded, the response "results" will always be forwarded on,
+ * - If the fetch succeeded, the response "results" will always be forwarded on,
  *      even if the response is outside of the 200-299 range.
  *      - Because some backends provide more detailed error info (that a saga
  *        may need) as part of the body, rather than just the response status.
@@ -45475,12 +45902,33 @@ function* handleRequest(action) {
 async function makeRequest(options, requestId) {
   const log = _logs.logManager.getLogger('REQUEST', requestId);
 
-  // TODO This function sometimes returns `{ body : false , ...}` and also isn't consistent
-  // with providing `{ message }` or `{result : {message}}`. What's up with that?
-  // Make it so that it returns consistently and the same object.
-  // Make sure this behaviour is not relied upon by callers before changing this.
-
   // TODO This functions is too complex. Consider refactoring.
+
+  /**
+   * Make a response object that will  have the same structure every time
+   * regardless of the server response.
+   *
+   * @param {Object} apiResponse API related response data
+   * @param {string} apiResponse.error This should be a string indicating an error if the request fails due to an invalid request.
+   * @param {string} apiResponse.message This should be a string with more details about the api error.
+   * @param {Object} httpResponse This will contain the response data from the server.
+   * @param {Object} httpResponse.body The response body data from the server.
+   * @param {boolean} httpResponse.ok Indicates if the request was considered a success by the server.
+   * @param {Object} httpResponse.code The HTTP status code for the request.
+   * @param {Object} httpResponse.message A message describing the server response.
+   * @return {Object} An object containing API and/or server response details.
+   */
+  function makeResponse(apiResponse = {}, httpResponse = {}) {
+    return {
+      body: httpResponse.body,
+      error: apiResponse.error,
+      result: {
+        ok: Boolean(httpResponse.ok),
+        code: httpResponse.code,
+        message: apiResponse.message || httpResponse.message
+      }
+    };
+  }
 
   // Extract and remove the non-fetch API properties.
   const { url, queryParams, responseType = 'json' } = options,
@@ -45489,11 +45937,7 @@ async function makeRequest(options, requestId) {
   if (!url || typeof url !== 'string') {
     const invalidUrlMessage = `Invalid request url; expected url of type string but received ${url} instead`;
     log.error(invalidUrlMessage);
-    return {
-      body: undefined,
-      error: 'REQUEST_URL',
-      message: invalidUrlMessage
-    };
+    return makeResponse({ error: 'REQUEST_URL', message: invalidUrlMessage });
   }
 
   // Grab that last part of the URL (after the last /) to be logged.
@@ -45504,28 +45948,18 @@ async function makeRequest(options, requestId) {
 
   if (!responseTypes.hasOwnProperty(responseType)) {
     // Invalid data type requested
-    log.info('Cannot make request; responseType value was invalid.');
-    return {
-      body: undefined,
-      error: 'RESPONSE_TYPE',
-      message: 'Requested invalid data type for response'
-    };
+    const invalidResponseType = 'Cannot make request; responseType value was invalid.';
+    log.info(invalidResponseType);
+    return makeResponse({ error: 'RESPONSE_TYPE', message: invalidResponseType });
   }
+
   let response;
   let contentType;
   try {
     response = await fetch(url + (0, _utils.toQueryString)(queryParams), fetchOptions);
   } catch (err) {
     log.info(`Failed to make request, caused by ${err.message}`);
-    return {
-      body: false,
-      error: 'FETCH',
-      result: {
-        ok: false,
-        code: err.name,
-        message: err.message
-      }
-    };
+    return makeResponse({ error: 'FETCH' }, { code: err.name, message: err.message });
   }
 
   try {
@@ -45552,11 +45986,7 @@ async function makeRequest(options, requestId) {
        *    individual special cases...
        */
       if (response.status === 403 && contentType.includes('html')) {
-        return {
-          body: false,
-          error: 'REQUEST',
-          result
-        };
+        return makeResponse({ error: 'REQUEST' }, result);
       }
 
       /*
@@ -45565,11 +45995,7 @@ async function makeRequest(options, requestId) {
        */
       const isJson = contentType && contentType.includes(contentTypes.jsonType);
       responseBody = isJson ? await response.json() : {};
-      return {
-        body: responseBody,
-        error: 'REQUEST',
-        result
-      };
+      return makeResponse({ error: 'REQUEST' }, (0, _extends3.default)({ body: responseBody }, result));
     } else if (response.status === 204) {
       /*
        * A `204 (No Content)` response indicates a success, but with no content to return.
@@ -45578,11 +46004,7 @@ async function makeRequest(options, requestId) {
       responseBody = {};
 
       log.info(`Finished request with successful response (status ${response.status}).`);
-      return {
-        body: responseBody,
-        error: false,
-        result
-      };
+      return makeResponse(undefined, (0, _extends3.default)({ body: responseBody }, result));
     } else {
       /**
        * The SDK should only be parsing the responses as is expected without checking the content type of the response.
@@ -45617,35 +46039,15 @@ async function makeRequest(options, requestId) {
         // If the code gets here the issue is either with the server not sending us expected data, or with
         // the calling code that told us to expect the wrong data.
 
-        return {
-          body: undefined,
-          error: 'REQUEST',
-          result: {
-            ok: false,
-            code: e.name,
-            message: e.message
-          }
-        };
+        return makeResponse({ error: 'REQUEST' }, { code: e.name, message: e.message });
       }
 
       log.info(`Finished request with successful response (status ${response.status}).`);
-      return {
-        body: responseBody,
-        error: false,
-        result
-      };
+      return makeResponse(undefined, (0, _extends3.default)({ body: responseBody }, result));
     }
   } catch (err) {
     log.info(`Failed to parse response, caused by ${err.message}`);
-    return {
-      body: false,
-      error: 'REQUEST',
-      result: {
-        ok: false,
-        code: err.name,
-        message: err.message
-      }
-    };
+    return makeResponse({ error: 'REQUEST' }, { code: err.name, message: err.message });
   }
 }
 
@@ -45761,7 +46163,7 @@ function injectAgentVersionHeader(state) {
 Object.defineProperty(exports, "__esModule", {
   value: true
 });
-const prefix = '@@KANDY/';
+const prefix = '@@KANDY/SUBSCRIPTION/';
 
 const SUBSCRIBE = exports.SUBSCRIBE = prefix + 'SUBSCRIBE';
 const SUBSCRIBE_FINISHED = exports.SUBSCRIBE_FINISHED = prefix + 'SUBSCRIBE_FINISHED';
@@ -53008,6 +53410,35 @@ function Session(id, managers, config = {}) {
     const peer = peerManager.get(peerId);
     const track = trackManager.get(newTrack.id);
     return peer.replaceTrack(track.track, options).then(() => {
+      // Setup handlers for the replaced track, same as adding a new track
+      const media = mediaManager.get(track.getStream().id);
+      if (media) {
+        media.on('track:removed', trackId => {
+          emitter.emit('track:removed', {
+            local: true,
+            trackId: trackId
+          });
+        });
+      }
+
+      track.once('ended', ({ performRenegotiation }) => {
+        // If the PeerConnection is closed, we don't need to worry about
+        //    removing the track (and it would throw an error anyway).
+        if (peer.signalingState !== 'closed') {
+          peer.removeTrack(track.id);
+          emitter.emit('track:ended', {
+            local: true,
+            trackId: track.id,
+            performRenegotiation: performRenegotiation
+          });
+          // Remove track from session dscp settings
+          if (settings.dscpControls.hasOwnProperty(track.id)) {
+            log.debug(`Removing track ${track.id} from session dscp settings`);
+            delete settings.dscpControls[track.id];
+          }
+        }
+      });
+
       emitter.emit('track:replaced', {
         oldTrackId: options.trackId,
         trackId: newTrack.id
@@ -54354,8 +54785,12 @@ var _fp = __webpack_require__("../../node_modules/lodash/fp.js");
 /**
  * A set of {@link call.SdpHandlerFunction SdpHandlerFunction}s for manipulating SDP information.
  * These handlers are used to customize low-level call behaviour for very specific
- * environments and/or scenarios. They can be provided during SDK instantiation
- * to be used for all calls.
+ * environments and/or scenarios.
+ *
+ * Note that SDP handlers are exposed on the entry point of the SDK. They can be added during
+ * initialization of the SDK using the {@link #configconfigcall config.call.sdpHandlers} configuration
+ * parameter. They can also be set after the SDK's creation by using the
+ * {@link call.setSdpHandlers} function.
  *
  * @public
  * @namespace sdpHandlers
@@ -54364,29 +54799,59 @@ var _fp = __webpack_require__("../../node_modules/lodash/fp.js");
  * const codecRemover = sdpHandlers.createCodecRemover(['VP8', 'VP9'])
  * const client = create({
  *   call: {
- *     sdpHandlers: [ <Your-SDP-Handler-Function>, ...]
+ *     sdpHandlers: [ codecRemover, <Your-SDP-Handler-Function>, ...]
  *   }
  * })
+ * @example
+ * // Through the Call API post-instantiation
+ * client.call.setSdpHandlers([ codecRemover, <Your-SDP-Handler-Function>, ...])
  */
 
-// Disabling eslint for the next comment as we want to be able to use a disallowed word
-// eslint-disable-next-line no-warning-comments
 /**
- * In some scenarios it's necessary to remove certain codecs being offered by the SDK to the remote party.
+ * An object that represents a selector to match codecs of an RTP map in SDP.
+ *
+ * @public
+ * @static
+ * @typedef {Object} CodecSelector
+ * @memberof sdpHandlers
+ * @property {string} name The name of the codec.
+ * @property {Array<string>} fmtpParams An array of strings to match against the "a=fmtp" format parameters for the corresponding codec.
+ *                                      All of the elements in the array must be contained in the "a=fmtp" attribute in order to be a match.
+ */
+
+/**
+ * This function creates an SDP handler that will remove codecs matching the selectors specified for SDP offers and answers.
+ *
+ * In some scenarios it's necessary to remove certain codecs being offered by the SDK to remote parties. For example, some legacy call services limit the SDP
+ * length (usually to 4KB) and will reject calls that have SDP size above this amount.
+ *
  * While creating an SDP handler would allow a user to perform this type of manipulation, it is a non-trivial task that requires in-depth knowledge of WebRTC SDP.
  *
- * To facilitate this common task, the SDK provides a codec removal handler creator that can be used for this purpose.
- *
- * The SDP handlers are exposed on the entry point of the SDK. They need to be added to the list of SDP handlers via configuration on creation of an instance of the SDK.
+ * To facilitate this common task, the createCodecRemover function creates a codec removal handler that can be used for this purpose. Applications can use this codec
+ * removal handler in combination with the {@link call.getAvailableCodecs call.getAvailableCodecs} function in order to build logic to determine the best codecs to use
+ * for their application.
  *
  * @public
  * @memberof sdpHandlers
  * @method createCodecRemover
- * @param {Array<string>} codecs A list of codec names to remove from the SDP.
+ * @param {Array<CodecSelector> | Array<string>} codecs A list of codec selectors to remove from the SDP. If passing a list of strings, they will be converted into
+ *                                                      codec selectors that correspond to those names without any extra FMTP parameters.
  * @returns {call.SdpHandlerFunction} The resulting SDP handler that will remove the codec.
  * @example
  * import { create, sdpHandlers } from 'kandy';
- * const codecRemover = sdpHandlers.createCodecRemover(['VP8', 'VP9'])
+ *
+ * const codecRemover = sdpHandlers.createCodecRemover([
+ *   // Remove all VP8 and VP9 codecs.
+ *   'VP8',
+ *   'VP9',
+ *
+ *   // Remove all H264 codecs with the specified FMTP parameters.
+ *   {
+ *     name: 'H264',
+ *     fmtpParams: ['profile-level-id=4d0032', 'packetization-mode=1']
+ *   }
+ * ])
+ *
  * const client = create({
  *   call: {
  *     sdpHandlers: [codecRemover]
