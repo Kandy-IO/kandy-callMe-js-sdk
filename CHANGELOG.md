@@ -24,6 +24,10 @@ Choose your configuration ([Kandy-US](https://kandy-io.github.io/kandy-link-js-s
 - Added bandwidth control parameter for anonymous calls. `KAA-2403`
 - Added new Call API `call.setSdpHandlers` for setting SDP Handlers after the SDK has been initialized. `KAA-2322`
 
+### Fixed
+
+- Fixed an issue preventing the playing of video tracks during a call on iOS Safari. `KAA-2382`
+
 ## 4.17.0 - 2020-06-26
 
 ### Added
