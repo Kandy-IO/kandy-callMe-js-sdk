@@ -28,6 +28,10 @@ Choose your configuration ([Kandy-US](https://kandy-io.github.io/kandy-link-js-s
 
 - Fixed an issue preventing the playing of video tracks during a call on iOS Safari. `KAA-2382`
 
+### Changed
+
+- Updated the `webrtc-adapter` package (6.4.4 -> 7.6.3). `KAA-2381`
+
 ## 4.17.0 - 2020-06-26
 
 ### Added
