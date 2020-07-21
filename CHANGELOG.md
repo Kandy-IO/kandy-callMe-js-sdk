@@ -27,6 +27,7 @@ Choose your configuration ([Kandy-US](https://kandy-io.github.io/kandy-link-js-s
 ### Fixed
 
 - Fixed an issue preventing the playing of video tracks during a call on iOS Safari. `KAA-2382`
+- Fixed erroneous validation messages being thrown by valid call configurations.
 
 ### Changed
 
