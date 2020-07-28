@@ -60,6 +60,7 @@ Choose the configuration that applies to you:
 
 - Added bandwidth control parameter for anonymous calls. `KAA-2403`
 - Added new Call API `call.setSdpHandlers` for setting SDP Handlers after the SDK has been initialized. `KAA-2322`
+- Added new tutorials. `KAA-2432`
 
 ### Fixed
 

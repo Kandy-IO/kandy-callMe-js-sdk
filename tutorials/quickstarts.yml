@@ -1,0 +1,23 @@
+# "Display" data about quickstarts.
+# Information to be displayed on the Quickstarts page.
+
+- name: Get Started
+  description: # Get Started
+  link: /quickstarts/javascript/newCallMe/Get%20Started
+
+- name: Configurations
+  description: # Configurations
+  link: /quickstarts/javascript/newCallMe/Configurations
+
+- name: Enabling Anonymous Call Service
+  description: # Enabling Anonymous Call Service
+  link: /quickstarts/javascript/newCallMe/Enabling%20Anonymous%20Call%20Service
+
+- name: Generating Tokens
+  description: # Generating Tokens
+  link: /quickstarts/javascript/newCallMe/Generating%20Tokens
+
+- name: Anonymous Calls
+  description: # Anonymous Calls
+  link: /quickstarts/javascript/newCallMe/Anonymous%20Calls
+

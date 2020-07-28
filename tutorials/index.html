@@ -1,0 +1,170 @@
+<!DOCTYPE >
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
+    <title>Kandy Tutorials</title>
+    <link rel="stylesheet" href="https://unpkg.com/docute@4/dist/docute.css" />
+  </head>
+  <body>
+    <div id="docute"></div>
+    <script src="https://unpkg.com/docute@4/dist/docute.js"></script>
+    <script src="//cdn.jsdelivr.net/remarkable/1.7.1/remarkable.min.js"></script>
+    <script type="module">
+      import { configs } from './config.js'
+
+      const sidebar = [{
+        title: "Tutorials",
+        links: [
+        
+          {
+            title: 'Get Started',
+            link: 'Get Started'
+          },
+        
+          {
+            title: 'Configurations',
+            link: 'Configurations'
+          },
+        
+          {
+            title: 'Enabling Anonymous Call Service',
+            link: 'Enabling Anonymous Call Service'
+          },
+        
+          {
+            title: 'Generating Tokens',
+            link: 'Generating Tokens'
+          },
+        
+          {
+            title: 'Anonymous Calls',
+            link: 'Anonymous Calls'
+          },
+        
+        ]
+      }]
+
+      // Get all query params (i.e. params that are provided as part of the URL address of a given Tutorial)
+      // These params come after '/?' in that URL.
+      const queryParams = new URLSearchParams(window.location.search);
+      const configName = queryParams.get('config')
+      let configIdx
+
+      // Try to determine the index for the configuration we need to use
+      // for replacing all the templated variables in any of the Tutorial pages.
+      if (!configName) {
+        // If there was no 'config' query parameter, then by default we'll access
+        // the first configuration element in our 'configs' array.
+        configIdx = 0
+      } else {
+        let element = configs.find(x => x.name === configName)
+        if (!element) {
+          configIdx = 0
+        } else {
+          configIdx = configs.indexOf(element);
+        }
+      }
+
+      let useDefault = !configs || !configs[configIdx] || !configs[configIdx].data
+      new Docute({
+        target: '#docute',
+        sidebar,
+        plugins: [
+          {
+            name: 'Hide Front Matter',
+            extend(api) {
+              api.processMarkdown(md => md.replace(/---([^]*?)---/m, ''))
+            }
+          },
+          {
+            name: 'Convert KANDYFQDN',
+            extend(api) {
+              const kandyFQDN = useDefault ? '$KANDYFQDN$' : configs[configIdx].data.KANDYFQDN
+              api.processMarkdown(md => md.replace(/\$KANDYFQDN\$/gm, kandyFQDN))
+            }
+          },
+          {
+            name: 'Convert KANDYTURN1',
+            extend(api) {
+              const kandyTURN1 = useDefault ? '$KANDYTURN1$' : configs[configIdx].data.KANDYTURN1
+              api.processMarkdown(md => md.replace(/\$KANDYTURN1\$/gm, kandyTURN1))
+            }
+          },
+          {
+            name: 'Convert KANDYTURN2',
+            extend(api) {
+              const kandyTURN2 = useDefault ? '$KANDYTURN2$' : configs[configIdx].data.KANDYTURN2
+              api.processMarkdown(md => md.replace(/\$KANDYTURN2\$/gm, kandyTURN2))
+            }
+          },
+          {
+            name: 'Convert KANDYSTUN1',
+            extend(api) {
+              const kandySTUN1 = useDefault ? '$KANDYSTUN1$' : configs[configIdx].data.KANDYSTUN1
+              api.processMarkdown(md => md.replace(/\$KANDYSTUN1\$/gm, kandySTUN1))
+            }
+          },
+          {
+            name: 'Convert KANDYSTUN2',
+            extend(api) {
+              const kandySTUN2 = useDefault ? '$KANDYSTUN2$' : configs[configIdx].data.KANDYSTUN2
+              api.processMarkdown(md => md.replace(/\$KANDYSTUN2\$/gm, kandySTUN2))
+            }
+          },
+          {
+            name: 'Convert KANDY',
+            extend(api) {
+              const kandy = useDefault ? '$KANDY$' : configs[configIdx].data.KANDY
+              api.processMarkdown(md => md.replace(/\$KANDY\$/gm, kandy))
+            }
+          },
+          {
+            name: 'Convert SUBSCRIPTIONFQDN',
+            extend(api) {
+              const subscriptionFQDN = useDefault ? '$SUBSCRIPTIONFQDN$' : configs[configIdx].data.SUBSCRIPTIONFQDN
+              api.processMarkdown(md => md.replace(/\$SUBSCRIPTIONFQDN\$/gm, subscriptionFQDN))
+            }
+          },
+          {
+            name: 'Convert WEBSOCKETFQDN',
+            extend(api) {
+              const webSocketFQDN = useDefault ? '$WEBSOCKETFQDN$' : configs[configIdx].data.WEBSOCKETFQDN
+              api.processMarkdown(md => md.replace(/\$WEBSOCKETFQDN\$/gm, webSocketFQDN))
+            }
+          },
+          {
+            // This is required so that docute/vue don't mangle
+            // the codepen form.
+            name: 'Unescape HTML',
+            extend(api) {
+              // This hook will wrap the html generated by the markdown
+              // in a div that uses vue's "v-html" directive so that the
+              // html is not escaped by Vue.
+              api.extendMarkdownComponent(component =>{
+                const rawHtml = String(component.template)
+
+                // Loop through every line of the markdown to find the codepen form
+                // and replace it with a div with the v-html directive and set the form
+                // as data for the view so that it gets rendered without being escaped.
+                const modifiedHtml = rawHtml.split('\n')
+                  .map(line => {
+                    if (line.startsWith('<form action="https://codepen.io/pen/define"')) {
+                      component.data = () => ({codepenForm: line})
+
+                      return '<div v-html="codepenForm"></div>'
+                    }
+
+                    return line
+                  })
+                  .join('\n')
+
+                component.template = modifiedHtml
+              })
+            }
+          }
+        ]
+      })
+    </script>
+  </body>
+</html>
