@@ -66,6 +66,7 @@ Choose the configuration that applies to you:
 
 - Fixed an issue preventing the playing of video tracks during a call on iOS Safari. `KAA-2382`
 - Fixed erroneous validation messages being thrown by valid call configurations.
+- Fixed an issue preventing the proper termination of an audio+video outgoing call when camera was already in use. `KAA-2426`
 
 ### Changed
 
