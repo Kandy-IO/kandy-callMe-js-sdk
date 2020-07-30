@@ -16988,7 +16988,7 @@
                 "children": [
                   {
                     "type": "text",
-                    "value": "Custom SIP headers can be used to convey additional information to a SIP endpoint.",
+                    "value": "The form of an SDP handler function and the expected arguments that it receives.",
                     "position": {
                       "start": {
                         "line": 1,
@@ -16997,8 +16997,8 @@
                       },
                       "end": {
                         "line": 1,
-                        "column": 83,
-                        "offset": 82
+                        "column": 81,
+                        "offset": 80
                       },
                       "indent": []
                     }
@@ -17012,506 +17012,10 @@
                   },
                   "end": {
                     "line": 1,
-                    "column": 83,
-                    "offset": 82
+                    "column": 81,
+                    "offset": 80
                   },
                   "indent": []
-                }
-              },
-              {
-                "type": "paragraph",
-                "children": [
-                  {
-                    "type": "text",
-                    "value": "These headers must be configured on the server prior to making a request, otherwise the request will fail when trying to set the headers.",
-                    "position": {
-                      "start": {
-                        "line": 3,
-                        "column": 1,
-                        "offset": 84
-                      },
-                      "end": {
-                        "line": 3,
-                        "column": 138,
-                        "offset": 221
-                      },
-                      "indent": []
-                    }
-                  }
-                ],
-                "position": {
-                  "start": {
-                    "line": 3,
-                    "column": 1,
-                    "offset": 84
-                  },
-                  "end": {
-                    "line": 3,
-                    "column": 138,
-                    "offset": 221
-                  },
-                  "indent": []
-                }
-              },
-              {
-                "type": "paragraph",
-                "children": [
-                  {
-                    "type": "text",
-                    "value": "These headers can be specified with the ",
-                    "position": {
-                      "start": {
-                        "line": 5,
-                        "column": 1,
-                        "offset": 223
-                      },
-                      "end": {
-                        "line": 5,
-                        "column": 41,
-                        "offset": 263
-                      },
-                      "indent": []
-                    }
-                  },
-                  {
-                    "type": "link",
-                    "url": "call.make",
-                    "title": null,
-                    "jsdoc": true,
-                    "children": [
-                      {
-                        "type": "text",
-                        "value": "call.make"
-                      }
-                    ],
-                    "position": {
-                      "start": {
-                        "line": 5,
-                        "column": 41,
-                        "offset": 263
-                      },
-                      "end": {
-                        "line": 5,
-                        "column": 58,
-                        "offset": 280
-                      },
-                      "indent": []
-                    }
-                  },
-                  {
-                    "type": "text",
-                    "value": " and ",
-                    "position": {
-                      "start": {
-                        "line": 5,
-                        "column": 58,
-                        "offset": 280
-                      },
-                      "end": {
-                        "line": 5,
-                        "column": 63,
-                        "offset": 285
-                      },
-                      "indent": []
-                    }
-                  },
-                  {
-                    "type": "link",
-                    "url": "call.answer",
-                    "title": null,
-                    "jsdoc": true,
-                    "children": [
-                      {
-                        "type": "text",
-                        "value": "call.answer"
-                      }
-                    ],
-                    "position": {
-                      "start": {
-                        "line": 5,
-                        "column": 63,
-                        "offset": 285
-                      },
-                      "end": {
-                        "line": 5,
-                        "column": 82,
-                        "offset": 304
-                      },
-                      "indent": []
-                    }
-                  },
-                  {
-                    "type": "text",
-                    "value": " APIs.\nThey can also be set on a call using the ",
-                    "position": {
-                      "start": {
-                        "line": 5,
-                        "column": 82,
-                        "offset": 304
-                      },
-                      "end": {
-                        "line": 6,
-                        "column": 42,
-                        "offset": 352
-                      },
-                      "indent": [
-                        1
-                      ]
-                    }
-                  },
-                  {
-                    "type": "link",
-                    "url": "#callsetcustomparameters",
-                    "title": null,
-                    "jsdoc": true,
-                    "children": [
-                      {
-                        "type": "text",
-                        "value": "call.setCustomParameters"
-                      }
-                    ],
-                    "position": {
-                      "start": {
-                        "line": 6,
-                        "column": 42,
-                        "offset": 352
-                      },
-                      "end": {
-                        "line": 6,
-                        "column": 74,
-                        "offset": 384
-                      },
-                      "indent": []
-                    }
-                  },
-                  {
-                    "type": "text",
-                    "value": ", and sent using the ",
-                    "position": {
-                      "start": {
-                        "line": 6,
-                        "column": 74,
-                        "offset": 384
-                      },
-                      "end": {
-                        "line": 6,
-                        "column": 95,
-                        "offset": 405
-                      },
-                      "indent": []
-                    }
-                  },
-                  {
-                    "type": "link",
-                    "url": "#callsendcustomparameters",
-                    "title": null,
-                    "jsdoc": true,
-                    "children": [
-                      {
-                        "type": "text",
-                        "value": "call.sendCustomParameters"
-                      }
-                    ],
-                    "position": {
-                      "start": {
-                        "line": 6,
-                        "column": 95,
-                        "offset": 405
-                      },
-                      "end": {
-                        "line": 6,
-                        "column": 128,
-                        "offset": 438
-                      },
-                      "indent": []
-                    }
-                  },
-                  {
-                    "type": "text",
-                    "value": " API.",
-                    "position": {
-                      "start": {
-                        "line": 6,
-                        "column": 128,
-                        "offset": 438
-                      },
-                      "end": {
-                        "line": 6,
-                        "column": 133,
-                        "offset": 443
-                      },
-                      "indent": []
-                    }
-                  }
-                ],
-                "position": {
-                  "start": {
-                    "line": 5,
-                    "column": 1,
-                    "offset": 223
-                  },
-                  "end": {
-                    "line": 6,
-                    "column": 133,
-                    "offset": 443
-                  },
-                  "indent": [
-                    1
-                  ]
-                }
-              },
-              {
-                "type": "paragraph",
-                "children": [
-                  {
-                    "type": "text",
-                    "value": "Custom headers may be received anytime throughout the duration a call. A remote endpoint may send custom headers when starting a call,\n answering a call, or during call updates such as hold/unhold and addition/removal of media in the call.\n When these custom headers are received, the SDK will emit a ",
-                    "position": {
-                      "start": {
-                        "line": 8,
-                        "column": 1,
-                        "offset": 445
-                      },
-                      "end": {
-                        "line": 10,
-                        "column": 62,
-                        "offset": 746
-                      },
-                      "indent": [
-                        1,
-                        1
-                      ]
-                    }
-                  },
-                  {
-                    "type": "link",
-                    "url": "#calleventcallcustomparameters",
-                    "title": null,
-                    "jsdoc": true,
-                    "children": [
-                      {
-                        "type": "text",
-                        "value": "call:customParameters"
-                      }
-                    ],
-                    "position": {
-                      "start": {
-                        "line": 10,
-                        "column": 62,
-                        "offset": 746
-                      },
-                      "end": {
-                        "line": 10,
-                        "column": 124,
-                        "offset": 808
-                      },
-                      "indent": []
-                    }
-                  },
-                  {
-                    "type": "text",
-                    "value": " event\n which will contain the custom parameters that were received.",
-                    "position": {
-                      "start": {
-                        "line": 10,
-                        "column": 124,
-                        "offset": 808
-                      },
-                      "end": {
-                        "line": 11,
-                        "column": 62,
-                        "offset": 876
-                      },
-                      "indent": [
-                        1
-                      ]
-                    }
-                  }
-                ],
-                "position": {
-                  "start": {
-                    "line": 8,
-                    "column": 1,
-                    "offset": 445
-                  },
-                  "end": {
-                    "line": 11,
-                    "column": 62,
-                    "offset": 876
-                  },
-                  "indent": [
-                    1,
-                    1,
-                    1
-                  ]
-                }
-              },
-              {
-                "type": "paragraph",
-                "children": [
-                  {
-                    "type": "text",
-                    "value": "A Call's custom parameters are a property of the Call's ",
-                    "position": {
-                      "start": {
-                        "line": 13,
-                        "column": 1,
-                        "offset": 878
-                      },
-                      "end": {
-                        "line": 13,
-                        "column": 57,
-                        "offset": 934
-                      },
-                      "indent": []
-                    }
-                  },
-                  {
-                    "type": "link",
-                    "url": "#callcallobject",
-                    "title": null,
-                    "jsdoc": true,
-                    "children": [
-                      {
-                        "type": "text",
-                        "value": "CallObject"
-                      }
-                    ],
-                    "position": {
-                      "start": {
-                        "line": 13,
-                        "column": 57,
-                        "offset": 934
-                      },
-                      "end": {
-                        "line": 13,
-                        "column": 91,
-                        "offset": 968
-                      },
-                      "indent": []
-                    }
-                  },
-                  {
-                    "type": "text",
-                    "value": ",\n which can be retrieved using the ",
-                    "position": {
-                      "start": {
-                        "line": 13,
-                        "column": 91,
-                        "offset": 968
-                      },
-                      "end": {
-                        "line": 14,
-                        "column": 35,
-                        "offset": 1004
-                      },
-                      "indent": [
-                        1
-                      ]
-                    }
-                  },
-                  {
-                    "type": "link",
-                    "url": "#callgetbyid",
-                    "title": null,
-                    "jsdoc": true,
-                    "children": [
-                      {
-                        "type": "text",
-                        "value": "call.getById"
-                      }
-                    ],
-                    "position": {
-                      "start": {
-                        "line": 14,
-                        "column": 35,
-                        "offset": 1004
-                      },
-                      "end": {
-                        "line": 14,
-                        "column": 55,
-                        "offset": 1024
-                      },
-                      "indent": []
-                    }
-                  },
-                  {
-                    "type": "text",
-                    "value": " or\n ",
-                    "position": {
-                      "start": {
-                        "line": 14,
-                        "column": 55,
-                        "offset": 1024
-                      },
-                      "end": {
-                        "line": 15,
-                        "column": 2,
-                        "offset": 1029
-                      },
-                      "indent": [
-                        1
-                      ]
-                    }
-                  },
-                  {
-                    "type": "link",
-                    "url": "#callgetall",
-                    "title": null,
-                    "jsdoc": true,
-                    "children": [
-                      {
-                        "type": "text",
-                        "value": "call.getAll"
-                      }
-                    ],
-                    "position": {
-                      "start": {
-                        "line": 15,
-                        "column": 2,
-                        "offset": 1029
-                      },
-                      "end": {
-                        "line": 15,
-                        "column": 21,
-                        "offset": 1048
-                      },
-                      "indent": []
-                    }
-                  },
-                  {
-                    "type": "text",
-                    "value": " APIs.",
-                    "position": {
-                      "start": {
-                        "line": 15,
-                        "column": 21,
-                        "offset": 1048
-                      },
-                      "end": {
-                        "line": 15,
-                        "column": 27,
-                        "offset": 1054
-                      },
-                      "indent": []
-                    }
-                  }
-                ],
-                "position": {
-                  "start": {
-                    "line": 13,
-                    "column": 1,
-                    "offset": 878
-                  },
-                  "end": {
-                    "line": 15,
-                    "column": 27,
-                    "offset": 1054
-                  },
-                  "indent": [
-                    1,
-                    1
-                  ]
                 }
               }
             ],
@@ -17522,9 +17026,9 @@
                 "offset": 0
               },
               "end": {
-                "line": 15,
-                "column": 27,
-                "offset": 1054
+                "line": 1,
+                "column": 81,
+                "offset": 80
               }
             }
           },
@@ -17532,81 +17036,76 @@
             {
               "title": "public",
               "description": null,
-              "lineNumber": 17,
+              "lineNumber": 2,
               "type": null
             },
             {
               "title": "static",
               "description": null,
-              "lineNumber": 18
-            },
-            {
-              "title": "module",
-              "description": null,
-              "lineNumber": 19,
-              "type": null,
-              "name": "CustomParameter"
+              "lineNumber": 3
             },
             {
               "title": "typedef",
               "description": null,
-              "lineNumber": 20,
+              "lineNumber": 4,
               "type": {
                 "type": "NameExpression",
-                "name": "Object"
+                "name": "Function"
               },
-              "name": "CustomParameter"
+              "name": "SdpHandlerFunction"
             },
             {
               "title": "memberof",
               "description": "call",
-              "lineNumber": 21
+              "lineNumber": 5
             },
             {
-              "title": "requires",
-              "description": null,
-              "lineNumber": 22,
-              "name": "link_call"
-            },
-            {
-              "title": "requires",
-              "description": null,
-              "lineNumber": 23,
-              "name": "callMe"
-            },
-            {
-              "title": "property",
-              "description": "The name of the custom parameter",
-              "lineNumber": 24,
+              "title": "param",
+              "description": "The SDP so far (could have been modified by previous handlers).",
+              "lineNumber": 6,
               "type": {
                 "type": "NameExpression",
-                "name": "string"
+                "name": "Object"
               },
-              "name": "name"
+              "name": "newSdp"
             },
             {
-              "title": "property",
-              "description": "The value of the custom parameter",
-              "lineNumber": 25,
+              "title": "param",
+              "description": "Additional information that might be useful when making SDP modifications.",
+              "lineNumber": 7,
               "type": {
                 "type": "NameExpression",
-                "name": "string"
+                "name": "call.SdpHandlerInfo"
               },
-              "name": "value"
+              "name": "info"
             },
             {
-              "title": "example",
-              "description": "// Specify custom parameters when making a call.\nclient.call.make(destination, mediaConstraints,\n {\n   customParameters: [\n     {\n       name: 'X-GPS',\n       value: '42.686032,23.344565'\n     }\n   ]\n }\n)",
-              "lineNumber": 26
+              "title": "param",
+              "description": "The SDP in its initial state.",
+              "lineNumber": 8,
+              "type": {
+                "type": "NameExpression",
+                "name": "Object"
+              },
+              "name": "originalSdp"
+            },
+            {
+              "title": "returns",
+              "description": "The resulting modified SDP based on the changes made by this function.",
+              "lineNumber": 9,
+              "type": {
+                "type": "NameExpression",
+                "name": "Object"
+              }
             }
           ],
           "loc": {
             "start": {
-              "line": 249,
+              "line": 177,
               "column": 0
             },
             "end": {
-              "line": 287,
+              "line": 187,
               "column": 3
             }
           },
@@ -17624,17 +17123,12 @@
             "file": "/var/jenkins_home/workspace/Kandy.js_beta/packages/kandy/src/call/interfaceNew/api/index.js"
           },
           "augments": [],
-          "examples": [
+          "examples": [],
+          "params": [
             {
-              "description": "// Specify custom parameters when making a call.\nclient.call.make(destination, mediaConstraints,\n {\n   customParameters: [\n     {\n       name: 'X-GPS',\n       value: '42.686032,23.344565'\n     }\n   ]\n }\n)"
-            }
-          ],
-          "params": [],
-          "properties": [
-            {
-              "title": "property",
-              "name": "name",
-              "lineNumber": 24,
+              "title": "param",
+              "name": "newSdp",
+              "lineNumber": 6,
               "description": {
                 "type": "root",
                 "children": [
@@ -17643,7 +17137,7 @@
                     "children": [
                       {
                         "type": "text",
-                        "value": "The name of the custom parameter",
+                        "value": "The SDP so far (could have been modified by previous handlers).",
                         "position": {
                           "start": {
                             "line": 1,
@@ -17652,8 +17146,8 @@
                           },
                           "end": {
                             "line": 1,
-                            "column": 33,
-                            "offset": 32
+                            "column": 64,
+                            "offset": 63
                           },
                           "indent": []
                         }
@@ -17667,8 +17161,8 @@
                       },
                       "end": {
                         "line": 1,
-                        "column": 33,
-                        "offset": 32
+                        "column": 64,
+                        "offset": 63
                       },
                       "indent": []
                     }
@@ -17682,20 +17176,20 @@
                   },
                   "end": {
                     "line": 1,
-                    "column": 33,
-                    "offset": 32
+                    "column": 64,
+                    "offset": 63
                   }
                 }
               },
               "type": {
                 "type": "NameExpression",
-                "name": "string"
+                "name": "Object"
               }
             },
             {
-              "title": "property",
-              "name": "value",
-              "lineNumber": 25,
+              "title": "param",
+              "name": "info",
+              "lineNumber": 7,
               "description": {
                 "type": "root",
                 "children": [
@@ -17704,7 +17198,7 @@
                     "children": [
                       {
                         "type": "text",
-                        "value": "The value of the custom parameter",
+                        "value": "Additional information that might be useful when making SDP modifications.",
                         "position": {
                           "start": {
                             "line": 1,
@@ -17713,8 +17207,8 @@
                           },
                           "end": {
                             "line": 1,
-                            "column": 34,
-                            "offset": 33
+                            "column": 75,
+                            "offset": 74
                           },
                           "indent": []
                         }
@@ -17728,8 +17222,8 @@
                       },
                       "end": {
                         "line": 1,
-                        "column": 34,
-                        "offset": 33
+                        "column": 75,
+                        "offset": 74
                       },
                       "indent": []
                     }
@@ -17743,28 +17237,150 @@
                   },
                   "end": {
                     "line": 1,
-                    "column": 34,
-                    "offset": 33
+                    "column": 75,
+                    "offset": 74
                   }
                 }
               },
               "type": {
                 "type": "NameExpression",
-                "name": "string"
+                "name": "call.SdpHandlerInfo"
+              }
+            },
+            {
+              "title": "param",
+              "name": "originalSdp",
+              "lineNumber": 8,
+              "description": {
+                "type": "root",
+                "children": [
+                  {
+                    "type": "paragraph",
+                    "children": [
+                      {
+                        "type": "text",
+                        "value": "The SDP in its initial state.",
+                        "position": {
+                          "start": {
+                            "line": 1,
+                            "column": 1,
+                            "offset": 0
+                          },
+                          "end": {
+                            "line": 1,
+                            "column": 30,
+                            "offset": 29
+                          },
+                          "indent": []
+                        }
+                      }
+                    ],
+                    "position": {
+                      "start": {
+                        "line": 1,
+                        "column": 1,
+                        "offset": 0
+                      },
+                      "end": {
+                        "line": 1,
+                        "column": 30,
+                        "offset": 29
+                      },
+                      "indent": []
+                    }
+                  }
+                ],
+                "position": {
+                  "start": {
+                    "line": 1,
+                    "column": 1,
+                    "offset": 0
+                  },
+                  "end": {
+                    "line": 1,
+                    "column": 30,
+                    "offset": 29
+                  }
+                }
+              },
+              "type": {
+                "type": "NameExpression",
+                "name": "Object"
               }
             }
           ],
-          "returns": [],
+          "properties": [],
+          "returns": [
+            {
+              "description": {
+                "type": "root",
+                "children": [
+                  {
+                    "type": "paragraph",
+                    "children": [
+                      {
+                        "type": "text",
+                        "value": "The resulting modified SDP based on the changes made by this function.",
+                        "position": {
+                          "start": {
+                            "line": 1,
+                            "column": 1,
+                            "offset": 0
+                          },
+                          "end": {
+                            "line": 1,
+                            "column": 71,
+                            "offset": 70
+                          },
+                          "indent": []
+                        }
+                      }
+                    ],
+                    "position": {
+                      "start": {
+                        "line": 1,
+                        "column": 1,
+                        "offset": 0
+                      },
+                      "end": {
+                        "line": 1,
+                        "column": 71,
+                        "offset": 70
+                      },
+                      "indent": []
+                    }
+                  }
+                ],
+                "position": {
+                  "start": {
+                    "line": 1,
+                    "column": 1,
+                    "offset": 0
+                  },
+                  "end": {
+                    "line": 1,
+                    "column": 71,
+                    "offset": 70
+                  }
+                }
+              },
+              "title": "returns",
+              "type": {
+                "type": "NameExpression",
+                "name": "Object"
+              }
+            }
+          ],
           "sees": [],
           "throws": [],
           "todos": [],
           "access": "public",
           "scope": "static",
           "kind": "typedef",
-          "name": "CustomParameter",
+          "name": "SdpHandlerFunction",
           "type": {
             "type": "NameExpression",
-            "name": "Object"
+            "name": "Function"
           },
           "memberof": "call",
           "members": {
@@ -17779,12 +17395,12 @@
               "name": "call"
             },
             {
-              "name": "CustomParameter",
+              "name": "SdpHandlerFunction",
               "kind": "typedef",
               "scope": "static"
             }
           ],
-          "namespace": "call.CustomParameter"
+          "namespace": "call.SdpHandlerFunction"
         },
         {
           "description": {
@@ -19506,7 +19122,7 @@
                 "children": [
                   {
                     "type": "text",
-                    "value": "The state representation of a Media object.\nMedia is a collection of Track objects.",
+                    "value": "The DSCPControls type defines the format for configuring network priorities (DSCP marking) for the media traffic.",
                     "position": {
                       "start": {
                         "line": 1,
@@ -19514,13 +19130,11 @@
                         "offset": 0
                       },
                       "end": {
-                        "line": 2,
-                        "column": 40,
-                        "offset": 83
+                        "line": 1,
+                        "column": 114,
+                        "offset": 113
                       },
-                      "indent": [
-                        1
-                      ]
+                      "indent": []
                     }
                   }
                 ],
@@ -19531,13 +19145,46 @@
                     "offset": 0
                   },
                   "end": {
-                    "line": 2,
-                    "column": 40,
-                    "offset": 83
+                    "line": 1,
+                    "column": 114,
+                    "offset": 113
                   },
-                  "indent": [
-                    1
-                  ]
+                  "indent": []
+                }
+              },
+              {
+                "type": "paragraph",
+                "children": [
+                  {
+                    "type": "text",
+                    "value": "If DSCPControls are not configured for a call the network priority of the traffic for all media kinds will be the default (i.e., \"low\").",
+                    "position": {
+                      "start": {
+                        "line": 3,
+                        "column": 1,
+                        "offset": 115
+                      },
+                      "end": {
+                        "line": 3,
+                        "column": 137,
+                        "offset": 251
+                      },
+                      "indent": []
+                    }
+                  }
+                ],
+                "position": {
+                  "start": {
+                    "line": 3,
+                    "column": 1,
+                    "offset": 115
+                  },
+                  "end": {
+                    "line": 3,
+                    "column": 137,
+                    "offset": 251
+                  },
+                  "indent": []
                 }
               }
             ],
@@ -19548,9 +19195,9 @@
                 "offset": 0
               },
               "end": {
-                "line": 2,
-                "column": 40,
-                "offset": 83
+                "line": 3,
+                "column": 137,
+                "offset": 251
               }
             }
           },
@@ -19558,76 +19205,79 @@
             {
               "title": "public",
               "description": null,
-              "lineNumber": 4,
+              "lineNumber": 5,
               "type": null
             },
             {
               "title": "static",
               "description": null,
-              "lineNumber": 5
+              "lineNumber": 6
             },
             {
               "title": "typedef",
               "description": null,
-              "lineNumber": 6,
+              "lineNumber": 7,
               "type": {
                 "type": "NameExpression",
                 "name": "Object"
               },
-              "name": "MediaObject"
+              "name": "DSCPControls"
             },
             {
               "title": "memberof",
               "description": "call",
-              "lineNumber": 7
+              "lineNumber": 8
             },
             {
               "title": "property",
-              "description": "The ID of the Media object.",
-              "lineNumber": 8,
-              "type": {
-                "type": "NameExpression",
-                "name": "string"
-              },
-              "name": "id"
-            },
-            {
-              "title": "property",
-              "description": "Indicator on whether this media is local or remote.",
+              "description": "The desired network priority for audio traffic (see {@link https://www.w3.org/TR/webrtc-priority/#rtc-priority-type RTCPriorityType Enum} for the list of possible values).",
               "lineNumber": 9,
               "type": {
-                "type": "NameExpression",
-                "name": "boolean"
+                "type": "OptionalType",
+                "expression": {
+                  "type": "NameExpression",
+                  "name": "RTCPriorityType"
+                }
               },
-              "name": "local"
+              "name": "audioNetworkPriority",
+              "default": "'low'"
             },
             {
               "title": "property",
-              "description": "A list of Track objects that are contained in this Media object.",
+              "description": "The desired network priority for video traffic (see {@link https://www.w3.org/TR/webrtc-priority/#rtc-priority-type RTCPriorityType Enum} for the list of possible values).",
               "lineNumber": 10,
               "type": {
-                "type": "TypeApplication",
+                "type": "OptionalType",
                 "expression": {
                   "type": "NameExpression",
-                  "name": "Array"
-                },
-                "applications": [
-                  {
-                    "type": "NameExpression",
-                    "name": "call.TrackObject"
-                  }
-                ]
+                  "name": "RTCPriorityType"
+                }
               },
-              "name": "tracks"
+              "name": "videoNetworkPriority",
+              "default": "'low'"
+            },
+            {
+              "title": "property",
+              "description": "The desired network priority for screen share traffic (see {@link https://www.w3.org/TR/webrtc-priority/#rtc-priority-type RTCPriorityType Enum} for the list of possible values).",
+              "lineNumber": 11,
+              "type": {
+                "type": "OptionalType",
+                "expression": {
+                  "type": "NameExpression",
+                  "name": "RTCPriorityType"
+                }
+              },
+              "name": "screenNetworkPriority",
+              "default": "'low'"
             }
           ],
           "loc": {
             "start": {
-              "line": 189,
+              "line": 141,
               "column": 0
             },
             "end": {
-              "line": 200,
+              "line": 153,
               "column": 3
             }
           },
@@ -19650,68 +19300,7 @@
           "properties": [
             {
               "title": "property",
-              "name": "id",
-              "lineNumber": 8,
-              "description": {
-                "type": "root",
-                "children": [
-                  {
-                    "type": "paragraph",
-                    "children": [
-                      {
-                        "type": "text",
-                        "value": "The ID of the Media object.",
-                        "position": {
-                          "start": {
-                            "line": 1,
-                            "column": 1,
-                            "offset": 0
-                          },
-                          "end": {
-                            "line": 1,
-                            "column": 28,
-                            "offset": 27
-                          },
-                          "indent": []
-                        }
-                      }
-                    ],
-                    "position": {
-                      "start": {
-                        "line": 1,
-                        "column": 1,
-                        "offset": 0
-                      },
-                      "end": {
-                        "line": 1,
-                        "column": 28,
-                        "offset": 27
-                      },
-                      "indent": []
-                    }
-                  }
-                ],
-                "position": {
-                  "start": {
-                    "line": 1,
-                    "column": 1,
-                    "offset": 0
-                  },
-                  "end": {
-                    "line": 1,
-                    "column": 28,
-                    "offset": 27
-                  }
-                }
-              },
-              "type": {
-                "type": "NameExpression",
-                "name": "string"
-              }
-            },
-            {
-              "title": "property",
-              "name": "local",
+              "name": "audioNetworkPriority",
               "lineNumber": 9,
               "description": {
                 "type": "root",
@@ -19721,7 +19310,7 @@
                     "children": [
                       {
                         "type": "text",
-                        "value": "Indicator on whether this media is local or remote.",
+                        "value": "The desired network priority for audio traffic (see ",
                         "position": {
                           "start": {
                             "line": 1,
@@ -19730,8 +19319,50 @@
                           },
                           "end": {
                             "line": 1,
-                            "column": 52,
-                            "offset": 51
+                            "column": 53,
+                            "offset": 52
+                          },
+                          "indent": []
+                        }
+                      },
+                      {
+                        "type": "link",
+                        "url": "https://www.w3.org/TR/webrtc-priority/#rtc-priority-type",
+                        "title": null,
+                        "jsdoc": true,
+                        "children": [
+                          {
+                            "type": "text",
+                            "value": "RTCPriorityType Enum"
+                          }
+                        ],
+                        "position": {
+                          "start": {
+                            "line": 1,
+                            "column": 53,
+                            "offset": 52
+                          },
+                          "end": {
+                            "line": 1,
+                            "column": 138,
+                            "offset": 137
+                          },
+                          "indent": []
+                        }
+                      },
+                      {
+                        "type": "text",
+                        "value": " for the list of possible values).",
+                        "position": {
+                          "start": {
+                            "line": 1,
+                            "column": 138,
+                            "offset": 137
+                          },
+                          "end": {
+                            "line": 1,
+                            "column": 172,
+                            "offset": 171
                           },
                           "indent": []
                         }
@@ -19745,8 +19376,8 @@
                       },
                       "end": {
                         "line": 1,
-                        "column": 52,
-                        "offset": 51
+                        "column": 172,
+                        "offset": 171
                       },
                       "indent": []
                     }
@@ -19760,19 +19391,22 @@
                   },
                   "end": {
                     "line": 1,
-                    "column": 52,
-                    "offset": 51
+                    "column": 172,
+                    "offset": 171
                   }
                 }
               },
               "type": {
-                "type": "NameExpression",
-                "name": "boolean"
+                "type": "OptionalType",
+                "expression": {
+                  "type": "NameExpression",
+                  "name": "RTCPriorityType"
+                }
               }
             },
             {
               "title": "property",
-              "name": "tracks",
+              "name": "videoNetworkPriority",
               "lineNumber": 10,
               "description": {
                 "type": "root",
@@ -19782,7 +19416,7 @@
                     "children": [
                       {
                         "type": "text",
-                        "value": "A list of Track objects that are contained in this Media object.",
+                        "value": "The desired network priority for video traffic (see ",
                         "position": {
                           "start": {
                             "line": 1,
@@ -19791,8 +19425,50 @@
                           },
                           "end": {
                             "line": 1,
-                            "column": 65,
-                            "offset": 64
+                            "column": 53,
+                            "offset": 52
+                          },
+                          "indent": []
+                        }
+                      },
+                      {
+                        "type": "link",
+                        "url": "https://www.w3.org/TR/webrtc-priority/#rtc-priority-type",
+                        "title": null,
+                        "jsdoc": true,
+                        "children": [
+                          {
+                            "type": "text",
+                            "value": "RTCPriorityType Enum"
+                          }
+                        ],
+                        "position": {
+                          "start": {
+                            "line": 1,
+                            "column": 53,
+                            "offset": 52
+                          },
+                          "end": {
+                            "line": 1,
+                            "column": 138,
+                            "offset": 137
+                          },
+                          "indent": []
+                        }
+                      },
+                      {
+                        "type": "text",
+                        "value": " for the list of possible values).",
+                        "position": {
+                          "start": {
+                            "line": 1,
+                            "column": 138,
+                            "offset": 137
+                          },
+                          "end": {
+                            "line": 1,
+                            "column": 172,
+                            "offset": 171
                           },
                           "indent": []
                         }
@@ -19806,8 +19482,8 @@
                       },
                       "end": {
                         "line": 1,
-                        "column": 65,
-                        "offset": 64
+                        "column": 172,
+                        "offset": 171
                       },
                       "indent": []
                     }
@@ -19821,23 +19497,123 @@
                   },
                   "end": {
                     "line": 1,
-                    "column": 65,
-                    "offset": 64
+                    "column": 172,
+                    "offset": 171
                   }
                 }
               },
               "type": {
-                "type": "TypeApplication",
+                "type": "OptionalType",
                 "expression": {
                   "type": "NameExpression",
-                  "name": "Array"
-                },
-                "applications": [
+                  "name": "RTCPriorityType"
+                }
+              }
+            },
+            {
+              "title": "property",
+              "name": "screenNetworkPriority",
+              "lineNumber": 11,
+              "description": {
+                "type": "root",
+                "children": [
                   {
-                    "type": "NameExpression",
-                    "name": "call.TrackObject"
+                    "type": "paragraph",
+                    "children": [
+                      {
+                        "type": "text",
+                        "value": "The desired network priority for screen share traffic (see ",
+                        "position": {
+                          "start": {
+                            "line": 1,
+                            "column": 1,
+                            "offset": 0
+                          },
+                          "end": {
+                            "line": 1,
+                            "column": 60,
+                            "offset": 59
+                          },
+                          "indent": []
+                        }
+                      },
+                      {
+                        "type": "link",
+                        "url": "https://www.w3.org/TR/webrtc-priority/#rtc-priority-type",
+                        "title": null,
+                        "jsdoc": true,
+                        "children": [
+                          {
+                            "type": "text",
+                            "value": "RTCPriorityType Enum"
+                          }
+                        ],
+                        "position": {
+                          "start": {
+                            "line": 1,
+                            "column": 60,
+                            "offset": 59
+                          },
+                          "end": {
+                            "line": 1,
+                            "column": 145,
+                            "offset": 144
+                          },
+                          "indent": []
+                        }
+                      },
+                      {
+                        "type": "text",
+                        "value": " for the list of possible values).",
+                        "position": {
+                          "start": {
+                            "line": 1,
+                            "column": 145,
+                            "offset": 144
+                          },
+                          "end": {
+                            "line": 1,
+                            "column": 179,
+                            "offset": 178
+                          },
+                          "indent": []
+                        }
+                      }
+                    ],
+                    "position": {
+                      "start": {
+                        "line": 1,
+                        "column": 1,
+                        "offset": 0
+                      },
+                      "end": {
+                        "line": 1,
+                        "column": 179,
+                        "offset": 178
+                      },
+                      "indent": []
+                    }
                   }
-                ]
+                ],
+                "position": {
+                  "start": {
+                    "line": 1,
+                    "column": 1,
+                    "offset": 0
+                  },
+                  "end": {
+                    "line": 1,
+                    "column": 179,
+                    "offset": 178
+                  }
+                }
+              },
+              "type": {
+                "type": "OptionalType",
+                "expression": {
+                  "type": "NameExpression",
+                  "name": "RTCPriorityType"
+                }
               }
             }
           ],
@@ -19848,7 +19624,7 @@
           "access": "public",
           "scope": "static",
           "kind": "typedef",
-          "name": "MediaObject",
+          "name": "DSCPControls",
           "type": {
             "type": "NameExpression",
             "name": "Object"
@@ -19866,12 +19642,12 @@
               "name": "call"
             },
             {
-              "name": "MediaObject",
+              "name": "DSCPControls",
               "kind": "typedef",
               "scope": "static"
             }
           ],
-          "namespace": "call.MediaObject"
+          "namespace": "call.DSCPControls"
         },
         {
           "description": {
@@ -19882,7 +19658,7 @@
                 "children": [
                   {
                     "type": "text",
-                    "value": "The form of an SDP handler function and the expected arguments that it receives.",
+                    "value": "Custom SIP headers can be used to convey additional information to a SIP endpoint.",
                     "position": {
                       "start": {
                         "line": 1,
@@ -19891,8 +19667,8 @@
                       },
                       "end": {
                         "line": 1,
-                        "column": 81,
-                        "offset": 80
+                        "column": 83,
+                        "offset": 82
                       },
                       "indent": []
                     }
@@ -19906,10 +19682,506 @@
                   },
                   "end": {
                     "line": 1,
-                    "column": 81,
-                    "offset": 80
+                    "column": 83,
+                    "offset": 82
                   },
                   "indent": []
+                }
+              },
+              {
+                "type": "paragraph",
+                "children": [
+                  {
+                    "type": "text",
+                    "value": "These headers must be configured on the server prior to making a request, otherwise the request will fail when trying to set the headers.",
+                    "position": {
+                      "start": {
+                        "line": 3,
+                        "column": 1,
+                        "offset": 84
+                      },
+                      "end": {
+                        "line": 3,
+                        "column": 138,
+                        "offset": 221
+                      },
+                      "indent": []
+                    }
+                  }
+                ],
+                "position": {
+                  "start": {
+                    "line": 3,
+                    "column": 1,
+                    "offset": 84
+                  },
+                  "end": {
+                    "line": 3,
+                    "column": 138,
+                    "offset": 221
+                  },
+                  "indent": []
+                }
+              },
+              {
+                "type": "paragraph",
+                "children": [
+                  {
+                    "type": "text",
+                    "value": "These headers can be specified with the ",
+                    "position": {
+                      "start": {
+                        "line": 5,
+                        "column": 1,
+                        "offset": 223
+                      },
+                      "end": {
+                        "line": 5,
+                        "column": 41,
+                        "offset": 263
+                      },
+                      "indent": []
+                    }
+                  },
+                  {
+                    "type": "link",
+                    "url": "call.make",
+                    "title": null,
+                    "jsdoc": true,
+                    "children": [
+                      {
+                        "type": "text",
+                        "value": "call.make"
+                      }
+                    ],
+                    "position": {
+                      "start": {
+                        "line": 5,
+                        "column": 41,
+                        "offset": 263
+                      },
+                      "end": {
+                        "line": 5,
+                        "column": 58,
+                        "offset": 280
+                      },
+                      "indent": []
+                    }
+                  },
+                  {
+                    "type": "text",
+                    "value": " and ",
+                    "position": {
+                      "start": {
+                        "line": 5,
+                        "column": 58,
+                        "offset": 280
+                      },
+                      "end": {
+                        "line": 5,
+                        "column": 63,
+                        "offset": 285
+                      },
+                      "indent": []
+                    }
+                  },
+                  {
+                    "type": "link",
+                    "url": "call.answer",
+                    "title": null,
+                    "jsdoc": true,
+                    "children": [
+                      {
+                        "type": "text",
+                        "value": "call.answer"
+                      }
+                    ],
+                    "position": {
+                      "start": {
+                        "line": 5,
+                        "column": 63,
+                        "offset": 285
+                      },
+                      "end": {
+                        "line": 5,
+                        "column": 82,
+                        "offset": 304
+                      },
+                      "indent": []
+                    }
+                  },
+                  {
+                    "type": "text",
+                    "value": " APIs.\nThey can also be set on a call using the ",
+                    "position": {
+                      "start": {
+                        "line": 5,
+                        "column": 82,
+                        "offset": 304
+                      },
+                      "end": {
+                        "line": 6,
+                        "column": 42,
+                        "offset": 352
+                      },
+                      "indent": [
+                        1
+                      ]
+                    }
+                  },
+                  {
+                    "type": "link",
+                    "url": "#callsetcustomparameters",
+                    "title": null,
+                    "jsdoc": true,
+                    "children": [
+                      {
+                        "type": "text",
+                        "value": "call.setCustomParameters"
+                      }
+                    ],
+                    "position": {
+                      "start": {
+                        "line": 6,
+                        "column": 42,
+                        "offset": 352
+                      },
+                      "end": {
+                        "line": 6,
+                        "column": 74,
+                        "offset": 384
+                      },
+                      "indent": []
+                    }
+                  },
+                  {
+                    "type": "text",
+                    "value": ", and sent using the ",
+                    "position": {
+                      "start": {
+                        "line": 6,
+                        "column": 74,
+                        "offset": 384
+                      },
+                      "end": {
+                        "line": 6,
+                        "column": 95,
+                        "offset": 405
+                      },
+                      "indent": []
+                    }
+                  },
+                  {
+                    "type": "link",
+                    "url": "#callsendcustomparameters",
+                    "title": null,
+                    "jsdoc": true,
+                    "children": [
+                      {
+                        "type": "text",
+                        "value": "call.sendCustomParameters"
+                      }
+                    ],
+                    "position": {
+                      "start": {
+                        "line": 6,
+                        "column": 95,
+                        "offset": 405
+                      },
+                      "end": {
+                        "line": 6,
+                        "column": 128,
+                        "offset": 438
+                      },
+                      "indent": []
+                    }
+                  },
+                  {
+                    "type": "text",
+                    "value": " API.",
+                    "position": {
+                      "start": {
+                        "line": 6,
+                        "column": 128,
+                        "offset": 438
+                      },
+                      "end": {
+                        "line": 6,
+                        "column": 133,
+                        "offset": 443
+                      },
+                      "indent": []
+                    }
+                  }
+                ],
+                "position": {
+                  "start": {
+                    "line": 5,
+                    "column": 1,
+                    "offset": 223
+                  },
+                  "end": {
+                    "line": 6,
+                    "column": 133,
+                    "offset": 443
+                  },
+                  "indent": [
+                    1
+                  ]
+                }
+              },
+              {
+                "type": "paragraph",
+                "children": [
+                  {
+                    "type": "text",
+                    "value": "Custom headers may be received anytime throughout the duration a call. A remote endpoint may send custom headers when starting a call,\n answering a call, or during call updates such as hold/unhold and addition/removal of media in the call.\n When these custom headers are received, the SDK will emit a ",
+                    "position": {
+                      "start": {
+                        "line": 8,
+                        "column": 1,
+                        "offset": 445
+                      },
+                      "end": {
+                        "line": 10,
+                        "column": 62,
+                        "offset": 746
+                      },
+                      "indent": [
+                        1,
+                        1
+                      ]
+                    }
+                  },
+                  {
+                    "type": "link",
+                    "url": "#calleventcallcustomparameters",
+                    "title": null,
+                    "jsdoc": true,
+                    "children": [
+                      {
+                        "type": "text",
+                        "value": "call:customParameters"
+                      }
+                    ],
+                    "position": {
+                      "start": {
+                        "line": 10,
+                        "column": 62,
+                        "offset": 746
+                      },
+                      "end": {
+                        "line": 10,
+                        "column": 124,
+                        "offset": 808
+                      },
+                      "indent": []
+                    }
+                  },
+                  {
+                    "type": "text",
+                    "value": " event\n which will contain the custom parameters that were received.",
+                    "position": {
+                      "start": {
+                        "line": 10,
+                        "column": 124,
+                        "offset": 808
+                      },
+                      "end": {
+                        "line": 11,
+                        "column": 62,
+                        "offset": 876
+                      },
+                      "indent": [
+                        1
+                      ]
+                    }
+                  }
+                ],
+                "position": {
+                  "start": {
+                    "line": 8,
+                    "column": 1,
+                    "offset": 445
+                  },
+                  "end": {
+                    "line": 11,
+                    "column": 62,
+                    "offset": 876
+                  },
+                  "indent": [
+                    1,
+                    1,
+                    1
+                  ]
+                }
+              },
+              {
+                "type": "paragraph",
+                "children": [
+                  {
+                    "type": "text",
+                    "value": "A Call's custom parameters are a property of the Call's ",
+                    "position": {
+                      "start": {
+                        "line": 13,
+                        "column": 1,
+                        "offset": 878
+                      },
+                      "end": {
+                        "line": 13,
+                        "column": 57,
+                        "offset": 934
+                      },
+                      "indent": []
+                    }
+                  },
+                  {
+                    "type": "link",
+                    "url": "#callcallobject",
+                    "title": null,
+                    "jsdoc": true,
+                    "children": [
+                      {
+                        "type": "text",
+                        "value": "CallObject"
+                      }
+                    ],
+                    "position": {
+                      "start": {
+                        "line": 13,
+                        "column": 57,
+                        "offset": 934
+                      },
+                      "end": {
+                        "line": 13,
+                        "column": 91,
+                        "offset": 968
+                      },
+                      "indent": []
+                    }
+                  },
+                  {
+                    "type": "text",
+                    "value": ",\n which can be retrieved using the ",
+                    "position": {
+                      "start": {
+                        "line": 13,
+                        "column": 91,
+                        "offset": 968
+                      },
+                      "end": {
+                        "line": 14,
+                        "column": 35,
+                        "offset": 1004
+                      },
+                      "indent": [
+                        1
+                      ]
+                    }
+                  },
+                  {
+                    "type": "link",
+                    "url": "#callgetbyid",
+                    "title": null,
+                    "jsdoc": true,
+                    "children": [
+                      {
+                        "type": "text",
+                        "value": "call.getById"
+                      }
+                    ],
+                    "position": {
+                      "start": {
+                        "line": 14,
+                        "column": 35,
+                        "offset": 1004
+                      },
+                      "end": {
+                        "line": 14,
+                        "column": 55,
+                        "offset": 1024
+                      },
+                      "indent": []
+                    }
+                  },
+                  {
+                    "type": "text",
+                    "value": " or\n ",
+                    "position": {
+                      "start": {
+                        "line": 14,
+                        "column": 55,
+                        "offset": 1024
+                      },
+                      "end": {
+                        "line": 15,
+                        "column": 2,
+                        "offset": 1029
+                      },
+                      "indent": [
+                        1
+                      ]
+                    }
+                  },
+                  {
+                    "type": "link",
+                    "url": "#callgetall",
+                    "title": null,
+                    "jsdoc": true,
+                    "children": [
+                      {
+                        "type": "text",
+                        "value": "call.getAll"
+                      }
+                    ],
+                    "position": {
+                      "start": {
+                        "line": 15,
+                        "column": 2,
+                        "offset": 1029
+                      },
+                      "end": {
+                        "line": 15,
+                        "column": 21,
+                        "offset": 1048
+                      },
+                      "indent": []
+                    }
+                  },
+                  {
+                    "type": "text",
+                    "value": " APIs.",
+                    "position": {
+                      "start": {
+                        "line": 15,
+                        "column": 21,
+                        "offset": 1048
+                      },
+                      "end": {
+                        "line": 15,
+                        "column": 27,
+                        "offset": 1054
+                      },
+                      "indent": []
+                    }
+                  }
+                ],
+                "position": {
+                  "start": {
+                    "line": 13,
+                    "column": 1,
+                    "offset": 878
+                  },
+                  "end": {
+                    "line": 15,
+                    "column": 27,
+                    "offset": 1054
+                  },
+                  "indent": [
+                    1,
+                    1
+                  ]
                 }
               }
             ],
@@ -19920,9 +20192,9 @@
                 "offset": 0
               },
               "end": {
-                "line": 1,
-                "column": 81,
-                "offset": 80
+                "line": 15,
+                "column": 27,
+                "offset": 1054
               }
             }
           },
@@ -19930,76 +20202,81 @@
             {
               "title": "public",
               "description": null,
-              "lineNumber": 2,
+              "lineNumber": 17,
               "type": null
             },
             {
               "title": "static",
               "description": null,
-              "lineNumber": 3
+              "lineNumber": 18
+            },
+            {
+              "title": "module",
+              "description": null,
+              "lineNumber": 19,
+              "type": null,
+              "name": "CustomParameter"
             },
             {
               "title": "typedef",
               "description": null,
-              "lineNumber": 4,
+              "lineNumber": 20,
               "type": {
                 "type": "NameExpression",
-                "name": "Function"
+                "name": "Object"
               },
-              "name": "SdpHandlerFunction"
+              "name": "CustomParameter"
             },
             {
               "title": "memberof",
               "description": "call",
-              "lineNumber": 5
+              "lineNumber": 21
             },
             {
-              "title": "param",
-              "description": "The SDP so far (could have been modified by previous handlers).",
-              "lineNumber": 6,
+              "title": "requires",
+              "description": null,
+              "lineNumber": 22,
+              "name": "link_call"
+            },
+            {
+              "title": "requires",
+              "description": null,
+              "lineNumber": 23,
+              "name": "callMe"
+            },
+            {
+              "title": "property",
+              "description": "The name of the custom parameter",
+              "lineNumber": 24,
               "type": {
                 "type": "NameExpression",
-                "name": "Object"
+                "name": "string"
               },
-              "name": "newSdp"
+              "name": "name"
             },
             {
-              "title": "param",
-              "description": "Additional information that might be useful when making SDP modifications.",
-              "lineNumber": 7,
+              "title": "property",
+              "description": "The value of the custom parameter",
+              "lineNumber": 25,
               "type": {
                 "type": "NameExpression",
-                "name": "call.SdpHandlerInfo"
+                "name": "string"
               },
-              "name": "info"
+              "name": "value"
             },
             {
-              "title": "param",
-              "description": "The SDP in its initial state.",
-              "lineNumber": 8,
-              "type": {
-                "type": "NameExpression",
-                "name": "Object"
-              },
-              "name": "originalSdp"
-            },
-            {
-              "title": "returns",
-              "description": "The resulting modified SDP based on the changes made by this function.",
-              "lineNumber": 9,
-              "type": {
-                "type": "NameExpression",
-                "name": "Object"
-              }
+              "title": "example",
+              "description": "// Specify custom parameters when making a call.\nclient.call.make(destination, mediaConstraints,\n {\n   customParameters: [\n     {\n       name: 'X-GPS',\n       value: '42.686032,23.344565'\n     }\n   ]\n }\n)",
+              "lineNumber": 26
             }
           ],
           "loc": {
             "start": {
-              "line": 177,
+              "line": 249,
               "column": 0
             },
             "end": {
-              "line": 187,
+              "line": 287,
               "column": 3
             }
           },
@@ -20017,12 +20294,17 @@
             "file": "/var/jenkins_home/workspace/Kandy.js_beta/packages/kandy/src/call/interfaceNew/api/index.js"
           },
           "augments": [],
-          "examples": [],
-          "params": [
+          "examples": [
             {
-              "title": "param",
-              "name": "newSdp",
-              "lineNumber": 6,
+              "description": "// Specify custom parameters when making a call.\nclient.call.make(destination, mediaConstraints,\n {\n   customParameters: [\n     {\n       name: 'X-GPS',\n       value: '42.686032,23.344565'\n     }\n   ]\n }\n)"
+            }
+          ],
+          "params": [],
+          "properties": [
+            {
+              "title": "property",
+              "name": "name",
+              "lineNumber": 24,
               "description": {
                 "type": "root",
                 "children": [
@@ -20031,7 +20313,7 @@
                     "children": [
                       {
                         "type": "text",
-                        "value": "The SDP so far (could have been modified by previous handlers).",
+                        "value": "The name of the custom parameter",
                         "position": {
                           "start": {
                             "line": 1,
@@ -20040,8 +20322,8 @@
                           },
                           "end": {
                             "line": 1,
-                            "column": 64,
-                            "offset": 63
+                            "column": 33,
+                            "offset": 32
                           },
                           "indent": []
                         }
@@ -20055,8 +20337,8 @@
                       },
                       "end": {
                         "line": 1,
-                        "column": 64,
-                        "offset": 63
+                        "column": 33,
+                        "offset": 32
                       },
                       "indent": []
                     }
@@ -20070,20 +20352,20 @@
                   },
                   "end": {
                     "line": 1,
-                    "column": 64,
-                    "offset": 63
+                    "column": 33,
+                    "offset": 32
                   }
                 }
               },
               "type": {
                 "type": "NameExpression",
-                "name": "Object"
+                "name": "string"
               }
             },
             {
-              "title": "param",
-              "name": "info",
-              "lineNumber": 7,
+              "title": "property",
+              "name": "value",
+              "lineNumber": 25,
               "description": {
                 "type": "root",
                 "children": [
@@ -20092,7 +20374,7 @@
                     "children": [
                       {
                         "type": "text",
-                        "value": "Additional information that might be useful when making SDP modifications.",
+                        "value": "The value of the custom parameter",
                         "position": {
                           "start": {
                             "line": 1,
@@ -20101,8 +20383,8 @@
                           },
                           "end": {
                             "line": 1,
-                            "column": 75,
-                            "offset": 74
+                            "column": 34,
+                            "offset": 33
                           },
                           "indent": []
                         }
@@ -20116,8 +20398,8 @@
                       },
                       "end": {
                         "line": 1,
-                        "column": 75,
-                        "offset": 74
+                        "column": 34,
+                        "offset": 33
                       },
                       "indent": []
                     }
@@ -20131,150 +20413,28 @@
                   },
                   "end": {
                     "line": 1,
-                    "column": 75,
-                    "offset": 74
+                    "column": 34,
+                    "offset": 33
                   }
                 }
               },
               "type": {
                 "type": "NameExpression",
-                "name": "call.SdpHandlerInfo"
-              }
-            },
-            {
-              "title": "param",
-              "name": "originalSdp",
-              "lineNumber": 8,
-              "description": {
-                "type": "root",
-                "children": [
-                  {
-                    "type": "paragraph",
-                    "children": [
-                      {
-                        "type": "text",
-                        "value": "The SDP in its initial state.",
-                        "position": {
-                          "start": {
-                            "line": 1,
-                            "column": 1,
-                            "offset": 0
-                          },
-                          "end": {
-                            "line": 1,
-                            "column": 30,
-                            "offset": 29
-                          },
-                          "indent": []
-                        }
-                      }
-                    ],
-                    "position": {
-                      "start": {
-                        "line": 1,
-                        "column": 1,
-                        "offset": 0
-                      },
-                      "end": {
-                        "line": 1,
-                        "column": 30,
-                        "offset": 29
-                      },
-                      "indent": []
-                    }
-                  }
-                ],
-                "position": {
-                  "start": {
-                    "line": 1,
-                    "column": 1,
-                    "offset": 0
-                  },
-                  "end": {
-                    "line": 1,
-                    "column": 30,
-                    "offset": 29
-                  }
-                }
-              },
-              "type": {
-                "type": "NameExpression",
-                "name": "Object"
+                "name": "string"
               }
             }
           ],
-          "properties": [],
-          "returns": [
-            {
-              "description": {
-                "type": "root",
-                "children": [
-                  {
-                    "type": "paragraph",
-                    "children": [
-                      {
-                        "type": "text",
-                        "value": "The resulting modified SDP based on the changes made by this function.",
-                        "position": {
-                          "start": {
-                            "line": 1,
-                            "column": 1,
-                            "offset": 0
-                          },
-                          "end": {
-                            "line": 1,
-                            "column": 71,
-                            "offset": 70
-                          },
-                          "indent": []
-                        }
-                      }
-                    ],
-                    "position": {
-                      "start": {
-                        "line": 1,
-                        "column": 1,
-                        "offset": 0
-                      },
-                      "end": {
-                        "line": 1,
-                        "column": 71,
-                        "offset": 70
-                      },
-                      "indent": []
-                    }
-                  }
-                ],
-                "position": {
-                  "start": {
-                    "line": 1,
-                    "column": 1,
-                    "offset": 0
-                  },
-                  "end": {
-                    "line": 1,
-                    "column": 71,
-                    "offset": 70
-                  }
-                }
-              },
-              "title": "returns",
-              "type": {
-                "type": "NameExpression",
-                "name": "Object"
-              }
-            }
-          ],
+          "returns": [],
           "sees": [],
           "throws": [],
           "todos": [],
           "access": "public",
           "scope": "static",
           "kind": "typedef",
-          "name": "SdpHandlerFunction",
+          "name": "CustomParameter",
           "type": {
             "type": "NameExpression",
-            "name": "Function"
+            "name": "Object"
           },
           "memberof": "call",
           "members": {
@@ -20289,12 +20449,12 @@
               "name": "call"
             },
             {
-              "name": "SdpHandlerFunction",
+              "name": "CustomParameter",
               "kind": "typedef",
               "scope": "static"
             }
           ],
-          "namespace": "call.SdpHandlerFunction"
+          "namespace": "call.CustomParameter"
         },
         {
           "description": "",
@@ -21001,7 +21161,7 @@
                 "children": [
                   {
                     "type": "text",
-                    "value": "The DSCPControls type defines the format for configuring network priorities (DSCP marking) for the media traffic.",
+                    "value": "The state representation of a Media object.\nMedia is a collection of Track objects.",
                     "position": {
                       "start": {
                         "line": 1,
@@ -21009,11 +21169,13 @@
                         "offset": 0
                       },
                       "end": {
-                        "line": 1,
-                        "column": 114,
-                        "offset": 113
+                        "line": 2,
+                        "column": 40,
+                        "offset": 83
                       },
-                      "indent": []
+                      "indent": [
+                        1
+                      ]
                     }
                   }
                 ],
@@ -21024,46 +21186,13 @@
                     "offset": 0
                   },
                   "end": {
-                    "line": 1,
-                    "column": 114,
-                    "offset": 113
+                    "line": 2,
+                    "column": 40,
+                    "offset": 83
                   },
-                  "indent": []
-                }
-              },
-              {
-                "type": "paragraph",
-                "children": [
-                  {
-                    "type": "text",
-                    "value": "If DSCPControls are not configured for a call the network priority of the traffic for all media kinds will be the default (i.e., \"low\").",
-                    "position": {
-                      "start": {
-                        "line": 3,
-                        "column": 1,
-                        "offset": 115
-                      },
-                      "end": {
-                        "line": 3,
-                        "column": 137,
-                        "offset": 251
-                      },
-                      "indent": []
-                    }
-                  }
-                ],
-                "position": {
-                  "start": {
-                    "line": 3,
-                    "column": 1,
-                    "offset": 115
-                  },
-                  "end": {
-                    "line": 3,
-                    "column": 137,
-                    "offset": 251
-                  },
-                  "indent": []
+                  "indent": [
+                    1
+                  ]
                 }
               }
             ],
@@ -21074,9 +21203,9 @@
                 "offset": 0
               },
               "end": {
-                "line": 3,
-                "column": 137,
-                "offset": 251
+                "line": 2,
+                "column": 40,
+                "offset": 83
               }
             }
           },
@@ -21084,79 +21213,76 @@
             {
               "title": "public",
               "description": null,
-              "lineNumber": 5,
+              "lineNumber": 4,
               "type": null
             },
             {
               "title": "static",
               "description": null,
-              "lineNumber": 6
+              "lineNumber": 5
             },
             {
               "title": "typedef",
               "description": null,
-              "lineNumber": 7,
+              "lineNumber": 6,
               "type": {
                 "type": "NameExpression",
                 "name": "Object"
               },
-              "name": "DSCPControls"
+              "name": "MediaObject"
             },
             {
               "title": "memberof",
               "description": "call",
-              "lineNumber": 8
+              "lineNumber": 7
             },
             {
               "title": "property",
-              "description": "The desired network priority for audio traffic (see {@link https://www.w3.org/TR/webrtc-priority/#rtc-priority-type RTCPriorityType Enum} for the list of possible values).",
+              "description": "The ID of the Media object.",
+              "lineNumber": 8,
+              "type": {
+                "type": "NameExpression",
+                "name": "string"
+              },
+              "name": "id"
+            },
+            {
+              "title": "property",
+              "description": "Indicator on whether this media is local or remote.",
               "lineNumber": 9,
               "type": {
-                "type": "OptionalType",
-                "expression": {
-                  "type": "NameExpression",
-                  "name": "RTCPriorityType"
-                }
+                "type": "NameExpression",
+                "name": "boolean"
               },
-              "name": "audioNetworkPriority",
-              "default": "'low'"
+              "name": "local"
             },
             {
               "title": "property",
-              "description": "The desired network priority for video traffic (see {@link https://www.w3.org/TR/webrtc-priority/#rtc-priority-type RTCPriorityType Enum} for the list of possible values).",
+              "description": "A list of Track objects that are contained in this Media object.",
               "lineNumber": 10,
               "type": {
-                "type": "OptionalType",
+                "type": "TypeApplication",
                 "expression": {
                   "type": "NameExpression",
-                  "name": "RTCPriorityType"
-                }
+                  "name": "Array"
+                },
+                "applications": [
+                  {
+                    "type": "NameExpression",
+                    "name": "call.TrackObject"
+                  }
+                ]
               },
-              "name": "videoNetworkPriority",
-              "default": "'low'"
-            },
-            {
-              "title": "property",
-              "description": "The desired network priority for screen share traffic (see {@link https://www.w3.org/TR/webrtc-priority/#rtc-priority-type RTCPriorityType Enum} for the list of possible values).",
-              "lineNumber": 11,
-              "type": {
-                "type": "OptionalType",
-                "expression": {
-                  "type": "NameExpression",
-                  "name": "RTCPriorityType"
-                }
-              },
-              "name": "screenNetworkPriority",
-              "default": "'low'"
+              "name": "tracks"
             }
           ],
           "loc": {
             "start": {
-              "line": 141,
+              "line": 189,
               "column": 0
             },
             "end": {
-              "line": 153,
+              "line": 200,
               "column": 3
             }
           },
@@ -21179,7 +21305,68 @@
           "properties": [
             {
               "title": "property",
-              "name": "audioNetworkPriority",
+              "name": "id",
+              "lineNumber": 8,
+              "description": {
+                "type": "root",
+                "children": [
+                  {
+                    "type": "paragraph",
+                    "children": [
+                      {
+                        "type": "text",
+                        "value": "The ID of the Media object.",
+                        "position": {
+                          "start": {
+                            "line": 1,
+                            "column": 1,
+                            "offset": 0
+                          },
+                          "end": {
+                            "line": 1,
+                            "column": 28,
+                            "offset": 27
+                          },
+                          "indent": []
+                        }
+                      }
+                    ],
+                    "position": {
+                      "start": {
+                        "line": 1,
+                        "column": 1,
+                        "offset": 0
+                      },
+                      "end": {
+                        "line": 1,
+                        "column": 28,
+                        "offset": 27
+                      },
+                      "indent": []
+                    }
+                  }
+                ],
+                "position": {
+                  "start": {
+                    "line": 1,
+                    "column": 1,
+                    "offset": 0
+                  },
+                  "end": {
+                    "line": 1,
+                    "column": 28,
+                    "offset": 27
+                  }
+                }
+              },
+              "type": {
+                "type": "NameExpression",
+                "name": "string"
+              }
+            },
+            {
+              "title": "property",
+              "name": "local",
               "lineNumber": 9,
               "description": {
                 "type": "root",
@@ -21189,7 +21376,7 @@
                     "children": [
                       {
                         "type": "text",
-                        "value": "The desired network priority for audio traffic (see ",
+                        "value": "Indicator on whether this media is local or remote.",
                         "position": {
                           "start": {
                             "line": 1,
@@ -21198,50 +21385,8 @@
                           },
                           "end": {
                             "line": 1,
-                            "column": 53,
-                            "offset": 52
-                          },
-                          "indent": []
-                        }
-                      },
-                      {
-                        "type": "link",
-                        "url": "https://www.w3.org/TR/webrtc-priority/#rtc-priority-type",
-                        "title": null,
-                        "jsdoc": true,
-                        "children": [
-                          {
-                            "type": "text",
-                            "value": "RTCPriorityType Enum"
-                          }
-                        ],
-                        "position": {
-                          "start": {
-                            "line": 1,
-                            "column": 53,
-                            "offset": 52
-                          },
-                          "end": {
-                            "line": 1,
-                            "column": 138,
-                            "offset": 137
-                          },
-                          "indent": []
-                        }
-                      },
-                      {
-                        "type": "text",
-                        "value": " for the list of possible values).",
-                        "position": {
-                          "start": {
-                            "line": 1,
-                            "column": 138,
-                            "offset": 137
-                          },
-                          "end": {
-                            "line": 1,
-                            "column": 172,
-                            "offset": 171
+                            "column": 52,
+                            "offset": 51
                           },
                           "indent": []
                         }
@@ -21255,8 +21400,8 @@
                       },
                       "end": {
                         "line": 1,
-                        "column": 172,
-                        "offset": 171
+                        "column": 52,
+                        "offset": 51
                       },
                       "indent": []
                     }
@@ -21270,22 +21415,19 @@
                   },
                   "end": {
                     "line": 1,
-                    "column": 172,
-                    "offset": 171
+                    "column": 52,
+                    "offset": 51
                   }
                 }
               },
               "type": {
-                "type": "OptionalType",
-                "expression": {
-                  "type": "NameExpression",
-                  "name": "RTCPriorityType"
-                }
+                "type": "NameExpression",
+                "name": "boolean"
               }
             },
             {
               "title": "property",
-              "name": "videoNetworkPriority",
+              "name": "tracks",
               "lineNumber": 10,
               "description": {
                 "type": "root",
@@ -21295,7 +21437,7 @@
                     "children": [
                       {
                         "type": "text",
-                        "value": "The desired network priority for video traffic (see ",
+                        "value": "A list of Track objects that are contained in this Media object.",
                         "position": {
                           "start": {
                             "line": 1,
@@ -21304,50 +21446,8 @@
                           },
                           "end": {
                             "line": 1,
-                            "column": 53,
-                            "offset": 52
-                          },
-                          "indent": []
-                        }
-                      },
-                      {
-                        "type": "link",
-                        "url": "https://www.w3.org/TR/webrtc-priority/#rtc-priority-type",
-                        "title": null,
-                        "jsdoc": true,
-                        "children": [
-                          {
-                            "type": "text",
-                            "value": "RTCPriorityType Enum"
-                          }
-                        ],
-                        "position": {
-                          "start": {
-                            "line": 1,
-                            "column": 53,
-                            "offset": 52
-                          },
-                          "end": {
-                            "line": 1,
-                            "column": 138,
-                            "offset": 137
-                          },
-                          "indent": []
-                        }
-                      },
-                      {
-                        "type": "text",
-                        "value": " for the list of possible values).",
-                        "position": {
-                          "start": {
-                            "line": 1,
-                            "column": 138,
-                            "offset": 137
-                          },
-                          "end": {
-                            "line": 1,
-                            "column": 172,
-                            "offset": 171
+                            "column": 65,
+                            "offset": 64
                           },
                           "indent": []
                         }
@@ -21361,8 +21461,8 @@
                       },
                       "end": {
                         "line": 1,
-                        "column": 172,
-                        "offset": 171
+                        "column": 65,
+                        "offset": 64
                       },
                       "indent": []
                     }
@@ -21376,123 +21476,23 @@
                   },
                   "end": {
                     "line": 1,
-                    "column": 172,
-                    "offset": 171
+                    "column": 65,
+                    "offset": 64
                   }
                 }
               },
               "type": {
-                "type": "OptionalType",
+                "type": "TypeApplication",
                 "expression": {
                   "type": "NameExpression",
-                  "name": "RTCPriorityType"
-                }
-              }
-            },
-            {
-              "title": "property",
-              "name": "screenNetworkPriority",
-              "lineNumber": 11,
-              "description": {
-                "type": "root",
-                "children": [
+                  "name": "Array"
+                },
+                "applications": [
                   {
-                    "type": "paragraph",
-                    "children": [
-                      {
-                        "type": "text",
-                        "value": "The desired network priority for screen share traffic (see ",
-                        "position": {
-                          "start": {
-                            "line": 1,
-                            "column": 1,
-                            "offset": 0
-                          },
-                          "end": {
-                            "line": 1,
-                            "column": 60,
-                            "offset": 59
-                          },
-                          "indent": []
-                        }
-                      },
-                      {
-                        "type": "link",
-                        "url": "https://www.w3.org/TR/webrtc-priority/#rtc-priority-type",
-                        "title": null,
-                        "jsdoc": true,
-                        "children": [
-                          {
-                            "type": "text",
-                            "value": "RTCPriorityType Enum"
-                          }
-                        ],
-                        "position": {
-                          "start": {
-                            "line": 1,
-                            "column": 60,
-                            "offset": 59
-                          },
-                          "end": {
-                            "line": 1,
-                            "column": 145,
-                            "offset": 144
-                          },
-                          "indent": []
-                        }
-                      },
-                      {
-                        "type": "text",
-                        "value": " for the list of possible values).",
-                        "position": {
-                          "start": {
-                            "line": 1,
-                            "column": 145,
-                            "offset": 144
-                          },
-                          "end": {
-                            "line": 1,
-                            "column": 179,
-                            "offset": 178
-                          },
-                          "indent": []
-                        }
-                      }
-                    ],
-                    "position": {
-                      "start": {
-                        "line": 1,
-                        "column": 1,
-                        "offset": 0
-                      },
-                      "end": {
-                        "line": 1,
-                        "column": 179,
-                        "offset": 178
-                      },
-                      "indent": []
-                    }
+                    "type": "NameExpression",
+                    "name": "call.TrackObject"
                   }
-                ],
-                "position": {
-                  "start": {
-                    "line": 1,
-                    "column": 1,
-                    "offset": 0
-                  },
-                  "end": {
-                    "line": 1,
-                    "column": 179,
-                    "offset": 178
-                  }
-                }
-              },
-              "type": {
-                "type": "OptionalType",
-                "expression": {
-                  "type": "NameExpression",
-                  "name": "RTCPriorityType"
-                }
+                ]
               }
             }
           ],
@@ -21503,7 +21503,7 @@
           "access": "public",
           "scope": "static",
           "kind": "typedef",
-          "name": "DSCPControls",
+          "name": "MediaObject",
           "type": {
             "type": "NameExpression",
             "name": "Object"
@@ -21521,12 +21521,12 @@
               "name": "call"
             },
             {
-              "name": "DSCPControls",
+              "name": "MediaObject",
               "kind": "typedef",
               "scope": "static"
             }
           ],
-          "namespace": "call.DSCPControls"
+          "namespace": "call.MediaObject"
         },
         {
           "description": {
@@ -30968,6 +30968,527 @@
                 "children": [
                   {
                     "type": "text",
+                    "value": "Removes local screenshare from an ongoing Call, stopping it from being\n   sent to the remote participant.",
+                    "position": {
+                      "start": {
+                        "line": 1,
+                        "column": 1,
+                        "offset": 0
+                      },
+                      "end": {
+                        "line": 2,
+                        "column": 35,
+                        "offset": 105
+                      },
+                      "indent": [
+                        1
+                      ]
+                    }
+                  }
+                ],
+                "position": {
+                  "start": {
+                    "line": 1,
+                    "column": 1,
+                    "offset": 0
+                  },
+                  "end": {
+                    "line": 2,
+                    "column": 35,
+                    "offset": 105
+                  },
+                  "indent": [
+                    1
+                  ]
+                }
+              },
+              {
+                "type": "paragraph",
+                "children": [
+                  {
+                    "type": "text",
+                    "value": "The latest SDK release (v4.X+) has not yet implemented this API in the\n   same way that it was available in previous releases (v3.X). In place\n   of this API, the SDK has a more general API that can be used for this\n   same behaviour.",
+                    "position": {
+                      "start": {
+                        "line": 4,
+                        "column": 1,
+                        "offset": 107
+                      },
+                      "end": {
+                        "line": 7,
+                        "column": 19,
+                        "offset": 341
+                      },
+                      "indent": [
+                        1,
+                        1,
+                        1
+                      ]
+                    }
+                  }
+                ],
+                "position": {
+                  "start": {
+                    "line": 4,
+                    "column": 1,
+                    "offset": 107
+                  },
+                  "end": {
+                    "line": 7,
+                    "column": 19,
+                    "offset": 341
+                  },
+                  "indent": [
+                    1,
+                    1,
+                    1
+                  ]
+                }
+              },
+              {
+                "type": "paragraph",
+                "children": [
+                  {
+                    "type": "text",
+                    "value": "The ",
+                    "position": {
+                      "start": {
+                        "line": 9,
+                        "column": 1,
+                        "offset": 343
+                      },
+                      "end": {
+                        "line": 9,
+                        "column": 5,
+                        "offset": 347
+                      },
+                      "indent": []
+                    }
+                  },
+                  {
+                    "type": "link",
+                    "url": "#callremovemedia",
+                    "title": null,
+                    "jsdoc": true,
+                    "children": [
+                      {
+                        "type": "text",
+                        "value": "call.removeMedia"
+                      }
+                    ],
+                    "position": {
+                      "start": {
+                        "line": 9,
+                        "column": 5,
+                        "offset": 347
+                      },
+                      "end": {
+                        "line": 9,
+                        "column": 29,
+                        "offset": 371
+                      },
+                      "indent": []
+                    }
+                  },
+                  {
+                    "type": "text",
+                    "value": " API can be used to perform the same\n   behaviour as ",
+                    "position": {
+                      "start": {
+                        "line": 9,
+                        "column": 29,
+                        "offset": 371
+                      },
+                      "end": {
+                        "line": 10,
+                        "column": 17,
+                        "offset": 424
+                      },
+                      "indent": [
+                        1
+                      ]
+                    }
+                  },
+                  {
+                    "type": "inlineCode",
+                    "value": "stopScreenshare",
+                    "position": {
+                      "start": {
+                        "line": 10,
+                        "column": 17,
+                        "offset": 424
+                      },
+                      "end": {
+                        "line": 10,
+                        "column": 34,
+                        "offset": 441
+                      },
+                      "indent": []
+                    }
+                  },
+                  {
+                    "type": "text",
+                    "value": ". ",
+                    "position": {
+                      "start": {
+                        "line": 10,
+                        "column": 34,
+                        "offset": 441
+                      },
+                      "end": {
+                        "line": 10,
+                        "column": 36,
+                        "offset": 443
+                      },
+                      "indent": []
+                    }
+                  },
+                  {
+                    "type": "link",
+                    "url": "#callremovemedia",
+                    "title": null,
+                    "jsdoc": true,
+                    "children": [
+                      {
+                        "type": "text",
+                        "value": "call.removeMedia"
+                      }
+                    ],
+                    "position": {
+                      "start": {
+                        "line": 10,
+                        "column": 36,
+                        "offset": 443
+                      },
+                      "end": {
+                        "line": 10,
+                        "column": 60,
+                        "offset": 467
+                      },
+                      "indent": []
+                    }
+                  },
+                  {
+                    "type": "text",
+                    "value": " is a\n   general-purpose API for removing media from a call, which covers the\n   same functionality as ",
+                    "position": {
+                      "start": {
+                        "line": 10,
+                        "column": 60,
+                        "offset": 467
+                      },
+                      "end": {
+                        "line": 12,
+                        "column": 26,
+                        "offset": 570
+                      },
+                      "indent": [
+                        1,
+                        1
+                      ]
+                    }
+                  },
+                  {
+                    "type": "inlineCode",
+                    "value": "stopScreenshare",
+                    "position": {
+                      "start": {
+                        "line": 12,
+                        "column": 26,
+                        "offset": 570
+                      },
+                      "end": {
+                        "line": 12,
+                        "column": 43,
+                        "offset": 587
+                      },
+                      "indent": []
+                    }
+                  },
+                  {
+                    "type": "text",
+                    "value": ". Specifying only the screen\n   track when using ",
+                    "position": {
+                      "start": {
+                        "line": 12,
+                        "column": 43,
+                        "offset": 587
+                      },
+                      "end": {
+                        "line": 13,
+                        "column": 21,
+                        "offset": 636
+                      },
+                      "indent": [
+                        1
+                      ]
+                    }
+                  },
+                  {
+                    "type": "link",
+                    "url": "#callremovemedia",
+                    "title": null,
+                    "jsdoc": true,
+                    "children": [
+                      {
+                        "type": "text",
+                        "value": "call.removeMedia"
+                      }
+                    ],
+                    "position": {
+                      "start": {
+                        "line": 13,
+                        "column": 21,
+                        "offset": 636
+                      },
+                      "end": {
+                        "line": 13,
+                        "column": 45,
+                        "offset": 660
+                      },
+                      "indent": []
+                    }
+                  },
+                  {
+                    "type": "text",
+                    "value": " will perform the same\n   behaviour as using ",
+                    "position": {
+                      "start": {
+                        "line": 13,
+                        "column": 45,
+                        "offset": 660
+                      },
+                      "end": {
+                        "line": 14,
+                        "column": 23,
+                        "offset": 705
+                      },
+                      "indent": [
+                        1
+                      ]
+                    }
+                  },
+                  {
+                    "type": "inlineCode",
+                    "value": "stopScreenshare",
+                    "position": {
+                      "start": {
+                        "line": 14,
+                        "column": 23,
+                        "offset": 705
+                      },
+                      "end": {
+                        "line": 14,
+                        "column": 40,
+                        "offset": 722
+                      },
+                      "indent": []
+                    }
+                  },
+                  {
+                    "type": "text",
+                    "value": ".",
+                    "position": {
+                      "start": {
+                        "line": 14,
+                        "column": 40,
+                        "offset": 722
+                      },
+                      "end": {
+                        "line": 14,
+                        "column": 41,
+                        "offset": 723
+                      },
+                      "indent": []
+                    }
+                  }
+                ],
+                "position": {
+                  "start": {
+                    "line": 9,
+                    "column": 1,
+                    "offset": 343
+                  },
+                  "end": {
+                    "line": 14,
+                    "column": 41,
+                    "offset": 723
+                  },
+                  "indent": [
+                    1,
+                    1,
+                    1,
+                    1,
+                    1
+                  ]
+                }
+              },
+              {
+                "type": "paragraph",
+                "children": [
+                  {
+                    "type": "text",
+                    "value": "There is a caveat that if a Call has multiple video tracks (for example,\n   both a video and a screen track), the SDK itself cannot yet\n   differentiate one from the other. The application will need to know\n   which track was the screen track in this scenario.",
+                    "position": {
+                      "start": {
+                        "line": 16,
+                        "column": 1,
+                        "offset": 725
+                      },
+                      "end": {
+                        "line": 19,
+                        "column": 54,
+                        "offset": 985
+                      },
+                      "indent": [
+                        1,
+                        1,
+                        1
+                      ]
+                    }
+                  }
+                ],
+                "position": {
+                  "start": {
+                    "line": 16,
+                    "column": 1,
+                    "offset": 725
+                  },
+                  "end": {
+                    "line": 19,
+                    "column": 54,
+                    "offset": 985
+                  },
+                  "indent": [
+                    1,
+                    1,
+                    1
+                  ]
+                }
+              }
+            ],
+            "position": {
+              "start": {
+                "line": 1,
+                "column": 1,
+                "offset": 0
+              },
+              "end": {
+                "line": 19,
+                "column": 54,
+                "offset": 985
+              }
+            }
+          },
+          "tags": [
+            {
+              "title": "public",
+              "description": null,
+              "lineNumber": 20,
+              "type": null
+            },
+            {
+              "title": "static",
+              "description": null,
+              "lineNumber": 21
+            },
+            {
+              "title": "method",
+              "description": null,
+              "lineNumber": 22,
+              "name": "stopScreenshare"
+            },
+            {
+              "title": "memberof",
+              "description": "call",
+              "lineNumber": 23
+            },
+            {
+              "title": "requires",
+              "description": null,
+              "lineNumber": 24,
+              "name": "call"
+            },
+            {
+              "title": "requires",
+              "description": null,
+              "lineNumber": 25,
+              "name": "callMe"
+            },
+            {
+              "title": "example",
+              "description": "const call = client.call.getById(callId)\n// Get the ID of any/all video tracks on the call.\nconst videoTracks = call.localTracks.filter(trackId => {\n   const track = call.media.getTrackById(trackId)\n   // Both video and screen tracks have kind of 'video'.\n   return track.kind === 'video'\n})\n\n// Pick out the screen track.\nconst screenTrack = videoTracks[0]\n\n// Remove screen from the call.\nclient.call.removeMedia(callId, [ screenTrack ])",
+              "lineNumber": 26
+            }
+          ],
+          "loc": {
+            "start": {
+              "line": 689,
+              "column": 4
+            },
+            "end": {
+              "line": 729,
+              "column": 7
+            }
+          },
+          "context": {
+            "loc": {
+              "start": {
+                "line": 759,
+                "column": 4
+              },
+              "end": {
+                "line": 762,
+                "column": 5
+              }
+            },
+            "file": "/var/jenkins_home/workspace/Kandy.js_beta/packages/kandy/src/call/interfaceNew/api/call.js"
+          },
+          "augments": [],
+          "examples": [
+            {
+              "description": "const call = client.call.getById(callId)\n// Get the ID of any/all video tracks on the call.\nconst videoTracks = call.localTracks.filter(trackId => {\n   const track = call.media.getTrackById(trackId)\n   // Both video and screen tracks have kind of 'video'.\n   return track.kind === 'video'\n})\n\n// Pick out the screen track.\nconst screenTrack = videoTracks[0]\n\n// Remove screen from the call.\nclient.call.removeMedia(callId, [ screenTrack ])"
+            }
+          ],
+          "params": [],
+          "properties": [],
+          "returns": [],
+          "sees": [],
+          "throws": [],
+          "todos": [],
+          "access": "public",
+          "scope": "static",
+          "kind": "function",
+          "name": "stopScreenshare",
+          "memberof": "call",
+          "members": {
+            "global": [],
+            "inner": [],
+            "instance": [],
+            "events": [],
+            "static": []
+          },
+          "path": [
+            {
+              "name": "call"
+            },
+            {
+              "name": "stopScreenshare",
+              "kind": "function",
+              "scope": "static"
+            }
+          ],
+          "namespace": "call.stopScreenshare"
+        },
+        {
+          "description": {
+            "type": "root",
+            "children": [
+              {
+                "type": "paragraph",
+                "children": [
+                  {
+                    "type": "text",
                     "value": "Adds local screenshare to an ongoing Call, to start sending to the remote\n   participant.",
                     "position": {
                       "start": {
@@ -32129,527 +32650,6 @@
             }
           ],
           "namespace": "call.sendDTMF"
-        },
-        {
-          "description": {
-            "type": "root",
-            "children": [
-              {
-                "type": "paragraph",
-                "children": [
-                  {
-                    "type": "text",
-                    "value": "Removes local screenshare from an ongoing Call, stopping it from being\n   sent to the remote participant.",
-                    "position": {
-                      "start": {
-                        "line": 1,
-                        "column": 1,
-                        "offset": 0
-                      },
-                      "end": {
-                        "line": 2,
-                        "column": 35,
-                        "offset": 105
-                      },
-                      "indent": [
-                        1
-                      ]
-                    }
-                  }
-                ],
-                "position": {
-                  "start": {
-                    "line": 1,
-                    "column": 1,
-                    "offset": 0
-                  },
-                  "end": {
-                    "line": 2,
-                    "column": 35,
-                    "offset": 105
-                  },
-                  "indent": [
-                    1
-                  ]
-                }
-              },
-              {
-                "type": "paragraph",
-                "children": [
-                  {
-                    "type": "text",
-                    "value": "The latest SDK release (v4.X+) has not yet implemented this API in the\n   same way that it was available in previous releases (v3.X). In place\n   of this API, the SDK has a more general API that can be used for this\n   same behaviour.",
-                    "position": {
-                      "start": {
-                        "line": 4,
-                        "column": 1,
-                        "offset": 107
-                      },
-                      "end": {
-                        "line": 7,
-                        "column": 19,
-                        "offset": 341
-                      },
-                      "indent": [
-                        1,
-                        1,
-                        1
-                      ]
-                    }
-                  }
-                ],
-                "position": {
-                  "start": {
-                    "line": 4,
-                    "column": 1,
-                    "offset": 107
-                  },
-                  "end": {
-                    "line": 7,
-                    "column": 19,
-                    "offset": 341
-                  },
-                  "indent": [
-                    1,
-                    1,
-                    1
-                  ]
-                }
-              },
-              {
-                "type": "paragraph",
-                "children": [
-                  {
-                    "type": "text",
-                    "value": "The ",
-                    "position": {
-                      "start": {
-                        "line": 9,
-                        "column": 1,
-                        "offset": 343
-                      },
-                      "end": {
-                        "line": 9,
-                        "column": 5,
-                        "offset": 347
-                      },
-                      "indent": []
-                    }
-                  },
-                  {
-                    "type": "link",
-                    "url": "#callremovemedia",
-                    "title": null,
-                    "jsdoc": true,
-                    "children": [
-                      {
-                        "type": "text",
-                        "value": "call.removeMedia"
-                      }
-                    ],
-                    "position": {
-                      "start": {
-                        "line": 9,
-                        "column": 5,
-                        "offset": 347
-                      },
-                      "end": {
-                        "line": 9,
-                        "column": 29,
-                        "offset": 371
-                      },
-                      "indent": []
-                    }
-                  },
-                  {
-                    "type": "text",
-                    "value": " API can be used to perform the same\n   behaviour as ",
-                    "position": {
-                      "start": {
-                        "line": 9,
-                        "column": 29,
-                        "offset": 371
-                      },
-                      "end": {
-                        "line": 10,
-                        "column": 17,
-                        "offset": 424
-                      },
-                      "indent": [
-                        1
-                      ]
-                    }
-                  },
-                  {
-                    "type": "inlineCode",
-                    "value": "stopScreenshare",
-                    "position": {
-                      "start": {
-                        "line": 10,
-                        "column": 17,
-                        "offset": 424
-                      },
-                      "end": {
-                        "line": 10,
-                        "column": 34,
-                        "offset": 441
-                      },
-                      "indent": []
-                    }
-                  },
-                  {
-                    "type": "text",
-                    "value": ". ",
-                    "position": {
-                      "start": {
-                        "line": 10,
-                        "column": 34,
-                        "offset": 441
-                      },
-                      "end": {
-                        "line": 10,
-                        "column": 36,
-                        "offset": 443
-                      },
-                      "indent": []
-                    }
-                  },
-                  {
-                    "type": "link",
-                    "url": "#callremovemedia",
-                    "title": null,
-                    "jsdoc": true,
-                    "children": [
-                      {
-                        "type": "text",
-                        "value": "call.removeMedia"
-                      }
-                    ],
-                    "position": {
-                      "start": {
-                        "line": 10,
-                        "column": 36,
-                        "offset": 443
-                      },
-                      "end": {
-                        "line": 10,
-                        "column": 60,
-                        "offset": 467
-                      },
-                      "indent": []
-                    }
-                  },
-                  {
-                    "type": "text",
-                    "value": " is a\n   general-purpose API for removing media from a call, which covers the\n   same functionality as ",
-                    "position": {
-                      "start": {
-                        "line": 10,
-                        "column": 60,
-                        "offset": 467
-                      },
-                      "end": {
-                        "line": 12,
-                        "column": 26,
-                        "offset": 570
-                      },
-                      "indent": [
-                        1,
-                        1
-                      ]
-                    }
-                  },
-                  {
-                    "type": "inlineCode",
-                    "value": "stopScreenshare",
-                    "position": {
-                      "start": {
-                        "line": 12,
-                        "column": 26,
-                        "offset": 570
-                      },
-                      "end": {
-                        "line": 12,
-                        "column": 43,
-                        "offset": 587
-                      },
-                      "indent": []
-                    }
-                  },
-                  {
-                    "type": "text",
-                    "value": ". Specifying only the screen\n   track when using ",
-                    "position": {
-                      "start": {
-                        "line": 12,
-                        "column": 43,
-                        "offset": 587
-                      },
-                      "end": {
-                        "line": 13,
-                        "column": 21,
-                        "offset": 636
-                      },
-                      "indent": [
-                        1
-                      ]
-                    }
-                  },
-                  {
-                    "type": "link",
-                    "url": "#callremovemedia",
-                    "title": null,
-                    "jsdoc": true,
-                    "children": [
-                      {
-                        "type": "text",
-                        "value": "call.removeMedia"
-                      }
-                    ],
-                    "position": {
-                      "start": {
-                        "line": 13,
-                        "column": 21,
-                        "offset": 636
-                      },
-                      "end": {
-                        "line": 13,
-                        "column": 45,
-                        "offset": 660
-                      },
-                      "indent": []
-                    }
-                  },
-                  {
-                    "type": "text",
-                    "value": " will perform the same\n   behaviour as using ",
-                    "position": {
-                      "start": {
-                        "line": 13,
-                        "column": 45,
-                        "offset": 660
-                      },
-                      "end": {
-                        "line": 14,
-                        "column": 23,
-                        "offset": 705
-                      },
-                      "indent": [
-                        1
-                      ]
-                    }
-                  },
-                  {
-                    "type": "inlineCode",
-                    "value": "stopScreenshare",
-                    "position": {
-                      "start": {
-                        "line": 14,
-                        "column": 23,
-                        "offset": 705
-                      },
-                      "end": {
-                        "line": 14,
-                        "column": 40,
-                        "offset": 722
-                      },
-                      "indent": []
-                    }
-                  },
-                  {
-                    "type": "text",
-                    "value": ".",
-                    "position": {
-                      "start": {
-                        "line": 14,
-                        "column": 40,
-                        "offset": 722
-                      },
-                      "end": {
-                        "line": 14,
-                        "column": 41,
-                        "offset": 723
-                      },
-                      "indent": []
-                    }
-                  }
-                ],
-                "position": {
-                  "start": {
-                    "line": 9,
-                    "column": 1,
-                    "offset": 343
-                  },
-                  "end": {
-                    "line": 14,
-                    "column": 41,
-                    "offset": 723
-                  },
-                  "indent": [
-                    1,
-                    1,
-                    1,
-                    1,
-                    1
-                  ]
-                }
-              },
-              {
-                "type": "paragraph",
-                "children": [
-                  {
-                    "type": "text",
-                    "value": "There is a caveat that if a Call has multiple video tracks (for example,\n   both a video and a screen track), the SDK itself cannot yet\n   differentiate one from the other. The application will need to know\n   which track was the screen track in this scenario.",
-                    "position": {
-                      "start": {
-                        "line": 16,
-                        "column": 1,
-                        "offset": 725
-                      },
-                      "end": {
-                        "line": 19,
-                        "column": 54,
-                        "offset": 985
-                      },
-                      "indent": [
-                        1,
-                        1,
-                        1
-                      ]
-                    }
-                  }
-                ],
-                "position": {
-                  "start": {
-                    "line": 16,
-                    "column": 1,
-                    "offset": 725
-                  },
-                  "end": {
-                    "line": 19,
-                    "column": 54,
-                    "offset": 985
-                  },
-                  "indent": [
-                    1,
-                    1,
-                    1
-                  ]
-                }
-              }
-            ],
-            "position": {
-              "start": {
-                "line": 1,
-                "column": 1,
-                "offset": 0
-              },
-              "end": {
-                "line": 19,
-                "column": 54,
-                "offset": 985
-              }
-            }
-          },
-          "tags": [
-            {
-              "title": "public",
-              "description": null,
-              "lineNumber": 20,
-              "type": null
-            },
-            {
-              "title": "static",
-              "description": null,
-              "lineNumber": 21
-            },
-            {
-              "title": "method",
-              "description": null,
-              "lineNumber": 22,
-              "name": "stopScreenshare"
-            },
-            {
-              "title": "memberof",
-              "description": "call",
-              "lineNumber": 23
-            },
-            {
-              "title": "requires",
-              "description": null,
-              "lineNumber": 24,
-              "name": "call"
-            },
-            {
-              "title": "requires",
-              "description": null,
-              "lineNumber": 25,
-              "name": "callMe"
-            },
-            {
-              "title": "example",
-              "description": "const call = client.call.getById(callId)\n// Get the ID of any/all video tracks on the call.\nconst videoTracks = call.localTracks.filter(trackId => {\n   const track = call.media.getTrackById(trackId)\n   // Both video and screen tracks have kind of 'video'.\n   return track.kind === 'video'\n})\n\n// Pick out the screen track.\nconst screenTrack = videoTracks[0]\n\n// Remove screen from the call.\nclient.call.removeMedia(callId, [ screenTrack ])",
-              "lineNumber": 26
-            }
-          ],
-          "loc": {
-            "start": {
-              "line": 689,
-              "column": 4
-            },
-            "end": {
-              "line": 729,
-              "column": 7
-            }
-          },
-          "context": {
-            "loc": {
-              "start": {
-                "line": 759,
-                "column": 4
-              },
-              "end": {
-                "line": 762,
-                "column": 5
-              }
-            },
-            "file": "/var/jenkins_home/workspace/Kandy.js_beta/packages/kandy/src/call/interfaceNew/api/call.js"
-          },
-          "augments": [],
-          "examples": [
-            {
-              "description": "const call = client.call.getById(callId)\n// Get the ID of any/all video tracks on the call.\nconst videoTracks = call.localTracks.filter(trackId => {\n   const track = call.media.getTrackById(trackId)\n   // Both video and screen tracks have kind of 'video'.\n   return track.kind === 'video'\n})\n\n// Pick out the screen track.\nconst screenTrack = videoTracks[0]\n\n// Remove screen from the call.\nclient.call.removeMedia(callId, [ screenTrack ])"
-            }
-          ],
-          "params": [],
-          "properties": [],
-          "returns": [],
-          "sees": [],
-          "throws": [],
-          "todos": [],
-          "access": "public",
-          "scope": "static",
-          "kind": "function",
-          "name": "stopScreenshare",
-          "memberof": "call",
-          "members": {
-            "global": [],
-            "inner": [],
-            "instance": [],
-            "events": [],
-            "static": []
-          },
-          "path": [
-            {
-              "name": "call"
-            },
-            {
-              "name": "stopScreenshare",
-              "kind": "function",
-              "scope": "static"
-            }
-          ],
-          "namespace": "call.stopScreenshare"
         },
         {
           "description": {
@@ -38641,324 +38641,6 @@
                 "children": [
                   {
                     "type": "text",
-                    "value": "A LogHandler can be used to customize how the SDK should log information. By\n   default, the SDK will log information to the console, but a LogHandler can\n   be configured to change this behaviour.",
-                    "position": {
-                      "start": {
-                        "line": 1,
-                        "column": 1,
-                        "offset": 0
-                      },
-                      "end": {
-                        "line": 3,
-                        "column": 43,
-                        "offset": 197
-                      },
-                      "indent": [
-                        1,
-                        1
-                      ]
-                    }
-                  }
-                ],
-                "position": {
-                  "start": {
-                    "line": 1,
-                    "column": 1,
-                    "offset": 0
-                  },
-                  "end": {
-                    "line": 3,
-                    "column": 43,
-                    "offset": 197
-                  },
-                  "indent": [
-                    1,
-                    1
-                  ]
-                }
-              },
-              {
-                "type": "paragraph",
-                "children": [
-                  {
-                    "type": "text",
-                    "value": "A LogHandler can be provided to the SDK as part of its configuration (see\n   ",
-                    "position": {
-                      "start": {
-                        "line": 5,
-                        "column": 1,
-                        "offset": 199
-                      },
-                      "end": {
-                        "line": 6,
-                        "column": 4,
-                        "offset": 276
-                      },
-                      "indent": [
-                        1
-                      ]
-                    }
-                  },
-                  {
-                    "type": "link",
-                    "url": "#configconfiglogs",
-                    "title": null,
-                    "jsdoc": true,
-                    "children": [
-                      {
-                        "type": "text",
-                        "value": "config.logs"
-                      }
-                    ],
-                    "position": {
-                      "start": {
-                        "line": 6,
-                        "column": 4,
-                        "offset": 276
-                      },
-                      "end": {
-                        "line": 6,
-                        "column": 41,
-                        "offset": 313
-                      },
-                      "indent": []
-                    }
-                  },
-                  {
-                    "type": "text",
-                    "value": "). The SDK will then provide this\n   function with the logged information.",
-                    "position": {
-                      "start": {
-                        "line": 6,
-                        "column": 41,
-                        "offset": 313
-                      },
-                      "end": {
-                        "line": 7,
-                        "column": 41,
-                        "offset": 387
-                      },
-                      "indent": [
-                        1
-                      ]
-                    }
-                  }
-                ],
-                "position": {
-                  "start": {
-                    "line": 5,
-                    "column": 1,
-                    "offset": 199
-                  },
-                  "end": {
-                    "line": 7,
-                    "column": 41,
-                    "offset": 387
-                  },
-                  "indent": [
-                    1,
-                    1
-                  ]
-                }
-              }
-            ],
-            "position": {
-              "start": {
-                "line": 1,
-                "column": 1,
-                "offset": 0
-              },
-              "end": {
-                "line": 7,
-                "column": 41,
-                "offset": 387
-              }
-            }
-          },
-          "tags": [
-            {
-              "title": "public",
-              "description": null,
-              "lineNumber": 9,
-              "type": null
-            },
-            {
-              "title": "static",
-              "description": null,
-              "lineNumber": 10
-            },
-            {
-              "title": "typedef",
-              "description": null,
-              "lineNumber": 11,
-              "type": {
-                "type": "NameExpression",
-                "name": "Function"
-              },
-              "name": "LogHandler"
-            },
-            {
-              "title": "memberof",
-              "description": "logger",
-              "lineNumber": 12
-            },
-            {
-              "title": "requires",
-              "description": null,
-              "lineNumber": 13,
-              "name": "logs"
-            },
-            {
-              "title": "param",
-              "description": "The LogEntry to be logged.",
-              "lineNumber": 14,
-              "type": {
-                "type": "NameExpression",
-                "name": "Object"
-              },
-              "name": "LogEntry"
-            },
-            {
-              "title": "example",
-              "description": "// Define a custom function to handle logs.\nfunction logHandler (logEntry) {\n  // Compile the meta info of the log for a prefix.\n  const { timestamp, level, target } = logEntry\n  let { method } = logEntry\n  const logInfo = `${timestamp} - ${target.type} - ${level}`\n\n  // Assume that the first message parameter is a string.\n  const [log, ...extra] = logEntry.messages\n\n  // For the timer methods, don't actually use the console methods.\n  //    The Logger already did the timing, so simply log out the info.\n  if (['time', 'timeLog', 'timeEnd'].includes(method)) {\n    method = 'debug'\n  }\n\n  console[method](`${logInfo} - ${log}`, ...extra)\n}\n\n// Provide the LogHandler as part of the SDK configurations.\nconst configs = { ... }\nconfigs.logs.handler = logHandler\nconst client = create(configs)",
-              "lineNumber": 15
-            }
-          ],
-          "loc": {
-            "start": {
-              "line": 54,
-              "column": 0
-            },
-            "end": {
-              "line": 93,
-              "column": 3
-            }
-          },
-          "context": {
-            "loc": {
-              "start": {
-                "line": 1,
-                "column": 0
-              },
-              "end": {
-                "line": 94,
-                "column": 0
-              }
-            },
-            "file": "/var/jenkins_home/workspace/Kandy.js_beta/packages/kandy/src/logs/docs.js"
-          },
-          "augments": [],
-          "examples": [
-            {
-              "description": "// Define a custom function to handle logs.\nfunction logHandler (logEntry) {\n  // Compile the meta info of the log for a prefix.\n  const { timestamp, level, target } = logEntry\n  let { method } = logEntry\n  const logInfo = `${timestamp} - ${target.type} - ${level}`\n\n  // Assume that the first message parameter is a string.\n  const [log, ...extra] = logEntry.messages\n\n  // For the timer methods, don't actually use the console methods.\n  //    The Logger already did the timing, so simply log out the info.\n  if (['time', 'timeLog', 'timeEnd'].includes(method)) {\n    method = 'debug'\n  }\n\n  console[method](`${logInfo} - ${log}`, ...extra)\n}\n\n// Provide the LogHandler as part of the SDK configurations.\nconst configs = { ... }\nconfigs.logs.handler = logHandler\nconst client = create(configs)"
-            }
-          ],
-          "params": [
-            {
-              "title": "param",
-              "name": "LogEntry",
-              "lineNumber": 14,
-              "description": {
-                "type": "root",
-                "children": [
-                  {
-                    "type": "paragraph",
-                    "children": [
-                      {
-                        "type": "text",
-                        "value": "The LogEntry to be logged.",
-                        "position": {
-                          "start": {
-                            "line": 1,
-                            "column": 1,
-                            "offset": 0
-                          },
-                          "end": {
-                            "line": 1,
-                            "column": 27,
-                            "offset": 26
-                          },
-                          "indent": []
-                        }
-                      }
-                    ],
-                    "position": {
-                      "start": {
-                        "line": 1,
-                        "column": 1,
-                        "offset": 0
-                      },
-                      "end": {
-                        "line": 1,
-                        "column": 27,
-                        "offset": 26
-                      },
-                      "indent": []
-                    }
-                  }
-                ],
-                "position": {
-                  "start": {
-                    "line": 1,
-                    "column": 1,
-                    "offset": 0
-                  },
-                  "end": {
-                    "line": 1,
-                    "column": 27,
-                    "offset": 26
-                  }
-                }
-              },
-              "type": {
-                "type": "NameExpression",
-                "name": "Object"
-              }
-            }
-          ],
-          "properties": [],
-          "returns": [],
-          "sees": [],
-          "throws": [],
-          "todos": [],
-          "access": "public",
-          "scope": "static",
-          "kind": "typedef",
-          "name": "LogHandler",
-          "type": {
-            "type": "NameExpression",
-            "name": "Function"
-          },
-          "memberof": "logger",
-          "members": {
-            "global": [],
-            "inner": [],
-            "instance": [],
-            "events": [],
-            "static": []
-          },
-          "path": [
-            {
-              "name": "logger",
-              "kind": "namespace"
-            },
-            {
-              "name": "LogHandler",
-              "kind": "typedef",
-              "scope": "static"
-            }
-          ],
-          "namespace": "logger.LogHandler"
-        },
-        {
-          "description": {
-            "type": "root",
-            "children": [
-              {
-                "type": "paragraph",
-                "children": [
-                  {
-                    "type": "text",
                     "value": "A LogEntry object is the data that the SDK compiles when information is\n   logged. It contains both the logged information and meta-info about when\n   and who logged it.",
                     "position": {
                       "start": {
@@ -39903,6 +39585,324 @@
             }
           ],
           "namespace": "logger.LogEntry"
+        },
+        {
+          "description": {
+            "type": "root",
+            "children": [
+              {
+                "type": "paragraph",
+                "children": [
+                  {
+                    "type": "text",
+                    "value": "A LogHandler can be used to customize how the SDK should log information. By\n   default, the SDK will log information to the console, but a LogHandler can\n   be configured to change this behaviour.",
+                    "position": {
+                      "start": {
+                        "line": 1,
+                        "column": 1,
+                        "offset": 0
+                      },
+                      "end": {
+                        "line": 3,
+                        "column": 43,
+                        "offset": 197
+                      },
+                      "indent": [
+                        1,
+                        1
+                      ]
+                    }
+                  }
+                ],
+                "position": {
+                  "start": {
+                    "line": 1,
+                    "column": 1,
+                    "offset": 0
+                  },
+                  "end": {
+                    "line": 3,
+                    "column": 43,
+                    "offset": 197
+                  },
+                  "indent": [
+                    1,
+                    1
+                  ]
+                }
+              },
+              {
+                "type": "paragraph",
+                "children": [
+                  {
+                    "type": "text",
+                    "value": "A LogHandler can be provided to the SDK as part of its configuration (see\n   ",
+                    "position": {
+                      "start": {
+                        "line": 5,
+                        "column": 1,
+                        "offset": 199
+                      },
+                      "end": {
+                        "line": 6,
+                        "column": 4,
+                        "offset": 276
+                      },
+                      "indent": [
+                        1
+                      ]
+                    }
+                  },
+                  {
+                    "type": "link",
+                    "url": "#configconfiglogs",
+                    "title": null,
+                    "jsdoc": true,
+                    "children": [
+                      {
+                        "type": "text",
+                        "value": "config.logs"
+                      }
+                    ],
+                    "position": {
+                      "start": {
+                        "line": 6,
+                        "column": 4,
+                        "offset": 276
+                      },
+                      "end": {
+                        "line": 6,
+                        "column": 41,
+                        "offset": 313
+                      },
+                      "indent": []
+                    }
+                  },
+                  {
+                    "type": "text",
+                    "value": "). The SDK will then provide this\n   function with the logged information.",
+                    "position": {
+                      "start": {
+                        "line": 6,
+                        "column": 41,
+                        "offset": 313
+                      },
+                      "end": {
+                        "line": 7,
+                        "column": 41,
+                        "offset": 387
+                      },
+                      "indent": [
+                        1
+                      ]
+                    }
+                  }
+                ],
+                "position": {
+                  "start": {
+                    "line": 5,
+                    "column": 1,
+                    "offset": 199
+                  },
+                  "end": {
+                    "line": 7,
+                    "column": 41,
+                    "offset": 387
+                  },
+                  "indent": [
+                    1,
+                    1
+                  ]
+                }
+              }
+            ],
+            "position": {
+              "start": {
+                "line": 1,
+                "column": 1,
+                "offset": 0
+              },
+              "end": {
+                "line": 7,
+                "column": 41,
+                "offset": 387
+              }
+            }
+          },
+          "tags": [
+            {
+              "title": "public",
+              "description": null,
+              "lineNumber": 9,
+              "type": null
+            },
+            {
+              "title": "static",
+              "description": null,
+              "lineNumber": 10
+            },
+            {
+              "title": "typedef",
+              "description": null,
+              "lineNumber": 11,
+              "type": {
+                "type": "NameExpression",
+                "name": "Function"
+              },
+              "name": "LogHandler"
+            },
+            {
+              "title": "memberof",
+              "description": "logger",
+              "lineNumber": 12
+            },
+            {
+              "title": "requires",
+              "description": null,
+              "lineNumber": 13,
+              "name": "logs"
+            },
+            {
+              "title": "param",
+              "description": "The LogEntry to be logged.",
+              "lineNumber": 14,
+              "type": {
+                "type": "NameExpression",
+                "name": "Object"
+              },
+              "name": "LogEntry"
+            },
+            {
+              "title": "example",
+              "description": "// Define a custom function to handle logs.\nfunction logHandler (logEntry) {\n  // Compile the meta info of the log for a prefix.\n  const { timestamp, level, target } = logEntry\n  let { method } = logEntry\n  const logInfo = `${timestamp} - ${target.type} - ${level}`\n\n  // Assume that the first message parameter is a string.\n  const [log, ...extra] = logEntry.messages\n\n  // For the timer methods, don't actually use the console methods.\n  //    The Logger already did the timing, so simply log out the info.\n  if (['time', 'timeLog', 'timeEnd'].includes(method)) {\n    method = 'debug'\n  }\n\n  console[method](`${logInfo} - ${log}`, ...extra)\n}\n\n// Provide the LogHandler as part of the SDK configurations.\nconst configs = { ... }\nconfigs.logs.handler = logHandler\nconst client = create(configs)",
+              "lineNumber": 15
+            }
+          ],
+          "loc": {
+            "start": {
+              "line": 54,
+              "column": 0
+            },
+            "end": {
+              "line": 93,
+              "column": 3
+            }
+          },
+          "context": {
+            "loc": {
+              "start": {
+                "line": 1,
+                "column": 0
+              },
+              "end": {
+                "line": 94,
+                "column": 0
+              }
+            },
+            "file": "/var/jenkins_home/workspace/Kandy.js_beta/packages/kandy/src/logs/docs.js"
+          },
+          "augments": [],
+          "examples": [
+            {
+              "description": "// Define a custom function to handle logs.\nfunction logHandler (logEntry) {\n  // Compile the meta info of the log for a prefix.\n  const { timestamp, level, target } = logEntry\n  let { method } = logEntry\n  const logInfo = `${timestamp} - ${target.type} - ${level}`\n\n  // Assume that the first message parameter is a string.\n  const [log, ...extra] = logEntry.messages\n\n  // For the timer methods, don't actually use the console methods.\n  //    The Logger already did the timing, so simply log out the info.\n  if (['time', 'timeLog', 'timeEnd'].includes(method)) {\n    method = 'debug'\n  }\n\n  console[method](`${logInfo} - ${log}`, ...extra)\n}\n\n// Provide the LogHandler as part of the SDK configurations.\nconst configs = { ... }\nconfigs.logs.handler = logHandler\nconst client = create(configs)"
+            }
+          ],
+          "params": [
+            {
+              "title": "param",
+              "name": "LogEntry",
+              "lineNumber": 14,
+              "description": {
+                "type": "root",
+                "children": [
+                  {
+                    "type": "paragraph",
+                    "children": [
+                      {
+                        "type": "text",
+                        "value": "The LogEntry to be logged.",
+                        "position": {
+                          "start": {
+                            "line": 1,
+                            "column": 1,
+                            "offset": 0
+                          },
+                          "end": {
+                            "line": 1,
+                            "column": 27,
+                            "offset": 26
+                          },
+                          "indent": []
+                        }
+                      }
+                    ],
+                    "position": {
+                      "start": {
+                        "line": 1,
+                        "column": 1,
+                        "offset": 0
+                      },
+                      "end": {
+                        "line": 1,
+                        "column": 27,
+                        "offset": 26
+                      },
+                      "indent": []
+                    }
+                  }
+                ],
+                "position": {
+                  "start": {
+                    "line": 1,
+                    "column": 1,
+                    "offset": 0
+                  },
+                  "end": {
+                    "line": 1,
+                    "column": 27,
+                    "offset": 26
+                  }
+                }
+              },
+              "type": {
+                "type": "NameExpression",
+                "name": "Object"
+              }
+            }
+          ],
+          "properties": [],
+          "returns": [],
+          "sees": [],
+          "throws": [],
+          "todos": [],
+          "access": "public",
+          "scope": "static",
+          "kind": "typedef",
+          "name": "LogHandler",
+          "type": {
+            "type": "NameExpression",
+            "name": "Function"
+          },
+          "memberof": "logger",
+          "members": {
+            "global": [],
+            "inner": [],
+            "instance": [],
+            "events": [],
+            "static": []
+          },
+          "path": [
+            {
+              "name": "logger",
+              "kind": "namespace"
+            },
+            {
+              "name": "LogHandler",
+              "kind": "typedef",
+              "scope": "static"
+            }
+          ],
+          "namespace": "logger.LogHandler"
         }
       ]
     },
