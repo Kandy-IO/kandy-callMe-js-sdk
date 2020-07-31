@@ -89,7 +89,6 @@ It then creates and returns a Cipher object, based on the given algorithm, key a
 ```javascript
 // Create an initialization vector
 const ivBuffer = Buffer.from('')
-
 // Create 'crypter' object based on algorithm: aes-128-ecb
 const crypter = crypto.createCipheriv('aes-128-ecb', keyBuffer, ivBuffer)
 ```

@@ -44,12 +44,12 @@ Note: It is important to always include these configurations.
 
 ```javascript
 authentication: {
-    subscription: {
-        server: '$SUBSCRIPTIONFQDN$'
-    },
-    websocket: {
-        server: '$WEBSOCKETFQDN$'
-    }
+  subscription: {
+    server: '$SUBSCRIPTIONFQDN$'
+  },
+  websocket: {
+    server: '$WEBSOCKETFQDN$'
+  }
 }
 ```
 
@@ -96,19 +96,19 @@ The Connectivity configs are used to customize the behaviour of the websocket an
 
 ```javascript
 connectivity: {
-       // Specify that a keepAlive ping should be sent every 60 seconds,
-    // and if unable to connect should try to reconnect 3 times before
-    // throwing an error. Specify to wait 10 seconds before attempting
-    // to connect, and double that time every connection attempt, while
-    // keeping maximum wait time under 300 seconds.
-    pingInterval: 60000, // milliseconds
-    reconnectLimit: 3,
-    reconnectDelay: 10000, // milliseconds
-    reconnectTimeMultiplier: 2,
-    reconnectTimeLimit: 300000, // milliseconds
-    autoReconnect: true,
-    maxMissedPings: 3,
-    checkConnectivity: true
+  // Specify that a keepAlive ping should be sent every 60 seconds,
+  // and if unable to connect should try to reconnect 3 times before
+  // throwing an error. Specify to wait 10 seconds before attempting
+  // to connect, and double that time every connection attempt, while
+  // keeping maximum wait time under 300 seconds.
+  pingInterval: 60000, // milliseconds
+  reconnectLimit: 3,
+  reconnectDelay: 10000, // milliseconds
+  reconnectTimeMultiplier: 2,
+  reconnectTimeLimit: 300000, // milliseconds
+  autoReconnect: true,
+  maxMissedPings: 3,
+  checkConnectivity: true
 }
 ```
 
