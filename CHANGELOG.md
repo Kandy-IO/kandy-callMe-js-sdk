@@ -73,6 +73,7 @@ Choose the configuration that applies to you:
 ### Changed
 
 - Updated the `webrtc-adapter` package (6.4.4 -> 7.6.3). `KAA-2381`
+- Added a small note to the documentation to inform that screensharing is not supported on iOS Safari. `KAA-2429`
 
 ## 4.17.0 - 2020-06-26
 
