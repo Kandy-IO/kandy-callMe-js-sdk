@@ -372,97 +372,81 @@ let callId = client.call.makeAnonymous(callee, credentials, callOptions);
 
 Returns **[string][8]** Id of the outgoing call.
 
-### BandwidthControls
+### CallObject
 
-The BandwidthControls type defines the format for configuring media and/or track bandwidth options.
-BandwidthControls only affect received remote tracks of the specified type.
+Information about a Call.
 
-Type: [Object][7]
-
-**Properties**
-
--   `call` **[number][12]?** The desired combined bandwidth bitrate in kilobits per second for all media in the call.
--   `audio` **[number][12]?** The desired bandwidth bitrate in kilobits per second for received remote audio.
--   `video` **[number][12]?** The desired bandwidth bitrate in kilobits per second for received remote video.
-
-**Examples**
-
-```javascript
-// Specify received remote video bandwidth limits when making a call.
-client.call.make(destination, mediaConstraints,
- {
-   bandwidth: {
-     video: 5
-   }
- }
-)
-```
-
-### CustomParameter
-
-Custom SIP headers can be used to convey additional information to a SIP endpoint.
-
-These headers must be configured on the server prior to making a request, otherwise the request will fail when trying to set the headers.
-
-These headers can be specified with the [call.make][23] and [call.answer][24] APIs.
-They can also be set on a call using the [call.setCustomParameters][25], and sent using the [call.sendCustomParameters][26] API.
-
-Custom headers may be received anytime throughout the duration a call. A remote endpoint may send custom headers when starting a call,
- answering a call, or during call updates such as hold/unhold and addition/removal of media in the call.
- When these custom headers are received, the SDK will emit a [call:customParameters][27] event
- which will contain the custom parameters that were received.
-
-A Call's custom parameters are a property of the Call's [CallObject][28],
- which can be retrieved using the [call.getById][29] or
- [call.getAll][30] APIs.
+Can be retrieved using the [call.getAll][23] or [call.getById][24] APIs.
 
 Type: [Object][7]
 
 **Properties**
 
--   `name` **[string][8]** The name of the custom parameter
--   `value` **[string][8]** The value of the custom parameter
+-   `id` **[string][8]** The ID of the call.
+-   `from` **user.UserID** A unique identifier (uri) of the person who made the call.
+-   `to` **user.UserID** A unique identifier (uri) of the person who receives the call.
+-   `direction` **[string][8]** The direction in which the call was created. Can be 'outgoing' or 'incoming'.
+-   `state` **[string][8]** The current state of the call. See [call.states][25] for possible states.
+-   `localHold` **[boolean][11]** Indicates whether this call is currently being held locally.
+-   `remoteHold` **[boolean][11]** Indicates whether this call is currently being held remotely.
+-   `localTracks` **[Array][13]&lt;[string][8]>** A list of Track IDs that the call is sending to the remote participant.
+-   `remoteTracks` **[Array][13]&lt;[string][8]>** A list of Track IDs that the call is receiving from the remote participant.
+-   `remoteParticipant` **[Object][7]** Information about the other call participant.
+    -   `remoteParticipant.displayNumber` **[string][8]?** The User ID of the remote participant in the form "username@domain".
+    -   `remoteParticipant.displayName` **[string][8]?** The display name of the remote participant.
+-   `bandwidth` **[call.BandwidthControls][21]** The bandwidth limitations set for the call.
+-   `customParameters` **[Array][13]&lt;[call.CustomParameter][22]>** The custom parameters set for the call.
+-   `startTime` **[number][12]** The start time of the call in milliseconds since the epoch.
+-   `endTime` **[number][12]?** The end time of the call in milliseconds since the epoch.
 
-**Examples**
-
-```javascript
-// Specify custom parameters when making a call.
-client.call.make(destination, mediaConstraints,
- {
-   customParameters: [
-     {
-       name: 'X-GPS',
-       value: '42.686032,23.344565'
-     }
-   ]
- }
-)
-```
-
-### DeviceInfo
-
-Contains information about a device.
+### SdpHandlerInfo
 
 Type: [Object][7]
 
 **Properties**
 
--   `deviceId` **[string][8]** The ID of the device.
--   `groupId` **[string][8]** The group ID of the device. Devices that share a `groupId` belong to the same physical device.
--   `kind` **[string][8]** The type of the device (audioinput, audiooutput, videoinput).
--   `label` **[string][8]** The name of the device.
+-   `callId` **[string][8]** The id corresponding to the call for which the handler is being run.
+-   `type` **RTCSdpType** The session description's type.
+-   `step` **[string][8]** The step that will occur after the SDP Handlers are run.
+       Will be either 'set' (the SDP will be set locally) or 'send' (the SDP will
+       be sent to the remote endpoint).
+-   `endpoint` **[string][8]** Which end of the connection created the SDP.
 
-### DevicesObject
-
-A collection of media devices and their information.
+### IceServer
 
 Type: [Object][7]
 
 **Properties**
 
--   `camera` **[Array][13]&lt;[call.DeviceInfo][31]>** A list of camera device information.
--   `microphone` **[Array][13]&lt;[call.DeviceInfo][31]>** A list of microphone device information.
--   `speaker` **[Array][13]&lt;[call.DeviceInfo][31]>** A list of speaker device information.
+-   `urls` **([Array][13]&lt;[string][8]> | [string][8])** Either an array of URLs for reaching out several ICE servers or a single URL for reaching one ICE server. See [RTCIceServers.urls documentation][26] to learn more about the actual url format.
+-   `credential` **[string][8]?** The credential needed by the ICE server.
+
+### MediaObject
+
+The state representation of a Media object.
+Media is a collection of Track objects.
+
+Type: [Object][7]
+
+**Properties**
+
+-   `id` **[string][8]** The ID of the Media object.
+-   `local` **[boolean][11]** Indicator on whether this media is local or remote.
+-   `tracks` **[Array][13]&lt;[call.TrackObject][27]>** A list of Track objects that are contained in this Media object.
+
+### SdpHandlerFunction
+
+The form of an SDP handler function and the expected arguments that it receives.
+
+Type: [Function][15]
+
+**Parameters**
+
+-   `newSdp` **[Object][7]** The SDP so far (could have been modified by previous handlers).
+-   `info` **[call.SdpHandlerInfo][28]** Additional information that might be useful when making SDP modifications.
+-   `originalSdp` **[Object][7]** The SDP in its initial state.
+
+Returns **[Object][7]** The resulting modified SDP based on the changes made by this function.
 
 ### TrackObject
 
@@ -486,81 +470,85 @@ Type: [Object][7]
 -   `state` **[string][8]** The state of this Track. Can be 'live' or 'ended'.
 -   `streamId` **[string][8]** The ID of the Media Stream that includes this Track.
 
-### MediaObject
+### DevicesObject
 
-The state representation of a Media object.
-Media is a collection of Track objects.
-
-Type: [Object][7]
-
-**Properties**
-
--   `id` **[string][8]** The ID of the Media object.
--   `local` **[boolean][11]** Indicator on whether this media is local or remote.
--   `tracks` **[Array][13]&lt;[call.TrackObject][32]>** A list of Track objects that are contained in this Media object.
-
-### SdpHandlerFunction
-
-The form of an SDP handler function and the expected arguments that it receives.
-
-Type: [Function][15]
-
-**Parameters**
-
--   `newSdp` **[Object][7]** The SDP so far (could have been modified by previous handlers).
--   `info` **[call.SdpHandlerInfo][33]** Additional information that might be useful when making SDP modifications.
--   `originalSdp` **[Object][7]** The SDP in its initial state.
-
-Returns **[Object][7]** The resulting modified SDP based on the changes made by this function.
-
-### SdpHandlerInfo
+A collection of media devices and their information.
 
 Type: [Object][7]
 
 **Properties**
 
--   `callId` **[string][8]** The id corresponding to the call for which the handler is being run.
--   `type` **RTCSdpType** The session description's type.
--   `step` **[string][8]** The step that will occur after the SDP Handlers are run.
-       Will be either 'set' (the SDP will be set locally) or 'send' (the SDP will
-       be sent to the remote endpoint).
--   `endpoint` **[string][8]** Which end of the connection created the SDP.
+-   `camera` **[Array][13]&lt;[call.DeviceInfo][29]>** A list of camera device information.
+-   `microphone` **[Array][13]&lt;[call.DeviceInfo][29]>** A list of microphone device information.
+-   `speaker` **[Array][13]&lt;[call.DeviceInfo][29]>** A list of speaker device information.
 
-### IceServer
+### DeviceInfo
 
-Type: [Object][7]
-
-**Properties**
-
--   `urls` **([Array][13]&lt;[string][8]> | [string][8])** Either an array of URLs for reaching out several ICE servers or a single URL for reaching one ICE server. See [RTCIceServers.urls documentation][34] to learn more about the actual url format.
--   `credential` **[string][8]?** The credential needed by the ICE server.
-
-### CallObject
-
-Information about a Call.
-
-Can be retrieved using the [call.getAll][30] or [call.getById][29] APIs.
+Contains information about a device.
 
 Type: [Object][7]
 
 **Properties**
 
--   `id` **[string][8]** The ID of the call.
--   `from` **user.UserID** A unique identifier (uri) of the person who made the call.
--   `to` **user.UserID** A unique identifier (uri) of the person who receives the call.
--   `direction` **[string][8]** The direction in which the call was created. Can be 'outgoing' or 'incoming'.
--   `state` **[string][8]** The current state of the call. See [call.states][35] for possible states.
--   `localHold` **[boolean][11]** Indicates whether this call is currently being held locally.
--   `remoteHold` **[boolean][11]** Indicates whether this call is currently being held remotely.
--   `localTracks` **[Array][13]&lt;[string][8]>** A list of Track IDs that the call is sending to the remote participant.
--   `remoteTracks` **[Array][13]&lt;[string][8]>** A list of Track IDs that the call is receiving from the remote participant.
--   `remoteParticipant` **[Object][7]** Information about the other call participant.
-    -   `remoteParticipant.displayNumber` **[string][8]?** The User ID of the remote participant in the form "username@domain".
-    -   `remoteParticipant.displayName` **[string][8]?** The display name of the remote participant.
--   `bandwidth` **[call.BandwidthControls][21]** The bandwidth limitations set for the call.
--   `customParameters` **[Array][13]&lt;[call.CustomParameter][22]>** The custom parameters set for the call.
--   `startTime` **[number][12]** The start time of the call in milliseconds since the epoch.
--   `endTime` **[number][12]?** The end time of the call in milliseconds since the epoch.
+-   `deviceId` **[string][8]** The ID of the device.
+-   `groupId` **[string][8]** The group ID of the device. Devices that share a `groupId` belong to the same physical device.
+-   `kind` **[string][8]** The type of the device (audioinput, audiooutput, videoinput).
+-   `label` **[string][8]** The name of the device.
+
+### DSCPControls
+
+The DSCPControls type defines the format for configuring network priorities (DSCP marking) for the media traffic.
+
+If DSCPControls are not configured for a call the network priority of the traffic for all media kinds will be the default (i.e., "low").
+
+Type: [Object][7]
+
+**Properties**
+
+-   `audioNetworkPriority` **RTCPriorityType?** The desired network priority for audio traffic (see [RTCPriorityType Enum][30] for the list of possible values).
+-   `videoNetworkPriority` **RTCPriorityType?** The desired network priority for video traffic (see [RTCPriorityType Enum][30] for the list of possible values).
+-   `screenNetworkPriority` **RTCPriorityType?** The desired network priority for screen share traffic (see [RTCPriorityType Enum][30] for the list of possible values).
+
+### CustomParameter
+
+Custom SIP headers can be used to convey additional information to a SIP endpoint.
+
+These headers must be configured on the server prior to making a request, otherwise the request will fail when trying to set the headers.
+
+These headers can be specified with the [call.make][31] and [call.answer][32] APIs.
+They can also be set on a call using the [call.setCustomParameters][33], and sent using the [call.sendCustomParameters][34] API.
+
+Custom headers may be received anytime throughout the duration a call. A remote endpoint may send custom headers when starting a call,
+ answering a call, or during call updates such as hold/unhold and addition/removal of media in the call.
+ When these custom headers are received, the SDK will emit a [call:customParameters][35] event
+ which will contain the custom parameters that were received.
+
+A Call's custom parameters are a property of the Call's [CallObject][36],
+ which can be retrieved using the [call.getById][24] or
+ [call.getAll][23] APIs.
+
+Type: [Object][7]
+
+**Properties**
+
+-   `name` **[string][8]** The name of the custom parameter
+-   `value` **[string][8]** The value of the custom parameter
+
+**Examples**
+
+```javascript
+// Specify custom parameters when making a call.
+client.call.make(destination, mediaConstraints,
+ {
+   customParameters: [
+     {
+       name: 'X-GPS',
+       value: '42.686032,23.344565'
+     }
+   ]
+ }
+)
+```
 
 ### MediaConstraint
 
@@ -596,19 +584,31 @@ client.call.make(destination, {
 })
 ```
 
-### DSCPControls
+### BandwidthControls
 
-The DSCPControls type defines the format for configuring network priorities (DSCP marking) for the media traffic.
-
-If DSCPControls are not configured for a call the network priority of the traffic for all media kinds will be the default (i.e., "low").
+The BandwidthControls type defines the format for configuring media and/or track bandwidth options.
+BandwidthControls only affect received remote tracks of the specified type.
 
 Type: [Object][7]
 
 **Properties**
 
--   `audioNetworkPriority` **RTCPriorityType?** The desired network priority for audio traffic (see [RTCPriorityType Enum][36] for the list of possible values).
--   `videoNetworkPriority` **RTCPriorityType?** The desired network priority for video traffic (see [RTCPriorityType Enum][36] for the list of possible values).
--   `screenNetworkPriority` **RTCPriorityType?** The desired network priority for screen share traffic (see [RTCPriorityType Enum][36] for the list of possible values).
+-   `call` **[number][12]?** The desired combined bandwidth bitrate in kilobits per second for all media in the call.
+-   `audio` **[number][12]?** The desired bandwidth bitrate in kilobits per second for received remote audio.
+-   `video` **[number][12]?** The desired bandwidth bitrate in kilobits per second for received remote video.
+
+**Examples**
+
+```javascript
+// Specify received remote video bandwidth limits when making a call.
+client.call.make(destination, mediaConstraints,
+ {
+   bandwidth: {
+     video: 5
+   }
+ }
+)
+```
 
 ### hold
 
@@ -662,11 +662,11 @@ The specified parameters will be saved as part of the call's information through
 All subsequent call operations will include these custom parameters.
 Therefore, invalid parameters, or parameters not previously configured on the server, will cause subsequent call operations to fail.
 
-A Call's custom parameters are a property of the Call's [CallObject][28],
-   which can be retrieved using the [call.getById][29] or
-   [call.getAll][30] APIs.
+A Call's custom parameters are a property of the Call's [CallObject][36],
+   which can be retrieved using the [call.getById][24] or
+   [call.getAll][23] APIs.
 
-The custom parameters set on a call can be sent directly with the [call.sendCustomParameters][26] API.
+The custom parameters set on a call can be sent directly with the [call.sendCustomParameters][34] API.
 
 Custom parameters can be removed from a call's information by setting them as undefined (e.g., `call.setCustomParameters(callId)`).
 Subsequent call operations will no longer send custom parameters.
@@ -681,11 +681,11 @@ Subsequent call operations will no longer send custom parameters.
 Send the custom parameters on an ongoing call to the server. The server may either consume the headers or relay them
 to another endpoint, depending on how the server is configured.
 
-A Call's custom parameters are a property of the Call's [CallObject][28],
-   which can be retrieved using the [call.getById][29] or
-   [call.getAll][30] APIs.
+A Call's custom parameters are a property of the Call's [CallObject][36],
+   which can be retrieved using the [call.getById][24] or
+   [call.getAll][23] APIs.
 
-To change or remove the custom parameters on a call, use the [call.setCustomParameters][25] API.
+To change or remove the custom parameters on a call, use the [call.setCustomParameters][33] API.
 
 **Parameters**
 
@@ -1052,18 +1052,6 @@ This is an advanced feature, changing the SDP handlers mid-call may cause
 
 -   `sdpHandlers` **[Array][13]&lt;[call.SdpHandlerFunction][16]>** The list of SDP handler functions to modify SDP.
 
-### setDefaultDevices
-
-The `setDefaultDevices` API from previous SDK releases (3.X) has been
-   deprecated in the latest releases (4.X+). The SDK no longer keeps
-   track of "default devices" on behalf of the application.
-
-The devices used for a call can be selected as part of the APIs for
-   starting the call. Microphone and/or camera can be chosen in the
-   [call.make][23] and [call.answer][24] APIs, and speaker can be
-   chosen when the audio track is rendered with the
-   [media.renderTracks][51] API.
-
 ### states
 
 Possible states that a Call can be in.
@@ -1076,9 +1064,9 @@ A Call's state describes the current status of the Call. An application
    whether the Call currently has media flowing between users.
 Unless stated otherwise, the Call's state pertains to both caller & callee.
 
-The Call's state is a property of the [CallObject][28],
-   which can be retrieved using the [call.getById][29] or
-   [call.getAll][30] APIs.
+The Call's state is a property of the [CallObject][36],
+   which can be retrieved using the [call.getById][24] or
+   [call.getAll][23] APIs.
 
 The SDK emits a [call:stateChange][39]
    event when a Call's state changes from one state to another.
@@ -1123,8 +1111,8 @@ The latest SDK release (v4.X+) has not yet implemented this API in the
 The same behaviour as the `changeSpeaker` API can be implemented by
    re-rendering the Call's audio track.  A speaker can be selected when
    rendering an audio track, so changing a speaker can be simulated
-   by unrendering the track with [media.removeTracks][52], then
-   re-rendering it with a new speaker with [media.renderTracks][51].
+   by unrendering the track with [media.removeTracks][51], then
+   re-rendering it with a new speaker with [media.renderTracks][52].
 
 **Examples**
 
@@ -1146,6 +1134,18 @@ client.media.renderTrack([ audioTrack ], audioContainer, {
    speakerId: 'speakerId'
 })
 ```
+
+### setDefaultDevices
+
+The `setDefaultDevices` API from previous SDK releases (3.X) has been
+   deprecated in the latest releases (4.X+). The SDK no longer keeps
+   track of "default devices" on behalf of the application.
+
+The devices used for a call can be selected as part of the APIs for
+   starting the call. Microphone and/or camera can be chosen in the
+   [call.make][31] and [call.answer][32] APIs, and speaker can be
+   chosen when the audio track is rendered with the
+   [media.renderTracks][52] API.
 
 ### changeInputDevices
 
@@ -1387,7 +1387,7 @@ Retrieve an available Track object with a specific Track ID.
 
 -   `trackId` **[string][8]** The ID of the Track to retrieve.
 
-Returns **[call.TrackObject][32]** A Track object.
+Returns **[call.TrackObject][27]** A Track object.
 
 ### renderTracks
 
@@ -1679,33 +1679,33 @@ Returns **[call.SdpHandlerFunction][16]** The resulting SDP handler that will re
 
 [22]: #callcustomparameter
 
-[23]: call.make
+[23]: #callgetall
 
-[24]: call.answer
+[24]: #callgetbyid
 
-[25]: #callsetcustomparameters
+[25]: #callstates
 
-[26]: #callsendcustomparameters
+[26]: https://developer.mozilla.org/en-US/docs/Web/API/RTCIceServer/urls
 
-[27]: #calleventcallcustomparameters
+[27]: #calltrackobject
 
-[28]: #callcallobject
+[28]: #callsdphandlerinfo
 
-[29]: #callgetbyid
+[29]: #calldeviceinfo
 
-[30]: #callgetall
+[30]: https://www.w3.org/TR/webrtc-priority/#rtc-priority-type
 
-[31]: #calldeviceinfo
+[31]: call.make
 
-[32]: #calltrackobject
+[32]: call.answer
 
-[33]: #callsdphandlerinfo
+[33]: #callsetcustomparameters
 
-[34]: https://developer.mozilla.org/en-US/docs/Web/API/RTCIceServer/urls
+[34]: #callsendcustomparameters
 
-[35]: #callstates
+[35]: #calleventcallcustomparameters
 
-[36]: https://www.w3.org/TR/webrtc-priority/#rtc-priority-type
+[36]: #callcallobject
 
 [37]: #callunhold
 
@@ -1735,9 +1735,9 @@ Returns **[call.SdpHandlerFunction][16]** The resulting SDP handler that will re
 
 [50]: #callsdphandlerfunction
 
-[51]: #mediarendertracks
+[51]: #mediaremovetracks
 
-[52]: #mediaremovetracks
+[52]: #mediarendertracks
 
 [53]: #callreplacetrack
 
