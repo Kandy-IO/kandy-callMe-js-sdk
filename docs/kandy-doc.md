@@ -386,23 +386,50 @@ Type: [Object][7]
 -   `videoNetworkPriority` **RTCPriorityType?** The desired network priority for video traffic (see [RTCPriorityType Enum][23] for the list of possible values).
 -   `screenNetworkPriority` **RTCPriorityType?** The desired network priority for screen share traffic (see [RTCPriorityType Enum][23] for the list of possible values).
 
+### CallObject
+
+Information about a Call.
+
+Can be retrieved using the [call.getAll][24] or [call.getById][25] APIs.
+
+Type: [Object][7]
+
+**Properties**
+
+-   `id` **[string][8]** The ID of the call.
+-   `from` **user.UserID** A unique identifier (uri) of the person who made the call.
+-   `to` **user.UserID** A unique identifier (uri) of the person who receives the call.
+-   `direction` **[string][8]** The direction in which the call was created. Can be 'outgoing' or 'incoming'.
+-   `state` **[string][8]** The current state of the call. See [call.states][26] for possible states.
+-   `localHold` **[boolean][11]** Indicates whether this call is currently being held locally.
+-   `remoteHold` **[boolean][11]** Indicates whether this call is currently being held remotely.
+-   `localTracks` **[Array][13]&lt;[string][8]>** A list of Track IDs that the call is sending to the remote participant.
+-   `remoteTracks` **[Array][13]&lt;[string][8]>** A list of Track IDs that the call is receiving from the remote participant.
+-   `remoteParticipant` **[Object][7]** Information about the other call participant.
+    -   `remoteParticipant.displayNumber` **[string][8]?** The User ID of the remote participant in the form "username@domain".
+    -   `remoteParticipant.displayName` **[string][8]?** The display name of the remote participant.
+-   `bandwidth` **[call.BandwidthControls][21]** The bandwidth limitations set for the call.
+-   `customParameters` **[Array][13]&lt;[call.CustomParameter][22]>** The custom parameters set for the call.
+-   `startTime` **[number][12]** The start time of the call in milliseconds since the epoch.
+-   `endTime` **[number][12]?** The end time of the call in milliseconds since the epoch.
+
 ### CustomParameter
 
 Custom SIP headers can be used to convey additional information to a SIP endpoint.
 
 These headers must be configured on the server prior to making a request, otherwise the request will fail when trying to set the headers.
 
-These headers can be specified with the [call.make][24] and [call.answer][25] APIs.
-They can also be set on a call using the [call.setCustomParameters][26], and sent using the [call.sendCustomParameters][27] API.
+These headers can be specified with the [call.make][27] and [call.answer][28] APIs.
+They can also be set on a call using the [call.setCustomParameters][29], and sent using the [call.sendCustomParameters][30] API.
 
 Custom headers may be received anytime throughout the duration a call. A remote endpoint may send custom headers when starting a call,
  answering a call, or during call updates such as hold/unhold and addition/removal of media in the call.
- When these custom headers are received, the SDK will emit a [call:customParameters][28] event
+ When these custom headers are received, the SDK will emit a [call:customParameters][31] event
  which will contain the custom parameters that were received.
 
-A Call's custom parameters are a property of the Call's [CallObject][29],
- which can be retrieved using the [call.getById][30] or
- [call.getAll][31] APIs.
+A Call's custom parameters are a property of the Call's [CallObject][32],
+ which can be retrieved using the [call.getById][25] or
+ [call.getAll][24] APIs.
 
 Type: [Object][7]
 
@@ -448,9 +475,9 @@ Type: [Object][7]
 
 **Properties**
 
--   `camera` **[Array][13]&lt;[call.DeviceInfo][32]>** A list of camera device information.
--   `microphone` **[Array][13]&lt;[call.DeviceInfo][32]>** A list of microphone device information.
--   `speaker` **[Array][13]&lt;[call.DeviceInfo][32]>** A list of speaker device information.
+-   `camera` **[Array][13]&lt;[call.DeviceInfo][33]>** A list of camera device information.
+-   `microphone` **[Array][13]&lt;[call.DeviceInfo][33]>** A list of microphone device information.
+-   `speaker` **[Array][13]&lt;[call.DeviceInfo][33]>** A list of speaker device information.
 
 ### TrackObject
 
@@ -485,7 +512,7 @@ Type: [Object][7]
 
 -   `id` **[string][8]** The ID of the Media object.
 -   `local` **[boolean][11]** Indicator on whether this media is local or remote.
--   `tracks` **[Array][13]&lt;[call.TrackObject][33]>** A list of Track objects that are contained in this Media object.
+-   `tracks` **[Array][13]&lt;[call.TrackObject][34]>** A list of Track objects that are contained in this Media object.
 
 ### SdpHandlerFunction
 
@@ -496,7 +523,7 @@ Type: [Function][15]
 **Parameters**
 
 -   `newSdp` **[Object][7]** The SDP so far (could have been modified by previous handlers).
--   `info` **[call.SdpHandlerInfo][34]** Additional information that might be useful when making SDP modifications.
+-   `info` **[call.SdpHandlerInfo][35]** Additional information that might be useful when making SDP modifications.
 -   `originalSdp` **[Object][7]** The SDP in its initial state.
 
 Returns **[Object][7]** The resulting modified SDP based on the changes made by this function.
@@ -520,35 +547,8 @@ Type: [Object][7]
 
 **Properties**
 
--   `urls` **([Array][13]&lt;[string][8]> | [string][8])** Either an array of URLs for reaching out several ICE servers or a single URL for reaching one ICE server. See [RTCIceServers.urls documentation][35] to learn more about the actual url format.
+-   `urls` **([Array][13]&lt;[string][8]> | [string][8])** Either an array of URLs for reaching out several ICE servers or a single URL for reaching one ICE server. See [RTCIceServers.urls documentation][36] to learn more about the actual url format.
 -   `credential` **[string][8]?** The credential needed by the ICE server.
-
-### CallObject
-
-Information about a Call.
-
-Can be retrieved using the [call.getAll][31] or [call.getById][30] APIs.
-
-Type: [Object][7]
-
-**Properties**
-
--   `id` **[string][8]** The ID of the call.
--   `from` **user.UserID** A unique identifier (uri) of the person who made the call.
--   `to` **user.UserID** A unique identifier (uri) of the person who receives the call.
--   `direction` **[string][8]** The direction in which the call was created. Can be 'outgoing' or 'incoming'.
--   `state` **[string][8]** The current state of the call. See [call.states][36] for possible states.
--   `localHold` **[boolean][11]** Indicates whether this call is currently being held locally.
--   `remoteHold` **[boolean][11]** Indicates whether this call is currently being held remotely.
--   `localTracks` **[Array][13]&lt;[string][8]>** A list of Track IDs that the call is sending to the remote participant.
--   `remoteTracks` **[Array][13]&lt;[string][8]>** A list of Track IDs that the call is receiving from the remote participant.
--   `remoteParticipant` **[Object][7]** Information about the other call participant.
-    -   `remoteParticipant.displayNumber` **[string][8]?** The User ID of the remote participant in the form "username@domain".
-    -   `remoteParticipant.displayName` **[string][8]?** The display name of the remote participant.
--   `bandwidth` **[call.BandwidthControls][21]** The bandwidth limitations set for the call.
--   `customParameters` **[Array][13]&lt;[call.CustomParameter][22]>** The custom parameters set for the call.
--   `startTime` **[number][12]** The start time of the call in milliseconds since the epoch.
--   `endTime` **[number][12]?** The end time of the call in milliseconds since the epoch.
 
 ### BandwidthControls
 
@@ -662,11 +662,11 @@ The specified parameters will be saved as part of the call's information through
 All subsequent call operations will include these custom parameters.
 Therefore, invalid parameters, or parameters not previously configured on the server, will cause subsequent call operations to fail.
 
-A Call's custom parameters are a property of the Call's [CallObject][29],
-   which can be retrieved using the [call.getById][30] or
-   [call.getAll][31] APIs.
+A Call's custom parameters are a property of the Call's [CallObject][32],
+   which can be retrieved using the [call.getById][25] or
+   [call.getAll][24] APIs.
 
-The custom parameters set on a call can be sent directly with the [call.sendCustomParameters][27] API.
+The custom parameters set on a call can be sent directly with the [call.sendCustomParameters][30] API.
 
 Custom parameters can be removed from a call's information by setting them as undefined (e.g., `call.setCustomParameters(callId)`).
 Subsequent call operations will no longer send custom parameters.
@@ -681,11 +681,11 @@ Subsequent call operations will no longer send custom parameters.
 Send the custom parameters on an ongoing call to the server. The server may either consume the headers or relay them
 to another endpoint, depending on how the server is configured.
 
-A Call's custom parameters are a property of the Call's [CallObject][29],
-   which can be retrieved using the [call.getById][30] or
-   [call.getAll][31] APIs.
+A Call's custom parameters are a property of the Call's [CallObject][32],
+   which can be retrieved using the [call.getById][25] or
+   [call.getAll][24] APIs.
 
-To change or remove the custom parameters on a call, use the [call.setCustomParameters][26] API.
+To change or remove the custom parameters on a call, use the [call.setCustomParameters][29] API.
 
 **Parameters**
 
@@ -1064,9 +1064,9 @@ A Call's state describes the current status of the Call. An application
    whether the Call currently has media flowing between users.
 Unless stated otherwise, the Call's state pertains to both caller & callee.
 
-The Call's state is a property of the [CallObject][29],
-   which can be retrieved using the [call.getById][30] or
-   [call.getAll][31] APIs.
+The Call's state is a property of the [CallObject][32],
+   which can be retrieved using the [call.getById][25] or
+   [call.getAll][24] APIs.
 
 The SDK emits a [call:stateChange][39]
    event when a Call's state changes from one state to another.
@@ -1106,7 +1106,7 @@ The `setDefaultDevices` API from previous SDK releases (3.X) has been
 
 The devices used for a call can be selected as part of the APIs for
    starting the call. Microphone and/or camera can be chosen in the
-   [call.make][24] and [call.answer][25] APIs, and speaker can be
+   [call.make][27] and [call.answer][28] APIs, and speaker can be
    chosen when the audio track is rendered with the
    [media.renderTracks][51] API.
 
@@ -1387,7 +1387,60 @@ Retrieve an available Track object with a specific Track ID.
 
 -   `trackId` **[string][8]** The ID of the Track to retrieve.
 
-Returns **[call.TrackObject][33]** A Track object.
+Returns **[call.TrackObject][34]** A Track object.
+
+### initializeDevices
+
+Requests permission to access media devices on the end-user's machine.
+
+This API will trigger the browser to ask the end-user for permission to
+   access their camera and/or microphone. These permissions are
+   needed for the SDK to read information about the devices (the label,
+   for example) and for using the devices for a call.
+
+If the browser does not yet have permission, it will prompt the end-user
+   with a small pop-up window, giving the user a chance to allow/deny the
+   permissions. The behaviour of this pop-up window differs slightly
+   based on the browser; it may automatically save the user's decision
+   (such as in Chrome and Safari) or it may require the user to choose
+   whether their decision should be saved (such as in Firefox).
+
+This API is not required for proper usage of media and/or calls, but
+   helps to prepare a user before a call is made or received. It allows
+   an application to prompt the user for device permissions when it is
+   convenient for them, rather than during call setup. If the user saves
+   their decision, they will not be prompted again when the SDK accesses
+   those devices for a call.
+
+For device information, the [media.getDevices][56] API will retrieve
+   the list of media devices available for the SDK to use. If this list
+   is empty, or is missing information, it is likely that the browser
+   does not have permission to access the device's information. We
+   recommend using the [media.initializeDevices][59] API in this
+   scenario if you would like to allow the end-user to select which
+   device(s) they would like to use when they make a call, rather than
+   using the system default.
+
+The SDK will emit a [devices:change][57]
+   event when the operation is successful or a
+   [devices:error][60] event if an error is
+   encountered.
+
+**Parameters**
+
+-   `constraints` **[Object][7]?** 
+    -   `constraints.audio` **[boolean][11]** Whether to ask for audio device permissions. (optional, default `true`)
+    -   `constraints.video` **[boolean][11]** Whether to ask for video device permissions. (optional, default `true`)
+
+**Examples**
+
+```javascript
+// The SDK will ask for both audio and video permissions by default.
+client.media.initializeDevices()
+
+// The SDK will only ask for audio permissions.
+client.media.initializeDevices({ audio: true, video: false })
+```
 
 ### renderTracks
 
@@ -1443,7 +1496,7 @@ If a local Track being sent in a Call is muted, the Track will be
    noticeably muted for the remote user. If a remote Track received in a
    call is muted, the result will only be noticeable locally.
 
-The SDK will emit a [media:muted][59] event
+The SDK will emit a [media:muted][61] event
    when a Track has been muted.
 
 **Parameters**
@@ -1456,7 +1509,7 @@ Unmutes the specified Tracks.
 
 Media will resume as normal for the Tracks.
 
-The SDK will emit a [media:unmuted][60] event
+The SDK will emit a [media:unmuted][62] event
    when a Track has been unmuted.
 
 **Parameters**
@@ -1480,7 +1533,7 @@ Provides an external notification to the system for processing.
 ### registerApplePush
 
 Registers with Apple push notification service. Once registration is successful, the application will be able to receive
-standard and/or voip push notifications. It can then send these notifications to the SDK with [api.notifications.process][61]
+standard and/or voip push notifications. It can then send these notifications to the SDK with [api.notifications.process][63]
 in order for the SDK to process them.
 
 **Parameters**
@@ -1498,13 +1551,13 @@ in order for the SDK to process them.
     -   `params.isProduction` **[boolean][11]** If true, push notification will be sent to production.
                                                If false, push notification will be sent to sandbox.
 
-Returns **[Promise][62]** When successful,  the information of the registration.
+Returns **[Promise][64]** When successful,  the information of the registration.
                   Promise will reject with error object otherwise.
 
 ### registerAndroidPush
 
 Registers with Google push notification service. Once registration is successful, the application will be able to receive
-standard and/or voip push notifications. It can then send these notifications to the SDK with [api.notifications.process][61]
+standard and/or voip push notifications. It can then send these notifications to the SDK with [api.notifications.process][63]
 in order for the SDK to process them.
 
 **Parameters**
@@ -1518,7 +1571,7 @@ in order for the SDK to process them.
     -   `params.realm` **[string][8]** The realm used by the push registration service to identify
                                        and establish a connection with the service gateway.
 
-Returns **[Promise][62]** When successful,  the information of the registration.
+Returns **[Promise][64]** When successful,  the information of the registration.
                   Promise will reject with error object otherwise.
 
 ### unregisterApplePush
@@ -1529,7 +1582,7 @@ Unregister Apple push notifications.
 
 -   `registrationInfo` **[string][8]** The data returned from the push registration
 
-Returns **[Promise][62]** When successful, the promise will resolve with undefined.
+Returns **[Promise][64]** When successful, the promise will resolve with undefined.
                   Promise will reject with error object otherwise.
 
 ### unregisterAndroidPush
@@ -1540,7 +1593,7 @@ Unregister Android push notifications.
 
 -   `registrationInfo` **[string][8]** The data returned from the push registration
 
-Returns **[Promise][62]** When successful, the promise will resolve with undefined.
+Returns **[Promise][64]** When successful, the promise will resolve with undefined.
                   Promise will reject with error object otherwise.
 
 ### enableWebsocket
@@ -1558,9 +1611,9 @@ These handlers are used to customize low-level call behaviour for very specific
 environments and/or scenarios.
 
 Note that SDP handlers are exposed on the entry point of the SDK. They can be added during
-initialization of the SDK using the [config.call.sdpHandlers][63] configuration
+initialization of the SDK using the [config.call.sdpHandlers][65] configuration
 parameter. They can also be set after the SDK's creation by using the
-[call.setSdpHandlers][64] function.
+[call.setSdpHandlers][66] function.
 
 **Examples**
 
@@ -1579,6 +1632,18 @@ const client = create({
 client.call.setSdpHandlers([ codecRemover, <Your-SDP-Handler-Function>, ...])
 ```
 
+### CodecSelector
+
+An object that represents a selector to match codecs of an RTP map in SDP.
+
+Type: [Object][7]
+
+**Properties**
+
+-   `name` **[string][8]** The name of the codec.
+-   `fmtpParams` **[Array][13]&lt;[string][8]>** An array of strings to match against the "a=fmtp" format parameters for the corresponding codec.
+                                         All of the elements in the array must be contained in the "a=fmtp" attribute in order to be a match.
+
 ### createCodecRemover
 
 This function creates an SDP handler that will remove codecs matching the selectors specified for SDP offers and answers.
@@ -1589,7 +1654,7 @@ length (usually to 4KB) and will reject calls that have SDP size above this amou
 While creating an SDP handler would allow a user to perform this type of manipulation, it is a non-trivial task that requires in-depth knowledge of WebRTC SDP.
 
 To facilitate this common task, the createCodecRemover function creates a codec removal handler that can be used for this purpose. Applications can use this codec
-removal handler in combination with the [call.getAvailableCodecs][65] function in order to build logic to determine the best codecs to use
+removal handler in combination with the [call.getAvailableCodecs][67] function in order to build logic to determine the best codecs to use
 for their application.
 
 **Parameters**
@@ -1622,18 +1687,6 @@ const client = create({
 ```
 
 Returns **[call.SdpHandlerFunction][16]** The resulting SDP handler that will remove the codec.
-
-### CodecSelector
-
-An object that represents a selector to match codecs of an RTP map in SDP.
-
-Type: [Object][7]
-
-**Properties**
-
--   `name` **[string][8]** The name of the codec.
--   `fmtpParams` **[Array][13]&lt;[string][8]>** An array of strings to match against the "a=fmtp" format parameters for the corresponding codec.
-                                         All of the elements in the array must be contained in the "a=fmtp" attribute in order to be a match.
 
 [1]: #config
 
@@ -1681,31 +1734,31 @@ Type: [Object][7]
 
 [23]: https://www.w3.org/TR/webrtc-priority/#rtc-priority-type
 
-[24]: call.make
+[24]: #callgetall
 
-[25]: call.answer
+[25]: #callgetbyid
 
-[26]: #callsetcustomparameters
+[26]: #callstates
 
-[27]: #callsendcustomparameters
+[27]: call.make
 
-[28]: #calleventcallcustomparameters
+[28]: call.answer
 
-[29]: #callcallobject
+[29]: #callsetcustomparameters
 
-[30]: #callgetbyid
+[30]: #callsendcustomparameters
 
-[31]: #callgetall
+[31]: #calleventcallcustomparameters
 
-[32]: #calldeviceinfo
+[32]: #callcallobject
 
-[33]: #calltrackobject
+[33]: #calldeviceinfo
 
-[34]: #callsdphandlerinfo
+[34]: #calltrackobject
 
-[35]: https://developer.mozilla.org/en-US/docs/Web/API/RTCIceServer/urls
+[35]: #callsdphandlerinfo
 
-[36]: #callstates
+[36]: https://developer.mozilla.org/en-US/docs/Web/API/RTCIceServer/urls
 
 [37]: #callunhold
 
@@ -1751,16 +1804,20 @@ Type: [Object][7]
 
 [58]: #callmediaobject
 
-[59]: #mediaeventmediamuted
+[59]: #mediainitializedevices
 
-[60]: #mediaeventmediaunmuted
+[60]: #mediaeventdeviceserror
 
-[61]: api.notifications.process
+[61]: #mediaeventmediamuted
 
-[62]: https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Promise
+[62]: #mediaeventmediaunmuted
 
-[63]: #configconfigcall
+[63]: api.notifications.process
 
-[64]: #callsetsdphandlers
+[64]: https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Promise
 
-[65]: #callgetavailablecodecs
+[65]: #configconfigcall
+
+[66]: #callsetsdphandlers
+
+[67]: #callgetavailablecodecs
