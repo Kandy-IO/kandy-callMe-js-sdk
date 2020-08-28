@@ -9,6 +9,10 @@
   description: # Configurations
   link: /quickstarts/javascript/newCallMe/Configurations
 
+- name: Logging
+  description: # SDK Logs
+  link: /quickstarts/javascript/newCallMe/Logging
+
 - name: Enabling Anonymous Call Service
   description: # Enabling Anonymous Call Service
   link: /quickstarts/javascript/newCallMe/Enabling%20Anonymous%20Call%20Service
