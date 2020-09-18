@@ -15,6 +15,10 @@ Kandy.js change log.
   - Added new debug level logs for messages sent and received on the websocket.
   - Added new section to the Logging tutorial to better describe the log levels.
 
+### Fixed
+
+- Fixed documentation for `renderTracks` function to correctly use `track.trackId` instead of the incorrect `track.id`. `KAA-2502`
+
 ### Changed
 
 - Updated tutorial codepens to be more robust around authentication and subscription operations. `KAA-2491`
