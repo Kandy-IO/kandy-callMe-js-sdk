@@ -15,6 +15,10 @@ Kandy.js change log.
   - Added new debug level logs for messages sent and received on the websocket.
   - Added new section to the Logging tutorial to better describe the log levels.
 
+### Changed
+
+- Updated tutorial codepens to be more robust around authentication and subscription operations. `KAA-2491`
+
 ## 4.19.0 - 2020-08-28
 
 ### SDP Semantics Defaults
