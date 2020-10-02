@@ -63,15 +63,21 @@ The following sections elaborate on these 2 ways.
 ### Token-based Anonymous Call
 
 The following code sample shows how to make a token-based anonymous call.
+In the CodePen provided below, the values for caller & callee (as well as realm & the tokens) will be obtained from the Node.js https server we provided, as an example.
 
-1. Specify the callee address and some call options (such as audio and video):
+1. Obtain callee & caller address from our example server by making a request and getting the 'data' result. Then setup the call options (such as audio and video):
 
 ```javascript 
-let callee = 'user1@example.com'
-let callOptions = {}
+let callee = data.callee
+
+const callOptions = {
+  from: data.caller,
+  video: withVideo,
+  audio: true
+}
 ```
 
-2. Build 'credentials' object, based on the three encrypted tokens and the token realm you got from your administrator in the previous tutorial page - see [Generating Tokens Quickstart](Generating%20Tokens).
+2. Build 'credentials' object, based on the three encrypted tokens and the token realm you got from your administrator in the previous tutorial page - see [Generating Tokens Quickstart](Generating%20Tokens). Note that our example server also provides all these values, when this client requests them.
 
 ```javascript 
 const credentials = {
@@ -82,8 +88,6 @@ const credentials = {
 }
 ```
 
-Note: The caller address is already encrypted in the `accountToken`
-
 3. Make the call with the above information using the `makeAnonymous` Call API:
 
 ```javascript 
@@ -93,10 +97,12 @@ callId = client.call.makeAnonymous(callee, credentials, callOptions)
 
 ### Regular Anonymous Call
 
-For this type of anonymous calls, the user needs to define only the callee, and then invoke the `makeAnonymous` Call API:
+For this type of anonymous calls, the user needs to define only the callee & caller by filling in the values in the text fields provided in this codepen's UI, and then invoke the `makeAnonymous` Call API:
 
 ```javascript 
-// Define callee & callOptions, similar to previous example
+// Define caller, callee and set their values as provided by user, then
+// define callOptions, similar to previous example.
+// Credentials can be left as a black object.
 
 // Initiate the anonymous call
 callId = client.call.makeAnonymous(callee, {}, callOptions)
@@ -116,17 +122,19 @@ In addition, the sample code below (including its UI interface) is what the appl
     <!-- User input for making a call. -->
     <div style="margin-bottom: 5px">
       <input type="button" value="Make Call" onclick="makeAnonymousCall();" />
-      to <input type="text" id="callee" placeholder="Callee's primary contact" /> with video
-      <input type="checkbox" id="make-with-video" />
+      <div style="margin-left: 20px" id="calleeSection">
+        to <input id="callee" type="text" placeholder="Callee's primary contact" />
+      </div>
+      <div style="margin-left: 20px">with video <input type="checkbox" id="make-with-video" /></div>
     </div>
 
-    <div style="margin-left: 49px">
-      Caller: <input type="text" id="caller" placeholder="Caller's primary contact" />
+    <div id="callerSection" style="margin-left: 20px">
+      Caller: <input id="caller" type="text" placeholder="Caller's primary contact" />
     </div>
 
     <div>
       Make a token-based call
-      <input type="checkbox" id="make-token-based-anonymous-call" />
+      <input type="checkbox" id="make-token-based-anonymous-call" onclick="toggleVisibilityOnUserFields();" />
     </div>
   </fieldset>
 
@@ -178,44 +186,67 @@ When the user clicks on the 'Make Call' button, we want our `makeAnonymousCall` 
 // Variable to keep track of the call.
 let callId;
 
-// Get user input and make a call to the callee.
+// If call is a regular anonymous one, then we'll use caller & callee
+// values, as provided by user (in the text fields of this UI).
+// If call is a token-based anonymous one, then caller & callee will
+// be obtained from our Node.js https server.
 async function makeAnonymousCall() {
-  // Gather call options.
-  let callee = document.getElementById("callee").value;
-  if (!callee) {
-    log("Error: Please provide the primary contact for the callee.");
-    return;
-  }
-  let withVideo = document.getElementById("make-with-video").checked;
   let makeATokenBasedAnonymousCall = document.getElementById("make-token-based-anonymous-call").checked;
 
   let caller = document.getElementById("caller").value;
-  if (!caller) {
+  if (!caller && !makeATokenBasedAnonymousCall) {
+    // For regular anonymous call, ask user to fill in the value
     log("Error: Please provide the primary contact for the caller.");
     return;
   }
 
-  // Define our call options
+  let callee = document.getElementById("callee").value;
+  if (!callee && !makeATokenBasedAnonymousCall) {
+    // For regular anonymous call, ask user to fill in the value
+    log("Error: Please provide the primary contact for the callee.");
+    return;
+  }
+
+  let withVideo = document.getElementById("make-with-video").checked;
+  // For regular anonymous call, there is no need for credentials
+  let credentials = {}
+
+  // Define our call options. Assume for now it is for a regular anonymous call.
   const callOptions = {
     from: caller,
     video: withVideo,
     audio: true
-  };
-  let credentials = {};
+  }
 ```
 
-As previously stated, for token-based anonymous calls, `accountToken`, `fromToken`, `toToken`, and `realm` are required in order to make the anonymous call. See the [Generating Tokens](Generating%20Tokens) section for more information on how to obtain/generate these values. In the codepen provided below, these values will need to be replaced with appropriate values.
+As previously stated, for token-based anonymous calls, `accountToken`, `fromToken`, `toToken`, and `realm` are required in order to make the anonymous call. See the [Generating Tokens](Generating%20Tokens) section for more information on how to obtain/generate these values. In the CodePen provided below, these values will be obtained from the Node.js https server we provided, as an example.
 
 ```javascript
   if (makeATokenBasedAnonymousCall) {
-    // Tokens required for making a token-based anonymous call
-    let accountToken = 'account token';
-    let fromToken = 'data token';
-    let toToken = 'to token';
+    // Before attempting to trigger outgoing call, get the actual token values
+    // from expressjs application server in order to make a token-based anonymous call.
+    const getTokensRequestUrl = 'https://localhost:3000/callparameters'
+    let result = await fetch(getTokensRequestUrl)
+    let data = await result.json()
 
-    let realm = 'realm';
+    let accountToken = data.accountToken
+    let fromToken = data.fromToken
+    let toToken = data.toToken
+    let realm = data.realm
 
-    // Build our credentials object
+    caller = data.caller
+    callee = data.callee
+
+    callOptions['from'] = caller
+
+    log('Got Account Token: ' + accountToken)
+    log('Got From Token:    ' + fromToken)
+    log('Got To Token:      ' + toToken)
+    log('Got Realm:         ' + realm)
+    log('Got Caller:        ' + caller)
+    log('Got Callee:        ' + callee)
+
+    // Build our credentials object.
     credentials = {
       accountToken,
       fromToken,
@@ -224,11 +255,11 @@ As previously stated, for token-based anonymous calls, `accountToken`, `fromToke
     };
     log("Making a token-based anonymous call to " + callee);
   } else {
-    // For regular anonymous calls, no extra information is needed
+    // For regular anonymous calls, no extra information is needed.
     log("Making a regular anonymous call to " + callee);
   }
 
-  // Finally, trigger the outgoing anonymous call
+  // Finally, trigger the outgoing anonymous call.
   callId = client.call.makeAnonymous(callee, credentials, callOptions);
 }
 ```
@@ -379,18 +410,19 @@ Do you want to try this example for yourself? Click the button below to get star
    - Enter the email address of that callee user (account or project users).
    - Enter the password to authenticate.
 4. For the anonymous _caller_, do the following:
-   - In the codepen source code associated with _caller_, search for the place where a token-based anonymous call is initiated, and provide actual values for the following defined variables: `accountToken`, `fromToken`, `toToken`, and `realm`.
-   - Enter the primary contact of the _caller_ in the specified text field.
-   - Enter the primary contact of the _callee_ in the specified text field.
    - Specify if you want the call to include video (otherwise it will be an audio-only call, by default).
    - For regular anonymous calls to the callee, ensure the 'Make a token-based call' checkbox is unchecked.
+     - Enter the primary contact of the _caller_ in the specified text field.
+     - Enter the primary contact of the _callee_ in the specified text field.
    - For token-based anonymous call to the callee, ensure 'Make a token-based call' checkbox is checked.
-     - **NOTE:** You will need to update the codepen lines 86-90 with appropriate token and realm values.
+     - In this case, ensure that your Node.js HTTPS server is started. We've provided a sample server, and this server can be started using the `yarn start` command.
+     - NOTE: If using the sample server, you will need to replace the dummy values specified in the `index.js` file of the sample server (lines 30-35) with your own values. Also, a key and certificate file will be needed to start the server with HTTPS (lines 14-17).
+     - Once the sample server has been started, the codepen will interact with the server to retrieve the necessary parameters for making a token-based anonymous call at the time the anonymous call is made.
 5. Click **Make Call** to start the anonymous call to the _callee_.
 6. Accept the incoming call from the _callee_. The two parties should now be in an established call.
 7. Click **End Call** in either browser instance to end the call.
 
-<form action="https://codepen.io/pen/define" method="POST" target="_blank" class="codepen-form"><input type="hidden" name="data" value=' {&quot;js&quot;:&quot;/**\n * Javascript SDK Anonymous Calls Demo\n */\n\n// Setup Kandy with the following configuration.\nconst { create } = Kandy\nconst client = create({\n  call: {\n    iceserver: [\n      {\n        url: &apos;$KANDYTURN1$&apos;,\n        credentials: &apos;&apos;\n      },\n      {\n        url: &apos;$KANDYTURN2$&apos;,\n        credentials: &apos;&apos;\n      },\n      {\n        url: &apos;$KANDYSTUN1$&apos;,\n        credentials: &apos;&apos;\n      },\n      {\n        url: &apos;$KANDYSTUN2$&apos;,\n        credentials: &apos;&apos;\n      }\n    ]\n  },\n  authentication: {\n    subscription: {\n      service: [&apos;call&apos;],\n      server: &apos;$SUBSCRIPTIONFQDN$&apos;\n    },\n    websocket: {\n      server: &apos;$SUBSCRIPTIONFQDN$&apos;\n    }\n  },\n  logs: {\n    logLevel: &apos;debug&apos;,\n    logActions: {\n      flattenActions: false,\n      actionOnly: false,\n      exposePayloads: true\n    }\n  }\n})\n\n// Utility function for appending messages to the message div.\nfunction log (message) {\n  document.getElementById(&apos;messages&apos;).innerHTML += &apos;<div>&apos; + message + &apos;</div>&apos;\n}\n\n/*\n *  Voice and Video Call functionality.\n */\n\n// Variable to keep track of the call.\nlet callId;\n\n// Get user input and make a call to the callee.\nasync function makeAnonymousCall() {\n  // Gather call options.\n  let callee = document.getElementById(\&quot;callee\&quot;).value;\n  if (!callee) {\n    log(\&quot;Error: Please provide the primary contact for the callee.\&quot;);\n    return;\n  }\n  let withVideo = document.getElementById(\&quot;make-with-video\&quot;).checked;\n  let makeATokenBasedAnonymousCall = document.getElementById(\&quot;make-token-based-anonymous-call\&quot;).checked;\n\n  let caller = document.getElementById(\&quot;caller\&quot;).value;\n  if (!caller) {\n    log(\&quot;Error: Please provide the primary contact for the caller.\&quot;);\n    return;\n  }\n\n  // Define our call options\n  const callOptions = {\n    from: caller,\n    video: withVideo,\n    audio: true\n  };\n  let credentials = {};\n\n  if (makeATokenBasedAnonymousCall) {\n    // Tokens required for making a token-based anonymous call\n    let accountToken = &apos;account token&apos;;\n    let fromToken = &apos;data token&apos;;\n    let toToken = &apos;to token&apos;;\n\n    let realm = &apos;realm&apos;;\n\n    // Build our credentials object\n    credentials = {\n      accountToken,\n      fromToken,\n      toToken,\n      realm\n    };\n    log(\&quot;Making a token-based anonymous call to \&quot; + callee);\n  } else {\n    // For regular anonymous calls, no extra information is needed\n    log(\&quot;Making a regular anonymous call to \&quot; + callee);\n  }\n\n  // Finally, trigger the outgoing anonymous call\n  callId = client.call.makeAnonymous(callee, credentials, callOptions);\n}\n\n// End an ongoing call.\nfunction endCall () {\n  // Retrieve call state.\n  let call = client.call.getById(callId)\n  log(&apos;Ending call with &apos; + call.to)\n\n  client.call.end(callId)\n}\n\n// Set listener for successful call starts.\nclient.on(&apos;call:start&apos;, function (params) {\n  log(&apos;Call successfully started. Waiting for response.&apos;)\n})\n\n// Set listener for generic call errors.\nclient.on(&apos;call:error&apos;, function (params) {\n  log(&apos;Encountered error on call: &apos; + params.error.message)\n})\n\n// Set listener for call media errors.\nclient.on(&apos;media:error&apos;, function (params) {\n  log(&apos;Call encountered media error: &apos; + params.error.message)\n})\n\n// Set listener for changes in a call&apos;s state.\nclient.on(&apos;call:stateChange&apos;, function (params) {\n  // Retrieve call state.\n  const call = client.call.getById(params.callId)\n\n  if (params.error && params.error.message) {\n    log(&apos;Error: &apos; + params.error.message)\n  }\n  log(&apos;Call state changed from &apos; + params.previous.state + &apos; to &apos; + call.state)\n\n  // If the call ended, stop tracking the callId.\n  if (params.state === &apos;ENDED&apos;) {\n    callId = null\n  }\n})\n\n// Set listener for new tracks.\nclient.on(&apos;call:newTrack&apos;, function (params) {\n  // Check whether the new track was a local track or not.\n  if (params.local) {\n    // Only render local visual media into the local container.\n    const localTrack = client.media.getTrackById(params.trackId)\n    if (localTrack.kind === &apos;video&apos;) {\n      client.media.renderTracks([params.trackId], &apos;#local-container&apos;)\n    }\n  } else {\n    // Render the remote media into the remote container.\n    client.media.renderTracks([params.trackId], &apos;#remote-container&apos;)\n  }\n})\n\n// Set listener for ended tracks.\nclient.on(&apos;call:trackEnded&apos;, function (params) {\n  // Check whether the ended track was a local track or not.\n  if (params.local) {\n    // Remove the track from the local container.\n    client.media.removeTracks([params.trackId], &apos;#local-container&apos;)\n  } else {\n    // Remove the track from the remote container.\n    client.media.removeTracks([params.trackId], &apos;#remote-container&apos;)\n  }\n})\n\n&quot;,&quot;html&quot;:&quot;<div>\n  <fieldset>\n    <legend>Make an Anonymous Call</legend>\n\n    <!-- User input for making a call. -->\n    <div style=\&quot;margin-bottom: 5px\&quot;>\n      <input type=\&quot;button\&quot; value=\&quot;Make Call\&quot; onclick=\&quot;makeAnonymousCall();\&quot; />\n      to <input type=\&quot;text\&quot; id=\&quot;callee\&quot; placeholder=\&quot;Callee&apos;s primary contact\&quot; /> with video\n      <input type=\&quot;checkbox\&quot; id=\&quot;make-with-video\&quot; />\n    </div>\n\n    <div style=\&quot;margin-left: 49px\&quot;>\n      Caller: <input type=\&quot;text\&quot; id=\&quot;caller\&quot; placeholder=\&quot;Caller&apos;s primary contact\&quot; />\n    </div>\n\n    <div>\n      Make a token-based call\n      <input type=\&quot;checkbox\&quot; id=\&quot;make-token-based-anonymous-call\&quot; />\n    </div>\n  </fieldset>\n\n  <fieldset>\n    <legend>End an Anonymous Call</legend>\n    <!-- User input for ending an ongoing call. -->\n    <input type=\&quot;button\&quot; value=\&quot;End Call\&quot; onclick=\&quot;endCall();\&quot; />\n  </fieldset>\n\n  <fieldset>\n    <!-- Message output container. -->\n    <legend>Messages</legend>\n    <div id=\&quot;messages\&quot;></div>\n  </fieldset>\n</div>\n\n<!-- Media containers. -->\nRemote video:\n<div id=\&quot;remote-container\&quot;></div>\n\nLocal video:\n<div id=\&quot;local-container\&quot;></div>\n\n&quot;,&quot;css&quot;:&quot;video {\n  width: 50% !important;\n}\n\n&quot;,&quot;title&quot;:&quot;Javascript SDK Anonymous Calls Demo&quot;,&quot;editors&quot;:101,&quot;js_external&quot;:&quot;https://unpkg.com/@kandy-io/callme-sdk@4.19.0/dist/kandy.js&quot;} '><input type="image" src="./TryItOn-CodePen.png"></form>
+<form action="https://codepen.io/pen/define" method="POST" target="_blank" class="codepen-form"><input type="hidden" name="data" value=' {&quot;js&quot;:&quot;/**\n * Javascript SDK Anonymous Calls Demo\n */\n\n// Setup Kandy with the following configuration.\nconst { create } = Kandy\nconst client = create({\n  call: {\n    iceserver: [\n      {\n        url: &apos;$KANDYTURN1$&apos;,\n        credentials: &apos;&apos;\n      },\n      {\n        url: &apos;$KANDYTURN2$&apos;,\n        credentials: &apos;&apos;\n      },\n      {\n        url: &apos;$KANDYSTUN1$&apos;,\n        credentials: &apos;&apos;\n      },\n      {\n        url: &apos;$KANDYSTUN2$&apos;,\n        credentials: &apos;&apos;\n      }\n    ]\n  },\n  authentication: {\n    subscription: {\n      service: [&apos;call&apos;],\n      server: &apos;$SUBSCRIPTIONFQDN$&apos;\n    },\n    websocket: {\n      server: &apos;$SUBSCRIPTIONFQDN$&apos;\n    }\n  },\n  logs: {\n    logLevel: &apos;debug&apos;,\n    logActions: {\n      actionOnly: false,\n      exposePayloads: true\n    }\n  }\n})\n\nfunction toggleVisibilityOnUserFields () {\n  let chbox = document.getElementById(&apos;make-token-based-anonymous-call&apos;)\n  let visibility = &apos;block&apos;\n  if (chbox.checked) {\n    visibility = &apos;none&apos;\n  }\n  document.getElementById(&apos;callerSection&apos;).style.display = visibility\n  document.getElementById(&apos;calleeSection&apos;).style.display = visibility\n}\n\n// Utility function for appending messages to the message div.\nfunction log (message) {\n  document.getElementById(&apos;messages&apos;).innerHTML += &apos;<div>&apos; + message + &apos;</div>&apos;\n}\n\n/*\n *  Voice and Video Call functionality.\n */\n\n// Variable to keep track of the call.\nlet callId;\n\n// If call is a regular anonymous one, then we&apos;ll use caller & callee\n// values, as provided by user (in the text fields of this UI).\n// If call is a token-based anonymous one, then caller & callee will\n// be obtained from our Node.js https server.\nasync function makeAnonymousCall() {\n  let makeATokenBasedAnonymousCall = document.getElementById(\&quot;make-token-based-anonymous-call\&quot;).checked;\n\n  let caller = document.getElementById(\&quot;caller\&quot;).value;\n  if (!caller && !makeATokenBasedAnonymousCall) {\n    // For regular anonymous call, ask user to fill in the value\n    log(\&quot;Error: Please provide the primary contact for the caller.\&quot;);\n    return;\n  }\n\n  let callee = document.getElementById(\&quot;callee\&quot;).value;\n  if (!callee && !makeATokenBasedAnonymousCall) {\n    // For regular anonymous call, ask user to fill in the value\n    log(\&quot;Error: Please provide the primary contact for the callee.\&quot;);\n    return;\n  }\n\n  let withVideo = document.getElementById(\&quot;make-with-video\&quot;).checked;\n  // For regular anonymous call, there is no need for credentials\n  let credentials = {}\n\n  // Define our call options. Assume for now it is for a regular anonymous call.\n  const callOptions = {\n    from: caller,\n    video: withVideo,\n    audio: true\n  }\n\n  if (makeATokenBasedAnonymousCall) {\n    // Before attempting to trigger outgoing call, get the actual token values\n    // from expressjs application server in order to make a token-based anonymous call.\n    const getTokensRequestUrl = &apos;https://localhost:3000/callparameters&apos;\n    let result = await fetch(getTokensRequestUrl)\n    let data = await result.json()\n\n    let accountToken = data.accountToken\n    let fromToken = data.fromToken\n    let toToken = data.toToken\n    let realm = data.realm\n\n    caller = data.caller\n    callee = data.callee\n\n    callOptions[&apos;from&apos;] = caller\n\n    log(&apos;Got Account Token: &apos; + accountToken)\n    log(&apos;Got From Token:    &apos; + fromToken)\n    log(&apos;Got To Token:      &apos; + toToken)\n    log(&apos;Got Realm:         &apos; + realm)\n    log(&apos;Got Caller:        &apos; + caller)\n    log(&apos;Got Callee:        &apos; + callee)\n\n    // Build our credentials object.\n    credentials = {\n      accountToken,\n      fromToken,\n      toToken,\n      realm\n    };\n    log(\&quot;Making a token-based anonymous call to \&quot; + callee);\n  } else {\n    // For regular anonymous calls, no extra information is needed.\n    log(\&quot;Making a regular anonymous call to \&quot; + callee);\n  }\n\n  // Finally, trigger the outgoing anonymous call.\n  callId = client.call.makeAnonymous(callee, credentials, callOptions);\n}\n\n// End an ongoing call.\nfunction endCall () {\n  // Retrieve call state.\n  let call = client.call.getById(callId)\n  log(&apos;Ending call with &apos; + call.to)\n\n  client.call.end(callId)\n}\n\n// Set listener for successful call starts.\nclient.on(&apos;call:start&apos;, function (params) {\n  log(&apos;Call successfully started. Waiting for response.&apos;)\n})\n\n// Set listener for generic call errors.\nclient.on(&apos;call:error&apos;, function (params) {\n  log(&apos;Encountered error on call: &apos; + params.error.message)\n})\n\n// Set listener for call media errors.\nclient.on(&apos;media:error&apos;, function (params) {\n  log(&apos;Call encountered media error: &apos; + params.error.message)\n})\n\n// Set listener for changes in a call&apos;s state.\nclient.on(&apos;call:stateChange&apos;, function (params) {\n  // Retrieve call state.\n  const call = client.call.getById(params.callId)\n\n  if (params.error && params.error.message) {\n    log(&apos;Error: &apos; + params.error.message)\n  }\n  log(&apos;Call state changed from &apos; + params.previous.state + &apos; to &apos; + call.state)\n\n  // If the call ended, stop tracking the callId.\n  if (params.state === &apos;ENDED&apos;) {\n    callId = null\n  }\n})\n\n// Set listener for new tracks.\nclient.on(&apos;call:newTrack&apos;, function (params) {\n  // Check whether the new track was a local track or not.\n  if (params.local) {\n    // Only render local visual media into the local container.\n    const localTrack = client.media.getTrackById(params.trackId)\n    if (localTrack.kind === &apos;video&apos;) {\n      client.media.renderTracks([params.trackId], &apos;#local-container&apos;)\n    }\n  } else {\n    // Render the remote media into the remote container.\n    client.media.renderTracks([params.trackId], &apos;#remote-container&apos;)\n  }\n})\n\n// Set listener for ended tracks.\nclient.on(&apos;call:trackEnded&apos;, function (params) {\n  // Check whether the ended track was a local track or not.\n  if (params.local) {\n    // Remove the track from the local container.\n    client.media.removeTracks([params.trackId], &apos;#local-container&apos;)\n  } else {\n    // Remove the track from the remote container.\n    client.media.removeTracks([params.trackId], &apos;#remote-container&apos;)\n  }\n})\n\n&quot;,&quot;html&quot;:&quot;<div>\n  <fieldset>\n    <legend>Make an Anonymous Call</legend>\n\n    <!-- User input for making a call. -->\n    <div style=\&quot;margin-bottom: 5px\&quot;>\n      <input type=\&quot;button\&quot; value=\&quot;Make Call\&quot; onclick=\&quot;makeAnonymousCall();\&quot; />\n      <div style=\&quot;margin-left: 20px\&quot; id=\&quot;calleeSection\&quot;>\n        to <input id=\&quot;callee\&quot; type=\&quot;text\&quot; placeholder=\&quot;Callee&apos;s primary contact\&quot; />\n      </div>\n      <div style=\&quot;margin-left: 20px\&quot;>with video <input type=\&quot;checkbox\&quot; id=\&quot;make-with-video\&quot; /></div>\n    </div>\n\n    <div id=\&quot;callerSection\&quot; style=\&quot;margin-left: 20px\&quot;>\n      Caller: <input id=\&quot;caller\&quot; type=\&quot;text\&quot; placeholder=\&quot;Caller&apos;s primary contact\&quot; />\n    </div>\n\n    <div>\n      Make a token-based call\n      <input type=\&quot;checkbox\&quot; id=\&quot;make-token-based-anonymous-call\&quot; onclick=\&quot;toggleVisibilityOnUserFields();\&quot; />\n    </div>\n  </fieldset>\n\n  <fieldset>\n    <legend>End an Anonymous Call</legend>\n    <!-- User input for ending an ongoing call. -->\n    <input type=\&quot;button\&quot; value=\&quot;End Call\&quot; onclick=\&quot;endCall();\&quot; />\n  </fieldset>\n\n  <fieldset>\n    <!-- Message output container. -->\n    <legend>Messages</legend>\n    <div id=\&quot;messages\&quot;></div>\n  </fieldset>\n</div>\n\n<!-- Media containers. -->\nRemote video:\n<div id=\&quot;remote-container\&quot;></div>\n\nLocal video:\n<div id=\&quot;local-container\&quot;></div>\n\n&quot;,&quot;css&quot;:&quot;video {\n  width: 50% !important;\n}\n\n&quot;,&quot;title&quot;:&quot;Javascript SDK Anonymous Calls Demo&quot;,&quot;editors&quot;:101,&quot;js_external&quot;:&quot;https://unpkg.com/@kandy-io/callme-sdk@4.20.0/dist/kandy.js&quot;} '><input type="image" src="./TryItOn-CodePen.png"></form>
 
 _Note: You’ll be sent to an external website._
 

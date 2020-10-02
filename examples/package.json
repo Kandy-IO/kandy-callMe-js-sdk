@@ -1,0 +1,14 @@
+{
+  "name": "callme-token-server-example",
+  "version": "0.0.1",
+  "description": "Sample application server for generating auth tokens for anonymous calling",
+  "license": "SEE LICENSE IN LICENSE.md",
+  "scripts": {
+    "start": "node index.js"
+  },
+  "dependencies": {
+    "cors": "^2.8.5",
+    "crypto": "^1.0.1",
+    "express": "^4.17.1"
+  }
+}
