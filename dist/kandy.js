@@ -1,7 +1,7 @@
 /**
  * Kandy.js
  * kandy.newCallMe.js
- * Version: 4.21.0-beta.549
+ * Version: 4.21.0-beta.550
  */
 (function webpackUniversalModuleDefinition(root, factory) {
 	if(typeof exports === 'object' && typeof module === 'object')
@@ -24957,6 +24957,7 @@ function api({ dispatch, getState }) {
      * Connect with user credentials to any backend services that the SDK instance deals with.
      *
      * @public
+     * @deprecated Since version 4.19.0. Please see {@link apisetCredentials setCredentials} and {@link services.subscribe subscribe} for new method of connecting.
      * @memberof api
      * @requires userCredentialsAuth
      * @method connect
@@ -24980,6 +24981,7 @@ function api({ dispatch, getState }) {
      * Connect with user credentials to any backend services that the SDK instance deals with.
      *
      * @public
+     * @deprecated Since version 4.19.0. Please see {@link apisetCredentials setCredentials} and {@link services.subscribe subscribe} for new method of connecting.
      * @memberof api
      * @requires userCredentialsDAKAuth
      * @method connect
@@ -25001,6 +25003,7 @@ function api({ dispatch, getState }) {
      * You can optionally provide a refresh token and the SDK will automatically get new access tokens.
      *
      * @public
+     * @deprecated Since version 4.19.0. Please see {@link apisetCredentials setCredentials} and {@link services.subscribe subscribe} for new method of connecting.
      * @memberof api
      * @requires accessTokenAuth
      * @method connect
@@ -25028,6 +25031,7 @@ function api({ dispatch, getState }) {
      * - organizationId - The ID of the organization the user is a part of.
      *
      * @public
+     * @deprecated Since version 4.19.0. Please see {@link apisetCredentials setCredentials} and {@link services.subscribe subscribe} for new method of connecting.
      * @memberof api
      * @requires hmacTokenAuth
      * @method connect
@@ -25056,6 +25060,7 @@ function api({ dispatch, getState }) {
      * Connect by providing a refresh token, to any backend services that the SDK instance deals with.
      *
      * @public
+     * @deprecated Since version 4.19.0. Please see {@link apisetCredentials setCredentials} and {@link services.subscribe subscribe} for new method of connecting.
      * @memberof api
      * @requires accessTokenAuth
      * @method connect
@@ -25076,6 +25081,7 @@ function api({ dispatch, getState }) {
      * Connect by providing an OAuth token, to any backend services that the SDK instance deals with.
      *
      * @public
+     * @deprecated Since version 4.19.0. Please see {@link apisetCredentials setCredentials} and {@link services.subscribe subscribe} for new method of connecting.
      * @memberof api
      * @requires oauthToken
      * @method connect
@@ -25101,6 +25107,7 @@ function api({ dispatch, getState }) {
      * Disconnects from the backend. This will close the websocket and you will stop receiving events.
      *
      * @public
+     * @deprecated Since version 4.19.0. Please see {@link services.unsubscribe unsubscribe} for new method of disconnecting.
      * @requires userCredentialsAuth
      * @requires userCredentialsDAKAuth
      * @requires accessTokenAuth
@@ -40562,7 +40569,7 @@ exports.getVersion = getVersion;
  * for the @@ tag below with actual version value.
  */
 function getVersion() {
-  return '4.21.0-beta.549';
+  return '4.21.0-beta.550';
 }
 
 /***/ }),
