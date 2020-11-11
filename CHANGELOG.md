@@ -7,7 +7,11 @@ Kandy.js change log.
 
 ## 4.22.0 - beta
 
-## Changed
+### Fixed
+
+- Fixed an issue where if an error occured during the user connect before the call, further call attempts would not work. `KAA-2529`
+
+### Changed
 
 - Changed `call.getStats` Call API to return a Promise, so that caller can get the report of the call as part of invoking this API. `KAA-2558`
 

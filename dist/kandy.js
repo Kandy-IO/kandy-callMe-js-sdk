@@ -1,7 +1,7 @@
 /**
  * Kandy.js
  * kandy.newCallMe.js
- * Version: 4.22.0-beta.575
+ * Version: 4.22.0-beta.576
  */
 (function webpackUniversalModuleDefinition(root, factory) {
 	if(typeof exports === 'object' && typeof module === 'object')
@@ -24459,6 +24459,16 @@ function* anonymousConnect() {
   while (true) {
     const action = yield (0, _effects2.take)(actionTypes.CONNECT);
 
+    if (!window || !window.localStorage || !window.localStorage.setItem) {
+      log.error('localStorage not supported in environment; cannot make anonymous calls.');
+      yield (0, _effects2.put)(actions.connectFinished({
+        error: new _errors2.default({
+          message: 'localStorage not supported in environment; cannot make anonymous calls.'
+        })
+      }));
+      continue;
+    }
+
     // Retrieve the connection info.
     const config = yield (0, _effects2.select)(_selectors.getAuthConfig);
 
@@ -24483,7 +24493,7 @@ function* anonymousConnect() {
       log.info('Subscription failed. Error: ', response.error);
       // Subscription failed.
       yield (0, _effects2.put)(actions.connectFinished(response, _constants.platforms.LINK));
-      return;
+      continue;
     } else if (!response.subscriptionParams.service.includes('callMe')) {
       // Subscription was successful, but didn't include the callMe service.
       log.info('Subscription failed. Call Me service not provided with subscription.');
@@ -24493,7 +24503,7 @@ function* anonymousConnect() {
           code: _errors.authCodes.MISSING_SERVICE
         })
       }));
-      return;
+      continue;
     }
 
     log.info('Successfully subscribed to callMe service. Connecting to websocket.');
@@ -24511,7 +24521,7 @@ function* anonymousConnect() {
       yield (0, _effects2.put)(actions.connectFinished({
         error: wsResponse.payload
       }, _constants.platforms.LINK));
-      return;
+      continue;
     }
     log.info('Successfully connected to websocket.');
 
@@ -24522,13 +24532,8 @@ function* anonymousConnect() {
     // This should be cleared after disconnection.
     // See: wamcall.js, function addNotificationChannel
     const notificationId = websocketInfo.url.substr(websocketInfo.url.lastIndexOf('/') + 1);
-    if (window && window.localStorage && window.localStorage.setItem) {
-      const username = action.payload.credentials.username;
-      window.localStorage.setItem(`FCS_${username}_NotificationId`, notificationId);
-    } else {
-      log.error('localStorage not supported in environment; cannot make anonymous calls.');
-      return { error: true };
-    }
+    const username = action.payload.credentials.username;
+    window.localStorage.setItem(`FCS_${username}_NotificationId`, notificationId);
 
     yield (0, _effects2.put)(actions.connectFinished({
       userInfo: {
@@ -40720,7 +40725,7 @@ exports.getVersion = getVersion;
  * for the @@ tag below with actual version value.
  */
 function getVersion() {
-  return '4.22.0-beta.575';
+  return '4.22.0-beta.576';
 }
 
 /***/ }),
