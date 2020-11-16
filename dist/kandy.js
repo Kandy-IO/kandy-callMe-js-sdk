@@ -1,7 +1,7 @@
 /**
  * Kandy.js
  * kandy.newCallMe.js
- * Version: 4.22.0-beta.577
+ * Version: 4.22.0-beta.578
  */
 (function webpackUniversalModuleDefinition(root, factory) {
 	if(typeof exports === 'object' && typeof module === 'object')
@@ -40725,7 +40725,7 @@ exports.getVersion = getVersion;
  * for the @@ tag below with actual version value.
  */
 function getVersion() {
-  return '4.22.0-beta.577';
+  return '4.22.0-beta.578';
 }
 
 /***/ }),
@@ -55020,6 +55020,7 @@ function Session(id, managers, config = {}) {
         if (description.type === 'answer') {
           recordNewDtlsRole();
         }
+
         // Set any parameters on the peer's senders if applicable
         setParameters();
 
