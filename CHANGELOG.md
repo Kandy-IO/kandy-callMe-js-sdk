@@ -9,6 +9,8 @@ Kandy.js change log.
 
 ### Fixed
 
+- Minor documentation fixes.
+  - Update the Call `MediaConstraint` format description to include the "direct value" approach. `KAA-2565`
 - Fixed an issue where if an error occured during the user connect before the call, further call attempts would not work. `KAA-2529`
 
 ### Changed
