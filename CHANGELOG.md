@@ -5,7 +5,7 @@ Kandy.js change log.
 - This project adheres to [Semantic Versioning](http://semver.org/).
 - This change log follows [keepachangelog.com](http://keepachangelog.com/) recommendations.
 
-## 4.22.0 - beta
+## 4.22.0 - 2020-11-27
 
 ### Added
 
@@ -18,6 +18,7 @@ Kandy.js change log.
 - Update the Call `MediaConstraint` format description to include the "direct value" approach. `KAA-2565`
 - Fixed an issue where if an error occurred during the user connect before the call, further call attempts would not work. `KAA-2529`
 - Fixed an issue where failed anonymous calls didn't delete the subscription when denied media access. `KAA-2530`
+- Fixed issue where the user subscription was being removed if internet connectivity was lost for too long. `KAA-2538`
 
 ### Changed
 
