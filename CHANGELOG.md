@@ -5,6 +5,25 @@ Kandy.js change log.
 - This project adheres to [Semantic Versioning](http://semver.org/).
 - This change log follows [keepachangelog.com](http://keepachangelog.com/) recommendations.
 
+## 4.22.0 - 2020-11-27
+
+### Added
+
+- Added SDK metadata to `call:statsReceived` event's payload. `KAA-2557`
+
+### Fixed
+
+- Fixed issue where call is not successfully put on hold if only one side is sharing video. `KAA-2555`
+- Minor documentation fixes.
+- Update the Call `MediaConstraint` format description to include the "direct value" approach. `KAA-2565`
+- Fixed an issue where if an error occurred during the user connect before the call, further call attempts would not work. `KAA-2529`
+- Fixed an issue where failed anonymous calls didn't delete the subscription when denied media access. `KAA-2530`
+- Fixed issue where the user subscription was being removed if internet connectivity was lost for too long. `KAA-2538`
+
+### Changed
+
+- Changed `call.getStats` Call API to return a Promise, so that caller can get the report of the call as part of invoking this API. `KAA-2558`
+
 ## 4.21.0 - 2020-10-30
 
 ### Fixed
