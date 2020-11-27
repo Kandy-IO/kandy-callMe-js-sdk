@@ -1,7 +1,7 @@
 /**
  * Kandy.js
  * kandy.newCallMe.js
- * Version: 4.22.0-beta.589
+ * Version: 4.22.0-beta.590
  */
 (function webpackUniversalModuleDefinition(root, factory) {
 	if(typeof exports === 'object' && typeof module === 'object')
@@ -24698,7 +24698,7 @@ function connect(credentials, options) {
 /**
  * Create a set connection info action that takes a connection and user info object
  *
- * @method connectFinished
+ * @method setConnectionInfo
  * @param {Object} $0
  * @param {Object} $0.userInfo An object representing the user information.
  * @param {Object} $0.connection A connection object. Information about how to connect to the backend services.
@@ -24887,7 +24887,7 @@ function resubscribeFinished({ error, attemptNum }, platform) {
  * Creates a refreshTokens action with the given credentials as a payload.
  *
  * @method refreshTokens
- * @param {Object} credentials A crendetials object containing tokens.
+ * @param {Object} credentials A credentials object containing tokens.
  * @return {Object} A flux standard action.
  */
 function refreshTokens(credentials) {
@@ -24978,7 +24978,7 @@ function setTokens({ accessToken, idToken }) {
 /**
  * Creates a setCredentials action that takes a credentials object.
  *
- * @method connect
+ * @method setCredentials
  * @param {Object} $0
  * @param {string} $0.username The username.
  * @param {string} $0.password The user's password.
@@ -25002,7 +25002,7 @@ function setCredentials({ username, password, authname, hmacToken, bearerAccessT
  * Create a setCredentials finished action that takes a userInfo object on success and possibly
  * an error object.
  *
- * @method connectFinished
+ * @method setCredentialsFinished
  * @param {Object} $0
  * @param {Object} $0.userInfo An object representing the user information.
  * @param {Object} $0.connection A connection object. Information about how to connect to the backend services.
@@ -33780,8 +33780,6 @@ exports.anonymousCallEnd = anonymousCallEnd;
 
 var _actionTypes = __webpack_require__("../../packages/kandy/src/call/interfaceNew/actionTypes.js");
 
-var actionTypes = _interopRequireWildcard(_actionTypes);
-
 var _actions = __webpack_require__("../../packages/kandy/src/auth/interface/actions.js");
 
 var authActions = _interopRequireWildcard(_actions);
@@ -33812,7 +33810,7 @@ function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { de
 // Call plugin.
 function* makeAnonymousCallEntry(deps) {
   // TODO: Using `makeCall` for now but will need a custom callstack saga for this
-  yield (0, _effects.takeEvery)(actionTypes.MAKE_ANONYMOUS_CALL, _establish.makeAnonymousCall, (0, _extends3.default)({}, deps));
+  yield (0, _effects.takeEvery)(_actionTypes.MAKE_ANONYMOUS_CALL, _establish.makeAnonymousCall, (0, _extends3.default)({}, deps));
 }
 
 /**
@@ -33826,8 +33824,10 @@ function* makeAnonymousCallEntry(deps) {
 
 // Other plugins.
 function* anonymousCallEnd() {
+  const failedMakeCallFinish = ({ type, error }) => type === _actionTypes.MAKE_CALL_FINISH && error;
+
   while (true) {
-    yield (0, _effects.take)(actionTypes.END_CALL_FINISH);
+    yield (0, _effects.take)([_actionTypes.END_CALL_FINISH, failedMakeCallFinish]);
 
     // When the call ends, we want to disconnect the user.
     yield (0, _effects.put)(authActions.disconnect());
@@ -34688,6 +34688,7 @@ function* makeCall(deps, action) {
       state: _constants.CALL_STATES.ENDED,
       error: error
     }));
+
     return;
   }
 
@@ -40863,7 +40864,7 @@ exports.getVersion = getVersion;
  * for the @@ tag below with actual version value.
  */
 function getVersion() {
-  return '4.22.0-beta.589';
+  return '4.22.0-beta.590';
 }
 
 /***/ }),
