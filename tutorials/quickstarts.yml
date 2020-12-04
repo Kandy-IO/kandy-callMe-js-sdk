@@ -25,3 +25,7 @@
   description: # Anonymous Calls
   link: /quickstarts/javascript/newCallMe/Anonymous%20Calls
 
+- name: Call Statistics
+  description: # Call Statistics
+  link: /quickstarts/javascript/newCallMe/Call%20Statistics
+
