@@ -1,7 +1,7 @@
 /**
  * Kandy.js
  * kandy.newCallMe.js
- * Version: 4.24.0-beta.602
+ * Version: 4.24.0-beta.603
  */
 (function webpackUniversalModuleDefinition(root, factory) {
 	if(typeof exports === 'object' && typeof module === 'object')
@@ -40880,7 +40880,7 @@ exports.getVersion = getVersion;
  * for the @@ tag below with actual version value.
  */
 function getVersion() {
-  return '4.24.0-beta.602';
+  return '4.24.0-beta.603';
 }
 
 /***/ }),
@@ -52336,7 +52336,7 @@ exports.default = ontrack;
  * @return {Boolean}  Whether the assignment succeeded or not.
  */
 function ontrack(listener) {
-  const { nativePeer, trackManager, log } = this;
+  const { id: peerId, nativePeer, trackManager, log } = this;
 
   nativePeer.ontrack = event => {
     /**
@@ -52361,7 +52361,11 @@ function ontrack(listener) {
     }
 
     // Convert the native MediaStreamTrack into a Track object.
-    const track = trackManager.add(nativeTrack, targetStream);
+
+    // Note: Here we use the peer id as a prefix. This is to solve certain issues in browsers
+    // when no SSRC is specified as part of signaling and the browser chooses to generate the same
+    // track id for 2 tracks on different peers.
+    const track = trackManager.add(`${peerId}-${nativeTrack.id}`, nativeTrack, targetStream);
 
     log.debug(`Peer received ${nativeTrack.kind} Track ${track.id}.`);
     listener(track);
@@ -54391,7 +54395,7 @@ function MediaManager(managers) {
 
     // Only add tracks to a Media objects using the `addTrack` method.
     mediaStream.getTracks().forEach(nativeTrack => {
-      const wrappedTrack = trackManager.add(nativeTrack, mediaStream);
+      const wrappedTrack = trackManager.add(nativeTrack.id, nativeTrack, mediaStream);
       media.addTrack(wrappedTrack);
     });
 
@@ -54912,8 +54916,8 @@ function TrackManager() {
    * @param  {MediaStream} stream
    * @return {Track} The added/wrapped Track object.
    */
-  function add(track, stream) {
-    const targetTrack = tracks.get(track.id);
+  function add(id, track, stream) {
+    const targetTrack = tracks.get(id);
 
     // Chrome issue: track.stream is outdated and needs to be updated to newStream.
     // targetTrack.stream.active is false & targetTrack.stream.getTracks() gives us an empty array.
@@ -54928,8 +54932,8 @@ function TrackManager() {
       return targetTrack;
     } else {
       // Wrap the track as a Track object.
-      const wrappedTrack = new _track2.default(track, stream);
-      tracks.set(track.id, wrappedTrack);
+      const wrappedTrack = new _track2.default(id, track, stream);
+      tracks.set(id, wrappedTrack);
 
       // Remove the track from the manager when it ends.
       wrappedTrack.once('ended', remove);
@@ -56188,17 +56192,17 @@ function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { de
 
 
 // Libraries.
-function Track(mediaTrack, mediaStream) {
-  const log = _logs.logManager.getLogger('Track', mediaTrack.id);
-  log.info(`Creating new ${mediaTrack.kind} Track.`);
-
+function Track(id, mediaTrack, mediaStream) {
   // Internal variables.
-  const id = mediaTrack.id;
+  const trackId = id;
   const track = mediaTrack;
   let stream = mediaStream;
   const containers = [];
   let constraints = {};
   const emitter = new _eventemitter2.default();
+
+  const log = _logs.logManager.getLogger('Track', trackId);
+  log.info(`Creating new ${track.kind} Track.`);
 
   /**
    * When a track ends, the Track itself doesn't do anything about it.
@@ -56207,7 +56211,7 @@ function Track(mediaTrack, mediaStream) {
   track.onended = event => {
     log.debug('Event emitted: ', event);
     emitter.emit('ended', {
-      trackId: track.id,
+      trackId,
       // If the event is defined:
       //   The event is triggered either from a remote notification or browser action.
       //   In case of browser action (e.g. "Stop sharing" screenshare on chrome), SDK will (eventually) receive a SESSION_TRACK_REMOVED action.
@@ -56227,7 +56231,7 @@ function Track(mediaTrack, mediaStream) {
   track.onmute = event => {
     log.debug('Event emitted: ', event);
     emitter.emit('muted', {
-      trackId: track.id
+      trackId
     });
   };
 
@@ -56239,7 +56243,7 @@ function Track(mediaTrack, mediaStream) {
   track.onunmute = event => {
     log.debug('Event emitted: ', event);
     emitter.emit('unmuted', {
-      trackId: track.id
+      trackId
     });
   };
 
@@ -56257,7 +56261,7 @@ function Track(mediaTrack, mediaStream) {
    */
   function getState() {
     return {
-      id,
+      id: trackId,
       streamId: stream.id,
       kind: track.kind,
       label: track.label,
@@ -56308,7 +56312,7 @@ function Track(mediaTrack, mediaStream) {
     // Make id safe for css (Firefox ids come wrapped in curly braces)
     // This makes it easier to do other manipulation on the rendering side
     // as we don't need to escape curly braces when doing element.querySelector (See removeFrom).
-    renderer.id = `${type}-${(0, _utils.makeSafeForCSS)(id)}`;
+    renderer.id = `${type}-${(0, _utils.makeSafeForCSS)(trackId)}`;
     renderer.style.height = '100%';
     renderer.style.width = '100%';
 
@@ -56385,7 +56389,7 @@ function Track(mediaTrack, mediaStream) {
     // Make id safe for css (Firefox ids come wrapped in curly braces)
     // This makes it easier to do other manipulation on the rendering side
     // as we don't need to escape curly braces when doing element.querySelector.
-    const rendererId = `${track.kind}-${(0, _utils.makeSafeForCSS)(id)}`;
+    const rendererId = `${track.kind}-${(0, _utils.makeSafeForCSS)(trackId)}`;
     const renderer = element.querySelector(`#${rendererId}`);
 
     if (renderer.srcObject) {
@@ -56504,7 +56508,7 @@ function Track(mediaTrack, mediaStream) {
    * The exposed API.
    */
   return {
-    id,
+    id: trackId,
     // Track APIs.
     getState,
     renderIn,
