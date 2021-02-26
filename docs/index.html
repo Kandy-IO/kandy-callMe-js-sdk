@@ -2,7 +2,7 @@
 <html>
 <head>
   <meta charset='utf-8' />
-  <title>kandy-callMe-js-sdk 4.24.2 | Documentation</title>
+  <title>kandy-callMe-js-sdk 4.25.0 | Documentation</title>
   <meta name='viewport' content='width=device-width,initial-scale=1'>
   <link href='assets/bass.css' type='text/css' rel='stylesheet' />
   <link href='assets/style.css' type='text/css' rel='stylesheet' />
@@ -14,7 +14,7 @@
       <div id='split-left' class='overflow-auto fs0 height-viewport-100'>
         <div class='py1 px2'>
           <h3 class='mb0 no-anchor'>kandy-callMe-js-sdk</h3>
-          <div class='mb1'><code>4.24.2</code></div>
+          <div class='mb1'><code>4.25.0</code></div>
           <input
             placeholder='Filter'
             id='filter-input'
@@ -1400,6 +1400,21 @@ collected.
     (default <code>false</code>)
   </td>
   <td class='break-word'><span>Whether to remove a=group attributes to stop media bundling from incoming and outgoing SDP messages.
+</span></td>
+</tr>
+
+
+              
+                <tr>
+  <td class='break-word'><span class='code bold'>call.ringingFeedbackMode</span> <code class='quiet'><a href="https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/String">string</a></code>
+  
+    (default <code>&#39;auto&#39;</code>)
+  </td>
+  <td class='break-word'><span>The mode for sending ringing feedback to the Caller ('auto', 'manual').
+By default, feedback will be automatically sent when a call has been received. In 'manual' mode, the application
+must initiate the feedback being sent. See the 
+<code>call.sendRingingFeedback</code>
+ API for more info.
 </span></td>
 </tr>
 
