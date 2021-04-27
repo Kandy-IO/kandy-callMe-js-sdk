@@ -17,6 +17,7 @@ Kandy.js change log.
 ### Fixed
 
 - Changed how [`destroy`](https://kandy-io.github.io/kandy-callMe-js-sdk/docs/#apidestroy) is used to prevent errors when destroying inside an event. `KJS-123`
+- Fixed an issue where minimizing the SDK caused an error. `KJS-141`
 
 ## 4.26.0 - 2021-03-26
 
