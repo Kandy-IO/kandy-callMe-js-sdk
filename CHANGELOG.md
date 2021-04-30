@@ -5,7 +5,7 @@ Kandy.js change log.
 - This project adheres to [Semantic Versioning](http://semver.org/).
 - This change log follows [keepachangelog.com](http://keepachangelog.com/) recommendations.
 
-## 4.27.0 - beta
+## 4.27.0 - 2021-04-30
 
 ### Added
 
@@ -19,13 +19,13 @@ Kandy.js change log.
 - Changed how [`destroy`](https://kandy-io.github.io/kandy-callMe-js-sdk/docs/#apidestroy) is used to prevent errors when destroying inside an event. `KJS-123`
 - Fixed an issue where minimizing the SDK caused an error. `KJS-141`
 - Added handling websocket error and close scenarios instead of waiting for the heartbeat to fail to either retry connection or just notify the app and clean up subscription. `KJS-61`
+- Added missing 'Call API:' logs to call plugin api interface. `KJS-124`
 
 ## 4.26.0 - 2021-03-26
 
 ### Fixed
 
 - Updated the Handling Media Tracks tutorial for more clarity. `KJS-109`
-- Added missing 'Call API:' logs to call, fcsBridge and groups plugin api interface. `KJS-124`
 
 ## 4.25.0 - 2021-02-26
 
