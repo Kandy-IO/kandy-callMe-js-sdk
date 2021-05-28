@@ -1,7 +1,7 @@
 /**
  * Kandy.js
  * kandy.newCallMe.js
- * Version: 4.28.0-beta.678
+ * Version: 4.29.0-beta.679
  */
 (function webpackUniversalModuleDefinition(root, factory) {
 	if(typeof exports === 'object' && typeof module === 'object')
@@ -1498,6 +1498,81 @@ if (typeof __e == 'number') __e = core; // eslint-disable-line no-undef
 /* 8 */
 /***/ (function(module, exports, __webpack_require__) {
 
+"use strict";
+
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+const prefix = '@@KANDY/WEBRTC/';
+
+/**
+ * Device action types.
+ */
+const DEVICES_CHANGE = exports.DEVICES_CHANGE = prefix + 'DEVICES/CHANGE';
+const INITIALIZE_DEVICES = exports.INITIALIZE_DEVICES = prefix + 'INITIALIZE_DEVICES';
+const INITIALIZE_DEVICES_FINISH = exports.INITIALIZE_DEVICES_FINISH = prefix + 'INITIALIZE_DEVICES_FINISH';
+
+/**
+ * Track action types.
+ */
+const trackPrefix = prefix + 'TRACK/';
+
+const TRACK_ADDED = exports.TRACK_ADDED = trackPrefix + 'ADDED';
+const TRACK_REMOVED = exports.TRACK_REMOVED = trackPrefix + 'REMOVED';
+
+const RENDER_TRACKS = exports.RENDER_TRACKS = trackPrefix + 'RENDER';
+const RENDER_TRACKS_FINISH = exports.RENDER_TRACKS_FINISH = trackPrefix + 'RENDER_FINISH';
+
+const REMOVE_TRACKS = exports.REMOVE_TRACKS = trackPrefix + 'REMOVE';
+const REMOVE_TRACKS_FINISH = exports.REMOVE_TRACKS_FINISH = trackPrefix + 'REMOVE_FINISH';
+
+const MUTE_TRACKS = exports.MUTE_TRACKS = trackPrefix + 'MUTE';
+const MUTE_TRACKS_FINISH = exports.MUTE_TRACKS_FINISH = trackPrefix + 'MUTE_FINISH';
+const UNMUTE_TRACKS = exports.UNMUTE_TRACKS = trackPrefix + 'UNMUTE';
+const UNMUTE_TRACKS_FINISH = exports.UNMUTE_TRACKS_FINISH = trackPrefix + 'UNMUTE_FINISH';
+
+const TRACK_SOURCE_MUTED = exports.TRACK_SOURCE_MUTED = trackPrefix + 'SOURCE_MUTED';
+const TRACK_SOURCE_UNMUTED = exports.TRACK_SOURCE_UNMUTED = trackPrefix + 'SOURCE_UNMUTED';
+
+/**
+ * Session action types.
+ */
+const sessionPrefix = prefix + 'SESSION/';
+
+const SESSION_ADDED = exports.SESSION_ADDED = sessionPrefix + 'ADDED';
+const SESSION_REMOVED = exports.SESSION_REMOVED = sessionPrefix + 'REMOVED';
+
+const SESSION_NEW_TRACK = exports.SESSION_NEW_TRACK = sessionPrefix + 'NEW_TRACK';
+const SESSION_TRACK_REMOVED = exports.SESSION_TRACK_REMOVED = sessionPrefix + 'TRACK_REMOVED';
+const SESSION_TRACK_ENDED = exports.SESSION_TRACK_ENDED = sessionPrefix + 'TRACK_ENDED';
+const SESSION_CHANGE = exports.SESSION_CHANGE = sessionPrefix + 'CHANGE';
+const SESSION_TRACK_REPLACED = exports.SESSION_TRACK_REPLACED = sessionPrefix + 'TRACK_REPLACED';
+
+const SESSION_ICE_CONNECTION_STATE_CHANGE = exports.SESSION_ICE_CONNECTION_STATE_CHANGE = sessionPrefix + 'ICE_CONNECTION_STATE_CHANGE';
+
+/**
+ * Media action types.
+ */
+const mediaPrefix = prefix + 'MEDIA/';
+
+const MEDIA_NEW = exports.MEDIA_NEW = mediaPrefix + 'NEW';
+const MEDIA_REMOVED = exports.MEDIA_REMOVED = mediaPrefix + 'REMOVED';
+const MEDIA_CHANGE = exports.MEDIA_CHANGE = mediaPrefix + 'CHANGE';
+
+const MEDIA_NEW_TRACK = exports.MEDIA_NEW_TRACK = mediaPrefix + 'NEW_TRACK';
+const MEDIA_TRACK_REMOVED = exports.MEDIA_TRACK_REMOVED = mediaPrefix + 'TRACK_REMOVED';
+const MEDIA_TRACK_ENDED = exports.MEDIA_TRACK_ENDED = mediaPrefix + 'TRACK_ENDED';
+
+/**
+ * Misc. action types.
+ */
+const SET_BROWSER_DETAILS = exports.SET_BROWSER_DETAILS = prefix + 'SET_BROWSER_DETAILS';
+
+/***/ }),
+/* 9 */
+/***/ (function(module, exports, __webpack_require__) {
+
 var global = __webpack_require__(12);
 var core = __webpack_require__(7);
 var ctx = __webpack_require__(31);
@@ -1563,7 +1638,7 @@ module.exports = $export;
 
 
 /***/ }),
-/* 9 */
+/* 10 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -1681,79 +1756,6 @@ function normalizeServices(services = []) {
     return { service: service };
   });
 }
-
-/***/ }),
-/* 10 */
-/***/ (function(module, exports, __webpack_require__) {
-
-"use strict";
-
-
-Object.defineProperty(exports, "__esModule", {
-  value: true
-});
-const prefix = '@@KANDY/WEBRTC/';
-
-/**
- * Device action types.
- */
-const DEVICES_CHANGE = exports.DEVICES_CHANGE = prefix + 'DEVICES/CHANGE';
-const INITIALIZE_DEVICES = exports.INITIALIZE_DEVICES = prefix + 'INITIALIZE_DEVICES';
-const INITIALIZE_DEVICES_FINISH = exports.INITIALIZE_DEVICES_FINISH = prefix + 'INITIALIZE_DEVICES_FINISH';
-
-/**
- * Track action types.
- */
-const trackPrefix = prefix + 'TRACK/';
-
-const TRACK_ADDED = exports.TRACK_ADDED = trackPrefix + 'ADDED';
-const TRACK_REMOVED = exports.TRACK_REMOVED = trackPrefix + 'REMOVED';
-
-const RENDER_TRACKS = exports.RENDER_TRACKS = trackPrefix + 'RENDER';
-const RENDER_TRACKS_FINISH = exports.RENDER_TRACKS_FINISH = trackPrefix + 'RENDER_FINISH';
-
-const REMOVE_TRACKS = exports.REMOVE_TRACKS = trackPrefix + 'REMOVE';
-const REMOVE_TRACKS_FINISH = exports.REMOVE_TRACKS_FINISH = trackPrefix + 'REMOVE_FINISH';
-
-const MUTE_TRACKS = exports.MUTE_TRACKS = trackPrefix + 'MUTE';
-const MUTE_TRACKS_FINISH = exports.MUTE_TRACKS_FINISH = trackPrefix + 'MUTE_FINISH';
-const UNMUTE_TRACKS = exports.UNMUTE_TRACKS = trackPrefix + 'UNMUTE';
-const UNMUTE_TRACKS_FINISH = exports.UNMUTE_TRACKS_FINISH = trackPrefix + 'UNMUTE_FINISH';
-
-const TRACK_SOURCE_MUTED = exports.TRACK_SOURCE_MUTED = trackPrefix + 'SOURCE_MUTED';
-const TRACK_SOURCE_UNMUTED = exports.TRACK_SOURCE_UNMUTED = trackPrefix + 'SOURCE_UNMUTED';
-
-/**
- * Session action types.
- */
-const sessionPrefix = prefix + 'SESSION/';
-
-const SESSION_ADDED = exports.SESSION_ADDED = sessionPrefix + 'ADDED';
-const SESSION_REMOVED = exports.SESSION_REMOVED = sessionPrefix + 'REMOVED';
-
-const SESSION_NEW_TRACK = exports.SESSION_NEW_TRACK = sessionPrefix + 'NEW_TRACK';
-const SESSION_TRACK_REMOVED = exports.SESSION_TRACK_REMOVED = sessionPrefix + 'TRACK_REMOVED';
-const SESSION_TRACK_ENDED = exports.SESSION_TRACK_ENDED = sessionPrefix + 'TRACK_ENDED';
-const SESSION_CHANGE = exports.SESSION_CHANGE = sessionPrefix + 'CHANGE';
-const SESSION_TRACK_REPLACED = exports.SESSION_TRACK_REPLACED = sessionPrefix + 'TRACK_REPLACED';
-
-/**
- * Media action types.
- */
-const mediaPrefix = prefix + 'MEDIA/';
-
-const MEDIA_NEW = exports.MEDIA_NEW = mediaPrefix + 'NEW';
-const MEDIA_REMOVED = exports.MEDIA_REMOVED = mediaPrefix + 'REMOVED';
-const MEDIA_CHANGE = exports.MEDIA_CHANGE = mediaPrefix + 'CHANGE';
-
-const MEDIA_NEW_TRACK = exports.MEDIA_NEW_TRACK = mediaPrefix + 'NEW_TRACK';
-const MEDIA_TRACK_REMOVED = exports.MEDIA_TRACK_REMOVED = mediaPrefix + 'TRACK_REMOVED';
-const MEDIA_TRACK_ENDED = exports.MEDIA_TRACK_ENDED = mediaPrefix + 'TRACK_ENDED';
-
-/**
- * Misc. action types.
- */
-const SET_BROWSER_DETAILS = exports.SET_BROWSER_DETAILS = prefix + 'SET_BROWSER_DETAILS';
 
 /***/ }),
 /* 11 */
@@ -2360,7 +2362,7 @@ const logManager = exports.logManager = manager;
 Object.defineProperty(exports, "__esModule", {
   value: true
 });
-exports.ICE_MEDIA_STATES = exports.FCS_ICE_MEDIA_STATES = exports.WEBRTC_DEVICE_KINDS = exports.CALL_DIRECTION = exports.STATUS_CODES = exports.COMPLEX_OPERATION_MESSAGES = exports.COMPLEX_OPERATIONS = exports.OPERATIONS = exports.CALL_MEDIA_STATES = exports.CALL_STATES = exports.CALL_STATES_FCS = exports.FCS_CALL_STATES = undefined;
+exports.ICE_MEDIA_STATES = exports.FCS_ICE_MEDIA_STATES = exports.WEBRTC_DEVICE_KINDS = exports.CALL_DIRECTION = exports.STATUS_CODES = exports.COMPLEX_OPERATION_MESSAGES = exports.COMPLEX_OPERATIONS = exports.OPERATIONS = exports.CALL_MEDIA_CONNECTION_STATES = exports.CALL_MEDIA_STATES = exports.CALL_STATES = exports.CALL_STATES_FCS = exports.FCS_CALL_STATES = undefined;
 
 var _fp = __webpack_require__(4);
 
@@ -2438,6 +2440,19 @@ const CALL_STATES = exports.CALL_STATES = {
   LOCAL_HOLD: 'Local Hold',
   REMOTE_HOLD: 'Remote Hold',
   DUAL_HOLD: 'Dual Hold'
+
+  /**
+   * Possible states for a Call's media connection.
+   * @name CALL_MEDIA_CONNECTION_STATES
+   */
+};const CALL_MEDIA_CONNECTION_STATES = exports.CALL_MEDIA_CONNECTION_STATES = {
+  NEW: 'new',
+  CHECKING: 'checking',
+  CONNECTED: 'connected',
+  COMPLETED: 'completed',
+  FAILED: 'failed',
+  DISCONNECTED: 'disconnected',
+  CLOSED: 'closed'
 
   /**
    * Call operations that require negotiation.
@@ -5277,8 +5292,6 @@ const CALL_RINGING = exports.CALL_RINGING = callPrefix + 'RINGING';
 const SESSION_PROGRESS = exports.SESSION_PROGRESS = callPrefix + 'SESSION_PROGRESS';
 const CALL_CANCELLED = exports.CALL_CANCELLED = callPrefix + 'CANCELLED';
 
-const CALL_AUDIT = exports.CALL_AUDIT = callPrefix + 'AUDIT';
-
 const ANSWER_CALL = exports.ANSWER_CALL = callPrefix + 'ANSWER';
 const ANSWER_CALL_FINISH = exports.ANSWER_CALL_FINISH = callPrefix + 'ANSWER_FINISH';
 
@@ -7921,7 +7934,7 @@ exports.getVersion = getVersion;
  * for the @@ tag below with actual version value.
  */
 function getVersion() {
-  return '4.28.0-beta.678';
+  return '4.29.0-beta.679';
 }
 
 /***/ }),
@@ -9687,7 +9700,7 @@ function handlersChanged(handlerMap) {
 "use strict";
 
 var LIBRARY = __webpack_require__(56);
-var $export = __webpack_require__(8);
+var $export = __webpack_require__(9);
 var redefine = __webpack_require__(130);
 var hide = __webpack_require__(32);
 var Iterators = __webpack_require__(61);
@@ -10323,7 +10336,7 @@ var actions = _interopRequireWildcard(_actions);
 
 var _utils = __webpack_require__(374);
 
-var _utils2 = __webpack_require__(9);
+var _utils2 = __webpack_require__(10);
 
 var _fp = __webpack_require__(4);
 
@@ -11367,7 +11380,7 @@ module.exports = function isFunction(arg) {
 /***/ (function(module, exports, __webpack_require__) {
 
 // most Object methods by ES6 should accept primitives
-var $export = __webpack_require__(8);
+var $export = __webpack_require__(9);
 var core = __webpack_require__(7);
 var fails = __webpack_require__(38);
 module.exports = function (KEY, exec) {
@@ -11931,7 +11944,7 @@ module.exports = function (KEY) {
 "use strict";
 
 var global = __webpack_require__(12);
-var $export = __webpack_require__(8);
+var $export = __webpack_require__(9);
 var meta = __webpack_require__(73);
 var fails = __webpack_require__(38);
 var hide = __webpack_require__(32);
@@ -12012,7 +12025,7 @@ module.exports = function (NAME) {
 "use strict";
 
 // https://tc39.github.io/proposal-setmap-offrom/
-var $export = __webpack_require__(8);
+var $export = __webpack_require__(9);
 
 module.exports = function (COLLECTION) {
   $export($export.S, COLLECTION, { of: function of() {
@@ -12031,7 +12044,7 @@ module.exports = function (COLLECTION) {
 "use strict";
 
 // https://tc39.github.io/proposal-setmap-offrom/
-var $export = __webpack_require__(8);
+var $export = __webpack_require__(9);
 var aFunction = __webpack_require__(54);
 var ctx = __webpack_require__(31);
 var forOf = __webpack_require__(62);
@@ -13790,7 +13803,7 @@ var _logs = __webpack_require__(3);
 
 var _effects3 = __webpack_require__(1);
 
-var _utils = __webpack_require__(9);
+var _utils = __webpack_require__(10);
 
 var _constants = __webpack_require__(13);
 
@@ -14210,7 +14223,7 @@ var _utf = __webpack_require__(378);
 
 var _utf2 = _interopRequireDefault(_utf);
 
-var _utils = __webpack_require__(9);
+var _utils = __webpack_require__(10);
 
 var _logs = __webpack_require__(3);
 
@@ -14704,7 +14717,6 @@ exports.sendRingingFeedbackFinish = sendRingingFeedbackFinish;
 exports.callRinging = callRinging;
 exports.sessionProgress = sessionProgress;
 exports.callCancelled = callCancelled;
-exports.sendCallAudit = sendCallAudit;
 exports.answerCall = answerCall;
 exports.answerCallFinish = answerCallFinish;
 exports.rejectCall = rejectCall;
@@ -14867,10 +14879,6 @@ function sessionProgress(id, params) {
 
 function callCancelled(id, params) {
   return callActionHelper(actionTypes.CALL_CANCELLED, id, params);
-}
-
-function sendCallAudit(id, params) {
-  return callActionHelper(actionTypes.CALL_AUDIT, id, params);
 }
 
 function answerCall(id, options) {
@@ -15155,7 +15163,7 @@ var _fp = __webpack_require__(4);
 
 var _selectors = __webpack_require__(16);
 
-var _utils = __webpack_require__(9);
+var _utils = __webpack_require__(10);
 
 /**
  * Plugin selector function to expose state globally
@@ -17934,7 +17942,7 @@ var _compose = __webpack_require__(201);
 
 var _compose2 = _interopRequireDefault(_compose);
 
-var _utils = __webpack_require__(9);
+var _utils = __webpack_require__(10);
 
 var _version = __webpack_require__(70);
 
@@ -18275,7 +18283,7 @@ module.exports = __webpack_require__(7).Object.assign;
 /***/ (function(module, exports, __webpack_require__) {
 
 // 19.1.3.1 Object.assign(target, source)
-var $export = __webpack_require__(8);
+var $export = __webpack_require__(9);
 
 $export($export.S + $export.F, 'Object', { assign: __webpack_require__(192) });
 
@@ -20664,7 +20672,7 @@ module.exports = __webpack_require__(7).Object.values;
 /***/ (function(module, exports, __webpack_require__) {
 
 // https://github.com/tc39/proposal-object-values-entries
-var $export = __webpack_require__(8);
+var $export = __webpack_require__(9);
 var $values = __webpack_require__(128)(false);
 
 $export($export.S, 'Object', {
@@ -20695,7 +20703,7 @@ module.exports = __webpack_require__(7).Symbol;
 var global = __webpack_require__(12);
 var has = __webpack_require__(33);
 var DESCRIPTORS = __webpack_require__(18);
-var $export = __webpack_require__(8);
+var $export = __webpack_require__(9);
 var redefine = __webpack_require__(130);
 var META = __webpack_require__(73).KEY;
 var $fails = __webpack_require__(38);
@@ -22170,7 +22178,7 @@ var _actions3 = _interopRequireDefault(_actions2);
 
 var _actions4 = __webpack_require__(34);
 
-var _utils = __webpack_require__(9);
+var _utils = __webpack_require__(10);
 
 var _effects = __webpack_require__(1);
 
@@ -23045,7 +23053,7 @@ module.exports = function (original) {
 /***/ (function(module, exports, __webpack_require__) {
 
 // https://github.com/DavidBruant/Map-Set.prototype.toJSON
-var $export = __webpack_require__(8);
+var $export = __webpack_require__(9);
 
 $export($export.P + $export.R, 'Set', { toJSON: __webpack_require__(147)('Set') });
 
@@ -23603,7 +23611,7 @@ module.exports = function defineProperties(T, D) {
 /* 255 */
 /***/ (function(module, exports, __webpack_require__) {
 
-var $export = __webpack_require__(8);
+var $export = __webpack_require__(9);
 // 19.1.2.3 / 15.2.3.7 Object.defineProperties(O, Properties)
 $export($export.S + $export.F * !__webpack_require__(18), 'Object', { defineProperties: __webpack_require__(132) });
 
@@ -23624,7 +23632,7 @@ module.exports = __webpack_require__(7).Array.from;
 "use strict";
 
 var ctx = __webpack_require__(31);
-var $export = __webpack_require__(8);
+var $export = __webpack_require__(9);
 var toObject = __webpack_require__(47);
 var call = __webpack_require__(142);
 var isArrayIter = __webpack_require__(143);
@@ -23706,7 +23714,7 @@ module.exports = function create(P, D) {
 /* 262 */
 /***/ (function(module, exports, __webpack_require__) {
 
-var $export = __webpack_require__(8);
+var $export = __webpack_require__(9);
 // 19.1.2.2 / 15.2.3.5 Object.create(O [, Properties])
 $export($export.S, 'Object', { create: __webpack_require__(74) });
 
@@ -24187,7 +24195,7 @@ var LIBRARY = __webpack_require__(56);
 var global = __webpack_require__(12);
 var ctx = __webpack_require__(31);
 var classof = __webpack_require__(107);
-var $export = __webpack_require__(8);
+var $export = __webpack_require__(9);
 var isObject = __webpack_require__(17);
 var aFunction = __webpack_require__(54);
 var anInstance = __webpack_require__(106);
@@ -24584,7 +24592,7 @@ module.exports = navigator && navigator.userAgent || '';
 "use strict";
 // https://github.com/tc39/proposal-promise-finally
 
-var $export = __webpack_require__(8);
+var $export = __webpack_require__(9);
 var core = __webpack_require__(7);
 var global = __webpack_require__(12);
 var speciesConstructor = __webpack_require__(153);
@@ -24611,7 +24619,7 @@ $export($export.P + $export.R, 'Promise', { 'finally': function (onFinally) {
 "use strict";
 
 // https://github.com/tc39/proposal-promise-try
-var $export = __webpack_require__(8);
+var $export = __webpack_require__(9);
 var newPromiseCapability = __webpack_require__(110);
 var perform = __webpack_require__(155);
 
@@ -25020,7 +25028,7 @@ var _actions2 = __webpack_require__(41);
 
 var _logs = __webpack_require__(3);
 
-var _utils = __webpack_require__(9);
+var _utils = __webpack_require__(10);
 
 var _kandyWebrtc = __webpack_require__(112);
 
@@ -25420,7 +25428,7 @@ exports.devicesChanged = devicesChanged;
 exports.initializeDevice = initializeDevice;
 exports.initializeDeviceFinish = initializeDeviceFinish;
 
-var _actionTypes = __webpack_require__(10);
+var _actionTypes = __webpack_require__(8);
 
 var actionTypes = _interopRequireWildcard(_actionTypes);
 
@@ -25482,7 +25490,7 @@ exports.renderTracksFinish = renderTracksFinish;
 exports.removeTracks = removeTracks;
 exports.removeTracksFinish = removeTracksFinish;
 
-var _actionTypes = __webpack_require__(10);
+var _actionTypes = __webpack_require__(8);
 
 var actionTypes = _interopRequireWildcard(_actionTypes);
 
@@ -25585,8 +25593,9 @@ exports.sessionTrackRemoved = sessionTrackRemoved;
 exports.sessionTrackEnded = sessionTrackEnded;
 exports.sessionChange = sessionChange;
 exports.sessionTrackReplaced = sessionTrackReplaced;
+exports.sessionIceConnectionStateChange = sessionIceConnectionStateChange;
 
-var _actionTypes = __webpack_require__(10);
+var _actionTypes = __webpack_require__(8);
 
 var actionTypes = _interopRequireWildcard(_actionTypes);
 
@@ -25643,6 +25652,10 @@ function sessionTrackReplaced(id, params) {
   return sessionActionHelper(actionTypes.SESSION_TRACK_REPLACED, id, params);
 }
 
+function sessionIceConnectionStateChange(id, params) {
+  return sessionActionHelper(actionTypes.SESSION_ICE_CONNECTION_STATE_CHANGE, id, params);
+}
+
 /***/ }),
 /* 288 */
 /***/ (function(module, exports, __webpack_require__) {
@@ -25664,7 +25677,7 @@ exports.mediaNewTrack = mediaNewTrack;
 exports.mediaTrackRemoved = mediaTrackRemoved;
 exports.mediaTrackEnded = mediaTrackEnded;
 
-var _actionTypes = __webpack_require__(10);
+var _actionTypes = __webpack_require__(8);
 
 var actionTypes = _interopRequireWildcard(_actionTypes);
 
@@ -25725,7 +25738,7 @@ Object.defineProperty(exports, "__esModule", {
 });
 exports.setBrowserDetails = setBrowserDetails;
 
-var _actionTypes = __webpack_require__(10);
+var _actionTypes = __webpack_require__(8);
 
 var actionTypes = _interopRequireWildcard(_actionTypes);
 
@@ -25800,7 +25813,7 @@ Object.defineProperty(exports, "__esModule", {
   value: true
 });
 
-var _actionTypes = __webpack_require__(10);
+var _actionTypes = __webpack_require__(8);
 
 var actionTypes = _interopRequireWildcard(_actionTypes);
 
@@ -25856,7 +25869,7 @@ var _extends2 = __webpack_require__(5);
 
 var _extends3 = _interopRequireDefault(_extends2);
 
-var _actionTypes = __webpack_require__(10);
+var _actionTypes = __webpack_require__(8);
 
 var actionTypes = _interopRequireWildcard(_actionTypes);
 
@@ -25956,7 +25969,7 @@ var _extends2 = __webpack_require__(5);
 
 var _extends3 = _interopRequireDefault(_extends2);
 
-var _actionTypes = __webpack_require__(10);
+var _actionTypes = __webpack_require__(8);
 
 var actionTypes = _interopRequireWildcard(_actionTypes);
 
@@ -26098,7 +26111,7 @@ var _extends2 = __webpack_require__(5);
 
 var _extends3 = _interopRequireDefault(_extends2);
 
-var _actionTypes = __webpack_require__(10);
+var _actionTypes = __webpack_require__(8);
 
 var actionTypes = _interopRequireWildcard(_actionTypes);
 
@@ -26220,7 +26233,7 @@ Object.defineProperty(exports, "__esModule", {
   value: true
 });
 
-var _actionTypes = __webpack_require__(10);
+var _actionTypes = __webpack_require__(8);
 
 var actionTypes = _interopRequireWildcard(_actionTypes);
 
@@ -26289,7 +26302,7 @@ var _eventTypes = __webpack_require__(157);
 
 var eventTypes = _interopRequireWildcard(_eventTypes);
 
-var _actionTypes = __webpack_require__(10);
+var _actionTypes = __webpack_require__(8);
 
 var actionTypes = _interopRequireWildcard(_actionTypes);
 
@@ -26334,7 +26347,7 @@ var _eventTypes = __webpack_require__(157);
 
 var eventTypes = _interopRequireWildcard(_eventTypes);
 
-var _actionTypes = __webpack_require__(10);
+var _actionTypes = __webpack_require__(8);
 
 var actionTypes = _interopRequireWildcard(_actionTypes);
 
@@ -26465,7 +26478,7 @@ exports.setListeners = setListeners;
 
 var _actions = __webpack_require__(26);
 
-var _utils = __webpack_require__(9);
+var _utils = __webpack_require__(10);
 
 var _effects = __webpack_require__(1);
 
@@ -26540,7 +26553,7 @@ exports.setListeners = setListeners;
 
 var _actions = __webpack_require__(26);
 
-var _actionTypes = __webpack_require__(10);
+var _actionTypes = __webpack_require__(8);
 
 var actionTypes = _interopRequireWildcard(_actionTypes);
 
@@ -26669,7 +26682,7 @@ var _reduxSaga = __webpack_require__(28);
 
 var _actions = __webpack_require__(26);
 
-var _utils = __webpack_require__(9);
+var _utils = __webpack_require__(10);
 
 /**
  * Sets up event listeners for a Track's events.
@@ -26751,7 +26764,7 @@ exports.setListeners = setListeners;
 
 var _actions = __webpack_require__(26);
 
-var _actionTypes = __webpack_require__(10);
+var _actionTypes = __webpack_require__(8);
 
 var actionTypes = _interopRequireWildcard(_actionTypes);
 
@@ -26863,7 +26876,7 @@ exports.setListeners = setListeners;
 
 var _actions = __webpack_require__(26);
 
-var _utils = __webpack_require__(9);
+var _utils = __webpack_require__(10);
 
 var _effects = __webpack_require__(1);
 
@@ -26964,7 +26977,7 @@ exports.setListeners = setListeners;
 
 var _actions = __webpack_require__(26);
 
-var _actionTypes = __webpack_require__(10);
+var _actionTypes = __webpack_require__(8);
 
 var actionTypes = _interopRequireWildcard(_actionTypes);
 
@@ -27069,7 +27082,7 @@ exports.setListeners = setListeners;
 
 var _actions = __webpack_require__(26);
 
-var _utils = __webpack_require__(9);
+var _utils = __webpack_require__(10);
 
 var _effects = __webpack_require__(1);
 
@@ -27155,6 +27168,12 @@ function setListeners(session, emit, END = 'END') {
     }));
   };
 
+  const iceConnectionStateChange = obj => {
+    emit(_actions.sessionActions.sessionIceConnectionStateChange(session.id, {
+      iceConnectionState: obj.iceConnectionState
+    }));
+  };
+
   // Generic "something changed" handler.
   // TODO: Either use this for other events or remove it.
   // eslint-disable-next-line no-unused-vars
@@ -27172,12 +27191,14 @@ function setListeners(session, emit, END = 'END') {
   session.on('track:removed', trackRemoved);
   session.on('track:ended', trackEnded);
   session.on('track:replaced', trackReplaced);
+  session.on('peer:iceConnectionStateChange', iceConnectionStateChange);
 
   const unsubscribe = () => {
     session.off('new:track', newTrack);
     session.off('track:removed', trackRemoved);
     session.off('track:ended', trackEnded);
     session.off('track:replaced', trackReplaced);
+    session.off('peer:iceConnectionStateChange', iceConnectionStateChange);
   };
   return unsubscribe;
 }
@@ -27209,7 +27230,7 @@ var _logs = __webpack_require__(309);
 
 var logSagas = _interopRequireWildcard(_logs);
 
-var _actionTypes = __webpack_require__(10);
+var _actionTypes = __webpack_require__(8);
 
 var actionTypes = _interopRequireWildcard(_actionTypes);
 
@@ -31072,7 +31093,7 @@ module.exports = __webpack_require__(146)(MAP, function (get) {
 /***/ (function(module, exports, __webpack_require__) {
 
 // https://github.com/DavidBruant/Map-Set.prototype.toJSON
-var $export = __webpack_require__(8);
+var $export = __webpack_require__(9);
 
 $export($export.P + $export.R, 'Map', { toJSON: __webpack_require__(147)('Map') });
 
@@ -31116,7 +31137,7 @@ var dP = __webpack_require__(24);
 var gOPD = __webpack_require__(135);
 var getPrototypeOf = __webpack_require__(139);
 var has = __webpack_require__(33);
-var $export = __webpack_require__(8);
+var $export = __webpack_require__(9);
 var createDesc = __webpack_require__(45);
 var anObject = __webpack_require__(29);
 var isObject = __webpack_require__(17);
@@ -34415,6 +34436,12 @@ function Session(id, managers, config = {}) {
    * @param {PeerConnection} targetPeer The peer to set event handlers on.
    */
   function setupPeerEventHandlers(targetPeer) {
+    targetPeer.oniceconnectionstatechange = event => {
+      emitter.emit('peer:iceConnectionStateChange', {
+        iceConnectionState: targetPeer.iceConnectionState
+      });
+    };
+
     // TODO: Use `uniqueLabel` when setting event listeners (and bubbling events).
     // When the peer gets an ICE candidate, emit it as
     //  a message to be sent to the other end.
@@ -34940,7 +34967,7 @@ var _sagas = __webpack_require__(372);
 
 var _sagas2 = __webpack_require__(165);
 
-var _utils = __webpack_require__(9);
+var _utils = __webpack_require__(10);
 
 var _validation = __webpack_require__(40);
 
@@ -35034,7 +35061,7 @@ var _interface = __webpack_require__(365);
 
 var _actions = __webpack_require__(34);
 
-var _utils = __webpack_require__(9);
+var _utils = __webpack_require__(10);
 
 var _fp = __webpack_require__(4);
 
@@ -36257,6 +36284,7 @@ function* getCommonOptions(url) {
   const platform = yield (0, _effects.select)(_selectors2.getPlatform);
   const requestInfo = yield (0, _effects.select)(_selectors2.getRequestInfo, platform);
   const useCustomHeader = yield (0, _effects.select)(_selectors.injectAgentVersionHeader);
+  const customSuffix = yield (0, _effects.select)(_selectors.customAgentVersionHeaderSuffix);
 
   // Start off with whatever options were set by the Auth plugin.
   //    The authentication headers / token will be there if they are set.
@@ -36278,7 +36306,12 @@ function* getCommonOptions(url) {
 
   // If enabled, add the 'Agent Version' header to the options.
   if (useCustomHeader) {
-    options.headers['X-Cpaas-Agent'] = getCpaasAgentHeaderValue(platform, url);
+    let headerValue = getCpaasAgentHeaderValue(platform, url);
+    if (customSuffix) {
+      // If a custom suffix value was provided as well, then use it.
+      headerValue += ' ' + customSuffix;
+    }
+    options.headers['X-Cpaas-Agent'] = headerValue;
   }
 
   return options;
@@ -36329,14 +36362,26 @@ Object.defineProperty(exports, "__esModule", {
   value: true
 });
 exports.injectAgentVersionHeader = injectAgentVersionHeader;
+exports.customAgentVersionHeaderSuffix = customAgentVersionHeaderSuffix;
 /**
  * Retrieves the flag which specifies wether or not this SDK should use a custom header as part of any requests being sent to server.
- * This custom header refers to the current agent version.
+ * This custom header refers to the current agent version,
+ * but it may also contain additional custom information (see customAgentVersionHeaderSuffix).
  * @param {Object} state  The current Redux state object.
  * @return {boolean} True if custom header should be used, false otherwise.
  */
 function injectAgentVersionHeader(state) {
   return state.config.requests.injectAgentVersionHeader;
+}
+
+/**
+ * Retrieves a custom suffix value which specifies any extra information that can be appended to the custom header.
+ * This custom header is sent by the SDK, as part of any requests being sent to server.
+ * @param {Object} state  The current Redux state object.
+ * @return {string} The suffix value.
+ */
+function customAgentVersionHeaderSuffix(state) {
+  return state.config.requests.customAgentVersionHeaderSuffix;
 }
 
 /***/ }),
@@ -36886,7 +36931,7 @@ var _link2 = _interopRequireDefault(_link);
 
 var _logs = __webpack_require__(3);
 
-var _utils = __webpack_require__(9);
+var _utils = __webpack_require__(10);
 
 var _fp = __webpack_require__(4);
 
@@ -36925,7 +36970,8 @@ const defaultOptions = {
   removeH264Codecs: true,
   earlyMedia: false,
   resyncOnConnect: false,
-  mediaBrokerOnly: false
+  mediaBrokerOnly: false,
+  callAuditTimer: 25000
 
   // config validation
 };const v8nValidation = _validation.validation.schema({
@@ -36940,7 +36986,8 @@ const defaultOptions = {
   removeH264Codecs: _validation.validation.boolean(),
   earlyMedia: _validation.validation.boolean(),
   resyncOnConnect: _validation.validation.boolean(),
-  mediaBrokerOnly: _validation.validation.boolean()
+  mediaBrokerOnly: _validation.validation.boolean(),
+  callAuditTimer: _validation.validation.positive()
 });
 const parseOptions = (0, _validation.parse)('call', v8nValidation);
 
@@ -37407,7 +37454,7 @@ var _actions2 = __webpack_require__(34);
 
 var _logs = __webpack_require__(3);
 
-var _utils = __webpack_require__(9);
+var _utils = __webpack_require__(10);
 
 var _fp = __webpack_require__(4);
 
@@ -37459,6 +37506,7 @@ const log = _logs.logManager.getLogger('CALL');
  * @param {string} [call.ringingFeedbackMode='auto'] The mode for sending ringing feedback to the Caller ('auto', 'manual').
  *    By default, feedback will be automatically sent when a call has been received. In 'manual' mode, the application
  *    must initiate the feedback being sent. See the `call.sendRingingFeedback` API for more info.
+ * @param {number} [call.callAuditTimer=25000] Time interval, in milliseconds between call audits.
  */
 
 /**
@@ -37492,7 +37540,8 @@ const defaultOptions = {
   removeBundling: false,
   trickleIceMode: 'NONE',
   normalizeDestination: true,
-  ringingFeedbackMode: 'auto'
+  ringingFeedbackMode: 'auto',
+  callAuditTimer: 25000
 
   // config validation
 };const v8nValidation = _validation.validation.schema({
@@ -37511,7 +37560,8 @@ const defaultOptions = {
   removeBundling: _validation.validation.boolean(),
   trickleIceMode: _validation.validation.string(),
   normalizeDestination: _validation.validation.boolean(),
-  ringingFeedbackMode: (0, _validation.enums)(['auto', 'manual'])
+  ringingFeedbackMode: (0, _validation.enums)(['auto', 'manual']),
+  callAuditTimer: _validation.validation.positive()
 });
 const parseOptions = (0, _validation.parse)('call', v8nValidation);
 
@@ -37664,6 +37714,7 @@ function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { de
  * @property {user.UserID} to A unique identifier (uri) of the person who receives the call.
  * @property {string} direction The direction in which the call was created. Can be 'outgoing' or 'incoming'.
  * @property {string} state The current state of the call. See {@link call.states} for possible states.
+ * @property {string} mediaConnectionState The current status of the call's media connection. See {@link call.mediaConnectionStates} for possible states.
  * @property {boolean} localHold Indicates whether this call is currently being held locally.
  * @property {boolean} remoteHold Indicates whether this call is currently being held remotely.
  * @property {Array<string>} localTracks A list of Track IDs that the call is sending to the remote participant.
@@ -37693,6 +37744,7 @@ function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { de
  * @property {user.UserID} to A unique identifier (uri) of the person who receives the call.
  * @property {string} direction The direction in which the call was created. Can be 'outgoing' or 'incoming'.
  * @property {string} state The current state of the call. See {@link call.states} for possible states.
+ * @property {string} mediaConnectionState The current status of the call's media connection. See {@link call.mediaConnectionStates} for possible states.
  * @property {boolean} localHold Indicates whether this call is currently being held locally.
  * @property {boolean} remoteHold Indicates whether this call is currently being held remotely.
  * @property {Array<string>} localTracks A list of Track IDs that the call is sending to the remote participant.
@@ -39242,7 +39294,81 @@ function callAPI({ dispatch, getState }) {
      *    }
      * })
      */
-    states: _constants.CALL_STATES
+    states: _constants.CALL_STATES,
+
+    /**
+     * Possible states that a Call's media connection can be in.
+     *
+     * A Call's media connection state describes the current status of media within the call.
+     *  An application should use this state to understand whether the Call participants are
+     *  able to see/hear each other or may be experiencing connection issues. The media connection
+     *  state can be used alongside the {@link call.states Call state} to determine if media issues
+     *  are occurring while the participants are expecting to be connected.
+     *
+     * These states are direct reflections of the possible
+     *  [RTCPeerConnection.iceConnectionState](https://developer.mozilla.org/en-US/docs/Web/API/RTCPeerConnection/iceConnectionState) values.
+     *
+     * The Call's media connection state is a property of the {@link call.CallObject CallObject},
+     *    which can be retrieved using the {@link call.getById} or
+     *    {@link call.getAll} APIs.
+     *
+     * The SDK emits a {@link call.event:call:mediaConnectionChange call:mediaConnectionChange}
+     *    event when a Call's media connection state changes from one state to another.
+     *
+     * @public
+     * @static
+     * @memberof call
+     * @requires callMe
+     * @requires call
+     * @type {Object}
+     * @property {string} NEW The Call is initializing the local side of the connection and waiting on information from the remote side.
+     *  When the information is received, the state will transition into `checking` as the Call automatically begins the connection process.
+     * @property {string} CHECKING The Call has received information from the remote endpoint and is working to establish the media connection.
+     *  When finished, the state will transition to either `connected` or `failed`.
+     * @property {string} CONNECTED A usable connection has been made and the Call will now have media.
+     *  The connection may not be optimal, though, so the Call will continue establishment to improve the connection before going into the `completed` state.
+     * @property {string} COMPLETED The media connection process has fully completed and the optimal connection has been established. While in this state,
+     *  the Call endpoints will receive each other's media.
+     * @property {string} DISCONNECTED Media has become disconnected and the Call endpoints have stopped receiving each other's media.
+     *  The Call will automatically attempt to reconnect, transitioning back to `completed` if successful or to `failed` if not.
+     * @property {string} FAILED The connection has failed and cannot be recovered automatically. A full media connection refresh is required to restablish a connection.
+     * @property {string} CLOSED The connection has been shut down and is no longer in use.
+     * @example
+     * // Use the media connection states to check the status of the media connection of the Call.
+     * client.on('call:mediaConnectionChange', function (params) {
+     *   // Retrieve the state of the Call this event is for.
+     *   const call = client.call.getById(params.callId)
+     *   const mediaConnectionStates = client.call.mediaConnectionStates
+     *
+     *   // Check the mediaConnectionState to determine which scenario the call is in.
+     *   switch (call.mediaConnectionState) {
+     *     case mediaConnectionStates.CONNECTED:
+     *     case mediaConnectionStates.COMPLETED:
+     *       // Media established: The Call's media is connected. The Call's participants
+     *       //    are able to see/hear each other.
+     *       // These states will occur after Call establishment.
+     *       ...
+     *       break
+     *     case mediaConnectionStates.NEW:
+     *     case mediaConnectionStates.CHECKING:
+     *     case mediaConnectionStates.DISCONNECTED:
+     *       // Media pending: The Call's media is not connected. The Call is working
+     *       //    to connect media automatically.
+     *       // These states will occur during Call establishment and may occur midcall if there are
+     *       //    connection issues (eg. poor network quality) or a Call participant has changed (eg. transfer).
+     *       ...
+     *       break
+     *     case mediaConnectionStates.FAILED:
+     *     case mediaConnectionStates.CLOSED:
+     *       // Media ended: The Call's media is not connected. The Call has either ended (CLOSED)
+     *       //    or requires a media refresh to reestablish (FAILED).
+     *       // These states will occur after Call establishment.
+     *       ...
+     *       break
+     *   }
+     * }
+     */
+    mediaConnectionStates: _constants.CALL_MEDIA_CONNECTION_STATES
 
     /**
      * The `setDefaultDevices` API from previous SDK releases (3.X) has been
@@ -39393,6 +39519,10 @@ var _actionTypes = __webpack_require__(36);
 
 var actionTypes = _interopRequireWildcard(_actionTypes);
 
+var _actionTypes2 = __webpack_require__(8);
+
+var webrtcActionTypes = _interopRequireWildcard(_actionTypes2);
+
 var _constants = __webpack_require__(21);
 
 var _utils = __webpack_require__(390);
@@ -39415,13 +39545,13 @@ function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { de
 
 
 // Libraries.
+// Call plugin.
 const noop = (state, action) => state;
 
 /**
  * The reducer logic used for finish operations that end a call.
  * @method callEnder
  */
-// Call plugin.
 const callEnder = (state, action) => {
   const now = Date.now();
   return (0, _extends3.default)({}, state, {
@@ -39431,6 +39561,9 @@ const callEnder = (state, action) => {
     startTime: state.startTime || now,
     endTime: now,
     remoteParticipant: (0, _extends3.default)({}, state.remoteParticipant, action.payload.remoteParticipant),
+    // Closing the peer doesn't trigger an oniceconnectionstatechange event
+    // although it does change the iceConnectionState property to closed
+    mediaConnectionState: 'closed',
     // TODO: Remove this later.
     isPending: undefined
   });
@@ -39954,6 +40087,13 @@ callReducers[actionTypes.RENEGOTIATE_FINISH] = {
   }
 };
 
+callReducers[webrtcActionTypes.SESSION_ICE_CONNECTION_STATE_CHANGE] = {
+  next(state, action) {
+    return (0, _extends3.default)({}, state, {
+      mediaConnectionState: action.payload.iceConnectionState
+    });
+  }
+};
 /*
  * Combine all of the call-tier reducers into a single reducer,
  *      each with a default state of empty object.
@@ -39962,6 +40102,8 @@ const callReducer = (0, _reduxActions.handleActions)(callReducers, {});
 
 // Actions routed to call-tier reducers.
 const specificCallActions = (0, _reduxActions.combineActions)(actionTypes.PENDING_OPERATION, actionTypes.PENDING_MAKE_CALL, actionTypes.MAKE_CALL_FINISH, actionTypes.ANSWER_CALL, actionTypes.ANSWER_CALL_FINISH, actionTypes.REJECT_CALL, actionTypes.REJECT_CALL_FINISH, actionTypes.CALL_ACCEPTED, actionTypes.SEND_RINGING_FEEDBACK, actionTypes.SEND_RINGING_FEEDBACK_FINISH, actionTypes.CALL_RINGING, actionTypes.SESSION_PROGRESS, actionTypes.CALL_CANCELLED, actionTypes.IGNORE_CALL, actionTypes.IGNORE_CALL_FINISH, actionTypes.END_CALL, actionTypes.END_CALL_FINISH, actionTypes.CALL_HOLD, actionTypes.CALL_HOLD_FINISH, actionTypes.CALL_UNHOLD, actionTypes.CALL_UNHOLD_FINISH, actionTypes.SET_CUSTOM_PARAMETERS, actionTypes.SEND_CUSTOM_PARAMETERS, actionTypes.SEND_CUSTOM_PARAMETERS_FINISH, actionTypes.CALL_REMOTE_HOLD_FINISH, actionTypes.CALL_REMOTE_UNHOLD_FINISH, actionTypes.ADD_MEDIA, actionTypes.ADD_BASIC_MEDIA, actionTypes.ADD_MEDIA_FINISH, actionTypes.REMOVE_MEDIA, actionTypes.REMOVE_BASIC_MEDIA, actionTypes.REMOVE_MEDIA_FINISH, actionTypes.RENEGOTIATE, actionTypes.RENEGOTIATE_FINISH, actionTypes.UPDATE_CALL, actionTypes.FORWARD_CALL, actionTypes.FORWARD_CALL_FINISH, actionTypes.DIRECT_TRANSFER, actionTypes.DIRECT_TRANSFER_FINISH, actionTypes.SEND_DTMF, actionTypes.SEND_DTMF_FINISH, actionTypes.JOIN, actionTypes.REPLACE_TRACK, actionTypes.REPLACE_TRACK_FINISH, actionTypes.REMOTE_SLOW_START, actionTypes.REMOTE_START_MOH_FINISH, actionTypes.REMOTE_STOP_MOH_FINISH, actionTypes.GET_STATS, actionTypes.GET_STATS_FINISH, actionTypes.SESSION_CREATED);
+
+const specificWebrtcSessionActions = (0, _reduxActions.combineActions)(webrtcActionTypes.SESSION_ICE_CONNECTION_STATE_CHANGE);
 
 /*
  * Reducer to handle specific call actions.
@@ -39978,6 +40120,20 @@ reducers[specificCallActions] = (state, action) => {
       //    successful and failure actions.
       updatedCall = (0, _utils.setOperationState)(updatedCall, action);
       return updatedCall;
+    } else {
+      return call;
+    }
+  });
+};
+
+/**
+ * Reducer to handle specific webrtc actions.
+ * Routes the actions to the call-tier reducers.
+ */
+reducers[specificWebrtcSessionActions] = (state, action) => {
+  return state.map(function (call) {
+    if (call.webrtcSessionId === action.payload.id) {
+      return callReducer(call, action);
     } else {
       return call;
     }
@@ -40291,7 +40447,7 @@ var _actionTypes = __webpack_require__(36);
 
 var actionTypes = _interopRequireWildcard(_actionTypes);
 
-var _actionTypes2 = __webpack_require__(10);
+var _actionTypes2 = __webpack_require__(8);
 
 var webrtcActionTypes = _interopRequireWildcard(_actionTypes2);
 
@@ -40834,13 +40990,13 @@ function* sendCustomParameters(deps) {
  * @param {Object} deps.webRTC      The WebRTC stack.
  */
 function* callAudit(deps) {
-  const actionTypesToDoAuditOn = [actionTypes.ANSWER_CALL, actionTypes.CALL_ACCEPTED, actionTypes.MAKE_CALL_FINISH];
+  const actionTypesToDoAuditOn = [actionTypes.ANSWER_CALL_FINISH, actionTypes.CALL_ACCEPTED, actionTypes.MAKE_CALL_FINISH];
 
   function callStartAuditPattern(action) {
     return actionTypesToDoAuditOn.indexOf(action.type) !== -1 && !action.error;
   }
 
-  yield (0, _effects.takeEvery)([callStartAuditPattern, actionTypes.CALL_AUDIT], _support2.sendCallAudit, {
+  yield (0, _effects.takeEvery)(callStartAuditPattern, _support2.sendCallAudit, {
     webRTC: deps.webRTC,
     requests
   });
@@ -43812,7 +43968,7 @@ module.exports = __webpack_require__(7).Object.entries;
 /***/ (function(module, exports, __webpack_require__) {
 
 // https://github.com/tc39/proposal-object-values-entries
-var $export = __webpack_require__(8);
+var $export = __webpack_require__(9);
 var $entries = __webpack_require__(128)(true);
 
 $export($export.S, 'Object', {
@@ -48019,22 +48175,23 @@ var _effects = __webpack_require__(1);
 function _interopRequireWildcard(obj) { if (obj && obj.__esModule) { return obj; } else { var newObj = {}; if (obj != null) { for (var key in obj) { if (Object.prototype.hasOwnProperty.call(obj, key)) newObj[key] = obj[key]; } } newObj.default = obj; return newObj; } }
 
 /**
- * Sends a call audit.
+ * Performs a call audit and manages the audit loop.
  *
- * This saga defines how/when a call audit is sent. It performs the signaling
- *    operations to audit the session on the server. There are no local webRTC
- *    operations involved.
- * Audits are sent in a loop. The saga receives the context of the call from
- *    the previous audit loop. It uses that to know if the loop should continue
- *    or not.
- * Assumptions:
- *    1. None.
+ * This saga is responsible for sending a call audit repeatedly on a consistent interval.
+ *  Consistency is ensured by calculating the time it takes to perform the actual
+ *  audit request, and subtracting that from the configured call audit timer.
+ *
+ * The saga determines which interval to use for the delay between requests by analyzing
+ *  the response to the audit request:
+ *    - for a successful response we use __Max(10s, configured `callAuditTimer`) - request duration__
+ *    - for an error response we use __Min(5s, 45% of `callAuditTimer`) - request duration__
+ *    - for a "Closed" status response, we stop the audit loop and tear down the call
+ *
  * Responsibilities:
  *    1. Determine if an audit should be sent.
- *        - Both the server or local sessions are on-going.
+ *        - Check call's state.
  *    2. Perform signaling (if needed).
- *    3. Dispatch "call audit" action.
- *        - Triggers the next loop. Includes info about the call context.
+ *    3. Return the status of the audit
  * @method sendCallAudit
  * @param {Object}   deps          Dependencies that the saga uses.
  * @param {Object}   deps.webRTC   The WebRTC stack.
@@ -48047,72 +48204,86 @@ function _interopRequireWildcard(obj) { if (obj && obj.__esModule) { return obj;
 // Other plugins.
 function* sendCallAudit(deps, action) {
   const { webRTC, requests } = deps;
+  let currentCall = yield (0, _effects.select)(_selectors.getCallById, action.payload.id);
 
-  const { error, id, status } = action.payload;
-  const log = _logs.logManager.getLogger('CALL', id);
-  const delayMs = error ? 5000 : 25000;
+  const log = _logs.logManager.getLogger('CALL', currentCall ? action.payload.id : '');
 
-  yield (0, _effects.delay)(delayMs);
-  const currentCall = yield (0, _effects.select)(_selectors.getCallById, id);
-
-  // Some basic validation
+  // Basic validation
   if (!currentCall) {
-    log.info('Call not found; stopping audit loop.');
+    log.debug(`Call ${action.payload.id} not found; no audit loop needed.`);
     return;
   }
-  // CALL_ACCEPTED actions should only trigger an audit loop if it is a joined call
+
+  // CALL_ACCEPTED actions should only trigger an audit loop if it is a joined call,
+  //  Otherwise, since this action is also dispatched during slow start calls, it will trigger
+  //  a second audit loop
   if (action.type === actionTypes.CALL_ACCEPTED && !currentCall.isJoinedCall) {
     return;
   }
 
-  if (currentCall.state === _constants.CALL_STATES.ENDED) {
-    log.info('Call has ended; stopping audit loop.');
-    return;
-  }
+  const config = yield (0, _effects.select)(_selectors.getOptions);
+  const successDelay = Math.max(10000, config.callAuditTimer);
+  const errorDelay = Math.min(5000, config.callAuditTimer * 0.45);
 
-  // If we get here, we know we have an active call. Just log our next intent...
-  if (!status) {
-    // If the action has no status, then the call starting triggered this audit.
-    log.info('Starting audit loop for new call.');
-  } else if (status === 'Retry') {
-    // If the previous audit failed for an unknown reason, retry it.
-    log.debug('Call status is "Unknown"; retrying failed audit for call.');
-  }
+  log.info('Starting audit loop for new call.');
+  while (true) {
+    const lastAudit = Date.now();
 
-  log.info('Sending call audit.');
-  // Send our audit request
-  const updateStatusResponse = yield (0, _effects.call)(requests.auditCall, {
-    wrtcsSessionId: currentCall.wrtcsSessionId,
-    isAnonymous: currentCall.isAnonymous,
-    account: currentCall.account
-  });
+    currentCall = yield (0, _effects.select)(_selectors.getCallById, action.payload.id);
 
-  // Schedule for another audit request
-  if (updateStatusResponse.error) {
-    // We have an error but status is not Closed, so we continue sending audit request in hoping audit will recover
-    const { message, code } = updateStatusResponse.error;
-    log.debug(`Call audit failed, caused by ${message} (${code}).`);
-    yield (0, _effects.put)(_actions.callActions.sendCallAudit(id, {
-      error: updateStatusResponse.error,
-      status: updateStatusResponse.status
-    }));
-  } else {
-    log.debug(`Call audit status is ${updateStatusResponse.status}.`);
-    yield (0, _effects.put)(_actions.callActions.sendCallAudit(id, { status: updateStatusResponse.status }));
-  }
+    if (currentCall.state === _constants.CALL_STATES.ENDED) {
+      log.info('Call has ended; stopping audit loop.');
+      return;
+    }
 
-  if (updateStatusResponse.status === 'Closed') {
-    // If this audit returned 'Closed', then the audit loop should stop right away.
-    log.info(`Ending audit loop and Call due to Closed status. Changing to ${_constants.CALL_STATES.ENDED}.`);
+    // Race between the audit and the audit request timeout of 4s
+    log.info('Sending call audit.');
+    const { audit, timeout } = yield (0, _effects.race)({
+      audit: (0, _effects.call)(requests.auditCall, {
+        wrtcsSessionId: currentCall.wrtcsSessionId,
+        isAnonymous: currentCall.isAnonymous,
+        account: currentCall.account
+      }),
+      timeout: (0, _effects.delay)(4000)
+    });
 
-    // Also hangup call automatically (from webRTC perspective)
-    yield (0, _effects.call)(_midcall.closeCall, webRTC, currentCall.webrtcSessionId);
+    /*
+     * Audit response error scenarios include the response having an `error: true` and `status` property.
+     *  The status will be either 'Retry' or 'Closed' (depending on statusCode we get from response),
+     *  and nothing else. See `auditCall` request sagas.
+     * Success scenarios will have `error: false` along with the call's `status`.
+     */
+    if (audit && audit.status === 'Retry') {
+      // We have an error but status is not Closed, so we continue sending audit request in hoping audit will recover
+      const { message, code } = audit.error;
+      log.debug(`Call audit failed, caused by ${message} (${code}); will retry failed audit for call.`);
+      const auditDuration = Date.now() - lastAudit;
+      yield (0, _effects.delay)(errorDelay - auditDuration);
+    } else if (audit && audit.status === 'Closed') {
+      // If this audit returned 'Closed', then the audit loop should stop right away.
+      log.info(`Ending audit loop and Call due to Closed status. Changing to ${_constants.CALL_STATES.ENDED}.`);
 
-    // Also, cleanup Redux state by sending END_CALL_FINISH action
-    yield (0, _effects.put)(_actions.callActions.endCallFinish(id, {
-      isLocal: true,
-      transition: { statusCode: 9909, reasonText: 'Call has ended due to call audit failure.' }
-    }));
+      // Hangup call automatically (from webRTC perspective)
+      yield (0, _effects.call)(_midcall.closeCall, webRTC, currentCall.webrtcSessionId);
+
+      // Cleanup Redux state by sending END_CALL_FINISH action
+      yield (0, _effects.put)(_actions.callActions.endCallFinish(currentCall.id, {
+        isLocal: true,
+        transition: { statusCode: 9909, reasonText: 'Call has ended due to call audit failure.' }
+      }));
+      return;
+    } else if (audit) {
+      log.debug(`Call audit status is ${audit.status}.`);
+      const auditDuration = Date.now() - lastAudit;
+      yield (0, _effects.delay)(successDelay - auditDuration);
+    } else if (timeout) {
+      // No need to cancel the audit task since the effect that loses the race is automatically cancelled
+      log.debug('Audit request timed out, retrying in 1 second.');
+      yield (0, _effects.delay)(1000);
+    } else {
+      log.debug('Audit loop encountered an unknown scenario; ending.');
+      return;
+    }
   }
 }
 
@@ -48158,7 +48329,7 @@ function* getSessions(deps, action) {
  *    1. The server uses Kandy Link 4.7.1+
  * Responsibilities:
  *    2. Update the call state if the call is out of sync (call's status does not match response from server)
- * @method sendCallAudit
+ * @method updateCallState
  * @param {Object}   deps          Dependencies that the saga uses.
  * @param {Object}   deps.webRTC   The WebRTC stack.
  * @param {Object}   deps.requests The set of platform-specific signalling functions.
@@ -48347,7 +48518,7 @@ var actionTypes = _interopRequireWildcard(_actionTypes);
 
 var _constants = __webpack_require__(65);
 
-var _actionTypes2 = __webpack_require__(10);
+var _actionTypes2 = __webpack_require__(8);
 
 var webrtcActionTypes = _interopRequireWildcard(_actionTypes2);
 
@@ -48712,6 +48883,17 @@ callEvents[webrtcActionTypes.SESSION_TRACK_ENDED] = (action, context) => {
   }
 };
 
+callEvents[webrtcActionTypes.SESSION_ICE_CONNECTION_STATE_CHANGE] = (action, context) => {
+  const state = context.state;
+  const call = (0, _selectors.getCallByWebrtcSessionId)(state, action.payload.id);
+
+  if (call) {
+    return callEventHandler(eventTypes.MEDIA_CONNECTION_CHANGE, action, {
+      callId: call.id
+    });
+  }
+};
+
 callEvents[actionTypes.MAKE_ANONYMOUS_CALL_FINISH] = (action, context) => {
   return callEventHandler(eventTypes.CALL_STARTED, action, {
     error: action.payload.error
@@ -48982,6 +49164,23 @@ const CUSTOM_PARAMETERS = exports.CUSTOM_PARAMETERS = 'call:customParameters';
  * @param {Array<Object>} params.codecs The list of codecs.
  */
 const AVAILABLE_CODECS = exports.AVAILABLE_CODECS = 'call:availableCodecs';
+
+/**
+ * A Call's media connection state has been changed.
+ *
+ * This event is emitted as a result of changes to the media connection of the Call.
+ * These state changes occur during call establishment, connection loss/re-establishment, call completion, etc.
+ *
+ * To check the media connection state of a call, retrieve the call's information using the  {@link call.getById} API,
+ *  and check the `mediaConnectionState` property of the call.
+ * See {@link call.mediaConnectionStates} for the list of possible values and descriptions.
+ * @public
+ * @memberof call
+ * @event call:mediaConnectionChange
+ * @param {Object} params
+ * @param {string} params.callId The ID of the Call whose media connection state was changed.
+ */
+const MEDIA_CONNECTION_CHANGE = exports.MEDIA_CONNECTION_CHANGE = 'call:mediaConnectionChange';
 
 /***/ }),
 /* 425 */
@@ -49924,7 +50123,7 @@ var _reduxSaga = __webpack_require__(28);
 
 var _effects = __webpack_require__(1);
 
-var _utils = __webpack_require__(9);
+var _utils = __webpack_require__(10);
 
 var _actions2 = __webpack_require__(119);
 
@@ -57241,7 +57440,7 @@ var _actions = __webpack_require__(34);
 
 var _actions2 = __webpack_require__(41);
 
-var _utils = __webpack_require__(9);
+var _utils = __webpack_require__(10);
 
 var _effects = __webpack_require__(1);
 
@@ -57317,13 +57516,17 @@ var _validation = __webpack_require__(40);
 
 /**
  * Configurable properties 'published' by this "Request" plugin.
+ * NOTE: Do NOT expose the config properties (related to this plugin) to the public API documentation.
  *
  * @property {boolean} [injectAgentVersionHeader=true] Option to automatically inject an agent version header to every REST request.
  *            This header is used to help with diagnostics and analytics in a completely anonymous fashion.
- *            TODO: Set it to 'true' after server side whitelists that actual custom header.
+ *
+ * @property {string} [customAgentVersionHeaderSuffix=''] Additional custom information that can be appended to the agent version header's value.
+ *           This additional suffix value is only used when injectAgentVersionHeader property is enabled.
  */
 const defaultOptions = exports.defaultOptions = {
-  injectAgentVersionHeader: true
+  injectAgentVersionHeader: true,
+  customAgentVersionHeaderSuffix: ''
 }; // Parse and/or Validate
 
 
@@ -57479,7 +57682,7 @@ var _freeze2 = _interopRequireDefault(_freeze);
 
 var _logs = __webpack_require__(3);
 
-var _utils = __webpack_require__(9);
+var _utils = __webpack_require__(10);
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
