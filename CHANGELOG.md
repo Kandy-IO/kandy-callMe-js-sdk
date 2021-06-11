@@ -17,6 +17,8 @@ Kandy.js change log.
 ### Fixed
 
 - Reworked Call audits so that the audits are performed with more consistency with respect to the interval. `KJS-149`
+- Switched from using String.prototype.replaceAll to String.prototype.replace and using regex to do the correct string replacement. Some browsers don't yet
+  support replaceAll. `KJS-164`
 
 ## 4.28.0 - 2021-05-28
 
