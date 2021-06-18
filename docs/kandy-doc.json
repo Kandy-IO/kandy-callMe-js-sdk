@@ -2583,7 +2583,7 @@
                 }
               },
               "name": "call.sdpSemantics",
-              "default": "'plan-b'"
+              "default": "'unified-plan'"
             },
             {
               "title": "param",
@@ -3002,7 +3002,7 @@
                     "type": "NameExpression",
                     "name": "string"
                   },
-                  "default": "'plan-b'"
+                  "default": "'unified-plan'"
                 },
                 {
                   "title": "param",
