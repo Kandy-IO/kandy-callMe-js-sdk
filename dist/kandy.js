@@ -1,7 +1,7 @@
 /**
  * Kandy.js
  * kandy.newCallMe.js
- * Version: 4.29.0-beta.705
+ * Version: 4.29.0-beta.706
  */
 (function webpackUniversalModuleDefinition(root, factory) {
 	if(typeof exports === 'object' && typeof module === 'object')
@@ -3164,34 +3164,6 @@ exports.f = __webpack_require__(17) ? Object.defineProperty : function definePro
 Object.defineProperty(exports, "__esModule", {
   value: true
 });
-exports.turnActions = exports.callActions = undefined;
-
-var _call = __webpack_require__(168);
-
-var callActionsImport = _interopRequireWildcard(_call);
-
-var _turn = __webpack_require__(380);
-
-var turnActionsImport = _interopRequireWildcard(_turn);
-
-function _interopRequireWildcard(obj) { if (obj && obj.__esModule) { return obj; } else { var newObj = {}; if (obj != null) { for (var key in obj) { if (Object.prototype.hasOwnProperty.call(obj, key)) newObj[key] = obj[key]; } } newObj.default = obj; return newObj; } }
-
-// Apparently the following doesn't work:
-//      export * as newName from './place';
-// So import everything from each file, then re-export.
-const callActions = exports.callActions = callActionsImport;
-const turnActions = exports.turnActions = turnActionsImport;
-
-/***/ }),
-/* 26 */
-/***/ (function(module, exports, __webpack_require__) {
-
-"use strict";
-
-
-Object.defineProperty(exports, "__esModule", {
-  value: true
-});
 exports.miscActions = exports.mediaActions = exports.sessionActions = exports.trackActions = exports.deviceActions = undefined;
 
 var _devices = __webpack_require__(285);
@@ -3224,6 +3196,34 @@ const trackActions = exports.trackActions = trackActionsImport;
 const sessionActions = exports.sessionActions = sessionActionsImport;
 const mediaActions = exports.mediaActions = mediaActionsImport;
 const miscActions = exports.miscActions = miscActionsImport;
+
+/***/ }),
+/* 26 */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+exports.turnActions = exports.callActions = undefined;
+
+var _call = __webpack_require__(168);
+
+var callActionsImport = _interopRequireWildcard(_call);
+
+var _turn = __webpack_require__(380);
+
+var turnActionsImport = _interopRequireWildcard(_turn);
+
+function _interopRequireWildcard(obj) { if (obj && obj.__esModule) { return obj; } else { var newObj = {}; if (obj != null) { for (var key in obj) { if (Object.prototype.hasOwnProperty.call(obj, key)) newObj[key] = obj[key]; } } newObj.default = obj; return newObj; } }
+
+// Apparently the following doesn't work:
+//      export * as newName from './place';
+// So import everything from each file, then re-export.
+const callActions = exports.callActions = callActionsImport;
+const turnActions = exports.turnActions = turnActionsImport;
 
 /***/ }),
 /* 27 */
@@ -7934,7 +7934,7 @@ exports.getVersion = getVersion;
  * for the @@ tag below with actual version value.
  */
 function getVersion() {
-  return '4.29.0-beta.705';
+  return '4.29.0-beta.706';
 }
 
 /***/ }),
@@ -10638,7 +10638,7 @@ exports.setupCall = setupCall;
 exports.setupIncomingCall = setupIncomingCall;
 exports.answerWebrtcSession = answerWebrtcSession;
 
-var _actions = __webpack_require__(25);
+var _actions = __webpack_require__(26);
 
 var _selectors = __webpack_require__(11);
 
@@ -25053,7 +25053,7 @@ var _sagas = __webpack_require__(307);
 
 var sagas = _interopRequireWildcard(_sagas);
 
-var _actions = __webpack_require__(26);
+var _actions = __webpack_require__(25);
 
 var _actions2 = __webpack_require__(41);
 
@@ -25229,7 +25229,7 @@ var _extends3 = _interopRequireDefault(_extends2);
 
 exports.default = mediaAPI;
 
-var _actions = __webpack_require__(26);
+var _actions = __webpack_require__(25);
 
 var _selectors = __webpack_require__(78);
 
@@ -26507,7 +26507,7 @@ Object.defineProperty(exports, "__esModule", {
 exports.default = watchDeviceEvents;
 exports.setListeners = setListeners;
 
-var _actions = __webpack_require__(26);
+var _actions = __webpack_require__(25);
 
 var _utils = __webpack_require__(10);
 
@@ -26582,7 +26582,7 @@ Object.defineProperty(exports, "__esModule", {
 exports.default = watchTrackManagerEvents;
 exports.setListeners = setListeners;
 
-var _actions = __webpack_require__(26);
+var _actions = __webpack_require__(25);
 
 var _actionTypes = __webpack_require__(8);
 
@@ -26711,7 +26711,7 @@ var _effects = __webpack_require__(1);
 
 var _reduxSaga = __webpack_require__(28);
 
-var _actions = __webpack_require__(26);
+var _actions = __webpack_require__(25);
 
 var _utils = __webpack_require__(10);
 
@@ -26793,7 +26793,7 @@ Object.defineProperty(exports, "__esModule", {
 exports.default = watchMediaManagerEvents;
 exports.setListeners = setListeners;
 
-var _actions = __webpack_require__(26);
+var _actions = __webpack_require__(25);
 
 var _actionTypes = __webpack_require__(8);
 
@@ -26905,7 +26905,7 @@ Object.defineProperty(exports, "__esModule", {
 exports.default = watchMediaEvents;
 exports.setListeners = setListeners;
 
-var _actions = __webpack_require__(26);
+var _actions = __webpack_require__(25);
 
 var _utils = __webpack_require__(10);
 
@@ -27006,7 +27006,7 @@ Object.defineProperty(exports, "__esModule", {
 exports.default = watchSessionManagerEvents;
 exports.setListeners = setListeners;
 
-var _actions = __webpack_require__(26);
+var _actions = __webpack_require__(25);
 
 var _actionTypes = __webpack_require__(8);
 
@@ -27111,7 +27111,7 @@ Object.defineProperty(exports, "__esModule", {
 exports.default = watchSessionEvents;
 exports.setListeners = setListeners;
 
-var _actions = __webpack_require__(26);
+var _actions = __webpack_require__(25);
 
 var _utils = __webpack_require__(10);
 
@@ -27382,7 +27382,7 @@ exports.muteTracks = muteTracks;
 exports.unmuteTracks = unmuteTracks;
 exports.initializeDevices = initializeDevices;
 
-var _actions = __webpack_require__(26);
+var _actions = __webpack_require__(25);
 
 var _logs = __webpack_require__(3);
 
@@ -37052,7 +37052,7 @@ Object.defineProperty(exports, "__esModule", {
 });
 exports.makeAnonymousCall = makeAnonymousCall;
 
-var _actions = __webpack_require__(25);
+var _actions = __webpack_require__(26);
 
 var _normalization = __webpack_require__(117);
 
@@ -37227,7 +37227,7 @@ var _extends3 = _interopRequireDefault(_extends2);
 
 exports.default = anonymousAPI;
 
-var _actions = __webpack_require__(25);
+var _actions = __webpack_require__(26);
 
 var _uuid = __webpack_require__(52);
 
@@ -37948,7 +37948,7 @@ var _extends3 = _interopRequireDefault(_extends2);
 
 exports.default = callAPI;
 
-var _actions = __webpack_require__(25);
+var _actions = __webpack_require__(26);
 
 var _selectors = __webpack_require__(11);
 
@@ -40373,6 +40373,7 @@ exports.directTransferEntry = directTransferEntry;
 exports.joinEntry = joinEntry;
 exports.replaceTrackEntry = replaceTrackEntry;
 exports.getAvailableCodecsEntry = getAvailableCodecsEntry;
+exports.watchForMediaDisconnect = watchForMediaDisconnect;
 
 var _actionTypes = __webpack_require__(36);
 
@@ -41025,6 +41026,25 @@ function* getAvailableCodecsEntry(deps) {
   yield (0, _effects.takeEvery)(actionTypes.GET_AVAILABLE_CODECS, _codecs.getAvailableCodecs, (0, _extends3.default)({}, deps));
 }
 
+/**
+ * Behaviour: Normalize ICE connection state changes between Plan-B
+ *    and Unified-Plan PeerConnections.
+ * See saga description of `normalizeIceFailure` for full context.
+ * @param  {Object} deps
+ */
+function* watchForMediaDisconnect(deps) {
+  // Watch for Session actions indicating the ICE connection has disconnected.
+  function onMediaDisconnect(action) {
+    return action.type === webrtcActionTypes.SESSION_ICE_CONNECTION_STATE_CHANGE && action.payload.iceConnectionState === _constants.CALL_MEDIA_CONNECTION_STATES.DISCONNECTED;
+  }
+
+  // We only need this behaviour when using Unified-Plan.
+  const options = yield (0, _effects.select)(_selectors.getOptions);
+  if (options.sdpSemantics === 'unified-plan') {
+    yield (0, _effects.takeEvery)(onMediaDisconnect, _support2.normalizeIceFailure);
+  }
+}
+
 /***/ }),
 /* 391 */
 /***/ (function(module, exports, __webpack_require__) {
@@ -41042,7 +41062,7 @@ var _extends3 = _interopRequireDefault(_extends2);
 
 exports.setTurnCredentials = setTurnCredentials;
 
-var _actions = __webpack_require__(25);
+var _actions = __webpack_require__(26);
 
 var _selectors = __webpack_require__(11);
 
@@ -42144,7 +42164,7 @@ exports.rejectCall = rejectCall;
 exports.ignoreCall = ignoreCall;
 exports.forwardCall = forwardCall;
 
-var _actions = __webpack_require__(25);
+var _actions = __webpack_require__(26);
 
 var _selectors = __webpack_require__(11);
 
@@ -43950,7 +43970,7 @@ var _midcall = __webpack_require__(66);
 
 var _bandwidth = __webpack_require__(171);
 
-var _actions = __webpack_require__(25);
+var _actions = __webpack_require__(26);
 
 var _selectors = __webpack_require__(11);
 
@@ -45207,7 +45227,7 @@ exports.callStatusUpdateFailed = callStatusUpdateFailed;
 exports.callCancelled = callCancelled;
 exports.receiveEarlyMedia = receiveEarlyMedia;
 
-var _actions = __webpack_require__(25);
+var _actions = __webpack_require__(26);
 
 var _selectors = __webpack_require__(11);
 
@@ -45997,7 +46017,7 @@ var _operations = __webpack_require__(412);
 
 var _operations2 = _interopRequireDefault(_operations);
 
-var _actions = __webpack_require__(25);
+var _actions = __webpack_require__(26);
 
 var _selectors = __webpack_require__(11);
 
@@ -47696,7 +47716,7 @@ exports.hasTelephoneEvent = hasTelephoneEvent;
 exports.convertTone = convertTone;
 exports.splitTones = splitTones;
 
-var _actions = __webpack_require__(25);
+var _actions = __webpack_require__(26);
 
 var _selectors = __webpack_require__(11);
 
@@ -48125,8 +48145,9 @@ Object.defineProperty(exports, "__esModule", {
 exports.sendCallAudit = sendCallAudit;
 exports.getSessions = getSessions;
 exports.updateCallState = updateCallState;
+exports.normalizeIceFailure = normalizeIceFailure;
 
-var _actions = __webpack_require__(25);
+var _actions = __webpack_require__(26);
 
 var _actionTypes = __webpack_require__(36);
 
@@ -48139,6 +48160,12 @@ var _constants = __webpack_require__(21);
 var _midcall = __webpack_require__(66);
 
 var _logs = __webpack_require__(3);
+
+var _actions2 = __webpack_require__(25);
+
+var _actionTypes2 = __webpack_require__(8);
+
+var webrtcActionTypes = _interopRequireWildcard(_actionTypes2);
 
 var _effects = __webpack_require__(1);
 
@@ -48356,6 +48383,93 @@ function* updateCallState(deps, activeCall) {
         }
       }
     }
+  }
+}
+
+/**
+ * This saga is meant to normalize ICE connection state changes between Plan-B
+ *    and Unified-Plan PeerConnections.
+ *
+ * Expectation: When ICE connection has an issue, it moves into `disconnected`
+ *    state. If it can't automatically fix the issue, it should move into `failed`
+ *    state shortly afterwards.
+ * Reality: Unified-Plan behaves a little differently, where it never transitions
+ *    into `failed` state. Plan-B uses heuristics to know when to give up and
+ *    transition into `failed` state, but Unified-Plan does not.
+ * Ref: https://docs.google.com/document/d/1-ZfikoUtoJa9k-GZG1daN0BU3IjIanQ_JSscHxQesvU/edit#heading=h.xy9xt6bk24e
+ *
+ * So this saga is meant to "fill-in" that missing behaviour for Unified-Plan:
+ *    If a Unified-Plan call enters `disconnected` state, we want to wait a short
+ *    amount of time (due to lacking any real heuristic). If the call is still
+ *    disconnect after that time, we assume it should be in `failed` state and
+ *    manually update the call state.
+ *
+ * The purpose for doing this is to enter other behaviours that rely on the `failed`
+ *    state (eg. ICE restart, telling the application there is no media) still occur.
+ *
+ * @param  {Action} action A "ICE connection state change" action specifically
+ *    for the disconnected state.
+ */
+function* normalizeIceFailure(action) {
+  /**
+   * Determines if a call is in limbo disconnected media state.
+   * @param  {CallObject}  targetCall
+   * @return {boolean} Whether the call is on-going but in disconnected ICE state.
+   */
+  function isDisconnected(targetCall) {
+    // 1) Call exists, 2) Call is on-going, 3) Call's media is disconnected.
+    return targetCall && ![_constants.CALL_STATES.ENDED, _constants.CALL_STATES.CANCELLED].includes(targetCall.state) && targetCall.mediaConnectionState === _constants.CALL_MEDIA_CONNECTION_STATES.DISCONNECTED;
+  }
+
+  let currentCall = yield (0, _effects.select)(_selectors.getCallByWebrtcSessionId, action.payload.id);
+  const options = yield (0, _effects.select)(_selectors.getOptions);
+  if (options.sdpSemantics !== 'unified-plan') {
+    // We only want to act when the PeerConnection is configured for Unified-Plan.
+    return;
+  } else if (!isDisconnected(currentCall)) {
+    // We only want to act if the call is currently disconnected.
+    return;
+  }
+
+  /*
+   * Wait a short time to let the Call try fixing things itself.
+   * The number "10000" was determined by comparing how long it takes for the
+   *    disconnected-->failed transition to happen when on Plan-B. It consistently
+   *    took [almost] exactly 10 seconds for the change to happen, no matter
+   *    if it was an audio-only or audio+video call.
+   * Note: This test was done on Chrome, since it is the only browser to support
+   *    Plan-B.
+   * Note: 10s is also Chrome's timeout for collecting ICE candidates on an
+   *    interface. I assume this isn't a coincidence.
+   */
+  const { ended, changedState } = yield (0, _effects.race)({
+    timeout: (0, _effects.delay)(10000),
+    // Watch for if this call ends while we're delaying.
+    ended: (0, _effects.take)(action => {
+      return action.type === actionTypes.END_CALL_FINISH && action.payload.id === currentCall.id;
+    }),
+    // Watch for if this call's media connection state changes again.
+    changedState: (0, _effects.take)(action => {
+      return action.type === webrtcActionTypes.SESSION_ICE_CONNECTION_STATE_CHANGE && action.payload.id === currentCall.webrtcSessionId;
+    })
+  });
+
+  if (ended || changedState) {
+    // If the call has ended, or is no longer disconnected, do nothing.
+    return;
+  }
+
+  // Get the call state again, to make sure we have the latest state.
+  currentCall = yield (0, _effects.select)(_selectors.getCallByWebrtcSessionId, action.payload.id);
+  // If the call is still disconnected, assume that it should have moved into
+  //    failed state. Manually trigger the action to transition into failed state.
+  if (isDisconnected(currentCall)) {
+    const log = _logs.logManager.getLogger('CALL', currentCall.id);
+    log.debug('Call has remained in disconnected media connection state too long. Manually transitioning to failed state.');
+
+    yield (0, _effects.put)(_actions2.sessionActions.sessionIceConnectionStateChange(currentCall.webrtcSessionId, {
+      iceConnectionState: _constants.CALL_MEDIA_CONNECTION_STATES.FAILED
+    }));
   }
 }
 
