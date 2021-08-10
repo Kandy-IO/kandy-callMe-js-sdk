@@ -1,7 +1,7 @@
 /**
  * Kandy.js
  * kandy.newCallMe.js
- * Version: 4.31.0-beta.719
+ * Version: 4.31.0-beta.720
  */
 (function webpackUniversalModuleDefinition(root, factory) {
 	if(typeof exports === 'object' && typeof module === 'object')
@@ -1573,74 +1573,6 @@ const SET_BROWSER_DETAILS = exports.SET_BROWSER_DETAILS = prefix + 'SET_BROWSER_
 /* 9 */
 /***/ (function(module, exports, __webpack_require__) {
 
-var global = __webpack_require__(12);
-var core = __webpack_require__(7);
-var ctx = __webpack_require__(31);
-var hide = __webpack_require__(32);
-var has = __webpack_require__(33);
-var PROTOTYPE = 'prototype';
-
-var $export = function (type, name, source) {
-  var IS_FORCED = type & $export.F;
-  var IS_GLOBAL = type & $export.G;
-  var IS_STATIC = type & $export.S;
-  var IS_PROTO = type & $export.P;
-  var IS_BIND = type & $export.B;
-  var IS_WRAP = type & $export.W;
-  var exports = IS_GLOBAL ? core : core[name] || (core[name] = {});
-  var expProto = exports[PROTOTYPE];
-  var target = IS_GLOBAL ? global : IS_STATIC ? global[name] : (global[name] || {})[PROTOTYPE];
-  var key, own, out;
-  if (IS_GLOBAL) source = name;
-  for (key in source) {
-    // contains in native
-    own = !IS_FORCED && target && target[key] !== undefined;
-    if (own && has(exports, key)) continue;
-    // export native or passed
-    out = own ? target[key] : source[key];
-    // prevent global pollution for namespaces
-    exports[key] = IS_GLOBAL && typeof target[key] != 'function' ? source[key]
-    // bind timers to global for call from export context
-    : IS_BIND && own ? ctx(out, global)
-    // wrap global constructors for prevent change them in library
-    : IS_WRAP && target[key] == out ? (function (C) {
-      var F = function (a, b, c) {
-        if (this instanceof C) {
-          switch (arguments.length) {
-            case 0: return new C();
-            case 1: return new C(a);
-            case 2: return new C(a, b);
-          } return new C(a, b, c);
-        } return C.apply(this, arguments);
-      };
-      F[PROTOTYPE] = C[PROTOTYPE];
-      return F;
-    // make static versions for prototype methods
-    })(out) : IS_PROTO && typeof out == 'function' ? ctx(Function.call, out) : out;
-    // export proto methods to core.%CONSTRUCTOR%.methods.%NAME%
-    if (IS_PROTO) {
-      (exports.virtual || (exports.virtual = {}))[key] = out;
-      // export proto methods to core.%CONSTRUCTOR%.prototype.%NAME%
-      if (type & $export.R && expProto && !expProto[key]) hide(expProto, key, out);
-    }
-  }
-};
-// type bitmap
-$export.F = 1;   // forced
-$export.G = 2;   // global
-$export.S = 4;   // static
-$export.P = 8;   // proto
-$export.B = 16;  // bind
-$export.W = 32;  // wrap
-$export.U = 64;  // safe
-$export.R = 128; // real proto method for `library`
-module.exports = $export;
-
-
-/***/ }),
-/* 10 */
-/***/ (function(module, exports, __webpack_require__) {
-
 "use strict";
 
 
@@ -1756,6 +1688,74 @@ function normalizeServices(services = []) {
     return { service: service };
   });
 }
+
+/***/ }),
+/* 10 */
+/***/ (function(module, exports, __webpack_require__) {
+
+var global = __webpack_require__(12);
+var core = __webpack_require__(7);
+var ctx = __webpack_require__(31);
+var hide = __webpack_require__(32);
+var has = __webpack_require__(33);
+var PROTOTYPE = 'prototype';
+
+var $export = function (type, name, source) {
+  var IS_FORCED = type & $export.F;
+  var IS_GLOBAL = type & $export.G;
+  var IS_STATIC = type & $export.S;
+  var IS_PROTO = type & $export.P;
+  var IS_BIND = type & $export.B;
+  var IS_WRAP = type & $export.W;
+  var exports = IS_GLOBAL ? core : core[name] || (core[name] = {});
+  var expProto = exports[PROTOTYPE];
+  var target = IS_GLOBAL ? global : IS_STATIC ? global[name] : (global[name] || {})[PROTOTYPE];
+  var key, own, out;
+  if (IS_GLOBAL) source = name;
+  for (key in source) {
+    // contains in native
+    own = !IS_FORCED && target && target[key] !== undefined;
+    if (own && has(exports, key)) continue;
+    // export native or passed
+    out = own ? target[key] : source[key];
+    // prevent global pollution for namespaces
+    exports[key] = IS_GLOBAL && typeof target[key] != 'function' ? source[key]
+    // bind timers to global for call from export context
+    : IS_BIND && own ? ctx(out, global)
+    // wrap global constructors for prevent change them in library
+    : IS_WRAP && target[key] == out ? (function (C) {
+      var F = function (a, b, c) {
+        if (this instanceof C) {
+          switch (arguments.length) {
+            case 0: return new C();
+            case 1: return new C(a);
+            case 2: return new C(a, b);
+          } return new C(a, b, c);
+        } return C.apply(this, arguments);
+      };
+      F[PROTOTYPE] = C[PROTOTYPE];
+      return F;
+    // make static versions for prototype methods
+    })(out) : IS_PROTO && typeof out == 'function' ? ctx(Function.call, out) : out;
+    // export proto methods to core.%CONSTRUCTOR%.methods.%NAME%
+    if (IS_PROTO) {
+      (exports.virtual || (exports.virtual = {}))[key] = out;
+      // export proto methods to core.%CONSTRUCTOR%.prototype.%NAME%
+      if (type & $export.R && expProto && !expProto[key]) hide(expProto, key, out);
+    }
+  }
+};
+// type bitmap
+$export.F = 1;   // forced
+$export.G = 2;   // global
+$export.S = 4;   // static
+$export.P = 8;   // proto
+$export.B = 16;  // bind
+$export.W = 32;  // wrap
+$export.U = 64;  // safe
+$export.R = 128; // real proto method for `library`
+module.exports = $export;
+
 
 /***/ }),
 /* 11 */
@@ -7890,7 +7890,7 @@ exports.getVersion = getVersion;
  * for the @@ tag below with actual version value.
  */
 function getVersion() {
-  return '4.31.0-beta.719';
+  return '4.31.0-beta.720';
 }
 
 /***/ }),
@@ -9668,7 +9668,7 @@ function handlersChanged(handlerMap) {
 "use strict";
 
 var LIBRARY = __webpack_require__(56);
-var $export = __webpack_require__(9);
+var $export = __webpack_require__(10);
 var redefine = __webpack_require__(129);
 var hide = __webpack_require__(32);
 var Iterators = __webpack_require__(61);
@@ -10304,7 +10304,7 @@ var actions = _interopRequireWildcard(_actions);
 
 var _utils = __webpack_require__(367);
 
-var _utils2 = __webpack_require__(10);
+var _utils2 = __webpack_require__(9);
 
 var _fp = __webpack_require__(4);
 
@@ -11356,7 +11356,7 @@ module.exports = function isFunction(arg) {
 /***/ (function(module, exports, __webpack_require__) {
 
 // most Object methods by ES6 should accept primitives
-var $export = __webpack_require__(9);
+var $export = __webpack_require__(10);
 var core = __webpack_require__(7);
 var fails = __webpack_require__(37);
 module.exports = function (KEY, exec) {
@@ -11920,7 +11920,7 @@ module.exports = function (KEY) {
 "use strict";
 
 var global = __webpack_require__(12);
-var $export = __webpack_require__(9);
+var $export = __webpack_require__(10);
 var meta = __webpack_require__(73);
 var fails = __webpack_require__(37);
 var hide = __webpack_require__(32);
@@ -12001,7 +12001,7 @@ module.exports = function (NAME) {
 "use strict";
 
 // https://tc39.github.io/proposal-setmap-offrom/
-var $export = __webpack_require__(9);
+var $export = __webpack_require__(10);
 
 module.exports = function (COLLECTION) {
   $export($export.S, COLLECTION, { of: function of() {
@@ -12020,7 +12020,7 @@ module.exports = function (COLLECTION) {
 "use strict";
 
 // https://tc39.github.io/proposal-setmap-offrom/
-var $export = __webpack_require__(9);
+var $export = __webpack_require__(10);
 var aFunction = __webpack_require__(54);
 var ctx = __webpack_require__(31);
 var forOf = __webpack_require__(62);
@@ -13779,7 +13779,7 @@ var _logs = __webpack_require__(3);
 
 var _effects3 = __webpack_require__(1);
 
-var _utils = __webpack_require__(10);
+var _utils = __webpack_require__(9);
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
@@ -14174,7 +14174,7 @@ var _utf = __webpack_require__(371);
 
 var _utf2 = _interopRequireDefault(_utf);
 
-var _utils = __webpack_require__(10);
+var _utils = __webpack_require__(9);
 
 var _logs = __webpack_require__(3);
 
@@ -15082,7 +15082,7 @@ var _fp = __webpack_require__(4);
 
 var _selectors = __webpack_require__(16);
 
-var _utils = __webpack_require__(10);
+var _utils = __webpack_require__(9);
 
 /**
  * Plugin selector function to expose state globally
@@ -17495,7 +17495,7 @@ var _compose = __webpack_require__(195);
 
 var _compose2 = _interopRequireDefault(_compose);
 
-var _utils = __webpack_require__(10);
+var _utils = __webpack_require__(9);
 
 var _version = __webpack_require__(70);
 
@@ -17836,7 +17836,7 @@ module.exports = __webpack_require__(7).Object.assign;
 /***/ (function(module, exports, __webpack_require__) {
 
 // 19.1.3.1 Object.assign(target, source)
-var $export = __webpack_require__(9);
+var $export = __webpack_require__(10);
 
 $export($export.S + $export.F, 'Object', { assign: __webpack_require__(186) });
 
@@ -20316,7 +20316,7 @@ module.exports = __webpack_require__(7).Object.values;
 /***/ (function(module, exports, __webpack_require__) {
 
 // https://github.com/tc39/proposal-object-values-entries
-var $export = __webpack_require__(9);
+var $export = __webpack_require__(10);
 var $values = __webpack_require__(127)(false);
 
 $export($export.S, 'Object', {
@@ -20347,7 +20347,7 @@ module.exports = __webpack_require__(7).Symbol;
 var global = __webpack_require__(12);
 var has = __webpack_require__(33);
 var DESCRIPTORS = __webpack_require__(18);
-var $export = __webpack_require__(9);
+var $export = __webpack_require__(10);
 var redefine = __webpack_require__(129);
 var META = __webpack_require__(73).KEY;
 var $fails = __webpack_require__(37);
@@ -21822,7 +21822,7 @@ var _actions3 = _interopRequireDefault(_actions2);
 
 var _actions4 = __webpack_require__(34);
 
-var _utils = __webpack_require__(10);
+var _utils = __webpack_require__(9);
 
 var _effects = __webpack_require__(1);
 
@@ -22697,7 +22697,7 @@ module.exports = function (original) {
 /***/ (function(module, exports, __webpack_require__) {
 
 // https://github.com/DavidBruant/Map-Set.prototype.toJSON
-var $export = __webpack_require__(9);
+var $export = __webpack_require__(10);
 
 $export($export.P + $export.R, 'Set', { toJSON: __webpack_require__(146)('Set') });
 
@@ -23255,7 +23255,7 @@ module.exports = function defineProperties(T, D) {
 /* 250 */
 /***/ (function(module, exports, __webpack_require__) {
 
-var $export = __webpack_require__(9);
+var $export = __webpack_require__(10);
 // 19.1.2.3 / 15.2.3.7 Object.defineProperties(O, Properties)
 $export($export.S + $export.F * !__webpack_require__(18), 'Object', { defineProperties: __webpack_require__(131) });
 
@@ -23276,7 +23276,7 @@ module.exports = __webpack_require__(7).Array.from;
 "use strict";
 
 var ctx = __webpack_require__(31);
-var $export = __webpack_require__(9);
+var $export = __webpack_require__(10);
 var toObject = __webpack_require__(46);
 var call = __webpack_require__(141);
 var isArrayIter = __webpack_require__(142);
@@ -23358,7 +23358,7 @@ module.exports = function create(P, D) {
 /* 257 */
 /***/ (function(module, exports, __webpack_require__) {
 
-var $export = __webpack_require__(9);
+var $export = __webpack_require__(10);
 // 19.1.2.2 / 15.2.3.5 Object.create(O [, Properties])
 $export($export.S, 'Object', { create: __webpack_require__(74) });
 
@@ -23643,7 +23643,7 @@ var actionTypes = _interopRequireWildcard(_actionTypes);
 
 var _reduxActions = __webpack_require__(23);
 
-var _fp = __webpack_require__(4);
+var _utils = __webpack_require__(9);
 
 function _interopRequireWildcard(obj) { if (obj && obj.__esModule) { return obj; } else { var newObj = {}; if (obj != null) { for (var key in obj) { if (Object.prototype.hasOwnProperty.call(obj, key)) newObj[key] = obj[key]; } } newObj.default = obj; return newObj; } }
 
@@ -23653,7 +23653,7 @@ const reducers = {};
 
 reducers[actionTypes.CONFIG_UPDATE] = {
   next(state, action) {
-    return (0, _fp.merge)(state, action.payload);
+    return (0, _utils.mergeValues)(state, action.payload);
   }
 };
 
@@ -23839,7 +23839,7 @@ var LIBRARY = __webpack_require__(56);
 var global = __webpack_require__(12);
 var ctx = __webpack_require__(31);
 var classof = __webpack_require__(107);
-var $export = __webpack_require__(9);
+var $export = __webpack_require__(10);
 var isObject = __webpack_require__(17);
 var aFunction = __webpack_require__(54);
 var anInstance = __webpack_require__(106);
@@ -24236,7 +24236,7 @@ module.exports = navigator && navigator.userAgent || '';
 "use strict";
 // https://github.com/tc39/proposal-promise-finally
 
-var $export = __webpack_require__(9);
+var $export = __webpack_require__(10);
 var core = __webpack_require__(7);
 var global = __webpack_require__(12);
 var speciesConstructor = __webpack_require__(152);
@@ -24263,7 +24263,7 @@ $export($export.P + $export.R, 'Promise', { 'finally': function (onFinally) {
 "use strict";
 
 // https://github.com/tc39/proposal-promise-try
-var $export = __webpack_require__(9);
+var $export = __webpack_require__(10);
 var newPromiseCapability = __webpack_require__(110);
 var perform = __webpack_require__(154);
 
@@ -24672,7 +24672,7 @@ var _actions2 = __webpack_require__(40);
 
 var _logs = __webpack_require__(3);
 
-var _utils = __webpack_require__(10);
+var _utils = __webpack_require__(9);
 
 var _kandyWebrtc = __webpack_require__(112);
 
@@ -26122,7 +26122,7 @@ exports.setListeners = setListeners;
 
 var _actions = __webpack_require__(26);
 
-var _utils = __webpack_require__(10);
+var _utils = __webpack_require__(9);
 
 var _effects = __webpack_require__(1);
 
@@ -26326,7 +26326,7 @@ var _reduxSaga = __webpack_require__(28);
 
 var _actions = __webpack_require__(26);
 
-var _utils = __webpack_require__(10);
+var _utils = __webpack_require__(9);
 
 /**
  * Sets up event listeners for a Track's events.
@@ -26520,7 +26520,7 @@ exports.setListeners = setListeners;
 
 var _actions = __webpack_require__(26);
 
-var _utils = __webpack_require__(10);
+var _utils = __webpack_require__(9);
 
 var _effects = __webpack_require__(1);
 
@@ -26726,7 +26726,7 @@ exports.setListeners = setListeners;
 
 var _actions = __webpack_require__(26);
 
-var _utils = __webpack_require__(10);
+var _utils = __webpack_require__(9);
 
 var _effects = __webpack_require__(1);
 
@@ -30737,7 +30737,7 @@ module.exports = __webpack_require__(145)(MAP, function (get) {
 /***/ (function(module, exports, __webpack_require__) {
 
 // https://github.com/DavidBruant/Map-Set.prototype.toJSON
-var $export = __webpack_require__(9);
+var $export = __webpack_require__(10);
 
 $export($export.P + $export.R, 'Map', { toJSON: __webpack_require__(146)('Map') });
 
@@ -30781,7 +30781,7 @@ var dP = __webpack_require__(25);
 var gOPD = __webpack_require__(134);
 var getPrototypeOf = __webpack_require__(138);
 var has = __webpack_require__(33);
-var $export = __webpack_require__(9);
+var $export = __webpack_require__(10);
 var createDesc = __webpack_require__(44);
 var anObject = __webpack_require__(29);
 var isObject = __webpack_require__(17);
@@ -34691,7 +34691,7 @@ var _sagas = __webpack_require__(365);
 
 var _sagas2 = __webpack_require__(164);
 
-var _utils = __webpack_require__(10);
+var _utils = __webpack_require__(9);
 
 var _validation = __webpack_require__(39);
 
@@ -34785,7 +34785,7 @@ var _interface = __webpack_require__(360);
 
 var _actions = __webpack_require__(34);
 
-var _utils = __webpack_require__(10);
+var _utils = __webpack_require__(9);
 
 var _fp = __webpack_require__(4);
 
@@ -36549,7 +36549,7 @@ var _link2 = _interopRequireDefault(_link);
 
 var _logs = __webpack_require__(3);
 
-var _utils = __webpack_require__(10);
+var _utils = __webpack_require__(9);
 
 var _fp = __webpack_require__(4);
 
@@ -37074,7 +37074,7 @@ var _actions2 = __webpack_require__(34);
 
 var _logs = __webpack_require__(3);
 
-var _utils = __webpack_require__(10);
+var _utils = __webpack_require__(9);
 
 var _fp = __webpack_require__(4);
 
@@ -43656,7 +43656,7 @@ module.exports = __webpack_require__(7).Object.entries;
 /***/ (function(module, exports, __webpack_require__) {
 
 // https://github.com/tc39/proposal-object-values-entries
-var $export = __webpack_require__(9);
+var $export = __webpack_require__(10);
 var $entries = __webpack_require__(127)(true);
 
 $export($export.S, 'Object', {
@@ -50219,7 +50219,7 @@ var _reduxSaga = __webpack_require__(28);
 
 var _effects = __webpack_require__(1);
 
-var _utils = __webpack_require__(10);
+var _utils = __webpack_require__(9);
 
 var _actions2 = __webpack_require__(119);
 
@@ -57955,7 +57955,7 @@ var _actions = __webpack_require__(34);
 
 var _actions2 = __webpack_require__(40);
 
-var _utils = __webpack_require__(10);
+var _utils = __webpack_require__(9);
 
 var _effects = __webpack_require__(1);
 
@@ -58197,7 +58197,7 @@ var _freeze2 = _interopRequireDefault(_freeze);
 
 var _logs = __webpack_require__(3);
 
-var _utils = __webpack_require__(10);
+var _utils = __webpack_require__(9);
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
