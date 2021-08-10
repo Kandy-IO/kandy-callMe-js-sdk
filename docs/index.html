@@ -445,12 +445,6 @@
                             </a></li>
                           
                             <li><a
-                              href='#calleventcallcustomparameters'
-                              class='regular pre-open'>
-                              <span style="color:orange">ⓔ</span> call:customParameters
-                            </a></li>
-                          
-                            <li><a
                               href='#calleventcallavailablecodecs'
                               class='regular pre-open'>
                               <span style="color:orange">ⓔ</span> call:availableCodecs
@@ -4243,13 +4237,13 @@ or the browser temporarily disabling the SDK's access to a local Track's source.
 They can also be set after a Call is established using the <a href="#callsetcustomparameters">call.setCustomParameters</a> API, and sent using the <a href="#callsendcustomparameters">call.sendCustomParameters</a> API.</p>
 <p>Custom headers may be received anytime throughout the duration a call. A remote endpoint may send custom headers when starting a call,
 answering a call, or during call updates such as hold/unhold and addition/removal of media in the call.
-When these custom headers are received, the SDK will emit a <a href="#calleventcallcustomparameters">call:customParameters</a> event
+When these custom headers are received, the SDK will emit a <a href="call.event:call:customParameters">call:customParameters</a> event
 which will contain the custom parameters that were received.</p>
 <p>A Call's custom parameters are stored on the Call's <a href="#callcallobject">CallObject</a>,
 which can be retrieved using the <a href="#callgetbyid">call.getById</a> or
 <a href="#callgetall">call.getAll</a> APIs. These are the parameters that will be sent to the remote
 endpoint of the Call. Parameters received from a Call are not stored as
-part of the CallObject and are only provided via the <a href="#calleventcallcustomparameters">call:customParameters</a> event.</p>
+part of the CallObject and are only provided via the <a href="call.event:call:customParameters">call:customParameters</a> event.</p>
 
 
   <div class='pre p1 fill-light mt0'>CustomParameter</div>
@@ -8359,101 +8353,6 @@ Track that was replaced to help an application replace it seamlessly.</p>
   <td class='break-word'><span class='code bold'>params.error</span> <code class='quiet'><a href="#apibasicerror">api.BasicError</a>?</code>
   </td>
   <td class='break-word'><span>An error object, if the operation was not successful.
-</span></td>
-</tr>
-
-
-              
-            </tbody>
-          </table>
-          
-        </div>
-      
-    </div>
-  
-
-  
-
-  
-
-  
-
-  
-
-  
-
-  
-
-  
-</section>
-
-      </div>
-    </div>
-  
-    <div class='border-bottom' id='calleventcallcustomparameters'>
-      <div class="clearfix small pointer toggle-sibling">
-        <div class="py1 contain">
-            <a class='icon pin-right py1 dark-link caret-right'>▸</a>
-            <span class='code strong strong truncate'>call:customParameters</span>
-        </div>
-      </div>
-      <div class="clearfix display-none toggle-target">
-        <section class='p2 mb2 clearfix bg-white minishadow'>
-
-  
-
-  <p>Custom Parameters have been received for a Call.</p>
-<p>These are parameters set by the remote endpoint of the Call. Please refer to
-<a href="#callcustomparameter">CustomParameter</a> for more information.</p>
-
-
-  <div class='pre p1 fill-light mt0'>call:customParameters</div>
-  
-  
-
-  
-  
-  
-  
-  
-  
-
-  
-    <div class='py1 quiet mt1 prose-big'>Parameters</div>
-    <div class='prose'>
-      
-        <div class='space-bottom0'>
-          <div>
-            <span class='code bold'>params</span> <code class='quiet'>(<a href="https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Object">Object</a>)</code>
-	    
-          </div>
-          
-          <table class='mt1 mb2 fixed-table h5 col-12'>
-            <colgroup>
-              <col width='30%' />
-              <col width='70%' />
-            </colgroup>
-            <thead>
-              <tr class='bold fill-light'>
-                <th>Name</th>
-                <th>Description</th>
-              </tr>
-            </thead>
-            <tbody class='mt1'>
-              
-                <tr>
-  <td class='break-word'><span class='code bold'>params.callId</span> <code class='quiet'><a href="https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/String">string</a></code>
-  </td>
-  <td class='break-word'><span>The ID of the Call in which custom parameters were received.
-</span></td>
-</tr>
-
-
-              
-                <tr>
-  <td class='break-word'><span class='code bold'>params.customParameters</span> <code class='quiet'><a href="https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Array">Array</a>&#x3C;<a href="#callcustomparameter">call.CustomParameter</a>></code>
-  </td>
-  <td class='break-word'><span>The custom parameters received.
 </span></td>
 </tr>
 

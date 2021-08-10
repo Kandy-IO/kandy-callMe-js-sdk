@@ -1892,7 +1892,7 @@ Returns **[call.SdpHandlerFunction][16]** The resulting SDP handler that will re
 
 [35]: #callsendcustomparameters
 
-[36]: #calleventcallcustomparameters
+[36]: call.event:call:customParameters
 
 [37]: #callcallobject
 
