@@ -13133,6 +13133,74 @@
                     1
                   ]
                 }
+              },
+              {
+                "type": "paragraph",
+                "children": [
+                  {
+                    "type": "text",
+                    "value": "Note that receiving this event is not an indication that a media operation\n   has completed. Therefore the application should not assume it is safe to\n   perform a new operation at this time. To be notified when a call has had\n   its media removed, see ",
+                    "position": {
+                      "start": {
+                        "line": 7,
+                        "column": 1,
+                        "offset": 234
+                      },
+                      "end": {
+                        "line": 10,
+                        "column": 27,
+                        "offset": 487
+                      },
+                      "indent": [
+                        1,
+                        1,
+                        1
+                      ]
+                    }
+                  },
+                  {
+                    "type": "link",
+                    "url": "#calleventcallremovedmedia",
+                    "title": null,
+                    "jsdoc": true,
+                    "children": [
+                      {
+                        "type": "text",
+                        "value": "call:removedMedia"
+                      }
+                    ],
+                    "position": {
+                      "start": {
+                        "line": 10,
+                        "column": 27,
+                        "offset": 487
+                      },
+                      "end": {
+                        "line": 10,
+                        "column": 81,
+                        "offset": 541
+                      },
+                      "indent": []
+                    }
+                  }
+                ],
+                "position": {
+                  "start": {
+                    "line": 7,
+                    "column": 1,
+                    "offset": 234
+                  },
+                  "end": {
+                    "line": 10,
+                    "column": 81,
+                    "offset": 541
+                  },
+                  "indent": [
+                    1,
+                    1,
+                    1
+                  ]
+                }
               }
             ],
             "position": {
@@ -13142,9 +13210,9 @@
                 "offset": 0
               },
               "end": {
-                "line": 5,
-                "column": 44,
-                "offset": 232
+                "line": 10,
+                "column": 81,
+                "offset": 541
               }
             }
           },
@@ -13152,23 +13220,23 @@
             {
               "title": "public",
               "description": null,
-              "lineNumber": 7,
+              "lineNumber": 12,
               "type": null
             },
             {
               "title": "memberof",
               "description": "call",
-              "lineNumber": 8
+              "lineNumber": 13
             },
             {
               "title": "event",
               "description": "call:trackEnded",
-              "lineNumber": 9
+              "lineNumber": 14
             },
             {
               "title": "param",
               "description": null,
-              "lineNumber": 10,
+              "lineNumber": 15,
               "type": {
                 "type": "NameExpression",
                 "name": "Object"
@@ -13178,7 +13246,7 @@
             {
               "title": "param",
               "description": "The ID of the call the track was removed from.",
-              "lineNumber": 11,
+              "lineNumber": 16,
               "type": {
                 "type": "NameExpression",
                 "name": "string"
@@ -13188,7 +13256,7 @@
             {
               "title": "param",
               "description": "The ID of the media the track was removed from.",
-              "lineNumber": 12,
+              "lineNumber": 17,
               "type": {
                 "type": "NameExpression",
                 "name": "string"
@@ -13198,7 +13266,7 @@
             {
               "title": "param",
               "description": "The ID of the removed track.",
-              "lineNumber": 13,
+              "lineNumber": 18,
               "type": {
                 "type": "NameExpression",
                 "name": "string"
@@ -13208,7 +13276,7 @@
             {
               "title": "param",
               "description": "Whether the track was local or not (remote)",
-              "lineNumber": 14,
+              "lineNumber": 19,
               "type": {
                 "type": "NameExpression",
                 "name": "boolean"
@@ -13222,18 +13290,18 @@
               "column": 0
             },
             "end": {
-              "line": 178,
+              "line": 183,
               "column": 3
             }
           },
           "context": {
             "loc": {
               "start": {
-                "line": 179,
+                "line": 184,
                 "column": 0
               },
               "end": {
-                "line": 179,
+                "line": 184,
                 "column": 49
               }
             },
@@ -13245,7 +13313,7 @@
             {
               "title": "param",
               "name": "params",
-              "lineNumber": 10,
+              "lineNumber": 15,
               "type": {
                 "type": "NameExpression",
                 "name": "Object"
@@ -13254,7 +13322,7 @@
                 {
                   "title": "param",
                   "name": "params.callId",
-                  "lineNumber": 11,
+                  "lineNumber": 16,
                   "description": {
                     "type": "root",
                     "children": [
@@ -13315,7 +13383,7 @@
                 {
                   "title": "param",
                   "name": "params.mediaId",
-                  "lineNumber": 12,
+                  "lineNumber": 17,
                   "description": {
                     "type": "root",
                     "children": [
@@ -13376,7 +13444,7 @@
                 {
                   "title": "param",
                   "name": "params.trackId",
-                  "lineNumber": 13,
+                  "lineNumber": 18,
                   "description": {
                     "type": "root",
                     "children": [
@@ -13437,7 +13505,7 @@
                 {
                   "title": "param",
                   "name": "params.local",
-                  "lineNumber": 14,
+                  "lineNumber": 19,
                   "description": {
                     "type": "root",
                     "children": [
@@ -13736,22 +13804,22 @@
           ],
           "loc": {
             "start": {
-              "line": 181,
+              "line": 186,
               "column": 0
             },
             "end": {
-              "line": 201,
+              "line": 206,
               "column": 3
             }
           },
           "context": {
             "loc": {
               "start": {
-                "line": 202,
+                "line": 207,
                 "column": 0
               },
               "end": {
-                "line": 202,
+                "line": 207,
                 "column": 50
               }
             },
@@ -14351,22 +14419,22 @@
           ],
           "loc": {
             "start": {
-              "line": 204,
+              "line": 209,
               "column": 0
             },
             "end": {
-              "line": 223,
+              "line": 228,
               "column": 3
             }
           },
           "context": {
             "loc": {
               "start": {
-                "line": 224,
+                "line": 229,
                 "column": 0
               },
               "end": {
-                "line": 224,
+                "line": 229,
                 "column": 55
               }
             },
@@ -14860,22 +14928,22 @@
           ],
           "loc": {
             "start": {
-              "line": 241,
+              "line": 246,
               "column": 0
             },
             "end": {
-              "line": 252,
+              "line": 257,
               "column": 3
             }
           },
           "context": {
             "loc": {
               "start": {
-                "line": 253,
+                "line": 258,
                 "column": 0
               },
               "end": {
-                "line": 253,
+                "line": 258,
                 "column": 54
               }
             },
@@ -15366,22 +15434,22 @@
           ],
           "loc": {
             "start": {
-              "line": 255,
+              "line": 260,
               "column": 0
             },
             "end": {
-              "line": 271,
+              "line": 276,
               "column": 3
             }
           },
           "context": {
             "loc": {
               "start": {
-                "line": 272,
+                "line": 277,
                 "column": 0
               },
               "end": {
-                "line": 272,
+                "line": 277,
                 "column": 67
               }
             },
