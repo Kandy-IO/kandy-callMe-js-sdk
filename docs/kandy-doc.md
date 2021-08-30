@@ -1362,6 +1362,38 @@ client.media.renderTrack([ audioTrack ], audioContainer, {
 The 'connection' namespace is used to connect and maintain connections between
 the SDK and one or more backend servers.
 
+### WSConnectionObject
+
+Information about a websocket connection.
+
+Can be retrieved using the [connection.getSocketState][62] API.
+
+Type: [Object][7]
+
+**Properties**
+
+-   `connected` **[boolean][11]** The state of the websocket connection.
+-   `pinging` **[boolean][11]** True if the client has sent a ping to the server and is still waiting for a pong response.
+-   `method` **[Object][7]** Information about how the websocket is being used.
+    -   `method.type` **[string][8]?** How the websocket is staying connected.
+    -   `method.responsibleParty` **[string][8]?** Who is responsible for keeping the connection alive.
+-   `platform` **[string][8]** The SDK platform being used.
+-   `pingInterval` **[number][12]** How often the client will ping the server to test for websocket connectivity.
+-   `reconnectLimit` **[number][12]** How many times the SDK will try to reconnect a disconnected websocket.
+-   `reconnectDelay` **[number][12]** How long the SDK will wait before retrying websocket reconnection.
+-   `reconnectTimeMultiplier` **[number][12]** Reconnect delay multiplier for subsequent attempts. The reconnect delay time will be multiplied by this after each failed reconnect attempt to increase the delay between attempts. eg. 5000ms then 10000ms then 20000ms delay if value is 2.
+-   `reconnectTimeLimit` **[number][12]** Maximum time delay between reconnect attempts (milliseconds). Used in conjunction with `reconnectTimeMultiplier` to prevent overly long delays between reconnection attempts.
+-   `autoReconnect` **[boolean][11]** Indicates if the SDK should automatically try reconnecting a disconnected websocket.
+-   `maxMissedPings` **[number][12]** How many missed pings before the SDK stops trying to reconnect a disconnected websocket.
+-   `webSocketOAuthMode` **[string][8]** The mode used for authenticating with the server.
+-   `wsInfo` **[Object][7]** Information required to connect a websocket to the server.
+    -   `wsInfo.protocol` **[string][8]?** The protocol to use to connect a websocket.
+    -   `wsInfo.server` **[string][8]?** The domain name or IP address of the server to connect to.
+    -   `wsInfo.port` **[number][12]?** The port of the server to connect to.
+    -   `wsInfo.url` **[string][8]?** The URL path to use to request a websocket connection.
+    -   `wsInfo.params` **[string][8]?** Any additional params that might be required by the server to establish the websocket connection.
+-   `lastContact` **[number][12]** The date and time that the last known contact with the server was.
+
 ### getSocketState
 
 Get the state of the websocket.
@@ -1369,6 +1401,8 @@ Get the state of the websocket.
 **Parameters**
 
 -   `platform` **[string][8]** Backend platform for which to request the websocket's state. (optional, default `'link'`)
+
+Returns **[connection.WSConnectionObject][63]** Details about the current websocket connection, including state and configuration.
 
 ### enableConnectivityChecking
 
@@ -1385,7 +1419,7 @@ The SDK has an internal logging system for providing information about its
    types of information, which are routed to a
    "[Log Handler][4]" for consumption. An application
    can provide their own Log Handler (see
-   [config.logs][62]) to customize how the logs are
+   [config.logs][64]) to customize how the logs are
    handled, or allow the default Log Handler to print the logs to the
    console.
 
@@ -1445,7 +1479,7 @@ A LogEntry object is the data that the SDK compiles when information is
    and who logged it.
 
 A [LogHandler][4] provided to the SDK (see
-   [config.logs][62]) will need to handle LogEntry
+   [config.logs][64]) will need to handle LogEntry
    objects.
 
 Type: [Object][7]
@@ -1494,7 +1528,7 @@ A LogHandler can be used to customize how the SDK should log information. By
    be configured to change this behaviour.
 
 A LogHandler can be provided to the SDK as part of its configuration (see
-   [config.logs][62]). The SDK will then provide this
+   [config.logs][64]). The SDK will then provide this
    function with the logged information.
 
 Type: [Function][15]
@@ -1534,7 +1568,7 @@ const client = create(configs)
 ## media
 
 The 'media' namespace provides an interface for interacting with Media that the
-   SDK has access to. Media is used in conjunction with the [Calls][63]
+   SDK has access to. Media is used in conjunction with the [Calls][65]
    feature to manipulate and render the Tracks sent and received from a Call.
 
 Media and Track objects are not created directly, but are created as part of
@@ -1545,13 +1579,13 @@ Media and Track objects are not created directly, but are created as part of
 The Media feature also keeps track of media devices that the user's machine
    can access. Any media device (eg. USB headset) connected to the machine
    can be used as a source for media. Available devices can be found using
-   the [media.getDevices][64] API.
+   the [media.getDevices][66] API.
 
 ### getDevices
 
 Retrieves the available media devices for use.
 
-The [devices:change][65] event will be
+The [devices:change][67] event will be
    emitted when the available media devices have changed.
 
 Returns **[Object][7]** The lists of camera, microphone, and speaker devices.
@@ -1564,7 +1598,7 @@ Retrieves an available Media object with a specific Media ID.
 
 -   `mediaId` **[string][8]** The ID of the Media to retrieve.
 
-Returns **[call.MediaObject][66]** A Media object.
+Returns **[call.MediaObject][68]** A Media object.
 
 ### getTrackById
 
@@ -1599,18 +1633,18 @@ This API is not required for proper usage of media and/or calls, but
    their decision, they will not be prompted again when the SDK accesses
    those devices for a call.
 
-For device information, the [media.getDevices][64] API will retrieve
+For device information, the [media.getDevices][66] API will retrieve
    the list of media devices available for the SDK to use. If this list
    is empty, or is missing information, it is likely that the browser
    does not have permission to access the device's information. We
-   recommend using the [media.initializeDevices][67] API in this
+   recommend using the [media.initializeDevices][69] API in this
    scenario if you would like to allow the end-user to select which
    device(s) they would like to use when they make a call, rather than
    using the system default.
 
-The SDK will emit a [devices:change][65]
+The SDK will emit a [devices:change][67]
    event when the operation is successful or a
-   [devices:error][68] event if an error is
+   [devices:error][70] event if an error is
    encountered.
 
 **Parameters**
@@ -1683,7 +1717,7 @@ If a local Track being sent in a Call is muted, the Track will be
    noticeably muted for the remote user. If a remote Track received in a
    call is muted, the result will only be noticeable locally.
 
-The SDK will emit a [media:muted][69] event
+The SDK will emit a [media:muted][71] event
    when a Track has been muted.
 
 **Parameters**
@@ -1696,7 +1730,7 @@ Unmutes the specified Tracks.
 
 Media will resume as normal for the Tracks.
 
-The SDK will emit a [media:unmuted][70] event
+The SDK will emit a [media:unmuted][72] event
    when a Track has been unmuted.
 
 **Parameters**
@@ -1720,7 +1754,7 @@ Provides an external notification to the system for processing.
 ### registerApplePush
 
 Registers with Apple push notification service. Once registration is successful, the application will be able to receive
-standard and/or voip push notifications. It can then send these notifications to the SDK with [api.notifications.process][71]
+standard and/or voip push notifications. It can then send these notifications to the SDK with [api.notifications.process][73]
 in order for the SDK to process them.
 
 **Parameters**
@@ -1738,13 +1772,13 @@ in order for the SDK to process them.
     -   `params.isProduction` **[boolean][11]** If true, push notification will be sent to production.
                                                If false, push notification will be sent to sandbox.
 
-Returns **[Promise][72]** When successful,  the information of the registration.
+Returns **[Promise][74]** When successful,  the information of the registration.
                   Promise will reject with error object otherwise.
 
 ### registerAndroidPush
 
 Registers with Google push notification service. Once registration is successful, the application will be able to receive
-standard and/or voip push notifications. It can then send these notifications to the SDK with [api.notifications.process][71]
+standard and/or voip push notifications. It can then send these notifications to the SDK with [api.notifications.process][73]
 in order for the SDK to process them.
 
 **Parameters**
@@ -1758,7 +1792,7 @@ in order for the SDK to process them.
     -   `params.realm` **[string][8]** The realm used by the push registration service to identify
                                        and establish a connection with the service gateway.
 
-Returns **[Promise][72]** When successful,  the information of the registration.
+Returns **[Promise][74]** When successful,  the information of the registration.
                   Promise will reject with error object otherwise.
 
 ### unregisterApplePush
@@ -1769,7 +1803,7 @@ Unregister Apple push notifications.
 
 -   `registrationInfo` **[string][8]** The data returned from the push registration
 
-Returns **[Promise][72]** When successful, the promise will resolve with undefined.
+Returns **[Promise][74]** When successful, the promise will resolve with undefined.
                   Promise will reject with error object otherwise.
 
 ### unregisterAndroidPush
@@ -1780,7 +1814,7 @@ Unregister Android push notifications.
 
 -   `registrationInfo` **[string][8]** The data returned from the push registration
 
-Returns **[Promise][72]** When successful, the promise will resolve with undefined.
+Returns **[Promise][74]** When successful, the promise will resolve with undefined.
                   Promise will reject with error object otherwise.
 
 ### enableWebsocket
@@ -1798,9 +1832,9 @@ These handlers are used to customize low-level call behaviour for very specific
 environments and/or scenarios.
 
 Note that SDP handlers are exposed on the entry point of the SDK. They can be added during
-initialization of the SDK using the [config.call.sdpHandlers][73] configuration
+initialization of the SDK using the [config.call.sdpHandlers][75] configuration
 parameter. They can also be set after the SDK's creation by using the
-[call.setSdpHandlers][74] function.
+[call.setSdpHandlers][76] function.
 
 **Examples**
 
@@ -1841,7 +1875,7 @@ length (usually to 4KB) and will reject calls that have SDP size above this amou
 While creating an SDP handler would allow a user to perform this type of manipulation, it is a non-trivial task that requires in-depth knowledge of WebRTC SDP.
 
 To facilitate this common task, the createCodecRemover function creates a codec removal handler that can be used for this purpose. Applications can use this codec
-removal handler in combination with the [call.getAvailableCodecs][75] function in order to build logic to determine the best codecs to use
+removal handler in combination with the [call.getAvailableCodecs][77] function in order to build logic to determine the best codecs to use
 for their application.
 
 **Parameters**
@@ -1997,30 +2031,34 @@ Returns **[call.SdpHandlerFunction][16]** The resulting SDP handler that will re
 
 [61]: #mediaremovetracks
 
-[62]: #configconfiglogs
+[62]: #connectiongetsocketstate
 
-[63]: #call
+[63]: #connectionwsconnectionobject
 
-[64]: #mediagetdevices
+[64]: #configconfiglogs
 
-[65]: #mediaeventdeviceschange
+[65]: #call
 
-[66]: #callmediaobject
+[66]: #mediagetdevices
 
-[67]: #mediainitializedevices
+[67]: #mediaeventdeviceschange
 
-[68]: #mediaeventdeviceserror
+[68]: #callmediaobject
 
-[69]: #mediaeventmediamuted
+[69]: #mediainitializedevices
 
-[70]: #mediaeventmediaunmuted
+[70]: #mediaeventdeviceserror
 
-[71]: api.notifications.process
+[71]: #mediaeventmediamuted
 
-[72]: https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Promise
+[72]: #mediaeventmediaunmuted
 
-[73]: #configconfigcall
+[73]: api.notifications.process
 
-[74]: #callsetsdphandlers
+[74]: https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Promise
 
-[75]: #callgetavailablecodecs
+[75]: #configconfigcall
+
+[76]: #callsetsdphandlers
+
+[77]: #callgetavailablecodecs
