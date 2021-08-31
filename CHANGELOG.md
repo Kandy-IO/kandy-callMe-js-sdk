@@ -5,6 +5,17 @@ Kandy.js change log.
 - This project adheres to [Semantic Versioning](http://semver.org/).
 - This change log follows [keepachangelog.com](http://keepachangelog.com/) recommendations.
 
+## 4.32.0 - beta
+
+### Added
+
+- Added public documentation for `config.call.normalizeDestination`. `KJS-103`
+- Added an extra property `iceCollectionDelay` as part of `extraInfo` parameter that is pased to `iceCollectionCheck` function. This will further improve the application's side in making a decision whether it has collected good enough ICE candidates. `KJS-253`
+
+### Changed
+
+- Changed the logic for triggering the ICE collection loop, by also triggering this loop when a new ICE candidate is discovered on local PeerConnection. This will speed up the Peer negotiation process. `KJS-122`
+
 ## 4.31.0 - 2021-08-30
 
 ### Added
@@ -16,6 +27,7 @@ Kandy.js change log.
 - Added exception handling to the SDP handler pipeline. If any handler throws an exception, it's now logged and execution continues with the next handler in the pipeline. `KJS-46`
 - Added previous media connection state to `call:mediaConnectionChange` event data. `KJS-96`
 - Added improved Call handling for local network errors occurring during hold and unhold midcall operations. `KJS-127`
+- Updated the _Generating Tokens_ tutorial to specify that SDK supports greater length keys when generating the auth tokens. `KJS-158`
 
 ### Fixed
 
