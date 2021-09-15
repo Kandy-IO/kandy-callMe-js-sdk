@@ -1,7 +1,7 @@
 /**
  * Kandy.js
  * kandy.newCallMe.js
- * Version: 4.32.0-beta.747
+ * Version: 4.32.0-beta.748
  */
 (function webpackUniversalModuleDefinition(root, factory) {
 	if(typeof exports === 'object' && typeof module === 'object')
@@ -7890,7 +7890,7 @@ exports.getVersion = getVersion;
  * for the @@ tag below with actual version value.
  */
 function getVersion() {
-  return '4.32.0-beta.747';
+  return '4.32.0-beta.748';
 }
 
 /***/ }),
@@ -37032,10 +37032,12 @@ function anonymousAPI(otherApi) {
     const anonAPIs = [
     // Getters.
     'getAll', 'getById', 'getAvailableCodecs',
+    // Setters.
+    'setCustomParameters', 'setSdpHandlers',
     // Call functionality.
-    'hold', 'unhold', 'setCustomParameters', 'sendCustomParameters', 'end', 'addMedia', 'removeMedia', 'sendDTMF', 'getStats', 'replaceTrack',
+    'hold', 'unhold', 'sendCustomParameters', 'end', 'addMedia', 'removeMedia', 'startVideo', 'stopVideo', 'sendDTMF', 'getStats', 'replaceTrack', 'restartMedia',
     // States,
-    'states'];
+    'states', 'mediaConnectionStates'];
 
     const newLinkAPI = (0, _fp.pick)(anonAPIs, otherApi({ dispatch, getState }).call);
 

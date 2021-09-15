@@ -15,6 +15,7 @@ Kandy.js change log.
 ### Fixed
 
 - Update notifications plugin state when a websocket connection is removed to indicate the websocket channel is no longer enabled. `KJS-209`
+- Fixed a Call issue where the start/stop video APIs were failing. `KJS-251`
 
 ### Changed
 
