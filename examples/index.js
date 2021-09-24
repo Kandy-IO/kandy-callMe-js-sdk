@@ -34,6 +34,12 @@ const account = 'YOUR CALLER@YOUR DOMAIN'
 const caller = 'sip:' + account
 const callee = 'sip:' + 'YOUR CALLEE@YOUR DOMAIN'
 
+const ALGO_FOR_ECB_CIPHER = 'aes-128-ecb'
+const ALGO_FOR_CBC_CIPHER = 'aes-256-cbc'
+
+// Initialization vector's length
+const IV_LENGTH = 16 // For AES keys, only
+
 // For any incoming request, inspect it and if request is supported then
 // process it & reply to it.
 
@@ -65,38 +71,118 @@ function generateParams (res, account, caller, callee) {
   // don't want the tokens to expire prematurelly.
   const timestamp = Date.now()
 
-  const accountToken = createToken(account, key, timestamp)
-  const fromToken = createToken(caller, key, timestamp)
-  const toToken = createToken(callee, key, timestamp)
+  if (key.length !== 16 && key.length !== 32) {
+    console.error('Key value (for generating account/from/to tokens) must be 16 or 32 characters in length')
+    return
+  }
+
+  // NOTE: If key length is 32 chars, then IV (Initialization Vector) cannot be empty,
+  //       otherwise we get an error (based on validation used by createCipheriv).
+  //       Generate a random value which will be reused by all three generated tokens.
+  //       (For AES, the IV value must always have 16 chars, regardless if key value is 16 or 32 chars in length)
+  const iv = key.length === 16 ? '' : generateRandomIv(IV_LENGTH)
+
+  let accountToken
+  let fromToken
+  let toToken
+  if (key.length === 16) {
+    // for ECB algo, iv can be empty
+    accountToken = createEcbToken(account, key, timestamp, iv)
+    fromToken = createEcbToken(caller, key, timestamp, iv)
+    toToken = createEcbToken(callee, key, timestamp, iv)
+  } else {
+    accountToken = createCbcToken(account, key, timestamp, iv)
+    fromToken = createCbcToken(caller, key, timestamp, iv)
+    toToken = createCbcToken(callee, key, timestamp, iv)
+  }
 
   // Return a response in the form of a stringified JSON object.
   const generatedParams = { realm, accountToken, fromToken, toToken, caller, callee }
   res.json(generatedParams)
 }
 
-// Creates an encrypted token based on three parameters:
+/**
+ * Generates a random Initialization Vector.
+ * @param length - The initialization vector's required length.
+ */
+function generateRandomIv (length) {
+  let result = ''
+  const characters = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789'
+  const charactersLength = characters.length
+  for (var i = 0; i < length; i++) {
+    result += characters.charAt(Math.floor(Math.random() * charactersLength))
+  }
+  return result
+}
+
+/**
+ * Creates an encrypted token based on four parameters:
+ * @param user - The user specific information
+ * @param key  - The secret key used for encrypting the user information
+ *               that gets stored in token (it's also used for decrypting it on server side)
+ * @param timestamp - The timestamp which marks the creation of this token, thus limiting its
+ *                    use beyond a certain duration.
+ * @param iv - The initialization vector used by the 'AES-128-ecb' algorithm.
+ * @return A CMAC token encrypted based on 'AES-128-ecb' algorithm.
+ *         CMAC (Cipher-based Message Authentication Code) is a block cipher-based message authentication code algorithm
+ *         and for understanding the generic token type (that CMAC token represents), please refer here:
+ *         https://en.wikipedia.org/wiki/One-key_MAC
+ *         AES stands for 'Advanced Encryption Standard' specification.
+ *         For more info on this specification, see https://en.wikipedia.org/wiki/Advanced_Encryption_Standard
+ */
+function createEcbToken (user, key, timestamp, iv) {
+  const keyBuffer = Buffer.from(key)
+  const textBuffer = Buffer.from(`${user};${timestamp}`)
+  const ivBuffer = Buffer.from(iv)
+
+  const crypter = crypto.createCipheriv(ALGO_FOR_ECB_CIPHER, keyBuffer, ivBuffer)
+  const chunks = []
+  chunks.push(crypter.update(textBuffer, 'buffer', 'hex'))
+  // According to KL Spec, this call is equivalent to: HEX ( AES-128-ECB ( plaintext) )
+  chunks.push(crypter.final('hex')) // final HEX function
+
+  const encryptedBuffer = Buffer.from(chunks.join(''), 'hex')
+  return encryptedBuffer.toString('hex')
+}
+
+// Creates an encrypted token based on four parameters:
 // @param user - The user specific information
 // @param key  - The secret key used for encrypting the user information
 //              that gets stored in token (it's also used for decrypting it on server side)
 // @param timestamp - The timestamp which marks the creation of this token, thus limiting its
 //                    use beyond a certain duration.
-// @return A CMAC token encrypted based on 'AES-128-ecb' algorithm.
-// CMAC (Cipher-based Message Authentication Code) is a block cipher-based message authentication code algorithm
-// and for understanding the generic token type (that CMAC token represents), please refer here:
-// https://en.wikipedia.org/wiki/One-key_MAC
-// AES stands for 'Advanced Encryption Standard' specification.
-// For more info on this specification, see https://en.wikipedia.org/wiki/Advanced_Encryption_Standard
-function createToken (user, key, timestamp) {
+// @param iv - The initialization vector used by the 'AES-256-cbc' algorithm.
+// @return A CMAC token encrypted based on 'AES-256-cbc' algorithm.
+function createCbcToken (user, key, timestamp, iv) {
   const keyBuffer = Buffer.from(key)
-  const textBuffer = Buffer.from(`${user};${timestamp}`)
 
-  const ivBuffer = Buffer.from('')
+  // According to KL 4.8 Spec, if key is 32 chars, then an extra x-ts is inserted
+  const textBuffer = Buffer.from(`${user};x-ts=${timestamp}`)
+  const ivBuffer = Buffer.from(iv)
 
-  const crypter = crypto.createCipheriv('aes-128-ecb', keyBuffer, ivBuffer)
+  const crypter = crypto.createCipheriv(ALGO_FOR_CBC_CIPHER, keyBuffer, ivBuffer)
+
   const chunks = []
   chunks.push(crypter.update(textBuffer, 'buffer', 'hex'))
   chunks.push(crypter.final('hex'))
-
   const encryptedBuffer = Buffer.from(chunks.join(''), 'hex')
-  return encryptedBuffer.toString('hex')
+  const ciphertext = encryptedBuffer.toString('hex')
+
+  // Convert letters to upper case (as indicated in Spec),
+  // as well as prepend the iv value
+  const IVciphertext = `${iv}${ciphertext.toUpperCase()}`
+
+  // According to KL 4.8 REST API spec (page 13) HMAC is generated by:
+  // (IVCiphertext ) and the secret key, as input parameters.
+  const hmac = crypto
+    .createHmac('sha256', key)
+    // updating data
+    .update(IVciphertext)
+    // Encoding to be used
+    .digest('hex')
+
+  // Convert letters to upper case, as indicated in Spec
+  const HMAC = hmac.toUpperCase()
+  const token = HMAC + IVciphertext
+  return token
 }

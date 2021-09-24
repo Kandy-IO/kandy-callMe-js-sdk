@@ -2,7 +2,7 @@
 <html>
 <head>
   <meta charset='utf-8' />
-  <title>kandy-callMe-js-sdk 4.31.0 | Documentation</title>
+  <title>kandy-callMe-js-sdk 4.32.0 | Documentation</title>
   <meta name='viewport' content='width=device-width,initial-scale=1'>
   <link href='assets/bass.css' type='text/css' rel='stylesheet' />
   <link href='assets/style.css' type='text/css' rel='stylesheet' />
@@ -14,7 +14,7 @@
       <div id='split-left' class='overflow-auto fs0 height-viewport-100'>
         <div class='py1 px2'>
           <h3 class='mb0 no-anchor'>kandy-callMe-js-sdk</h3>
-          <div class='mb1'><code>4.31.0</code></div>
+          <div class='mb1'><code>4.32.0</code></div>
           <input
             placeholder='Filter'
             id='filter-input'
@@ -475,6 +475,17 @@
                   </li>
                 <li><span style="color:magenta">ⓝ</span><a href='#connection' class=" toggle-sibling"> api.connection <span class='icon'>▸</span> </a><div class='toggle-target display-none'>
                           <ul class='list-reset py1-ul pl1'>
+                          <li class='h5'><span>Types</span></li>
+                          
+                            <li><a
+                              href='#connectionwsconnectionobject'
+                              class='regular pre-open'>
+                              <span style="color:blue">ⓣ</span> WSConnectionObject
+                            </a></li>
+                          
+                          </ul>
+                        
+                          <ul class='list-reset py1-ul pl1'>
                           <li class='h5'><span>Functions</span></li>
                           
                             <li><a
@@ -797,13 +808,13 @@ The SDK instance will be refered as 'api' throughout the rest of the documentati
     
       
       <pre class='p1 overflow-auto round fill-light'><span class="hljs-comment">// Instantiate the SDK.</span>
-<span class="hljs-keyword">import</span> { create } <span class="hljs-keyword">from</span> <span class="hljs-string">'kandy'</span>
+<span class="hljs-keyword">import</span> { create } <span class="hljs-keyword">from</span> <span class="hljs-string">&#x27;kandy&#x27;</span>
 <span class="hljs-keyword">const</span> client = create({
     <span class="hljs-attr">authentication</span>: { ... },
     <span class="hljs-attr">logs</span>: { ... },
     ...
 });
-<span class="hljs-comment">// Use the SDK's API.</span>
+<span class="hljs-comment">// Use the SDK&#x27;s API.</span>
 client.on( ... );</pre>
     
   
@@ -1463,6 +1474,17 @@ must initiate the feedback being sent. See the
 
 
               
+                <tr>
+  <td class='break-word'><span class='code bold'>call.normalizeDestination</span> <code class='quiet'><a href="https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Boolean">boolean</a></code>
+  
+    (default <code>true</code>)
+  </td>
+  <td class='break-word'><span>Specifies whether or not SIP address normalization will be applied.
+</span></td>
+</tr>
+
+
+              
             </tbody>
           </table>
           
@@ -1504,7 +1526,7 @@ must initiate the feedback being sent. See the
   <p>Configuration options for the Connectivity feature.
 The SDK can only use keepalive as the connectivity check.</p>
 <p>Keep Alive: The client sends "keepalive" messages (to the server) on the websocket at regular intervals. This lets the server know that the client is still connected, and that it should "keep the connection alive".</p>
-<p>For more information on keepalive see here: <a href="https://en.wikipedia.org/wiki/Keepalive">https://en.wikipedia.org/wiki/Keepalive</a></p>
+<p>For more information on keepalive see here: https://en.wikipedia.org/wiki/Keepalive</p>
 
 
   <div class='pre p1 fill-light mt0'>config.connectivity</div>
@@ -2048,7 +2070,7 @@ so as not to interfere with any ongoing events.</p>
     
       
       <pre class='p1 overflow-auto round fill-light'><span class="hljs-comment">// Instantiate the SDK.</span>
-<span class="hljs-keyword">import</span> { create } <span class="hljs-keyword">from</span> <span class="hljs-string">'kandy'</span>
+<span class="hljs-keyword">import</span> { create } <span class="hljs-keyword">from</span> <span class="hljs-string">&#x27;kandy&#x27;</span>
 <span class="hljs-keyword">const</span> config = {
     <span class="hljs-attr">authentication</span>: { ... },
     <span class="hljs-attr">logs</span>: { ... },
@@ -2263,7 +2285,7 @@ client.on( ... )</pre>
     
       
       <pre class='p1 overflow-auto round fill-light'><span class="hljs-comment">// Listen for events of a specific type emitted by the SDK.</span>
-client.on(<span class="hljs-string">'dummy:event'</span>, <span class="hljs-function"><span class="hljs-keyword">function</span> (<span class="hljs-params">params</span>) </span>{
+client.on(<span class="hljs-string">&#x27;dummy:event&#x27;</span>, <span class="hljs-function"><span class="hljs-keyword">function</span> (<span class="hljs-params">params</span>) </span>{
    <span class="hljs-comment">// Handle the event.</span>
 })</pre>
     
@@ -4249,13 +4271,13 @@ or the browser temporarily disabling the SDK's access to a local Track's source.
 They can also be set after a Call is established using the <a href="#callsetcustomparameters">call.setCustomParameters</a> API, and sent using the <a href="#callsendcustomparameters">call.sendCustomParameters</a> API.</p>
 <p>Custom headers may be received anytime throughout the duration a call. A remote endpoint may send custom headers when starting a call,
 answering a call, or during call updates such as hold/unhold and addition/removal of media in the call.
-When these custom headers are received, the SDK will emit a <a href="call.event:call:customParameters">call:customParameters</a> event
+When these custom headers are received, the SDK will emit a <a>call:customParameters</a> event
 which will contain the custom parameters that were received.</p>
 <p>A Call's custom parameters are stored on the Call's <a href="#callcallobject">CallObject</a>,
 which can be retrieved using the <a href="#callgetbyid">call.getById</a> or
 <a href="#callgetall">call.getAll</a> APIs. These are the parameters that will be sent to the remote
 endpoint of the Call. Parameters received from a Call are not stored as
-part of the CallObject and are only provided via the <a href="call.event:call:customParameters">call:customParameters</a> event.</p>
+part of the CallObject and are only provided via the <a>call:customParameters</a> event.</p>
 
 
   <div class='pre p1 fill-light mt0'>CustomParameter</div>
@@ -4326,8 +4348,8 @@ client.call.make(destination, mediaConstraints,
  {
    <span class="hljs-attr">customParameters</span>: [
      {
-       <span class="hljs-attr">name</span>: <span class="hljs-string">'X-GPS'</span>,
-       <span class="hljs-attr">value</span>: <span class="hljs-string">'42.686032,23.344565'</span>
+       <span class="hljs-attr">name</span>: <span class="hljs-string">&#x27;X-GPS&#x27;</span>,
+       <span class="hljs-attr">value</span>: <span class="hljs-string">&#x27;42.686032,23.344565&#x27;</span>
      }
    ]
  }
@@ -4676,32 +4698,32 @@ client.call.make(destination, mediaConstraints,
     
       
       <pre class='p1 overflow-auto round fill-light'><span class="hljs-comment">// Make a basic anonymous call.</span>
-<span class="hljs-keyword">let</span> callee = <span class="hljs-string">'user1@example.com'</span>;
+<span class="hljs-keyword">let</span> callee = <span class="hljs-string">&#x27;user1@example.com&#x27;</span>;
 <span class="hljs-keyword">let</span> callOptions = { ... };
 
 <span class="hljs-keyword">let</span> callId = client.call.makeAnonymous(callee, {}, callOptions);</pre>
     
       
       <pre class='p1 overflow-auto round fill-light'><span class="hljs-comment">// Make a time-limited token anonymous call.</span>
-<span class="hljs-keyword">let</span> callee = <span class="hljs-string">'user1@example.com'</span>;
-<span class="hljs-keyword">let</span> account = <span class="hljs-string">'user2@example.com'</span>;
+<span class="hljs-keyword">let</span> callee = <span class="hljs-string">&#x27;user1@example.com&#x27;</span>;
+<span class="hljs-keyword">let</span> account = <span class="hljs-string">&#x27;user2@example.com&#x27;</span>;
 <span class="hljs-keyword">let</span> callOptions = { ...
-    customParameters: [
+    <span class="hljs-attr">customParameters</span>: [
       {
-        <span class="hljs-string">"name"</span>: <span class="hljs-string">"X-GPS"</span>,
-        <span class="hljs-string">"value"</span>: <span class="hljs-string">"42.686032,23.344565"</span>
+        <span class="hljs-string">&quot;name&quot;</span>: <span class="hljs-string">&quot;X-GPS&quot;</span>,
+        <span class="hljs-string">&quot;value&quot;</span>: <span class="hljs-string">&quot;42.686032,23.344565&quot;</span>
       }
     ],
     ...
   };
 
 <span class="hljs-comment">// Generate / Retrieve the encrypted tokens.</span>
-<span class="hljs-keyword">const</span> key = <span class="hljs-string">'abc123...'</span>;
+<span class="hljs-keyword">const</span> key = <span class="hljs-string">&#x27;abc123...&#x27;</span>;
 <span class="hljs-keyword">const</span> credentials = {
      <span class="hljs-attr">accountToken</span>: createToken(account, key),
-     <span class="hljs-attr">fromToken</span>: createToken(<span class="hljs-string">'sip:'</span> + account, key),
-     <span class="hljs-attr">toToken</span>: createToken(<span class="hljs-string">'sip:'</span> + callee, key),
-     <span class="hljs-attr">realm</span>: <span class="hljs-string">'realmAbc123...'</span>
+     <span class="hljs-attr">fromToken</span>: createToken(<span class="hljs-string">&#x27;sip:&#x27;</span> + account, key),
+     <span class="hljs-attr">toToken</span>: createToken(<span class="hljs-string">&#x27;sip:&#x27;</span> + callee, key),
+     <span class="hljs-attr">realm</span>: <span class="hljs-string">&#x27;realmAbc123...&#x27;</span>
 };
 
 <span class="hljs-keyword">let</span> callId = client.call.makeAnonymous(callee, credentials, callOptions);</pre>
@@ -5849,7 +5871,7 @@ same way that it was available in previous releases (v3.X). In place
 of this API, the SDK has a more general API that can be used for this
 same behaviour.</p>
 <p>The <a href="#calladdmedia">call.addMedia</a> API can be used to perform the same behaviour
-as <code>startScreenshare</code>. <a href="#calladdmedia">call.addMedia</a> is a general-purpose API
+as <code>startScreenshare</code>. {@link call.addMedia} is a general-purpose API
 for adding media to a call, which covers the same functionality as
 <code>startScreenshare</code>. Selecting only screen options when using
 <a href="#calladdmedia">call.addMedia</a> will perform the same behaviour as using
@@ -5921,7 +5943,7 @@ same way that it was available in previous releases (v3.X). In place
 of this API, the SDK has a more general API that can be used for this
 same behaviour.</p>
 <p>The <a href="#callremovemedia">call.removeMedia</a> API can be used to perform the same
-behaviour as <code>stopScreenshare</code>. <a href="#callremovemedia">call.removeMedia</a> is a
+behaviour as <code>stopScreenshare</code>. {@link call.removeMedia} is a
 general-purpose API for removing media from a call, which covers the
 same functionality as <code>stopScreenshare</code>. Specifying only the screen
 track when using <a href="#callremovemedia">call.removeMedia</a> will perform the same
@@ -5959,8 +5981,8 @@ which track was the screen track in this scenario.</p>
 <span class="hljs-comment">// Get the ID of any/all video tracks on the call.</span>
 <span class="hljs-keyword">const</span> videoTracks = call.localTracks.filter(<span class="hljs-function"><span class="hljs-params">trackId</span> =&gt;</span> {
    <span class="hljs-keyword">const</span> track = call.media.getTrackById(trackId)
-   <span class="hljs-comment">// Both video and screen tracks have kind of 'video'.</span>
-   <span class="hljs-keyword">return</span> track.kind === <span class="hljs-string">'video'</span>
+   <span class="hljs-comment">// Both video and screen tracks have kind of &#x27;video&#x27;.</span>
+   <span class="hljs-keyword">return</span> track.kind === <span class="hljs-string">&#x27;video&#x27;</span>
 })
 
 <span class="hljs-comment">// Pick out the screen track.</span>
@@ -6032,9 +6054,7 @@ otherwise they will be added in-band to the call's audio.</p>
         <div class='space-bottom0'>
           <div>
             <span class='code bold'>tone</span> <code class='quiet'>(<a href="https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/String">string</a>)</code>
-	    DTMF tone(s) to send. Valid chracters are 
-['0','1','2','3','4','5','6','7','8','9','#','*' and ',']
-.
+	    DTMF tone(s) to send. Valid chracters are ['0','1','2','3','4','5','6','7','8','9','#','*' and ','].
 
           </div>
           
@@ -6160,7 +6180,7 @@ provided, RTCStatsReport is generated for the Call itself.
     <div class='py1 quiet mt1 prose-big'>Example</div>
     
       
-      <pre class='p1 overflow-auto round fill-light'>client.on(<span class="hljs-string">'call:statsReceived'</span>, <span class="hljs-function"><span class="hljs-keyword">function</span> (<span class="hljs-params">params</span>) </span>{
+      <pre class='p1 overflow-auto round fill-light'>client.on(<span class="hljs-string">&#x27;call:statsReceived&#x27;</span>, <span class="hljs-function"><span class="hljs-keyword">function</span> (<span class="hljs-params">params</span>) </span>{
    <span class="hljs-comment">// Iterate over each individual statistic inside the RTCPStatsReport.</span>
    params.result.forEach(<span class="hljs-function"><span class="hljs-params">stats</span> =&gt;</span> {
        <span class="hljs-comment">// Handle the data on its own or collate with previously gathered stats</span>
@@ -6169,7 +6189,7 @@ provided, RTCStatsReport is generated for the Call itself.
    })
 })
 
-<span class="hljs-comment">// Get a snapshot of the Call's stats.</span>
+<span class="hljs-comment">// Get a snapshot of the Call&#x27;s stats.</span>
 <span class="hljs-comment">//   This may be done on a regular interval to collect data over time.</span>
 client.call.getStats(callId)</pre>
     
@@ -6397,7 +6417,7 @@ client.call.replaceTrack(callId, videoTrack.id, {
 <span class="hljs-comment">// User will then be prompted to pick a specific screen to share and thus the device id will be selected.</span>
 client.call.replaceTrack(callId, videoTrack.id, {
   <span class="hljs-comment">// The track should be replaced with a screen sharing track.</span>
-  <span class="hljs-comment">// Note that 'screenOptions' property is not mandatory, as API will use default values</span>
+  <span class="hljs-comment">// Note that &#x27;screenOptions&#x27; property is not mandatory, as API will use default values</span>
   <span class="hljs-comment">// for properties like: width, height, frameRate.</span>
   <span class="hljs-attr">screen</span>: <span class="hljs-literal">true</span>
 })</pre>
@@ -6573,6 +6593,11 @@ event when a Call's state changes from one state to another.</p>
 
   <div class='pre p1 fill-light mt0'>states</div>
   
+    <p>
+      Type:
+      <a href="https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Object">Object</a>
+    </p>
+  
   
 
   
@@ -6723,7 +6748,7 @@ supported, this state may replace the Ringing state. This is a state valid only 
     
       
       <pre class='p1 overflow-auto round fill-light'><span class="hljs-comment">// Use the call states to know how to handle a change in the call.</span>
-client.on(<span class="hljs-string">'call:stateChange'</span>, <span class="hljs-function"><span class="hljs-keyword">function</span> (<span class="hljs-params">params</span>) </span>{
+client.on(<span class="hljs-string">&#x27;call:stateChange&#x27;</span>, <span class="hljs-function"><span class="hljs-keyword">function</span> (<span class="hljs-params">params</span>) </span>{
    <span class="hljs-keyword">const</span> call = client.call.getById(params.callId)
    <span class="hljs-comment">// Check if the call now has media flowing.</span>
    <span class="hljs-keyword">if</span> (call.state === client.call.states.CONNECTED) {
@@ -6775,6 +6800,11 @@ event when a Call's media connection state changes from one state to another.</p
 
 
   <div class='pre p1 fill-light mt0'>mediaConnectionStates</div>
+  
+    <p>
+      Type:
+      <a href="https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Object">Object</a>
+    </p>
   
   
 
@@ -6927,7 +6957,7 @@ The Call will automatically attempt to reconnect, transitioning back to
     
       
       <pre class='p1 overflow-auto round fill-light'><span class="hljs-comment">// Use the media connection states to check the status of the media connection of the Call.</span>
-client.on(<span class="hljs-string">'call:mediaConnectionChange'</span>, <span class="hljs-function"><span class="hljs-keyword">function</span> (<span class="hljs-params">params</span>) </span>{
+client.on(<span class="hljs-string">&#x27;call:mediaConnectionChange&#x27;</span>, <span class="hljs-function"><span class="hljs-keyword">function</span> (<span class="hljs-params">params</span>) </span>{
   <span class="hljs-comment">// Retrieve the state of the Call this event is for.</span>
   <span class="hljs-keyword">const</span> call = client.call.getById(params.callId)
   <span class="hljs-keyword">const</span> mediaConnectionStates = client.call.mediaConnectionStates
@@ -6936,30 +6966,30 @@ client.on(<span class="hljs-string">'call:mediaConnectionChange'</span>, <span c
   <span class="hljs-keyword">switch</span> (call.mediaConnectionState) {
     <span class="hljs-keyword">case</span> mediaConnectionStates.CONNECTED:
     <span class="hljs-keyword">case</span> mediaConnectionStates.COMPLETED:
-      <span class="hljs-comment">// Media established: The Call's media is connected. The Call's participants</span>
+      <span class="hljs-comment">// Media established: The Call&#x27;s media is connected. The Call&#x27;s participants</span>
       <span class="hljs-comment">//    are able to see/hear each other.</span>
       <span class="hljs-comment">// These states will occur after Call establishment.</span>
       ...
-      break
+      <span class="hljs-keyword">break</span>
     <span class="hljs-keyword">case</span> mediaConnectionStates.NEW:
     <span class="hljs-keyword">case</span> mediaConnectionStates.CHECKING:
     <span class="hljs-keyword">case</span> mediaConnectionStates.DISCONNECTED:
-      <span class="hljs-comment">// Media pending: The Call's media is not connected. The Call is working</span>
+      <span class="hljs-comment">// Media pending: The Call&#x27;s media is not connected. The Call is working</span>
       <span class="hljs-comment">//    to connect media automatically.</span>
       <span class="hljs-comment">// These states will occur during Call establishment and may occur midcall if there are</span>
       <span class="hljs-comment">//    connection issues (eg. poor network quality) or a Call participant has changed (eg. transfer).</span>
       ...
-      break
+      <span class="hljs-keyword">break</span>
     <span class="hljs-keyword">case</span> mediaConnectionStates.FAILED:
      <span class="hljs-comment">// Media has failed. The call requires a media refresh to restablish.</span>
      <span class="hljs-comment">// This state will occur after the `DISCONNECTED` state is encountered.</span>
      ...
-      break
+      <span class="hljs-keyword">break</span>
     <span class="hljs-keyword">case</span> mediaConnectionStates.CLOSED:
       <span class="hljs-comment">// Media ended due to the Call being ended.</span>
       <span class="hljs-comment">// This state will occur after Call establishment.</span>
       ...
-      break
+      <span class="hljs-keyword">break</span>
   }
 }</pre>
     
@@ -6996,7 +7026,7 @@ has entered the <code>failed</code> state, but may be used in other scenarios.</
 its media connection. By this time, or shortly after, the Call's
 <a href="#callmediaconnectionstates">mediaConnectionState</a> should have
 transitioned to <code>checking</code> (via a
-<a href="#calleventcallmediaconnectionchange">call:mediaConnectionChange</a>
+{@link call.event:call:mediaConnectionChange call:mediaConnectionChange}
 event) to signify the re-establishment. It will then transition to either
 <code>connected</code> or <code>failed</code> state, similar to during the initial Call establishment.</p>
 <p>If this operation fails, then the Call will not attempt the re-establishment
@@ -7167,21 +7197,21 @@ media, such as input device.</p>
     
       
       <pre class='p1 overflow-auto round fill-light'><span class="hljs-keyword">const</span> call = client.call.getById(callId)
-<span class="hljs-comment">// Get the ID of the Call's video track.</span>
+<span class="hljs-comment">// Get the ID of the Call&#x27;s video track.</span>
 <span class="hljs-keyword">const</span> videoTrack = call.localTracks.find(<span class="hljs-function"><span class="hljs-params">trackId</span> =&gt;</span> {
    <span class="hljs-keyword">const</span> track = client.media.getTrackById(trackId)
-   <span class="hljs-keyword">return</span> track.kind === <span class="hljs-string">'video'</span>
+   <span class="hljs-keyword">return</span> track.kind === <span class="hljs-string">&#x27;video&#x27;</span>
 })
 
 <span class="hljs-comment">// Select the new video options.</span>
 <span class="hljs-keyword">const</span> media = {
    <span class="hljs-attr">video</span>: <span class="hljs-literal">true</span>,
    <span class="hljs-attr">videoOptions</span>: {
-       <span class="hljs-attr">deviceId</span>: <span class="hljs-string">'cameraId'</span>
+       <span class="hljs-attr">deviceId</span>: <span class="hljs-string">&#x27;cameraId&#x27;</span>
    }
 }
 
-<span class="hljs-comment">// Change the call's camera by replacing the video track.</span>
+<span class="hljs-comment">// Change the call&#x27;s camera by replacing the video track.</span>
 client.call.replaceTrack(callId, videoTrack, media)</pre>
     
   
@@ -7245,10 +7275,10 @@ re-rendering it with a new speaker with <a href="#mediarendertracks">media.rende
     
       
       <pre class='p1 overflow-auto round fill-light'><span class="hljs-keyword">const</span> call = client.call.getById(callId)
-<span class="hljs-comment">// Get the ID of the Call's audio track.</span>
+<span class="hljs-comment">// Get the ID of the Call&#x27;s audio track.</span>
 <span class="hljs-keyword">const</span> audioTrack = call.localTracks.find(<span class="hljs-function"><span class="hljs-params">trackId</span> =&gt;</span> {
    <span class="hljs-keyword">const</span> track = client.media.getTrackById(trackId)
-   <span class="hljs-keyword">return</span> track.kind === <span class="hljs-string">'audio'</span>
+   <span class="hljs-keyword">return</span> track.kind === <span class="hljs-string">&#x27;audio&#x27;</span>
 })
 
 <span class="hljs-comment">// Where the audio track was previously rendered.</span>
@@ -7258,7 +7288,7 @@ re-rendering it with a new speaker with <a href="#mediarendertracks">media.rende
 client.media.removeTrack([ audioTrack ], audioContainer)
 <span class="hljs-comment">// Re-render the audio track with a new speaker.</span>
 client.media.renderTrack([ audioTrack ], audioContainer, {
-   <span class="hljs-attr">speakerId</span>: <span class="hljs-string">'speakerId'</span>
+   <span class="hljs-attr">speakerId</span>: <span class="hljs-string">&#x27;speakerId&#x27;</span>
 })</pre>
     
   
@@ -7616,7 +7646,7 @@ API.</p>
     <div class='py1 quiet mt1 prose-big'>Example</div>
     
       
-      <pre class='p1 overflow-auto round fill-light'>client.on(<span class="hljs-string">'call:receive'</span>, <span class="hljs-function"><span class="hljs-keyword">function</span>(<span class="hljs-params">params</span>) </span>{
+      <pre class='p1 overflow-auto round fill-light'>client.on(<span class="hljs-string">&#x27;call:receive&#x27;</span>, <span class="hljs-function"><span class="hljs-keyword">function</span>(<span class="hljs-params">params</span>) </span>{
     <span class="hljs-comment">// We have received a call, prompt the user to respond.</span>
     promptUser(client.call.getById(params.callId));
 });</pre>
@@ -7785,7 +7815,7 @@ API.</p>
     <div class='py1 quiet mt1 prose-big'>Example</div>
     
       
-      <pre class='p1 overflow-auto round fill-light'>client.on(<span class="hljs-string">'call:stateChange'</span>, <span class="hljs-function"><span class="hljs-keyword">function</span> (<span class="hljs-params">params</span>) </span>{
+      <pre class='p1 overflow-auto round fill-light'>client.on(<span class="hljs-string">&#x27;call:stateChange&#x27;</span>, <span class="hljs-function"><span class="hljs-keyword">function</span> (<span class="hljs-params">params</span>) </span>{
     <span class="hljs-keyword">const</span> call = client.call.getById(params.callId)
     <span class="hljs-keyword">const</span> prevState = params.previous.state
     log(<span class="hljs-string">`Call changed from <span class="hljs-subst">${prevState}</span> to <span class="hljs-subst">${call.state}</span> state.`</span>)
@@ -8364,7 +8394,7 @@ its media removed, see <a href="#calleventcallremovedmedia">call:removedMedia</a
     <div class='py1 quiet mt1 prose-big'>Example</div>
     
       
-      <pre class='p1 overflow-auto round fill-light'>client.on(<span class="hljs-string">'call:statsReceived'</span>, <span class="hljs-function"><span class="hljs-keyword">function</span> (<span class="hljs-params">params</span>) </span>{
+      <pre class='p1 overflow-auto round fill-light'>client.on(<span class="hljs-string">&#x27;call:statsReceived&#x27;</span>, <span class="hljs-function"><span class="hljs-keyword">function</span> (<span class="hljs-params">params</span>) </span>{
    <span class="hljs-comment">// Iterate over each individual statistic inside the RTCPStatsReport Map.</span>
    params.result.forEach(<span class="hljs-function"><span class="hljs-params">stat</span> =&gt;</span> {
      ...
@@ -8612,7 +8642,7 @@ information.</p>
 These state changes occur during call establishment, connection loss/re-establishment, call completion, etc.</p>
 <p>To check the media connection state of a call, retrieve the call's information using the  <a href="#callgetbyid">call.getById</a> API,
 and check the <code>mediaConnectionState</code> property of the call.
-See <a href="#callmediaconnectionstates">call.mediaConnectionStates</a> for the list of possible values and descriptions.</p>
+See {@link call.mediaConnectionStates} for the list of possible values and descriptions.</p>
 
 
   <div class='pre p1 fill-light mt0'>call:mediaConnectionChange</div>
@@ -8795,14 +8825,14 @@ successful.</p>
     <div class='py1 quiet mt1 prose-big'>Example</div>
     
       
-      <pre class='p1 overflow-auto round fill-light'>client.on(<span class="hljs-string">'call:mediaRestart'</span>, <span class="hljs-function"><span class="hljs-keyword">function</span> (<span class="hljs-params">params</span>) </span>{
+      <pre class='p1 overflow-auto round fill-light'>client.on(<span class="hljs-string">&#x27;call:mediaRestart&#x27;</span>, <span class="hljs-function"><span class="hljs-keyword">function</span> (<span class="hljs-params">params</span>) </span>{
    <span class="hljs-keyword">if</span> (params.error) {
      <span class="hljs-comment">// The operation failed. May want to determine whether to re-attempt the</span>
      <span class="hljs-comment">//    operation (if the failure was simply a connectivity issue) or to</span>
-     <span class="hljs-comment">//    consider the call's media irrecoverable.</span>
+     <span class="hljs-comment">//    consider the call&#x27;s media irrecoverable.</span>
      ...
    } <span class="hljs-keyword">else</span> {
-     <span class="hljs-comment">// The call should be re-establishing media, with the call's</span>
+     <span class="hljs-comment">// The call should be re-establishing media, with the call&#x27;s</span>
      <span class="hljs-comment">//    `mediaConnectionState` being updated.</span>
      <span class="hljs-keyword">const</span> mediaState = client.call.getById(params.callId).mediaConnectionState
      ...
@@ -8868,6 +8898,324 @@ the SDK and one or more backend servers.</p>
   
 
   
+      <div class='py1 quiet mt1 prose-big'>Types</div>
+      <div class="clearfix">
+  
+    <div class='border-bottom' id='connectionwsconnectionobject'>
+      <div class="clearfix small pointer toggle-sibling">
+        <div class="py1 contain">
+            <a class='icon pin-right py1 dark-link caret-right'>▸</a>
+            <span class='code strong strong truncate'>WSConnectionObject</span>
+        </div>
+      </div>
+      <div class="clearfix display-none toggle-target">
+        <section class='p2 mb2 clearfix bg-white minishadow'>
+
+  
+
+  <p>Information about a websocket connection.</p>
+<p>Can be retrieved using the <a href="#connectiongetsocketstate">connection.getSocketState</a> API.</p>
+
+
+  <div class='pre p1 fill-light mt0'>WSConnectionObject</div>
+  
+    <p>
+      Type:
+      <a href="https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Object">Object</a>
+    </p>
+  
+  
+
+  
+  
+  
+  
+  
+  
+
+  
+
+  
+    <div class='py1 quiet mt1 prose-big'>Properties</div>
+    <div>
+      
+        <div class='space-bottom0'>
+          <span class='code bold'>connected</span> 
+          <code class='quiet'>
+            (<a href="https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Boolean">boolean</a>)
+          </code>
+
+          
+
+          
+             : The state of the websocket connection.
+
+          
+          
+        </div>
+      
+        <div class='space-bottom0'>
+          <span class='code bold'>pinging</span> 
+          <code class='quiet'>
+            (<a href="https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Boolean">boolean</a>)
+          </code>
+
+          
+
+          
+             : True if the client has sent a ping to the server and is still waiting for a pong response.
+
+          
+          
+        </div>
+      
+        <div class='space-bottom0'>
+          <span class='code bold'>method</span> 
+          <code class='quiet'>
+            (<a href="https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Object">Object</a>)
+          </code>
+
+          
+
+          
+             : Information about how the websocket is being used.
+
+          
+          
+            <ul>
+              
+                <li><code>method.type</code> <a href="https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/String">string</a>?
+                  
+                  <p>How the websocket is staying connected.</p>
+</li>
+              
+                <li><code>method.responsibleParty</code> <a href="https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/String">string</a>?
+                  
+                  <p>Who is responsible for keeping the connection alive.</p>
+</li>
+              
+            </ul>
+          
+        </div>
+      
+        <div class='space-bottom0'>
+          <span class='code bold'>platform</span> 
+          <code class='quiet'>
+            (<a href="https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/String">string</a>)
+          </code>
+
+          
+
+          
+             : The SDK platform being used.
+
+          
+          
+        </div>
+      
+        <div class='space-bottom0'>
+          <span class='code bold'>pingInterval</span> 
+          <code class='quiet'>
+            (<a href="https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Number">number</a>)
+          </code>
+
+          
+
+          
+             : How often the client will ping the server to test for websocket connectivity.
+
+          
+          
+        </div>
+      
+        <div class='space-bottom0'>
+          <span class='code bold'>reconnectLimit</span> 
+          <code class='quiet'>
+            (<a href="https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Number">number</a>)
+          </code>
+
+          
+
+          
+             : How many times the SDK will try to reconnect a disconnected websocket.
+
+          
+          
+        </div>
+      
+        <div class='space-bottom0'>
+          <span class='code bold'>reconnectDelay</span> 
+          <code class='quiet'>
+            (<a href="https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Number">number</a>)
+          </code>
+
+          
+
+          
+             : How long the SDK will wait before retrying websocket reconnection.
+
+          
+          
+        </div>
+      
+        <div class='space-bottom0'>
+          <span class='code bold'>reconnectTimeMultiplier</span> 
+          <code class='quiet'>
+            (<a href="https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Number">number</a>)
+          </code>
+
+          
+
+          
+             : Reconnect delay multiplier for subsequent attempts. The reconnect delay time will be multiplied by this after each failed reconnect attempt to increase the delay between attempts. eg. 5000ms then 10000ms then 20000ms delay if value is 2.
+
+          
+          
+        </div>
+      
+        <div class='space-bottom0'>
+          <span class='code bold'>reconnectTimeLimit</span> 
+          <code class='quiet'>
+            (<a href="https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Number">number</a>)
+          </code>
+
+          
+
+          
+             : Maximum time delay between reconnect attempts (milliseconds). Used in conjunction with 
+<code>reconnectTimeMultiplier</code>
+ to prevent overly long delays between reconnection attempts.
+
+          
+          
+        </div>
+      
+        <div class='space-bottom0'>
+          <span class='code bold'>autoReconnect</span> 
+          <code class='quiet'>
+            (<a href="https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Boolean">boolean</a>)
+          </code>
+
+          
+
+          
+             : Indicates if the SDK should automatically try reconnecting a disconnected websocket.
+
+          
+          
+        </div>
+      
+        <div class='space-bottom0'>
+          <span class='code bold'>maxMissedPings</span> 
+          <code class='quiet'>
+            (<a href="https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Number">number</a>)
+          </code>
+
+          
+
+          
+             : How many missed pings before the SDK stops trying to reconnect a disconnected websocket.
+
+          
+          
+        </div>
+      
+        <div class='space-bottom0'>
+          <span class='code bold'>webSocketOAuthMode</span> 
+          <code class='quiet'>
+            (<a href="https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/String">string</a>)
+          </code>
+
+          
+
+          
+             : The mode used for authenticating with the server.
+
+          
+          
+        </div>
+      
+        <div class='space-bottom0'>
+          <span class='code bold'>wsInfo</span> 
+          <code class='quiet'>
+            (<a href="https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Object">Object</a>)
+          </code>
+
+          
+
+          
+             : Information required to connect a websocket to the server.
+
+          
+          
+            <ul>
+              
+                <li><code>wsInfo.protocol</code> <a href="https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/String">string</a>?
+                  
+                  <p>The protocol to use to connect a websocket.</p>
+</li>
+              
+                <li><code>wsInfo.server</code> <a href="https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/String">string</a>?
+                  
+                  <p>The domain name or IP address of the server to connect to.</p>
+</li>
+              
+                <li><code>wsInfo.port</code> <a href="https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Number">number</a>?
+                  
+                  <p>The port of the server to connect to.</p>
+</li>
+              
+                <li><code>wsInfo.url</code> <a href="https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/String">string</a>?
+                  
+                  <p>The URL path to use to request a websocket connection.</p>
+</li>
+              
+                <li><code>wsInfo.params</code> <a href="https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/String">string</a>?
+                  
+                  <p>Any additional params that might be required by the server to establish the websocket connection.</p>
+</li>
+              
+            </ul>
+          
+        </div>
+      
+        <div class='space-bottom0'>
+          <span class='code bold'>lastContact</span> 
+          <code class='quiet'>
+            (<a href="https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Number">number</a>)
+          </code>
+
+          
+
+          
+             : The date and time that the last known contact with the server was.
+
+          
+          
+        </div>
+      
+    </div>
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+</section>
+
+      </div>
+    </div>
+  
+</div>
+
+    
 
     
       <div class='py1 quiet mt1 prose-big'>Functions</div>
@@ -8888,7 +9236,7 @@ the SDK and one or more backend servers.</p>
   <p>Get the state of the websocket.</p>
 
 
-  <div class='pre p1 fill-light mt0'>getSocketState(platform: <a href="https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/String">string</a>)</div>
+  <div class='pre p1 fill-light mt0'>getSocketState(platform: <a href="https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/String">string</a>): <a href="#connectionwsconnectionobject">connection.WSConnectionObject</a></div>
   
   
 
@@ -8918,6 +9266,16 @@ the SDK and one or more backend servers.</p>
 
   
 
+  
+    <div class='py1 quiet mt1 prose-big'>Returns</div>
+    
+      <div>
+        <code><a href="#connectionwsconnectionobject">connection.WSConnectionObject</a></code>:
+          Details about the current websocket connection, including state and configuration.
+
+        
+      </div>
+    
   
 
   
@@ -9333,10 +9691,10 @@ method as parameters.
   <span class="hljs-comment">// Assume that the first message parameter is a string.</span>
   <span class="hljs-keyword">const</span> [log, ...extra] = logEntry.messages
 
-  <span class="hljs-comment">// For the timer methods, don't actually use the console methods.</span>
+  <span class="hljs-comment">// For the timer methods, don&#x27;t actually use the console methods.</span>
   <span class="hljs-comment">//    The Logger already did the timing, so simply log out the info.</span>
-  <span class="hljs-keyword">if</span> ([<span class="hljs-string">'time'</span>, <span class="hljs-string">'timeLog'</span>, <span class="hljs-string">'timeEnd'</span>].includes(method)) {
-    method = <span class="hljs-string">'debug'</span>
+  <span class="hljs-keyword">if</span> ([<span class="hljs-string">&#x27;time&#x27;</span>, <span class="hljs-string">&#x27;timeLog&#x27;</span>, <span class="hljs-string">&#x27;timeEnd&#x27;</span>].includes(method)) {
+    method = <span class="hljs-string">&#x27;debug&#x27;</span>
   }
 
   <span class="hljs-built_in">console</span>[method](<span class="hljs-string">`<span class="hljs-subst">${logInfo}</span> - <span class="hljs-subst">${log}</span>`</span>, ...extra)
@@ -9426,10 +9784,10 @@ function with the logged information.</p>
   <span class="hljs-comment">// Assume that the first message parameter is a string.</span>
   <span class="hljs-keyword">const</span> [log, ...extra] = logEntry.messages
 
-  <span class="hljs-comment">// For the timer methods, don't actually use the console methods.</span>
+  <span class="hljs-comment">// For the timer methods, don&#x27;t actually use the console methods.</span>
   <span class="hljs-comment">//    The Logger already did the timing, so simply log out the info.</span>
-  <span class="hljs-keyword">if</span> ([<span class="hljs-string">'time'</span>, <span class="hljs-string">'timeLog'</span>, <span class="hljs-string">'timeEnd'</span>].includes(method)) {
-    method = <span class="hljs-string">'debug'</span>
+  <span class="hljs-keyword">if</span> ([<span class="hljs-string">&#x27;time&#x27;</span>, <span class="hljs-string">&#x27;timeLog&#x27;</span>, <span class="hljs-string">&#x27;timeEnd&#x27;</span>].includes(method)) {
+    method = <span class="hljs-string">&#x27;debug&#x27;</span>
   }
 
   <span class="hljs-built_in">console</span>[method](<span class="hljs-string">`<span class="hljs-subst">${logInfo}</span> - <span class="hljs-subst">${log}</span>`</span>, ...extra)
@@ -10106,11 +10464,11 @@ escaped.
     
       
       <pre class='p1 overflow-auto round fill-light'><span class="hljs-comment">// When a Call receives a new track, render it.</span>
-client.on(<span class="hljs-string">'call:newTrack'</span>, <span class="hljs-function"><span class="hljs-keyword">function</span> (<span class="hljs-params">params</span>) </span>{
+client.on(<span class="hljs-string">&#x27;call:newTrack&#x27;</span>, <span class="hljs-function"><span class="hljs-keyword">function</span> (<span class="hljs-params">params</span>) </span>{
    <span class="hljs-keyword">const</span> track = client.media.getTrackById(params.trackId)
    <span class="hljs-keyword">const</span> container = params.local ? localContainer : remoteContainer
 
-   <span class="hljs-comment">// Render the Call's new track when it first becomes available.</span>
+   <span class="hljs-comment">// Render the Call&#x27;s new track when it first becomes available.</span>
    client.media.renderTracks([ track.trackId ], container)
 })</pre>
     
@@ -10381,7 +10739,7 @@ when a Track has been unmuted.</p>
     
       
       <pre class='p1 overflow-auto round fill-light'><span class="hljs-comment">// Listen for changes to available media devices.</span>
-client.on(<span class="hljs-string">'devices:change'</span>, <span class="hljs-function"><span class="hljs-keyword">function</span> (<span class="hljs-params"></span>) </span>{
+client.on(<span class="hljs-string">&#x27;devices:change&#x27;</span>, <span class="hljs-function"><span class="hljs-keyword">function</span> (<span class="hljs-params"></span>) </span>{
    <span class="hljs-comment">// Retrieve the latest media device lists.</span>
    <span class="hljs-keyword">const</span> devices = client.media.getDevices()
 })</pre>
@@ -11698,8 +12056,8 @@ parameter. They can also be set after the SDK's creation by using the
     <div class='py1 quiet mt1 prose-big'>Example</div>
     
       
-      <pre class='p1 overflow-auto round fill-light'><span class="hljs-keyword">import</span> { create, sdpHandlers } <span class="hljs-keyword">from</span> <span class="hljs-string">'kandy'</span>;
-<span class="hljs-keyword">const</span> codecRemover = sdpHandlers.createCodecRemover([<span class="hljs-string">'VP8'</span>, <span class="hljs-string">'VP9'</span>])
+      <pre class='p1 overflow-auto round fill-light'><span class="hljs-keyword">import</span> { create, sdpHandlers } <span class="hljs-keyword">from</span> <span class="hljs-string">&#x27;kandy&#x27;</span>;
+<span class="hljs-keyword">const</span> codecRemover = sdpHandlers.createCodecRemover([<span class="hljs-string">&#x27;VP8&#x27;</span>, <span class="hljs-string">&#x27;VP9&#x27;</span>])
 <span class="hljs-keyword">const</span> client = create({
   <span class="hljs-attr">call</span>: {
     <span class="hljs-attr">sdpHandlers</span>: [ codecRemover, &lt;Your-SDP-Handler-<span class="hljs-built_in">Function</span>&gt;, ...]
@@ -11880,17 +12238,17 @@ codec selectors that correspond to those names without any extra FMTP parameters
     <div class='py1 quiet mt1 prose-big'>Example</div>
     
       
-      <pre class='p1 overflow-auto round fill-light'><span class="hljs-keyword">import</span> { create, sdpHandlers } <span class="hljs-keyword">from</span> <span class="hljs-string">'kandy'</span>;
+      <pre class='p1 overflow-auto round fill-light'><span class="hljs-keyword">import</span> { create, sdpHandlers } <span class="hljs-keyword">from</span> <span class="hljs-string">&#x27;kandy&#x27;</span>;
 
 <span class="hljs-keyword">const</span> codecRemover = sdpHandlers.createCodecRemover([
   <span class="hljs-comment">// Remove all VP8 and VP9 codecs.</span>
-  <span class="hljs-string">'VP8'</span>,
-  <span class="hljs-string">'VP9'</span>,
+  <span class="hljs-string">&#x27;VP8&#x27;</span>,
+  <span class="hljs-string">&#x27;VP9&#x27;</span>,
 
   <span class="hljs-comment">// Remove all H264 codecs with the specified FMTP parameters.</span>
   {
-    <span class="hljs-attr">name</span>: <span class="hljs-string">'H264'</span>,
-    <span class="hljs-attr">fmtpParams</span>: [<span class="hljs-string">'profile-level-id=4d0032'</span>, <span class="hljs-string">'packetization-mode=1'</span>]
+    <span class="hljs-attr">name</span>: <span class="hljs-string">&#x27;H264&#x27;</span>,
+    <span class="hljs-attr">fmtpParams</span>: [<span class="hljs-string">&#x27;profile-level-id=4d0032&#x27;</span>, <span class="hljs-string">&#x27;packetization-mode=1&#x27;</span>]
   }
 ])
 
