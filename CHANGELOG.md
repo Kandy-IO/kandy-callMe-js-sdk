@@ -5,17 +5,19 @@ Kandy.js change log.
 - This project adheres to [Semantic Versioning](http://semver.org/).
 - This change log follows [keepachangelog.com](http://keepachangelog.com/) recommendations.
 
-## 4.32.0 - beta
+## 4.32.0 - 2021-09-24
 
 ### Added
 
 - Added public documentation for `config.call.normalizeDestination`. `KJS-103`
 - Added an extra property `iceCollectionDelay` as part of `extraInfo` parameter that is passed to `iceCollectionCheck` function. This will further improve the application's side in making a decision whether it has collected good enough ICE candidates. `KJS-253`
+- Updated the _Generating Tokens_ tutorial to specify that SDK supports greater length keys when generating the auth tokens. `KJS-158`
 
 ### Fixed
 
 - Update notifications plugin state when a websocket connection is removed to indicate the websocket channel is no longer enabled. `KJS-209`
 - Fixed a Call issue where the start/stop video APIs were failing. `KJS-251`
+- Fixed a Call issue where receiving a compressed SDP would cause the operation to fail `KJS-328`
 
 ## 4.31.0 - 2021-08-30
 
@@ -28,7 +30,6 @@ Kandy.js change log.
 - Added exception handling to the SDP handler pipeline. If any handler throws an exception, it's now logged and execution continues with the next handler in the pipeline. `KJS-46`
 - Added previous media connection state to `call:mediaConnectionChange` event data. `KJS-96`
 - Added improved Call handling for local network errors occurring during hold and unhold midcall operations. `KJS-127`
-- Updated the _Generating Tokens_ tutorial to specify that SDK supports greater length keys when generating the auth tokens. `KJS-158`
 
 ### Fixed
 
