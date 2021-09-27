@@ -1,7 +1,7 @@
 /**
  * Kandy.js
  * kandy.newCallMe.js
- * Version: 4.33.0-beta.761
+ * Version: 4.33.0-beta.762
  */
 (function webpackUniversalModuleDefinition(root, factory) {
 	if(typeof exports === 'object' && typeof module === 'object')
@@ -8002,7 +8002,7 @@ exports.getVersion = getVersion;
  * for the @@ tag below with actual version value.
  */
 function getVersion() {
-  return '4.33.0-beta.761';
+  return '4.33.0-beta.762';
 }
 
 /***/ }),
@@ -15011,12 +15011,14 @@ function unholdCallFinish(id, params) {
   return callActionHelper(actionTypes.CALL_UNHOLD_FINISH, id, params);
 }
 
-function setCustomParameters(id, customParameters) {
+function setCustomParameters(id, customOptions) {
   const action = {
     type: actionTypes.SET_CUSTOM_PARAMETERS,
     payload: {
       id,
-      customParameters
+      // customOptions can either be an array (i.e., just the headers) or an object (i.e., headers and body)
+      customParameters: (0, _fp.isPlainObject)(customOptions) ? customOptions.customParameters : customOptions,
+      customBodies: (0, _fp.isPlainObject)(customOptions) ? customOptions.customBodies : undefined
     }
   };
   return action;
@@ -37676,7 +37678,7 @@ function anonymousAPI(otherApi) {
          * @param {call.MediaConstraint} [callOptions.screenOptions.width] The width of the screenShare.
          * @param {call.MediaConstraint} [callOptions.screenOptions.frameRate] The frame rate of the screenShare.
          * @param {string} [callOptions.displayName] Custom display name to be provided to the destination. Only used with token-less anonymous calls. Not supported in all environments and may use default display name.
-         * @param {Array<call.CustomParameter>} [callOptions.customParameters] Custom SIP header parameters for the SIP backend
+         * @param {Array<call.CustomParameter>} [callOptions.customParameters] Custom SIP header parameters for the SIP backend.
          * @return {string} Id of the outgoing call.
          * @example
          * // Make a basic anonymous call.
@@ -37708,6 +37710,15 @@ function anonymousAPI(otherApi) {
          * };
          *
          * let callId = client.call.makeAnonymous(callee, credentials, callOptions);
+         */
+
+        /**
+         * @private
+         * @memberof call
+         * @requires callMe
+         * @method makeAnonymous
+         * @param {Object} callOptions Call options.
+         * @param {Array<call.CustomBody>} [callOptions.customBodies] Custom SIP bodies for the SIP backend.
          */
         makeAnonymous(callee, credentials = {}, callOptions = {}) {
           // Separate the media constraints from the callOptions.
@@ -38305,6 +38316,48 @@ function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { de
  */
 
 /**
+ * Custom SIP bodies can be used to convey additional information to a SIP endpoint.
+ *
+ * The appropriate configuration for sending custom bodies must be enabled on the server prior to making call requests,
+ *  otherwise the requests will fail when trying to include the bodies.
+ *
+ * The `contentType` of the custom body should be compliant with RFC 2045, RFC 3261 (and their updated versions),
+ *  and the `contentDisposition` should be compliant with RFC 2183, RFC 3204, and RFC 3261 (and their updated versions).
+ *
+ * These custom bodies can be specified with the {@link call.make} and {@link call.answer} APIs.
+ *  They can also be set after a Call is established using the {@link call.setCustomParameters} API.
+ *
+ * A Call's custom bodies are stored on the Call's {@link call.CallObject CallObject},
+ *  which can be retrieved using the {@link call.getById} or
+ *  {@link call.getAll} APIs. These custom bodies will be sent to the remote endpoint of the Call for all subsequent
+ *  basic midcall operations, such as hold/unhold and add/remove media.
+ *
+ * @private
+ * @static
+ * @module CustomBody
+ * @typedef {Object} CustomBody
+ * @memberof call
+ * @requires link_call
+ * @requires callMe
+ * @property {string} contentType - The media type of the message body.
+ * @property {string} contentDisposition - How the message body is to be interpreted.
+ * @property {string} body - The message body.
+ * @example
+ * // Specify custom bodies when making a call.
+ * client.call.make(destination, mediaConstraints,
+ *  {
+ *    customBodies: [
+ *      {
+ *        contentType: 'text/plain;charset=UTF-8',
+ *        contentDisposition: 'render;HANDLING=OPTIONAL',
+ *        body: 'Geo location information is sent.'
+ *      }
+ *    ]
+ *  }
+ * )
+ */
+
+/**
  * Call API index.
  * APIs are organized by their namespacing.
  * @method api
@@ -38494,6 +38547,17 @@ function callAPI({ dispatch, getState }) {
      * // Make an audio-only call.
      * const newCallId = client.call.make(destination, { audio: true })
      */
+
+    /**
+     * @private
+     * @static
+     * @memberof call
+     * @requires link_call
+     * @requires callMe
+     * @method make
+     * @param {Object} [options]
+     * @param {Array<call.CustomBody>} [options.customBodies] Custom SIP bodies for the SIP backend.
+     */
     make(destination, media, options = {}) {
       log.debug(_logs.API_LOG_TAG + 'call.make: ', destination, media, options);
 
@@ -38644,6 +38708,17 @@ function callAPI({ dispatch, getState }) {
      * @param {Array<call.CustomParameter>} [options.customParameters] Custom SIP header parameters for the SIP backend.
      * @param {call.DSCPControls} [options.dscpControls] Options for configuring DSCP markings on the media traffic
      */
+
+    /**
+     * @private
+     * @static
+     * @memberof call
+     * @requires link_call
+     * @requires callMe
+     * @method answer
+     * @param {Object} [options]
+     * @param {Array<call.CustomBody>} [options.customBodies] Custom SIP bodies for the SIP backend.
+     */
     answer(callId, media, options = {}) {
       log.debug(_logs.API_LOG_TAG + 'call.answer: ', callId, media, options);
 
@@ -38793,6 +38868,26 @@ function callAPI({ dispatch, getState }) {
      * @method setCustomParameters
      * @param {string} callId The ID of the call.
      * @param {Array<call.CustomParameter>} customParameters The custom parameters to set.
+     */
+
+    /**
+     * Set custom SIP headers and bodies for a call, to be provided to the remote endpoint.
+     *
+     * This API takes either an array of {@link call.CustomParameter Custom Parameters}, or if custom bodies
+     *  also need to be set, an object consisting of either {@link call.CustomParameter Custom Parameters} or
+     *  {@link call.CustomBody Custom Bodies} or both.
+     *
+     * Note that usage of the `setCustomParameters` API will completely overwrite any previously set headers and bodies.
+     *  Therefore, if either parameters or headers are omitted during subsequent API calls, they will
+     *  be overwritten to undefined.
+     * @private
+     * @static
+     * @memberof call
+     * @requires link_call
+     * @method setCustomParameters
+     * @param {Array<call.CustomParameter> | Object} customParameters The custom parameters to set.
+     * @param {Array<call.CustomParameter>} [customParameters.customParameters] Custom SIP headers for the SIP backend.
+     * @param {Array<call.CustomBody>} [customParameters.customBodies] Custom SIP bodies for the SIP backend.
      */
     setCustomParameters(callId, customParameters) {
       log.debug(_logs.API_LOG_TAG + 'call.setCustomParameters: ', callId, customParameters);
@@ -40149,7 +40244,8 @@ callReducers[actionTypes.PENDING_MAKE_CALL] = {
       webrtcSessionId: action.payload.webrtcSessionId,
       bandwidth: action.payload.bandwidth,
       displayName: action.payload.displayName,
-      customParameters: action.payload.customParameters
+      customParameters: action.payload.customParameters,
+      customBodies: action.payload.customBodies
     });
   }
 };
@@ -40180,7 +40276,8 @@ callReducers[actionTypes.ANSWER_CALL_FINISH] = {
       localHold: false,
       remoteHold: false,
       bandwidth: action.payload.bandwidth,
-      customParameters: action.payload.customParameters
+      customParameters: action.payload.customParameters,
+      customBodies: action.payload.customBodies
 
       // Add start time to the call's state here if the call is not a slowstart call
     });if (action.meta && !action.meta.isSlowStart) {
@@ -40262,12 +40359,9 @@ callReducers[actionTypes.CALL_UNHOLD_FINISH] = {
 
 callReducers[actionTypes.SET_CUSTOM_PARAMETERS] = {
   next(state, action) {
-    let customParameters = action.payload.customParameters;
-    if (Array.isArray(customParameters) && customParameters.length === 0) {
-      customParameters = undefined;
-    }
     return (0, _extends3.default)({}, state, {
-      customParameters
+      customParameters: action.payload.customParameters,
+      customBodies: action.payload.customBodies
     });
   }
 };
@@ -41655,7 +41749,8 @@ function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { de
  * @param  {string} [callInfo.account] An account token used by the request if it is an anonymous call.
  * @param  {string} [callInfo.from] A from token used by the request if it is an anonymous call.
  * @param  {string} [callInfo.displayName] A custom display name to use. Not supported in all environments and may use default display name.
- * @param  {Array<CustomParameter>} [callInfo.customParameters] Custom SIP header parameters for the SIP backend
+ * @param  {Array<CustomParameter>} [callInfo.customParameters] Custom SIP header parameters for the SIP backend.
+ * @param  {Array<CustomBody>} [callInfo.customBodies] Custom SIP bodies for the SIP backend.
  * @return {Object} response Signalling response.
  * @return {string} [response.wrtcsSessionId] ID that the server uses to track this call.
  * @return {Object} [response.error] An error object, if signalling failed.
@@ -41695,7 +41790,8 @@ function* createSession(callInfo) {
     to: callInfo.participantAddress,
     sdp: callInfo.offer,
     supported: [],
-    customParameters: callInfo.customParameters
+    customParameters: callInfo.customParameters,
+    customBodies: callInfo.customBodies
   };
 
   if (callOptions.earlyMedia) {
@@ -41893,6 +41989,7 @@ function* endSession(callInfo) {
  * @param  {string} callInfo.wrtcsSessionId ID that the server uses to identify the session.
  * @param  {string} callInfo.answer The local SDP to complete negotiation. This may be an offer is performing slow start answer.
  * @param  {Array<CustomParameter>} callInfo.customParameters The custom parameters of the call.
+ * @param  {Array<CustomBody>} callInfo.customBodies The custom bodies of the call.
  * @return {Object} response Signalling response.
  * @return {Object} [response.error] An error object, if signalling failed.
  */
@@ -41911,7 +42008,8 @@ function* answerSession(callInfo) {
     callControlRequest: {
       type: 'callAnswer',
       sdp: callInfo.answer,
-      customParameters: callInfo.customParameters
+      customParameters: callInfo.customParameters,
+      customBodies: callInfo.customBodies
     }
   });
 
@@ -42136,7 +42234,8 @@ function* directTransferSession(callInfo) {
  * @param  {string} callInfo.wrtcsSessionId The ID the backend uses to track the session.
  * @param  {string} callInfo.otherWrtcsSessionId
  * @param  {string} callInfo.sdp The new sdp to use.
- * @param  {Array<CustomParameter>} callInfo.customParameters The custom parameters of the current call
+ * @param  {Array<CustomParameter>} callInfo.customParameters The custom parameters of the current call.
+ * @param  {Array<CustomBody>} callInfo.customBodies The custom bodies of the call.
  * @return {Object} response object from the server.
  * @return {Object} [response.error] An error object, if signalling failed.
  * @return {string} [response.newWrtcsSessionId] The back-end session id, if signalling succeeded.
@@ -42191,6 +42290,7 @@ function* joinSessions(callInfo) {
  * @param  {boolean} [callInfo.isAnonymous] Flag indicating whether the call is anonymous or not.
  * @param  {string}  [callInfo.account] An account token used by the request if it is an anonymous call.
  * @param  {Array}   [callInfo.customParameters] The custom parameters of the call.
+ * @param  {Array}   [callInfo.customBodies] The custom bodies of the call.
  * @return {Object} response Signalling response.
  * @return {Object} response.error An error object, if signalling failed.
  */
@@ -42207,7 +42307,8 @@ function* updateSession(callInfo) {
     [bodyType]: {
       type: 'startCallUpdate',
       sdp: callInfo.offer,
-      customParameters: callInfo.customParameters
+      customParameters: callInfo.customParameters,
+      customBodies: callInfo.customBodies
     }
   });
 
@@ -42349,7 +42450,8 @@ function* updateSessionResponse(callInfo) {
     [bodyType]: {
       type: 'respondCallUpdate',
       sdp: callInfo.answer,
-      customParameters: callInfo.customParameters
+      customParameters: callInfo.customParameters,
+      customBodies: callInfo.customBodies
     }
   });
 
@@ -42713,7 +42815,8 @@ function* makeCall(deps, action) {
     account: action.payload.account,
     offer: offerSdp,
     displayName: action.payload.displayName ? action.payload.displayName : '',
-    customParameters: action.payload.customParameters
+    customParameters: action.payload.customParameters,
+    customBodies: action.payload.customBodies
   };
 
   const response = yield (0, _effects.call)(requests.createSession, callInfo);
@@ -42732,8 +42835,9 @@ function* makeCall(deps, action) {
       bandwidth,
       // The custom display name to use. Not supported on all environments.
       displayName: action.payload.displayName,
-      // The custom parameters of the call
-      customParameters: action.payload.customParameters
+      // The custom parameters (headers) and custom bodies of the call
+      customParameters: action.payload.customParameters,
+      customBodies: action.payload.customBodies
     }));
   } else {
     log.info('Failed to initiate call. Ending call and cleaning up WebRTC portions.');
@@ -42965,7 +43069,8 @@ function* answerCall(deps, action) {
     callInfo = {
       answer: webrtcInfo.offerSdp,
       wrtcsSessionId: incomingCall.wrtcsSessionId,
-      customParameters: action.payload.customParameters
+      customParameters: action.payload.customParameters,
+      customBodies: action.payload.customBodies
 
       // Even if the answer request is successful, we still need to wait for a
       //    notification from the signaling server to know if the call is complete.
@@ -42998,7 +43103,8 @@ function* answerCall(deps, action) {
       id: incomingCall.id,
       answer: webrtcInfo.answerSDP,
       wrtcsSessionId: incomingCall.wrtcsSessionId,
-      customParameters: action.payload.customParameters
+      customParameters: action.payload.customParameters,
+      customBodies: action.payload.customBodies
 
       // If the answer request is successful, then the call can be considered complete.
     };nextState = _constants.CALL_STATES.CONNECTED;
@@ -43026,8 +43132,9 @@ function* answerCall(deps, action) {
       mediaConstraints,
       // The bandwidth of the call
       bandwidth,
-      // The custom parameters of the call
-      customParameters: action.payload.customParameters
+      // The custom parameters (headers) and custom bodies of the call
+      customParameters: action.payload.customParameters,
+      customBodies: action.payload.customBodies
     }, {
       isSlowStart: incomingCall.isSlowStart
     }));
@@ -44588,7 +44695,7 @@ function* offerInactiveMedia(deps, action) {
   }
 
   const targetCall = yield (0, _effects2.select)(_selectors.getCallById, action.payload.id);
-  const { wrtcsSessionId, webrtcSessionId, isAnonymous, account, customParameters } = targetCall;
+  const { wrtcsSessionId, webrtcSessionId, isAnonymous, account, customParameters, customBodies } = targetCall;
 
   // TODO: Make sure the session is in the correct signaling state to start a
   //    renegotiation operation.
@@ -44614,7 +44721,8 @@ function* offerInactiveMedia(deps, action) {
     offer: offer.sdp,
     isAnonymous,
     account,
-    customParameters
+    customParameters,
+    customBodies
   };
 
   const response = yield (0, _effects2.call)(requests.updateSession, callInfo);
@@ -44702,7 +44810,7 @@ function* offerFullMedia(deps, action) {
   }
 
   const targetCall = yield (0, _effects2.select)(_selectors.getCallById, action.payload.id);
-  const { wrtcsSessionId, webrtcSessionId, isAnonymous, account, customParameters } = targetCall;
+  const { wrtcsSessionId, webrtcSessionId, isAnonymous, account, customParameters, customBodies } = targetCall;
 
   // TODO: Make sure the session is in the correct signaling state to start a
   //    renegotiation operation.
@@ -44728,7 +44836,8 @@ function* offerFullMedia(deps, action) {
     offer: offer.sdp,
     isAnonymous,
     account,
-    customParameters
+    customParameters,
+    customBodies
   };
 
   const response = yield (0, _effects2.call)(requests.updateSession, callInfo);
@@ -45009,7 +45118,8 @@ function* addMedia(deps, action) {
     isAnonymous,
     account,
     localOp,
-    customParameters
+    customParameters,
+    customBodies
   } = yield (0, _effects2.select)(_selectors.getCallById, id);
 
   const finalBandwidth = {
@@ -45035,7 +45145,8 @@ function* addMedia(deps, action) {
     offer: sdp,
     isAnonymous,
     account,
-    customParameters
+    customParameters,
+    customBodies
 
     // Perform signalling to add media
   };const response = yield (0, _effects2.call)(requests.updateSession, callInfo);
@@ -45147,7 +45258,8 @@ function* removeMedia(deps, action) {
     isAnonymous,
     account,
     localOp,
-    customParameters
+    customParameters,
+    customBodies
   } = yield (0, _effects2.select)(_selectors.getCallById, id);
 
   const finalBandwidth = {
@@ -45173,7 +45285,8 @@ function* removeMedia(deps, action) {
     offer: sdp,
     isAnonymous,
     account,
-    customParameters
+    customParameters,
+    customBodies
   };
 
   const response = yield (0, _effects2.call)(requests.updateSession, callInfo);
@@ -45283,7 +45396,8 @@ function* renegotiate(deps, action) {
     isAnonymous,
     account,
     localOp,
-    customParameters
+    customParameters,
+    customBodies
   } = yield (0, _effects2.select)(_selectors.getCallById, id);
 
   // Make sure the call state is what we expect
@@ -45316,7 +45430,8 @@ function* renegotiate(deps, action) {
     offer: offer.sdp,
     isAnonymous,
     account,
-    customParameters
+    customParameters,
+    customBodies
   };
 
   const response = yield (0, _effects2.call)(requests.updateSession, callInfo);
@@ -45798,7 +45913,8 @@ function* iceRestart(deps, action) {
     account,
     localOp,
     localHold,
-    customParameters
+    customParameters,
+    customBodies
   } = yield (0, _effects2.select)(_selectors.getCallById, callId);
 
   const session = yield (0, _effects2.call)([deps.webRTC.sessionManager, 'get'], webrtcSessionId);
@@ -45868,7 +45984,8 @@ function* iceRestart(deps, action) {
     offer: offer.sdp,
     isAnonymous,
     account,
-    customParameters
+    customParameters,
+    customBodies
   };
 
   const response = yield (0, _effects2.call)(requests.updateSession, callInfo);
@@ -47137,7 +47254,8 @@ function* handleUpdateRequest(deps, targetCall, params) {
     answer: answerSDP,
     isAnonymous: targetCall.isAnonymous,
     account: targetCall.account,
-    customParameters: targetCall.customParameters
+    customParameters: targetCall.customParameters,
+    customBodies: targetCall.customBodies
   };
 
   const response = yield (0, _effects.call)(requests.updateSessionResponse, callInfo);
@@ -47252,7 +47370,8 @@ function* handleSlowUpdateRequest(deps, targetCall, params) {
     answer: slowOffer.sdp,
     isAnonymous: targetCall.isAnonymous,
     account: targetCall.account,
-    customParameters: targetCall.customParameters
+    customParameters: targetCall.customParameters,
+    customBodies: targetCall.customBodies
 
     // Respond with our "offer".
   };const response = yield (0, _effects.call)(requests.updateSessionResponse, callInfo);

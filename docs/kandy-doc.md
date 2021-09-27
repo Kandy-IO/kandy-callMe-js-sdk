@@ -375,7 +375,7 @@ Starts an outgoing call as an anonymous user.
         *   `callOptions.screenOptions.width` **[call.MediaConstraint][20]?** The width of the screenShare.
         *   `callOptions.screenOptions.frameRate` **[call.MediaConstraint][20]?** The frame rate of the screenShare.
     *   `callOptions.displayName` **[string][8]?** Custom display name to be provided to the destination. Only used with token-less anonymous calls. Not supported in all environments and may use default display name.
-    *   `callOptions.customParameters` **[Array][13]<[call.CustomParameter][22]>?** Custom SIP header parameters for the SIP backend
+    *   `callOptions.customParameters` **[Array][13]<[call.CustomParameter][22]>?** Custom SIP header parameters for the SIP backend.
 
 #### Examples
 
