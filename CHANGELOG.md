@@ -13,6 +13,11 @@ Kandy.js change log.
 - Added two properties: `isLocal` & media `id` on the `media:sourceMuted` & `media:sourceUnmuted` events. These events are sent to application level. `KJS-78`
 - A new `connectivity.resetConnection` API to allow for a reset of websocket connection. This can be invoked by the application when it detects unstable network conditions. `KJS-373`
 
+### Fixed
+
+- Fixed a Call issue where EarlyMedia could be enabled on Firefox even though it cannot support it. `KJS-366`
+  - A warning will be logged on SDK initialization and the configuration will be disabled.
+
 ## 4.32.0 - 2021-09-24
 
 ### Added
