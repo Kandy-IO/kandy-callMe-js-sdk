@@ -14,7 +14,7 @@ When an application wants to make an anonymous call, the destination account (i.
 
 The administrator should go through the following steps:
 
-- Login to Kandy Link Admin Portal site with administrator priviledges. A typical front end UI looks like this.
+- Login to Kandy Link Admin Portal site with administrator privileges. A typical front end UI looks like this.
 
 ![Admin Portal](admin_portal.png)
 
