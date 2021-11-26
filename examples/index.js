@@ -43,7 +43,7 @@ const IV_LENGTH = 16 // For AES keys, only
 // For any incoming request, inspect it and if request is supported then
 // process it & reply to it.
 
-// Here request comes for getting the defaut tokens.
+// Here request comes for getting the default tokens.
 // (i.e. tokens that will be generated based on the hardcoded caller/callee values
 // provided by this app)
 app.get('/callparameters', (req, res) => {
@@ -68,7 +68,7 @@ function generateParams (res, account, caller, callee) {
   // We'll generate a timestamp at this time
   // (i.e. when this server receives a request for tokens to be generated)
   // because tokens are only valid for a certain period of time and we
-  // don't want the tokens to expire prematurelly.
+  // don't want the tokens to expire prematurely.
   const timestamp = Date.now()
 
   if (key.length !== 16 && key.length !== 32) {

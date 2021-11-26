@@ -8,7 +8,7 @@
           "children": [
             {
               "type": "text",
-              "value": "The SDK creation factory. Create an instance of the SDK by calling this factory with the desired configurations.\nThe SDK instance will be refered as 'api' throughout the rest of the documentation content."
+              "value": "The SDK creation factory. Create an instance of the SDK by calling this factory with the desired configurations.\nThe SDK instance will be referred as 'api' throughout the rest of the documentation content."
             }
           ]
         }
@@ -4812,7 +4812,7 @@
                 "column": 0
               },
               "end": {
-                "line": 24,
+                "line": 25,
                 "column": 16
               }
             },
@@ -4903,266 +4903,6 @@
             }
           ],
           "namespace": "api.BasicError"
-        },
-        {
-          "description": {
-            "type": "root",
-            "children": [
-              {
-                "type": "paragraph",
-                "children": [
-                  {
-                    "type": "text",
-                    "value": "Send a request to the underlying REST service with the appropriate configuration and authentication.\nThis is a wrapper on top of the browser's "
-                  },
-                  {
-                    "type": "link",
-                    "title": null,
-                    "url": "https://developer.mozilla.org/en-US/docs/Web/API/fetch",
-                    "children": [
-                      {
-                        "type": "text",
-                        "value": "fetch API"
-                      }
-                    ]
-                  },
-                  {
-                    "type": "text",
-                    "value": "\nand behaves very similarly but using SDK configuration for the base URL and authentication as well\nas SDK logging."
-                  }
-                ]
-              }
-            ]
-          },
-          "tags": [
-            {
-              "title": "public",
-              "description": null,
-              "lineNumber": 6,
-              "type": null
-            },
-            {
-              "title": "memberof",
-              "description": "api",
-              "lineNumber": 7
-            },
-            {
-              "title": "method",
-              "description": null,
-              "lineNumber": 8,
-              "name": "fetch"
-            },
-            {
-              "title": "param",
-              "description": "The full path of the resource to fetch from the underlying service. This should include any REST version\n                         or user information. This path will be appended to the base URL according to SDK configuration.",
-              "lineNumber": 9,
-              "type": {
-                "type": "NameExpression",
-                "name": "string"
-              },
-              "name": "resource"
-            },
-            {
-              "title": "param",
-              "description": "An object containing any custom settings that you want to apply to the request. See [fetch API](https://developer.mozilla.org/en-US/docs/Web/API/fetch)\n                          for a full description and defaults.",
-              "lineNumber": 11,
-              "type": {
-                "type": "NameExpression",
-                "name": "RequestInit"
-              },
-              "name": "init"
-            },
-            {
-              "title": "return",
-              "description": "A promise for a [Response](https://developer.mozilla.org/en-US/docs/Web/API/Response) object.",
-              "lineNumber": 13,
-              "type": {
-                "type": "TypeApplication",
-                "expression": {
-                  "type": "NameExpression",
-                  "name": "Promise"
-                },
-                "applications": [
-                  {
-                    "type": "NameExpression",
-                    "name": "Response"
-                  }
-                ]
-              }
-            },
-            {
-              "title": "example",
-              "description": "// Send a REST request to the server\n// Create a request options object following [fetch API](https://developer.mozilla.org/en-US/docs/Web/API/fetch)\nconst requestOptions = {\n  method: 'POST',\n  body: JSON.stringify({\n    test: 123\n  })\n}\n\n// Note that you will need to subscribe for the `custom` service in order to\n// receive notifications from the `externalnotification` service.\nconst response = await client.fetch('/rest/version/1/user/xyz@test.com/externalnotification', requestOptions)",
-              "lineNumber": 14
-            }
-          ],
-          "loc": {
-            "start": {
-              "line": 20,
-              "column": 6
-            },
-            "end": {
-              "line": 47,
-              "column": 9
-            }
-          },
-          "context": {
-            "loc": {
-              "start": {
-                "line": 48,
-                "column": 6
-              },
-              "end": {
-                "line": 58,
-                "column": 7
-              }
-            },
-            "file": "/var/jenkins_home/workspace/Kandy.js_master/packages/kandy/src/request/interface/api.js"
-          },
-          "augments": [],
-          "examples": [
-            {
-              "description": "// Send a REST request to the server\n// Create a request options object following [fetch API](https://developer.mozilla.org/en-US/docs/Web/API/fetch)\nconst requestOptions = {\n  method: 'POST',\n  body: JSON.stringify({\n    test: 123\n  })\n}\n\n// Note that you will need to subscribe for the `custom` service in order to\n// receive notifications from the `externalnotification` service.\nconst response = await client.fetch('/rest/version/1/user/xyz@test.com/externalnotification', requestOptions)"
-            }
-          ],
-          "implements": [],
-          "params": [
-            {
-              "title": "param",
-              "name": "resource",
-              "lineNumber": 9,
-              "description": {
-                "type": "root",
-                "children": [
-                  {
-                    "type": "paragraph",
-                    "children": [
-                      {
-                        "type": "text",
-                        "value": "The full path of the resource to fetch from the underlying service. This should include any REST version\nor user information. This path will be appended to the base URL according to SDK configuration."
-                      }
-                    ]
-                  }
-                ]
-              },
-              "type": {
-                "type": "NameExpression",
-                "name": "string"
-              }
-            },
-            {
-              "title": "param",
-              "name": "init",
-              "lineNumber": 11,
-              "description": {
-                "type": "root",
-                "children": [
-                  {
-                    "type": "paragraph",
-                    "children": [
-                      {
-                        "type": "text",
-                        "value": "An object containing any custom settings that you want to apply to the request. See "
-                      },
-                      {
-                        "type": "link",
-                        "title": null,
-                        "url": "https://developer.mozilla.org/en-US/docs/Web/API/fetch",
-                        "children": [
-                          {
-                            "type": "text",
-                            "value": "fetch API"
-                          }
-                        ]
-                      },
-                      {
-                        "type": "text",
-                        "value": "\nfor a full description and defaults."
-                      }
-                    ]
-                  }
-                ]
-              },
-              "type": {
-                "type": "NameExpression",
-                "name": "RequestInit"
-              }
-            }
-          ],
-          "properties": [],
-          "returns": [
-            {
-              "description": {
-                "type": "root",
-                "children": [
-                  {
-                    "type": "paragraph",
-                    "children": [
-                      {
-                        "type": "text",
-                        "value": "A promise for a "
-                      },
-                      {
-                        "type": "link",
-                        "title": null,
-                        "url": "https://developer.mozilla.org/en-US/docs/Web/API/Response",
-                        "children": [
-                          {
-                            "type": "text",
-                            "value": "Response"
-                          }
-                        ]
-                      },
-                      {
-                        "type": "text",
-                        "value": " object."
-                      }
-                    ]
-                  }
-                ]
-              },
-              "title": "returns",
-              "type": {
-                "type": "TypeApplication",
-                "expression": {
-                  "type": "NameExpression",
-                  "name": "Promise"
-                },
-                "applications": [
-                  {
-                    "type": "NameExpression",
-                    "name": "Response"
-                  }
-                ]
-              }
-            }
-          ],
-          "sees": [],
-          "throws": [],
-          "todos": [],
-          "yields": [],
-          "access": "public",
-          "memberof": "api",
-          "kind": "function",
-          "name": "fetch",
-          "members": {
-            "global": [],
-            "inner": [],
-            "instance": [],
-            "events": [],
-            "static": []
-          },
-          "path": [
-            {
-              "name": "api",
-              "kind": "module"
-            },
-            {
-              "name": "fetch",
-              "kind": "function"
-            }
-          ],
-          "namespace": "apifetch"
         }
       ]
     },
@@ -5226,11 +4966,11 @@
     "context": {
       "loc": {
         "start": {
-          "line": 351,
+          "line": 365,
           "column": 0
         },
         "end": {
-          "line": 355,
+          "line": 369,
           "column": 1
         }
       },
@@ -10257,8 +9997,21 @@
             },
             {
               "title": "property",
-              "description": "Information about the other call participant.",
+              "description": "Information about what media was offered by the person who made the call.",
               "lineNumber": 22,
+              "type": {
+                "type": "OptionalType",
+                "expression": {
+                  "type": "NameExpression",
+                  "name": "call.MediaOffered"
+                }
+              },
+              "name": "mediaOffered"
+            },
+            {
+              "title": "property",
+              "description": "Information about the other call participant.",
+              "lineNumber": 23,
               "type": {
                 "type": "NameExpression",
                 "name": "Object"
@@ -10268,7 +10021,7 @@
             {
               "title": "property",
               "description": "The User ID of the remote participant in the form \"username@domain\".",
-              "lineNumber": 23,
+              "lineNumber": 24,
               "type": {
                 "type": "OptionalType",
                 "expression": {
@@ -10281,7 +10034,7 @@
             {
               "title": "property",
               "description": "The display name of the remote participant.",
-              "lineNumber": 24,
+              "lineNumber": 25,
               "type": {
                 "type": "OptionalType",
                 "expression": {
@@ -10294,7 +10047,7 @@
             {
               "title": "property",
               "description": "The bandwidth limitations set for the call.",
-              "lineNumber": 25,
+              "lineNumber": 26,
               "type": {
                 "type": "NameExpression",
                 "name": "call.BandwidthControls"
@@ -10304,7 +10057,7 @@
             {
               "title": "property",
               "description": "The locally set Custom Parameters for the call.",
-              "lineNumber": 26,
+              "lineNumber": 27,
               "type": {
                 "type": "TypeApplication",
                 "expression": {
@@ -10323,7 +10076,7 @@
             {
               "title": "property",
               "description": "The start time of the call in milliseconds since the epoch.",
-              "lineNumber": 27,
+              "lineNumber": 28,
               "type": {
                 "type": "NameExpression",
                 "name": "number"
@@ -10333,7 +10086,7 @@
             {
               "title": "property",
               "description": "The end time of the call in milliseconds since the epoch.",
-              "lineNumber": 28,
+              "lineNumber": 29,
               "type": {
                 "type": "OptionalType",
                 "expression": {
@@ -10346,22 +10099,22 @@
           ],
           "loc": {
             "start": {
-              "line": 41,
+              "line": 42,
               "column": 0
             },
             "end": {
-              "line": 70,
+              "line": 72,
               "column": 3
             }
           },
           "context": {
             "loc": {
               "start": {
-                "line": 351,
+                "line": 365,
                 "column": 0
               },
               "end": {
-                "line": 355,
+                "line": 369,
                 "column": 1
               }
             },
@@ -10654,8 +10407,34 @@
             },
             {
               "title": "property",
-              "name": "remoteParticipant",
+              "name": "mediaOffered",
               "lineNumber": 22,
+              "description": {
+                "type": "root",
+                "children": [
+                  {
+                    "type": "paragraph",
+                    "children": [
+                      {
+                        "type": "text",
+                        "value": "Information about what media was offered by the person who made the call."
+                      }
+                    ]
+                  }
+                ]
+              },
+              "type": {
+                "type": "OptionalType",
+                "expression": {
+                  "type": "NameExpression",
+                  "name": "call.MediaOffered"
+                }
+              }
+            },
+            {
+              "title": "property",
+              "name": "remoteParticipant",
+              "lineNumber": 23,
               "description": {
                 "type": "root",
                 "children": [
@@ -10678,7 +10457,7 @@
                 {
                   "title": "property",
                   "name": "remoteParticipant.displayNumber",
-                  "lineNumber": 23,
+                  "lineNumber": 24,
                   "description": {
                     "type": "root",
                     "children": [
@@ -10704,7 +10483,7 @@
                 {
                   "title": "property",
                   "name": "remoteParticipant.displayName",
-                  "lineNumber": 24,
+                  "lineNumber": 25,
                   "description": {
                     "type": "root",
                     "children": [
@@ -10732,7 +10511,7 @@
             {
               "title": "property",
               "name": "bandwidth",
-              "lineNumber": 25,
+              "lineNumber": 26,
               "description": {
                 "type": "root",
                 "children": [
@@ -10755,7 +10534,7 @@
             {
               "title": "property",
               "name": "customParameters",
-              "lineNumber": 26,
+              "lineNumber": 27,
               "description": {
                 "type": "root",
                 "children": [
@@ -10787,7 +10566,7 @@
             {
               "title": "property",
               "name": "startTime",
-              "lineNumber": 27,
+              "lineNumber": 28,
               "description": {
                 "type": "root",
                 "children": [
@@ -10810,7 +10589,7 @@
             {
               "title": "property",
               "name": "endTime",
-              "lineNumber": 28,
+              "lineNumber": 29,
               "description": {
                 "type": "root",
                 "children": [
@@ -11034,22 +10813,22 @@
           ],
           "loc": {
             "start": {
-              "line": 91,
+              "line": 93,
               "column": 0
             },
             "end": {
-              "line": 125,
+              "line": 127,
               "column": 3
             }
           },
           "context": {
             "loc": {
               "start": {
-                "line": 351,
+                "line": 365,
                 "column": 0
               },
               "end": {
-                "line": 355,
+                "line": 369,
                 "column": 1
               }
             },
@@ -11159,6 +10938,177 @@
                 "children": [
                   {
                     "type": "text",
+                    "value": "The MediaOffered type defines what media capabilities are offered by the person making a call.\nThis is an optional property and therefore may be null if it is not known or if it's associated with caller's side of the call."
+                  }
+                ]
+              }
+            ]
+          },
+          "tags": [
+            {
+              "title": "public",
+              "description": null,
+              "lineNumber": 4,
+              "type": null
+            },
+            {
+              "title": "static",
+              "description": null,
+              "lineNumber": 5
+            },
+            {
+              "title": "typedef",
+              "description": null,
+              "lineNumber": 6,
+              "type": {
+                "type": "NameExpression",
+                "name": "Object"
+              },
+              "name": "MediaOffered"
+            },
+            {
+              "title": "memberof",
+              "description": "call",
+              "lineNumber": 7
+            },
+            {
+              "title": "property",
+              "description": "Specifies if any audio capability has been offered by the caller. If set to true, then the caller is capable of supporting at least one audio stream in the current call.",
+              "lineNumber": 8,
+              "type": {
+                "type": "NameExpression",
+                "name": "boolean"
+              },
+              "name": "audio"
+            },
+            {
+              "title": "property",
+              "description": "Specifies if any video capability has been offered by the caller. If set to true, then the caller is capable of supporting at least one video stream in the current call.",
+              "lineNumber": 9,
+              "type": {
+                "type": "NameExpression",
+                "name": "boolean"
+              },
+              "name": "video"
+            }
+          ],
+          "loc": {
+            "start": {
+              "line": 129,
+              "column": 0
+            },
+            "end": {
+              "line": 139,
+              "column": 3
+            }
+          },
+          "context": {
+            "loc": {
+              "start": {
+                "line": 365,
+                "column": 0
+              },
+              "end": {
+                "line": 369,
+                "column": 1
+              }
+            },
+            "file": "/var/jenkins_home/workspace/Kandy.js_master/packages/kandy/src/call/interfaceNew/api/index.js"
+          },
+          "augments": [],
+          "examples": [],
+          "implements": [],
+          "params": [],
+          "properties": [
+            {
+              "title": "property",
+              "name": "audio",
+              "lineNumber": 8,
+              "description": {
+                "type": "root",
+                "children": [
+                  {
+                    "type": "paragraph",
+                    "children": [
+                      {
+                        "type": "text",
+                        "value": "Specifies if any audio capability has been offered by the caller. If set to true, then the caller is capable of supporting at least one audio stream in the current call."
+                      }
+                    ]
+                  }
+                ]
+              },
+              "type": {
+                "type": "NameExpression",
+                "name": "boolean"
+              }
+            },
+            {
+              "title": "property",
+              "name": "video",
+              "lineNumber": 9,
+              "description": {
+                "type": "root",
+                "children": [
+                  {
+                    "type": "paragraph",
+                    "children": [
+                      {
+                        "type": "text",
+                        "value": "Specifies if any video capability has been offered by the caller. If set to true, then the caller is capable of supporting at least one video stream in the current call."
+                      }
+                    ]
+                  }
+                ]
+              },
+              "type": {
+                "type": "NameExpression",
+                "name": "boolean"
+              }
+            }
+          ],
+          "returns": [],
+          "sees": [],
+          "throws": [],
+          "todos": [],
+          "yields": [],
+          "access": "public",
+          "scope": "static",
+          "kind": "typedef",
+          "name": "MediaOffered",
+          "type": {
+            "type": "NameExpression",
+            "name": "Object"
+          },
+          "memberof": "call",
+          "members": {
+            "global": [],
+            "inner": [],
+            "instance": [],
+            "events": [],
+            "static": []
+          },
+          "path": [
+            {
+              "name": "call"
+            },
+            {
+              "name": "MediaOffered",
+              "kind": "typedef",
+              "scope": "static"
+            }
+          ],
+          "namespace": "call.MediaOffered"
+        },
+        {
+          "description": {
+            "type": "root",
+            "children": [
+              {
+                "type": "paragraph",
+                "children": [
+                  {
+                    "type": "text",
                     "value": "The BandwidthControls type defines the format for configuring media and/or track bandwidth options.\nBandwidthControls only affect received remote tracks of the specified type."
                   }
                 ]
@@ -11239,22 +11189,22 @@
           ],
           "loc": {
             "start": {
-              "line": 127,
+              "line": 141,
               "column": 0
             },
             "end": {
-              "line": 147,
+              "line": 161,
               "column": 3
             }
           },
           "context": {
             "loc": {
               "start": {
-                "line": 351,
+                "line": 365,
                 "column": 0
               },
               "end": {
-                "line": 355,
+                "line": 369,
                 "column": 1
               }
             },
@@ -11477,22 +11427,22 @@
           ],
           "loc": {
             "start": {
-              "line": 149,
+              "line": 163,
               "column": 0
             },
             "end": {
-              "line": 161,
+              "line": 175,
               "column": 3
             }
           },
           "context": {
             "loc": {
               "start": {
-                "line": 351,
+                "line": 365,
                 "column": 0
               },
               "end": {
-                "line": 355,
+                "line": 369,
                 "column": 1
               }
             },
@@ -11736,22 +11686,22 @@
           ],
           "loc": {
             "start": {
-              "line": 163,
+              "line": 177,
               "column": 0
             },
             "end": {
-              "line": 170,
+              "line": 184,
               "column": 3
             }
           },
           "context": {
             "loc": {
               "start": {
-                "line": 351,
+                "line": 365,
                 "column": 0
               },
               "end": {
-                "line": 355,
+                "line": 369,
                 "column": 1
               }
             },
@@ -11951,22 +11901,22 @@
           ],
           "loc": {
             "start": {
-              "line": 172,
+              "line": 186,
               "column": 0
             },
             "end": {
-              "line": 183,
+              "line": 197,
               "column": 3
             }
           },
           "context": {
             "loc": {
               "start": {
-                "line": 351,
+                "line": 365,
                 "column": 0
               },
               "end": {
-                "line": 355,
+                "line": 369,
                 "column": 1
               }
             },
@@ -12187,22 +12137,22 @@
           ],
           "loc": {
             "start": {
-              "line": 185,
+              "line": 199,
               "column": 0
             },
             "end": {
-              "line": 195,
+              "line": 209,
               "column": 3
             }
           },
           "context": {
             "loc": {
               "start": {
-                "line": 351,
+                "line": 365,
                 "column": 0
               },
               "end": {
-                "line": 355,
+                "line": 369,
                 "column": 1
               }
             },
@@ -12422,22 +12372,22 @@
           ],
           "loc": {
             "start": {
-              "line": 197,
+              "line": 211,
               "column": 0
             },
             "end": {
-              "line": 208,
+              "line": 222,
               "column": 3
             }
           },
           "context": {
             "loc": {
               "start": {
-                "line": 351,
+                "line": 365,
                 "column": 0
               },
               "end": {
-                "line": 355,
+                "line": 369,
                 "column": 1
               }
             },
@@ -12722,22 +12672,22 @@
           ],
           "loc": {
             "start": {
-              "line": 210,
+              "line": 224,
               "column": 0
             },
             "end": {
-              "line": 231,
+              "line": 245,
               "column": 3
             }
           },
           "context": {
             "loc": {
               "start": {
-                "line": 351,
+                "line": 365,
                 "column": 0
               },
               "end": {
-                "line": 355,
+                "line": 369,
                 "column": 1
               }
             },
@@ -13123,22 +13073,22 @@
           ],
           "loc": {
             "start": {
-              "line": 233,
+              "line": 247,
               "column": 0
             },
             "end": {
-              "line": 243,
+              "line": 257,
               "column": 3
             }
           },
           "context": {
             "loc": {
               "start": {
-                "line": 351,
+                "line": 365,
                 "column": 0
               },
               "end": {
-                "line": 355,
+                "line": 369,
                 "column": 1
               }
             },
@@ -13364,22 +13314,22 @@
           ],
           "loc": {
             "start": {
-              "line": 245,
+              "line": 259,
               "column": 0
             },
             "end": {
-              "line": 256,
+              "line": 270,
               "column": 3
             }
           },
           "context": {
             "loc": {
               "start": {
-                "line": 351,
+                "line": 365,
                 "column": 0
               },
               "end": {
-                "line": 355,
+                "line": 369,
                 "column": 1
               }
             },
@@ -13793,22 +13743,22 @@
           ],
           "loc": {
             "start": {
-              "line": 258,
+              "line": 272,
               "column": 0
             },
             "end": {
-              "line": 298,
+              "line": 312,
               "column": 3
             }
           },
           "context": {
             "loc": {
               "start": {
-                "line": 351,
+                "line": 365,
                 "column": 0
               },
               "end": {
-                "line": 355,
+                "line": 369,
                 "column": 1
               }
             },
@@ -17888,7 +17838,7 @@
             },
             {
               "title": "param",
-              "description": "DTMF tone(s) to send. Valid chracters are ['0','1','2','3','4','5','6','7','8','9','#','*' and ','].",
+              "description": "DTMF tone(s) to send. Valid characters are ['0','1','2','3','4','5','6','7','8','9','#','*' and ','].",
               "lineNumber": 23,
               "type": {
                 "type": "NameExpression",
@@ -17987,7 +17937,7 @@
                     "children": [
                       {
                         "type": "text",
-                        "value": "DTMF tone(s) to send. Valid chracters are ['0','1','2','3','4','5','6','7','8','9','#','*' and ',']."
+                        "value": "DTMF tone(s) to send. Valid characters are ['0','1','2','3','4','5','6','7','8','9','#','*' and ',']."
                       }
                     ]
                   }
@@ -18143,7 +18093,7 @@
                 "children": [
                   {
                     "type": "text",
-                    "value": "This API will return a promise which, when resolved, will contain the report of the particlar call.\nThe progress of the operation will be tracked via the\n"
+                    "value": "This API will return a promise which, when resolved, will contain the report of the particular call.\nThe progress of the operation will be tracked via the\n"
                   },
                   {
                     "type": "link",
@@ -20134,7 +20084,7 @@
             },
             {
               "title": "property",
-              "description": "The connection has failed and cannot be recovered automatically. A full media connection refresh is required to restablish a connection. See the {@link call.restartMedia} API.",
+              "description": "The connection has failed and cannot be recovered automatically. A full media connection refresh is required to reestablish a connection. See the {@link call.restartMedia} API.",
               "lineNumber": 40,
               "type": {
                 "type": "NameExpression",
@@ -20154,7 +20104,7 @@
             },
             {
               "title": "example",
-              "description": "// Use the media connection states to check the status of the media connection of the Call.\nclient.on('call:mediaConnectionChange', function (params) {\n  // Retrieve the state of the Call this event is for.\n  const call = client.call.getById(params.callId)\n  const mediaConnectionStates = client.call.mediaConnectionStates\n\n  // Check the mediaConnectionState to determine which scenario the call is in.\n  switch (call.mediaConnectionState) {\n    case mediaConnectionStates.CONNECTED:\n    case mediaConnectionStates.COMPLETED:\n      // Media established: The Call's media is connected. The Call's participants\n      //    are able to see/hear each other.\n      // These states will occur after Call establishment.\n      ...\n      break\n    case mediaConnectionStates.NEW:\n    case mediaConnectionStates.CHECKING:\n    case mediaConnectionStates.DISCONNECTED:\n      // Media pending: The Call's media is not connected. The Call is working\n      //    to connect media automatically.\n      // These states will occur during Call establishment and may occur midcall if there are\n      //    connection issues (eg. poor network quality) or a Call participant has changed (eg. transfer).\n      ...\n      break\n    case mediaConnectionStates.FAILED:\n     // Media has failed. The call requires a media refresh to restablish.\n     // This state will occur after the `DISCONNECTED` state is encountered.\n     ...\n      break\n    case mediaConnectionStates.CLOSED:\n      // Media ended due to the Call being ended.\n      // This state will occur after Call establishment.\n      ...\n      break\n  }\n}",
+              "description": "// Use the media connection states to check the status of the media connection of the Call.\nclient.on('call:mediaConnectionChange', function (params) {\n  // Retrieve the state of the Call this event is for.\n  const call = client.call.getById(params.callId)\n  const mediaConnectionStates = client.call.mediaConnectionStates\n\n  // Check the mediaConnectionState to determine which scenario the call is in.\n  switch (call.mediaConnectionState) {\n    case mediaConnectionStates.CONNECTED:\n    case mediaConnectionStates.COMPLETED:\n      // Media established: The Call's media is connected. The Call's participants\n      //    are able to see/hear each other.\n      // These states will occur after Call establishment.\n      ...\n      break\n    case mediaConnectionStates.NEW:\n    case mediaConnectionStates.CHECKING:\n    case mediaConnectionStates.DISCONNECTED:\n      // Media pending: The Call's media is not connected. The Call is working\n      //    to connect media automatically.\n      // These states will occur during Call establishment and may occur midcall if there are\n      //    connection issues (eg. poor network quality) or a Call participant has changed (eg. transfer).\n      ...\n      break\n    case mediaConnectionStates.FAILED:\n     // Media has failed. The call requires a media refresh to reestablish.\n     // This state will occur after the `DISCONNECTED` state is encountered.\n     ...\n      break\n    case mediaConnectionStates.CLOSED:\n      // Media ended due to the Call being ended.\n      // This state will occur after Call establishment.\n      ...\n      break\n  }\n}",
               "lineNumber": 42
             }
           ],
@@ -20184,7 +20134,7 @@
           "augments": [],
           "examples": [
             {
-              "description": "// Use the media connection states to check the status of the media connection of the Call.\nclient.on('call:mediaConnectionChange', function (params) {\n  // Retrieve the state of the Call this event is for.\n  const call = client.call.getById(params.callId)\n  const mediaConnectionStates = client.call.mediaConnectionStates\n\n  // Check the mediaConnectionState to determine which scenario the call is in.\n  switch (call.mediaConnectionState) {\n    case mediaConnectionStates.CONNECTED:\n    case mediaConnectionStates.COMPLETED:\n      // Media established: The Call's media is connected. The Call's participants\n      //    are able to see/hear each other.\n      // These states will occur after Call establishment.\n      ...\n      break\n    case mediaConnectionStates.NEW:\n    case mediaConnectionStates.CHECKING:\n    case mediaConnectionStates.DISCONNECTED:\n      // Media pending: The Call's media is not connected. The Call is working\n      //    to connect media automatically.\n      // These states will occur during Call establishment and may occur midcall if there are\n      //    connection issues (eg. poor network quality) or a Call participant has changed (eg. transfer).\n      ...\n      break\n    case mediaConnectionStates.FAILED:\n     // Media has failed. The call requires a media refresh to restablish.\n     // This state will occur after the `DISCONNECTED` state is encountered.\n     ...\n      break\n    case mediaConnectionStates.CLOSED:\n      // Media ended due to the Call being ended.\n      // This state will occur after Call establishment.\n      ...\n      break\n  }\n}"
+              "description": "// Use the media connection states to check the status of the media connection of the Call.\nclient.on('call:mediaConnectionChange', function (params) {\n  // Retrieve the state of the Call this event is for.\n  const call = client.call.getById(params.callId)\n  const mediaConnectionStates = client.call.mediaConnectionStates\n\n  // Check the mediaConnectionState to determine which scenario the call is in.\n  switch (call.mediaConnectionState) {\n    case mediaConnectionStates.CONNECTED:\n    case mediaConnectionStates.COMPLETED:\n      // Media established: The Call's media is connected. The Call's participants\n      //    are able to see/hear each other.\n      // These states will occur after Call establishment.\n      ...\n      break\n    case mediaConnectionStates.NEW:\n    case mediaConnectionStates.CHECKING:\n    case mediaConnectionStates.DISCONNECTED:\n      // Media pending: The Call's media is not connected. The Call is working\n      //    to connect media automatically.\n      // These states will occur during Call establishment and may occur midcall if there are\n      //    connection issues (eg. poor network quality) or a Call participant has changed (eg. transfer).\n      ...\n      break\n    case mediaConnectionStates.FAILED:\n     // Media has failed. The call requires a media refresh to reestablish.\n     // This state will occur after the `DISCONNECTED` state is encountered.\n     ...\n      break\n    case mediaConnectionStates.CLOSED:\n      // Media ended due to the Call being ended.\n      // This state will occur after Call establishment.\n      ...\n      break\n  }\n}"
             }
           ],
           "implements": [],
@@ -20365,7 +20315,7 @@
                     "children": [
                       {
                         "type": "text",
-                        "value": "The connection has failed and cannot be recovered automatically. A full media connection refresh is required to restablish a connection. See the "
+                        "value": "The connection has failed and cannot be recovered automatically. A full media connection refresh is required to reestablish a connection. See the "
                       },
                       {
                         "type": "link",
@@ -23487,7 +23437,7 @@
             },
             {
               "title": "property",
-              "description": "A unique identifer for the target.",
+              "description": "A unique identifier for the target.",
               "lineNumber": 20,
               "type": {
                 "type": "OptionalType",
@@ -23696,7 +23646,7 @@
                         "children": [
                           {
                             "type": "text",
-                            "value": "A unique identifer for the target."
+                            "value": "A unique identifier for the target."
                           }
                         ]
                       }
@@ -24090,22 +24040,22 @@
     ],
     "loc": {
       "start": {
-        "line": 72,
+        "line": 74,
         "column": 0
       },
       "end": {
-        "line": 89,
+        "line": 91,
         "column": 3
       }
     },
     "context": {
       "loc": {
         "start": {
-          "line": 351,
+          "line": 365,
           "column": 0
         },
         "end": {
-          "line": 355,
+          "line": 369,
           "column": 1
         }
       },
@@ -25228,6 +25178,247 @@
             }
           ],
           "namespace": "media.event:media:sourceUnmuted"
+        },
+        {
+          "description": {
+            "type": "root",
+            "children": [
+              {
+                "type": "paragraph",
+                "children": [
+                  {
+                    "type": "text",
+                    "value": "The specified Track has been rendered into an element."
+                  }
+                ]
+              }
+            ]
+          },
+          "tags": [
+            {
+              "title": "public",
+              "description": null,
+              "lineNumber": 3,
+              "type": null
+            },
+            {
+              "title": "static",
+              "description": null,
+              "lineNumber": 4
+            },
+            {
+              "title": "memberof",
+              "description": "media",
+              "lineNumber": 5
+            },
+            {
+              "title": "event",
+              "description": "media:trackRendered",
+              "lineNumber": 6
+            },
+            {
+              "title": "param",
+              "description": null,
+              "lineNumber": 7,
+              "type": {
+                "type": "NameExpression",
+                "name": "Object"
+              },
+              "name": "params"
+            },
+            {
+              "title": "param",
+              "description": "The list of track id's that were rendered.",
+              "lineNumber": 8,
+              "type": {
+                "type": "TypeApplication",
+                "expression": {
+                  "type": "NameExpression",
+                  "name": "Array"
+                },
+                "applications": [
+                  {
+                    "type": "NameExpression",
+                    "name": "string"
+                  }
+                ]
+              },
+              "name": "params.trackIds"
+            },
+            {
+              "title": "param",
+              "description": "The css selector used to identify the element the track is rendered into.",
+              "lineNumber": 9,
+              "type": {
+                "type": "NameExpression",
+                "name": "string"
+              },
+              "name": "params.selector"
+            },
+            {
+              "title": "param",
+              "description": "An error object, if the operation was not successful.",
+              "lineNumber": 10,
+              "type": {
+                "type": "OptionalType",
+                "expression": {
+                  "type": "NameExpression",
+                  "name": "api.BasicError"
+                }
+              },
+              "name": "params.error"
+            }
+          ],
+          "loc": {
+            "start": {
+              "line": 110,
+              "column": 0
+            },
+            "end": {
+              "line": 121,
+              "column": 3
+            }
+          },
+          "context": {
+            "loc": {
+              "start": {
+                "line": 122,
+                "column": 0
+              },
+              "end": {
+                "line": 122,
+                "column": 51
+              }
+            },
+            "file": "/var/jenkins_home/workspace/Kandy.js_master/packages/kandy/src/webrtc/interface/eventTypes.js"
+          },
+          "augments": [],
+          "examples": [],
+          "implements": [],
+          "params": [
+            {
+              "title": "param",
+              "name": "params",
+              "lineNumber": 7,
+              "type": {
+                "type": "NameExpression",
+                "name": "Object"
+              },
+              "properties": [
+                {
+                  "title": "param",
+                  "name": "params.trackIds",
+                  "lineNumber": 8,
+                  "description": {
+                    "type": "root",
+                    "children": [
+                      {
+                        "type": "paragraph",
+                        "children": [
+                          {
+                            "type": "text",
+                            "value": "The list of track id's that were rendered."
+                          }
+                        ]
+                      }
+                    ]
+                  },
+                  "type": {
+                    "type": "TypeApplication",
+                    "expression": {
+                      "type": "NameExpression",
+                      "name": "Array"
+                    },
+                    "applications": [
+                      {
+                        "type": "NameExpression",
+                        "name": "string"
+                      }
+                    ]
+                  }
+                },
+                {
+                  "title": "param",
+                  "name": "params.selector",
+                  "lineNumber": 9,
+                  "description": {
+                    "type": "root",
+                    "children": [
+                      {
+                        "type": "paragraph",
+                        "children": [
+                          {
+                            "type": "text",
+                            "value": "The css selector used to identify the element the track is rendered into."
+                          }
+                        ]
+                      }
+                    ]
+                  },
+                  "type": {
+                    "type": "NameExpression",
+                    "name": "string"
+                  }
+                },
+                {
+                  "title": "param",
+                  "name": "params.error",
+                  "lineNumber": 10,
+                  "description": {
+                    "type": "root",
+                    "children": [
+                      {
+                        "type": "paragraph",
+                        "children": [
+                          {
+                            "type": "text",
+                            "value": "An error object, if the operation was not successful."
+                          }
+                        ]
+                      }
+                    ]
+                  },
+                  "type": {
+                    "type": "OptionalType",
+                    "expression": {
+                      "type": "NameExpression",
+                      "name": "api.BasicError"
+                    }
+                  }
+                }
+              ]
+            }
+          ],
+          "properties": [],
+          "returns": [],
+          "sees": [],
+          "throws": [],
+          "todos": [],
+          "yields": [],
+          "access": "public",
+          "scope": "static",
+          "memberof": "media",
+          "kind": "event",
+          "name": "media:trackRendered",
+          "members": {
+            "global": [],
+            "inner": [],
+            "instance": [],
+            "events": [],
+            "static": []
+          },
+          "path": [
+            {
+              "name": "media",
+              "kind": "namespace"
+            },
+            {
+              "name": "media:trackRendered",
+              "kind": "event",
+              "scope": "static"
+            }
+          ],
+          "namespace": "media.event:media:trackRendered"
         }
       ],
       "static": [
@@ -28673,6 +28864,348 @@
       }
     ],
     "namespace": "notification"
+  },
+  {
+    "description": {
+      "type": "root",
+      "children": [
+        {
+          "type": "paragraph",
+          "children": [
+            {
+              "type": "text",
+              "value": "The 'request' namespace (within the 'api' type) is used to make network requests to the server."
+            }
+          ]
+        }
+      ]
+    },
+    "tags": [
+      {
+        "title": "public",
+        "description": null,
+        "lineNumber": 3,
+        "type": null
+      },
+      {
+        "title": "namespace",
+        "description": null,
+        "lineNumber": 4,
+        "type": null,
+        "name": "request"
+      }
+    ],
+    "loc": {
+      "start": {
+        "line": 20,
+        "column": 6
+      },
+      "end": {
+        "line": 25,
+        "column": 9
+      }
+    },
+    "context": {
+      "loc": {
+        "start": {
+          "line": 55,
+          "column": 6
+        },
+        "end": {
+          "line": 65,
+          "column": 7
+        }
+      },
+      "file": "/var/jenkins_home/workspace/Kandy.js_master/packages/kandy/src/request/interface/api.js"
+    },
+    "augments": [],
+    "examples": [],
+    "implements": [],
+    "params": [],
+    "properties": [],
+    "returns": [],
+    "sees": [],
+    "throws": [],
+    "todos": [],
+    "yields": [],
+    "access": "public",
+    "kind": "namespace",
+    "name": "request",
+    "members": {
+      "global": [],
+      "inner": [],
+      "instance": [],
+      "events": [],
+      "static": [
+        {
+          "description": {
+            "type": "root",
+            "children": [
+              {
+                "type": "paragraph",
+                "children": [
+                  {
+                    "type": "text",
+                    "value": "Send a request to the underlying REST service with the appropriate configuration and authentication.\nThis is a wrapper on top of the browser's "
+                  },
+                  {
+                    "type": "link",
+                    "title": null,
+                    "url": "https://developer.mozilla.org/en-US/docs/Web/API/fetch",
+                    "children": [
+                      {
+                        "type": "text",
+                        "value": "fetch API"
+                      }
+                    ]
+                  },
+                  {
+                    "type": "text",
+                    "value": "\nand behaves very similarly but using SDK configuration for the base URL and authentication as well\nas SDK logging."
+                  }
+                ]
+              }
+            ]
+          },
+          "tags": [
+            {
+              "title": "public",
+              "description": null,
+              "lineNumber": 6,
+              "type": null
+            },
+            {
+              "title": "memberof",
+              "description": "request",
+              "lineNumber": 7
+            },
+            {
+              "title": "method",
+              "description": null,
+              "lineNumber": 8,
+              "name": "fetch"
+            },
+            {
+              "title": "param",
+              "description": "The full path of the resource to fetch from the underlying service. This should include any REST version\n                         or user information. This path will be appended to the base URL according to SDK configuration.",
+              "lineNumber": 9,
+              "type": {
+                "type": "NameExpression",
+                "name": "string"
+              },
+              "name": "resource"
+            },
+            {
+              "title": "param",
+              "description": "An object containing any custom settings that you want to apply to the request. See [fetch API](https://developer.mozilla.org/en-US/docs/Web/API/fetch)\n                          for a full description and defaults.",
+              "lineNumber": 11,
+              "type": {
+                "type": "NameExpression",
+                "name": "RequestInit"
+              },
+              "name": "init"
+            },
+            {
+              "title": "return",
+              "description": "A promise for a [Response](https://developer.mozilla.org/en-US/docs/Web/API/Response) object.",
+              "lineNumber": 13,
+              "type": {
+                "type": "TypeApplication",
+                "expression": {
+                  "type": "NameExpression",
+                  "name": "Promise"
+                },
+                "applications": [
+                  {
+                    "type": "NameExpression",
+                    "name": "Response"
+                  }
+                ]
+              }
+            },
+            {
+              "title": "example",
+              "description": "// Send a REST request to the server\n// Create a request options object following [fetch API](https://developer.mozilla.org/en-US/docs/Web/API/fetch)\nconst requestOptions = {\n  method: 'POST',\n  body: JSON.stringify({\n    test: 123\n  })\n}\n\n// Note that you will need to subscribe for the `custom` service in order to\n// receive notifications from the `externalnotification` service.\nconst response = await client.request.fetch('/rest/version/1/user/xyz@test.com/externalnotification', requestOptions)",
+              "lineNumber": 14
+            }
+          ],
+          "loc": {
+            "start": {
+              "line": 27,
+              "column": 6
+            },
+            "end": {
+              "line": 54,
+              "column": 9
+            }
+          },
+          "context": {
+            "loc": {
+              "start": {
+                "line": 55,
+                "column": 6
+              },
+              "end": {
+                "line": 65,
+                "column": 7
+              }
+            },
+            "file": "/var/jenkins_home/workspace/Kandy.js_master/packages/kandy/src/request/interface/api.js"
+          },
+          "augments": [],
+          "examples": [
+            {
+              "description": "// Send a REST request to the server\n// Create a request options object following [fetch API](https://developer.mozilla.org/en-US/docs/Web/API/fetch)\nconst requestOptions = {\n  method: 'POST',\n  body: JSON.stringify({\n    test: 123\n  })\n}\n\n// Note that you will need to subscribe for the `custom` service in order to\n// receive notifications from the `externalnotification` service.\nconst response = await client.request.fetch('/rest/version/1/user/xyz@test.com/externalnotification', requestOptions)"
+            }
+          ],
+          "implements": [],
+          "params": [
+            {
+              "title": "param",
+              "name": "resource",
+              "lineNumber": 9,
+              "description": {
+                "type": "root",
+                "children": [
+                  {
+                    "type": "paragraph",
+                    "children": [
+                      {
+                        "type": "text",
+                        "value": "The full path of the resource to fetch from the underlying service. This should include any REST version\nor user information. This path will be appended to the base URL according to SDK configuration."
+                      }
+                    ]
+                  }
+                ]
+              },
+              "type": {
+                "type": "NameExpression",
+                "name": "string"
+              }
+            },
+            {
+              "title": "param",
+              "name": "init",
+              "lineNumber": 11,
+              "description": {
+                "type": "root",
+                "children": [
+                  {
+                    "type": "paragraph",
+                    "children": [
+                      {
+                        "type": "text",
+                        "value": "An object containing any custom settings that you want to apply to the request. See "
+                      },
+                      {
+                        "type": "link",
+                        "title": null,
+                        "url": "https://developer.mozilla.org/en-US/docs/Web/API/fetch",
+                        "children": [
+                          {
+                            "type": "text",
+                            "value": "fetch API"
+                          }
+                        ]
+                      },
+                      {
+                        "type": "text",
+                        "value": "\nfor a full description and defaults."
+                      }
+                    ]
+                  }
+                ]
+              },
+              "type": {
+                "type": "NameExpression",
+                "name": "RequestInit"
+              }
+            }
+          ],
+          "properties": [],
+          "returns": [
+            {
+              "description": {
+                "type": "root",
+                "children": [
+                  {
+                    "type": "paragraph",
+                    "children": [
+                      {
+                        "type": "text",
+                        "value": "A promise for a "
+                      },
+                      {
+                        "type": "link",
+                        "title": null,
+                        "url": "https://developer.mozilla.org/en-US/docs/Web/API/Response",
+                        "children": [
+                          {
+                            "type": "text",
+                            "value": "Response"
+                          }
+                        ]
+                      },
+                      {
+                        "type": "text",
+                        "value": " object."
+                      }
+                    ]
+                  }
+                ]
+              },
+              "title": "returns",
+              "type": {
+                "type": "TypeApplication",
+                "expression": {
+                  "type": "NameExpression",
+                  "name": "Promise"
+                },
+                "applications": [
+                  {
+                    "type": "NameExpression",
+                    "name": "Response"
+                  }
+                ]
+              }
+            }
+          ],
+          "sees": [],
+          "throws": [],
+          "todos": [],
+          "yields": [],
+          "access": "public",
+          "memberof": "request",
+          "kind": "function",
+          "name": "fetch",
+          "members": {
+            "global": [],
+            "inner": [],
+            "instance": [],
+            "events": [],
+            "static": []
+          },
+          "path": [
+            {
+              "name": "request",
+              "kind": "function"
+            },
+            {
+              "name": "fetch",
+              "kind": "function"
+            }
+          ],
+          "namespace": "requestfetch"
+        }
+      ]
+    },
+    "path": [
+      {
+        "name": "request",
+        "kind": "namespace"
+      }
+    ],
+    "namespace": "request"
   },
   {
     "description": {
