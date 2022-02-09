@@ -1,7 +1,7 @@
 /**
  * Kandy.js
  * kandy.newCallMe.js
- * Version: 4.37.0-beta.830
+ * Version: 4.37.0-beta.831
  */
 (function webpackUniversalModuleDefinition(root, factory) {
 	if(typeof exports === 'object' && typeof module === 'object')
@@ -1719,9 +1719,9 @@ const SET_BROWSER_DETAILS = exports.SET_BROWSER_DETAILS = prefix + 'SET_BROWSER_
 
 var global = __webpack_require__(13);
 var core = __webpack_require__(8);
-var ctx = __webpack_require__(31);
-var hide = __webpack_require__(32);
-var has = __webpack_require__(33);
+var ctx = __webpack_require__(32);
+var hide = __webpack_require__(33);
+var has = __webpack_require__(34);
 var PROTOTYPE = 'prototype';
 
 var $export = function (type, name, source) {
@@ -5802,188 +5802,6 @@ if (true) {
 /* 31 */
 /***/ (function(module, exports, __webpack_require__) {
 
-// optional / simple context binding
-var aFunction = __webpack_require__(55);
-module.exports = function (fn, that, length) {
-  aFunction(fn);
-  if (that === undefined) return fn;
-  switch (length) {
-    case 1: return function (a) {
-      return fn.call(that, a);
-    };
-    case 2: return function (a, b) {
-      return fn.call(that, a, b);
-    };
-    case 3: return function (a, b, c) {
-      return fn.call(that, a, b, c);
-    };
-  }
-  return function (/* ...args */) {
-    return fn.apply(that, arguments);
-  };
-};
-
-
-/***/ }),
-/* 32 */
-/***/ (function(module, exports, __webpack_require__) {
-
-var dP = __webpack_require__(24);
-var createDesc = __webpack_require__(44);
-module.exports = __webpack_require__(20) ? function (object, key, value) {
-  return dP.f(object, key, createDesc(1, value));
-} : function (object, key, value) {
-  object[key] = value;
-  return object;
-};
-
-
-/***/ }),
-/* 33 */
-/***/ (function(module, exports) {
-
-var hasOwnProperty = {}.hasOwnProperty;
-module.exports = function (it, key) {
-  return hasOwnProperty.call(it, key);
-};
-
-
-/***/ }),
-/* 34 */
-/***/ (function(module, exports, __webpack_require__) {
-
-"use strict";
-
-
-Object.defineProperty(exports, "__esModule", {
-  value: true
-});
-exports.update = update;
-exports.setSdpHandlers = setSdpHandlers;
-
-var _actionTypes = __webpack_require__(154);
-
-var actionTypes = _interopRequireWildcard(_actionTypes);
-
-var _utils = __webpack_require__(109);
-
-var _sdpHandlers = __webpack_require__(180);
-
-function _interopRequireWildcard(obj) { if (obj && obj.__esModule) { return obj; } else { var newObj = {}; if (obj != null) { for (var key in obj) { if (Object.prototype.hasOwnProperty.call(obj, key)) newObj[key] = obj[key]; } } newObj.default = obj; return newObj; } }
-
-/**
- * Add or update a specific key within the store.config.
- *
- * @param {Object} values The values that will be placed in the store.
- * @param {string} [pluginName] The plugin name of the config being set.
- * @return {Action} action A redux action.
- */
-function update(values, pluginName = '') {
-  var payload;
-  // Use the plugin name as a substate key, if present.
-  if (pluginName) {
-    payload = {
-      [pluginName]: values
-    };
-  } else {
-    payload = values;
-  }
-
-  return {
-    type: actionTypes.CONFIG_UPDATE,
-    payload: payload
-  };
-}
-
-/**
- * Updates the SDP Handlers in the call plugin configs
- *
- * @method setSdpHandlers
- * @param {Array<call.SdpHandlerFunction>} sdpHandlers The list of SDP handler to set in the config.
- * @param {Object}                         options     Options to configure extra sdp handlers
- * @returns {Object} A flux standard action.
- */
-function setSdpHandlers(sdpHandlers, options) {
-  /*
-   * Set SDP handlers to be used for every operation:
-   *
-   * 1. Application provided SDP handlers.
-   *
-   * 2. Disable DTLS-SDES crypto method (ie. delete the line) if there's a better
-   *    crypto method enabled. WebRTC only allows one method to be enabled.
-   *    This is needed for interoperability with non-browser endpoints that include
-   *    SDES as a fallback method.
-   *
-   * 3. [optional] Disable H264 Codecs for video calls, used to reduce SDP size
-   *
-   * 4. Modify sdp and add bandwidth limits on it if bandwidth controls are provided.
-   */
-  if (options.removeH264Codecs) {
-    sdpHandlers.push((0, _sdpHandlers.createCodecRemover)(['H264']));
-  }
-  sdpHandlers.push(_utils.sanitizeSdesFromSdp);
-  sdpHandlers.push(_utils.modifySdpBandwidth);
-
-  return {
-    type: actionTypes.SET_SDP_HANDLERS,
-    payload: {
-      sdpHandlers
-    }
-  };
-}
-
-/***/ }),
-/* 35 */
-/***/ (function(module, exports, __webpack_require__) {
-
-var parser = __webpack_require__(273);
-var writer = __webpack_require__(274);
-
-exports.write = writer;
-exports.parse = parser.parse;
-exports.parseParams = parser.parseParams;
-exports.parseFmtpConfig = parser.parseFmtpConfig; // Alias of parseParams().
-exports.parsePayloads = parser.parsePayloads;
-exports.parseRemoteCandidates = parser.parseRemoteCandidates;
-exports.parseImageAttributes = parser.parseImageAttributes;
-exports.parseSimulcastStreamList = parser.parseSimulcastStreamList;
-
-
-/***/ }),
-/* 36 */
-/***/ (function(module, exports, __webpack_require__) {
-
-"use strict";
-
-
-Object.defineProperty(exports, "__esModule", {
-  value: true
-});
-const prefix = '@@KANDY/CONN/';
-
-// Actions to tell connectivity plugin what to do
-const WS_ATTEMPT_CONNECT = exports.WS_ATTEMPT_CONNECT = prefix + 'WS_ATTEMPT_CONNECT';
-const WS_CONNECT_FINISHED = exports.WS_CONNECT_FINISHED = prefix + 'WS_CONNECT_FINISHED';
-const WS_DISCONNECT = exports.WS_DISCONNECT = prefix + 'WS_DISCONNECT';
-const WS_DISCONNECT_FINISHED = exports.WS_DISCONNECT_FINISHED = prefix + 'WS_DISCONNECT_FINISHED';
-const WS_RECONNECT_FAILED = exports.WS_RECONNECT_FAILED = prefix + 'WS_RECONNECT_FAILED';
-
-// actions for hooking into connectivity plugin behaviour
-const WS_CLOSED = exports.WS_CLOSED = prefix + 'WS_CLOSED';
-const WS_ERROR = exports.WS_ERROR = prefix + 'WS_ERROR';
-
-const LOST_CONNECTION = exports.LOST_CONNECTION = prefix + 'LOST_CONNECTION';
-
-const RECEIVE_SERVER_PING = exports.RECEIVE_SERVER_PING = prefix + 'RECEIVE_SERVER_PING';
-const RECEIVE_SERVER_PONG = exports.RECEIVE_SERVER_PONG = prefix + 'RECEIVE_SERVER_PONG';
-
-const CHANGE_CONNECTIVITY_CHECKING = exports.CHANGE_CONNECTIVITY_CHECKING = prefix + 'CHANGE_CONNECTIVITY_CHECKING';
-const CHANGE_PING_INTERVAL = exports.CHANGE_PING_INTERVAL = prefix + 'CHANGE_PING_INTERVAL';
-
-/***/ }),
-/* 37 */
-/***/ (function(module, exports, __webpack_require__) {
-
 "use strict";
 
 
@@ -6117,6 +5935,188 @@ const trackPrefix = callPrefix + 'TRACK/';
 
 const TRACK_ADDED = exports.TRACK_ADDED = trackPrefix + 'ADDED';
 const TRACK_REMOVED = exports.TRACK_REMOVED = trackPrefix + 'REMOVED';
+
+/***/ }),
+/* 32 */
+/***/ (function(module, exports, __webpack_require__) {
+
+// optional / simple context binding
+var aFunction = __webpack_require__(55);
+module.exports = function (fn, that, length) {
+  aFunction(fn);
+  if (that === undefined) return fn;
+  switch (length) {
+    case 1: return function (a) {
+      return fn.call(that, a);
+    };
+    case 2: return function (a, b) {
+      return fn.call(that, a, b);
+    };
+    case 3: return function (a, b, c) {
+      return fn.call(that, a, b, c);
+    };
+  }
+  return function (/* ...args */) {
+    return fn.apply(that, arguments);
+  };
+};
+
+
+/***/ }),
+/* 33 */
+/***/ (function(module, exports, __webpack_require__) {
+
+var dP = __webpack_require__(24);
+var createDesc = __webpack_require__(44);
+module.exports = __webpack_require__(20) ? function (object, key, value) {
+  return dP.f(object, key, createDesc(1, value));
+} : function (object, key, value) {
+  object[key] = value;
+  return object;
+};
+
+
+/***/ }),
+/* 34 */
+/***/ (function(module, exports) {
+
+var hasOwnProperty = {}.hasOwnProperty;
+module.exports = function (it, key) {
+  return hasOwnProperty.call(it, key);
+};
+
+
+/***/ }),
+/* 35 */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+exports.update = update;
+exports.setSdpHandlers = setSdpHandlers;
+
+var _actionTypes = __webpack_require__(154);
+
+var actionTypes = _interopRequireWildcard(_actionTypes);
+
+var _utils = __webpack_require__(109);
+
+var _sdpHandlers = __webpack_require__(180);
+
+function _interopRequireWildcard(obj) { if (obj && obj.__esModule) { return obj; } else { var newObj = {}; if (obj != null) { for (var key in obj) { if (Object.prototype.hasOwnProperty.call(obj, key)) newObj[key] = obj[key]; } } newObj.default = obj; return newObj; } }
+
+/**
+ * Add or update a specific key within the store.config.
+ *
+ * @param {Object} values The values that will be placed in the store.
+ * @param {string} [pluginName] The plugin name of the config being set.
+ * @return {Action} action A redux action.
+ */
+function update(values, pluginName = '') {
+  var payload;
+  // Use the plugin name as a substate key, if present.
+  if (pluginName) {
+    payload = {
+      [pluginName]: values
+    };
+  } else {
+    payload = values;
+  }
+
+  return {
+    type: actionTypes.CONFIG_UPDATE,
+    payload: payload
+  };
+}
+
+/**
+ * Updates the SDP Handlers in the call plugin configs
+ *
+ * @method setSdpHandlers
+ * @param {Array<call.SdpHandlerFunction>} sdpHandlers The list of SDP handler to set in the config.
+ * @param {Object}                         options     Options to configure extra sdp handlers
+ * @returns {Object} A flux standard action.
+ */
+function setSdpHandlers(sdpHandlers, options) {
+  /*
+   * Set SDP handlers to be used for every operation:
+   *
+   * 1. Application provided SDP handlers.
+   *
+   * 2. Disable DTLS-SDES crypto method (ie. delete the line) if there's a better
+   *    crypto method enabled. WebRTC only allows one method to be enabled.
+   *    This is needed for interoperability with non-browser endpoints that include
+   *    SDES as a fallback method.
+   *
+   * 3. [optional] Disable H264 Codecs for video calls, used to reduce SDP size
+   *
+   * 4. Modify sdp and add bandwidth limits on it if bandwidth controls are provided.
+   */
+  if (options.removeH264Codecs) {
+    sdpHandlers.push((0, _sdpHandlers.createCodecRemover)(['H264']));
+  }
+  sdpHandlers.push(_utils.sanitizeSdesFromSdp);
+  sdpHandlers.push(_utils.modifySdpBandwidth);
+
+  return {
+    type: actionTypes.SET_SDP_HANDLERS,
+    payload: {
+      sdpHandlers
+    }
+  };
+}
+
+/***/ }),
+/* 36 */
+/***/ (function(module, exports, __webpack_require__) {
+
+var parser = __webpack_require__(273);
+var writer = __webpack_require__(274);
+
+exports.write = writer;
+exports.parse = parser.parse;
+exports.parseParams = parser.parseParams;
+exports.parseFmtpConfig = parser.parseFmtpConfig; // Alias of parseParams().
+exports.parsePayloads = parser.parsePayloads;
+exports.parseRemoteCandidates = parser.parseRemoteCandidates;
+exports.parseImageAttributes = parser.parseImageAttributes;
+exports.parseSimulcastStreamList = parser.parseSimulcastStreamList;
+
+
+/***/ }),
+/* 37 */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+const prefix = '@@KANDY/CONN/';
+
+// Actions to tell connectivity plugin what to do
+const WS_ATTEMPT_CONNECT = exports.WS_ATTEMPT_CONNECT = prefix + 'WS_ATTEMPT_CONNECT';
+const WS_CONNECT_FINISHED = exports.WS_CONNECT_FINISHED = prefix + 'WS_CONNECT_FINISHED';
+const WS_DISCONNECT = exports.WS_DISCONNECT = prefix + 'WS_DISCONNECT';
+const WS_DISCONNECT_FINISHED = exports.WS_DISCONNECT_FINISHED = prefix + 'WS_DISCONNECT_FINISHED';
+const WS_RECONNECT_FAILED = exports.WS_RECONNECT_FAILED = prefix + 'WS_RECONNECT_FAILED';
+
+// actions for hooking into connectivity plugin behaviour
+const WS_CLOSED = exports.WS_CLOSED = prefix + 'WS_CLOSED';
+const WS_ERROR = exports.WS_ERROR = prefix + 'WS_ERROR';
+
+const LOST_CONNECTION = exports.LOST_CONNECTION = prefix + 'LOST_CONNECTION';
+
+const RECEIVE_SERVER_PING = exports.RECEIVE_SERVER_PING = prefix + 'RECEIVE_SERVER_PING';
+const RECEIVE_SERVER_PONG = exports.RECEIVE_SERVER_PONG = prefix + 'RECEIVE_SERVER_PONG';
+
+const CHANGE_CONNECTIVITY_CHECKING = exports.CHANGE_CONNECTIVITY_CHECKING = prefix + 'CHANGE_CONNECTIVITY_CHECKING';
+const CHANGE_PING_INTERVAL = exports.CHANGE_PING_INTERVAL = prefix + 'CHANGE_PING_INTERVAL';
 
 /***/ }),
 /* 38 */
@@ -7327,7 +7327,7 @@ module.exports = {};
 /***/ (function(module, exports, __webpack_require__) {
 
 var def = __webpack_require__(24).f;
-var has = __webpack_require__(33);
+var has = __webpack_require__(34);
 var TAG = __webpack_require__(15)('toStringTag');
 
 module.exports = function (it, tag, stat) {
@@ -7339,7 +7339,7 @@ module.exports = function (it, tag, stat) {
 /* 62 */
 /***/ (function(module, exports, __webpack_require__) {
 
-var ctx = __webpack_require__(31);
+var ctx = __webpack_require__(32);
 var call = __webpack_require__(130);
 var isArrayIter = __webpack_require__(131);
 var anObject = __webpack_require__(29);
@@ -7385,7 +7385,7 @@ exports.getVersion = getVersion;
  * for the @@ tag below with actual version value.
  */
 function getVersion() {
-  return '4.37.0-beta.830';
+  return '4.37.0-beta.831';
 }
 
 /***/ }),
@@ -8694,7 +8694,7 @@ module.exports = Object.create || function create(O, Properties) {
 
 __webpack_require__(206);
 var global = __webpack_require__(13);
-var hide = __webpack_require__(32);
+var hide = __webpack_require__(33);
 var Iterators = __webpack_require__(60);
 var TO_STRING_TAG = __webpack_require__(15)('toStringTag');
 
@@ -8763,7 +8763,7 @@ module.exports = { "default": __webpack_require__(222), __esModule: true };
 
 var META = __webpack_require__(70)('meta');
 var isObject = __webpack_require__(19);
-var has = __webpack_require__(33);
+var has = __webpack_require__(34);
 var setDesc = __webpack_require__(24).f;
 var id = 0;
 var isExtensible = Object.isExtensible || function () {
@@ -8995,7 +8995,7 @@ var _freeze2 = _interopRequireDefault(_freeze);
 
 exports.runPipeline = runPipeline;
 
-var _sdpTransform = __webpack_require__(35);
+var _sdpTransform = __webpack_require__(36);
 
 var _sdpTransform2 = _interopRequireDefault(_sdpTransform);
 
@@ -9156,7 +9156,7 @@ Object.defineProperty(exports, "__esModule", {
 });
 exports.changePingInterval = exports.changeConnectivityChecking = exports.receiveServerPong = exports.receiveServerPing = exports.lostConnection = exports.wsError = exports.wsClosed = exports.wsReconnectFailed = exports.wsDisconnectFinished = exports.wsConnectFinished = exports.wsDisconnect = exports.wsAttemptConnect = undefined;
 
-var _actionTypes = __webpack_require__(36);
+var _actionTypes = __webpack_require__(37);
 
 var actionTypes = _interopRequireWildcard(_actionTypes);
 
@@ -9227,7 +9227,7 @@ var _logs = __webpack_require__(2);
 
 var _kandyLogger = __webpack_require__(75);
 
-var _sdpTransform = __webpack_require__(35);
+var _sdpTransform = __webpack_require__(36);
 
 var _sdpTransform2 = _interopRequireDefault(_sdpTransform);
 
@@ -9581,7 +9581,7 @@ module.exports = function isObject(arg) {
 var LIBRARY = __webpack_require__(57);
 var $export = __webpack_require__(10);
 var redefine = __webpack_require__(125);
-var hide = __webpack_require__(32);
+var hide = __webpack_require__(33);
 var Iterators = __webpack_require__(60);
 var $iterCreate = __webpack_require__(205);
 var setToStringTag = __webpack_require__(61);
@@ -9717,7 +9717,7 @@ module.exports.f = function (C) {
 /* 103 */
 /***/ (function(module, exports, __webpack_require__) {
 
-var hide = __webpack_require__(32);
+var hide = __webpack_require__(33);
 module.exports = function (target, src, safe) {
   for (var key in src) {
     if (safe && target[key]) target[key] = src[key];
@@ -10479,7 +10479,7 @@ exports.waitForReconnect = waitForReconnect;
 
 var _actions = __webpack_require__(84);
 
-var _actionTypes = __webpack_require__(36);
+var _actionTypes = __webpack_require__(37);
 
 var _selectors = __webpack_require__(66);
 
@@ -10780,7 +10780,7 @@ var mediaOps = _interopRequireWildcard(_media);
 
 var _effects = __webpack_require__(1);
 
-var _sdpTransform = __webpack_require__(35);
+var _sdpTransform = __webpack_require__(36);
 
 var _sdpTransform2 = _interopRequireDefault(_sdpTransform);
 
@@ -11473,7 +11473,7 @@ module.exports = !__webpack_require__(20) && !__webpack_require__(38)(function (
 /* 122 */
 /***/ (function(module, exports, __webpack_require__) {
 
-var has = __webpack_require__(33);
+var has = __webpack_require__(34);
 var toIObject = __webpack_require__(39);
 var arrayIndexOf = __webpack_require__(189)(false);
 var IE_PROTO = __webpack_require__(93)('IE_PROTO');
@@ -11512,7 +11512,7 @@ module.exports = function isFunction(arg) {
 /* 125 */
 /***/ (function(module, exports, __webpack_require__) {
 
-module.exports = __webpack_require__(32);
+module.exports = __webpack_require__(33);
 
 
 /***/ }),
@@ -11547,7 +11547,7 @@ module.exports = document && document.documentElement;
 /***/ (function(module, exports, __webpack_require__) {
 
 // 19.1.2.9 / 15.2.3.2 Object.getPrototypeOf(O)
-var has = __webpack_require__(33);
+var has = __webpack_require__(34);
 var toObject = __webpack_require__(46);
 var IE_PROTO = __webpack_require__(93)('IE_PROTO');
 var ObjectProto = Object.prototype;
@@ -11635,7 +11635,7 @@ module.exports = function (O, D) {
 /* 134 */
 /***/ (function(module, exports, __webpack_require__) {
 
-var ctx = __webpack_require__(31);
+var ctx = __webpack_require__(32);
 var invoke = __webpack_require__(209);
 var html = __webpack_require__(127);
 var cel = __webpack_require__(88);
@@ -11882,7 +11882,7 @@ var pIE = __webpack_require__(58);
 var createDesc = __webpack_require__(44);
 var toIObject = __webpack_require__(39);
 var toPrimitive = __webpack_require__(89);
-var has = __webpack_require__(33);
+var has = __webpack_require__(34);
 var IE8_DOM_DEFINE = __webpack_require__(121);
 var gOPD = Object.getOwnPropertyDescriptor;
 
@@ -12092,7 +12092,7 @@ function getTypes(state) {
 var dP = __webpack_require__(24).f;
 var create = __webpack_require__(73);
 var redefineAll = __webpack_require__(103);
-var ctx = __webpack_require__(31);
+var ctx = __webpack_require__(32);
 var anInstance = __webpack_require__(101);
 var forOf = __webpack_require__(62);
 var $iterDefine = __webpack_require__(99);
@@ -12244,7 +12244,7 @@ var global = __webpack_require__(13);
 var $export = __webpack_require__(10);
 var meta = __webpack_require__(77);
 var fails = __webpack_require__(38);
-var hide = __webpack_require__(32);
+var hide = __webpack_require__(33);
 var redefineAll = __webpack_require__(103);
 var forOf = __webpack_require__(62);
 var anInstance = __webpack_require__(101);
@@ -12343,7 +12343,7 @@ module.exports = function (COLLECTION) {
 // https://tc39.github.io/proposal-setmap-offrom/
 var $export = __webpack_require__(10);
 var aFunction = __webpack_require__(55);
-var ctx = __webpack_require__(31);
+var ctx = __webpack_require__(32);
 var forOf = __webpack_require__(62);
 
 module.exports = function (COLLECTION) {
@@ -14725,7 +14725,7 @@ var _requests = __webpack_require__(164);
 
 var _actionTypes2 = __webpack_require__(43);
 
-var _actionTypes3 = __webpack_require__(36);
+var _actionTypes3 = __webpack_require__(37);
 
 var connectivityActionTypes = _interopRequireWildcard(_actionTypes3);
 
@@ -15249,7 +15249,7 @@ exports.restartMedia = restartMedia;
 exports.restartMediaFinish = restartMediaFinish;
 exports.updateCall = updateCall;
 
-var _actionTypes = __webpack_require__(37);
+var _actionTypes = __webpack_require__(31);
 
 var actionTypes = _interopRequireWildcard(_actionTypes);
 
@@ -17010,7 +17010,7 @@ exports.compareSummary = compareSummary;
 
 var _logs = __webpack_require__(2);
 
-var _sdpTransform = __webpack_require__(35);
+var _sdpTransform = __webpack_require__(36);
 
 var _sdpTransform2 = _interopRequireDefault(_sdpTransform);
 
@@ -20766,7 +20766,7 @@ var setToStringTag = __webpack_require__(61);
 var IteratorPrototype = {};
 
 // 25.1.2.1.1 %IteratorPrototype%[@@iterator]()
-__webpack_require__(32)(IteratorPrototype, __webpack_require__(15)('iterator'), function () { return this; });
+__webpack_require__(33)(IteratorPrototype, __webpack_require__(15)('iterator'), function () { return this; });
 
 module.exports = function (Constructor, NAME, next) {
   Constructor.prototype = create(IteratorPrototype, { next: descriptor(1, next) });
@@ -20830,7 +20830,7 @@ module.exports = function () { /* empty */ };
 
 var LIBRARY = __webpack_require__(57);
 var global = __webpack_require__(13);
-var ctx = __webpack_require__(31);
+var ctx = __webpack_require__(32);
 var classof = __webpack_require__(100);
 var $export = __webpack_require__(10);
 var isObject = __webpack_require__(19);
@@ -22239,7 +22239,7 @@ module.exports = __webpack_require__(8).Symbol;
 
 // ECMAScript 6 symbols shim
 var global = __webpack_require__(13);
-var has = __webpack_require__(33);
+var has = __webpack_require__(34);
 var DESCRIPTORS = __webpack_require__(20);
 var $export = __webpack_require__(10);
 var redefine = __webpack_require__(125);
@@ -22475,7 +22475,7 @@ $JSON && $export($export.S + $export.F * (!USE_NATIVE || $fails(function () {
 });
 
 // 19.4.3.4 Symbol.prototype[@@toPrimitive](hint)
-$Symbol[PROTOTYPE][TO_PRIMITIVE] || __webpack_require__(32)($Symbol[PROTOTYPE], TO_PRIMITIVE, $Symbol[PROTOTYPE].valueOf);
+$Symbol[PROTOTYPE][TO_PRIMITIVE] || __webpack_require__(33)($Symbol[PROTOTYPE], TO_PRIMITIVE, $Symbol[PROTOTYPE].valueOf);
 // 19.4.3.5 Symbol.prototype[@@toStringTag]
 setToStringTag($Symbol, 'Symbol');
 // 20.2.1.9 Math[@@toStringTag]
@@ -23714,7 +23714,7 @@ var _actions2 = __webpack_require__(253);
 
 var _actions3 = _interopRequireDefault(_actions2);
 
-var _actions4 = __webpack_require__(34);
+var _actions4 = __webpack_require__(35);
 
 var _utils = __webpack_require__(7);
 
@@ -24422,7 +24422,7 @@ module.exports = __webpack_require__(149)(SET, function (get) {
 // 4 -> Array#every
 // 5 -> Array#find
 // 6 -> Array#findIndex
-var ctx = __webpack_require__(31);
+var ctx = __webpack_require__(32);
 var IObject = __webpack_require__(90);
 var toObject = __webpack_require__(46);
 var toLength = __webpack_require__(69);
@@ -25078,7 +25078,7 @@ module.exports = __webpack_require__(8).Array.from;
 
 "use strict";
 
-var ctx = __webpack_require__(31);
+var ctx = __webpack_require__(32);
 var $export = __webpack_require__(10);
 var toObject = __webpack_require__(46);
 var call = __webpack_require__(130);
@@ -25353,7 +25353,7 @@ Object.defineProperty(exports, "__esModule", {
 });
 exports.default = api;
 
-var _actions = __webpack_require__(34);
+var _actions = __webpack_require__(35);
 
 var actions = _interopRequireWildcard(_actions);
 
@@ -25484,7 +25484,7 @@ exports.getDefaultCollectionFunction = getDefaultCollectionFunction;
 
 var _constants = __webpack_require__(18);
 
-var _sdpTransform = __webpack_require__(35);
+var _sdpTransform = __webpack_require__(36);
 
 var _sdpTransform2 = _interopRequireDefault(_sdpTransform);
 
@@ -32789,7 +32789,7 @@ module.exports = __webpack_require__(8).Reflect.set;
 var dP = __webpack_require__(24);
 var gOPD = __webpack_require__(144);
 var getPrototypeOf = __webpack_require__(128);
-var has = __webpack_require__(33);
+var has = __webpack_require__(34);
 var $export = __webpack_require__(10);
 var createDesc = __webpack_require__(44);
 var anObject = __webpack_require__(29);
@@ -36566,7 +36566,7 @@ exports.default = baseAuth;
 
 var _interface = __webpack_require__(363);
 
-var _actions = __webpack_require__(34);
+var _actions = __webpack_require__(35);
 
 var _utils = __webpack_require__(7);
 
@@ -38157,7 +38157,7 @@ var _extends3 = _interopRequireDefault(_extends2);
 exports.makeAnonymousCallEntry = makeAnonymousCallEntry;
 exports.anonymousCallEnd = anonymousCallEnd;
 
-var _actionTypes = __webpack_require__(37);
+var _actionTypes = __webpack_require__(31);
 
 var _actions = __webpack_require__(65);
 
@@ -38358,7 +38358,7 @@ Object.defineProperty(exports, "__esModule", {
 });
 exports.turnChanged = turnChanged;
 
-var _actionTypes = __webpack_require__(37);
+var _actionTypes = __webpack_require__(31);
 
 var actionTypes = _interopRequireWildcard(_actionTypes);
 
@@ -38569,7 +38569,7 @@ var _configs2 = _interopRequireDefault(_configs);
 
 var _actions = __webpack_require__(40);
 
-var _actions2 = __webpack_require__(34);
+var _actions2 = __webpack_require__(35);
 
 var _logs = __webpack_require__(2);
 
@@ -39272,7 +39272,7 @@ var _normalization = __webpack_require__(116);
 
 var _selectors2 = __webpack_require__(14);
 
-var _actions2 = __webpack_require__(34);
+var _actions2 = __webpack_require__(35);
 
 var _uuid = __webpack_require__(53);
 
@@ -40860,7 +40860,7 @@ var _extends2 = __webpack_require__(5);
 
 var _extends3 = _interopRequireDefault(_extends2);
 
-var _actionTypes = __webpack_require__(37);
+var _actionTypes = __webpack_require__(31);
 
 var actionTypes = _interopRequireWildcard(_actionTypes);
 
@@ -41207,7 +41207,24 @@ callReducers[actionTypes.UPDATE_CALL] = {
     const _action$payload = action.payload,
           { transition } = _action$payload,
           payloadWithoutTransition = (0, _objectWithoutProperties3.default)(_action$payload, ['transition']);
-    return (0, _extends3.default)({}, state, payloadWithoutTransition);
+    const newState = (0, _extends3.default)({}, state, payloadWithoutTransition);
+
+    /*
+     * Edge-case workaround.
+     * If the current operation is an on-going remote slow-start, then this remote
+     *   update call action is intended to be the "finish" for it. The "update call"
+     *   action being used here is an edge-case when the remote operation wasn't
+     *   something we can identify.
+     * This is being done manually because the "update call" action does not work
+     *   with the SDK's "operation tracking" logic in the reducers.
+     * See function `handleSlowUpdateResponse` in `/call/negotiation.js` for more info.
+     * Reference: KJS-542
+     */
+    if (action.meta && action.meta.isRemote === true && newState.remoteOp && newState.remoteOp.operation === _constants.OPERATIONS.SLOW_START && newState.remoteOp.status === _constants.OP_STATUS.ONGOING) {
+      newState.remoteOp = undefined;
+    }
+
+    return newState;
   }
 };
 
@@ -41735,7 +41752,7 @@ var _extends2 = __webpack_require__(5);
 
 var _extends3 = _interopRequireDefault(_extends2);
 
-var _actionTypes = __webpack_require__(37);
+var _actionTypes = __webpack_require__(31);
 
 var actionTypes = _interopRequireWildcard(_actionTypes);
 
@@ -41818,7 +41835,7 @@ exports.restartIce = restartIce;
 exports.watchForMediaDisconnect = watchForMediaDisconnect;
 exports.callCollectionCheckEntry = callCollectionCheckEntry;
 
-var _actionTypes = __webpack_require__(37);
+var _actionTypes = __webpack_require__(31);
 
 var actionTypes = _interopRequireWildcard(_actionTypes);
 
@@ -41826,7 +41843,7 @@ var _actionTypes2 = __webpack_require__(9);
 
 var webrtcActionTypes = _interopRequireWildcard(_actionTypes2);
 
-var _actionTypes3 = __webpack_require__(36);
+var _actionTypes3 = __webpack_require__(37);
 
 var connectivityActionTypes = _interopRequireWildcard(_actionTypes3);
 
@@ -47250,7 +47267,7 @@ var _effects = __webpack_require__(1);
 
 var _uuid = __webpack_require__(53);
 
-var _sdpTransform = __webpack_require__(35);
+var _sdpTransform = __webpack_require__(36);
 
 var _sdpTransform2 = _interopRequireDefault(_sdpTransform);
 
@@ -47709,6 +47726,8 @@ function* sessionStatusUpdateEnded(deps, params) {
   // Close the local webRTC session
   yield (0, _effects.call)(_midcall.closeCall, deps.webRTC, currentCall.webrtcSessionId);
 
+  // If we had the local operation tracked in state, then we can dispatch the action
+  //    intended to "finish" the operation.
   const localOp = currentCall.localOp;
   if (localOp && localOp.operation && localOp.status === _constants2.OP_STATUS.PENDING) {
     let transition;
@@ -47735,31 +47754,32 @@ function* sessionStatusUpdateEnded(deps, params) {
           statusCode: _constants.STATUS_CODES.JOIN_SUCCESS
         };
         break;
+      default:
+        log.info('Unknown local call operation for completed notice. Cannot provide transition information.');
+        break;
     }
     if (finishAction) {
-      log.debug('Marking call locally as ended. Call ID: ', currentCall.id);
-
       yield (0, _effects.put)(finishAction(currentCall.id, { transition }));
-
-      // We also need to notify the backend that call with currentCall.id should be removed
-      // by sending a DELETE REST request.
-      // Perform signalling to end the session on server's side.
-      const isAnonymous = currentCall.isAnonymous;
-      const account = currentCall.account;
-      log.info('Ending call by requesting to be removed from backend ...');
-      const response = yield (0, _effects.call)(requests.endSession, { wrtcsSessionId, isAnonymous, account });
-
-      if (!response.error) {
-        log.info(`Finished ending call. Changing call state to ${_constants.CALL_STATES.ENDED}.`);
-        yield (0, _effects.put)(_actions.callActions.endCallFinish(currentCall.id, (0, _index.generateEndParams)(currentCall.state, true, params)));
-      } else {
-        log.debug(`Error received when attempting to end the session: ${response.error}. Changing call state to ${_constants.CALL_STATES.ENDED}.`);
-        yield (0, _effects.put)(_actions.callActions.endCallFinish(currentCall.id, {
-          isLocal: true,
-          error: response.error
-        }));
-      }
     }
+  }
+
+  // We also need to notify the backend that call with currentCall.id should be removed
+  // by sending a DELETE REST request.
+  // Perform signalling to end the session on server's side.
+  const isAnonymous = currentCall.isAnonymous;
+  const account = currentCall.account;
+  log.debug('Ending call session on server-side.');
+  const response = yield (0, _effects.call)(requests.endSession, { wrtcsSessionId, isAnonymous, account });
+
+  if (!response.error) {
+    log.info(`Finished ending call. Changing call state to ${_constants.CALL_STATES.ENDED}.`);
+    yield (0, _effects.put)(_actions.callActions.endCallFinish(currentCall.id, (0, _index.generateEndParams)(currentCall.state, true, params)));
+  } else {
+    log.debug(`Error received when attempting to end the session: ${response.error}. Changing call state to ${_constants.CALL_STATES.ENDED}.`);
+    yield (0, _effects.put)(_actions.callActions.endCallFinish(currentCall.id, {
+      isLocal: true,
+      error: response.error
+    }));
   }
 }
 
@@ -48037,6 +48057,10 @@ var _operations2 = _interopRequireDefault(_operations);
 
 var _actions = __webpack_require__(26);
 
+var _actionTypes = __webpack_require__(31);
+
+var actionTypes = _interopRequireWildcard(_actionTypes);
+
 var _selectors = __webpack_require__(12);
 
 var _constants = __webpack_require__(18);
@@ -48055,16 +48079,14 @@ var _negotiation = __webpack_require__(412);
 
 var _effects = __webpack_require__(1);
 
+function _interopRequireWildcard(obj) { if (obj && obj.__esModule) { return obj; } else { var newObj = {}; if (obj != null) { for (var key in obj) { if (Object.prototype.hasOwnProperty.call(obj, key)) newObj[key] = obj[key]; } } newObj.default = obj; return newObj; } }
+
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 // Other plugins.
 
 
 // Call plugin helpers.
-
-
-// Call plugin.
-// Callstack.
 const log = _logs.logManager.getLogger('CALL');
 
 /**
@@ -48102,6 +48124,10 @@ const log = _logs.logManager.getLogger('CALL');
 
 
 // Libraries.
+
+
+// Call plugin.
+// Callstack.
 function* handleUpdateRequest(deps, targetCall, params) {
   const { webRTC, requests } = deps;
 
@@ -48646,14 +48672,35 @@ function* handleSlowUpdateResponse(deps, targetCall, params) {
     const nextState = mediaFlowing ? _constants.CALL_STATES.CONNECTED : _constants.CALL_STATES.ON_HOLD;
 
     log.info(`Finished processing remote slow-start response. Changing to ${nextState}.`);
-    yield (0, _effects.put)(callAction(targetCall.id, {
+
+    const action = callAction(targetCall.id, {
       state: nextState,
       // Remote participant's information.
       remoteParticipant: {
         displayNumber: params.remoteNumber,
         displayName: params.remoteName
       }
-    }));
+    });
+
+    if (action.type === actionTypes.UPDATE_CALL) {
+      /*
+       * This is a hack. The proper solution would be to never use a generic action for state changes.
+       * This action doesn't work with the SDK's "operation tracking" logic in the call reducers, so
+       *     the call state becomes out-of-sync with the operations.
+       *  In this scenario, the operation start was a remote slow-start negotiation, but the SDK fails
+       *      to determine what the actual operation was, so it falls-back to using the generic action
+       *      for the "finish". This means that the remoteOp in state never gets cleaned-up, which can
+       *      cause issues later.
+       *  The workaround is to mark the action as a remote update action, so that the reducer can
+       *      manually clean-up the remote operation in this scenario.
+       * Reference: KJS-542
+       */
+      action.meta = {
+        isRemote: true
+      };
+    }
+
+    yield (0, _effects.put)(action);
   } else {
     // Scenario: The call is in an unexpected state for receiving a remote
     //    answer SDP. This should never happen.
@@ -49407,7 +49454,7 @@ exports.setMediaInactive = setMediaInactive;
 exports.hasMediaFlowing = hasMediaFlowing;
 exports.hasMusicOnHold = hasMusicOnHold;
 
-var _sdpTransform = __webpack_require__(35);
+var _sdpTransform = __webpack_require__(36);
 
 var _sdpTransform2 = _interopRequireDefault(_sdpTransform);
 
@@ -49767,7 +49814,7 @@ var _errors2 = _interopRequireDefault(_errors);
 
 var _effects = __webpack_require__(1);
 
-var _sdpTransform = __webpack_require__(35);
+var _sdpTransform = __webpack_require__(36);
 
 var _sdpTransform2 = _interopRequireDefault(_sdpTransform);
 
@@ -50196,7 +50243,7 @@ exports.callIceCollectionCheck = callIceCollectionCheck;
 
 var _actions = __webpack_require__(26);
 
-var _actionTypes = __webpack_require__(37);
+var _actionTypes = __webpack_require__(31);
 
 var actionTypes = _interopRequireWildcard(_actionTypes);
 
@@ -50660,7 +50707,7 @@ var _eventTypes = __webpack_require__(418);
 
 var eventTypes = _interopRequireWildcard(_eventTypes);
 
-var _actionTypes = __webpack_require__(37);
+var _actionTypes = __webpack_require__(31);
 
 var actionTypes = _interopRequireWildcard(_actionTypes);
 
@@ -51491,7 +51538,7 @@ var _events2 = _interopRequireDefault(_events);
 
 var _sagas = __webpack_require__(426);
 
-var _actions = __webpack_require__(34);
+var _actions = __webpack_require__(35);
 
 var _actions2 = __webpack_require__(40);
 
@@ -51707,7 +51754,7 @@ var _extends2 = __webpack_require__(5);
 
 var _extends3 = _interopRequireDefault(_extends2);
 
-var _actionTypes = __webpack_require__(36);
+var _actionTypes = __webpack_require__(37);
 
 var actionTypes = _interopRequireWildcard(_actionTypes);
 
@@ -51859,7 +51906,7 @@ var _eventTypes = __webpack_require__(425);
 
 var eventTypes = _interopRequireWildcard(_eventTypes);
 
-var _actionTypes = __webpack_require__(36);
+var _actionTypes = __webpack_require__(37);
 
 var actionTypes = _interopRequireWildcard(_actionTypes);
 
@@ -51943,7 +51990,7 @@ var _websocket = __webpack_require__(427);
 
 var _selectors = __webpack_require__(66);
 
-var _actionTypes = __webpack_require__(36);
+var _actionTypes = __webpack_require__(37);
 
 var actionTypes = _interopRequireWildcard(_actionTypes);
 
@@ -52571,7 +52618,7 @@ var _notification = __webpack_require__(435);
 
 var _actions = __webpack_require__(40);
 
-var _actions2 = __webpack_require__(34);
+var _actions2 = __webpack_require__(35);
 
 var _effects = __webpack_require__(1);
 
@@ -52700,7 +52747,7 @@ var _actionTypes = __webpack_require__(43);
 
 var actionTypes = _interopRequireWildcard(_actionTypes);
 
-var _actionTypes2 = __webpack_require__(36);
+var _actionTypes2 = __webpack_require__(37);
 
 var _reduxActions = __webpack_require__(22);
 
@@ -60202,7 +60249,7 @@ var _events2 = _interopRequireDefault(_events);
 
 var _interface = __webpack_require__(444);
 
-var _actions = __webpack_require__(34);
+var _actions = __webpack_require__(35);
 
 var _actions2 = __webpack_require__(40);
 
