@@ -600,7 +600,7 @@ Type: [Object][7]
 
 ### IceCollectionInfo
 
-This object is provided to the [IceCollectionCheckFunction][36], and contains the
+This object is provided to the [IceCollectionCheckFunction][19], and contains the
 necessary information about the call (i.e., call ID, current call operation), and information about the ongoing ICE collection,
 such as the list of all ICE candidates collected so far and the ICE gathering state.
 
@@ -613,11 +613,11 @@ Type: [Object][7]
 *   `reason` **[string][8]** The reason the check function was called. Three possible values:
     'NewCandidate' - A new ICE candidate was collected. Note: there may be multiple new ICE candidates collected.
     'IceGatheringStateChanged' - The ICE gathering state changed.
-    'Scheduled' - A scheduled call (for first invocation, and subsequent invocations based on `wait` value returned by `IceCollectionCheckFunction`)
+    'Scheduled' - A scheduled call (for first invocation, and subsequent invocations based on `wait` value returned by [IceCollectionCheckFunction][19].)
 *   `iceCandidates` **[Array][13]\<RTCIceCandidate>** An array of all ICE candidates collected so far.
 *   `iceCollectionDuration` **[number][12]** The time elapsed since the start of the ICE collection process.
 *   `iceGatheringState` **[string][8]** The current ICE gathering state.
-    See [RTCPeerConnection.iceGatheringState][37]
+    See [RTCPeerConnection.iceGatheringState][36].
 *   `rtcPeerConnectionConfig` **[Object][7]** The current configration for the RTCPeerConnection.
 *   `rtcLocalSessionDescription` **[string][8]** The current local session description set on the peer.
 
@@ -629,7 +629,7 @@ This function is provided the necessary details of the current WebRTC session an
 ([IceCollectionInfo][17]), which it can use to dictate how to proceed with a call.
 The function can be invoked for three different reasons:
 a new ICE candidate was collected, the ICE gathering state changed, or a scheduled call based on the `wait` time set after
-an initial invocation of the function (See {@link call.IceCollectionInfo IceCollectionInfo}.reason).
+an initial invocation of the function.
 
 The function must then return an appropriate result object in the format of [IceCollectionCheckResult][18]
 which will dictate how the call will proceed. An incorrect return object, or result `type`, will cause the call to end with an error.
@@ -637,7 +637,9 @@ which will dictate how the call will proceed. An incorrect return object, or res
 \[Default]
 The default IceCollectionCheckFunction uses the following algorithm to determine if the call can proceed to negotiation:
 
-1.  If the `iceGatheringState` is "complete" at any stage, then proceed with the negotiation.
+1.  If the `iceGatheringState` is "complete" at any stage, then:
+    *   Proceed with the negotiation if any ICE candidates are collected.
+    *   Or, end the call if there are no ICE candidates collected.
 2.  Otherwise, if before the ideal ICE collection timeout:
     *   If every media has a relay ICE candidate for every configured TURN server, proceed with negotiation.
     *   Else, wait until the ideal timeout, or when invoked for another reason.
@@ -655,7 +657,13 @@ Type: [Function][16]
 
 #### Parameters
 
-*   `iceCollectionInfo` **[call.IceCollectionInfo][38]** Information about the current status of the ICE candidate collection.
+*   `iceCollectionInfo` **[call.IceCollectionInfo][37]** Information about the current status of the ICE candidate collection.
+*   `iceTimeouts` **[Object][7]** Configurations provided to the SDK for ICE collection timeout boundaries.
+
+    *   `iceTimeouts.iceCollectionIdealTimeout` **[number][12]** The amount of time to wait for ideal candidates, in
+        milliseconds.  See [config.call][38] for more information.
+    *   `iceTimeouts.iceCollectionMaxTimeout` **[number][12]** The maximum amount of time to wait for ICE collection,
+        in milliseconds. See [config.call][38] for more information.
 
 #### Examples
 
@@ -666,7 +674,7 @@ function isRelayCandidate (candidate) {
   return candidate.type === 'relay'
 }
 
-function myIceCollectionCheck ({ iceGatheringState, iceCandidates }) {
+function myIceCollectionCheck ({ iceGatheringState, iceCandidates }, iceTimeouts) {
   if (iceGatheringState === 'complete') {
     if (iceCandidates.some(isRelayCandidate)) {
       return { type: 'StartCall' }
@@ -2554,9 +2562,9 @@ These handlers are used to customize low-level call behaviour for very specific
 environments and/or scenarios.
 
 Note that SDP handlers are exposed on the entry point of the SDK. They can be added during
-initialization of the SDK using the [config.call.sdpHandlers][99] configuration
+initialization of the SDK using the [config.call.sdpHandlers][38] configuration
 parameter. They can also be set after the SDK's creation by using the
-[call.setSdpHandlers][100] function.
+[call.setSdpHandlers][99] function.
 
 ### Examples
 
@@ -2701,11 +2709,11 @@ Returns **[call.SdpHandlerFunction][20]** The resulting SDP handler that will re
 
 [35]: https://developer.mozilla.org/en-US/docs/Web/API/RTCIceServer/urls
 
-[36]: call.IceCollectionCheckFunction`
+[36]: https://developer.mozilla.org/en-US/docs/Web/API/RTCPeerConnection/iceGatheringState
 
-[37]: https://developer.mozilla.org/en-US/docs/Web/API/RTCPeerConnection/iceGatheringState
+[37]: #callicecollectioninfo
 
-[38]: #callicecollectioninfo
+[38]: #configconfigcall
 
 [39]: #callicecollectioncheckresult
 
@@ -2827,6 +2835,4 @@ Returns **[call.SdpHandlerFunction][20]** The resulting SDP handler that will re
 
 [98]: https://developer.mozilla.org/en-US/docs/Web/API/Response
 
-[99]: #configconfigcall
-
-[100]: #callsetsdphandlers
+[99]: #callsetsdphandlers
