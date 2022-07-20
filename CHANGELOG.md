@@ -131,6 +131,12 @@ client.on('media:trackEnded', function (params) {
 
 The v5.0 release also includes changes to a few other parts of the SDK. These changes should not be noticeable to an application, but are worth mentioning for awareness. A number of features of the SDK have had their codebase renewed to better support the direction of the SDK going forward. This will translate to a better developer experience in the future. They do not require any application changes as part of v5.0, as the changes are backwards-compatible. As always, if you encounter an issue with a release change, please report the issue to us.
 
+## 4.41.1 - 2022-07-20
+
+### Fixed
+
+- Fixed a Call issue where a `join` operation would cause audio issues for remote users with music-on-hold in certain backend configurations. `KJS-934`
+
 ## 4.41.0 - 2022-06-30
 
 ## 4.40.0 - 2022-05-27
